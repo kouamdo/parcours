@@ -1,0 +1,115 @@
+<div class="card">
+    <div class="card-header">{{ titre }}</div>
+    <div class="card-body">
+        <form [formGroup]="forme" (ngSubmit)="onSubmit(forme.value)" *ngIf="forme" >
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-sm-3 col-md-4">
+                                <label for="nom" class="label">
+                                    Nom
+                                </label>
+                            </div>
+                            <div class="col-sm-9 col-md-8">
+                                <input type="text" formControlName="nom" name="nom" id="nom"  placeholder="Nom"  class="form-control" required>
+                            </div>
+                            <div  *ngIf="submitted && f['nom'].errors"  class="alert alert-danger" >
+                                <div *ngIf="f['nom'].errors['required']">Le nom est obligatoire.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-sm-3 col-md-4">
+                                <label for="dateNaissance" class="label" >
+                                    Date de naissance
+                                </label>
+                            </div>
+                            <div class="col-sm-9 col-md-8">
+                                <input  type="date" formControlName="dateNaissance"  name="dateNaissance" id="dateNaissance" placeholder="dateNaissance" value="1990-02-01" required class="form-control">
+                            </div>
+                            <div  *ngIf="submitted && f['dateNaissance'].errors"  class="alert alert-danger" >
+                                <div *ngIf="f['dateNaissance'].errors['required']">La date de naissance est obligatoire.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-sm-3 col-md-4">
+                                <label  for="telephone"  class="label" >
+                                    Téléphone
+                                </label>
+                            </div>
+                            <div class="col-sm-9 col-md-8">
+                                <input type="text" formControlName="telephone" name="telephone" id="telephone" placeholder="Téléphone" class="form-control" >
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-sm-3 col-md-4">
+                                <label for="adresse" class="label" >
+                                Adresse
+                                </label>
+                            </div>
+                            <div class="col-sm-9 col-md-8">
+                                <input type="text" formControlName="adresse"  name="adresse"  id="adresse" placeholder="Adresse" class="form-control" >
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-sm-3 col-md-4">
+                                <label for="prenom" class="label" >
+                                    Prénom
+                                </label>
+                            </div>
+                            <div class="col-sm-9 col-md-8">
+                                <input  type="text" formControlName="prenom" name="prenom" id="prenom" placeholder="Prénom" class="form-control"  required  >
+                            </div>
+                            <div  *ngIf="submitted && f['prenom'].errors"  class="alert alert-danger" >
+                                <div *ngIf="f['prenom'].errors['required']">Le prénom est obligatoire.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-sm-3 col-md-4">
+                                <label  for="sexe" class="label" >
+                                    Sexe
+                                </label>
+                            </div>
+                            <div class='col-sm-9 col-md-8'>
+                                <select  class="btn-ptimary" formControlName="sexe" name="sexe" id="sexe">
+                                    <option value="M" >Homme</option>
+                                    <option value="F">Femme</option>
+                                </select>
+                            </div>
+        
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-sm-3 col-md-4">
+                                <label for="mail" class="label" >
+                                Email
+                                </label>
+                            </div>
+                            <div class="col-sm-9 col-md-8">
+                                <input type="email" formControlName="mail"  name="mail"  id="mail" placeholder="Email"   required  class="form-control" >
+                            </div>
+                            <div  *ngIf="submitted && f['mail'].errors"  class="alert alert-danger" >
+                                <div *ngIf="f['mail'].errors['required']">Email est obligatoire.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+      
+            <button type="submit" class="btn btn-primary">{{btnLibelle}}</button>
+        </form>
+    </div>
+</div>

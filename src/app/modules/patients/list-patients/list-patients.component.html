@@ -1,0 +1,49 @@
+<div class="card container" >
+    <div class='card-hearder' >
+        {{titre}}
+    </div>
+    <div class="row">
+        <div class="col-3">
+            <input type="search" placeholder="Rechercher" id="rechercherPatient">
+        </div>
+        <div class="col-3">
+            <button class="btn btn-primary" [routerLink]="['/patient-nouveau']">Ajouter Patient</button>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class='table-responsive'>
+            <table class='table'>
+                <thead>
+                    <tr>
+                        <th>Nom</th>
+                        <th>Prénom</th>
+                        <th>Date Naissance</th>
+                        <th>Sexe</th>
+                        <th>EMail</th>
+                        <th>Adresse</th>
+                        <th>Téléphone</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor='let patient of (patients$ | async) as patients'>
+                      <td >{{patient.nom  | uppercase }} </td>
+                     <td > {{patient.prenom}}</td>
+                     <td>{{patient.dateNaissance}}</td>
+                      <td>{{patient.sexe }}</td>
+                      <td>{{patient.mail}}</td>
+                      <td>{{patient.adresse}}</td>
+                      <td>{{patient.telephone}}</td>
+                      <td>
+                        <div class="col">
+
+                        </div>
+                        <a class="btn btn-primary" [routerLink]="['new-patient']">Orienter</a>
+                        <a class="btn btn-primary" [routerLink]="['/patient-nouveau',patient.id]">Modifier</a>
+                    </td>
+                  </tr>  
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -5,11 +5,7 @@
   "projects": {
     "clinique": {
       "projectType": "application",
-      "schematics": {
-        "@schematics/angular:component": {
-          "style": "sass"
-        }
-      },
+      "schematics": {},
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
@@ -22,28 +18,57 @@
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
-            "inlineStyleLanguage": "sass",
+            "aot": true,
+            "inlineStyleLanguage": "css",
             "assets": [
               "src/favicon.ico",
               "src/assets"
             ],
             "styles": [
-              "src/styles.sass"
+              "src/styles.css",
+              "node_modules/admin-lte/plugins/fontawesome-free/css/all.min.css",
+              "node_modules/admin-lte/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css",
+              "node_modules/admin-lte/plugins/icheck-bootstrap/icheck-bootstrap.min.css",
+              "node_modules/admin-lte/plugins/jqvmap/jqvmap.min.css",
+              "node_modules/admin-lte/plugins/overlayScrollbars/css/OverlayScrollbars.min.css",
+              "node_modules/admin-lte/plugins/daterangepicker/daterangepicker.css",
+              "node_modules/admin-lte/plugins/summernote/summernote-bs4.min.css",
+              "node_modules/admin-lte/dist/css/adminlte.min.css"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/admin-lte/plugins/jquery/jquery.min.js",
+              "node_modules/admin-lte/plugins/jquery-ui/jquery-ui.min.js",
+              "node_modules/admin-lte/plugins/bootstrap/js/bootstrap.bundle.min.js",
+              "node_modules/admin-lte/plugins/daterangepicker/daterangepicker.js",
+              "node_modules/admin-lte/plugins/chart.js/Chart.min.js",
+              "node_modules/admin-lte/plugins/moment/moment.min.js",
+              "node_modules/admin-lte/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js",
+              "node_modules/admin-lte/dist/js/pages/dashboard2.js",
+              "node_modules/admin-lte/dist/js/adminlte.js",
+              "node_modules/admin-lte/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js",
+              "node_modules/admin-lte/plugins/sparklines/sparkline.js",
+              "node_modules/admin-lte/plugins/summernote/summernote-bs4.min.js",
+              "node_modules/admin-lte/plugins/jquery-mousewheel/jquery.mousewheel.js",
+              "node_modules/admin-lte/plugins/raphael/raphael.min.js",
+              "node_modules/admin-lte/plugins/jquery-mapael/maps/usa_states.min.js",
+              "node_modules/admin-lte/plugins/jquery-mapael/jquery.mapael.min.js",
+              "node_modules/admin-lte/plugins/jqvmap/jquery.vmap.min.js",
+              "node_modules/admin-lte/plugins/jqvmap/maps/jquery.vmap.usa.js",
+              "node_modules/admin-lte/plugins/jquery-knob/jquery.knob.min.js"
+            ]
           },
           "configurations": {
             "production": {
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kb",
-                  "maximumError": "1mb"
+                  "maximumWarning": "5mb",
+                  "maximumError": "7mb"
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "2kb",
-                  "maximumError": "4kb"
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
                 }
               ],
               "fileReplacements": [
@@ -60,6 +85,7 @@
               "vendorChunk": true,
               "extractLicenses": false,
               "sourceMap": true,
+              "aot": true,
               "namedChunks": true
             }
           },
@@ -96,12 +122,15 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.sass"
+              "src/styles.css"
             ],
             "scripts": []
           }
         }
       }
     }
+  },
+  "cli": {
+    "analytics": false
   }
 }
