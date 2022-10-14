@@ -8,9 +8,8 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemDBService } from './backend/backend';
 import { NotFoundComponent } from './not-found/not-found.component';
-import { TranslateModule, TranslateLoader, TranslateCompiler } from '@ngx-translate/core';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { TranslateMessageFormatCompiler } from 'ngx-translate-messageformat-compiler';
 
 @NgModule({
   declarations: [
@@ -22,7 +21,7 @@ import { TranslateMessageFormatCompiler } from 'ngx-translate-messageformat-comp
     AppRoutingModule,
     ReactiveFormsModule,
     FormsModule,
-    HttpClientInMemoryWebApiModule.forRoot(InMemDBService),
+    HttpClientInMemoryWebApiModule.forRoot(InMemDBService, {dataEncapsulation: false, passThruUnknownUrl: true}),
     PatientsModule,
 
     // ngx-translate and the loader module
@@ -33,12 +32,6 @@ import { TranslateMessageFormatCompiler } from 'ngx-translate-messageformat-comp
             useFactory: HttpLoaderFactory,
             deps: [HttpClient]
         },
-
-        // compiler configuration
-        compiler: {
-            provide: TranslateCompiler,
-            useClass: TranslateMessageFormatCompiler
-        }
     })
 
   ],

@@ -241,20 +241,8 @@
           </ul>
         </li>
       </ul>
-      <select name="language" id="language">
-        <option value="">Langues</option>
-        <option value="en">
-          <button class="btn btn-navbar active" type="button" (click)="useLanguage('en')">en</button>
-        </option>
-        <option value="fr">
-          <button class="btn btn-navbar" type="button" (click)="useLanguage('fr')">fr</button>
-        </option>
-        <option value="de">
-          <button class="btn btn-navbar" type="button" (click)="useLanguage('de')">de</button>
-        </option>
-        <option value="sp">
-          <button class="btn btn-navbar" type="button" (click)="useLanguage('sp')">sp</button>
-        </option>
+      <select name="language" id="language" (change)="valeurChange($event)">
+        <option *ngFor="let langue of langues" [value]="langue">{{ langue }}</option>
       </select>
     </nav>
   
