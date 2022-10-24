@@ -6,7 +6,7 @@
                 "nav-link2":"Contact"
             },
             "nav-left":{
-                "nav-link1":"Patients",
+                "nav-link1":"{{libelle}}",
                 "nav-link1-item1":"Search",
                 "nav-link1-item2":"Creat",
                 "nav-link1-item3":"Update",

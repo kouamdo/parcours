@@ -10,6 +10,12 @@ import { InMemDBService } from './backend/backend';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatSliderModule } from '@angular/material/slider';
+import { MatIconModule } from '@angular/material/icon';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatSlideToggle, MatSlideToggleModule } from "@angular/material/slide-toggle";
+import { MenuModule } from './modules/menu/menu.module';
 
 @NgModule({
   declarations: [
@@ -23,6 +29,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
     FormsModule,
     HttpClientInMemoryWebApiModule.forRoot(InMemDBService, {dataEncapsulation: false, passThruUnknownUrl: true}),
     PatientsModule,
+    MenuModule,
 
     // ngx-translate and the loader module
     HttpClientModule,
@@ -32,7 +39,12 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
             useFactory: HttpLoaderFactory,
             deps: [HttpClient]
         },
-    })
+    }),
+    BrowserAnimationsModule,
+    MatSliderModule,
+    MatIconModule,
+    MatToolbarModule,
+    MatSlideToggleModule
 
   ],
   providers: [],
