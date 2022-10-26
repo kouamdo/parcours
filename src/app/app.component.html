@@ -241,18 +241,6 @@
           </ul>
         </li>
       </ul>
-      <select name="language" id="language" (change)="valeurChange($event)">
-        <option *ngFor="let langue of langues" [value]="langue">{{ langue }}</option>
-      </select><br>
-      <p>
-        <mat-toolbar class="bg-light">
-          Dark Mode
-          <div ></div>
-          <mat-icon class="mr-2 ml-2">brightness_5</mat-icon>
-          <mat-slide-toggle (click)="change()" class="mr-2">
-          </mat-slide-toggle>
-          <mat-icon>bedtime</mat-icon>
-        </mat-toolbar>
     </nav>
   
     </div>
@@ -327,8 +315,19 @@
 
 
 <aside class="control-sidebar control-sidebar-dark" [ngClass]="{'control-sidebar-light': toggle, 'control-sidebar-dark': !toggle}">
+  
+  <select name="language" id="language" (change)="valeurChange($event)">
+    <option *ngFor="let langue of langues" [value]="langue">{{ langue }}</option>
+  </select><br>
   <p>
-    hello
+    <mat-toolbar class="bg-light">
+      Dark Mode
+      <div ></div>
+      <mat-icon class="mr-2 ml-2">brightness_5</mat-icon>
+      <mat-slide-toggle (click)="change()" class="mr-2">
+      </mat-slide-toggle>
+      <mat-icon>bedtime</mat-icon>
+    </mat-toolbar>
   </p>
 </aside>
 

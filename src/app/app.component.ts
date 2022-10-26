@@ -15,17 +15,17 @@ export class AppComponent {
   langues : string[] = ['en','fr','sp','de'];
 
   iElementInit : IElementInit = {};
-  libelle = this.iElementInit.libelle;
+  libelle = this.elementInitService.iElementInit.libelle;
 
 
-  constructor(private translate: TranslateService, private overlay: OverlayContainer) {
+  constructor(private translate: TranslateService, private overlay: OverlayContainer, private elementInitService: ElementInitService) {
     translate.addLangs(this.langues);
     translate.setDefaultLang('en'); 
     translate.use('en');
   }
   
   ngOnInit(): void {
-    this.iElementInit.libelle = "Patient";
+    alert(this.elementInitService.iElementInit.libelle);
   }
 
   getTranslation(){};
