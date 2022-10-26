@@ -1,0 +1,24 @@
+{
+    "accueil":{
+        "header":{
+            "nav-top":{
+                "nav-link1":"Home",
+                "nav-link2":"Contact"
+            },
+            "nav-left":{
+                "nav-link1":"Patients",
+                "nav-link1-item1":"Search",
+                "nav-link1-item2":"Creat",
+                "nav-link1-item3":"Update",
+
+                "nav-link2":"Tickets",
+                "nav-link2-item1":"Give a ticket",
+                "nav-link2-item2":"Creat queue",
+                "nav-link2-item3":"Reset queue"
+            }
+        },
+        "footer":{
+
+        }
+    }
+}

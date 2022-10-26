@@ -7,5 +7,5 @@ export interface IPatient
     dateNaissance?:String,
     adresse:string,
     mail:string,
-    telephone:string
+    telephone:string,
 }
