@@ -25,10 +25,9 @@ export class AppComponent {
   }
   
   ngOnInit(): void {
-    alert(this.elementInitService.iElementInit.libelle);
+    
   }
 
-  getTranslation(){};
   useLanguage(language: string): void {
     this.translate.use(language);
   }

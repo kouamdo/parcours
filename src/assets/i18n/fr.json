@@ -6,19 +6,50 @@
                 "nav-link2":"Contact"
             },
             "nav-left":{
+                "nav-search-bar":"Recherche",
                 "nav-link1":"Patients",
                 "nav-link1-item1":"Recherche",
                 "nav-link1-item2":"Créer",
                 "nav-link1-item3":"Modifier",
 
                 "nav-link2":"Tickets",
-                "nav-link2-item1":"Give a ticket",
-                "nav-link2-item2":"Creat queue",
-                "nav-link2-item3":"Reset queue"
+                "nav-link2-item1":"Donner un ticket",
+                "nav-link2-item2":"Creer une file",
+                "nav-link2-item3":"Reinitialiser la file"
+            }
+        },
+        "central-panel":{
+            "title":"Bande d'annonce",
+            "list-item1-link1":"Accueil",
+            "list-item2":"Tableau de bord"
+        },
+        "main-area":{
+            "encart":{
+                "title":"Rapport recapitulatif mensuel",
+                "dropdown-list":{
+                    "link1":"Action",
+                    "link2":"Another action",
+                    "link3":"Something else here",
+                    "link4":"Separated link"
+                }
             }
         },
         "footer":{
 
+        }
+    },
+    "patient":{
+        "header":"Patients retrouvé(e)s",
+        "search-bar":"Rechercher",
+        "table":{
+            "table-head1":"Nom",
+            "table-head2":"Prénom",
+            "table-head3":"Date Naissance",
+            "table-head4":"Sexe",
+            "table-head5":"EMail",
+            "table-head6":"Adresse",
+            "table-head7":"Téléphone",
+            "table-head8":"Actions"
         }
     }
 }

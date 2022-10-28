@@ -6,6 +6,7 @@
                 "nav-link2":"Contact"
             },
             "nav-left":{
+                "nav-search-bar":"Search",
                 "nav-link1":"Patients",
                 "nav-link1-item1":"Search",
                 "nav-link1-item2":"Creat",
@@ -17,8 +18,38 @@
                 "nav-link2-item3":"Reset queue"
             }
         },
+        "central-panel":{
+            "title":"Trailer",
+            "list-item1-link1":"Home",
+            "list-item2":"Dashboard v2"
+        },
+        "main-area":{
+            "encart":{
+                "title":"Monthly Recap Report",
+                "dropdown-list":{
+                    "link1":"Action",
+                    "link2":"Another action",
+                    "link3":"Something else here",
+                    "link4":"Separated link"
+                }
+            }
+        },
         "footer":{
 
+        }
+    },
+    "patient":{
+        "header":"Patients retrouvé(e)s",
+        "search-bar":"Rechercher",
+        "table":{
+            "table-head1":"Nom",
+            "table-head2":"Prénom",
+            "table-head3":"Date Naissance",
+            "table-head4":"Sexe",
+            "table-head5":"EMail",
+            "table-head6":"Adresse",
+            "table-head7":"Téléphone",
+            "table-head8":"Actions"
         }
     }
 }

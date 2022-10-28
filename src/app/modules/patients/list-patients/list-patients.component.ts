@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { EMPTY, Observable } from 'rxjs';
 import { IPatient } from 'src/app/modele/Patient';
 import { PatientsService } from 'src/app/services/patients/patients.service';
@@ -13,9 +14,9 @@ export class ListPatientsComponent implements OnInit {
 
   patients$:Observable<IPatient[]>=EMPTY;
 
-  titre:string="Patients retrouvé(e)s";
+  //titre:string="Patients retrouvé(e)s";
 
-  constructor(private router:Router, private servicePatient:PatientsService) { }
+  constructor(private translate: TranslateService,private router:Router, private servicePatient:PatientsService) { }
 
   ngOnInit(): void {
     this.patients$ = this.getAllPatients();
