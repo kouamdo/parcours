@@ -1,0 +1,36 @@
+.searchBlock{
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 10px;
+    margin-right: 8px;
+    button{
+        width: 7%;
+        background-color: #7ea97e;
+        color: white;
+    }
+    .inputSection{
+        width: 91%;
+    }
+}
+#addUserBotton{
+    color: #7ea97e;
+    font-size: 20px;
+}
+#tableBlock{
+    width: 100%;
+    div{
+        width: 100%;
+    }
+    table{
+        #actions{
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            font-size: 12px;
+            a{
+                color: #7ea97e;
+            }
+        }
+    }
+}

@@ -39,17 +39,22 @@
         }
     },
     "patient":{
-        "header":"Patients retrouvé(e)s",
+        "text":"Patients retrouvé(e)s",
         "search-bar":"Rechercher",
         "table":{
-            "table-head1":"Nom",
-            "table-head2":"Prénom",
-            "table-head3":"Date Naissance",
-            "table-head4":"Sexe",
-            "table-head5":"EMail",
-            "table-head6":"Adresse",
-            "table-head7":"Téléphone",
-            "table-head8":"Actions"
+            "title1":"Nom",
+            "title2":"Prénom",
+            "title3":"Date Naissance",
+            "title4":"Sexe",
+            "title5":"EMail",
+            "title6":"Adresse",
+            "title7":"Téléphone",
+            "title8":"Actions",
+            "actions":{
+                "link1":"Orienter",
+                "link2":"Update",
+                "link3":"View"
+            }
         }
     }
 }

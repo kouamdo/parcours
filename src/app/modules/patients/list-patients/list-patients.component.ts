@@ -8,7 +8,7 @@ import { PatientsService } from 'src/app/services/patients/patients.service';
 @Component({
   selector: 'app-list-patients',
   templateUrl: './list-patients.component.html',
-  styleUrls: ['./list-patients.component.css']
+  styleUrls: ['./list-patients.component.scss']
 })
 export class ListPatientsComponent implements OnInit {
 
