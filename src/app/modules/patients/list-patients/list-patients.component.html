@@ -1,28 +1,35 @@
-<div class="card container" >
-    <div class='card-hearder' >
-        {{titre}}
-    </div>
-    <div class="row">
-        <div class="col-3">
-            <input type="search" placeholder="Rechercher" id="rechercherPatient">
+<div class="card container-fluid" >
+    <div class='card-hearder pt-3' >
+            <!--{{"patient.text" | translate}}-->
+        <div class="d-flex align-items-center justify-content-center mr-4">
+            <div class="input-group searchBlock">
+                <div class="form-outline inputSection">
+                    <input type="search" id="form1" class="form-control" placeholder="{{'patient.search-bar' | translate}}" />
+                </div>
+                <button type="button" class="btn p-0">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+            <div class="" id="addUserBotton">
+                <span>
+                    <i class="fa fa-user-plus" aria-hidden="true"></i>
+                </span>
+            </div>
         </div>
-        <div class="col-3">
-            <button class="btn btn-primary" [routerLink]="['/patient-nouveau']">Ajouter Patient</button>
-        </div>
     </div>
-    <div class="card-body">
+    <div class="card-body" id="tableBlock">
         <div class='table-responsive'>
-            <table class='table'>
+            <table class='table text-center'>
                 <thead>
                     <tr>
-                        <th>Nom</th>
-                        <th>Prénom</th>
-                        <th>Date Naissance</th>
-                        <th>Sexe</th>
-                        <th>EMail</th>
-                        <th>Adresse</th>
-                        <th>Téléphone</th>
-                        <th>Actions</th>
+                        <th>{{"patient.table.title1" | translate}}</th>
+                        <th>{{"patient.table.title2" | translate}}</th>
+                        <th>{{"patient.table.title3" | translate}}</th>
+                        <th>{{"patient.table.title4" | translate}}</th>
+                        <th>{{"patient.table.title5" | translate}}</th>
+                        <th>{{"patient.table.title6" | translate}}</th>
+                        <th>{{"patient.table.title7" | translate}}</th>
+                        <th>{{"patient.table.title8" | translate}}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -35,11 +42,17 @@
                       <td>{{patient.adresse}}</td>
                       <td>{{patient.telephone}}</td>
                       <td>
-                        <div class="col">
-
-                        </div>
-                        <a class="btn btn-primary" [routerLink]="['new-patient']">Orienter</a>
-                        <a class="btn btn-primary" [routerLink]="['/patient-nouveau',patient.id]">Modifier</a>
+                        <p id="actions">
+                            <a class="" [routerLink]="['new-patient']" title="{{'patient.table.actions.link1' | translate}}">
+                                <i class="fa fa-map-pin" aria-hidden="true"></i>
+                            </a>
+                            <a class="" [routerLink]="['new-patient']" title="{{'patient.table.actions.link3' | translate}}">
+                                <i class="fa fa-eye text-secondary" aria-hidden="true"></i>
+                            </a>
+                            <a class="" [routerLink]="['/patient-nouveau',patient.id]" title="{{'patient.table.actions.link2' | translate}}">
+                                <i class="fa fa-pen text-info" aria-hidden="true"></i>
+                            </a>
+                        </p>
                     </td>
                   </tr>  
                 </tbody>

@@ -8,7 +8,7 @@ import {OverlayContainer, OverlayModule} from '@angular/cdk/overlay';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.scss']
 }) 
 export class AppComponent {
   title = 'Parcours client - clinique de ...';
@@ -25,10 +25,9 @@ export class AppComponent {
   }
   
   ngOnInit(): void {
-    alert(this.elementInitService.iElementInit.libelle);
+    
   }
 
-  getTranslation(){};
   useLanguage(language: string): void {
     this.translate.use(language);
   }

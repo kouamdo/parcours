@@ -1,0 +1,20 @@
+.activeLinkCSS {
+    transition: ease 0.2s;
+    background-color: rgb(91, 91, 91);
+    padding-left: 20px;
+    span{
+        background-color: #7ea97e;
+        display: inline-block;
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        i{
+            display: none;
+            margin: auto 5px;
+        }
+    }
+    p{
+        color: #7ea97e;
+        margin-left: 8px;
+    }
+}

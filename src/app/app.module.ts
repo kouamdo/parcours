@@ -39,6 +39,7 @@ import { MenuModule } from './modules/menu/menu.module';
             useFactory: HttpLoaderFactory,
             deps: [HttpClient]
         },
+        extend:true
     }),
     BrowserAnimationsModule,
     MatSliderModule,

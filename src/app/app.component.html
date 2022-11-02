@@ -1,4 +1,4 @@
-<div class="wrapper"  [ngClass]="{'light-mode': toggle, 'dark-mode': !toggle}"class="light-mode">
+<div id="google_element" [ngClass]="{'light-mode': toggle, 'dark-mode': !toggle}"class="light-mode wrapper">
 
   <div class="preloader flex-column justify-content-center align-items-center">
     <img class="animation__wobble" src="assets/img/logoNotep.png" alt="logoNotep.png" height="60" width="60">
@@ -163,7 +163,7 @@
     <!-- zone de recherche en haut gauche-->
     <div class="form-inline">
       <div class="input-group" data-widget="sidebar-search">
-        <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
+        <input class="form-control form-control-sidebar" type="search" placeholder="{{'accueil.header.nav-left.nav-search-bar' | translate}}" aria-label="Search">
         <div class="input-group-append">
           <button class="btn btn-sidebar">
           <i class="fas fa-search fa-fw"></i>
@@ -177,7 +177,7 @@
       
         <li class="nav-item menu-open">
           <a href="#" class="nav-link">
-            <i class="nav-icon fas fa-tachometer-alt"></i>
+            <i class="fas fa-user-cog fa-lg"></i>
             <p>
               {{libelle}}
             <i class="right fas fa-angle-left"></i>
@@ -186,7 +186,7 @@
           <ul class="nav nav-treeview">
             <li class="nav-item">
               <a class="nav-link" routerLink="list-patients" routerLinkActive="activeLinkCSS" >
-                <i class="far fa-circle nav-icon"></i>
+                <span><i class="far fa-circle nav-icon"></i></span>
                 <p>
                   {{"accueil.header.nav-left.nav-link1-item1" | translate}}
                 </p>
@@ -194,7 +194,7 @@
             </li>
             <li class="nav-item">
               <a class="nav-link" routerLink="patient-nouveau" routerLinkActive="activeLinkCSS" >
-                <i class="far fa-circle nav-icon"></i>
+                <span><span><i class="far fa-circle nav-icon"></i></span></span>
                 <p>
                   {{"accueil.header.nav-left.nav-link1-item2" | translate}}
                 </p>
@@ -202,7 +202,7 @@
             </li>
             <li class="nav-item">
               <a href="./index3.html" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
+              <span><i class="far fa-circle nav-icon"></i></span>
               <p>
                 {{"accueil.header.nav-left.nav-link1-item3" | translate}}
               </p>
@@ -213,7 +213,7 @@
         
         <li class="nav-item">
           <a href="#" class="nav-link">
-            <i class="nav-icon fas fa-chart-pie"></i>
+            <i class="nav-icon fas fa-chart-pie fa-lg"></i>
             <p>
               {{"accueil.header.nav-left.nav-link2" | translate}}
               <i class="right fas fa-angle-left"></i>
@@ -222,20 +222,26 @@
           <ul class="nav nav-treeview">
             <li class="nav-item">
               <a href="pages/charts/chartjs.html" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Donner un ticket</p>
+                <span><i class="far fa-circle nav-icon"></i></span>
+                <p>
+                  {{"accueil.header.nav-left.nav-link2-item1" | translate}}
+                </p>
               </a>
             </li>
             <li class="nav-item">
               <a href="pages/charts/flot.html" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Créer file</p>
+              <span><i class="far fa-circle nav-icon"></i></span>
+              <p>
+                {{"accueil.header.nav-left.nav-link2-item2" | translate}}
+              </p>
               </a>
             </li>
             <li class="nav-item">
               <a href="pages/charts/inline.html" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Reset file</p>
+                <span><i class="far fa-circle nav-icon"></i></span>
+                <p>
+                  {{"accueil.header.nav-left.nav-link2-item3" | translate}}
+                </p>
               </a>
             </li>
           </ul>
@@ -252,12 +258,20 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1 class="m-0">Bande d'annonce</h1>
+          <h1 class="m-0">
+            {{"accueil.central-panel.title" | translate}}
+          </h1>
         </div>
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
-          <li class="breadcrumb-item"><a href="#">Home</a></li>
-          <li class="breadcrumb-item active">Dashboard v2</li>
+          <li class="breadcrumb-item">
+            <a href="#">
+              {{"accueil.central-panel.list-item1-link1" | translate}}
+            </a>
+          </li>
+          <li class="breadcrumb-item active">
+            {{"accueil.central-panel.list-item2" | translate}}
+          </li>
           </ol>
         </div>
       </div>
@@ -273,7 +287,9 @@
           <!-- premier encart détachable -->
           <div class="card">
             <div class="card-header">
-              <h5 class="card-title">Monthly Recap Report</h5>
+              <h5 class="card-title">
+                {{"accueil.main-area.encart.title" | translate}}
+              </h5>
               <div class="card-tools">
                 <button type="button" class="btn btn-tool" data-card-widget="collapse">
                   <i class="fas fa-minus"></i>
@@ -283,11 +299,19 @@
                   <i class="fas fa-wrench"></i>
                   </button>
                   <div class="dropdown-menu dropdown-menu-right" role="menu">
-                    <a href="#" class="dropdown-item">Action</a>
-                    <a href="#" class="dropdown-item">Another action</a>
-                    <a href="#" class="dropdown-item">Something else here</a>
+                    <a href="#" class="dropdown-item">
+                      {{"accueil.main-area.encart.dropdown-list.link1" | translate}}
+                    </a>
+                    <a href="#" class="dropdown-item">
+                      {{"accueil.main-area.encart.dropdown-list.link2" | translate}}
+                    </a>
+                    <a href="#" class="dropdown-item">
+                      {{"accueil.main-area.encart.dropdown-list.link3" | translate}}
+                    </a>
                     <a class="dropdown-divider"></a>
-                    <a href="#" class="dropdown-item">Separated link</a>
+                    <a href="#" class="dropdown-item">
+                      {{"accueil.main-area.encart.dropdown-list.link4" | translate}}
+                    </a>
                 </div>
 
                   <button class="btn btn-navbar" type="button" data-widget="navbar-search">

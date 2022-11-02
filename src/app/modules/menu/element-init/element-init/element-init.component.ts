@@ -19,7 +19,6 @@ export class ElementInitComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.iElementInit.libelle = "Patient";
     /*alert(this.iElementInit.libelle);*/
   }
 
