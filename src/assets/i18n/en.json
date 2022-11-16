@@ -40,7 +40,7 @@
     },
     "patient":{
         "text":"Patients retrouvé(e)s",
-        "search-bar":"Rechercher",
+        "search-bar":"search",
         "table":{
             "title1":"Name",
             "title2":"Surname",
@@ -53,8 +53,15 @@
             "actions":{
                 "link1":"Orienter",
                 "link2":"Update",
-                "link3":"View"
+                "link3":"View",
+                "link4":"Delete"
             }
         }
+    },
+    "theme":{
+        "libelle":"theme"
+    },
+    "langue":{
+        "libelle":"langages"
     }
 }

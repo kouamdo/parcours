@@ -1,3 +1,9 @@
+.title{
+    height: 100px;
+    h2{
+        color: #7ea97e;
+    }
+}
 .searchBlock{
     width: 100%;
     display: flex;
@@ -11,11 +17,30 @@
     }
     .inputSection{
         width: 91%;
+        input{
+            border: none;
+            border: 1px solid #7ea97e21;
+        }
     }
 }
-#addUserBotton{
-    color: #7ea97e;
-    font-size: 20px;
+.tableTools{
+    padding-bottom: 15px;
+    #addUserBotton{
+        background-color: #7ea97e;
+        color: white;
+        font-size: 20px;
+        padding: 10px;
+        border-radius: 5px;
+        span{
+            padding: 6px;
+            border: none;
+            border-radius: 3px;
+        }
+        span:hover{
+            box-shadow: 0 0 2px #7ea97e;
+            transition: ease 0.23s;
+        }
+    }
 }
 #tableBlock{
     width: 100%;
@@ -24,12 +49,29 @@
     }
     table{
         #actions{
-            display: flex;
-            align-items: center;
-            justify-content: space-around;
             font-size: 12px;
-            a{
+            .dropdown-toggle{
+                padding: 0;
+                margin-left: 10px;
                 color: #7ea97e;
+                span{
+                    position: relative;
+                    bottom: 6px;
+                    font-size: 28px;
+                    margin-right: 5px;
+                }
+            }
+            div{
+                button{
+                    color: #7ea97e;
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    span{
+                        width: 70%;
+                        text-align: left;
+                    }
+                }
             }
         }
     }

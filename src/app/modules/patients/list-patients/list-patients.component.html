@@ -1,62 +1,81 @@
-<div class="card container-fluid" >
-    <div class='card-hearder pt-3' >
-            <!--{{"patient.text" | translate}}-->
-        <div class="d-flex align-items-center justify-content-center mr-4">
-            <div class="input-group searchBlock">
-                <div class="form-outline inputSection">
-                    <input type="search" id="form1" class="form-control" placeholder="{{'patient.search-bar' | translate}}" />
+<div id="mainSection" class="d-flex flex-column justify-content-around">
+    <div class="title">
+        <h2>Liste de tous les patients</h2>
+    </div>
+    <div class="card container-fluid" >
+        <div class='card-hearder pt-3' >
+            <div class="d-flex align-items-center justify-content-end mr-4 tableTools">
+                <div class="form-inline mr-3">
+                    <div class="input-group" data-widget="sidebar-search">
+                      <input class="form-control form-control-sidebar" type="search" placeholder="{{'accueil.header.nav-left.nav-search-bar' | translate}}" aria-label="Search">
+                      <div class="input-group-append">
+                        <button class="btn btn-secondary btn-sidebar">
+                        <i class="fas fa-search fa-fw"></i>
+                        </button>
+                      </div>
+                    </div>
                 </div>
-                <button type="button" class="btn p-0">
-                    <i class="fas fa-search"></i>
-                </button>
-            </div>
-            <div class="" id="addUserBotton">
-                <span>
-                    <i class="fa fa-user-plus" aria-hidden="true"></i>
-                </span>
+                <div role="button" id="addUserBotton" routerLink="../patient-nouveau">
+                    <span title="Ajouter un patient">
+                        <i class="fa fa-user-plus" aria-hidden="true"></i>
+                    </span>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="card-body" id="tableBlock">
-        <div class='table-responsive'>
-            <table class='table text-center'>
-                <thead>
-                    <tr>
-                        <th>{{"patient.table.title1" | translate}}</th>
-                        <th>{{"patient.table.title2" | translate}}</th>
-                        <th>{{"patient.table.title3" | translate}}</th>
-                        <th>{{"patient.table.title4" | translate}}</th>
-                        <th>{{"patient.table.title5" | translate}}</th>
-                        <th>{{"patient.table.title6" | translate}}</th>
-                        <th>{{"patient.table.title7" | translate}}</th>
-                        <th>{{"patient.table.title8" | translate}}</th>
-                    </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor='let patient of (patients$ | async) as patients'>
-                      <td >{{patient.nom  | uppercase }} </td>
-                     <td > {{patient.prenom}}</td>
-                     <td>{{patient.dateNaissance}}</td>
-                      <td>{{patient.sexe }}</td>
-                      <td>{{patient.mail}}</td>
-                      <td>{{patient.adresse}}</td>
-                      <td>{{patient.telephone}}</td>
-                      <td>
-                        <p id="actions">
-                            <a class="" [routerLink]="['new-patient']" title="{{'patient.table.actions.link1' | translate}}">
-                                <i class="fa fa-map-pin" aria-hidden="true"></i>
-                            </a>
-                            <a class="" [routerLink]="['new-patient']" title="{{'patient.table.actions.link3' | translate}}">
-                                <i class="fa fa-eye text-secondary" aria-hidden="true"></i>
-                            </a>
-                            <a class="" [routerLink]="['/patient-nouveau',patient.id]" title="{{'patient.table.actions.link2' | translate}}">
-                                <i class="fa fa-pen text-info" aria-hidden="true"></i>
-                            </a>
-                        </p>
-                    </td>
-                  </tr>  
-                </tbody>
-            </table>
+        <div class="card-body p-0" id="tableBlock">
+            <div class='table-responsive w-100'>
+                <table class='table text-left w-100'>
+                    <thead>
+                        <tr>
+                            <th>{{"patient.table.title1" | translate}}</th>
+                            <th>{{"patient.table.title2" | translate}}</th>
+                            <th>{{"patient.table.title3" | translate}}</th>
+                            <th>{{"patient.table.title4" | translate}}</th>
+                            <th>{{"patient.table.title5" | translate}}</th>
+                            <th>{{"patient.table.title6" | translate}}</th>
+                            <th>{{"patient.table.title7" | translate}}</th>
+                            <th>{{"patient.table.title8" | translate}}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor='let patient of (patients$ | async) as patients'>
+                        <td >{{patient.nom  | uppercase }} </td>
+                        <td > {{patient.prenom}}</td>
+                        <td>{{patient.dateNaissance}}</td>
+                        <td>{{patient.sexe }}</td>
+                        <td>{{patient.mail}}</td>
+                        <td>{{patient.adresse}}</td>
+                        <td>{{patient.telephone}}</td>
+                        <td>
+                            <div id="actions" class="dropdown open">
+                                <button class="btn dropdown-toggle" type="button" id="triggerId" data-toggle="dropdown" aria-haspopup="true"
+                                        aria-expanded="false">
+                                    <span>...</span>
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="triggerId">
+                                    <button class="dropdown-item nav-link" [routerLink]="['new-patient']" title="{{'patient.table.actions.link1' | translate}}">
+                                        <i class="fa fa-map-pin" aria-hidden="true"></i>
+                                        <span>{{'patient.table.actions.link1' | translate}}</span>
+                                    </button>
+                                    <button class="dropdown-item nav-link" [routerLink]="['new-patient']" title="{{'patient.table.actions.link3' | translate}}">
+                                        <i class="fa fa-eye text-secondary" aria-hidden="true"></i>
+                                        <span>{{'patient.table.actions.link3' | translate}}</span>
+                                    </button>
+                                    <button class="dropdown-item nav-link" [routerLink]="['/patient-nouveau',patient.id]" title="{{'patient.table.actions.link2' | translate}}">
+                                        <i class="fa fa-pen text-info" aria-hidden="true"></i>
+                                        <span>{{'patient.table.actions.link2' | translate}}</span>
+                                    </button>
+                                    <button class="dropdown-item nav-link" [routerLink]="['/patient-nouveau',patient.id]" title="{{'patient.table.actions.link4' | translate}}">
+                                        <i class="fa fa-times-circle text-danger" aria-hidden="true"></i>
+                                        <span>{{'patient.table.actions.link4' | translate}}</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>  
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>

@@ -8,14 +8,14 @@ import {IPatient} from '../../../modele/Patient';
 @Component({
   selector: 'app-new-patient',
   templateUrl: './new-patient.component.html',
-  styleUrls: ['./new-patient.component.css']
+  styleUrls: ['./new-patient.component.scss']
 })
 export class NewPatientComponent implements OnInit {
   //patient$:Observable<patientient>=EMPTY;
   patient : IPatient|undefined;
   forme: FormGroup;
   btnLibelle: string="Ajouter";
-  titre: string="Nouveau Patient";
+  titre: string="Ajouter un nouveau Patient";
   submitted: boolean=false;
   //TODO validation du formulaire. particulièrment les mail; les dates
   constructor(private formBuilder:FormBuilder, private patientService:PatientsService,private router:Router, private infosPath:ActivatedRoute) { 

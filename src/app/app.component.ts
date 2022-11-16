@@ -13,6 +13,12 @@ import {OverlayContainer, OverlayModule} from '@angular/cdk/overlay';
 export class AppComponent {
   title = 'Parcours client - clinique de ...';
   langues : string[] = ['en','fr','sp','de'];
+  flags = [
+    { flag: 'assets/images/flags/us.svg'},
+    { flag: 'assets/images/flags/fr.svg'},
+    { flag: 'assets/images/flags/spain.svg'},
+    { flag: 'assets/images/flags/germany.svg'},
+  ];
 
   iElementInit : IElementInit = {};
   libelle = this.elementInitService.iElementInit.libelle;

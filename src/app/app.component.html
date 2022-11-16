@@ -1,4 +1,4 @@
-<div id="google_element" [ngClass]="{'light-mode': toggle, 'dark-mode': !toggle}"class="light-mode wrapper">
+<div [ngClass]="{'light-mode': toggle, 'dark-mode': !toggle}" class="wrapper">
 
   <div class="preloader flex-column justify-content-center align-items-center">
     <img class="animation__wobble" src="assets/img/logoNotep.png" alt="logoNotep.png" height="60" width="60">
@@ -145,110 +145,99 @@
       <!-- menu vertical -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
   
-    <a href="index3.html" class="brand-link">
-      <img src="assets/img/logoNotep.png" alt="Notep Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+    <a href="index3.html" class="brand-link" id="logo">
+      <img src="assets/img/logoNotep.png" width="25px" alt="Notep Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
       <span class="brand-text font-weight-light">Notep Consulting</span>
     </a>
   
-    <div class="sidebar">
+    <div class="sidebar" id="userActions">
       <!-- Identité du user en dessous du logo haut gauche-->
-      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-        <div class="image">
+      <div class="user">
+        <div class="image text-center">
           <img src="assets/img/avatar.png" class="img-circle elevation-2" alt="User Image">
         </div>
-      <div class="info">
-        <a href="#" class="d-block">Philippe NGONGANG</a>
-      </div>
-    </div>
-    <!-- zone de recherche en haut gauche-->
-    <div class="form-inline">
-      <div class="input-group" data-widget="sidebar-search">
-        <input class="form-control form-control-sidebar" type="search" placeholder="{{'accueil.header.nav-left.nav-search-bar' | translate}}" aria-label="Search">
-        <div class="input-group-append">
-          <button class="btn btn-sidebar">
-          <i class="fas fa-search fa-fw"></i>
-          </button>
+        <div class="info">
+          <a href="#" class="d-block">Philippe NGONGANG</a>
         </div>
+        <p id="role" class="text-light"><small>Admin</small></p>
       </div>
-    </div>
-    <!-- Menu gauche-->
-    <nav class="mt-2">
-      <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-      
-        <li class="nav-item menu-open">
-          <a href="#" class="nav-link">
-            <i class="fas fa-user-cog fa-lg"></i>
-            <p>
-              {{libelle}}
-            <i class="right fas fa-angle-left"></i>
-            </p>
-          </a>
-          <ul class="nav nav-treeview">
-            <li class="nav-item">
-              <a class="nav-link" routerLink="list-patients" routerLinkActive="activeLinkCSS" >
-                <span><i class="far fa-circle nav-icon"></i></span>
-                <p>
-                  {{"accueil.header.nav-left.nav-link1-item1" | translate}}
-                </p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" routerLink="patient-nouveau" routerLinkActive="activeLinkCSS" >
-                <span><span><i class="far fa-circle nav-icon"></i></span></span>
-                <p>
-                  {{"accueil.header.nav-left.nav-link1-item2" | translate}}
-                </p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="./index3.html" class="nav-link">
-              <span><i class="far fa-circle nav-icon"></i></span>
-              <p>
-                {{"accueil.header.nav-left.nav-link1-item3" | translate}}
-              </p>
-              </a>
-            </li>
-          </ul>
-        </li>
+      <!-- Menu gauche-->
+      <nav class="mt-2 menuLeft">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
         
-        <li class="nav-item">
-          <a href="#" class="nav-link">
-            <i class="nav-icon fas fa-chart-pie fa-lg"></i>
-            <p>
-              {{"accueil.header.nav-left.nav-link2" | translate}}
-              <i class="right fas fa-angle-left"></i>
-            </p>
-          </a>
-          <ul class="nav nav-treeview">
-            <li class="nav-item">
-              <a href="pages/charts/chartjs.html" class="nav-link">
-                <span><i class="far fa-circle nav-icon"></i></span>
-                <p>
-                  {{"accueil.header.nav-left.nav-link2-item1" | translate}}
-                </p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="pages/charts/flot.html" class="nav-link">
-              <span><i class="far fa-circle nav-icon"></i></span>
+          <li class="nav-item menu-open">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-user-cog"></i>
               <p>
-                {{"accueil.header.nav-left.nav-link2-item2" | translate}}
+                {{libelle}}
+              <i class="right fas fa-angle-left"></i>
               </p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="pages/charts/inline.html" class="nav-link">
+            </a>
+            <ul class="nav nav-treeview liste">
+              <li class="nav-item">
+                <a class="nav-link" routerLink="list-patients" routerLinkActive="activeLinkCSS" >
+                  <span><i class="far fa-circle nav-icon"></i></span>
+                  <p>
+                    {{"accueil.header.nav-left.nav-link1-item1" | translate}}
+                  </p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" routerLink="patient-nouveau" routerLinkActive="activeLinkCSS" >
+                  <span><i class="far fa-circle nav-icon"></i></span>
+                  <p>
+                    {{"accueil.header.nav-left.nav-link1-item2" | translate}}
+                  </p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a  routerLink="" class="nav-link">
                 <span><i class="far fa-circle nav-icon"></i></span>
                 <p>
-                  {{"accueil.header.nav-left.nav-link2-item3" | translate}}
+                  {{"accueil.header.nav-left.nav-link1-item3" | translate}}
                 </p>
-              </a>
-            </li>
-          </ul>
-        </li>
-      </ul>
-    </nav>
-  
+                </a>
+              </li>
+            </ul>
+          </li>
+          
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-chart-pie"></i>
+              <p>
+                {{"accueil.header.nav-left.nav-link2" | translate}}
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview liste">
+              <li class="nav-item">
+                <a routerLink="" class="nav-link">
+                  <span><i class="far fa-circle nav-icon"></i></span>
+                  <p>
+                    {{"accueil.header.nav-left.nav-link2-item1" | translate}}
+                  </p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a routerLink="" class="nav-link">
+                <span><i class="far fa-circle nav-icon"></i></span>
+                <p>
+                  {{"accueil.header.nav-left.nav-link2-item2" | translate}}
+                </p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a routerLink="" class="nav-link">
+                  <span><i class="far fa-circle nav-icon"></i></span>
+                  <p>
+                    {{"accueil.header.nav-left.nav-link2-item3" | translate}}
+                  </p>
+                </a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
     </div>
   </aside>
     <!-- panneau central -->
@@ -258,9 +247,9 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1 class="m-0">
+          <!--<h1 class="m-0">
             {{"accueil.central-panel.title" | translate}}
-          </h1>
+          </h1>-->
         </div>
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
@@ -285,7 +274,7 @@
       <div class="row">
         <div class="col-md-12">
           <!-- premier encart détachable -->
-          <div class="card">
+          <!--<div class="card">
             <div class="card-header">
               <h5 class="card-title">
                 {{"accueil.main-area.encart.title" | translate}}
@@ -323,29 +312,26 @@
                 </button>
               </div>
             </div>
-          </div>
+          </div>-->
           <div class="card-body">
             <router-outlet></router-outlet>
           </div>
-        
         </div>
-      
       </div>
-      
     </div>
   </section>
-  
 </div>
 
 
 <aside class="control-sidebar control-sidebar-dark" [ngClass]="{'control-sidebar-light': toggle, 'control-sidebar-dark': !toggle}">
-  
-  <select name="language" id="language" (change)="valeurChange($event)">
-    <option *ngFor="let langue of langues" [value]="langue">{{ langue }}</option>
-  </select><br>
-  <p>
+  <label class="m-2" for="language">{{"langue.libelle" | translate}} 
+    <select name="language" id="language" (change)="valeurChange($event)">
+      <option *ngFor="let langue of langues" [value]="langue">{{ langue }}</option>
+    </select><br>
+  </label>
+  <p class="m-2">
     <mat-toolbar class="bg-light">
-      Dark Mode
+      {{"theme.libelle" | translate}}
       <div ></div>
       <mat-icon class="mr-2 ml-2">brightness_5</mat-icon>
       <mat-slide-toggle (click)="change()" class="mr-2">
