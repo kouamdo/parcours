@@ -24,5 +24,4 @@ export class ListPatientsComponent implements OnInit {
   private getAllPatients(){
     return this.servicePatient.getAllPatients();
   }
-
 }
