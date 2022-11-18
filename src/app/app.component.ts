@@ -8,11 +8,17 @@ import {OverlayContainer, OverlayModule} from '@angular/cdk/overlay';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.scss']
 }) 
 export class AppComponent {
   title = 'Parcours client - clinique de ...';
   langues : string[] = ['en','fr','sp','de'];
+  flags = [
+    { flag: 'assets/images/flags/us.svg'},
+    { flag: 'assets/images/flags/fr.svg'},
+    { flag: 'assets/images/flags/spain.svg'},
+    { flag: 'assets/images/flags/germany.svg'},
+  ];
 
   iElementInit : IElementInit = {};
   libelle = this.elementInitService.iElementInit.libelle;
@@ -25,10 +31,9 @@ export class AppComponent {
   }
   
   ngOnInit(): void {
-    alert(this.elementInitService.iElementInit.libelle);
+    
   }
 
-  getTranslation(){};
   useLanguage(language: string): void {
     this.translate.use(language);
   }

@@ -9,7 +9,7 @@ import { IElementInit } from 'src/app/modele/element-init';
 })
 export class ElementInitService {
   iElementInit : IElementInit = {};
-  constructor() { 
+  constructor() {
     this.iElementInit.libelle = "Patient";
   }
 }
