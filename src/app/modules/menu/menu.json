@@ -1,0 +1,14 @@
+{
+    "idMenu":"1234",
+    "elements":{
+        "libelleElt":"Patients",
+        "ordre":"1",
+        "fonctionalite":{
+            "libelle1":"Afficher",
+            "libelle2":"Modifier",
+            "libelle3":"Afficher",
+            "libelle4":"Afficher"
+            
+        }
+    }
+}

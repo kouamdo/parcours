@@ -53,8 +53,15 @@
             "actions":{
                 "link1":"Orienter",
                 "link2":"Modifier",
-                "link3":"Détails"
+                "link3":"Détails",
+                "link4":"Supprimer"
             }
         }
+    },
+    "theme":{
+        "libelle":"theme"
+    },
+    "langue":{
+        "libelle":"langues"
     }
 }
