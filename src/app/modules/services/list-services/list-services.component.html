@@ -29,10 +29,10 @@
                         <tr>
                             <th>Libelle</th>
                             <th>Etat</th>
-                            <th>Date Naissance</th>
                             <th>date de derniere modification</th>
                             <th>date d'attribution</th>
                             <th>date de fin</th>
+                            <th>Options</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -42,14 +42,13 @@
                            <td>{{service.dateDerniereModification}}</td>
                             <td>{{service.dateAttribution}}</td>
                             <td>{{service.dateFin}}</td>
-                            <td>{{service.nombreTotalAttributions}}</td>
                         <td>
                             <div id="actions" class="dropdown open">
                                 <button class="btn dropdown-toggle" type="button" id="triggerId" data-toggle="dropdown" aria-haspopup="true"
                                         aria-expanded="false">
                                     <span>...</span>
                                 </button>
-                                <!--<div class="dropdown-menu" aria-labelledby="triggerId">
+                                <div class="dropdown-menu" aria-labelledby="triggerId">
                                     <button class="dropdown-item nav-link" [routerLink]="['new-services']" title="Orienter">
                                         <i class="fa fa-map-pin" aria-hidden="true"></i>
                                         <span>Orienter</span>
@@ -66,7 +65,7 @@
                                         <i class="fa fa-times-circle text-danger" aria-hidden="true"></i>
                                         <span>Supprimer</span>
                                     </button>
-                                </div>-->
+                                </div>
                             </div>
                         </td>
                     </tr>  

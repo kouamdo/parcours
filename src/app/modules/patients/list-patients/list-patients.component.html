@@ -41,7 +41,7 @@
                     <tr *ngFor='let patient of (patients$ | async) as patients'>
                         <td >{{patient.nom  | uppercase }} </td>
                         <td > {{patient.prenom}}</td>
-                        <td>{{patient.dateNaissance}}</td>
+                        <td>{{patient.dateNaissance | date: 'dd/MM/yyyy'}}</td>
                         <td>{{patient.sexe }}</td>
                         <td>{{patient.mail}}</td>
                         <td>{{patient.adresse}}</td>
