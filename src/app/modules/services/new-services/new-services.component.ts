@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, MaxLengthValidator,MinLengthValidator,ReactiveF
 import { Router, ActivatedRoute } from '@angular/router';
 import { EMPTY, Observable } from 'rxjs';
 import { IService } from 'src/app/modele/service';
-import { ServicesService } from 'src/app/services/services.service';
+import { ServicesService } from 'src/app/services/services/services.service';
 
 @Component({
   selector: 'app-new-services',
@@ -17,13 +17,14 @@ export class NewServicesComponent implements OnInit {
   btnLibelle: string="Ajouter";
   titre: string="Ajouter un nouveau service";
   submitted: boolean=false;
+
   constructor(private formBuilder:FormBuilder, private serviceService:ServicesService,private router:Router, private infosPath:ActivatedRoute) { 
     this.forme = this.formBuilder.group({
       libelle: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
       etat: ['Non assigne', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
-      dateDerniereModification: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
-      dateAttribution: [''],
-      dateFin: ['']
+      dateDerniereModification: ['/', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
+      dateAttribution: ['/'],
+      dateFin: ['/']
     })
   }
 
@@ -32,7 +33,7 @@ export class NewServicesComponent implements OnInit {
     if((idService != null) && idService!==''){
       this.btnLibelle="Modifier";
       this.titre="service à Modifier";
-      this.serviceService.getServiceById(Number(idService)).subscribe((x: IService | undefined) =>
+      this.serviceService.getServiceById(Number(idService)).subscribe(x =>
         {
           this.service = x; console.log(this.service);
           this.forme.setValue({
@@ -41,8 +42,8 @@ export class NewServicesComponent implements OnInit {
             dateDerniereModification: this.service.dateDerniereModification,
             dateAttribution: this.service.dateAttribution,
             dateFin:  this.service.dateFin
-          })   
-        });
+          })
+      });
     }
   }
 
@@ -69,10 +70,10 @@ export class NewServicesComponent implements OnInit {
       serviceTemp.id = this.service.id  
     }
     this.serviceService.ajouterService(serviceTemp).subscribe(
-      (      object: any) => {
+      object => {
         this.router.navigate(['/list-services']);
       },
-      (      error: any)=>{
+      error =>{
         console.log(error)
       }
     )
