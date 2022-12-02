@@ -76,3 +76,21 @@
         }
     }
 }
+.blockServices{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    label{
+        padding: 10px 5px;
+        color: #7ea97e;
+        font-weight: normal;
+        input{
+            margin-right: 5px;
+            color: #7ea97e;
+        }
+        input:checked{
+            background-color: #7ea97e;
+        }
+    }
+}
