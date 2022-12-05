@@ -1,6 +1,6 @@
 export interface IService {
     id:Number,
-    libelle?:string,
+    libelle:string,
     etat?:string,
     dateDerniereModification?:string,
     dateAttribution?:String,

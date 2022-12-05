@@ -40,7 +40,7 @@
                     <tbody>
                     <tr *ngFor='let patient of (patients$ | async) as patients'>
                         <td >{{patient.nom  | uppercase }} </td>
-                        <td > {{patient.prenom}}</td>
+                        <td >{{patient.prenom}}</td>
                         <td>{{patient.dateNaissance | date: 'dd/MM/yyyy'}}</td>
                         <td>{{patient.sexe }}</td>
                         <td>{{patient.mail}}</td>
@@ -93,14 +93,42 @@
                     <div class="modal-body">
                         <form class="container-fluid blockServices">
                             <label *ngFor='let service of (services$ | async) as services'>
-                                <input type="radio" name="libelle" id="libelle" value="{{service.libelle}}">
+                                <input type="radio" name="libelle" id="libelle" value="{{service.libelle}}" (click)="libelle = service.libelle">
                                 {{service.libelle}}
                             </label>
                         </form>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save</button>
+                    <div class="modal-footer d-flex justify-content-between align-items-center">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Anuller</button>
+                        <button type="button" class="btn btn-success" data-dismiss="modal" data-toggle="modal" data-target="#modelTicket">Suivant</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Modal -->
+        <div class="modal fade" id="modelTicket" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                        <div class="modal-header">
+                                <h5 class="modal-title">Nouveau Ticket</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                    <div class="modal-body">
+                        <div class="container-fluid">
+                            <p>Nom du service : <span>{{libelle}}</span></p>
+                            <p>Identifiant : <span>{{iTicket.id}}</span></p>
+                            <p>date et heure : <span>{{iTicket.dateImpression | date: 'dd/MM/yyyy'}}</span></p>
+                            <p>
+                                code barre : <i class="fa fa-barcode fa-lg" aria-hidden="true"></i>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="modal-footer d-flex justify-content-between align-items-center">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                        <button  onclick="window.print()" type="button" class="btn btn-primary"><i class="fa fa-print" aria-hidden="true"></i> Imprimer</button>
                     </div>
                 </div>
             </div>

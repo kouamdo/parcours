@@ -4,6 +4,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { EMPTY, Observable } from 'rxjs';
 import { IPatient } from 'src/app/modele/Patient';
 import { IService } from 'src/app/modele/service';
+import { ITicket } from 'src/app/modele/ticket';
 import { PatientsService } from 'src/app/services/patients/patients.service';
 import { ServicesService } from 'src/app/services/services/services.service';
 
@@ -18,6 +19,14 @@ export class ListPatientsComponent implements OnInit {
 
   services$:Observable<IService[]>=EMPTY;
 
+  tickets$:Observable<ITicket[]>=EMPTY;
+
+  iTicket : ITicket = {
+    id: 2,
+    dateImpression: new Date
+  };
+  libelle : string = "";
+
   //titre:string="Patients retrouvé(e)s";
 
   constructor(private translate: TranslateService,private router:Router, private servicePatient:PatientsService, private serviceService:ServicesService) { }
@@ -25,6 +34,8 @@ export class ListPatientsComponent implements OnInit {
   ngOnInit(): void {
     this.patients$ = this.getAllPatients();
     this.services$ = this.getAllServices();
+    sessionStorage.getItem(this.libelle)
+    sessionStorage.setItem("le libelle est", this.libelle)
   }
 
   private getAllPatients(){
