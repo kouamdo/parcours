@@ -1,0 +1,23 @@
+<nav class="mt-2" >
+    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+        <li *ngFor="let menu of fonctionnalites"  class="nav-item {{ menu.actif }}">
+            <a href="#" class="nav-link">
+                <i class="nav-icon {{ menu.icone }}"></i>
+                <p>
+                    {{ menu.fonction }} 
+                    <i class="right fas fa-angle-left"></i>
+                </p>
+            </a>
+            <ul class="nav nav-treeview">
+                <li class="nav-item" *ngFor="let elt of menu.elements">
+                    <a class="nav-link" routerLink="{{ elt.lien }}" routerLinkActive="activeLinkCSS" >
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>
+                            {{elt.nom}}
+                        </p>
+                    </a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</nav>
