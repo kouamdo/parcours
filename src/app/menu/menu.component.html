@@ -11,7 +11,7 @@
             <ul class="nav nav-treeview">
                 <li class="nav-item" *ngFor="let elt of menu.elements">
                     <a class="nav-link" routerLink="{{ elt.lien }}" routerLinkActive="activeLinkCSS" >
-                        <i class="far fa-circle nav-icon"></i>
+                        <span><i class="far fa-circle nav-icon"></i></span>
                         <p>
                             {{elt.nom}}
                         </p>
