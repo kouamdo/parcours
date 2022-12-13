@@ -93,7 +93,7 @@
                     <div class="modal-body">
                         <form class="container-fluid blockServices">
                             <label *ngFor='let service of (services$ | async) as services'>
-                                <input type="radio" name="libelle" id="libelle" value="{{service.libelle}}" (click)="libelle = service.libelle">
+                                <input type="radio" name="libelle" id="libelle" value="{{service.libelle}}" (click)="setLibelle(service.libelle)">
                                 {{service.libelle}}
                             </label>
                         </form>

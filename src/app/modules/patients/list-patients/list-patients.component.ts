@@ -34,8 +34,12 @@ export class ListPatientsComponent implements OnInit {
   ngOnInit(): void {
     this.patients$ = this.getAllPatients();
     this.services$ = this.getAllServices();
-    sessionStorage.getItem(this.libelle)
-    sessionStorage.setItem("le libelle est", this.libelle)
+    //sessionStorage.getItem(this.libelle)
+  }
+
+  setLibelle(srt: string){
+    sessionStorage.setItem("libelle_service", srt);
+    this.libelle = srt;
   }
 
   private getAllPatients(){
