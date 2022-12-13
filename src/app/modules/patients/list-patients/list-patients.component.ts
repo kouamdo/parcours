@@ -22,8 +22,11 @@ export class ListPatientsComponent implements OnInit {
   tickets$:Observable<ITicket[]>=EMPTY;
 
   iTicket : ITicket = {
-    id: 2,
-    dateImpression: new Date
+    id: "",
+    date_heure: new Date,
+    idUnique: '',
+    idFileAttente: '',
+    idPersonne: ''
   };
   libelle : string = "";
 
@@ -37,9 +40,9 @@ export class ListPatientsComponent implements OnInit {
     //sessionStorage.getItem(this.libelle)
   }
 
-  setLibelle(srt: string){
-    sessionStorage.setItem("libelle_service", srt);
-    this.libelle = srt;
+  setLibelle(idService: string){
+    sessionStorage.setItem("libelle_service", idService);
+    this.libelle = idService;
   }
 
   private getAllPatients(){

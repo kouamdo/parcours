@@ -2,6 +2,9 @@ import { IPatient } from "./Patient";
 import { IService } from "./service";
 
 export interface ITicket {
-    id:Number;
-    dateImpression:Date;
+    id:string;
+    idUnique:string;
+    date_heure:Date;
+    idFileAttente:string;
+    idPersonne:string;
 }
