@@ -8,15 +8,13 @@ import { BrowserModule } from '@angular/platform-browser';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { HttpLoaderFactory } from 'src/app/app.module';
 import { HttpClient } from '@angular/common/http';
-import { MainPageComponent } from './main-page/main-page.component';
 
 
 
 @NgModule({
   declarations: [
     NewPatientComponent,
-    ListPatientsComponent,
-    MainPageComponent
+    ListPatientsComponent
   ],
   imports: [
     CommonModule,
