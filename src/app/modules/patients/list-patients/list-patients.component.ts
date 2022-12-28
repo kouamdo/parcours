@@ -7,6 +7,7 @@ import { IService } from 'src/app/modele/service';
 import { ITicket } from 'src/app/modele/ticket';
 import { PatientsService } from 'src/app/services/patients/patients.service';
 import { ServicesService } from 'src/app/services/services/services.service';
+import { TicketsService } from 'src/app/services/tickets/tickets.service';
 
 @Component({
   selector: 'app-list-patients',
@@ -21,28 +22,32 @@ export class ListPatientsComponent implements OnInit {
 
   tickets$:Observable<ITicket[]>=EMPTY;
 
-  iTicket : ITicket = {
-    id: "",
-    date_heure: new Date,
-    idUnique: '',
-    idFileAttente: '',
-    idPersonne: ''
-  };
-  libelle : string = "";
+  id_personne : number = 0;
+  id_service : number = 0;
+  nom_patient : string = "";
+  libelle_service : string = "";
+  currentDate : Date = new Date()
 
-  //titre:string="Patients retrouvé(e)s";
-
-  constructor(private translate: TranslateService,private router:Router, private servicePatient:PatientsService, private serviceService:ServicesService) { }
+  constructor(private translate: TranslateService,private router:Router, private servicePatient:PatientsService, private serviceService:ServicesService, private serviceTicket:TicketsService) { }
 
   ngOnInit(): void {
     this.patients$ = this.getAllPatients();
     this.services$ = this.getAllServices();
-    //sessionStorage.getItem(this.libelle)
+    this.tickets$ = this.getAllTickets();
   }
 
-  setLibelle(idService: string){
-    sessionStorage.setItem("libelle_service", idService);
-    this.libelle = idService;
+  setIdPersonne(id_personne : number, nom_patient : string){
+    this.id_personne = id_personne;
+    this.nom_patient = nom_patient
+    sessionStorage.setItem("id_patient", this.id_personne.toString());
+    sessionStorage.setItem("nom_patient", this.nom_patient);
+  }
+  setLibelleService(id_service : number, libelleService: string){
+    this.libelle_service = libelleService;
+    this.id_service = id_service;
+
+    sessionStorage.setItem("id_service", this.id_service.toString());
+    sessionStorage.setItem("libelle_service", this.libelle_service);
   }
 
   private getAllPatients(){
@@ -50,5 +55,8 @@ export class ListPatientsComponent implements OnInit {
   }
   private getAllServices(){
     return this.serviceService.getAllServices();
+  }
+  private getAllTickets(){
+    return this.serviceTicket.getAllTickets();
   }
 }

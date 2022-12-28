@@ -1,30 +1,28 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NewPatientComponent } from './new-patient/new-patient.component';
-import { ListPatientsComponent } from './list-patients/list-patients.component';
-import { AppRoutingModule } from 'src/app/app-routing.module';
+
+import { TicketsRoutingModule } from './tickets-routing.module';
+import { ListTicketsComponent } from './list-tickets/list-tickets.component';
+import { NewTicketComponent } from './new-ticket/new-ticket.component';
+import { HttpClient } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { AppRoutingModule } from 'src/app/app-routing.module';
 import { HttpLoaderFactory } from 'src/app/app.module';
-import { HttpClient } from '@angular/common/http';
-import { MainPageComponent } from './main-page/main-page.component';
-import { TicketsModule } from '../tickets/tickets.module';
-
 
 
 @NgModule({
   declarations: [
-    NewPatientComponent,
-    ListPatientsComponent,
-    MainPageComponent
+    ListTicketsComponent,
+    NewTicketComponent
   ],
   imports: [
     CommonModule,
+    TicketsRoutingModule,
     FormsModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    TicketsModule,
     TranslateModule.forChild({
         loader: {
             provide: TranslateLoader,
@@ -34,6 +32,9 @@ import { TicketsModule } from '../tickets/tickets.module';
         extend:true
     }),
     BrowserModule 
+  ],
+  exports: [
+    NewTicketComponent
   ]
 })
-export class PatientsModule { }
+export class TicketsModule { }

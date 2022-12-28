@@ -27,7 +27,7 @@
                                     <input  type="text" formControlName="etat"  name="etat" id="etat" placeholder="etat" value="" required class="form-control">
                                 </div>
                                 <div  *ngIf="submitted && f['etat'].errors"  class="alert alert-danger" >
-                                    <div *ngIf="f['etat'].errors['required']">La date de naissance est obligatoire.</div>
+                                    <div *ngIf="f['etat'].errors['required']">L'etat est obligatoire.</div>
                                 </div>
                             </div>
                         </div>

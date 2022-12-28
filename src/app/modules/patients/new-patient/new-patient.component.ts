@@ -78,7 +78,6 @@ export class NewPatientComponent implements OnInit {
       dateNaissance:patientInput.dateNaissance
     }
 
-
     if(this.patient != undefined){
       patientTemp.id = this.patient.id  
     }

@@ -1,7 +1,7 @@
 export interface IPatient
 {
-    id:Number,
-    nom?:string,
+    id:number,
+    nom:string,
     prenom?:string,
     sexe?:string,
     dateNaissance?:Date,
