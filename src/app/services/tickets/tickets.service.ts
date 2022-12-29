@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, map } from 'rxjs';
+import { Observable, map, of } from 'rxjs';
 import { ITicket } from 'src/app/modele/ticket';
 
 @Injectable({
@@ -38,7 +38,7 @@ export class TicketsService {
     };
 
     this.http.post("api/tickets",ticket);
-    
-    return ticket as unknown as Observable<ITicket>;
+
+    return of(ticket);
   }
 }

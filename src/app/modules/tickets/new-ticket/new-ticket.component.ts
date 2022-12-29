@@ -76,34 +76,17 @@ export class NewTicketComponent implements OnInit {
     //Todo la validation d'element non conforme passe
     if(this.forme.invalid) return;
 
-    let ticketTemp : ITicket={
-      id: Number(9),
-      idUnique: ticketInput.idUnique,
-      date_heure: new Date,
-      idFileAttente: sessionStorage.getItem("id_service"),
-      idPersonne: sessionStorage.getItem("id_patient")
-    }
-
-    this._ticket = ticketTemp;
-
-    if ((sessionStorage.getItem("id_patient") != undefined) && (sessionStorage.getItem("id_service") != undefined)) {
+      console.log("OK pass");
         
       this.ticketsService.attribuerTicket(sessionStorage.getItem("id_patient"),sessionStorage.getItem("id_service")).subscribe(
         object => {
+          console.log("OK objet" + object);
           this._ticket = object;
-          /*this._ticket.id = object.id
-          this._ticket.idUnique = object.idUnique
-          this._ticket.date_heure = object.date_heure
-          this._ticket.idFileAttente = object.idFileAttente
-          this._ticket.idPersonne = object.idPersonne*/
-    sessionStorage.setItem("idFileAttente", this._ticket.idFileAttente!);
-        },
-        error =>{
-          console.log(error)
+          sessionStorage.setItem("idFileAttente", this._ticket.idFileAttente!);
         }
       )
 
-    }
+    
   }
 
   nextStep(){
