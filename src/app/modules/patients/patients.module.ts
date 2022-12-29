@@ -8,7 +8,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { HttpLoaderFactory } from 'src/app/app.module';
 import { HttpClient } from '@angular/common/http';
-
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 
 @NgModule({
@@ -21,6 +23,9 @@ import { HttpClient } from '@angular/common/http';
     FormsModule,
     AppRoutingModule,
     ReactiveFormsModule,
+    MatAutocompleteModule,
+    MatInputModule,
+    MatFormFieldModule,
     TranslateModule.forChild({
         loader: {
             provide: TranslateLoader,

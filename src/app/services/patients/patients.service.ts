@@ -25,6 +25,15 @@ export class PatientsService {
     );
   }
 
+  getPatientsByName(nom:string):Observable<IPatient[]>{
+    return this.getAllPatients().pipe(
+      map(x=>
+        {
+          return x.filter(p=> p.nom.toLowerCase().startsWith(nom))
+        })
+    );
+  }
+
   ajouterPatient(patient:IPatient)
   {
     return this.http.post("api/patients",patient);

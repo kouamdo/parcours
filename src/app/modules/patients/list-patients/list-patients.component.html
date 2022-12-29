@@ -6,14 +6,17 @@
         <div class='card-hearder pt-3' >
             <div class="d-flex align-items-center justify-content-end mr-4 tableTools">
                 <div class="form-inline mr-3">
-                    <div class="input-group" data-widget="sidebar-search">
-                      <input class="form-control form-control-sidebar" type="search" placeholder="{{'accueil.header.nav-left.nav-search-bar' | translate}}" aria-label="Search">
-                      <div class="input-group-append">
-                        <button class="btn btn-secondary btn-sidebar">
-                        <i class="fas fa-search fa-fw"></i>
-                        </button>
-                      </div>
-                    </div>
+                    <form class="example-form">
+                        <mat-form-field class="example-full-width" appearance="fill">
+                          <mat-label>Rechercher</mat-label>
+                          <input type="text" matInput [formControl]="myControl" [matAutocomplete]="auto">
+                          <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+                            <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                              {{option.nom}}
+                            </mat-option>
+                          </mat-autocomplete>
+                        </mat-form-field>
+                    </form>
                 </div>
                 <div role="button" id="addUserBotton" routerLink="../patient-nouveau">
                     <span title="Ajouter un patient">
