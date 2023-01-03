@@ -40,11 +40,8 @@ export class NewTicketComponent implements OnInit {
   };
 
   constructor(private formBuilder:FormBuilder, private ticketsService:TicketsService,private router:Router, private infosPath:ActivatedRoute, private serviceService:ServicesService) { 
-    this.forme = this.formBuilder.group({
-      idUnique: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
-      date_heure: [this.currentDate, [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
-      idFileAttente: [],
-      idPersonne: [],
+    this.forme = this.formBuilder.group({ 
+      serviceId: [],
     })
   }
 
@@ -71,22 +68,23 @@ export class NewTicketComponent implements OnInit {
   get f(){
     return this.forme.controls;
   }
+  
   onSubmit(ticketInput:any){
     this.submitted=true;
     //Todo la validation d'element non conforme passe
     if(this.forme.invalid) return;
-
-      console.log("OK pass");
         
       this.ticketsService.attribuerTicket(sessionStorage.getItem("id_patient"),sessionStorage.getItem("id_service")).subscribe(
         object => {
-          console.log("OK objet" + object);
           this._ticket = object;
           sessionStorage.setItem("idFileAttente", this._ticket.idFileAttente!);
+          this._ticket.idPersonne = sessionStorage.getItem("nom_patient");
+          //il faut que le nom du service et du patient apparaissent sur le recap pour impression
         }
       )
 
-    
+    this.nextStep();
+    //this.removeData();
   }
 
   nextStep(){
