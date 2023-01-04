@@ -83,6 +83,8 @@ export class NewTicketComponent implements OnInit {
           console.log("OK objet" + object);
           this._ticket = object;
           sessionStorage.setItem("idFileAttente", this._ticket.idFileAttente!);
+          console.log(this._ticket.idFileAttente);
+          this.router.navigate(['/list-ticket']);
         }
       )
 
