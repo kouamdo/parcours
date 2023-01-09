@@ -24,7 +24,9 @@ export class NewTicketComponent implements OnInit {
   currentDate = new Date;
   strIidPersonne: string = "";
   idPersonne: number = 0;
+  nomPersonne : string | null= "";
   id_service : number = 0;
+  libelleService : string | null = "";
   id_ticket : number = 0;
   libelle_service : string = "";
   step : any = 1;
@@ -71,6 +73,9 @@ export class NewTicketComponent implements OnInit {
   
   onSubmit(ticketInput:any){
     this.submitted=true;
+
+    this.nomPersonne = sessionStorage.getItem("nom_patient");
+    this.libelleService = sessionStorage.getItem("libelle_service");
     //Todo la validation d'element non conforme passe
     if(this.forme.invalid) return;
         
@@ -108,5 +113,12 @@ export class NewTicketComponent implements OnInit {
   }
   removeData() {
     sessionStorage.clear();
+  }
+  imprimer(dinName : string) {
+    var printContents = document.getElementById(dinName)!.innerHTML;    
+    var originalContents = document.body.innerHTML;      
+    document.body.innerHTML = printContents;     
+    window.print();
+    document.body.innerHTML = originalContents;
   }
 }
