@@ -15,14 +15,15 @@ import { MatSliderModule } from '@angular/material/slider';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSlideToggle, MatSlideToggleModule } from "@angular/material/slide-toggle";
-import { MenuModule } from './modules/menu/menu.module';
 import { ServicesModule } from './modules/services/services.module';
+import { MenuComponent } from './menu/menu.component';
 import { TicketsModule } from './modules/tickets/tickets.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    MenuComponent
   ],
   imports: [
     BrowserModule,
@@ -31,7 +32,6 @@ import { TicketsModule } from './modules/tickets/tickets.module';
     FormsModule,
     HttpClientInMemoryWebApiModule.forRoot(InMemDBService, {dataEncapsulation: false, passThruUnknownUrl: true}),
     PatientsModule,
-    MenuModule,
     ServicesModule,
     TicketsModule,
 

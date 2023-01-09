@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { MenuRoutingModule } from './modules/menu/menu-routing.module';
 import { PatientsRoutingModule } from './modules/patients/patient-routing.module';
 import { ServicesRoutingModule } from './modules/services/services-routing.module';
 import { TicketsRoutingModule } from './modules/tickets/tickets-routing.module';

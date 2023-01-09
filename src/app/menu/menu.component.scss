@@ -1,0 +1,53 @@
+.activeLinkCSS {
+    transition: ease 0.2s;
+    background-color: inherit;
+    padding-left: 20px;
+    span{
+        background-color: #7ea97e;
+        display: inline-block;
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        i{
+            display: none;
+            margin: auto 5px;
+        }
+    }
+    p{
+        color: #7ea97e;
+        margin-left: 8px;
+    }
+}
+#logo{
+    border: none;
+    font-size: 16px;
+}
+#userActions{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+    .image{
+        img{
+            width: 50%;
+        }
+    }
+    .info{
+        margin: 10px 0;
+    }
+    .user{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-around;
+        padding: 20% 0;
+    }
+    .menuLeft{
+        .liste{
+            i{
+                font-size: 12px;
+            }
+        }
+    }
+}
