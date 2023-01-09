@@ -17,6 +17,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSlideToggle, MatSlideToggleModule } from "@angular/material/slide-toggle";
 import { ServicesModule } from './modules/services/services.module';
 import { MenuComponent } from './menu/menu.component';
+import { TicketsModule } from './modules/tickets/tickets.module';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { MenuComponent } from './menu/menu.component';
     HttpClientInMemoryWebApiModule.forRoot(InMemDBService, {dataEncapsulation: false, passThruUnknownUrl: true}),
     PatientsModule,
     ServicesModule,
+    TicketsModule,
 
     // ngx-translate and the loader module
     HttpClientModule,

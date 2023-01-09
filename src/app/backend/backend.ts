@@ -4,6 +4,7 @@ import { IFonctionnalites } from "../modele/fonctionnalites";
 import { IMenus } from "../modele/menus";
 import { IPatient } from "../modele/Patient";
 import { IService } from "../modele/service";
+import { ITicket } from "../modele/ticket";
 
 export class InMemDBService implements InMemoryDbService{
     createDb(){
@@ -12,9 +13,15 @@ export class InMemDBService implements InMemoryDbService{
             {id:2, nom:"Ouandji", prenom:"tre", sexe:"F", adresse:"Douala", telephone:"090999091", mail:"ouang@yad.fr", dateNaissance: new Date("07/03/1990")}
         ];
         let services:IService[]=[
-            {id:2, libelle:"Pharmacie", etat:"non attribue",dateDerniereModification: "07/03/1990",dateAttribution: "07/03/1990",dateFin: "07/03/1990",nombreTotalAttributions: 6},
+            {id:1, libelle:"Pharmacie", etat:"non attribue",dateDerniereModification: "07/03/1990",dateAttribution: "07/03/1990",dateFin: "07/03/1990",nombreTotalAttributions: 6},
             {id:2, libelle:"Laboratoire", etat:"non attribue",dateDerniereModification: "07/03/1990",dateAttribution: "07/03/1990",dateFin: "07/03/1990",nombreTotalAttributions: 20},
-            {id:2, libelle:"Consultation", etat:"non attribue",dateDerniereModification: "07/03/1990",dateAttribution: "07/03/1990",dateFin: "07/03/1990",nombreTotalAttributions: 50}
+            {id:3, libelle:"Consultation", etat:"non attribue",dateDerniereModification: "07/03/1990",dateAttribution: "07/03/1990",dateFin: "07/03/1990",nombreTotalAttributions: 50}
+        ];
+        let tickets:ITicket[]=[
+            {id:1, idUnique:"20221206S1A01", date_heure: new Date(), idFileAttente: "S1A01", idPersonne: "1"},
+            {id:2, idUnique:"20221206S1A02", date_heure: new Date(), idFileAttente: "S1A01", idPersonne: "2"},
+            {id:3, idUnique:"20221206S1A01", date_heure: new Date(), idFileAttente: "S1A02", idPersonne: "1"},
+            {id:4, idUnique:"20221206S1A02", date_heure: new Date(), idFileAttente: "S1A02", idPersonne: "2"}
         ];
         let menus:IMenus[] =[ 
           {"idUser":"phil", "langue":"fr","fonctionnalites":[
@@ -28,6 +35,6 @@ export class InMemDBService implements InMemoryDbService{
             {"fonction":"Ticket", "icone":"fas fa-chart-pie", "actif":"", "elements":[{"nom":"New", "lien":"patient-nouveau", "bouton":"false"}  , {"nom":"Search", "lien":"list-patients", "bouton":"false"}, {"nom":"Modify", "lien":"patient-nouveau/:idPatient", "bouton":"false"}, {"nom":"Modify", "lien":"patient-nouveau/:idPatient", "bouton":"false"}]}
           ]}
         ];
-        return{patients,services, menus};
+        return{patients,services, menus, tickets};
     }
 }

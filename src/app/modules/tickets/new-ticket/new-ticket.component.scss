@@ -1,0 +1,126 @@
+#mainSection{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+.block{
+    width: 100%;
+}
+@media print{
+    .block{
+        background-color: red;
+    }
+}
+.entete{
+    background-color: #7ea97e;
+    color: white;
+    text-align: center;
+    font-size: 22px;
+    font-weight: bold;
+}
+.formulaire{
+    display: none;
+}
+.form-control{
+    border: none;
+    box-shadow: 0 0 2px rgb(220, 220, 220);
+    height: 30px;
+}
+.champs{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    label{
+        width: 300px;
+        font-weight: normal;
+    }
+}
+.actionButton{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    button{
+        background-color: #7ea97e;
+        color: white;
+        width: fit-content;
+        //white-space: nowrap;
+    }
+}
+.blockServices{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    label{
+        padding: 10px 5px;
+        color: #7ea97e;
+        font-weight: normal;
+        input{
+            margin-right: 5px;
+            color: #7ea97e;
+        }
+        input:checked{
+            background-color: #7ea97e;
+        }
+    }
+}
+#ticketView{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    color: #000000d4;
+    div{
+        width: 100%;
+    }
+    .title{
+        position: relative;
+        div{
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+        }
+        img{
+            width: 40px;
+        }
+        small{
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            color: #7ea97e;
+            font-size: 8px;
+        }
+    }
+    .objetTicket{
+        h3{
+            font-size: 12px;
+            font-weight: bold;
+        }
+    }
+    .filigramme{
+        background: url("../../../../assets/img/logoNotep.png") no-repeat top center;
+        background-size: contain;
+        #ticketContent{
+            background-color: #ffffffe5;
+            width: 100%;
+            height: max-content;
+            p{
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                font-size: 10px;
+                font-style: italic;
+                span{
+                    font-weight: bold;
+                }
+            }
+            .barCode{
+                justify-content: center;
+            }
+        }
+    }
+}

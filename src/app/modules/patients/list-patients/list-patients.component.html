@@ -40,7 +40,7 @@
                     <tbody>
                     <tr *ngFor='let patient of (patients$ | async) as patients'>
                         <td >{{patient.nom  | uppercase }} </td>
-                        <td > {{patient.prenom}}</td>
+                        <td >{{patient.prenom}}</td>
                         <td>{{patient.dateNaissance | date: 'dd/MM/yyyy'}}</td>
                         <td>{{patient.sexe }}</td>
                         <td>{{patient.mail}}</td>
@@ -53,7 +53,9 @@
                                     <span>...</span>
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="triggerId">
-                                    <button class="dropdown-item nav-link" [routerLink]="['new-patient']" title="{{'patient.table.actions.link1' | translate}}">
+                                    <!-- Button trigger modal -->
+                                    <button class="dropdown-item nav-link" title="{{'patient.table.actions.link1' | translate}}"
+                                        type="button" data-toggle="modal" data-target="#modelTicket" (click) = "setIdPersonne(patient.id, patient.nom)">
                                         <i class="fa fa-map-pin" aria-hidden="true"></i>
                                         <span>{{'patient.table.actions.link1' | translate}}</span>
                                     </button>
@@ -76,6 +78,11 @@
                     </tbody>
                 </table>
             </div>
+        </div>
+                
+        <!-- Modal -->
+        <div class="modal fade" id="modelTicket" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+            <app-new-ticket></app-new-ticket>
         </div>
     </div>
 </div>

@@ -1,0 +1,56 @@
+
+<!-- Modal -->
+<div class="modal-dialog" role="document">
+    <form [formGroup]="forme" (ngSubmit)="onSubmit(forme.value)" *ngIf="forme"  class="modal-content">
+        <div id="mainSection"  class="modal-body">
+            <div class="card block" *ngIf="step == 1">
+                <div class="card-header pt-4 pb-4 entete">{{ titre }}
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="card-body">
+                    <div class="container-fluid blockServices">
+                        <label *ngFor='let service of (services$ | async) as services'>
+                            <input type="radio" formControlName="serviceId" name="serviceId" required id="{{service.id}}" value="{{service.libelle}}" (click)="setLibelleService(service.id,service.libelle)">
+                            {{service.libelle}}
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div id="ticketView" class="card" *ngIf="step == 2">
+                <div class="title" style="position: relative; width: fit-content;">
+                    <div class="d-flex align-items-start">
+                        <img src="../../../../assets/img/logoNotep.png" alt="" width="40px">
+                        <h2>Noped consulting</h2>
+                    </div>
+                    <small style="position: absolute; right:0; bottom: 0; color: #7ea97e;">logiciel de gestion client</small>
+                </div>
+                <div class="objetTicket pt-3 pb-3">
+                    <h3>Ticket de validation service</h3>
+                </div>
+                <div class="filigramme">
+                    <div id="ticketContent">
+                        <p><span>Intitule du service : </span>{{this.libelleService}}</p>
+                        <p><span>id unique du ticket : </span>{{this._ticket.idUnique}}</p>
+                        <p><span>Date : </span>{{this._ticket.date_heure | date: 'dd/MM/yyyy A hh:mm:ss'}}</p>
+                        <p><span>Nom du beneficiaire : </span>{{this.nomPersonne}}</p>
+                        <p class="barCode pt-2 pb-1">
+                            <i class="fa fa-barcode fa-4x" aria-hidden="true"></i>
+                            <i class="fa fa-barcode fa-4x" aria-hidden="true"></i>
+                            <i class="fa fa-barcode fa-4x" aria-hidden="true"></i>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer w-100" style="border: none;">
+            <div class="actionButton">
+                <button class="btn" data-dismiss="modal" routerLink="../list-patients" *ngIf="step == 1" (click)="removeData()">Annuler</button>
+                <button class="btn" *ngIf="step == 2" (click)="previousStep()">precedent</button>
+                <button class="btn" *ngIf="step == 2" (click)="imprimer('ticketView'); removeData()">Imprimer</button>
+                <button type="submit" class="btn" *ngIf="step == 1">{{btnLibelle}}</button>
+            </div>
+        </div>
+    </form>
+</div>
