@@ -13,7 +13,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [PatientsRoutingModule, RouterModule.forRoot(routes), MenuRoutingModule, ServicesRoutingModule, TicketsRoutingModule],
+  imports: [PatientsRoutingModule, RouterModule.forRoot(routes), ServicesRoutingModule, TicketsRoutingModule],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
