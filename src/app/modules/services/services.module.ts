@@ -1,23 +1,25 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NewPatientComponent } from './new-patient/new-patient.component';
-import { ListPatientsComponent } from './list-patients/list-patients.component';
-import { AppRoutingModule } from 'src/app/app-routing.module';
+
+import { ServicesRoutingModule } from './services-routing.module';
+import { ListServicesComponent } from './list-services/list-services.component';
+import { NewServicesComponent } from './new-services/new-services.component';
+import { HttpClient } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { AppRoutingModule } from 'src/app/app-routing.module';
 import { HttpLoaderFactory } from 'src/app/app.module';
-import { HttpClient } from '@angular/common/http';
-
 
 
 @NgModule({
   declarations: [
-    NewPatientComponent,
-    ListPatientsComponent
+    ListServicesComponent,
+    NewServicesComponent
   ],
   imports: [
     CommonModule,
+    ServicesRoutingModule,
     FormsModule,
     AppRoutingModule,
     ReactiveFormsModule,
@@ -32,4 +34,4 @@ import { HttpClient } from '@angular/common/http';
     BrowserModule 
   ]
 })
-export class PatientsModule { }
+export class ServicesModule { }

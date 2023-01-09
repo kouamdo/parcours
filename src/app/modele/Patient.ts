@@ -4,7 +4,7 @@ export interface IPatient
     nom?:string,
     prenom?:string,
     sexe?:string,
-    dateNaissance?:String,
+    dateNaissance?:Date,
     adresse:string,
     mail:string,
     telephone:string,
