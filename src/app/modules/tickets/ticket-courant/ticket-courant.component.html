@@ -1,0 +1,24 @@
+<div id="mainSection" class="">
+    <div class="w-100">
+        <div class="w-100" *ngFor='let patient of (patients$ | async) as patients'>
+            <div class="w-100" *ngFor='let ticket of (tickets$ | async) as tickets'>
+                <div class="block w-100 card">
+                    <div *ngIf="patient.id.toString() == ticket.idPersonne">
+                        <div class="blockNom">
+                            <p>{{patient.nom}}</p>
+                            <p class="numero">
+                                <span id="numero">{{ticket.idUnique}}</span> 
+                                <span>N<sup>o</sup> ticket</span>
+                            </p> 
+                        </div>
+                        <div class="options pb-2">
+                            <button class="btn btn-primary">traiter</button>
+                            <button class="btn">Renvoyer dans la file</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

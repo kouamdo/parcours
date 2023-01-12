@@ -1,0 +1,48 @@
+#mainSection{
+    width: 100% !important;
+    padding: 10px;
+}
+.block div{
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.061);
+}
+.blockNom{
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    font-size: 12px;
+    padding: 10px;
+    padding-bottom: 0;
+    #numero{
+        border: 1px solid rgba(255, 255, 255, 0.233);
+        padding: 5px;
+        font-size: 12px;
+        background-color: rgba(255, 255, 255, 0.208);
+    }
+    .numero{
+        display: flex;
+        flex-direction: column;
+        span{
+            font-size: 10px;
+        }
+    }
+}
+.options{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    button{
+        padding: 5px;
+        margin: 0 10px;
+        font-size: 12px;
+    }
+    button:last-child{
+        color: rgb(255, 255, 255);
+        background-color: #7ea97e;
+        opacity: 0.8;
+        transition: ease 0.2s;
+    }
+    button:last-child:hover{
+        opacity: 1;
+    }
+}
