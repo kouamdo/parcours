@@ -16,16 +16,28 @@ export class TicketCourantComponent implements OnInit {
 
   tickets$:Observable<ITicket[]>=EMPTY;
   patients$:Observable<IPatient[]>=EMPTY;
+  minDate : Date = new Date()
 
-  constructor(private translate: TranslateService, private router:Router, private serviceTicket:TicketsService, private servicePatient:PatientsService) { }
-
-  ngOnInit(): void {
-    this.tickets$ = this.getAllTickets();
-    this.patients$ = this.getAllPatients();
+  constructor(private translate: TranslateService, private router:Router, private serviceTicket:TicketsService, private servicePatient:PatientsService) { 
+    
   }
 
-  private getAllTickets(){
-    return this.serviceTicket.getAllTickets();
+  ngOnInit(): void {
+    this.tickets$ = this.getAllTicketsActifsSort();
+    this.patients$ = this.getAllPatients();
+    
+    this.tickets$.subscribe(
+      x=>{
+        let minDate = x[0].date_heure
+        this.minDate = minDate
+    console.log("la date la plus anciene du tableau est " + this.serviceTicket.getMinDate(this.minDate))
+      }
+    )
+  }
+
+  private getAllTicketsActifsSort(){
+    console.log("la date est " + this.minDate)
+    return this.serviceTicket.getAllTicketsActifsSort(this.serviceTicket.getMinDate(this.minDate));
   }
   private getAllPatients(){
     return this.servicePatient.getAllPatients();

@@ -45,4 +45,8 @@
     button:last-child:hover{
         opacity: 1;
     }
+    .boutonAppel:focus{
+        background-color: rgba(255, 68, 0, 0.73);
+        border-color: rgba(255, 68, 0, 0.73);
+    }
 }

@@ -38,12 +38,14 @@ export class NewTicketComponent implements OnInit {
     idUnique: '',
     date_heure: new Date,
     idFileAttente: null,
-    idPersonne: null
+    idPersonne: null,
+    statut: ''
   };
 
   constructor(private formBuilder:FormBuilder, private ticketsService:TicketsService,private router:Router, private infosPath:ActivatedRoute, private serviceService:ServicesService) { 
     this.forme = this.formBuilder.group({ 
-      serviceId: [],
+      
+      statut: ['Actif']
     })
   }
 
@@ -62,7 +64,8 @@ export class NewTicketComponent implements OnInit {
             idUnique: this.ticket.idUnique,
             date_heure: this.ticket.date_heure,
             idFileAttente: this.ticket.idFileAttente,
-            idPersonne: this.ticket.idPersonne
+            idPersonne: this.ticket.idPersonne,
+            statut: this.ticket.statut
           })
       });
     }

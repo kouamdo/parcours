@@ -32,6 +32,7 @@
                             <th>date et heure derniere modification</th>
                             <th>idFileAttente</th>
                             <th>idPersonne</th>
+                            <th>statut</th>
                             <th>Options</th>
                         </tr>
                     </thead>
@@ -42,6 +43,7 @@
                             <td>{{ticket.date_heure | date:'dd/MM/yyyy'}} At {{ticket.date_heure | date:'HH:mm:ss'}}</td>
                             <td>{{ticket.idFileAttente}}</td>
                             <td>{{ticket.idPersonne}}</td>
+                            <td>{{ticket.statut}}</td>
                             <td>
                                 <div id="actions" class="dropdown open">
                                     <button class="btn dropdown-toggle" type="button" id="triggerId" data-toggle="dropdown" aria-haspopup="true"
