@@ -14,8 +14,8 @@ import { TicketsService } from 'src/app/services/tickets/tickets.service';
 })
 export class TicketCourantComponent implements OnInit {
 
-  tickets$:Observable<ITicket[]>=EMPTY;
-  patients$:Observable<IPatient[]>=EMPTY;
+  ticketRecent:ITicket | undefined;
+  patientRecent:IPatient | undefined;
   minDate : Date = new Date()
 
   constructor(private translate: TranslateService, private router:Router, private serviceTicket:TicketsService, private servicePatient:PatientsService) { 
@@ -23,23 +23,41 @@ export class TicketCourantComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.tickets$ = this.getAllTicketsActifsSort();
-    this.patients$ = this.getAllPatients();
+    this.serviceTicket.getNextTicketActif().subscribe(valeur => {
+      this.ticketRecent = this.getMinDate(valeur);
+    });
+   
+    if(this.ticketRecent?.idPersonne)
+      this.servicePatient.getPatientById(this.ticketRecent?.idPersonne).subscribe(
+        valeur =>{this.patientRecent;} 
+      );
     
-    this.tickets$.subscribe(
-      x=>{
-        let minDate = x[0].date_heure
-        this.minDate = minDate
-    console.log("la date la plus anciene du tableau est " + this.serviceTicket.getMinDate(this.minDate))
-      }
-    )
   }
 
-  private getAllTicketsActifsSort(){
-    console.log("la date est " + this.minDate)
-    return this.serviceTicket.getAllTicketsActifsSort(this.serviceTicket.getMinDate(this.minDate));
-  }
-  private getAllPatients(){
-    return this.servicePatient.getAllPatients();
+
+  getMinDate(listTicketsActifs : ITicket[] | undefined): ITicket{
+    if(listTicketsActifs == undefined){
+        let retour : ITicket ={
+                id:-1,
+            idUnique:"",
+            date_heure: new Date,
+            idFileAttente:  null,
+            idPersonne: null,
+            statut:"0"
+        };
+        return retour;
+    }
+    else{
+     let minDate :Date = listTicketsActifs[0].date_heure;
+     let indexChercher = 0;
+      for (let index = 1; index < listTicketsActifs.length; index++) {
+        if (listTicketsActifs[index].date_heure < minDate) {
+          minDate = listTicketsActifs[index].date_heure;
+          indexChercher = index;
+        }
+      }
+
+      return listTicketsActifs[indexChercher];
+    }
   }
 }
