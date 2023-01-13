@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { filter, map } from 'rxjs/operators';
+import {  map } from 'rxjs/operators';
 import { IPatient } from 'src/app/modele/Patient';
 
 @Injectable({
@@ -25,13 +25,13 @@ export class PatientsService {
     );
   }
 
-  getPatientsByName(nom:string):Observable<IPatient[]>{
-    return this.getAllPatients().pipe(
+   getPatientsByName(nom:string): Observable<IPatient[]> {
+    return this.http.get<IPatient[]>('api/patients').pipe(
       map(x=>
         {
           return x.filter(p=> p.nom.toLowerCase().startsWith(nom))
         })
-    );
+    );        
   }
 
   ajouterPatient(patient:IPatient)

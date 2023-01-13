@@ -5,10 +5,9 @@ import { EMPTY, Observable } from 'rxjs';
 import { IPatient } from 'src/app/modele/Patient';
 import { PatientsService } from 'src/app/services/patients/patients.service';
 import {FormControl} from '@angular/forms';
-import {map, startWith} from 'rxjs/operators';
 
 export interface User {
-  name: string;
+  nom: string;
 }
 
 @Component({
@@ -22,18 +21,26 @@ export class ListPatientsComponent implements OnInit {
 
   myControl = new FormControl<string | IPatient>('');
   options: IPatient[] = [];
-  filteredOptions: Observable<IPatient[]> | undefined;
-
+  filteredOptions: IPatient[] | undefined;
   constructor(private translate: TranslateService,private router:Router, private servicePatient:PatientsService) { }
 
   ngOnInit(): void {
     this.patients$ = this.getAllPatients();
-    this.filteredOptions = this.myControl.valueChanges.pipe(
-      startWith(''),
-      map(value => {
+    this.myControl.valueChanges.subscribe(
+      value => {
         const name = typeof value === 'string' ? value : value?.nom;
-        return name ? this._filter(name as string) : this.options.slice();
-      }),
+        if(name != undefined && name?.length >0){
+          this.servicePatient.getPatientsByName(name.toLowerCase() as string).subscribe(
+            reponse => { 
+              this.filteredOptions = reponse;
+            }
+          )
+        }
+        else{
+          this.filteredOptions = [];
+        }
+        
+      }
     );
   }
 
@@ -45,12 +52,9 @@ export class ListPatientsComponent implements OnInit {
     return user && user.nom ? user.nom : '';
   }
 
-  private _filter(name: string): IPatient[] {
-    const filterValue = name.toLowerCase();
-    this.servicePatient.getPatientsByName(filterValue).subscribe(
-      pers => this.options=pers
-    );
-    return this.options;
+
+  public rechercherListingPersonne(option: IPatient){
+    this.patients$ = this.servicePatient.getPatientsByName(option.nom.toLowerCase());
   }
 
 }
