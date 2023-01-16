@@ -4,14 +4,17 @@
             <div class="w-100">
                 <div class="block w-100 card">
                         <div class="blockNom">
-                            <p>{{patientRecent?.nom}}</p>
+                            <p>
+                                <span>Nom : </span>
+                                <span id="nom">{{patientRecent?.nom}}</span> 
+                            </p>
                             <p class="numero">
-                                <span id="numero">{{ticketRecent?.idUnique}}</span> 
-                                <span>N<sup>o</sup> ticket</span>
+                                <span>N<sup>o</sup> ticket : </span>
+                                <span id="numero">{{ticketRecent?.idUnique}} </span>                         
                             </p> 
                         </div>
                         <div class="options pb-2">
-                            <button class="btn btn-primary">traiter</button>
+                            <button class="btn btn-primary" (click)="faire()">traiter</button>
                             <button class="btn btn-secondary boutonAppel">Appel</button>
                             <button class="btn" title="Renvoyer dans la file">Renvoyer</button>
                         </div>

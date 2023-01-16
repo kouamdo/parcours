@@ -16,24 +16,29 @@ export class TicketCourantComponent implements OnInit {
 
   ticketRecent:ITicket | undefined;
   patientRecent:IPatient | undefined;
-  minDate : Date = new Date()
+  minDate : Date = new Date();
 
   constructor(private translate: TranslateService, private router:Router, private serviceTicket:TicketsService, private servicePatient:PatientsService) { 
-    
+   
   }
 
   ngOnInit(): void {
     this.serviceTicket.getNextTicketActif().subscribe(valeur => {
       this.ticketRecent = this.getMinDate(valeur);
+
+      if(this.ticketRecent?.idPersonne){
+        this.servicePatient.getPatientById(this.ticketRecent?.idPersonne).subscribe(
+          valeur =>{this.patientRecent= valeur;} 
+        );
+      }
+        
     });
-   
-    if(this.ticketRecent?.idPersonne)
-      this.servicePatient.getPatientById(this.ticketRecent?.idPersonne).subscribe(
-        valeur =>{this.patientRecent;} 
-      );
     
   }
 
+  faire(){
+    alert(this.patientRecent?.nom);
+  }
 
   getMinDate(listTicketsActifs : ITicket[] | undefined): ITicket{
     if(listTicketsActifs == undefined){
