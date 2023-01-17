@@ -23,6 +23,12 @@ export class TicketCourantComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.afficherSuivant();
+  }
+
+  afficherSuivant(){
+    //TODO ajouter en parametre l'id du personnel connecté afin de filtrer les tickets actifs de son service
+    //lorsqu'on renverra un ticket n fois, le back pourra le mettre dans un état annulé 
     this.serviceTicket.getNextTicketActif().subscribe(valeur => {
       this.ticketRecent = this.getMinDate(valeur);
 
@@ -31,11 +37,9 @@ export class TicketCourantComponent implements OnInit {
           valeur =>{this.patientRecent= valeur;} 
         );
       }
-        
+            
     });
-    
   }
-
   faire(){
     alert(this.patientRecent?.nom);
   }

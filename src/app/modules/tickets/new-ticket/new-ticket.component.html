@@ -12,7 +12,7 @@
                 <div class="card-body">
                     <div class="container-fluid blockServices">
                         <label *ngFor='let service of (services$ | async) as services'>
-                            <input type="radio" formControlName="serviceId" name="serviceId" required id="{{service.id}}" value="{{service.libelle}}" (click)="setLibelleService(service.id,service.libelle)">
+                            <input type="radio"  name="serviceId" required id="{{service.id}}" value="{{service.libelle}}" (click)="setLibelleService(service.id,service.libelle)">
                             {{service.libelle}}
                         </label>
                     </div>
