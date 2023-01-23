@@ -60,11 +60,11 @@ export class TicketCourantComponent implements OnInit {
       this.ticketRecent!.statut = "Attente"
       this.serviceTicket.modifierTicket(this.ticketRecent!).subscribe()
       let ticket : ITicket = {
-        id: 1,
+        id: 9,
         idUnique: '123456',
         date_heure: new Date,
         idFileAttente: "id_service",
-        idPersonne: "id_patient",
+        idPersonne: "1",
         statut: 'Attente'
       };
       this.ticketRecent = ticket
