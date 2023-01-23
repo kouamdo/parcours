@@ -65,12 +65,9 @@ export class TicketCourantComponent implements OnInit {
         date_heure: new Date,
         idFileAttente: "id_service",
         idPersonne: "id_patient",
-        statut: 'Appel'
+        statut: 'Attente'
       };
       this.ticketRecent = ticket
-      //this.http.post("api/tickets",ticket);
-
-      //return of(this.ticketRecent);
     }
   }
   getMinDate(listTicketsActifs : ITicket[] | undefined): ITicket{
