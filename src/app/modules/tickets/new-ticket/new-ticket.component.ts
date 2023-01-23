@@ -44,7 +44,6 @@ export class NewTicketComponent implements OnInit {
 
   constructor(private formBuilder:FormBuilder, private ticketsService:TicketsService,private router:Router, private infosPath:ActivatedRoute, private serviceService:ServicesService) { 
     this.forme = this.formBuilder.group({ 
-      
       statut: ['Actif']
     })
   }

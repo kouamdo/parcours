@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { Observable, EMPTY } from 'rxjs';
+import { Observable, EMPTY, of } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 import { IPatient } from 'src/app/modele/Patient';
 import { ITicket } from 'src/app/modele/ticket';
 import { PatientsService } from 'src/app/services/patients/patients.service';
@@ -18,7 +19,7 @@ export class TicketCourantComponent implements OnInit {
   patientRecent:IPatient | undefined;
   minDate : Date = new Date();
 
-  constructor(private translate: TranslateService, private router:Router, private serviceTicket:TicketsService, private servicePatient:PatientsService) { 
+  constructor(private translate: TranslateService, private router:Router, private serviceTicket:TicketsService, private servicePatient:PatientsService, private http:HttpClient) { 
    
   }
 
@@ -40,10 +41,38 @@ export class TicketCourantComponent implements OnInit {
             
     });
   }
-  faire(){
-    alert(this.patientRecent?.nom);
+  ticketTraite(){
+      this.ticketRecent!.statut = "Traiter"
+      this.serviceTicket.modifierTicket(this.ticketRecent!).subscribe()
+      this.afficherSuivant()
   }
+  ticketRenvoye(){
+      this.afficherSuivant()
+      this.ticketRecent!.statut = "Actif"
+      this.serviceTicket.modifierTicket(this.ticketRecent!).subscribe()
+  }
+  ticketAttente(){
+    if (this.ticketRecent!.statut == "Actif") {
+      this.ticketRecent!.statut = "Attente"
+      this.serviceTicket.modifierTicket(this.ticketRecent!).subscribe()
+    }else{
+      //this.afficherSuivant()
+      this.ticketRecent!.statut = "Attente"
+      this.serviceTicket.modifierTicket(this.ticketRecent!).subscribe()
+      let ticket : ITicket = {
+        id: 1,
+        idUnique: '123456',
+        date_heure: new Date,
+        idFileAttente: "id_service",
+        idPersonne: "id_patient",
+        statut: 'Appel'
+      };
+      this.ticketRecent = ticket
+      //this.http.post("api/tickets",ticket);
 
+      //return of(this.ticketRecent);
+    }
+  }
   getMinDate(listTicketsActifs : ITicket[] | undefined): ITicket{
     if(listTicketsActifs == undefined){
         let retour : ITicket ={

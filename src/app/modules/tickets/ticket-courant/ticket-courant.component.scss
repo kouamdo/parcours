@@ -12,12 +12,15 @@
     justify-content: space-between;
     font-size: 12px;
     padding: 10px;
-    padding-bottom: 0;
+    padding-bottom: 20px;
+    p{
+        display: flex;
+        flex-direction: column;
+    }
     #numero{
-        border: 1px solid rgba(255, 255, 255, 0.233);
+        border: 1px solid rgba(255, 255, 255, 0.316);
         padding: 5px;
-        font-size: 12px;
-        background-color: rgba(255, 255, 255, 0.208);
+        background-color: rgba(255, 255, 255, 0.363);
     }
     .numero{
         display: flex;
@@ -31,22 +34,49 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    button{
-        padding: 5px;
-        margin: 0 10px;
-        font-size: 12px;
-    }
-    button:last-child{
-        color: rgb(255, 255, 255);
+    padding: 0 8px;
+    button {
+        display: inline-block;
+        padding: 5px 15px;
+        font-size: 10px;
+        cursor: pointer;
+        text-align: center;
+        text-decoration: none;
+        outline: none;
+        color: #fff;
         background-color: #7ea97e;
-        opacity: 0.8;
-        transition: ease 0.2s;
+        border: none;
+        border-radius: 15px;
+        box-shadow: 0 2px #999;
+        &:first-child{
+            background-color: rgba(72, 72, 243, 0.838);
+        }
     }
-    button:last-child:hover{
-        opacity: 1;
+    button:hover {
+    background-color: #7ea97e96;
     }
-    .boutonAppel:focus{
+    
+    button:active {
+    background-color: #7ea97e96;
+    box-shadow: 0 5px #666;
+    transform: translateY(1px);
+    }
+    .boutonAppel{
+        background-color: rgb(224, 194, 22);
+    }
+    .boutonAppelEffet{
         background-color: rgba(255, 68, 0, 0.73);
         border-color: rgba(255, 68, 0, 0.73);
+        box-shadow: 0 0 0 orangered;/*ombre sur le conteneur*/
+        animation: pulse 1.3s infinite;
+        font-weight: bold;
+    }
+    .boutonAppelEffet:hover{
+        background-color: rgba(255, 68, 0, 0.73);
+    }
+}
+@keyframes pulse {
+    to {
+        box-shadow: 0 0 0 10px rgba(255, 68, 0, 0.01);
     }
 }

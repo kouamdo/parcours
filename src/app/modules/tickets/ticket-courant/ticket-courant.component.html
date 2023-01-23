@@ -14,9 +14,9 @@
                             </p> 
                         </div>
                         <div class="options pb-2">
-                            <button class="btn btn-primary" (click)="faire()">traiter</button>
-                            <button class="btn btn-secondary boutonAppel">Appel</button>
-                            <button class="btn" title="Renvoyer dans la file">Renvoyer</button>
+                            <button class="btn" (click)="ticketTraite()">traiter</button>
+                            <button class="btn boutonAppel" [ngClass]="{'boutonAppelEffet':ticketRecent?.statut === 'Attente'}" (click)="ticketAttente()">Appel</button>
+                            <button class="btn" (click)="ticketRenvoye()" title="Renvoyer dans la file">Renvoyer</button>
                         </div>
                 </div>
             </div>

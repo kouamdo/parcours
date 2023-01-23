@@ -24,6 +24,9 @@ export class TicketsService {
     );
   }
 
+  /*updateTicket(id: string, params: ITicket) {
+    return this.http.put(`${"api/tickets"}/${id}`, params);
+  }*/
   getAllTicketsActifs():Observable<ITicket[]>{
     
     return this.getAllTickets().pipe(
@@ -67,7 +70,7 @@ export class TicketsService {
     
   }
 
-  ajouterTicket(ticket:ITicket)
+  modifierTicket(ticket:ITicket)
   {
     return this.http.post("api/tickets",ticket);
   }
