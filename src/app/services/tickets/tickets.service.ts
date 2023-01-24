@@ -90,8 +90,10 @@ export class TicketsService {
     return of(ticket);
   }
   
-  retourNouveauTicketTest(ticketRecent: ITicket):ITicket
+  modifierOuNouveauTicket(ticketRecent: ITicket):Observable < ITicket>
   {
+    console.log("resultat " + ticketRecent)
+    this.http.post("api/tickets",ticketRecent);
     let ticket : ITicket = {
       id: 23,
       idUnique: '123456',
@@ -103,7 +105,7 @@ export class TicketsService {
 
     ticketRecent = ticket
 
-    return ticketRecent;
+    return of (ticketRecent);
   }
   
 }

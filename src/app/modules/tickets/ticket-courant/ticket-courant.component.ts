@@ -52,7 +52,19 @@ export class TicketCourantComponent implements OnInit {
       this.serviceTicket.modifierTicket(this.ticketRecent!).subscribe()
   }
   ticketAttente(){
+    
     if (this.ticketRecent!.statut == "Actif") {
+      this.ticketRecent!.statut = "Attente"
+      this.serviceTicket.modifierOuNouveauTicket(this.ticketRecent!).subscribe(
+        objet=>{
+          this.ticketRecent = objet
+        }
+      )
+      
+    }else{
+      //relanceAppel vers IHM affichage des tickets
+    }
+    /*if (this.ticketRecent!.statut == "Actif") {
       this.ticketRecent!.statut = "Attente"
       this.serviceTicket.modifierTicket(this.ticketRecent!).subscribe()
     }else{
@@ -60,7 +72,7 @@ export class TicketCourantComponent implements OnInit {
       this.serviceTicket.modifierTicket(this.ticketRecent!).subscribe()
       
       this.ticketRecent = this.serviceTicket.retourNouveauTicketTest(this.ticketRecent!)
-    }
+    }*/
   }
   getMinDate(listTicketsActifs : ITicket[] | undefined): ITicket{
     if(listTicketsActifs == undefined){

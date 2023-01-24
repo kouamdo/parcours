@@ -48,7 +48,7 @@
             <div class="actionButton">
                 <button class="btn" data-dismiss="modal" routerLink="../list-patients" *ngIf="step == 1" (click)="removeData()">Annuler</button>
                 <button class="btn" *ngIf="step == 2" (click)="previousStep()">precedent</button>
-                <button class="btn" *ngIf="step == 2" (click)="imprimer('ticketView'); removeData()">Imprimer</button>
+                <button class="btn" data-dismiss="modal" *ngIf="step == 2" (click)="imprimer('ticketView'); removeData()">Imprimer</button>
                 <button type="submit" class="btn" *ngIf="step == 1">{{btnLibelle}}</button>
             </div>
         </div>
