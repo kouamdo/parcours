@@ -56,18 +56,10 @@ export class TicketCourantComponent implements OnInit {
       this.ticketRecent!.statut = "Attente"
       this.serviceTicket.modifierTicket(this.ticketRecent!).subscribe()
     }else{
-      //this.afficherSuivant()
       this.ticketRecent!.statut = "Attente"
       this.serviceTicket.modifierTicket(this.ticketRecent!).subscribe()
-      let ticket : ITicket = {
-        id: 9,
-        idUnique: '123456',
-        date_heure: new Date,
-        idFileAttente: "id_service",
-        idPersonne: "1",
-        statut: 'Attente'
-      };
-      this.ticketRecent = ticket
+      
+      this.ticketRecent = this.serviceTicket.retourNouveauTicketTest(this.ticketRecent!)
     }
   }
   getMinDate(listTicketsActifs : ITicket[] | undefined): ITicket{

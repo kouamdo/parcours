@@ -89,4 +89,21 @@ export class TicketsService {
 
     return of(ticket);
   }
+  
+  retourNouveauTicketTest(ticketRecent: ITicket):ITicket
+  {
+    let ticket : ITicket = {
+      id: 23,
+      idUnique: '123456',
+      date_heure: new Date,
+      idFileAttente: "ABC",
+      idPersonne: "1",
+      statut: 'Actif'
+    };
+
+    ticketRecent = ticket
+
+    return ticketRecent;
+  }
+  
 }
