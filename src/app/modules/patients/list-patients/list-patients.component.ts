@@ -76,6 +76,9 @@ export class ListPatientsComponent implements OnInit, AfterViewInit {
 
   public rechercherListingPersonne(option: IPatient){
     this.patients$ = this.servicePatient.getPatientsByName(option.nom.toLowerCase());
+    this.servicePatient.getPatientsByName(option.nom.toLowerCase()).subscribe(
+        valeurs => {this.dataSource.data = valeurs;}
+    )
   }
 
 }
