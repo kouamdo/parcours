@@ -90,7 +90,7 @@ export class TicketsService {
     return of(ticket);
   }
   
-  modifierOuNouveauTicket(ticketRecent: ITicket):Observable < ITicket>
+  modifierOuNouveauTicket(ticketRecent: ITicket): Observable<ITicket>
   {
     console.log("resultat " + ticketRecent)
     this.http.post("api/tickets",ticketRecent);

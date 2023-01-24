@@ -57,7 +57,12 @@ export class TicketCourantComponent implements OnInit {
       this.ticketRecent!.statut = "Attente"
       this.serviceTicket.modifierOuNouveauTicket(this.ticketRecent!).subscribe(
         objet=>{
-          this.ticketRecent = objet
+          this.ticketRecent = objet;
+          if(this.ticketRecent?.idPersonne){
+            this.servicePatient.getPatientById(this.ticketRecent?.idPersonne).subscribe(
+              valeur =>{this.patientRecent= valeur;} 
+            );
+          }
         }
       )
       
