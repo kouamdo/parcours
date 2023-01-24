@@ -11,7 +11,8 @@ import { HttpClient } from '@angular/common/http';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatTableModule} from '@angular/material/table';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,8 @@ import { MatInputModule } from '@angular/material/input';
     MatAutocompleteModule,
     MatInputModule,
     MatFormFieldModule,
+    MatPaginatorModule,
+    MatTableModule,
     TranslateModule.forChild({
         loader: {
             provide: TranslateLoader,
