@@ -90,10 +90,9 @@ export class TicketsService {
     return of(ticket);
   }
   
-  modifierOuNouveauTicket(ticketRecent: ITicket): Observable<ITicket>
+  modifierOuNouveauTicket(ticketRecent: ITicket):Observable < ITicket>
   {
-    console.log("resultat " + ticketRecent)
-    this.http.post("api/tickets",ticketRecent);
+    this.http.post("api/tickets",ticketRecent).subscribe();
     let ticket : ITicket = {
       id: 23,
       idUnique: '123456',
