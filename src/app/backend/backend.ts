@@ -25,14 +25,14 @@ export class InMemDBService implements InMemoryDbService{
         ];
         let menus:IMenus[] =[ 
           {"idUser":"phil", "langue":"fr","fonctionnalites":[
-            {"fonction":"Patient", "icone":"fas fa-user-cog", "actif":"menu-open", "elements":[{"nom":"Créer", "lien":"patient-nouveau", "bouton":"false"}  , {"nom":"Rechercher", "lien":"list-patients", "bouton":"false"}, {"nom":"Modifier", "lien":"patient-nouveau/:idPatient", "bouton":"false"}, {"nom":"Modifier", "lien":"patient-nouveau/:idPatient", "bouton":"false"}]},
-            {"fonction":"Service", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"Créer", "lien":"./service-nouveau", "bouton":"false"}  , {"nom":"Rechercher", "lien":"./list-services", "bouton":"false"}, {"nom":"Modifier", "lien":"patient-nouveau/:idPatient", "bouton":"false"}, {"nom":"Modifier", "lien":"patient-nouveau/:idPatient", "bouton":"false"},{"nom":"Orienter", "lien":"patient-nouveau", "bouton":"true"}]},
-            {"fonction":"Ticket", "icone":"fas fa-chart-pie", "actif":"", "elements":[{"nom":"Créer", "lien":"patient-nouveau", "bouton":"false"}  , {"nom":"Rechercher", "lien":"list-patients", "bouton":"false"}, {"nom":"Modifier", "lien":"patient-nouveau/:idPatient", "bouton":"false"}, {"nom":"Modifier", "lien":"patient-nouveau/:idPatient", "bouton":"false"}]}
+            {"fonction":"Patient", "icone":"fas fa-user-cog", "actif":"menu-open", "elements":[{"nom":"Créer", "lien":"patient-nouveau", "bouton":"false"}  , {"nom":"Rechercher", "lien":"list-patients", "bouton":"false"}, {"nom":"Modifier", "lien":"patient-nouveau/:idPatient", "bouton":"false"}]},
+            {"fonction":"Service", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"Créer", "lien":"./service-nouveau", "bouton":"false"}  , {"nom":"Rechercher", "lien":"./list-services", "bouton":"false"}, {"nom":"Modifier", "lien":"patient-nouveau/:idPatient", "bouton":"false"}]},
+            {"fonction":"Ticket", "icone":"fas fa-chart-pie", "actif":"", "elements":[ {"nom":"Rechercher", "lien":"list-tickets", "bouton":"false"}]}
           ]},
           {"idUser":"phil", "langue":"en","fonctionnalites":[
-            {"fonction":"People", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"New", "lien":"patient-nouveau", "bouton":"false"}  , {"nom":"Search", "lien":"list-patients", "bouton":"false"}, {"nom":"Modify", "lien":"patient-nouveau/:idPatient", "bouton":"false"}, {"nom":"Modify", "lien":"patient-nouveau/:idPatient", "bouton":"false"}]},
-            {"fonction":"Service", "icone":"fas fa-user-cog", "actif":"menu-open", "elements":[{"nom":"New", "lien":"./service-nouveau", "bouton":"false"}  , {"nom":"Search", "lien":"./list-services", "bouton":"false"}, {"nom":"Modify", "lien":"patient-nouveau/:idPatient", "bouton":"false"}, {"nom":"Modify", "lien":"patient-nouveau/:idPatient", "bouton":"false"},{"nom":"Guide", "lien":"patient-nouveau", "bouton":"true"}]},
-            {"fonction":"Ticket", "icone":"fas fa-chart-pie", "actif":"", "elements":[{"nom":"New", "lien":"patient-nouveau", "bouton":"false"}  , {"nom":"Search", "lien":"list-patients", "bouton":"false"}, {"nom":"Modify", "lien":"patient-nouveau/:idPatient", "bouton":"false"}, {"nom":"Modify", "lien":"patient-nouveau/:idPatient", "bouton":"false"}]}
+            {"fonction":"People", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"New", "lien":"patient-nouveau", "bouton":"false"}  , {"nom":"Search", "lien":"list-patients", "bouton":"false"}, {"nom":"Modify", "lien":"patient-nouveau/:idPatient", "bouton":"false"}]},
+            {"fonction":"Service", "icone":"fas fa-user-cog", "actif":"menu-open", "elements":[{"nom":"New", "lien":"./service-nouveau", "bouton":"false"}  , {"nom":"Search", "lien":"./list-services", "bouton":"false"}, {"nom":"Modify", "lien":"patient-nouveau/:idPatient", "bouton":"false"}]},
+            {"fonction":"Ticket", "icone":"fas fa-chart-pie", "actif":"", "elements":[ {"nom":"Search", "lien":"list-tickets", "bouton":"false"}]}
           ]}
         ];
         return{patients,services, menus};
