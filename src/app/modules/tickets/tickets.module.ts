@@ -10,12 +10,14 @@ import { BrowserModule } from '@angular/platform-browser';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { AppRoutingModule } from 'src/app/app-routing.module';
 import { HttpLoaderFactory } from 'src/app/app.module';
+import { TicketCourantComponent } from './ticket-courant/ticket-courant.component';
 
 
 @NgModule({
   declarations: [
     ListTicketsComponent,
-    NewTicketComponent
+    NewTicketComponent,
+    TicketCourantComponent
   ],
   imports: [
     CommonModule,
@@ -34,7 +36,8 @@ import { HttpLoaderFactory } from 'src/app/app.module';
     BrowserModule 
   ],
   exports: [
-    NewTicketComponent
+    NewTicketComponent,
+    TicketCourantComponent
   ]
 })
 export class TicketsModule { }
