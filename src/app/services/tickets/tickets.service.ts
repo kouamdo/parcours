@@ -20,7 +20,7 @@ export class TicketsService {
     return this.http.get<ITicket[]>('api/tickets').pipe();
   }
 
-  getTicketById(id:number):Observable<ITicket>{
+  getTicketById(id:string):Observable<ITicket>{
     return this.getAllTickets().pipe(
       map(x=>
         {
@@ -45,7 +45,7 @@ export class TicketsService {
   getMinDate(listTicketsActifs : ITicket[] | undefined): ITicket{
     if(listTicketsActifs == undefined){
         let retour : ITicket ={
-            id:-1,
+            id:"-1",
             idUnique:"",
             date_heure: new Date,
             idFileAttente:  null,
@@ -75,7 +75,7 @@ export class TicketsService {
   attribuerTicket(id_patient : string | null, id_service : string | null):Observable<ITicket>
   {
     let ticket : ITicket = {
-      id: Number(9),
+      id: "9",
       idUnique: '123456',
       date_heure: new Date,
       idFileAttente: id_service,
@@ -92,7 +92,7 @@ export class TicketsService {
   {
     this.http.post("api/tickets",ticketRecent).subscribe();
     let ticket : ITicket = {
-      id: 23,
+      id: "23",
       idUnique: '123456',
       date_heure: new Date,
       idFileAttente: "ABC",
