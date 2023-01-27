@@ -7,6 +7,7 @@ import { IPatient } from 'src/app/modele/Patient';
 import { ITicket } from 'src/app/modele/ticket';
 import { PatientsService } from 'src/app/services/patients/patients.service';
 import { TicketsService } from 'src/app/services/tickets/tickets.service';
+import { StatutTicket } from 'src/app/modele/statut-ticket';
 
 @Component({
   selector: 'app-ticket-courant',
@@ -18,6 +19,9 @@ export class TicketCourantComponent implements OnInit {
   ticketRecent:ITicket | undefined;
   patientRecent:IPatient | undefined;
   minDate : Date = new Date();
+  statutTicketActif = StatutTicket.actif
+  statutTicketAttente = StatutTicket.attente
+  statutTicketTraite = StatutTicket.traite
 
   constructor(private translate: TranslateService, private router:Router, private serviceTicket:TicketsService, private servicePatient:PatientsService, private http:HttpClient) { 
    
@@ -42,22 +46,21 @@ export class TicketCourantComponent implements OnInit {
     });
   }
   ticketTraite(){
-      this.ticketRecent!.statut = "Traiter"
+      this.ticketRecent!.statut = this.statutTicketTraite
       this.serviceTicket.modifierTicket(this.ticketRecent!).subscribe()
       this.afficherSuivant()
   }
   ticketRenvoye(){
       this.afficherSuivant()
-      this.ticketRecent!.statut = "Actif"
+      this.ticketRecent!.statut = this.statutTicketActif
       this.serviceTicket.modifierTicket(this.ticketRecent!).subscribe()
   }
   ticketAttente(){
-    
-    if (this.ticketRecent!.statut == "Actif") {
-      this.ticketRecent!.statut = "Attente"
+    if (this.ticketRecent!.statut == this.statutTicketActif) {
+      this.ticketRecent!.statut = this.statutTicketAttente
       this.serviceTicket.modifierTicket(this.ticketRecent!).subscribe()
       
-    }else if(this.ticketRecent!.statut == "Attente"){
+    }else if(this.ticketRecent!.statut == this.statutTicketAttente){
 
       this.serviceTicket.modifierOuNouveauTicket(this.ticketRecent!).subscribe(
         objet=>{
@@ -82,7 +85,7 @@ export class TicketCourantComponent implements OnInit {
             date_heure: new Date,
             idFileAttente:  null,
             idPersonne: null,
-            statut:"0"
+            statut: this.statutTicketActif
         };
         return retour;
     }
@@ -95,7 +98,6 @@ export class TicketCourantComponent implements OnInit {
           indexChercher = index;
         }
       }
-
       return listTicketsActifs[indexChercher];
     }
   }
