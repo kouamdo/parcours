@@ -22,7 +22,7 @@ export class ListPatientsComponent implements OnInit {
 
   tickets$:Observable<ITicket[]>=EMPTY;
 
-  id_personne : number = 0;
+  id_personne : string = "0";
   id_service : number = 0;
   nom_patient : string = "";
   libelle_service : string = "";
@@ -36,7 +36,7 @@ export class ListPatientsComponent implements OnInit {
     this.tickets$ = this.getAllTickets();
   }
 
-  setIdPersonne(id_personne : number, nom_patient : string){
+  setIdPersonne(id_personne : string, nom_patient : string){
     this.id_personne = id_personne;
     this.nom_patient = nom_patient
     sessionStorage.setItem("id_patient", this.id_personne.toString());

@@ -12,7 +12,7 @@
                 <div class="card-body">
                     <div class="container-fluid blockServices">
                         <label *ngFor='let service of (services$ | async) as services'>
-                            <input type="radio" formControlName="serviceId" name="serviceId" required id="{{service.id}}" value="{{service.libelle}}" (click)="setLibelleService(service.id,service.libelle)">
+                            <input type="radio"  name="serviceId" required id="{{service.id}}" value="{{service.libelle}}" (click)="setLibelleService(service.id,service.libelle)">
                             {{service.libelle}}
                         </label>
                     </div>
@@ -48,7 +48,7 @@
             <div class="actionButton">
                 <button class="btn" data-dismiss="modal" routerLink="../list-patients" *ngIf="step == 1" (click)="removeData()">Annuler</button>
                 <button class="btn" *ngIf="step == 2" (click)="previousStep()">precedent</button>
-                <button class="btn" *ngIf="step == 2" (click)="imprimer('ticketView'); removeData()">Imprimer</button>
+                <button class="btn" data-dismiss="modal" *ngIf="step == 2" (click)="removeData()">Imprimer</button>
                 <button type="submit" class="btn" *ngIf="step == 1">{{btnLibelle}}</button>
             </div>
         </div>

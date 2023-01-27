@@ -33,7 +33,7 @@ export class NewServicesComponent implements OnInit {
     if((idService != null) && idService!==''){
       this.btnLibelle="Modifier";
       this.titre="service à Modifier";
-      this.serviceService.getServiceById(Number(idService)).subscribe(x =>
+      this.serviceService.getServiceById(idService).subscribe(x =>
         {
           this.service = x; console.log(this.service);
           this.forme.setValue({
@@ -56,7 +56,7 @@ export class NewServicesComponent implements OnInit {
     if(this.forme.invalid) return;
 
     let serviceTemp : IService={
-      id: Number(9),
+      id: "9",
       libelle: serviceInput.libelle,
       etat: serviceInput.etat,
       dateDerniereModification: serviceInput.dateDerniereModification,
