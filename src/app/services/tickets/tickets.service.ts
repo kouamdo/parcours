@@ -1,12 +1,17 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, map, of, filter, EMPTY } from 'rxjs';
+import { StatutTicket } from 'src/app/modele/statut-ticket';
 import { ITicket } from 'src/app/modele/ticket';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TicketsService {
+
+  statutTicketActif = StatutTicket.actif
+  statutTicketAttente = StatutTicket.attente
+  statutTicketTraite = StatutTicket.traite
   
   constructor(private http:HttpClient) { }
 
@@ -24,24 +29,17 @@ export class TicketsService {
     );
   }
 
-  /*updateTicket(id: string, params: ITicket) {
-    return this.http.put(`${"api/tickets"}/${id}`, params);
-  }*/
   getAllTicketsActifs():Observable<ITicket[]>{
     
     return this.getAllTickets().pipe(
       map(x=>
         {
-          return x.filter(p=>p.statut == "Actif")
+          return x.filter(p=>p.statut == this.statutTicketActif)
         })
     );    
   }
   
   getNextTicketActif():Observable<ITicket[]>{
-   /* let listTicketsActifs : ITicket[] | undefined;
-    this.getAllTicketsActifs().pipe(val => listTicketsActifs=val
-    );   
-     return of(this.getMinDate(listTicketsActifs));*/
      return this.getAllTicketsActifs();
   }
   getMinDate(listTicketsActifs : ITicket[] | undefined): ITicket{
@@ -52,7 +50,7 @@ export class TicketsService {
             date_heure: new Date,
             idFileAttente:  null,
             idPersonne: null,
-            statut:"0"
+            statut: this.statutTicketActif
         };
         return retour;
     }
@@ -82,10 +80,10 @@ export class TicketsService {
       date_heure: new Date,
       idFileAttente: id_service,
       idPersonne: id_patient,
-      statut: 'actif'
+      statut: this.statutTicketActif
     };
 
-    this.http.post("api/tickets",ticket);
+    this.http.post("api/tickets",ticket).subscribe();
 
     return of(ticket);
   }
@@ -99,7 +97,7 @@ export class TicketsService {
       date_heure: new Date,
       idFileAttente: "ABC",
       idPersonne: "1",
-      statut: 'Actif'
+      statut: this.statutTicketActif
     };
 
     ticketRecent = ticket

@@ -4,9 +4,13 @@ import { IFonctionnalites } from "../modele/fonctionnalites";
 import { IMenus } from "../modele/menus";
 import { IPatient } from "../modele/Patient";
 import { IService } from "../modele/service";
+import { StatutTicket } from "../modele/statut-ticket";
 import { ITicket } from "../modele/ticket";
 
 export class InMemDBService implements InMemoryDbService{
+  statutTicketActif = StatutTicket.actif
+  statutTicketAttente = StatutTicket.attente
+  statutTicketTraite = StatutTicket.traite
     createDb(){
         let patients:IPatient[]=[
             {id:"1", nom:"NGONGANG", prenom:"Philippe", sexe:"M", adresse:"Yaoundé", telephone:"090999090", mail:"ngong@yad.fr", dateNaissance: new Date("07/07/1989")},
