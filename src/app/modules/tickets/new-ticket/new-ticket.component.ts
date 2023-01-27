@@ -116,11 +116,4 @@ export class NewTicketComponent implements OnInit {
   removeData() {
     sessionStorage.clear();
   }
-  imprimer(dinName : string) {
-    var printContents = document.getElementById(dinName)!.innerHTML;    
-    var originalContents = document.body.innerHTML;      
-    document.body.innerHTML = printContents;     
-    window.print();
-    document.body.innerHTML = originalContents;
-  }
 }
