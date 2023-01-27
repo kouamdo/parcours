@@ -13,6 +13,7 @@ import {MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatTableModule} from '@angular/material/table';
+import {MatSortModule} from '@angular/material/sort';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import {MatTableModule} from '@angular/material/table';
     MatFormFieldModule,
     MatPaginatorModule,
     MatTableModule,
+    MatSortModule,
     TranslateModule.forChild({
         loader: {
             provide: TranslateLoader,

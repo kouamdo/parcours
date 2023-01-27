@@ -25,64 +25,9 @@
                 </div>
             </div>
         </div>
-        <div class="card-body p-0" id="tableBlock">
-            <div class='table-responsive w-100'>
-                <table class='table text-left w-100'>
-                    <thead>
-                        <tr>
-                            <th>{{"patient.table.title1" | translate}}</th>
-                            <th>{{"patient.table.title2" | translate}}</th>
-                            <th>{{"patient.table.title3" | translate}}</th>
-                            <th>{{"patient.table.title4" | translate}}</th>
-                            <th>{{"patient.table.title5" | translate}}</th>
-                            <th>{{"patient.table.title6" | translate}}</th>
-                            <th>{{"patient.table.title7" | translate}}</th>
-                            <th>{{"patient.table.title8" | translate}}</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    <tr *ngFor='let patient of (patients$ | async) as patients'>
-                        <td >{{patient.nom  | uppercase }} </td>
-                        <td > {{patient.prenom}}</td>
-                        <td>{{patient.dateNaissance | date: 'dd/MM/yyyy'}}</td>
-                        <td>{{patient.sexe }}</td>
-                        <td>{{patient.mail}}</td>
-                        <td>{{patient.adresse}}</td>
-                        <td>{{patient.telephone}}</td>
-                        <td>
-                            <div id="actions" class="dropdown open">
-                                <button class="btn dropdown-toggle" type="button" id="triggerId" data-toggle="dropdown" aria-haspopup="true"
-                                        aria-expanded="false">
-                                    <span>...</span>
-                                </button>
-                                <div class="dropdown-menu" aria-labelledby="triggerId">
-                                    <button class="dropdown-item nav-link" [routerLink]="['new-patient']" title="{{'patient.table.actions.link1' | translate}}">
-                                        <i class="fa fa-map-pin" aria-hidden="true"></i>
-                                        <span>{{'patient.table.actions.link1' | translate}}</span>
-                                    </button>
-                                    <button class="dropdown-item nav-link" [routerLink]="['new-patient']" title="{{'patient.table.actions.link3' | translate}}">
-                                        <i class="fa fa-eye text-secondary" aria-hidden="true"></i>
-                                        <span>{{'patient.table.actions.link3' | translate}}</span>
-                                    </button>
-                                    <button class="dropdown-item nav-link" [routerLink]="['/patient-nouveau',patient.id]" title="{{'patient.table.actions.link2' | translate}}">
-                                        <i class="fa fa-pen text-info" aria-hidden="true"></i>
-                                        <span>{{'patient.table.actions.link2' | translate}}</span>
-                                    </button>
-                                    <button class="dropdown-item nav-link" [routerLink]="['/patient-nouveau',patient.id]" title="{{'patient.table.actions.link4' | translate}}">
-                                        <i class="fa fa-times-circle text-danger" aria-hidden="true"></i>
-                                        <span>{{'patient.table.actions.link4' | translate}}</span>
-                                    </button>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>  
-                    </tbody>
-                </table>
-            </div>
-        </div>
         <div>
             <div class="">
-                <table mat-table [dataSource]="dataSource">
+                <table mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)">
               
                   <!-- nom Column -->
                   <ng-container matColumnDef="nom">
