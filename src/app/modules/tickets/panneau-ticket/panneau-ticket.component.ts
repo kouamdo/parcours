@@ -21,11 +21,11 @@ export class PanneauTicketComponent implements OnInit {
   constructor(private translate: TranslateService, private router:Router, private serviceTicket:TicketsService, private servicePatient:PatientsService,  private http:HttpClient) { }
 
   ngOnInit(): void {
-    this.tickets$ = this.getAllTicketsActifs();
+    this.tickets$ = this.getAllTicketsAttente();
   }
 
-  private getAllTicketsActifs(){
-    return this.serviceTicket.getAllTicketsActifs();
+  private getAllTicketsAttente(){
+    return this.serviceTicket.getAllTicketsAttente();
   }
 
 }

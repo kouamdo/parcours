@@ -24,6 +24,7 @@
     display: flex;
     justify-content: space-between;
     padding: 0 10px;
+    font-weight: 500;
 }
 .contenu{
     display: flex;
@@ -34,11 +35,12 @@
 }
 .panneau{
     width: 70%;
-    padding-top: 70px !important;
     padding: 20px;
     margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
     background-color: #d4d4d4;
-    position: relative;
     video{
         width: 100%;
         height: 350px;
@@ -59,7 +61,7 @@
     margin: 10px 0;
     height: 100px;
     box-shadow: 0 0 6px #7ea97e82;
-    color: #fffefec1;
+    color: #fffefee4;
     position: relative;
 }
 .bigTitle{
@@ -86,19 +88,20 @@
 .infos{
     background-color: rgb(255, 170, 0);
     box-shadow: 0 0 6px rgb(255, 170, 0);
-    color: #ffffff7c;
+    color: #fffefee4;
     font-size: 20px;
     height: 50px;
+    margin-bottom: 20px;
     display: flex;
     justify-content: center;
-    width: 95%;
-    position: absolute;
-    top: 5px;
-    left: 10px;
-    right: 10px;
     p{
         margin: auto 5px;
         width: 100%;
+    }
+}
+@media screen and (max-width: 1200px) {
+    .infos, .bigTitle, .smallContent{
+        font-size: 16px !important;
     }
 }
 @media screen and (max-width: 1080px) {
