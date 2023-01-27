@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ListTicketsComponent } from './list-tickets/list-tickets.component';
 import { NewTicketComponent } from './new-ticket/new-ticket.component';
+import { PanneauTicketComponent } from './panneau-ticket/panneau-ticket.component';
 
 const routes: Routes = [
   {
@@ -18,6 +19,10 @@ const routes: Routes = [
     path: 'list-tickets',
     title: 'Recherche de tickets',
     component: ListTicketsComponent
+  },
+  {
+    path: 'panneau-tickets',
+    component: PanneauTicketComponent
   }
 ];
 
