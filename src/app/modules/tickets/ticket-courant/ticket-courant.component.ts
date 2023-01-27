@@ -80,7 +80,7 @@ export class TicketCourantComponent implements OnInit {
   getMinDate(listTicketsActifs : ITicket[] | undefined): ITicket{
     if(listTicketsActifs == undefined){
         let retour : ITicket ={
-            id:-1,
+            id:"-1",
             idUnique:"",
             date_heure: new Date,
             idFileAttente:  null,

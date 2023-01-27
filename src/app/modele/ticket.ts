@@ -1,5 +1,5 @@
 export interface ITicket {
-    id:number;
+    id:string;
     idUnique:string;
     date_heure:Date;
     idFileAttente:string | null;

@@ -23,18 +23,18 @@ export class NewTicketComponent implements OnInit {
   submitted: boolean=false;
   currentDate = new Date;
   strIidPersonne: string = "";
-  idPersonne: number = 0;
+  idPersonne: string = "0";
   nomPersonne : string | null= "";
-  id_service : number = 0;
+  id_service : string = "0";
   libelleService : string | null = "";
-  id_ticket : number = 0;
+  id_ticket : string = "0";
   libelle_service : string = "";
   step : any = 1;
 
   services$:Observable<IService[]>=EMPTY;
   tickets$:Observable<ITicket[]>=EMPTY;
   _ticket : ITicket = {
-    id: 0,
+    id: "0",
     idUnique: '',
     date_heure: new Date,
     idFileAttente: null,
@@ -44,7 +44,7 @@ export class NewTicketComponent implements OnInit {
 
   constructor(private formBuilder:FormBuilder, private ticketsService:TicketsService,private router:Router, private infosPath:ActivatedRoute, private serviceService:ServicesService) { 
     this.forme = this.formBuilder.group({ 
-      statut: ['Actif']
+      
     })
   }
 
@@ -56,7 +56,7 @@ export class NewTicketComponent implements OnInit {
     if((idTicket != null) && idTicket!==''){
       this.btnLibelle="Modifier";
       this.titre="Ticket à Modifier";
-      this.ticketsService.getTicketById(Number(idTicket)).subscribe(x =>
+      this.ticketsService.getTicketById(idTicket).subscribe(x =>
         {
           this.ticket = x; console.log(this.ticket);
           this.forme.setValue({
@@ -103,14 +103,14 @@ export class NewTicketComponent implements OnInit {
   private getAllServices(){
     return this.serviceService.getAllServices();
   }
-  setLibelleService(id_service : number, libelleService: string){
+  setLibelleService(id_service : string, libelleService: string){
     this.libelle_service = libelleService;
     this.id_service = id_service;
 
     sessionStorage.setItem("id_service", this.id_service.toString());
     sessionStorage.setItem("libelle_service", this.libelle_service);
   }
-  private   getTicketById(id: number){
+  private   getTicketById(id: string){
     return this.ticketsService.getTicketById(id);
   }
   removeData() {
