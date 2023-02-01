@@ -1,6 +1,6 @@
 <nav class="mt-2" >
     <ul (click)="changeEtat()" class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-        <li *ngFor="let menu of fonctionnalites" class="nav-item {{ menu.actif }}" [ngClass]="{'menu-close': toggleEtat, '{{ menu.actif }}': !toggleEtat}">
+        <li *ngFor="let menu of fonctionnalites" class="nav-item {{ menu.actif }}">
             <a href="#" class="nav-link">
                 <i class="nav-icon {{ menu.icone }}"></i>
                 <p>

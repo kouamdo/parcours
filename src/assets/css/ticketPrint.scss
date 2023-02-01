@@ -1,0 +1,65 @@
+/* print with this style */
+@media print {
+    @page {
+        size: 20px !important;
+        size: portrait;
+        
+    }
+    #ticketView{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 10px;
+        width: 350px !important;
+        color: #000000d4;
+    }
+    #ticketView div{
+        width: 100%;
+    }
+    .title{
+        position: relative;
+    }
+    #ticketView .title div{
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+    }
+    .title img{
+        width: 40px;
+    }
+    .title small{
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        color: #7ea97e;
+        font-size: 8px;
+    }
+    .objetTicket h3{
+        font-size: 12px;
+        font-weight: bold;
+    }
+    #filigramme{
+        background: url("../../../../assets/img/logoNotep.png") no-repeat top center;
+        background-size: contain;
+        width: 100%;
+    }
+    #ticketContent{
+        background-color: #ffffffe5;
+        width: 100%;
+        height: max-content;
+    }
+    #ticketContent p{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-size: 10px;
+        font-style: italic;
+    }
+    #ticketContent p span{
+        font-weight: bold;
+    }
+    #ticketContent p .barCode{
+        justify-content: center;
+    }
+}

@@ -8,34 +8,12 @@
 .block{
     width: 100%;
 }
-@media print{
-    .block{
-        background-color: red;
-    }
-}
 .entete{
     background-color: #7ea97e;
     color: white;
     text-align: center;
     font-size: 22px;
     font-weight: bold;
-}
-.formulaire{
-    display: none;
-}
-.form-control{
-    border: none;
-    box-shadow: 0 0 2px rgb(220, 220, 220);
-    height: 30px;
-}
-.champs{
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    label{
-        width: 300px;
-        font-weight: normal;
-    }
 }
 .actionButton{
     display: flex;
@@ -101,7 +79,7 @@
             font-weight: bold;
         }
     }
-    .filigramme{
+    #filigramme{
         background: url("../../../../assets/img/logoNotep.png") no-repeat top center;
         background-size: contain;
         #ticketContent{
