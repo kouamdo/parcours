@@ -11,6 +11,7 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { AppRoutingModule } from 'src/app/app-routing.module';
 import { HttpLoaderFactory } from 'src/app/app.module';
 import { TicketCourantComponent } from './ticket-courant/ticket-courant.component';
+import { NgxPrintModule } from 'ngx-print';
 import { PanneauTicketComponent } from './panneau-ticket/panneau-ticket.component';
 
 
@@ -35,7 +36,9 @@ import { PanneauTicketComponent } from './panneau-ticket/panneau-ticket.componen
         },
         extend:true
     }),
-    BrowserModule 
+    BrowserModule,
+    // ngx-print
+    NgxPrintModule,
   ],
   exports: [
     NewTicketComponent,
