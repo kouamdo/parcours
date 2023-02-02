@@ -6,14 +6,17 @@
         <div class='card-hearder pt-3' >
             <div class="d-flex align-items-center justify-content-end mr-4 tableTools">
                 <div class="form-inline mr-3">
-                    <div class="input-group" data-widget="sidebar-search">
-                      <input class="form-control form-control-sidebar" type="search" placeholder="{{'accueil.header.nav-left.nav-search-bar' | translate}}" aria-label="Search">
-                      <div class="input-group-append">
-                        <button class="btn btn-secondary btn-sidebar">
-                        <i class="fas fa-search fa-fw"></i>
-                        </button>
-                      </div>
-                    </div>
+                    <form class="example-form">
+                        <mat-form-field class="example-full-width" appearance="fill">
+                          <mat-label class="searchBar">Rechercher</mat-label>
+                          <input type="text" matInput aria-label="Rechercher" [formControl]="myControl" [matAutocomplete]="auto">
+                          <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+                            <mat-option *ngFor="let option of filteredOptions" [value]="option" (onSelectionChange)="rechercherListingPersonne(option)">
+                              {{option.nom}}
+                            </mat-option>
+                          </mat-autocomplete>
+                        </mat-form-field>
+                    </form>
                 </div>
                 <div role="button" id="addUserBotton" routerLink="../patient-nouveau">
                     <span title="Ajouter un patient">
@@ -23,61 +26,96 @@
             </div>
         </div>
         <div class="card-body p-0" id="tableBlock">
-            <div class='table-responsive w-100'>
-                <table class='table text-left w-100'>
-                    <thead>
-                        <tr>
-                            <th>{{"patient.table.title1" | translate}}</th>
-                            <th>{{"patient.table.title2" | translate}}</th>
-                            <th>{{"patient.table.title3" | translate}}</th>
-                            <th>{{"patient.table.title4" | translate}}</th>
-                            <th>{{"patient.table.title5" | translate}}</th>
-                            <th>{{"patient.table.title6" | translate}}</th>
-                            <th>{{"patient.table.title7" | translate}}</th>
-                            <th>{{"patient.table.title8" | translate}}</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    <tr *ngFor='let patient of (patients$ | async) as patients'>
-                        <td >{{patient.nom  | uppercase }} </td>
-                        <td >{{patient.prenom}}</td>
-                        <td>{{patient.dateNaissance | date: 'dd/MM/yyyy'}}</td>
-                        <td>{{patient.sexe }}</td>
-                        <td>{{patient.mail}}</td>
-                        <td>{{patient.adresse}}</td>
-                        <td>{{patient.telephone}}</td>
-                        <td>
-                            <div id="actions" class="dropdown open">
-                                <button class="btn dropdown-toggle" type="button" id="triggerId" data-toggle="dropdown" aria-haspopup="true"
-                                        aria-expanded="false">
-                                    <span>...</span>
+            <div class="table-responsive w-100">
+                <table class='table table-sm table-centered table-striped table-bordered w-100' mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)">
+              
+                  <!-- nom Column -->
+                  <ng-container matColumnDef="nom">
+                    <th class="text-dark containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{"patient.table.title1" | translate}} </th>
+                    <td class="text-dark text-left containCell" mat-cell *matCellDef="let element"> {{element.nom}} </td>
+                  </ng-container>
+              
+                  <!-- prenom Column -->
+                  <ng-container matColumnDef="prenom">
+                    <th class="text-dark containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{"patient.table.title2" | translate}} </th>
+                    <td class="text-dark text-left containCell" mat-cell *matCellDef="let element"> {{element.prenom}} </td>
+                  </ng-container>
+              
+                  <!-- birthday Column -->
+                  <ng-container matColumnDef="anniversaire">
+                    <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{"patient.table.title3" | translate}} </th>
+                    <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.dateNaissance}} </td>
+                  </ng-container>
+              
+                  <!-- sexe Column -->
+                  <ng-container matColumnDef="sexe">
+                    <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{"patient.table.title4" | translate}} </th>
+                    <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.sexe}} </td>
+                  </ng-container>
+
+                  <!-- mail Column -->
+                  <ng-container matColumnDef="mail">
+                    <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{"patient.table.title5" | translate}} </th>
+                    <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.mail}} </td>
+                  </ng-container>
+              
+                  <!-- adresse Column -->
+                  <ng-container matColumnDef="adresse">
+                    <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{"patient.table.title6" | translate}} </th>
+                    <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.adresse}} </td>
+                  </ng-container>
+
+                  <!-- telephone Column -->
+                  <ng-container matColumnDef="telephone">
+                    <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{"patient.table.title7" | translate}} </th>
+                    <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.telephone}} </td>
+                  </ng-container>
+                  
+                  <!-- action Column -->
+                  <ng-container matColumnDef="actions">
+                    <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{"patient.table.title8" | translate}} </th>
+                    <td class="text-dark containCell" mat-cell *matCellDef="let element">
+                        <div id="actions" class="dropdown open">
+                            <button class="btn dropdown-toggle" type="button" id="triggerId" data-toggle="dropdown" aria-haspopup="true"
+                                    aria-expanded="false">
+                                <span>...</span>
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="triggerId">
+                                <button class="dropdown-item nav-link" [routerLink]="['new-patient']" title="{{'patient.table.actions.link1' | translate}}">
+                                    <i class="fa fa-map-pin" aria-hidden="true"></i>
+                                    <span>{{'patient.table.actions.link1' | translate}}</span>
                                 </button>
-                                <div class="dropdown-menu" aria-labelledby="triggerId">
-                                    <!-- Button trigger modal -->
-                                    <button class="dropdown-item nav-link" title="{{'patient.table.actions.link1' | translate}}"
-                                        type="button" data-toggle="modal" data-target="#modelTicket" (click) = "setIdPersonne(patient.id, patient.nom)">
-                                        <i class="fa fa-map-pin" aria-hidden="true"></i>
-                                        <span>{{'patient.table.actions.link1' | translate}}</span>
-                                    </button>
-                                    <button class="dropdown-item nav-link" [routerLink]="['new-patient']" title="{{'patient.table.actions.link3' | translate}}">
-                                        <i class="fa fa-eye text-secondary" aria-hidden="true"></i>
-                                        <span>{{'patient.table.actions.link3' | translate}}</span>
-                                    </button>
-                                    <button class="dropdown-item nav-link" [routerLink]="['/patient-nouveau',patient.id]" title="{{'patient.table.actions.link2' | translate}}">
-                                        <i class="fa fa-pen text-info" aria-hidden="true"></i>
-                                        <span>{{'patient.table.actions.link2' | translate}}</span>
-                                    </button>
-                                    <button class="dropdown-item nav-link" [routerLink]="['/patient-nouveau',patient.id]" title="{{'patient.table.actions.link4' | translate}}">
-                                        <i class="fa fa-times-circle text-danger" aria-hidden="true"></i>
-                                        <span>{{'patient.table.actions.link4' | translate}}</span>
-                                    </button>
-                                </div>
+                                <button class="dropdown-item nav-link" [routerLink]="['new-patient']" title="{{'patient.table.actions.link3' | translate}}">
+                                    <i class="fa fa-eye text-secondary" aria-hidden="true"></i>
+                                    <span>{{'patient.table.actions.link3' | translate}}</span>
+                                </button>
+                                <button class="dropdown-item nav-link" [routerLink]="['/patient-nouveau',element.id]" title="{{'patient.table.actions.link2' | translate}}">
+                                    <i class="fa fa-pen text-info" aria-hidden="true"></i>
+                                    <span>{{'patient.table.actions.link2' | translate}}</span>
+                                </button>
+                                <button class="dropdown-item nav-link" [routerLink]="['/patient-nouveau',element.id]" title="{{'patient.table.actions.link4' | translate}}">
+                                    <i class="fa fa-times-circle text-danger" aria-hidden="true"></i>
+                                    <span>{{'patient.table.actions.link4' | translate}}</span>
+                                </button>
                             </div>
-                        </td>
-                    </tr>  
-                    </tbody>
+                        </div>
+                    </td>
+                  </ng-container>
+
+                  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
                 </table>
-            </div>
+                <mat-paginator class="bg-light" [pageSizeOptions]="[5, 10, 20]"
+                               showFirstLastButtons
+                               aria-label="Select page of periodic elements">
+                </mat-paginator>
+              </div>
+              
+        </div>
+                
+        <!-- Modal -->
+        <div class="modal fade" id="modelTicket" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+            <app-new-ticket></app-new-ticket>
         </div>
                 
         <!-- Modal -->

@@ -8,9 +8,13 @@ import { BrowserModule } from '@angular/platform-browser';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { HttpLoaderFactory } from 'src/app/app.module';
 import { HttpClient } from '@angular/common/http';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatTableModule} from '@angular/material/table';
+import {MatSortModule} from '@angular/material/sort';
 import { TicketsModule } from '../tickets/tickets.module';
-
-
 
 @NgModule({
   declarations: [
@@ -22,6 +26,12 @@ import { TicketsModule } from '../tickets/tickets.module';
     FormsModule,
     AppRoutingModule,
     ReactiveFormsModule,
+    MatAutocompleteModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatPaginatorModule,
+    MatTableModule,
+    MatSortModule,
     TicketsModule,
     TranslateModule.forChild({
         loader: {
