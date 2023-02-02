@@ -1,0 +1,67 @@
+<div id="mainSection" class="d-flex flex-column justify-content-around">
+    <div class="title">
+        <h2>Liste de tous les tickets</h2>
+    </div>
+    <div class="card container-fluid" >
+        <div class='card-hearder pt-3' >
+            <div class="d-flex align-items-center justify-content-end mr-4 tableTools">
+                <div class="form-inline mr-3">
+                    <div class="input-group" data-widget="sidebar-search">
+                      <input class="form-control form-control-sidebar" type="search" placeholder="Rechercher" aria-label="Search">
+                      <div class="input-group-append">
+                        <button class="btn btn-secondary btn-sidebar">
+                        <i class="fas fa-search fa-fw"></i>
+                        </button>
+                      </div>
+                    </div>
+                </div>
+                <div role="button" id="addUserBotton" routerLink="../ticket-nouveau">
+                    <span title="Ajouter un ticket">
+                        <i class="fa fa-user-plus" aria-hidden="true"></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="card-body p-0" id="tableBlock">
+            <div class='table-responsive w-100'>
+                <table class='table text-left w-100'>
+                    <thead>
+                        <tr>
+                            <th>id</th>
+                            <th>idUnique</th>
+                            <th>date et heure derniere modification</th>
+                            <th>idFileAttente</th>
+                            <th>idPersonne</th>
+                            <th>statut</th>
+                            <th>Options</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor='let ticket of (tickets$ | async) as tickets'>
+                            <td>{{ticket.id}} </td>
+                            <td>{{ticket.idUnique}}</td>
+                            <td>{{ticket.date_heure | date:'dd/MM/yyyy'}} At {{ticket.date_heure | date:'HH:mm:ss'}}</td>
+                            <td>{{ticket.idFileAttente}}</td>
+                            <td>{{ticket.idPersonne}}</td>
+                            <td>{{ticket.statut}}</td>
+                            <td>
+                                <div id="actions" class="dropdown open">
+                                    <button class="btn dropdown-toggle" type="button" id="triggerId" data-toggle="dropdown" aria-haspopup="true"
+                                            aria-expanded="false">
+                                        <span>...</span>
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="triggerId">
+                                        <button class="dropdown-item nav-link" [routerLink]="['new-tickets']" title="Voir">
+                                            <i class="fa fa-eye text-secondary" aria-hidden="true"></i>
+                                            <span>Voir</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>  
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

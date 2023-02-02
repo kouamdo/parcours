@@ -16,21 +16,25 @@
 }.form-control{
     border: none;
     box-shadow: 0 0 2px rgb(220, 220, 220);
-    height: 55px;
+    height: 35px;
 }
 .champs{
     display: flex;
     align-items: center;
     justify-content: space-around;
+    margin: 10px 0;
     label{
         width: 300px;
         font-weight: normal;
     }
 }
+.champs, select, input{
+    font-size: 15px;
+}
 select{
     border: none;
     box-shadow: 0 0 2px rgb(220, 220, 220);
-    height: 40px;
+    height: 24px;
     background-color: #7ea97e63;
     color: rgb(108, 108, 108);
     padding: 0 10px;
@@ -43,5 +47,8 @@ select{
     button{
         background-color: #7ea97e;
         color: white;
+        height: 30px;
+        padding: 0 10px;
+        font-size: 15px;
     }
 }

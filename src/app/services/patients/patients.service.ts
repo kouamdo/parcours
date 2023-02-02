@@ -16,7 +16,7 @@ export class PatientsService {
     return this.http.get<IPatient[]>('api/patients').pipe(map(x=>x));
   }
 
-  getPatientById(id:number):Observable<IPatient>{
+  getPatientById(id:string):Observable<IPatient>{
     return this.getAllPatients().pipe(
       map(x=>
         {

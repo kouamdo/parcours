@@ -41,7 +41,7 @@ export class NewPatientComponent implements OnInit {
       this.btnLibelle="Modifier";
       this.titre="Patient à Modifier";
       //trouver un autre moyen d'initialiser avec des valeurs
-      this.patientService.getPatientById(Number(idPatient)).subscribe(x =>
+      this.patientService.getPatientById(idPatient).subscribe(x =>
         {
           this.patient = x; console.log(this.patient);
           this.forme.setValue({
@@ -68,7 +68,7 @@ export class NewPatientComponent implements OnInit {
     if(this.forme.invalid) return;
 
     let patientTemp : IPatient={
-      id: Number(9),
+      id: String(9),
       nom:patientInput.nom,
       prenom:patientInput.prenom,
       sexe:patientInput.sexe,
@@ -78,16 +78,12 @@ export class NewPatientComponent implements OnInit {
       dateNaissance:patientInput.dateNaissance
     }
 
-
     if(this.patient != undefined){
       patientTemp.id = this.patient.id  
     }
     this.patientService.ajouterPatient(patientTemp).subscribe(
       object => {
         this.router.navigate(['/list-patients']);
-      },
-      error=>{
-        console.log(error)
       }
     )
   }
