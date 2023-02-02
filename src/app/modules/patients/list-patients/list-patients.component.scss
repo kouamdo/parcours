@@ -99,10 +99,6 @@ mat-form-field:focus{
         border: none;
         margin: 0;
     }
-    &::after{
-        content: '';
-        opacity: 0;
-    }
 }  
 .example-full-width {
     height: 42px !important;
@@ -127,6 +123,7 @@ mat-form-field:focus{
     margin: 0;
     color: #7ea97e96;
     border: none;
+    font-size: small;
 }
 .searchBar:focus, .searchBar:active {
     position: relative;
@@ -144,4 +141,26 @@ mat-form-field:focus{
 .containCell{
     padding-top: 20px;
     text-align: center;
+}
+td{
+    font-size: 13px;
+}
+@media screen and (max-width: 1200px) {
+    .title h2{
+        font-size: 15px;
+    }  
+    .example-full-width {
+        height: 42px !important;
+        border: 2px solid #7ea97e;
+    }
+}
+@media screen and (max-width: 1100px) {
+    .title h2{
+        font-size: 15px;
+    } 
+}
+@media screen and (max-width: 1060px) {
+    td{
+        font-size: 12px;
+    }
 }
