@@ -48,12 +48,5 @@ export class MenuComponent implements OnInit, OnChanges {
 
   private getMenus(){
     return  this.menuService.getMenuByUserAndLangue(this.userId,this.langueParent);
-  }
-
-  toggleEtat:boolean = false;
-
-  changeEtat(){
-    this.toggleEtat = !this.toggleEtat;
-  }
-   
+  } 
 }
