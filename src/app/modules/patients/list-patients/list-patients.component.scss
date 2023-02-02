@@ -1,3 +1,4 @@
+
 .title{
     height: 100px;
     h2{
@@ -76,23 +77,71 @@
         }
     }
 }
-
-.example-form {
-    min-width: 150px;
-    max-width: 500px;
-    width: 100%;
+mat-form-field{
+    padding: 0;
+    margin: 0;
     color: #7ea97e;
-  }
-  
-  .example-full-width {
-    width: 100%;
-    border-block: solid;
-  }
-
-  table {
-    width: 100%;
-  }
-  
-  th.mat-sort-header-sorted {
-    color: black;
-  }
+    line-height: normal;
+    box-sizing: initial;
+    input{
+        padding: 0;
+        border: none;
+        margin: 0;
+    }
+}
+mat-form-field:focus{
+    border: none;
+    padding: 0;
+    margin: 0;
+    input{
+        padding: 0;
+        color: #7ea97e;
+        border: none;
+        margin: 0;
+    }
+    &::after{
+        content: '';
+        opacity: 0;
+    }
+}  
+.example-full-width {
+    height: 42px !important;
+    border: 2px solid #7ea97e;
+    border-radius: 5px;
+    background-color: transparent;
+    padding: 0;
+    margin: 0;
+}
+.searchBar {
+    position: relative;
+    top: -2px;
+    padding: 0;
+    margin: 0;
+    color: #7ea97e96;
+    border: none;
+}
+.searchBar {
+    position: relative;
+    top: -2px;
+    padding: 0;
+    margin: 0;
+    color: #7ea97e96;
+    border: none;
+}
+.searchBar:focus, .searchBar:active {
+    position: relative;
+    top: -2px;
+    padding: 0;
+    margin: 0;
+    color: #7ea97e96;
+    border: none;
+}
+.containHead{
+    padding: 1% 10px;
+    margin: auto;
+    text-align: center;
+}
+.containCell{
+    padding-top: 20px;
+    text-align: center;
+}

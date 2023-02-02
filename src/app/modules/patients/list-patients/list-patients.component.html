@@ -1,6 +1,6 @@
 <div id="mainSection" class="d-flex flex-column justify-content-around">
     <div class="title">
-        <h2>Liste de tous les patients</h2>
+        <h2>Listing des patients</h2>
     </div>
     <div class="card container-fluid" >
         <div class='card-hearder pt-3' >
@@ -8,7 +8,7 @@
                 <div class="form-inline mr-3">
                     <form class="example-form">
                         <mat-form-field class="example-full-width" appearance="fill">
-                          <mat-label>Rechercher</mat-label>
+                          <mat-label class="searchBar">Rechercher</mat-label>
                           <input type="text" matInput aria-label="Rechercher" [formControl]="myControl" [matAutocomplete]="auto">
                           <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
                             <mat-option *ngFor="let option of filteredOptions" [value]="option" (onSelectionChange)="rechercherListingPersonne(option)">
@@ -25,56 +25,56 @@
                 </div>
             </div>
         </div>
-        <div>
-            <div class="">
-                <table mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)">
+        <div class="card-body p-0" id="tableBlock">
+            <div class="table-responsive w-100">
+                <table class='table table-sm table-centered table-striped table-bordered w-100' mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)">
               
                   <!-- nom Column -->
                   <ng-container matColumnDef="nom">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> {{"patient.table.title1" | translate}} </th>
-                    <td mat-cell *matCellDef="let element"> {{element.nom}} </td>
+                    <th class="text-dark containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{"patient.table.title1" | translate}} </th>
+                    <td class="text-dark text-left containCell" mat-cell *matCellDef="let element"> {{element.nom}} </td>
                   </ng-container>
               
                   <!-- prenom Column -->
                   <ng-container matColumnDef="prenom">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> {{"patient.table.title2" | translate}} </th>
-                    <td mat-cell *matCellDef="let element"> {{element.prenom}} </td>
+                    <th class="text-dark containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{"patient.table.title2" | translate}} </th>
+                    <td class="text-dark text-left containCell" mat-cell *matCellDef="let element"> {{element.prenom}} </td>
                   </ng-container>
               
                   <!-- birthday Column -->
                   <ng-container matColumnDef="anniversaire">
-                    <th mat-header-cell *matHeaderCellDef> {{"patient.table.title3" | translate}} </th>
-                    <td mat-cell *matCellDef="let element"> {{element.dateNaissance}} </td>
+                    <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{"patient.table.title3" | translate}} </th>
+                    <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.dateNaissance}} </td>
                   </ng-container>
               
                   <!-- sexe Column -->
                   <ng-container matColumnDef="sexe">
-                    <th mat-header-cell *matHeaderCellDef> {{"patient.table.title4" | translate}} </th>
-                    <td mat-cell *matCellDef="let element"> {{element.sexe}} </td>
+                    <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{"patient.table.title4" | translate}} </th>
+                    <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.sexe}} </td>
                   </ng-container>
 
                   <!-- mail Column -->
                   <ng-container matColumnDef="mail">
-                    <th mat-header-cell *matHeaderCellDef> {{"patient.table.title5" | translate}} </th>
-                    <td mat-cell *matCellDef="let element"> {{element.mail}} </td>
+                    <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{"patient.table.title5" | translate}} </th>
+                    <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.mail}} </td>
                   </ng-container>
               
                   <!-- adresse Column -->
                   <ng-container matColumnDef="adresse">
-                    <th mat-header-cell *matHeaderCellDef> {{"patient.table.title6" | translate}} </th>
-                    <td mat-cell *matCellDef="let element"> {{element.adresse}} </td>
+                    <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{"patient.table.title6" | translate}} </th>
+                    <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.adresse}} </td>
                   </ng-container>
 
                   <!-- telephone Column -->
                   <ng-container matColumnDef="telephone">
-                    <th mat-header-cell *matHeaderCellDef> {{"patient.table.title7" | translate}} </th>
-                    <td mat-cell *matCellDef="let element"> {{element.telephone}} </td>
+                    <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{"patient.table.title7" | translate}} </th>
+                    <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.telephone}} </td>
                   </ng-container>
                   
                   <!-- action Column -->
                   <ng-container matColumnDef="actions">
-                    <th mat-header-cell *matHeaderCellDef> {{"patient.table.title8" | translate}} </th>
-                    <td mat-cell *matCellDef="let element">
+                    <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{"patient.table.title8" | translate}} </th>
+                    <td class="text-dark containCell" mat-cell *matCellDef="let element">
                         <div id="actions" class="dropdown open">
                             <button class="btn dropdown-toggle" type="button" id="triggerId" data-toggle="dropdown" aria-haspopup="true"
                                     aria-expanded="false">
@@ -106,7 +106,7 @@
                   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
                 </table>
               
-                <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+                <mat-paginator class="bg-light" [pageSizeOptions]="[5, 10, 20]"
                                showFirstLastButtons
                                aria-label="Select page of periodic elements">
                 </mat-paginator>
