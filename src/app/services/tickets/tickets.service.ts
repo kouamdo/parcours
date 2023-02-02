@@ -38,6 +38,15 @@ export class TicketsService {
         })
     );    
   }
+  getAllTicketsAttente():Observable<ITicket[]>{
+    
+    return this.getAllTickets().pipe(
+      map(x=>
+        {
+          return x.filter(p=>p.statut == this.statutTicketAttente)
+        })
+    );    
+  }
   
   getNextTicketActif():Observable<ITicket[]>{
      return this.getAllTicketsActifs();
