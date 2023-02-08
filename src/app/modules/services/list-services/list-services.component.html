@@ -6,14 +6,17 @@
         <div class='card-hearder pt-3' >
             <div class="d-flex align-items-center justify-content-end mr-4 tableTools">
                 <div class="form-inline mr-3">
-                    <div class="input-group" data-widget="sidebar-search">
-                      <input class="form-control form-control-sidebar" type="search" placeholder="Rechercher" aria-label="Search">
-                      <div class="input-group-append">
-                        <button class="btn btn-secondary btn-sidebar">
-                        <i class="fas fa-search fa-fw"></i>
-                        </button>
-                      </div>
-                    </div>
+                    <form class="example-form">
+                        <mat-form-field class="example-full-width" appearance="fill">
+                          <mat-label class="searchBar">Rechercher</mat-label>
+                          <input type="text" matInput aria-label="Rechercher" [formControl]="myControl" [matAutocomplete]="auto">
+                          <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+                            <mat-option *ngFor="let option of filteredOptions" [value]="option" (onSelectionChange)="rechercherListingService(option)">
+                              {{option.libelle}}
+                            </mat-option>
+                          </mat-autocomplete>
+                        </mat-form-field>
+                    </form>
                 </div>
                 <div role="button" id="addUserBotton" routerLink="../service-nouveau">
                     <span title="Ajouter un service">
@@ -24,53 +27,70 @@
         </div>
         <div class="card-body p-0" id="tableBlock">
             <div class='table-responsive w-100'>
-                <table class='table text-left w-100'>
-                    <thead>
-                        <tr>
-                            <th>Libelle</th>
-                            <th>Etat</th>
-                            <th>date de derniere modification</th>
-                            <th>date d'attribution</th>
-                            <th>date de fin</th>
-                            <th>Options</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor='let service of (services$ | async) as services'>
-                            <td >{{service.libelle}} </td>
-                           <td > {{service.etat}}</td>
-                           <td>{{service.dateDerniereModification}}</td>
-                            <td>{{service.dateAttribution}}</td>
-                            <td>{{service.dateFin}}</td>
-                        <td>
+                <table class='table table-sm table-centered table-striped table-bordered w-100' mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)">
+                 
+                    <!-- Libelle Column -->
+                    <ng-container matColumnDef="Libelle">
+                        <th class="text-dark containHead" mat-header-cell *matHeaderCellDef mat-sort-header> Libelle </th>
+                        <td class="text-dark text-left containCell" mat-cell *matCellDef="let element"> {{element.Libelle}} </td>
+                    </ng-container>
+                    
+                    <!-- Etat Column -->
+                    <ng-container matColumnDef="Etat">
+                        <th class="text-dark containHead" mat-header-cell *matHeaderCellDef mat-sort-header> Etat </th>
+                        <td class="text-dark text-left containCell" mat-cell *matCellDef="let element"> {{element.Etat}} </td>
+                    </ng-container>
+                    
+                    <!-- date de derniere modification Column -->
+                    <ng-container matColumnDef="dateDerniereModification">
+                        <th class="text-dark containHead" mat-header-cell *matHeaderCellDef mat-sort-header> date de derniere modification </th>
+                        <td class="text-dark text-left containCell" mat-cell *matCellDef="let element"> {{element.dateDerniereModification}} </td>
+                    </ng-container>
+                    
+                    <!-- date d'attribution Column -->
+                    <ng-container matColumnDef="dateAttribution">
+                        <th class="text-dark containHead" mat-header-cell *matHeaderCellDef mat-sort-header> date d'attribution </th>
+                        <td class="text-dark text-left containCell" mat-cell *matCellDef="let element"> {{element.dateAttribution}} </td>
+                    </ng-container>
+                    
+                    <!-- date de fin Column -->
+                    <ng-container matColumnDef="dateFin">
+                        <th class="text-dark containHead" mat-header-cell *matHeaderCellDef mat-sort-header> date de fin </th>
+                        <td class="text-dark text-left containCell" mat-cell *matCellDef="let element"> {{element.dateFin}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="actions">
+                        <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{"patient.table.title8" | translate}} </th>
+                        <td class="text-dark containCell" mat-cell *matCellDef="let element">
                             <div id="actions" class="dropdown open">
                                 <button class="btn dropdown-toggle" type="button" id="triggerId" data-toggle="dropdown" aria-haspopup="true"
                                         aria-expanded="false">
                                     <span>...</span>
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="triggerId">
-                                    <button class="dropdown-item nav-link" [routerLink]="['new-services']" title="Orienter">
-                                        <i class="fa fa-map-pin" aria-hidden="true"></i>
-                                        <span>Orienter</span>
-                                    </button>
                                     <button class="dropdown-item nav-link" [routerLink]="['new-services']" title="Ajouter">
                                         <i class="fa fa-eye text-secondary" aria-hidden="true"></i>
                                         <span>Ajouter</span>
                                     </button>
-                                    <button class="dropdown-item nav-link" [routerLink]="['/service-nouveau',service.id]" title="Voir">
+                                    <button class="dropdown-item nav-link" [routerLink]="['/service-nouveau',element.id]" title="Voir">
                                         <i class="fa fa-pen text-info" aria-hidden="true"></i>
                                         <span>Voir</span>
                                     </button>
-                                    <button class="dropdown-item nav-link" [routerLink]="['/service-nouveau',service.id]" title="Supprimer">
+                                    <button class="dropdown-item nav-link" [routerLink]="['/service-nouveau',element.id]" title="Supprimer">
                                         <i class="fa fa-times-circle text-danger" aria-hidden="true"></i>
                                         <span>Supprimer</span>
                                     </button>
                                 </div>
                             </div>
                         </td>
-                    </tr>  
-                    </tbody>
+                    </ng-container>
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
                 </table>
+                <mat-paginator class="bg-light" [pageSizeOptions]="[5, 10, 20]"
+                               showFirstLastButtons
+                               aria-label="Select page of periodic elements">
+                </mat-paginator>
             </div>
         </div>
     </div>
