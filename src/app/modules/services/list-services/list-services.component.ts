@@ -11,7 +11,7 @@ import { IService } from 'src/app/modele/service';
 import { ServicesService } from 'src/app/services/services/services.service';
 
 export interface service {
-  nom: string;
+  libelle: string;
 }
 
 @Component({
@@ -28,7 +28,7 @@ export class ListServicesComponent implements OnInit, AfterViewInit {
   ELEMENTS_TABLE: IService[] = [];
   filteredOptions: IService[] | undefined;
 
-  displayedColumns: string[] = ['nom', 'prenom', 'anniversaire', 'sexe', 'mail', 'adresse', 'telephone', 'actions'];
+  displayedColumns: string[] = ['libelle', 'etat', 'dateDerniereModification', 'dateAttribution', 'dateFin', 'actions'];
   
   dataSource = new MatTableDataSource<IService>(this.ELEMENTS_TABLE);
 

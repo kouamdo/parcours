@@ -30,13 +30,13 @@
                 <table class='table table-sm table-centered table-striped table-bordered w-100' mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)">
                  
                     <!-- Libelle Column -->
-                    <ng-container matColumnDef="Libelle">
+                    <ng-container matColumnDef="libelle">
                         <th class="text-dark containHead" mat-header-cell *matHeaderCellDef mat-sort-header> Libelle </th>
-                        <td class="text-dark text-left containCell" mat-cell *matCellDef="let element"> {{element.Libelle}} </td>
+                        <td class="text-success text-left containCell" mat-cell *matCellDef="let element"> {{element.Libelle}} </td>
                     </ng-container>
                     
                     <!-- Etat Column -->
-                    <ng-container matColumnDef="Etat">
+                    <ng-container matColumnDef="etat">
                         <th class="text-dark containHead" mat-header-cell *matHeaderCellDef mat-sort-header> Etat </th>
                         <td class="text-dark text-left containCell" mat-cell *matCellDef="let element"> {{element.Etat}} </td>
                     </ng-container>
@@ -68,7 +68,7 @@
                                     <span>...</span>
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="triggerId">
-                                    <button class="dropdown-item nav-link" [routerLink]="['new-services']" title="Ajouter">
+                                    <button class="dropdown-item nav-link" [routerLink]="['/service-nouveau']" title="Ajouter">
                                         <i class="fa fa-eye text-secondary" aria-hidden="true"></i>
                                         <span>Ajouter</span>
                                     </button>
