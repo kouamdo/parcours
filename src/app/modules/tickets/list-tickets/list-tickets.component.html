@@ -1,19 +1,22 @@
 <div id="mainSection" class="d-flex flex-column justify-content-around">
     <div class="title">
-        <h2>Liste de tous les tickets</h2>
+        <h2>Listing des tickets</h2>
     </div>
     <div class="card container-fluid" >
         <div class='card-hearder pt-3' >
             <div class="d-flex align-items-center justify-content-end mr-4 tableTools">
                 <div class="form-inline mr-3">
-                    <div class="input-group" data-widget="sidebar-search">
-                      <input class="form-control form-control-sidebar" type="search" placeholder="Rechercher" aria-label="Search">
-                      <div class="input-group-append">
-                        <button class="btn btn-secondary btn-sidebar">
-                        <i class="fas fa-search fa-fw"></i>
-                        </button>
-                      </div>
-                    </div>
+                    <form class="example-form">
+                        <mat-form-field class="example-full-width" appearance="fill">
+                          <mat-label class="searchBar">Rechercher</mat-label>
+                          <input type="text" matInput aria-label="Rechercher" [formControl]="myControl" [matAutocomplete]="auto">
+                          <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+                            <mat-option *ngFor="let option of filteredOptions" [value]="option" (onSelectionChange)="rechercherListingTicket(option)">
+                              {{option.idUnique}}
+                            </mat-option>
+                          </mat-autocomplete>
+                        </mat-form-field>
+                    </form>
                 </div>
                 <div role="button" id="addUserBotton" routerLink="../ticket-nouveau">
                     <span title="Ajouter un ticket">
@@ -24,43 +27,69 @@
         </div>
         <div class="card-body p-0" id="tableBlock">
             <div class='table-responsive w-100'>
-                <table class='table text-left w-100'>
-                    <thead>
-                        <tr>
-                            <th>id</th>
-                            <th>idUnique</th>
-                            <th>date et heure derniere modification</th>
-                            <th>idFileAttente</th>
-                            <th>idPersonne</th>
-                            <th>statut</th>
-                            <th>Options</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor='let ticket of (tickets$ | async) as tickets'>
-                            <td>{{ticket.id}} </td>
-                            <td>{{ticket.idUnique}}</td>
-                            <td>{{ticket.date_heure | date:'dd/MM/yyyy'}} At {{ticket.date_heure | date:'HH:mm:ss'}}</td>
-                            <td>{{ticket.idFileAttente}}</td>
-                            <td>{{ticket.idPersonne}}</td>
-                            <td>{{ticket.statut}}</td>
-                            <td>
-                                <div id="actions" class="dropdown open">
-                                    <button class="btn dropdown-toggle" type="button" id="triggerId" data-toggle="dropdown" aria-haspopup="true"
-                                            aria-expanded="false">
-                                        <span>...</span>
+                <table class='table table-sm table-centered table-striped table-bordered w-100' mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)">
+                    
+                  <!-- id Column -->
+                  <ng-container matColumnDef="id">
+                    <th class="text-dark containHead" mat-header-cell *matHeaderCellDef mat-sort-header> id </th>
+                    <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.id}} </td>
+                  </ng-container>
+
+                  <!-- idUnique Column -->
+                  <ng-container matColumnDef="idUnique">
+                    <th class="text-dark containHead" mat-header-cell *matHeaderCellDef mat-sort-header> id Unique </th>
+                    <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.idUnique}} </td>
+                  </ng-container>
+
+                  <!-- date_heure Column -->
+                  <ng-container matColumnDef="date_heure">
+                    <th class="text-dark containHead" mat-header-cell *matHeaderCellDef mat-sort-header> date et heure derniere modification</th>
+                    <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.date_heure}} </td>
+                  </ng-container>
+
+                  <!-- idFileAttente Column -->
+                  <ng-container matColumnDef="idFileAttente">
+                    <th class="text-dark containHead" mat-header-cell *matHeaderCellDef mat-sort-header> id dans la File d'attente </th>
+                    <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.idFileAttente}} </td>
+                  </ng-container>
+
+                  <!-- idPersonne Column -->
+                  <ng-container matColumnDef="idPersonne">
+                    <th class="text-dark containHead" mat-header-cell *matHeaderCellDef mat-sort-header> id Personne </th>
+                    <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.idPersonne}} </td>
+                  </ng-container>
+
+                  <!-- statut Column -->
+                  <ng-container matColumnDef="statut">
+                    <th class="text-dark containHead" mat-header-cell *matHeaderCellDef mat-sort-header> statut </th>
+                    <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.statut}} </td>
+                  </ng-container>
+                  
+                    <!-- action Column -->
+                    <ng-container matColumnDef="actions">
+                        <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{"patient.table.title8" | translate}} </th>
+                        <td class="text-dark containCell" mat-cell *matCellDef="let element">
+                            <div id="actions" class="dropdown open">
+                                <button class="btn dropdown-toggle" type="button" id="triggerId" data-toggle="dropdown" aria-haspopup="true"
+                                        aria-expanded="false">
+                                    <span>...</span>
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="triggerId">
+                                    <button class="dropdown-item nav-link" [routerLink]="" title="Imprimer le ticket">
+                                        <i class="fa fa-print" aria-hidden="true"></i>
+                                        <span> Imprimer </span>
                                     </button>
-                                    <div class="dropdown-menu" aria-labelledby="triggerId">
-                                        <button class="dropdown-item nav-link" [routerLink]="['new-tickets']" title="Voir">
-                                            <i class="fa fa-eye text-secondary" aria-hidden="true"></i>
-                                            <span>Voir</span>
-                                        </button>
-                                    </div>
                                 </div>
-                            </td>
-                        </tr>  
-                    </tbody>
-                </table>
+                            </div>
+                        </td>
+                    </ng-container> 
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                  </table>
+                  <mat-paginator style="background-color: rgba(126, 169, 126, 0.79);" [pageSizeOptions]="[5, 10, 20]"
+                                 showFirstLastButtons
+                                 aria-label="Select page of periodic elements">
+                  </mat-paginator>
             </div>
         </div>
     </div>

@@ -28,6 +28,14 @@ export class TicketsService {
         })
     );
   }
+  getTicketByIdUnique(uniqueId:string): Observable<ITicket[]> {
+   return this.http.get<ITicket[]>('api/patients').pipe(
+     map(x=>
+       {
+         return x.filter(t=> t.idUnique.toLowerCase().startsWith(uniqueId))
+       })
+   );        
+ }
 
   getAllTicketsActifs():Observable<ITicket[]>{
     

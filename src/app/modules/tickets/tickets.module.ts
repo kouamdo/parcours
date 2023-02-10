@@ -13,6 +13,12 @@ import { HttpLoaderFactory } from 'src/app/app.module';
 import { TicketCourantComponent } from './ticket-courant/ticket-courant.component';
 import { NgxPrintModule } from 'ngx-print';
 import { PanneauTicketComponent } from './panneau-ticket/panneau-ticket.component';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { MatTableModule } from '@angular/material/table';
 
 
 @NgModule({
@@ -28,6 +34,12 @@ import { PanneauTicketComponent } from './panneau-ticket/panneau-ticket.componen
     FormsModule,
     AppRoutingModule,
     ReactiveFormsModule,
+    MatAutocompleteModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatPaginatorModule,
+    MatTableModule,
+    MatSortModule,
     TranslateModule.forChild({
         loader: {
             provide: TranslateLoader,
