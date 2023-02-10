@@ -75,10 +75,13 @@
                                     <span>...</span>
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="triggerId">
-                                    <button class="dropdown-item nav-link" [routerLink]="" title="Imprimer le ticket">
-                                        <i class="fa fa-print" aria-hidden="true"></i>
-                                        <span> Imprimer </span>
-                                    </button>
+                                  <button class="btn"
+                                    [useExistingCss]="true"
+                                    styleSheetFile="assets/css/ticketPrint.scss"
+                                    printSectionId="ticketView"
+                                    ngxPrint (click)="recupIdTicket(element.id); ticketAImprimer()">
+                                    Imprimer
+                                  </button>
                                 </div>
                             </div>
                         </td>
@@ -93,4 +96,32 @@
             </div>
         </div>
     </div>
+</div>
+
+
+    
+<div id="ticketView" class="card">
+  <div class="title">
+      <div class="d-flex align-items-start">
+          <img src="../../../../assets/img/logoNotep.png" alt="" width="40px">
+          <h2>Noped consulting</h2>
+      </div>
+      <small>logiciel de gestion client</small>
+  </div>
+  <div class="objetTicket pt-3 pb-3">
+      <h3>Ticket de validation service</h3>
+  </div>
+  <div id="filigramme">
+      <div id="ticketContent">
+          <p><span>Intitule du service : </span>{{this.ticketImpression!.idFileAttente}}</p>
+          <p><span>id unique du ticket : </span>{{this.ticketImpression!.idUnique}}</p>
+          <p><span>Date : </span>{{this.ticketImpression!.date_heure | date: 'dd/MM/yyyy A hh:mm:ss'}}</p>
+          <p><span>Nom du beneficiaire : </span>{{this.patientCorrespondant!.nom}}</p>
+          <p class="barCode pt-2 pb-1">
+              <i class="fa fa-barcode fa-4x" aria-hidden="true"></i>
+              <i class="fa fa-barcode fa-4x" aria-hidden="true"></i>
+              <i class="fa fa-barcode fa-4x" aria-hidden="true"></i>
+          </p>
+      </div>
+  </div>
 </div>

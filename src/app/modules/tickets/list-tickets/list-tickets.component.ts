@@ -1,5 +1,5 @@
 import { LiveAnnouncer } from '@angular/cdk/a11y';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
@@ -7,7 +7,9 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { Observable, EMPTY } from 'rxjs';
+import { IPatient } from 'src/app/modele/Patient';
 import { ITicket } from 'src/app/modele/ticket';
+import { PatientsService } from 'src/app/services/patients/patients.service';
 import { TicketsService } from 'src/app/services/tickets/tickets.service';
 
 @Component({
@@ -15,9 +17,17 @@ import { TicketsService } from 'src/app/services/tickets/tickets.service';
   templateUrl: './list-tickets.component.html',
   styleUrls: ['./list-tickets.component.scss']
 })
-export class ListTicketsComponent implements OnInit {
+export class ListTicketsComponent implements OnInit, AfterViewInit {
 
   tickets$:Observable<ITicket[]>=EMPTY;
+  ticketImpression:ITicket | undefined;
+  patientCorrespondant:IPatient = {
+    id: '',
+    nom: '',
+    adresse: '',
+    mail: '',
+    telephone: ''
+  };
   idTicketImpression : string = ""
   
   myControl = new FormControl<string | ITicket>('');
@@ -33,10 +43,18 @@ export class ListTicketsComponent implements OnInit {
 
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private translate: TranslateService, private router:Router, private serviceTicket:TicketsService, private _liveAnnouncer: LiveAnnouncer,) { }
+  constructor(private translate: TranslateService, private router:Router, private serviceTicket:TicketsService, private _liveAnnouncer: LiveAnnouncer,private servicePatient:PatientsService) { }
 
   ngOnInit(): void {
     this.tickets$ = this.getAllTickets();
+    this.ticketImpression  = {
+      id: "1",
+      idUnique: '',
+      date_heure: new Date,
+      idFileAttente: null,
+      idPersonne: null,
+      statut: ''
+    };
 
     this.getAllTickets().subscribe(valeurs => {
       this.dataSource.data = valeurs;
@@ -58,7 +76,6 @@ export class ListTicketsComponent implements OnInit {
       }
     );
     });
-
   }
 
   displayFn(ticket: ITicket): string {
@@ -84,6 +101,22 @@ export class ListTicketsComponent implements OnInit {
     }
   }
 
+  recupIdTicket(idTicket : string){
+    this.idTicketImpression = idTicket
+  }
+
+  ticketAImprimer(){
+    this.serviceTicket.getTicketById(this.idTicketImpression).subscribe(
+      objet=>{
+        this.ticketImpression = objet;
+        if(this.ticketImpression?.idPersonne){
+          this.servicePatient.getPatientById(this.ticketImpression?.idPersonne).subscribe(
+            valeur =>{this.patientCorrespondant= valeur;} 
+          );
+        }
+      }
+    )
+  }
 
   private getAllTickets(){
     return this.serviceTicket.getAllTickets();

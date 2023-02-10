@@ -145,6 +145,63 @@ mat-form-field:focus{
 td{
     font-size: 13px;
 }
+#ticketView{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    color: #000000d4;
+    div{
+        width: 100%;
+    }
+    .title{
+        position: relative;
+        div{
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+        }
+        img{
+            width: 40px;
+        }
+        small{
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            color: #7ea97e;
+            font-size: 8px;
+        }
+    }
+    .objetTicket{
+        h3{
+            font-size: 12px;
+            font-weight: bold;
+        }
+    }
+    #filigramme{
+        background: url("../../../../assets/img/logoNotep.png") no-repeat top center;
+        background-size: contain;
+        #ticketContent{
+            background-color: #ffffffe5;
+            width: 100%;
+            height: max-content;
+            p{
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                font-size: 10px;
+                font-style: italic;
+                span{
+                    font-weight: bold;
+                }
+            }
+            .barCode{
+                justify-content: center;
+            }
+        }
+    }
+}
 @media screen and (max-width: 1200px) {
     .title h2{
         font-size: 15px;
