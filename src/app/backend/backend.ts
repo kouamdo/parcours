@@ -24,9 +24,9 @@ export class InMemDBService implements InMemoryDbService{
             {id:"9", nom:"Oubian", prenom:"tresor", sexe:"F", adresse:"Douala", telephone:"090999091", mail:"ouang@yad.fr", dateNaissance: new Date("07/03/1990")}
         ];
         let services:IService[]=[
-            {id:"1", libelle:"Pharmacie", etat:"non attribue",dateDerniereModification: "07/03/1990",dateAttribution: "07/03/1990",dateFin: "07/03/1990",nombreTotalAttributions: 6},
-            {id:"2", libelle:"Laboratoire", etat:"non attribue",dateDerniereModification: "07/03/1990",dateAttribution: "07/03/1990",dateFin: "07/03/1990",nombreTotalAttributions: 20},
-            {id:"3", libelle:"Consultation", etat:"non attribue",dateDerniereModification: "07/03/1990",dateAttribution: "07/03/1990",dateFin: "07/03/1990",nombreTotalAttributions: 50}
+            {id:"1", libelle:"Pharmacie", etat:"non attribue",dateDerniereModification: "07/03/2000",dateAttribution: "07/03/1990",dateFin: "07/03/1990",nombreTotalAttributions: 6},
+            {id:"2", libelle:"Laboratoire", etat:"non attribue",dateDerniereModification: "06/08/1990",dateAttribution: "07/03/1990",dateFin: "07/03/1990",nombreTotalAttributions: 20},
+            {id:"3", libelle:"Consultation", etat:"non attribue",dateDerniereModification: "12/06/1972",dateAttribution: "07/03/1990",dateFin: "07/03/1990",nombreTotalAttributions: 50}
         ];
         let tickets:ITicket[]=[
             {id:"1", idUnique:"20221206S1A01", date_heure: new Date("01/13/2022"), idFileAttente: "S1A01", idPersonne: "1", statut: this.statutTicketTraite},
@@ -42,14 +42,14 @@ export class InMemDBService implements InMemoryDbService{
         ];
         let menus:IMenus[] =[ 
           {"idUser":"phil", "langue":"fr","fonctionnalites":[
-            {"fonction":"Personne", "icone":"fas fa-user-cog", "actif":"menu-open", "elements":[{"nom":"Créer", "lien":"patient-nouveau", "bouton":"false"}  , {"nom":"Rechercher", "lien":"list-patients", "bouton":"false"}, {"nom":"Modifier", "lien":"patient-nouveau/:idPatient", "bouton":"false"}, {"nom":"Modifier", "lien":"patient-nouveau/:idPatient", "bouton":"false"}]},
-            {"fonction":"Service", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"Créer", "lien":"./service-nouveau", "bouton":"false"}  , {"nom":"Rechercher", "lien":"./list-services", "bouton":"false"}, {"nom":"Modifier", "lien":"patient-nouveau/:idPatient", "bouton":"false"}, {"nom":"Modifier", "lien":"patient-nouveau/:idPatient", "bouton":"false"},{"nom":"Orienter", "lien":"patient-nouveau", "bouton":"true"}]},
-            {"fonction":"Ticket", "icone":"fas fa-chart-pie", "actif":"", "elements":[{"nom":"Créer", "lien":"patient-nouveau", "bouton":"false"}  , {"nom":"Rechercher", "lien":"list-tickets", "bouton":"false"}, {"nom":"Modifier", "lien":"patient-nouveau/:idPatient", "bouton":"false"}, {"nom":"Modifier", "lien":"patient-nouveau/:idPatient", "bouton":"false"}, {"nom":"Afficher le panneau", "lien":"panneau-tickets", "bouton":"false"}]}
+            {"fonction":"Personne", "icone":"fas fa-user-cog", "actif":"menu-open", "elements":[{"nom":"Créer", "lien":"patient-nouveau", "bouton":"false"}  , {"nom":"Rechercher", "lien":"list-patients", "bouton":"false"}]},
+            {"fonction":"Service", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"Créer", "lien":"./service-nouveau", "bouton":"false"}  , {"nom":"Rechercher", "lien":"./list-services", "bouton":"false"}]},
+            {"fonction":"Ticket", "icone":"fas fa-chart-pie", "actif":"", "elements":[{"nom":"Rechercher", "lien":"list-tickets", "bouton":"false"}, {"nom":"Afficher le panneau", "lien":"panneau-tickets", "bouton":"false"}]}
           ]},
           {"idUser":"phil", "langue":"en","fonctionnalites":[
-            {"fonction":"People", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"New", "lien":"patient-nouveau", "bouton":"false"}  , {"nom":"Search", "lien":"list-patients", "bouton":"false"}, {"nom":"Modify", "lien":"patient-nouveau/:idPatient", "bouton":"false"}, {"nom":"Modify", "lien":"patient-nouveau/:idPatient", "bouton":"false"}]},
-            {"fonction":"Service", "icone":"fas fa-user-cog", "actif":"menu-open", "elements":[{"nom":"New", "lien":"./service-nouveau", "bouton":"false"}  , {"nom":"Search", "lien":"./list-services", "bouton":"false"}, {"nom":"Modify", "lien":"patient-nouveau/:idPatient", "bouton":"false"}, {"nom":"Modify", "lien":"patient-nouveau/:idPatient", "bouton":"false"},{"nom":"Guide", "lien":"patient-nouveau", "bouton":"true"}]},
-            {"fonction":"Ticket", "icone":"fas fa-chart-pie", "actif":"", "elements":[{"nom":"New", "lien":"patient-nouveau", "bouton":"false"}  , {"nom":"Search", "lien":"list-tickets", "bouton":"false"}, {"nom":"Modify", "lien":"patient-nouveau/:idPatient", "bouton":"false"}, {"nom":"Modify", "lien":"patient-nouveau/:idPatient", "bouton":"false"}, {"nom":"Afficher le panneau", "lien":"panneau-tickets", "bouton":"false"}]}
+            {"fonction":"People", "icone":"fas fa-user-cog", "actif":"menu-open", "elements":[{"nom":"New", "lien":"patient-nouveau", "bouton":"false"}  , {"nom":"Search", "lien":"list-patients", "bouton":"false"}]},
+            {"fonction":"Service", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"New", "lien":"./service-nouveau", "bouton":"false"}  , {"nom":"Search", "lien":"./list-services", "bouton":"false"}]},
+            {"fonction":"Ticket", "icone":"fas fa-chart-pie", "actif":"", "elements":[{"nom":"Search", "lien":"list-tickets", "bouton":"false"}, {"nom":"View panel", "lien":"panneau-tickets", "bouton":"false"}]}
           ]}
         ];
         return{patients,services, menus, tickets};
