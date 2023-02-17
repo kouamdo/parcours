@@ -75,13 +75,18 @@
                                     <span>...</span>
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="triggerId">
-                                  <button class="btn"
-                                    [useExistingCss]="true"
-                                    styleSheetFile="assets/css/ticketPrint.scss"
-                                    printSectionId="ticketView"
-                                    ngxPrint (click)="recupIdTicket(element.id); ticketAImprimer()">
-                                    {{'lists.button1' | translate}}
-                                  </button>
+                                  <div class="d-flex justify-content-center">
+                                    <button *ngIf="element.statut == statutTicketTraite" class="btn"
+                                      [useExistingCss]="true"
+                                      styleSheetFile="assets/css/ticketPrint.scss"
+                                      printSectionId="ticketView"
+                                      ngxPrint (click)="recupIdTicket(element.id); ticketAImprimer()">
+                                      <i class="fa fa-print fa-1x text-secondary mr-3" aria-hidden="true"></i> {{'lists.button1' | translate}}
+                                    </button>
+                                    <button *ngIf="element.statut != statutTicketTraite" disabled class="btn text-sm">
+                                      {{'lists.button5' | translate}}
+                                    </button>
+                                  </div>
                                 </div>
                             </div>
                         </td>
@@ -100,9 +105,9 @@
 
 
     
-<div id="ticketView" class="card">
+<div id="ticketView" class="card d-none" style="width: 20%;">
   <div class="title">
-      <div class="d-flex align-items-start">
+    <div class="d-flex align-items-center justify-content-between">
           <img src="../../../../assets/img/logoNotep.png" alt="" width="40px">
           <h2>Noped consulting</h2>
       </div>

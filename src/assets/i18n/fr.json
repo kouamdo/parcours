@@ -43,7 +43,8 @@
         "button1":"Imprimer",
         "button2":"Retour",
         "button3":"Annuler",
-        "button4":"Précédent"
+        "button4":"Précédent",
+        "button5":"Aucune action"
     },
     "patient":{
         "text":"Patients retrouvé(e)s",

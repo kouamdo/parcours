@@ -145,6 +145,10 @@ mat-form-field:focus{
 td{
     font-size: 13px;
 }
+th{
+    background-color: rgba(126, 169, 126, 0.2);
+    color: #7ea97e !important;
+}
 #ticketView{
     display: flex;
     flex-direction: column;

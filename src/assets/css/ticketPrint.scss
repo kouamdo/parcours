@@ -1,8 +1,8 @@
 /* print with this style */
 @media print {
     @page {
-        size: 20px !important;
-        size: portrait;
+        size:  20% !important;
+        //size: portrait;
         
     }
     #ticketView{
@@ -13,17 +13,20 @@
         padding: 10px;
         width: 350px !important;
         color: #000000d4;
+        background-color: #7ea97e;
     }
     #ticketView div{
         width: 100%;
     }
     .title{
         position: relative;
+        width: 30%;
     }
     #ticketView .title div{
         display: flex;
-        align-items: flex-start;
+        align-items: center;
         justify-content: space-between;
+        width: 100%;
     }
     .title img{
         width: 40px;
@@ -42,7 +45,7 @@
     #filigramme{
         background: url("../../../../assets/img/logoNotep.png") no-repeat top center;
         background-size: contain;
-        width: 100%;
+        width: 30%;
     }
     #ticketContent{
         background-color: #ffffffe5;
@@ -55,11 +58,12 @@
         justify-content: space-between;
         font-size: 10px;
         font-style: italic;
+        width: 100%;
     }
     #ticketContent p span{
         font-weight: bold;
     }
-    #ticketContent p .barCode{
+    #ticketContent .barCode{
         justify-content: center;
     }
 }

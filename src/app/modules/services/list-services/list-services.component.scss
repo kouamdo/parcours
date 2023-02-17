@@ -145,6 +145,10 @@ mat-form-field:focus{
 td{
     font-size: 13px;
 }
+th{
+    background-color: rgba(126, 169, 126, 0.2);
+    color: #7ea97e !important;
+}
 @media screen and (max-width: 1200px) {
     .title h2{
         font-size: 15px;
