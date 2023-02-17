@@ -41,7 +41,10 @@
     "lists":{
         "title":"listing",
         "button1":"Print",
-        "button2":"close"
+        "button2":"Close",
+        "button3":"Cancel",
+        "button4":"Previous",
+        "button5":"No action yet"
     },
     "patient":{
         "text":"Patients retrouvé(e)s",

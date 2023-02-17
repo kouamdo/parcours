@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { Observable, EMPTY } from 'rxjs';
 import { IPatient } from 'src/app/modele/Patient';
+import { StatutTicket } from 'src/app/modele/statut-ticket';
 import { ITicket } from 'src/app/modele/ticket';
 import { PatientsService } from 'src/app/services/patients/patients.service';
 import { TicketsService } from 'src/app/services/tickets/tickets.service';
@@ -28,7 +29,10 @@ export class ListTicketsComponent implements OnInit, AfterViewInit {
     mail: '',
     telephone: ''
   };
-  idTicketImpression : string = ""
+  idTicketImpression : string = "";
+  statutTicketActif = StatutTicket.actif
+  statutTicketAttente = StatutTicket.attente
+  statutTicketTraite = StatutTicket.traite
   
   myControl = new FormControl<string | ITicket>('');
  
