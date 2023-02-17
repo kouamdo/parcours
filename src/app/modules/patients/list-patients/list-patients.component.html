@@ -45,7 +45,7 @@
                   <!-- birthday Column -->
                   <ng-container matColumnDef="anniversaire">
                     <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{"patient.table.title3" | translate}} </th>
-                    <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.dateNaissance}} </td>
+                    <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.dateNaissance | date: 'dd/MM/yyyy'}} </td>
                   </ng-container>
               
                   <!-- sexe Column -->
