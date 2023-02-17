@@ -1,6 +1,6 @@
 <div id="mainSection" class="d-flex flex-column justify-content-around">
     <div class="title">
-        <h2>Listing des tickets</h2>
+        <h2>{{"lists.title" | translate}} tickets</h2>
     </div>
     <div class="card container-fluid" >
         <div class='card-hearder pt-3' >
@@ -8,7 +8,7 @@
                 <div class="form-inline mr-3">
                     <form class="example-form">
                         <mat-form-field class="example-full-width" appearance="fill">
-                          <mat-label class="searchBar">Rechercher</mat-label>
+                          <mat-label class="searchBar">{{'patient.search-bar' | translate}}</mat-label>
                           <input type="text" matInput aria-label="Rechercher" [formControl]="myControl" [matAutocomplete]="auto">
                           <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
                             <mat-option *ngFor="let option of filteredOptions" [value]="option" (onSelectionChange)="rechercherListingTicket(option)">
@@ -31,43 +31,43 @@
                     
                   <!-- id Column -->
                   <ng-container matColumnDef="id">
-                    <th class="text-dark containHead" mat-header-cell *matHeaderCellDef mat-sort-header> id </th>
+                    <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'tickets.table.title1' | translate}} </th>
                     <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.id}} </td>
                   </ng-container>
 
                   <!-- idUnique Column -->
                   <ng-container matColumnDef="idUnique">
-                    <th class="text-dark containHead" mat-header-cell *matHeaderCellDef mat-sort-header> id Unique </th>
+                    <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'tickets.table.title2' | translate}} </th>
                     <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.idUnique}} </td>
                   </ng-container>
 
                   <!-- date_heure Column -->
                   <ng-container matColumnDef="date_heure">
-                    <th class="text-dark containHead" mat-header-cell *matHeaderCellDef mat-sort-header> date et heure derniere modification</th>
+                    <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'tickets.table.title3' | translate}} </th>
                     <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.date_heure}} </td>
                   </ng-container>
 
                   <!-- idFileAttente Column -->
                   <ng-container matColumnDef="idFileAttente">
-                    <th class="text-dark containHead" mat-header-cell *matHeaderCellDef mat-sort-header> id dans la File d'attente </th>
+                    <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'tickets.table.title4' | translate}} </th>
                     <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.idFileAttente}} </td>
                   </ng-container>
 
                   <!-- idPersonne Column -->
                   <ng-container matColumnDef="idPersonne">
-                    <th class="text-dark containHead" mat-header-cell *matHeaderCellDef mat-sort-header> id Personne </th>
+                    <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'tickets.table.title5' | translate}} </th>
                     <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.idPersonne}} </td>
                   </ng-container>
 
                   <!-- statut Column -->
                   <ng-container matColumnDef="statut">
-                    <th class="text-dark containHead" mat-header-cell *matHeaderCellDef mat-sort-header> statut </th>
+                    <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'tickets.table.title6' | translate}} </th>
                     <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.statut}} </td>
                   </ng-container>
                   
                     <!-- action Column -->
                     <ng-container matColumnDef="actions">
-                        <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{"patient.table.title8" | translate}} </th>
+                        <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef> {{"patient.table.title8" | translate}} </th>
                         <td class="text-dark containCell" mat-cell *matCellDef="let element">
                             <div id="actions" class="dropdown open">
                                 <button class="btn dropdown-toggle" type="button" id="triggerId" data-toggle="dropdown" aria-haspopup="true"
@@ -80,7 +80,7 @@
                                     styleSheetFile="assets/css/ticketPrint.scss"
                                     printSectionId="ticketView"
                                     ngxPrint (click)="recupIdTicket(element.id); ticketAImprimer()">
-                                    Imprimer
+                                    {{'lists.button1' | translate}}
                                   </button>
                                 </div>
                             </div>
@@ -106,17 +106,17 @@
           <img src="../../../../assets/img/logoNotep.png" alt="" width="40px">
           <h2>Noped consulting</h2>
       </div>
-      <small>logiciel de gestion client</small>
+      <small>{{'tickets.form.text1' | translate}}</small>
   </div>
   <div class="objetTicket pt-3 pb-3">
       <h3>Ticket de validation service</h3>
   </div>
   <div id="filigramme">
       <div id="ticketContent">
-          <p><span>Intitule du service : </span>{{this.ticketImpression!.idFileAttente}}</p>
-          <p><span>id unique du ticket : </span>{{this.ticketImpression!.idUnique}}</p>
-          <p><span>Date : </span>{{this.ticketImpression!.date_heure | date: 'dd/MM/yyyy A hh:mm:ss'}}</p>
-          <p><span>Nom du beneficiaire : </span>{{this.patientCorrespondant!.nom}}</p>
+          <p><span>{{'tickets.form.label1' | translate}}</span>{{this.ticketImpression!.idFileAttente}}</p>
+          <p><span>{{'tickets.form.label2' | translate}}</span>{{this.ticketImpression!.idUnique}}</p>
+          <p><span>{{'tickets.form.label3' | translate}}</span>{{this.ticketImpression!.date_heure | date: 'dd/MM/yyyy A hh:mm:ss'}}</p>
+          <p><span>{{'tickets.form.label4' | translate}}</span>{{this.patientCorrespondant!.nom}}</p>
           <p class="barCode pt-2 pb-1">
               <i class="fa fa-barcode fa-4x" aria-hidden="true"></i>
               <i class="fa fa-barcode fa-4x" aria-hidden="true"></i>
