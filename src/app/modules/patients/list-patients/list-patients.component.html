@@ -45,7 +45,7 @@
                   <!-- birthday Column -->
                   <ng-container matColumnDef="anniversaire">
                     <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{"patient.table.title3" | translate}} </th>
-                    <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.dateNaissance}} </td>
+                    <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.dateNaissance | date: 'dd/MM/yyyy'}} </td>
                   </ng-container>
               
                   <!-- sexe Column -->
@@ -82,9 +82,11 @@
                                 <span>...</span>
                             </button>
                             <div class="dropdown-menu" aria-labelledby="triggerId">
-                                <button class="dropdown-item nav-link" [routerLink]="['new-patient']" title="{{'patient.table.actions.link1' | translate}}">
-                                    <i class="fa fa-map-pin" aria-hidden="true"></i>
-                                    <span>{{'patient.table.actions.link1' | translate}}</span>
+                                
+                                <button class="dropdown-item nav-link" title="{{'patient.table.actions.link1' | translate}}"
+                                  type="button" data-toggle="modal" data-target="#modelTicket" (click) = "setIdPersonne(element.id, element.nom)">
+                                  <i class="fa fa-map-pin" aria-hidden="true"></i>
+                                  <span>{{'patient.table.actions.link1' | translate}}</span>
                                 </button>
                                 <button class="dropdown-item nav-link" [routerLink]="['new-patient']" title="{{'patient.table.actions.link3' | translate}}">
                                     <i class="fa fa-eye text-secondary" aria-hidden="true"></i>
