@@ -7,7 +7,7 @@
             },
             "nav-left":{
                 "nav-search-bar":"Search",
-                "nav-link1":"Patients",
+                "nav-link1":"{{libelle}}",
                 "nav-link1-item1":"Search",
                 "nav-link1-item2":"Creat",
                 "nav-link1-item3":"Update",
@@ -38,17 +38,22 @@
 
         }
     },
+    "lists":{
+        "title":"listing",
+        "button1":"Print",
+        "button2":"close"
+    },
     "patient":{
         "text":"Patients retrouvé(e)s",
         "search-bar":"search",
         "table":{
-            "title1":"Nom",
-            "title2":"Prénom",
-            "title3":"Date Naissance",
-            "title4":"Sexe",
+            "title1":"Name",
+            "title2":"Surname",
+            "title3":"Birthday",
+            "title4":"Sex",
             "title5":"EMail",
-            "title6":"Adresse",
-            "title7":"Téléphone",
+            "title6":"Adress",
+            "title7":"Phone",
             "title8":"Actions",
             "actions":{
                 "link1":"Orienter",
@@ -56,6 +61,51 @@
                 "link3":"View",
                 "link4":"Delete"
             }
+        },
+        "form":{
+            "text1":"Name is requied",
+            "text2":"Surname is requied",
+            "text3":"Birthday is requied",
+            "text4":"mail address is requied is requied"
+        } 
+    },
+    "services":{
+        "table":{
+            "title1":"Libel",
+            "title2":"Status",
+            "title3":"Last modification's date",
+            "title4":"Allocation's date",
+            "title5":"Date end"
+        },
+        "form":{
+            "label1":"Libel",
+            "label2":"Status",
+            "label3":"Last modification's date",
+            "text1":"Libel is requied",
+            "text2":"Status is requied",
+            "text3":"the Last modification's date is requied"
+        }
+    },
+    "tickets":{
+        "table":{
+            "title1":"Id",
+            "title2":"Unique Id",
+            "title3":"last modification Date / time ",
+            "title4":"Id in the queue",
+            "title5":"Id person",
+            "title6":"Status"
+        },
+        "form":{
+            "label1":"Service's name : ",
+            "label2":"ticket unique id : ",
+            "label3":"Date : ",
+            "label4":"Recipient's name : ",
+            "label5":"ticket : ",
+            "label6":"Name : ",
+            "text1":"Customers management software"
+        },
+        "panel":{
+            "text1":"Here are all news Here are all news Here are all news Here are all news"
         }
     },
     "theme":{

@@ -1,6 +1,7 @@
 <div id="mainSection" class="d-flex flex-column justify-content-around">
     <div class="title">
-        <h2>Listing des patients</h2>
+        <h2>{{"lists.title" | translate}} patients</h2>
+        
     </div>
     <div class="card container-fluid" >
         <div class='card-hearder pt-3' >
@@ -8,7 +9,7 @@
                 <div class="form-inline mr-3">
                     <form class="example-form">
                         <mat-form-field class="example-full-width" appearance="fill">
-                          <mat-label class="searchBar">Rechercher</mat-label>
+                          <mat-label class="searchBar">{{'patient.search-bar' | translate}}</mat-label>
                           <input type="text" matInput aria-label="Rechercher" [formControl]="myControl" [matAutocomplete]="auto">
                           <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
                             <mat-option *ngFor="let option of filteredOptions" [value]="option" (onSelectionChange)="rechercherListingPersonne(option)">
@@ -31,14 +32,14 @@
               
                   <!-- nom Column -->
                   <ng-container matColumnDef="nom">
-                    <th class="text-dark containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{"patient.table.title1" | translate}} </th>
-                    <td class="text-dark text-left containCell" mat-cell *matCellDef="let element"> {{element.nom}} </td>
+                    <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{"patient.table.title1" | translate}} </th>
+                    <td class="text-dark text-center containCell" mat-cell *matCellDef="let element"> {{element.nom}} </td>
                   </ng-container>
               
                   <!-- prenom Column -->
                   <ng-container matColumnDef="prenom">
-                    <th class="text-dark containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{"patient.table.title2" | translate}} </th>
-                    <td class="text-dark text-left containCell" mat-cell *matCellDef="let element"> {{element.prenom}} </td>
+                    <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{"patient.table.title2" | translate}} </th>
+                    <td class="text-dark text-center containCell" mat-cell *matCellDef="let element"> {{element.prenom}} </td>
                   </ng-container>
               
                   <!-- birthday Column -->
@@ -105,7 +106,7 @@
                   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
                 </table>
-                <mat-paginator style="background-color: rgba(126, 169, 126, 0.79);" [pageSizeOptions]="[5, 10, 20]"
+                <mat-paginator class="bg-light" [pageSizeOptions]="[5, 10, 20]"
                                showFirstLastButtons
                                aria-label="Select page of periodic elements">
                 </mat-paginator>

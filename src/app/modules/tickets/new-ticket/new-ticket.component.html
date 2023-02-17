@@ -24,17 +24,17 @@
                         <img src="../../../../assets/img/logoNotep.png" alt="" width="40px">
                         <h2>Noped consulting</h2>
                     </div>
-                    <small>logiciel de gestion client</small>
+                    <small>{{'tickets.form.text1' | translate}}</small>
                 </div>
                 <div class="objetTicket pt-3 pb-3">
                     <h3>Ticket de validation service</h3>
                 </div>
                 <div id="filigramme">
                     <div id="ticketContent">
-                        <p><span>Intitule du service : </span>{{this.libelleService}}</p>
-                        <p><span>id unique du ticket : </span>{{this._ticket.idUnique}}</p>
-                        <p><span>Date : </span>{{this._ticket.date_heure | date: 'dd/MM/yyyy A hh:mm:ss'}}</p>
-                        <p><span>Nom du beneficiaire : </span>{{this.nomPersonne}}</p>
+                        <p><span>{{'tickets.form.label1' | translate}}</span>{{this.libelleService}}</p>
+                        <p><span>{{'tickets.form.label2' | translate}}</span>{{this._ticket.idUnique}}</p>
+                        <p><span>{{'tickets.form.label3' | translate}}</span>{{this._ticket.date_heure | date: 'dd/MM/yyyy A hh:mm:ss'}}</p>
+                        <p><span>{{'tickets.form.label4' | translate}}</span>{{this.nomPersonne}}</p>
                         <p class="barCode pt-2 pb-1">
                             <i class="fa fa-barcode fa-4x" aria-hidden="true"></i>
                             <i class="fa fa-barcode fa-4x" aria-hidden="true"></i>
@@ -46,14 +46,14 @@
         </div>
         <div class="modal-footer w-100">
             <div class="actionButton">
-                <button class="btn" data-dismiss="modal" routerLink="../list-patients" *ngIf="step == 1" (click)="removeData()">Annuler</button>
-                <button class="btn" *ngIf="step == 2" (click)="previousStep()">precedent</button>
+                <button class="btn" data-dismiss="modal" routerLink="../list-patients" *ngIf="step == 1" (click)="removeData()">{{'lists.button3' | translate}}</button>
+                <button class="btn" *ngIf="step == 2" (click)="previousStep()">{{'lists.button4' | translate}}</button>
                 <button class="btn" routerLink="../list-patients" data-dismiss="modal" *ngIf="step == 2"
                      [useExistingCss]="true"
                      styleSheetFile="assets/css/ticketPrint.scss"
                      printSectionId="ticketView"
                      ngxPrint (click)="removeData()">
-                     Imprimer
+                     {{'lists.button1' | translate}}
                 </button>
                 <button type="submit" class="btn" *ngIf="step == 1">{{btnLibelle}}</button>
             </div>
