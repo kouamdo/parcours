@@ -1,0 +1,75 @@
+<div id="mainSection">
+    <div class="card block">
+        <div class="card-header pt-4 pb-4 entete">{{ titre }}</div>
+        <div class="card-body">
+            <form [formGroup]="forme" (ngSubmit)="onSubmit(forme.value)" *ngIf="forme" >
+                <div class="">
+                    <div class="">
+                        <div class="form-group">
+                            <div>
+                                <div class="champs">
+                                    <label for="libelle" class="label">
+                                        {{'missions.table.title1' | translate}}
+                                    </label>
+                                    <input type="text" formControlName="libelle" name="libelle" id="libelle"  placeholder="{{'missions.table.title1' | translate}}"  class="form-control" required>
+                                </div>
+                                <div  *ngIf="submitted && f['libelle'].errors"  class="alert alert-danger" >
+                                    <div *ngIf="f['libelle'].errors['required']">{{'missions.form.text1' | translate}}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div>
+                                <div class="champs">
+                                    <label for="description" class="label" >
+                                        {{'missions.table.title2' | translate}}
+                                    </label>
+                                    <input  type="text" formControlName="description"  name="description" id="description" placeholder="{{'missions.table.title2' | translate}}" value="" required class="form-control">
+                                </div>
+                                <div  *ngIf="submitted && f['description'].errors"  class="alert alert-danger" >
+                                    <div *ngIf="f['description'].errors['required']">{{'missions.form.text2' | translate}}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div>
+                                <div class="champs">
+                                    <label for="etat" class="label" >
+                                        {{'missions.table.title3' | translate}}
+                                    </label>
+                                    <input  type="text" formControlName="etat"  name="etat" id="etat" placeholder="{{'missions.table.title3' | translate}}" value="" required class="form-control">
+                                </div>
+                                <div  *ngIf="submitted && f['etat'].errors"  class="alert alert-danger" >
+                                    <div *ngIf="f['etat'].errors['required']">{{'missions.form.text3' | translate}}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="champs">
+                                <label  for="dateCreation"  class="label" >
+                                    {{'missions.table.title4' | translate}}
+                                </label>
+                                <input type="date" formControlName="dateCreation" name="dateCreation" id="dateCreation" placeholder="{{'missions.table.title4' | translate}}" class="form-control" >
+                            </div>
+                            <div  *ngIf="submitted && f['dateCreation'].errors"  class="alert alert-danger" >
+                                <div *ngIf="f['dateCreation'].errors['required']">{{'missions.form.text4' | translate}}</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="champs">
+                                <label  for="dateModification"  class="label" >
+                                    {{'missions.table.title5' | translate}}
+                                </label>
+                                <input type="date" formControlName="dateModification" name="dateModification" id="dateModification" placeholder="{{'missions.table.title5' | translate}}" class="form-control" >
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="actionButton">
+                    <button class="btn" routerLink="../list-missions">{{'lists.button2' | translate}}</button>
+                    <button type="submit" class="btn">{{btnLibelle}}</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

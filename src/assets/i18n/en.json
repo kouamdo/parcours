@@ -111,6 +111,37 @@
             "text1":"Here are all news Here are all news Here are all news Here are all news"
         }
     },
+    "attributs":{
+        "table":{
+            "title1":"title",
+            "title2":"Description",
+            "title3":"Status",
+            "title4":"Date Creation",
+            "title5":"Date Modification",
+            "title6":"Type"
+        },
+        "form":{
+            "text1":"Le libelle est obligatoire.",
+            "text2":"L'etat est obligatoire.",
+            "text3":"La date de derniere modification est obligatoire."
+        }
+    },
+    "missions":{
+        "table":{
+            "title1":"Libelle",
+            "title2":"Description",
+            "title3":"Etat",
+            "title4":"Date Creation",
+            "title5":"Date Modification"
+        },
+        "form":{
+            "text1":"Le titre est obligatoire.",
+            "text2":"La description est obligatoire.",
+            "text3":"L'etat est obligatoire.",
+            "text4":"La date de derniere modification est obligatoire.",
+            "text5":"Le type est obligatoire."
+        }
+    },
     "theme":{
         "libelle":"theme"
     },
