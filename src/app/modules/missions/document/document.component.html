@@ -1,1 +1,93 @@
-<p>document works!</p>
+<div id="mainSection">
+    <div class="card block">
+        <div class="card-header pt-4 pb-4 entete">{{ titre }}</div>
+        <div class="card-body">
+            <form [formGroup]="forme" (ngSubmit)="onSubmit(forme.value)" *ngIf="forme" >
+                <div class="">
+                    <div class="">
+                        <div class="form-group">
+                            <div>
+                                <div class="champs">
+                                    <label for="titre" class="label">
+                                        {{'document.table.title1' | translate}}
+                                    </label>
+                                    <input type="text" formControlName="titre" name="titre" id="titre"  placeholder="{{'document.table.title1' | translate}}"  class="form-control" required>
+                                </div>
+                                <div  *ngIf="submitted && f['titre'].errors"  class="alert alert-danger" >
+                                    <div *ngIf="f['titre'].errors['required']">{{'document.form.text1' | translate}}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div>
+                                <div class="champs">
+                                    <label for="description" class="label" >
+                                        {{"document.table.title2" | translate}}
+                                    </label>
+                                    <textarea type="textarea" formControlName="description" name="description" id="description" placeholder="{{'document.table.title2' | translate}}" class="form-control"  required></textarea>
+                                </div>
+                                <div  *ngIf="submitted && f['description'].errors"  class="alert alert-danger" >
+                                    <div *ngIf="f['description'].errors['required']">{{'document.form.text2' | translate}}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="champs">
+                                <label  for="missions" class="label">
+                                    {{"document.table.title3" | translate}}
+                                </label>
+                                <div class="dropdown w-100">
+                                    <button class="select dropdown-toggle btn" name="missions" id="missions" type="button" id="triggerId" data-toggle="dropdown" aria-haspopup="true"
+                                            aria-expanded="false">
+                                        {{'document.table.title5' | translate}}
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="triggerId">
+                                        <label class="dropdown-item" for="missions" *ngFor="let missions of (mission$ | async) as mission let i=index">
+                                            <input value=""  type="checkbox" formArrayName="_missions" [value]="missions.libelle" name="missions" id="missions" (change)="onCheckMissionChange($event)">
+                                            {{missions.libelle}}
+                                        </label>
+                                    </div>
+                                </div>  
+                            </div>
+                            <div  *ngIf="submitted && f['missions'].errors"  class="alert alert-danger" >
+                                <div *ngIf="f['missions'].errors['required']">{{'document.form.text3' | translate}}</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="champs">
+                                <label  for="attributs" class="label">
+                                    {{"document.table.title4" | translate}}
+                                </label>
+                                <div class="dropdown w-100">
+                                    <button class="select dropdown-toggle btn" name="attributs" id="attributs" type="button" id="triggerId" data-toggle="dropdown" aria-haspopup="true"
+                                            aria-expanded="false">
+                                        {{'document.table.title6' | translate}}
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="triggerId">
+                                        <label class="dropdown-item" for="attributs" *ngFor="let attributs of (attrubut$ | async) as attrubut let i=index">
+                                            <input value=""  type="checkbox" formArrayName="_attributs" [value]="attributs.titre" name="attributs" id="attributs" (change)="onCheckAttributChange($event)">
+                                            {{attributs.titre}}
+                                        </label>
+                                    </div>
+                                </div>  
+                            </div>
+                            <div class="result">
+                                <ul class="list-group">
+                                    <!-- <li class="list-group-item resultElt" *ngFor="let attributs of _attrubuts">Active item</li> -->
+                                </ul>
+                            </div>
+                            <div  *ngIf="submitted && f['attributs'].errors"  class="alert alert-danger" >
+                                <div *ngIf="f['attributs'].errors['required']">{{'document.form.text4' | translate}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="actionButton">
+                    <button class="btn" routerLink="../list-documents">{{'lists.button2' | translate}}</button>
+                    <button type="submit" class="btn">{{btnLibelle}}</button>
+                </div>
+            </form>
+        </div>
+        <p class="card w-100 pt-5">{{ forme.value | json }}</p>
+    </div>
+</div>

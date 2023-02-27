@@ -69,7 +69,7 @@
             "text1":"Le nom est obligatoire.",
             "text2":"Le prénom est obligatoire.",
             "text3":"La date de naissance est obligatoire.",
-            "text4":"L'addresse mail est obligatoire. est obligatoire."
+            "text4":"L'addresse mail est obligatoire."
         }       
     },
     "services":{
@@ -143,6 +143,24 @@
             "text4":"La date de creation est obligatoire.",
             "text5":"Le type est obligatoire."
         }
+    },
+    "document":{
+        "text":"documents retrouvé(e)s",
+        "search-bar":"Rechercher",
+        "table":{
+            "title1":"Titre",
+            "title2":"Description",
+            "title3":"Missions",
+            "title4":"Attributs",
+            "title5":"Selectionner les missions",
+            "title6":"Selectionner les attributs"
+        },
+        "form":{
+            "text1":"Le Titre est obligatoire.",
+            "text2":"La Description est obligatoire.",
+            "text3":"Les Missions sont obligatoires.",
+            "text4":"Les attributs sont obligatoires."
+        }       
     },
     "theme":{
         "libelle":"theme"
