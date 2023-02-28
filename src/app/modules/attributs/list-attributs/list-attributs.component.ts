@@ -39,7 +39,7 @@ export class ListAttributsComponent implements OnInit {
 
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private translate: TranslateService,private router:Router, private serviceAttribut:AttributService, private _liveAnnouncer: LiveAnnouncer,) { }
+  constructor(private translate: TranslateService,private router:Router, private serviceAttribut:AttributService, private _liveAnnouncer: LiveAnnouncer) { }
 
   ngOnInit(): void {
     this.getAllAttributs().subscribe(valeurs => {

@@ -7,7 +7,7 @@
 .searchBlock{
     width: 100%;
     display: flex;
-    justify-content: flex-end;
+    justify-content: flex-e nd;
     padding-right: 10px;
     margin-right: 8px;
     button{
@@ -106,14 +106,6 @@ mat-form-field:focus{
     background-color: transparent;
     padding: 0;
     margin: 0;
-}
-.searchBar {
-    position: relative;
-    top: -2px;
-    padding: 0;
-    margin: 0;
-    color: #7ea97e96;
-    border: none;
 }
 .searchBar {
     position: relative;
