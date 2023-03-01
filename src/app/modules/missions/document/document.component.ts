@@ -110,6 +110,8 @@ export class DocumentComponent implements OnInit {
     const _attributs = (this.forme.controls['_attributs'] as FormArray);
     if (event.target.checked) {
       _attributs.push(new FormControl(event.target.value));
+      
+      this.addSelectedAttribut(this.idAttribut);
     } else {
       const index = _attributs.controls
       .findIndex(x => x.value === event.target.value);
@@ -117,20 +119,29 @@ export class DocumentComponent implements OnInit {
     }
     this._attributs = _attributs  
   }
+
   getAttributId(idAttribut: string) {
     this.idAttribut = idAttribut
   }
+
   addSelectedAttribut(idAttribut: string) {
-    this.AttributData.subscribe(
-      value=>{
-        //value.push(this.serviceAttribut.getAttributById(this.idAttribut));  
+    console.log('attribut :' + idAttribut);
+    this.serviceAttribut.getAttributById(idAttribut).subscribe(
+      val => {
+        console.log('Iattribut :' + val.id);
+        this.ELEMENTS_TABLE = this.dataSource.data;
+        this.ELEMENTS_TABLE.push(val);
+        this.dataSource.data = this.ELEMENTS_TABLE;
       }
     )
-    this.idAttribut = idAttribut
+    
+    
   }
+
   removeSelectedAttribut(idAttribut: string) {
     this.idAttribut = idAttribut
   }
+
   onSubmit(documentInput:any){
     this.submitted=true;
     if(this.forme.invalid) return;
