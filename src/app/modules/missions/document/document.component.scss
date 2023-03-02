@@ -138,12 +138,9 @@ mat-form-field:focus{
 }
 .containHead{
     padding: 1% 0;
-    padding-left: 1%;
-    text-align: center;
 }
 .containCell{
     padding-top: 20px;
-    text-align: center;
 }
 td{
     font-size: 13px;
@@ -151,6 +148,24 @@ td{
 th{
     background-color: rgba(126, 169, 126, 0.2);
     color: #7ea97e !important;
+}
+.listAttr{
+    width: 100%;
+    padding: 20px 5px;
+    background-color: #b3b3b30f;
+    margin-bottom: 10px;
+    border-radius: 3px;
+    flex-wrap: wrap;
+}
+.listAttr ul{
+    flex-wrap: wrap;
+}
+.listAttr li{
+    padding: 5px;
+    background-color: #7ea97e1d;
+    color: #7ea97e;
+    margin: 5px;
+    border-radius: 10px;
 }
 @media screen and (max-width: 1200px) {
     .title h2{

@@ -9,7 +9,6 @@ import { Observable, EMPTY } from 'rxjs';
 import { IAttributs } from 'src/app/modele/attributs';
 import { IDocument } from 'src/app/modele/document';
 import { IMission } from 'src/app/modele/mission';
-import { TypeTicket } from 'src/app/modele/type-ticket';
 import { AttributService } from 'src/app/services/attributs/attribut.service';
 import { DocumentService } from 'src/app/services/documents/document.service';
 import { MissionsService } from 'src/app/services/missions/missions.service';
@@ -32,18 +31,12 @@ export class DocumentComponent implements OnInit {
   submitted: boolean=false;
   idMission : string = "";
   idAttribut : string = "";
+
   // variables attributs, pour afficher le tableau d'attributs sur l'IHM
-  attrubuts$:Observable<IAttributs>=EMPTY;
-  typeInt = TypeTicket.Int;
-  typeString = TypeTicket.String;
-  typeDouble = TypeTicket.Double;
-  typeFloat = TypeTicket.Float;
-  typeBoolean = TypeTicket.Boolean;
-  typeDate = TypeTicket.Date;
   myControl = new FormControl<string | IAttributs>('');
   ELEMENTS_TABLE: IAttributs[] = [];
   filteredOptions: IAttributs[] | undefined;
-  displayedColumns: string[] = ['titre', 'description', 'type', 'actions'];
+  displayedColumns: string[] = ['actions','titre', 'description', 'type'];
   dataSource = new MatTableDataSource<IAttributs>(this.ELEMENTS_TABLE);
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
@@ -111,10 +104,11 @@ export class DocumentComponent implements OnInit {
     if (event.target.checked) {
       _attributs.push(new FormControl(event.target.value));
       
-      this.addSelectedAttribut(this.idAttribut);
+      this.ajoutSelectionAttribut(this.idAttribut);
     } else {
       const index = _attributs.controls
       .findIndex(x => x.value === event.target.value);
+      this.retirerSelectionAttribut(index)
       _attributs.removeAt(index);
     }
     this._attributs = _attributs  
@@ -124,7 +118,7 @@ export class DocumentComponent implements OnInit {
     this.idAttribut = idAttribut
   }
 
-  addSelectedAttribut(idAttribut: string) {
+  ajoutSelectionAttribut(idAttribut: string) {
     console.log('attribut :' + idAttribut);
     this.serviceAttribut.getAttributById(idAttribut).subscribe(
       val => {
@@ -133,13 +127,21 @@ export class DocumentComponent implements OnInit {
         this.ELEMENTS_TABLE.push(val);
         this.dataSource.data = this.ELEMENTS_TABLE;
       }
-    )
-    
-    
+    )    
   }
 
-  removeSelectedAttribut(idAttribut: string) {
-    this.idAttribut = idAttribut
+  retirerSelectionAttribut(index: number) {
+    this.ELEMENTS_TABLE = this.dataSource.data;
+    this.ELEMENTS_TABLE.splice(index);
+    this.dataSource.data = this.ELEMENTS_TABLE;
+    // this.serviceAttribut.getAttributById(idAttribut).subscribe(
+    //   val => {
+    //     console.log('Iattribut :' + val.id);
+    //     this.ELEMENTS_TABLE = this.dataSource.data;
+    //     this.ELEMENTS_TABLE.splice(val);
+    //     this.dataSource.data = this.ELEMENTS_TABLE;
+    //   }
+    // )
   }
 
   onSubmit(documentInput:any){
