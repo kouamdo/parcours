@@ -18,12 +18,6 @@ import { AttributService } from 'src/app/services/attributs/attribut.service';
 })
 export class ListAttributsComponent implements OnInit {
   attrubuts$:Observable<IAttributs>=EMPTY;
-  typeInt = TypeTicket.Int;
-  typeString = TypeTicket.String;
-  typeDouble = TypeTicket.Double;
-  typeFloat = TypeTicket.Float;
-  typeBoolean = TypeTicket.Boolean;
-  typeDate = TypeTicket.Date;
 
   myControl = new FormControl<string | IAttributs>('');
  

@@ -22,9 +22,7 @@ export class DocumentComponent implements OnInit {
   
   document : IDocument|undefined;
   missionData : IMission[] | undefined;
-  AttributData : Observable<IAttributs[]>=EMPTY;
   mission$:Observable<IMission[]>=EMPTY;
-  attrubut$:Observable<IAttributs[]>=EMPTY;
   forme: FormGroup;
   btnLibelle: string="Ajouter";
   titre: string="Ajouter un nouveau document";
@@ -37,7 +35,8 @@ export class DocumentComponent implements OnInit {
   ELEMENTS_TABLE: IAttributs[] = [];
   filteredOptions: IAttributs[] | undefined;
   displayedColumns: string[] = ['actions','titre', 'description', 'type'];
-  dataSource = new MatTableDataSource<IAttributs>(this.ELEMENTS_TABLE);
+  dataSourceAttribut = new MatTableDataSource<IAttributs>(this.ELEMENTS_TABLE);
+  dataSourceAttributResultat = new MatTableDataSource<IAttributs>();
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -49,13 +48,16 @@ export class DocumentComponent implements OnInit {
       _attributs :  new FormArray([]),
       titre: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
       description: [''],
-      missions: ['', Validators.required],
-      attributs: ['', Validators.required]
+      missions: [],
+      attributs: []
     });
   }
   ngOnInit(): void {
     this.mission$ = this.getAllMissions();
-    this.attrubut$ = this.getAllAttributs();
+    this.getAllAttributs().subscribe(valeurs => {
+      this.dataSourceAttribut.data = valeurs;
+    });
+
     let IdDocument = this.infosPath.snapshot.paramMap.get('IdDocument');
     if((IdDocument != null) && IdDocument!==''){
       this.btnLibelle="Modifier";
@@ -103,7 +105,6 @@ export class DocumentComponent implements OnInit {
     const _attributs = (this.forme.controls['_attributs'] as FormArray);
     if (event.target.checked) {
       _attributs.push(new FormControl(event.target.value));
-      
       this.ajoutSelectionAttribut(this.idAttribut);
     } else {
       const index = _attributs.controls
@@ -123,25 +124,19 @@ export class DocumentComponent implements OnInit {
     this.serviceAttribut.getAttributById(idAttribut).subscribe(
       val => {
         console.log('Iattribut :' + val.id);
-        this.ELEMENTS_TABLE = this.dataSource.data;
+        this.ELEMENTS_TABLE = this.dataSourceAttributResultat.data;
         this.ELEMENTS_TABLE.push(val);
-        this.dataSource.data = this.ELEMENTS_TABLE;
+        this.dataSourceAttributResultat.data = this.ELEMENTS_TABLE;
       }
     )    
   }
 
   retirerSelectionAttribut(index: number) {
-    this.ELEMENTS_TABLE = this.dataSource.data;
-    this.ELEMENTS_TABLE.splice(index);
-    this.dataSource.data = this.ELEMENTS_TABLE;
-    // this.serviceAttribut.getAttributById(idAttribut).subscribe(
-    //   val => {
-    //     console.log('Iattribut :' + val.id);
-    //     this.ELEMENTS_TABLE = this.dataSource.data;
-    //     this.ELEMENTS_TABLE.splice(val);
-    //     this.dataSource.data = this.ELEMENTS_TABLE;
-    //   }
-    // )
+    const _attributs = (this.forme.controls['_attributs'] as FormArray);
+    this.ELEMENTS_TABLE = this.dataSourceAttributResultat.data;
+    this.ELEMENTS_TABLE.splice(index, 1); // je supprime un seul element du tableau a la position 'index'
+    _attributs.removeAt(index);
+    this.dataSourceAttributResultat.data = this.ELEMENTS_TABLE;
   }
 
   onSubmit(documentInput:any){
@@ -166,30 +161,24 @@ export class DocumentComponent implements OnInit {
   get f(){
     return this.forme.controls;
   }
-  private getAllDocuments(){
-    return this.serviceDocument.getAllDocuments();
-  }
   private getAllMissions(){
     return this.serviceMission.getAllMissions();
   }
   private getAllAttributs(){
     return this.serviceAttribut.getAllAttributs();
   }
-  private getListAttributs(){
-    return this.forme.controls['_attributs'] as FormArray;
-  }
   displayFn(attribue: IAttributs): string {
     return attribue && attribue.titre ? attribue.titre : '';
   }
 
   ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+    this.dataSourceAttribut.paginator = this.paginator;
+    this.dataSourceAttribut.sort = this.sort;
   }
 
   public rechercherListingAttribut(option: IAttributs){
     this.serviceAttribut.getAttributsByTitre(option.titre.toLowerCase()).subscribe(
-        valeurs => {this.dataSource.data = valeurs;}
+        valeurs => {this.dataSourceAttribut.data = valeurs;}
     )
   }
   

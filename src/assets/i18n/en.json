@@ -145,6 +145,7 @@
     "document":{
         "text":"documents retrouvé(e)s",
         "search-bar":"Rechercher",
+        "title1":"Affichage des resuttats",
         "table":{
             "title1":"Titre",
             "title2":"Description",

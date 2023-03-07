@@ -54,39 +54,25 @@
         font-size: 15px;
     }
 }
-#tableBlock{
+.tableBlock{
     width: 100%;
     div{
         width: 100%;
     }
     table{
-        #actions{
+        .actions{
             font-size: 12px;
-            .dropdown-toggle{
-                padding: 0;
-                margin-left: 10px;
-                color: #7ea97e;
-                span{
-                    position: relative;
-                    bottom: 6px;
-                    font-size: 28px;
-                    margin-right: 5px;
-                }
-            }
-            div{
-                button{
-                    color: #7ea97e;
-                    display: flex;
-                    align-items: center;
-                    justify-content: space-between;
-                    span{
-                        width: 70%;
-                        text-align: left;
-                    }
-                }
-            }
         }
     }
+}
+.actions button{
+    font-size: 10px;
+}
+.result h2{
+    opacity: 0.6;
+}
+#tableList{
+    margin: 10px 0 30px 0;
 }
 mat-form-field{
     padding: 0;

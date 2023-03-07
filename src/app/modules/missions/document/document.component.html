@@ -43,14 +43,11 @@
                                     </button>
                                     <div class="dropdown-menu" aria-labelledby="triggerId">
                                         <label class="dropdown-item" for="missions" *ngFor="let missions of (mission$ | async) as mission let i=index">
-                                            <input value=""  type="checkbox" formArrayName="_missions" [value]="missions.libelle" name="missions" id="missions" (change)="onCheckMissionChange($event)">
+                                            <input  type="checkbox" required formArrayName="_missions" [value]="missions.libelle" name="missions" id="missions" (change)="onCheckMissionChange($event)">
                                             {{missions.libelle}}
                                         </label>
                                     </div>
                                 </div>  
-                            </div>
-                            <div  *ngIf="submitted && f['missions'].errors"  class="alert alert-danger" >
-                                <div *ngIf="f['missions'].errors['required']">{{'document.form.text3' | translate}}</div>
                             </div>
                         </div>
                         <div class="form-group">
@@ -60,19 +57,19 @@
                                 </label>
                                 <div class="dropdown w-100">
                                 <!-- Button trigger modal -->
-                                    <button class="select btn" name="attributs" id="attributs" type="button" id="triggerId" data-toggle="modal" data-target="#modelId">
+                                    <button class="select btn" name="attributs" id="attributs" type="button" id="triggerId" data-toggle="modal" data-target="#modalAttributs">
                                         {{'document.table.title6' | translate}}
                                     </button>
                                 </div>
                                 <!-- Modal -->
-                                <div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+                                <div class="modal fade" id="modalAttributs" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
                                     <div class="modal-dialog modal-xl" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
                                                 <h5 class="modal-title">{{'document.table.title6' | translate}}</h5>
                                                 <div class='card-hearder pt-3' >
                                                 </div>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <button type="button" class="close text-danger" data-dismiss="modal" aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
                                             </div>
@@ -84,8 +81,8 @@
                                                                 <mat-form-field class="example-full-width" appearance="fill">
                                                                   <mat-label class="searchBar">{{'patient.search-bar' | translate}}</mat-label>
                                                                   <input type="text" matInput aria-label="Rechercher" [formControl]="myControl" [matAutocomplete]="auto">
-                                                                  <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
-                                                                    <mat-option *ngFor="let option of filteredOptions" [value]="option" (onSelectionChange)="rechercherListingAttribut(option)">
+                                                                  <mat-autocomplete class="blockAutocomplate" #auto="matAutocomplete" [displayWith]="displayFn">
+                                                                    <mat-option class="options" *ngFor="let option of filteredOptions" [value]="option" (onSelectionChange)="rechercherListingAttribut(option)">
                                                                       {{option.titre}}
                                                                     </mat-option>
                                                                   </mat-autocomplete>
@@ -94,17 +91,84 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div *ngFor="let attributs of (attrubut$ | async) as attrubut let i=index">
-                                                    <label for="attributs">
-                                                        <input value="" type="checkbox" formArrayName="_attributs" [value]="attributs.titre" name="attributs" id="attributs" (click)="getAttributId(attributs.id)" (change)="onCheckAttributChange($event)">
-                                                        {{attributs.titre}}
-                                                    </label>
+
+                                                <!-- tableau listing des attributs -->
+                                                
+                                                <div class="card-body p-0 tableBlock" id="tableList">
+                                                    <div class='table-responsive w-100'>
+                                                        <table class='table table-sm table-centered table-striped table-bordered w-100' mat-table [dataSource]="dataSourceAttribut" matSort (matSortChange)="announceSortChange($event)">
+                                                        
+                                                            <!-- id Column -->
+                                                            <ng-container matColumnDef="id">
+                                                                <th class="text-dark containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'tickets.table.title1' | translate}} </th>
+                                                                <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.id}} </td>
+                                                            </ng-container>
+                                                        
+                                                            <!-- titre Column -->
+                                                            <ng-container matColumnDef="titre">
+                                                                <th class="text-dark containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'attributs.table.title1' | translate}} </th>
+                                                                <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.titre}} </td>
+                                                            </ng-container>
+                                                            
+                                                            <!-- description Column -->
+                                                            <ng-container matColumnDef="description">
+                                                                <th class="text-dark containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'attributs.table.title2' | translate}} </th>
+                                                                <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.description}} </td>
+                                                            </ng-container>
+                                                            
+                                                            <!-- etat Column -->
+                                                            <ng-container matColumnDef="etat">
+                                                                <th class="text-dark containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'attributs.table.title3' | translate}} </th>
+                                                                <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.etat}} </td>
+                                                            </ng-container>
+                                                            
+                                                            <!-- dateCreation Column -->
+                                                            <ng-container matColumnDef="dateCreation">
+                                                                <th class="text-dark containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'attributs.table.title4' | translate}} </th>
+                                                                <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.dateCreation | date: 'dd/MM/yyyy'}} </td>
+                                                            </ng-container>
+                                                            
+                                                            <!-- dateModification Column -->
+                                                            <ng-container matColumnDef="dateModification">
+                                                                <th class="text-dark containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'attributs.table.title5' | translate}} </th>
+                                                                <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.dateModification | date: 'dd/MM/yyyy'}} </td>
+                                                            </ng-container>
+
+                                                            <!-- type Column -->
+                                                            <ng-container matColumnDef="type">
+                                                                <th class="text-dark containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'attributs.table.title6' | translate}} </th>
+                                                                <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.type}} </td>
+                                                            </ng-container>
+
+                                                            <!-- Actions column -->
+                                                            <ng-container matColumnDef="actions">
+                                                                <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{"patient.table.title8" | translate}} </th>
+                                                                <td class="text-dark containCell" mat-cell *matCellDef="let element">
+                                                                    <div class="actions" class="">
+                                                                        <label style="width: 2px;" for="attributs">
+                                                                            <input type="checkbox" required formArrayName="_attributs" [value]="element.titre" name="attributs" id="attributs" (click)="getAttributId(element.id)" (change)="onCheckAttributChange($event)">
+                                                                        </label>
+                                                                    </div>
+                                                                </td>
+                                                            </ng-container>
+                                                            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                                                            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                                                        </table>
+                                                        <mat-paginator style="background-color: rgba(126, 169, 126, 0.79);" [pageSizeOptions]="[2, 5, 10, 20]"
+                                                                       showFirstLastButtons
+                                                                       aria-label="Select page of periodic elements">
+                                                        </mat-paginator>
+                                                    </div>
                                                 </div>
+                                                <!-- tableau affichage des resultats -->
                                                 <div class="result">
+                                                    <h2>
+                                                        {{'document.title1' | translate}}
+                                                    </h2>
                                                     <div class="card" >
-                                                        <div class="card-body p-0" id="tableBlock">
+                                                        <div class="card-body p-0 tableBlock" id="tableResultats">
                                                             <div class='table-responsive w-100 m-0'>
-                                                                <table class='table table-sm table-centered table-striped w-100' mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)">
+                                                                <table class='table table-sm table-centered table-striped w-100' mat-table [dataSource]="dataSourceAttributResultat" matSort (matSortChange)="announceSortChange($event)">
                                                                     <!-- titre Column -->
                                                                     <ng-container matColumnDef="titre">
                                                                         <th class="text-dark containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'attributs.table.title1' | translate}} </th>
@@ -124,10 +188,10 @@
                                                                     <ng-container matColumnDef="actions">
                                                                         <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{"patient.table.title8" | translate}} </th>
                                                                         <td class="text-dark containCell" mat-cell *matCellDef="let element;  let i=index">
-                                                                            <div id="actions">
-                                                                                <label for="attributs">
-                                                                                    <input type="checkbox" formControlName="attributs" [value]="element.titre" [checked]="true" name="attributs" id="attributs" (change)="retirerSelectionAttribut(i)">
-                                                                                </label>
+                                                                            <div class="actions">
+                                                                                <button class="btn p-0" name="attributs"  [value]="element.id" id="attributs" title="clicker pour annuler la selection" (click)="retirerSelectionAttribut(i)">
+                                                                                    <i class="fa fa-trash text-danger" aria-hidden="true"></i>
+                                                                                </button>
                                                                             </div>
                                                                         </td>
                                                                     </ng-container>
@@ -150,14 +214,11 @@
                                     </div>
                                 </div>
                             </div>
-                            <div  *ngIf="submitted && f['attributs'].errors"  class="alert alert-danger" >
-                                <div *ngIf="f['attributs'].errors['required']">{{'document.form.text4' | translate}}</div>
-                            </div>
                         </div>   
                         <!-- affichage list attributs selectiones -->
                         <div class="listAttr">
                             <ul class="nav d-flex align-items-center justify-content-start">
-                                <li class="nav-item" *ngFor="let listeAttributs of dataSource.data">
+                                <li class="nav-item" *ngFor="let listeAttributs of dataSourceAttributResultat.data">
                                     {{listeAttributs.titre}}
                                 </li>                               
                             </ul>
@@ -170,8 +231,8 @@
                 </div>
             </form>
         </div>
-        <!-- <p class="card w-100 pt-5">{{ forme.value | json }}</p>
+        <p class="card w-100 pt-5">{{ forme.value | json }}</p>
 
-        {{forme.value._attributs}} -->
+        {{forme.value._attributs}}
     </div>
 </div>

@@ -33,8 +33,8 @@ export class DocumentService {
     );        
   }
  
-   ajouterDocument(service:IDocument )
+   ajouterDocument(document:IDocument )
    {
-     return this.http.post("api/documents",service);
+     return this.http.post("api/documents",document);
    }
 }

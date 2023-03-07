@@ -1,6 +1,7 @@
 import { DatePipe } from "@angular/common";
 import { InMemoryDbService } from "angular-in-memory-web-api";
 import { IAttributs } from "../modele/attributs";
+import { IDocument } from "../modele/document";
 import { IFonctionnalites } from "../modele/fonctionnalites";
 import { IMenus } from "../modele/menus";
 import { IMission } from "../modele/mission";
@@ -85,6 +86,11 @@ export class InMemDBService implements InMemoryDbService{
           {id:"7", titre:"Groupe sangin", description:"Groupe sangin de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeString},
           {id:"8", titre:"cicatrice", description:"cicatrice de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeBoolean}
         ];
-        return{patients,services, menus, tickets, missions, attributs};
+        let documents:IDocument[]=[
+          {id:"1", titre:"ordonnance", description:"Document delivre par le medecin ou un infirmier de l'etablissement",
+           missions:[{id:"1", libelle:"fiche de soin", description:"fiche de soin est une mission", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990")}], 
+           attributs:[{id:"1", titre:"taille", description:"taille de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeDouble}]}
+        ];
+        return{patients, services, menus, tickets, missions, attributs, documents};
     }
 }
