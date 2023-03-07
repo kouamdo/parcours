@@ -44,7 +44,9 @@
         "button2":"Close",
         "button3":"Cancel",
         "button4":"Previous",
-        "button5":"No action yet"
+        "button5":"No action yet",
+        "button6":"validate",
+        "button7":"Edit"
     },
     "patient":{
         "text":"Patients retrouvé(e)s",

@@ -44,7 +44,9 @@
         "button2":"Retour",
         "button3":"Annuler",
         "button4":"Précédent",
-        "button5":"Aucune action"
+        "button5":"Aucune action",
+        "button6":"valider",
+        "button7":"Modifier"
     },
     "patient":{
         "text":"Patients retrouvé(e)s",

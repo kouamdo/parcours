@@ -56,8 +56,9 @@
                                     {{"document.table.title4" | translate}}
                                 </label>
                                 <div class="dropdown w-100">
+
                                 <!-- Button trigger modal -->
-                                    <button class="select btn" name="attributs" id="attributs" type="button" id="triggerId" data-toggle="modal" data-target="#modalAttributs">
+                                    <button class="select btn" name="attributs" type="button" id="triggerId" data-toggle="modal" data-target="#modalAttributs">
                                         {{'document.table.title6' | translate}}
                                     </button>
                                 </div>
@@ -208,7 +209,7 @@
                                                 </div>
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">{{'lists.button6' | translate}}</button>
                                             </div>
                                         </div>
                                     </div>
@@ -217,11 +218,12 @@
                         </div>   
                         <!-- affichage list attributs selectiones -->
                         <div class="listAttr">
-                            <ul class="nav d-flex align-items-center justify-content-start">
-                                <li class="nav-item" *ngFor="let listeAttributs of dataSourceAttributResultat.data">
-                                    {{listeAttributs.titre}}
-                                </li>                               
-                            </ul>
+                            <button type="button" class="btn p-0" data-toggle="modal" data-target="#modalAttributs" title="{{'lists.button7' | translate}}">
+                                <i class="fas fa-pen-square text-info"></i>
+                            </button>
+                            <span *ngFor="let listeAttributs of dataSourceAttributResultat.data">
+                                {{listeAttributs.titre | lowercase}}<span>, </span>
+                            </span>
                         </div>
                     </div>
                 </div>
@@ -231,8 +233,8 @@
                 </div>
             </form>
         </div>
-        <p class="card w-100 pt-5">{{ forme.value | json }}</p>
+        <!-- <p class="card w-100 pt-5">{{ forme.value | json }}</p>
 
-        {{forme.value._attributs}}
+        {{forme.value._attributs}} -->
     </div>
 </div>
