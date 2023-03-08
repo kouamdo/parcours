@@ -24,7 +24,7 @@ export class DocumentService {
     );
   }
   
-  getDocumentByLibelle(titre:string): Observable<IDocument[]> {
+  getDocumentByTitre(titre:string): Observable<IDocument[]> {
     return this.http.get<IDocument[]>('api/documents').pipe(
       map(x=>
         {

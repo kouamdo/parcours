@@ -1,10 +1,10 @@
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormGroup, FormControl, FormArray, FormBuilder, Validators } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Observable, EMPTY } from 'rxjs';
 import { IAttributs } from 'src/app/modele/attributs';
 import { IDocument } from 'src/app/modele/document';
@@ -14,11 +14,11 @@ import { DocumentService } from 'src/app/services/documents/document.service';
 import { MissionsService } from 'src/app/services/missions/missions.service';
 
 @Component({
-  selector: 'app-document',
-  templateUrl: './document.component.html',
-  styleUrls: ['./document.component.scss']
+  selector: 'app-new-form-document',
+  templateUrl: './new-form-document.component.html',
+  styleUrls: ['./new-form-document.component.scss']
 })
-export class DocumentComponent implements OnInit {
+export class NewFormDocumentComponent implements OnInit {
   
   document : IDocument|undefined;
   missionData : IMission[] | undefined;
@@ -190,3 +190,4 @@ export class DocumentComponent implements OnInit {
     }
   }
 }
+

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AttributsRoutingModule } from './modules/attributs/attributs-routing.module';
+import { DocumentsRoutingModule } from './modules/documents/documents-routing.module';
 import { MissionsRoutingModule } from './modules/missions/missions-routing.module';
 import { PatientsRoutingModule } from './modules/patients/patient-routing.module';
 import { ServicesRoutingModule } from './modules/services/services-routing.module';
@@ -21,7 +22,8 @@ const routes: Routes = [
     ServicesRoutingModule, 
     TicketsRoutingModule, 
     AttributsRoutingModule,
-    MissionsRoutingModule
+    MissionsRoutingModule,
+    DocumentsRoutingModule
   ],
   exports: [RouterModule]
 })

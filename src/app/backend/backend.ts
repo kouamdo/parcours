@@ -58,14 +58,16 @@ export class InMemDBService implements InMemoryDbService{
             {"fonction":"Service", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"Créer", "lien":"./service-nouveau", "bouton":"false"}  , {"nom":"Rechercher", "lien":"./list-services", "bouton":"false"}]},
             {"fonction":"Ticket", "icone":"fas fa-chart-pie", "actif":"", "elements":[{"nom":"Rechercher", "lien":"list-tickets", "bouton":"false"}, {"nom":"Afficher le panneau", "lien":"panneau-tickets", "bouton":"false"}]},
             {"fonction":"Attribut", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"Créer", "lien":"./attribut-nouveau", "bouton":"false"}  , {"nom":"Rechercher", "lien":"./list-attributs", "bouton":"false"}]},
-            {"fonction":"Mission", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"Créer", "lien":"./mission-nouveau", "bouton":"false"}  , {"nom":"Rechercher", "lien":"./list-missions", "bouton":"false"}  , {"nom":"Documents", "lien":"./document-nouveau", "bouton":"false"}]}
+            {"fonction":"Mission", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"Créer", "lien":"./mission-nouveau", "bouton":"false"}  , {"nom":"Rechercher", "lien":"./list-missions", "bouton":"false"}]},
+            {"fonction":"Documents", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"Créer model documents", "lien":"./document-nouveau", "bouton":"false"}, {"nom":"Rechercher", "lien":"./list-documents", "bouton":"false"}]}
           ]},
           {"idUser":"phil", "langue":"en","fonctionnalites":[
             {"fonction":"People", "icone":"fas fa-user-cog", "actif":"menu-close", "elements":[{"nom":"New", "lien":"patient-nouveau", "bouton":"false"}  , {"nom":"Search", "lien":"list-patients", "bouton":"false"}]},
             {"fonction":"Service", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"New", "lien":"./service-nouveau", "bouton":"false"}  , {"nom":"Search", "lien":"./list-services", "bouton":"false"}]},
             {"fonction":"Ticket", "icone":"fas fa-chart-pie", "actif":"", "elements":[{"nom":"Search", "lien":"list-tickets", "bouton":"false"}, {"nom":"View panel", "lien":"panneau-tickets", "bouton":"false"}]},
             {"fonction":"Attribut", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"New", "lien":"./attribut-nouveau", "bouton":"false"}  , {"nom":"Search", "lien":"./list-attributs", "bouton":"false"}]},
-            {"fonction":"Mission", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"New", "lien":"./mission-nouveau", "bouton":"false"}  , {"nom":"Search", "lien":"./list-missions", "bouton":"false"}  , {"nom":"Documents", "lien":"./document-nouveau", "bouton":"false"}]}
+            {"fonction":"Mission", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"New", "lien":"./mission-nouveau", "bouton":"false"}  , {"nom":"Search", "lien":"./list-missions", "bouton":"false"}]},
+            {"fonction":"Documents", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"New document's model", "lien":"./document-nouveau", "bouton":"false"}, {"nom":"Search", "lien":"./list-documents", "bouton":"false"}]}
           ]}
         ];
         let missions:IMission[]=[
@@ -87,9 +89,45 @@ export class InMemDBService implements InMemoryDbService{
           {id:"8", titre:"cicatrice", description:"cicatrice de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeBoolean}
         ];
         let documents:IDocument[]=[
-          {id:"1", titre:"ordonnance", description:"Document delivre par le medecin ou un infirmier de l'etablissement",
-           missions:[{id:"1", libelle:"fiche de soin", description:"fiche de soin est une mission", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990")}], 
-           attributs:[{id:"1", titre:"taille", description:"taille de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeDouble}]}
+          {id:"1", titre:"dcument 1", description:"Document delivre par le medecin ou un infirmier de l'etablissement",
+           missions:[{id:"1", libelle:"fiche de soin", description:"fiche de soin est une mission", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990")},
+                    {id:"3", libelle:"bon de commande", description:"bon de commande est une mission", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990")},
+                    {id:"4", libelle:"recu de paiement", description:"recu de paiement est une mission", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990")}
+            ], 
+           attributs:[{id:"1", titre:"taille", description:"taille de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeDouble},
+                      {id:"4", titre:"age", description:"age de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeDouble},
+                      {id:"5", titre:"allergies", description:"allergies de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeString},
+                      {id:"6", titre:"teint", description:"teint de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeString},
+                      {id:"7", titre:"Groupe sangin", description:"Groupe sangin de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeString},
+                      {id:"8", titre:"cicatrice", description:"cicatrice de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeBoolean}
+            ]
+          },
+          {id:"2", titre:"dcument 2", description:"Document delivre par le medecin ou un infirmier de l'etablissement",
+           missions:[{id:"1", libelle:"fiche de soin", description:"fiche de soin est une mission", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990")},
+                    {id:"3", libelle:"bon de commande", description:"bon de commande est une mission", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990")},
+                    {id:"4", libelle:"recu de paiement", description:"recu de paiement est une mission", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990")}
+            ], 
+           attributs:[{id:"1", titre:"taille", description:"taille de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeDouble},
+                      {id:"4", titre:"age", description:"age de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeDouble},
+                      {id:"5", titre:"allergies", description:"allergies de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeString},
+                      {id:"6", titre:"teint", description:"teint de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeString},
+                      {id:"7", titre:"Groupe sangin", description:"Groupe sangin de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeString},
+                      {id:"8", titre:"cicatrice", description:"cicatrice de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeBoolean}
+            ]
+          },
+          {id:"3", titre:"dcument 3", description:"Document delivre par le medecin ou un infirmier de l'etablissement",
+           missions:[{id:"1", libelle:"fiche de soin", description:"fiche de soin est une mission", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990")},
+                    {id:"3", libelle:"bon de commande", description:"bon de commande est une mission", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990")},
+                    {id:"4", libelle:"recu de paiement", description:"recu de paiement est une mission", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990")}
+            ], 
+           attributs:[{id:"1", titre:"taille", description:"taille de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeDouble},
+                      {id:"4", titre:"age", description:"age de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeDouble},
+                      {id:"5", titre:"allergies", description:"allergies de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeString},
+                      {id:"6", titre:"teint", description:"teint de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeString},
+                      {id:"7", titre:"Groupe sangin", description:"Groupe sangin de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeString},
+                      {id:"8", titre:"cicatrice", description:"cicatrice de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeBoolean}
+            ]
+          }
         ];
         return{patients, services, menus, tickets, missions, attributs, documents};
     }

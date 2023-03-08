@@ -16,14 +16,12 @@ import { HttpClient } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { HttpLoaderFactory } from 'src/app/app.module';
-import { DocumentComponent } from './document/document.component';
 
 
 @NgModule({
   declarations: [
     ListMissionComponent,
-    NewMissionComponent,
-    DocumentComponent
+    NewMissionComponent
   ],
   imports: [
     CommonModule,
