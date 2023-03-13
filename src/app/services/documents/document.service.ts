@@ -15,7 +15,12 @@ export class DocumentService {
     return this.http.get<IDocument[]>('api/documents').pipe(map(x=>x));
   }
 
-  getDocumentById(id:string):Observable<IDocument >{
+  getTableauDocuments():Observable<IDocument>
+  {
+    return this.http.get<IDocument>('api/documents').pipe(map(x=>x));
+  }
+
+  getDocumentById(id:string):Observable<IDocument>{
     return this.getAllDocuments().pipe(
       map(x=>
         {

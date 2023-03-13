@@ -18,7 +18,7 @@ import { DocumentService } from 'src/app/services/documents/document.service';
 })
 export class ListFormDocumentComponent implements OnInit, AfterViewInit {
 
-  document$:Observable<IDocument[]>=EMPTY;
+  document$:Observable<IDocument>=EMPTY;
   myControl = new FormControl<string | IDocument>('');
  
   ELEMENTS_TABLE: IDocument[] = [];
@@ -39,19 +39,15 @@ export class ListFormDocumentComponent implements OnInit, AfterViewInit {
   constructor(private translate: TranslateService, private router:Router, private serviceDocument: DocumentService,  private _liveAnnouncer: LiveAnnouncer) { }
 
   ngOnInit(): void {
-    this.document$ = this.getAllDocuments();
-    this.document$.subscribe(
-      x=>{
-        // if(x!=null && x.attributs=null){
-        //   this.attributsParDocuments = x.attributs;
-        // }
+    this.document$ = this.getTableauDocuments()
+    this.document$.subscribe(x=>{
+      if (x!=null && x.attributs!=null) {
+        this.attributsParDocuments = x.attributs
       }
+    }
     )
     this.getAllDocuments().subscribe(valeurs => {
       this.dataSource.data = valeurs;
-      // if(valeurs!=null && valeurs.attributs!=null){
-      //   this.attributsParDocuments = x.attributs;
-      // }
     });
 
     this.myControl.valueChanges.subscribe(
@@ -93,5 +89,9 @@ export class ListFormDocumentComponent implements OnInit, AfterViewInit {
 
   private getAllDocuments(){
     return this.serviceDocument.getAllDocuments();
+  }
+
+  private getTableauDocuments(){
+    return this.serviceDocument.getTableauDocuments();
   }
 }
