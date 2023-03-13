@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ListFormDocumentComponent } from './list-form-document/list-form-document.component';
 import { NewFormDocumentComponent } from './new-form-document/new-form-document.component';
+import { ViewFormDocumentComponent } from './view-form-document/view-form-document.component';
 
 const routes: Routes = [
   {
@@ -13,6 +14,11 @@ const routes: Routes = [
     path: 'list-documents',
     title: 'liste formulaires de documents',
     component: ListFormDocumentComponent
+  },
+  {
+    path: 'view-document',
+    title: 'Voir le document',
+    component: ViewFormDocumentComponent
   }
 ];
 

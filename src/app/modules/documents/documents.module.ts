@@ -16,12 +16,14 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { AppRoutingModule } from 'src/app/app-routing.module';
 import { HttpLoaderFactory } from 'src/app/app.module';
 import { ListFormDocumentComponent } from './list-form-document/list-form-document.component';
+import { ViewFormDocumentComponent } from './view-form-document/view-form-document.component';
 
 
 @NgModule({
   declarations: [
     NewFormDocumentComponent,
-    ListFormDocumentComponent
+    ListFormDocumentComponent,
+    ViewFormDocumentComponent
   ],
   imports: [
     CommonModule,

@@ -36,10 +36,10 @@ export class NewPatientComponent implements OnInit {
     let idPatient = this.infosPath.snapshot.paramMap.get('idPatient');
     console.log("idPatient :" + idPatient);
     if((idPatient != null) && idPatient!==''){
-      //formatDate : FormatDatePipe; 
-      //  formatDate.transform("");
+
       this.btnLibelle="Modifier";
       this.titre="Patient à Modifier";
+      
       //trouver un autre moyen d'initialiser avec des valeurs
       this.patientService.getPatientById(idPatient).subscribe(x =>
         {
