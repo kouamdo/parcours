@@ -21,9 +21,10 @@ export class ViewFormDocumentComponent implements OnInit {
   constructor(private router:Router, private infosPath:ActivatedRoute, private serviceDocument:DocumentService) {}
 
   ngOnInit(): void {
-    let IdDocument = this.infosPath.snapshot.paramMap.get('IdDocument');
-    if((IdDocument != null) && IdDocument!==''){
-      this.serviceDocument.getDocumentById(IdDocument).subscribe(
+    let idDocument = this.infosPath.snapshot.paramMap.get('idDocument');
+    console.log("idDocument :" + idDocument);
+    if((idDocument != null) && idDocument!==''){
+      this.serviceDocument.getDocumentById(idDocument).subscribe(
         x =>{
           this.document = x;
           console.log("Voici le document", this.document);

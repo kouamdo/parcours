@@ -16,7 +16,7 @@ const routes: Routes = [
     component: ListFormDocumentComponent
   },
   {
-    path: 'view-document',
+    path: 'view-document/:idDocument',
     title: 'Voir le document',
     component: ViewFormDocumentComponent
   }
