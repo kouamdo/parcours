@@ -6,6 +6,7 @@ import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Observable, EMPTY } from 'rxjs';
+import { IAfficheDocument } from 'src/app/modele/affiche-document';
 import { IAttributs } from 'src/app/modele/attributs';
 import { IDocument } from 'src/app/modele/document';
 import { IMission } from 'src/app/modele/mission';
@@ -29,6 +30,16 @@ export class NewFormDocumentComponent implements OnInit {
   submitted: boolean=false;
   idMission : string = "";
   idAttribut : string = "";
+
+  afficheDocument : IAfficheDocument = {
+    id: '',
+    titre: '',
+    description: '',
+    missions: [],
+    attributs: [],
+    listeMissions: '',
+    listAttributs: ''
+  }
 
   // variables attributs, pour afficher le tableau d'attributs sur l'IHM
   myControl = new FormControl<string | IAttributs>('');

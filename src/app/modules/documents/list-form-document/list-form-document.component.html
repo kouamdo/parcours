@@ -60,7 +60,7 @@
                         <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'document.table.title4' | translate}} </th>
                         <td class="text-dark text-center containCell" mat-cell *matCellDef="let element">
                             <p></p>
-                            <span  *ngFor="let attributs"> {{attributs.titre}} </span>
+                            <span > {{element.attributs}} </span>
                         </td>
                     </ng-container>
 
