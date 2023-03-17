@@ -69,11 +69,11 @@ export class NewFormDocumentComponent implements OnInit {
       this.dataSourceAttribut.data = valeurs;
     });
 
-    let IdDocument = this.infosPath.snapshot.paramMap.get('IdDocument');
-    if((IdDocument != null) && IdDocument!==''){
+    let idDocument = this.infosPath.snapshot.paramMap.get('idDocument');
+    if((idDocument != null) && idDocument!==''){
       this.btnLibelle="Modifier";
       this.titre="Document à Modifier";
-      this.serviceDocument.getDocumentById(IdDocument).subscribe(x =>
+      this.serviceDocument.getDocumentById(idDocument).subscribe(x =>
       {
         this.document = x; console.log(this.document);
         this.forme.setValue({

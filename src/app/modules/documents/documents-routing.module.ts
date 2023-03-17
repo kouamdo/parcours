@@ -11,6 +11,11 @@ const routes: Routes = [
     component: NewFormDocumentComponent
   },
   {
+    path: 'document-nouveau/:idDocument',
+    title: 'Nouveau formulaire de documents',
+    component: NewFormDocumentComponent
+  },
+  {
     path: 'list-documents',
     title: 'liste formulaires de documents',
     component: ListFormDocumentComponent

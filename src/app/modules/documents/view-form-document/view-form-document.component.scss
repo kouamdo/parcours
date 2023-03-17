@@ -1,0 +1,65 @@
+.mainBlock{
+    background-color: #ffffff;
+    padding-top: 5px;
+}
+h1{
+    text-align: center;
+    text-transform: uppercase;
+    background-color: #7ea97e;
+    color: rgba(255, 255, 255, 0.7);
+    border-radius: 5px;
+    box-shadow: 0 0 2px #7ea97e;
+    padding: 10px 0;
+    margin: 0 5px;
+    position: relative;
+}
+h1 span{
+    position: absolute;
+    left: 5px;
+    transition: ease 0.2s;
+}
+h1 span:hover{
+    border: solid 1px #ffffff9a;
+    padding: 0 10px;
+    transition: ease-in-out 0.2s;
+}
+#titre{
+    margin: 20px 0;
+}
+#description{
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    p{
+        margin: 0;
+        margin-left: 5px;
+        width: 50%;
+        background-color: #7ea97e0e;
+        padding: 10px;
+        padding-top: 0;
+        border-radius: 5px;
+    }
+}
+.infos{
+    padding: 0 20px;
+    padding-bottom: 10px;
+}
+.options {
+    padding: 0 10px;
+    padding-bottom: 10px;
+}
+.options button {
+    margin-left: 10px;
+}
+.infos p{
+    margin: 40px 0;
+    font-weight: 300;
+}
+.infos .title{
+    font-weight: normal;
+    text-transform: uppercase;
+}
+th{
+    background-color: #7ea97e2f;
+    color: #7ea97e;
+}

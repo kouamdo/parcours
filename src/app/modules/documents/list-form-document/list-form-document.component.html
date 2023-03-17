@@ -58,9 +58,9 @@
                     <!-- attributs Column -->
                     <ng-container matColumnDef="attributs">
                         <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'document.table.title4' | translate}} </th>
-                        <td class="text-dark text-center containCell" mat-cell *matCellDef="let element">
+                        <td class="text-dark text-center containCell" mat-cell *matCellDef="let element; let i = index">
                             <p></p>
-                            <span > {{element.attributs}} </span>
+                            <span > {{element.attributs[i].titre}} </span>
                         </td>
                     </ng-container>
 
