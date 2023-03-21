@@ -140,6 +140,8 @@ export class NewFormDocumentComponent implements OnInit {
   }
 
   onSubmit(documentInput:any){
+    const _missionsSelected = (this.forme.get('_missions') as FormArray);
+    console.log("_missionsSelected",_missionsSelected.value);
     this.submitted=true;
     if(this.forme.invalid) return;
     let documentTemp : IDocument={
