@@ -152,6 +152,7 @@
         "search-bar":"Rechercher",
         "title1":"Affichage des resuttats",
         "table":{
+            "title0":"Id",
             "title1":"Titre",
             "title2":"Description",
             "title3":"Missions",

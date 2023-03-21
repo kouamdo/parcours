@@ -43,7 +43,7 @@
                                     </button>
                                     <div class="dropdown-menu" aria-labelledby="triggerId">
                                         <label class="dropdown-item" for="missions" *ngFor="let missions of (mission$ | async) as mission let i=index">
-                                            <input  type="checkbox" required formArrayName="_missions" [value]="missions.libelle" name="missions" id="missions" (change)="onCheckMissionChange($event)">
+                                            <input  type="checkbox" required formArrayName="_missions" [value]="missions.libelle" name="missions" id="missions" (click)="getMissionId(missions.id)" (change)="onCheckMissionChange($event)">
                                             {{missions.libelle}}
                                         </label>
                                     </div>
@@ -157,8 +157,8 @@
                                                                     </div>
                                                                 </td>
                                                             </ng-container>
-                                                            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                                                            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                                                            <tr mat-header-row *matHeaderRowDef="displayedAttributsColumns"></tr>
+                                                            <tr mat-row *matRowDef="let row; columns: displayedAttributsColumns;"></tr>
                                                         </table>
                                                         <mat-paginator style="background-color: rgba(126, 169, 126, 0.79);" [pageSizeOptions]="[2, 5, 10, 20]"
                                                                        showFirstLastButtons
@@ -201,8 +201,8 @@
                                                                             </div>
                                                                         </td>
                                                                     </ng-container>
-                                                                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                                                                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                                                                    <tr mat-header-row *matHeaderRowDef="displayedAttributsColumns"></tr>
+                                                                    <tr mat-row *matRowDef="let row; columns: displayedAttributsColumns;"></tr>
                                                                 </table>
                                                                 <mat-paginator style="background-color: rgba(126, 169, 126, 0.79);" [pageSizeOptions]="[5, 10, 20]"
                                                                                showFirstLastButtons

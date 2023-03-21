@@ -19,7 +19,6 @@ import { DocumentService } from 'src/app/services/documents/document.service';
 })
 export class ListFormDocumentComponent implements OnInit, AfterViewInit {
 
-  document$:Observable<IDocument[]>=EMPTY;
   myControl = new FormControl<string | IDocument>('');
  
   ELEMENTS_TABLE: IDocument[] = [];
@@ -34,8 +33,8 @@ export class ListFormDocumentComponent implements OnInit, AfterViewInit {
 
   @ViewChild(MatSort) sort!: MatSort;
 
-  missionsParDocuments! : IAttributs[];
-  attributsParDocuments! : IAttributs[]
+  tableDocuments : IAfficheDocument[] = []
+  
   
   afficheDocument : IAfficheDocument = {
     id: '',
@@ -51,19 +50,39 @@ export class ListFormDocumentComponent implements OnInit, AfterViewInit {
   constructor(private translate: TranslateService, private router:Router, private serviceDocument: DocumentService,  private _liveAnnouncer: LiveAnnouncer) { }
 
   ngOnInit(): void {
-    this.document$ = this.getAllDocuments()
     this.getAllDocuments().subscribe(valeurs => {
-      this.dataSource.data = valeurs;
-    });
-    this.serviceDocument.getTableauDocuments().subscribe(
-      x =>{
-        this.afficheDocument.listAttributs = x.attributs.toString()
-        this.afficheDocument.listeMissions = x.missions.toString()
+     const tableDocuments : IAfficheDocument[] = this.tableDocuments
+     
+      valeurs.forEach(
+        x =>{
+          this.afficheDocument  = {
+            id: '',
+            titre: '',
+            description: '',
+            missions: [],
+            attributs: [],
+            listeMissions: '',
+            listAttributs: ''
+          }
+          this.afficheDocument.id = x.id;
+          this.afficheDocument.titre = x.titre;
+          this.afficheDocument.description = x.description;
+          this.afficheDocument.missions = x.missions;
+          this.afficheDocument.attributs = x.attributs;
 
-        sessionStorage.setItem("voici la liste des attributs :", this.afficheDocument.listAttributs);
-        console.log("voici la liste des attributs : ", this.afficheDocument.listAttributs)
-      }
-    )
+          if (x.id == this.afficheDocument.id) {
+            x.missions.forEach(
+              m => this.afficheDocument.listeMissions += m.libelle + ","+ " "
+            )
+            x.attributs.forEach(
+              a => this.afficheDocument.listAttributs += a.titre + ","+ " "
+            ) 
+          }
+          tableDocuments.push(this.afficheDocument)
+        }
+      )
+      this.dataSource.data = tableDocuments;
+    });
 
     this.myControl.valueChanges.subscribe(
       value => {
@@ -78,7 +97,6 @@ export class ListFormDocumentComponent implements OnInit, AfterViewInit {
         else{
           this.filteredOptions = [];
         }
-        
       }
     );
   }

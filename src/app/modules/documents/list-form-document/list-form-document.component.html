@@ -31,7 +31,7 @@
                  
                     <!-- id Column -->
                     <ng-container matColumnDef="id">
-                        <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'document.table.title1' | translate}} </th>
+                        <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'document.table.title0' | translate}} </th>
                         <td class="text-dark text-center containCell" mat-cell *matCellDef="let element"> {{element.id}} </td>
                     </ng-container>
                  
@@ -50,17 +50,16 @@
                     <!-- missions Column -->
                     <ng-container matColumnDef="missions">
                         <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'document.table.title3' | translate}} </th>
-                        <td class="text-dark text-center containCell" mat-cell *matCellDef="let element; let i = index"> 
-                            <span>{{element.missions[i].libelle}}</span>
+                        <td class="text-dark text-center containCell" mat-cell *matCellDef="let element"> 
+                            <span> {{element.listeMissions}} </span>
                         </td>
                     </ng-container>
                     
                     <!-- attributs Column -->
                     <ng-container matColumnDef="attributs">
                         <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'document.table.title4' | translate}} </th>
-                        <td class="text-dark text-center containCell" mat-cell *matCellDef="let element; let i = index">
-                            <p></p>
-                            <span > {{element.attributs[i].titre}} </span>
+                        <td class="text-dark text-center containCell" mat-cell *matCellDef="let element">
+                            <span> {{element.listAttributs}} </span>
                         </td>
                     </ng-container>
 

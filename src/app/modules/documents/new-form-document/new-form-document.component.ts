@@ -22,7 +22,6 @@ import { MissionsService } from 'src/app/services/missions/missions.service';
 export class NewFormDocumentComponent implements OnInit {
   
   document : IDocument|undefined;
-  missionData : IMission[] | undefined;
   mission$:Observable<IMission[]>=EMPTY;
   forme: FormGroup;
   btnLibelle: string="Ajouter";
@@ -30,6 +29,7 @@ export class NewFormDocumentComponent implements OnInit {
   submitted: boolean=false;
   idMission : string = "";
   idAttribut : string = "";
+  dataSourceMission : IMission[] | undefined
 
   afficheDocument : IAfficheDocument = {
     id: '',
@@ -43,15 +43,17 @@ export class NewFormDocumentComponent implements OnInit {
 
   // variables attributs, pour afficher le tableau d'attributs sur l'IHM
   myControl = new FormControl<string | IAttributs>('');
-  ELEMENTS_TABLE: IAttributs[] = [];
+  ELEMENTS_TABLE_ATTRIBUTS: IAttributs[] = [];
   filteredOptions: IAttributs[] | undefined;
-  displayedColumns: string[] = ['actions','titre', 'description', 'type'];
-  dataSourceAttribut = new MatTableDataSource<IAttributs>(this.ELEMENTS_TABLE);
+  displayedAttributsColumns: string[] = ['actions','titre', 'description', 'type'];
+  dataSourceAttribut = new MatTableDataSource<IAttributs>(this.ELEMENTS_TABLE_ATTRIBUTS);
   dataSourceAttributResultat = new MatTableDataSource<IAttributs>();
+  _attributs :  FormArray | undefined;
+  _missions :  FormArray | undefined;
+
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-  _attributs :  FormArray | undefined;
 
   constructor(private router:Router, private formBuilder: FormBuilder, private infosPath:ActivatedRoute, private serviceDocument:DocumentService, private serviceMission:MissionsService, private serviceAttribut:AttributService,  private _liveAnnouncer: LiveAnnouncer) {
     this.forme = this.formBuilder.group({
@@ -106,11 +108,13 @@ export class NewFormDocumentComponent implements OnInit {
     const _missions = (this.forme.controls['_missions'] as FormArray);
     if (event.target.checked) {
       _missions.push(new FormControl(event.target.value));
+      //this.dataSourceMission?.push(this.serviceMission.getMissionById(this.idMission))
     } else {
       const index = _missions.controls
       .findIndex(x => x.value === event.target.value);
       _missions.removeAt(index);
     }
+      this._missions = _missions
   }
   onCheckAttributChange(event: any) {
     const _attributs = (this.forme.controls['_attributs'] as FormArray);
@@ -129,25 +133,27 @@ export class NewFormDocumentComponent implements OnInit {
   getAttributId(idAttribut: string) {
     this.idAttribut = idAttribut
   }
+  getMissionId(idMission: string) {
+    this.idMission = idMission
+  }
 
   ajoutSelectionAttribut(idAttribut: string) {
-    console.log('attribut :' + idAttribut);
     this.serviceAttribut.getAttributById(idAttribut).subscribe(
       val => {
-        console.log('Iattribut :' + val.id);
-        this.ELEMENTS_TABLE = this.dataSourceAttributResultat.data;
-        this.ELEMENTS_TABLE.push(val);
-        this.dataSourceAttributResultat.data = this.ELEMENTS_TABLE;
+        console.log('IdAttribut :' + val.id);
+        this.ELEMENTS_TABLE_ATTRIBUTS = this.dataSourceAttributResultat.data;
+        this.ELEMENTS_TABLE_ATTRIBUTS.push(val);
+        this.dataSourceAttributResultat.data = this.ELEMENTS_TABLE_ATTRIBUTS;
       }
     )    
   }
 
   retirerSelectionAttribut(index: number) {
     const _attributs = (this.forme.controls['_attributs'] as FormArray);
-    this.ELEMENTS_TABLE = this.dataSourceAttributResultat.data;
-    this.ELEMENTS_TABLE.splice(index, 1); // je supprime un seul element du tableau a la position 'index'
+    this.ELEMENTS_TABLE_ATTRIBUTS = this.dataSourceAttributResultat.data;
+    this.ELEMENTS_TABLE_ATTRIBUTS.splice(index, 1); // je supprime un seul element du tableau a la position 'index'
     _attributs.removeAt(index);
-    this.dataSourceAttributResultat.data = this.ELEMENTS_TABLE;
+    this.dataSourceAttributResultat.data = this.ELEMENTS_TABLE_ATTRIBUTS;
   }
 
   onSubmit(documentInput:any){
@@ -157,12 +163,15 @@ export class NewFormDocumentComponent implements OnInit {
       id: String(9),
       titre:documentInput.titre,
       description:documentInput.description,
-      missions:documentInput.missions,
-      attributs:documentInput.attributs
+      missions:[],
+      attributs:[]
     }
     if(this.document != undefined){
       documentTemp.id = this.document.id  
     }
+    this.dataSourceAttributResultat.data.forEach(
+      a => documentTemp.attributs.push(a)
+    )
     this.serviceDocument.ajouterDocument(documentTemp).subscribe(
       object => {
         this.router.navigate(['/list-documents']);
