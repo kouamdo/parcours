@@ -46,7 +46,8 @@
         "button4":"Précédent",
         "button5":"Aucune action",
         "button6":"valider",
-        "button7":"Modifier"
+        "button7":"Modifier",
+        "button8":"Supprimer"
     },
     "patient":{
         "text":"Patients retrouvé(e)s",
@@ -163,7 +164,12 @@
             "text2":"La Description est obligatoire.",
             "text3":"Les Missions sont obligatoires.",
             "text4":"Les attributs sont obligatoires."
-        }       
+        },
+        "view":{
+            "title":"Modele du document",
+            "text1":"liste des missions du document",
+            "text2":"liste des attributs du document"
+        }      
     },
     "theme":{
         "libelle":"theme"

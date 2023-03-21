@@ -137,7 +137,7 @@ th{
     color: #7ea97e !important;
 }
 .listAttr{
-    width: 68%;
+    width: 100%;
     padding: 20px 5px;
     padding-right: 10px;
     background-color: #b3b3b30f;
@@ -150,6 +150,13 @@ th{
         right: 0;
         bottom: 0;
         font-size: 18px;
+        border: none;
+        border-radius: 5px;
+        i{
+            box-shadow: 0 0 2px rgb(220, 220, 220);
+            color: #7ea97ea6;
+
+        }
     }
 }
 @media screen and (max-width: 1200px) {
@@ -159,9 +166,6 @@ th{
     .example-full-width {
         height: 42px !important;
         border: 2px solid #7ea97e;
-    }
-    .listAttr{
-        width: 62%;
     }
 }
 @media screen and (max-width: 1100px) {
@@ -176,11 +180,11 @@ th{
 }
 @media screen and (max-width: 910px) {
     .listAttr{
-        width: 60%;
+        width: 100%;
     }
 }
 @media screen and (max-width: 830px) {
     .listAttr{
-        width: 55%;
+        width: 100%;
     }
 }

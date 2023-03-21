@@ -6,6 +6,7 @@ import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Observable, EMPTY } from 'rxjs';
+import { IAfficheDocument } from 'src/app/modele/affiche-document';
 import { IAttributs } from 'src/app/modele/attributs';
 import { IDocument } from 'src/app/modele/document';
 import { IMission } from 'src/app/modele/mission';
@@ -29,6 +30,16 @@ export class NewFormDocumentComponent implements OnInit {
   submitted: boolean=false;
   idMission : string = "";
   idAttribut : string = "";
+
+  afficheDocument : IAfficheDocument = {
+    id: '',
+    titre: '',
+    description: '',
+    missions: [],
+    attributs: [],
+    listeMissions: '',
+    listAttributs: ''
+  }
 
   // variables attributs, pour afficher le tableau d'attributs sur l'IHM
   myControl = new FormControl<string | IAttributs>('');
@@ -58,11 +69,11 @@ export class NewFormDocumentComponent implements OnInit {
       this.dataSourceAttribut.data = valeurs;
     });
 
-    let IdDocument = this.infosPath.snapshot.paramMap.get('IdDocument');
-    if((IdDocument != null) && IdDocument!==''){
+    let idDocument = this.infosPath.snapshot.paramMap.get('idDocument');
+    if((idDocument != null) && idDocument!==''){
       this.btnLibelle="Modifier";
       this.titre="Document à Modifier";
-      this.serviceDocument.getDocumentById(IdDocument).subscribe(x =>
+      this.serviceDocument.getDocumentById(idDocument).subscribe(x =>
       {
         this.document = x; console.log(this.document);
         this.forme.setValue({

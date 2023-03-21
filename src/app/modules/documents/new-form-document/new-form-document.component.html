@@ -57,10 +57,15 @@
                                 </label>
                                 <div class="dropdown w-100">
 
-                                <!-- Button trigger modal -->
-                                    <button class="select btn" name="attributs" type="button" id="triggerId" data-toggle="modal" data-target="#modalAttributs">
-                                        {{'document.table.title6' | translate}}
-                                    </button>
+                                    <!-- affichage list attributs selectiones -->
+                                    <div class="listAttr">
+                                        <button type="button" class="btn p-0" data-toggle="modal" data-target="#modalAttributs" title="{{'lists.button7' | translate}}">
+                                            <i class="fas fa-pen-square"></i>
+                                        </button>
+                                        <span *ngFor="let listeAttributs of dataSourceAttributResultat.data">
+                                            {{listeAttributs.titre | lowercase}}<span>, </span>
+                                        </span>
+                                    </div>
                                 </div>
                                 <!-- Modal -->
                                 <div class="modal fade" id="modalAttributs" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
@@ -215,20 +220,11 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>   
-                        <!-- affichage list attributs selectiones -->
-                        <div class="listAttr">
-                            <button type="button" class="btn p-0" data-toggle="modal" data-target="#modalAttributs" title="{{'lists.button7' | translate}}">
-                                <i class="fas fa-pen-square text-info"></i>
-                            </button>
-                            <span *ngFor="let listeAttributs of dataSourceAttributResultat.data">
-                                {{listeAttributs.titre | lowercase}}<span>, </span>
-                            </span>
-                        </div>
+                        </div>  
                     </div>
                 </div>
                 <div class="actionButton">
-                    <button class="btn" routerLink="../list-documents">{{'lists.button2' | translate}}</button>
+                    <button class="btn" routerLink="../../list-documents">{{'lists.button2' | translate}}</button>
                     <button type="submit" class="btn">{{btnLibelle}}</button>
                 </div>
             </form>
