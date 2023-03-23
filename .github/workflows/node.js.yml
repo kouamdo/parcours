@@ -44,9 +44,12 @@ jobs:
       - name: Install admin-lte
         run: |
           npm install admin-lte --save
+      - name: Install karma
+        run: |
+          npm i -D puppeteer karma-chrome-launcher
       - name: Build
         run: |
           npm run build --configuration=production
       - name: Test
         run: |
-          npm run test --configuration=production
+          npm run test --configuration=production --watch=false --browsers=ChromeHeadless
