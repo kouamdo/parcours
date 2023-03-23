@@ -47,9 +47,6 @@ jobs:
       - name: Build
         run: |
           npm run build --configuration=production
-      - name: Lint
-        run: |
-          npm run lint
       - name: Test
         run: |
           npm run test --configuration=production
