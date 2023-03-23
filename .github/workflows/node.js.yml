@@ -69,7 +69,11 @@ jobs:
           tag_name: ${{ steps.changelog.outputs.tag }}
           release_name: ${{ steps.changelog.outputs.tag }}
           body: ${{ steps.changelog.outputs.clean_changelog }}
-
+          
+      - name: Add GH Pages
+        run: |
+          npm run add:ghpages
+      
       - name: Deploy
         run: |
           npm run deploy
