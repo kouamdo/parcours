@@ -52,4 +52,4 @@ jobs:
           npm run build --configuration=production
       - name: Test
         run: |
-          npm run test --configuration=production --watch=false --browsers=ChromeHeadless
+          npm run test:ci
