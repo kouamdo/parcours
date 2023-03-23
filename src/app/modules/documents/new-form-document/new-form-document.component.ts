@@ -29,7 +29,15 @@ export class NewFormDocumentComponent implements OnInit {
   submitted: boolean=false;
   idMission : string = "";
   idAttribut : string = "";
-  dataSourceMission : IMission[] | undefined
+
+  missionsTemp : IMission = {
+    id: '',
+    libelle: '',
+    description: '',
+    etat: false,
+    dateCreation: new Date,
+    dateModification:  new Date
+  }
 
   afficheDocument : IAfficheDocument = {
     id: '',
@@ -49,6 +57,9 @@ export class NewFormDocumentComponent implements OnInit {
   dataSourceAttribut = new MatTableDataSource<IAttributs>(this.ELEMENTS_TABLE_ATTRIBUTS);
   dataSourceAttributResultat = new MatTableDataSource<IAttributs>();
   _attributs :  FormArray | undefined;
+
+  dataMission : IMission[] = []
+  dataSourceMissionResultat = new MatTableDataSource<IMission>();
   _missions :  FormArray | undefined;
 
   @ViewChild(MatPaginator)
@@ -108,13 +119,15 @@ export class NewFormDocumentComponent implements OnInit {
     const _missions = (this.forme.controls['_missions'] as FormArray);
     if (event.target.checked) {
       _missions.push(new FormControl(event.target.value));
-      //this.dataSourceMission?.push(this.serviceMission.getMissionById(this.idMission))
+      //this.ajoutSelectionMission(this.idMission)
     } else {
       const index = _missions.controls
       .findIndex(x => x.value === event.target.value);
+      //this.retirerSelectionMission(index)
       _missions.removeAt(index);
     }
       this._missions = _missions
+      console.log(this._missions.value)
   }
   onCheckAttributChange(event: any) {
     const _attributs = (this.forme.controls['_attributs'] as FormArray);
@@ -148,6 +161,17 @@ export class NewFormDocumentComponent implements OnInit {
     )    
   }
 
+  // ajoutSelectionMission(idMission : string) {
+  //   this.serviceMission.getMissionById(idMission).subscribe(
+  //     val => {
+  //       console.log('IdMission :' + val.id);
+  //       this.dataSourceMission = this.dataSourceMissionResultat.data;
+  //       this.dataSourceMission.push(val);
+  //       this.dataSourceMissionResultat.data = this.dataSourceMission;
+  //     }
+  //   ) 
+  // }
+
   retirerSelectionAttribut(index: number) {
     const _attributs = (this.forme.controls['_attributs'] as FormArray);
     this.ELEMENTS_TABLE_ATTRIBUTS = this.dataSourceAttributResultat.data;
@@ -156,9 +180,18 @@ export class NewFormDocumentComponent implements OnInit {
     this.dataSourceAttributResultat.data = this.ELEMENTS_TABLE_ATTRIBUTS;
   }
 
+  // retirerSelectionMission(index: number) {
+  //   const _missions = (this.forme.controls['_missions'] as FormArray);
+  //   this.dataSourceMission = this.dataSourceMissionResultat.data;
+  //   this.dataSourceMission.splice(index, 1);
+  //   console.log("l'index enleve est : " + index)
+  //   _missions.removeAt(index);
+  //   this.dataSourceMissionResultat.data = this.dataSourceMission;
+  // }
+
   onSubmit(documentInput:any){
-    const _missionsSelected = (this.forme.get('_missions') as FormArray);
-    console.log("_missionsSelected",_missionsSelected.value);
+    const _missionsSelected = (this.forme.get('_missions') as FormArray).value;
+    
     this.submitted=true;
     if(this.forme.invalid) return;
     let documentTemp : IDocument={
@@ -168,9 +201,32 @@ export class NewFormDocumentComponent implements OnInit {
       missions:[],
       attributs:[]
     }
-    if(this.document != undefined){
-      documentTemp.id = this.document.id  
-    }
+    _missionsSelected.forEach((element: any) => {
+      console.log("_missionsSelected est : " ,element);
+      this.serviceMission.getMissionById(element).subscribe(
+        object => {
+          this.missionsTemp = {
+            id: '',
+            libelle: '',
+            description: '',
+            etat: false,
+            dateCreation: new Date,
+            dateModification:  new Date
+          }
+          this.missionsTemp.id = object.id
+          this.missionsTemp.libelle = object.libelle
+          this.missionsTemp.description = object.description
+          this.missionsTemp.etat = object.etat
+          this.missionsTemp.dateCreation = object.dateCreation
+          this.missionsTemp.dateModification = object.dateModification
+          
+          this.dataMission.push(this.missionsTemp)
+        }
+      )
+    });
+    documentTemp.missions = this.dataMission
+    console.log("documentTemp.missions est : " ,documentTemp.missions);
+    
     this.dataSourceAttributResultat.data.forEach(
       a => documentTemp.attributs.push(a)
     )

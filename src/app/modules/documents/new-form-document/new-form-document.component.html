@@ -43,7 +43,7 @@
                                     </button>
                                     <div class="dropdown-menu" aria-labelledby="triggerId" formArrayName="_missions">
                                         <label class="dropdown-item" for="missions" *ngFor="let missions of (mission$ | async) as mission let i=index">
-                                            <input  type="checkbox" required   [value]="missions.id" name="missions" [id]="missions.id" (change)="onCheckMissionChange($event)">
+                                            <input  type="checkbox" required   [value]="missions.id" name="missions" [id]="missions.id" (click)="getMissionId(missions.id)" (change)="onCheckMissionChange($event)">
                                             {{missions.libelle}}
                                         </label>
                                     </div>
@@ -233,4 +233,12 @@
 
         {{forme.value._attributs}} -->
     </div>
+</div>
+<div>
+    <p *ngFor="let m of dataSourceMissionResultat.data">
+        {{m.id}} 
+          {{m.libelle}} 
+         {{m.etat}} 
+         {{m.dateCreation}}
+    </p>
 </div>
