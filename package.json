@@ -8,7 +8,8 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "test:ci": "ng test --browsers=ChromeHeadless --progress=false --watch=false --code-coverage --source-map=false",
-    "deploy": "ng deploy"
+    "deploy": "ng deploy",
+    "add:ghpages": "ng add angular-cli-ghpages"
   },
   "private": true,
   "dependencies": {
