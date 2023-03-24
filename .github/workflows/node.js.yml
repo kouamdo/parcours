@@ -80,4 +80,4 @@ jobs:
           target_branch: gh-pages
           build_dir: dist/clinique
         env:
-          GITHUB_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
