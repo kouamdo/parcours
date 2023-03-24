@@ -60,7 +60,7 @@ jobs:
           github-token: ${{ secrets.SONAR_TOKEN }}
           output-file: "false"
 
-      - name: Create Release
+      - name: Create Release 
         uses: actions/create-release@v1
         if: ${{ steps.changelog.outputs.skipped == 'false' }}
         env:
