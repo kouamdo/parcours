@@ -75,7 +75,8 @@ jobs:
           npm run add:ghpages
       
       - name: Deploy
-        run: |
-          npm run deploy
+        with:
+            target_branch: gh-pages
+            build_dir: dist/clinique
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
