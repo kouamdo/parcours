@@ -75,7 +75,9 @@ jobs:
           npm run add:ghpages
       
       - name: Deploy
-        run: |
-          npm run deploy
+        uses: crazy-max/ghaction-github-pages@v3
+        with:
+          target_branch: gh-pages
+          build_dir: dist/clinique
         env:
           GITHUB_TOKEN: ${{ secrets.SONAR_TOKEN }}
