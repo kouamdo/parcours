@@ -75,6 +75,7 @@ jobs:
           npm run add:ghpages
       
       - name: Deploy
+        uses: crazy-max/ghaction-github-pages@v3
         with:
             target_branch: gh-pages
             build_dir: dist/clinique
