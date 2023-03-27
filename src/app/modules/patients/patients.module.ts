@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { NewPatientComponent } from './new-patient/new-patient.component';
 import { ListPatientsComponent } from './list-patients/list-patients.component';
 import { AppRoutingModule } from 'src/app/app-routing.module';
@@ -42,6 +42,7 @@ import { MatTableModule } from '@angular/material/table';
         extend:true
     }),
     BrowserModule 
-  ]
+  ],
+  providers: [DatePipe],
 })
 export class PatientsModule { }

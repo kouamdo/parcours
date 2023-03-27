@@ -1,5 +1,6 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup,MaxLengthValidator,MinLengthValidator,ReactiveFormsModule, Validators  } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup,MaxLengthValidator,MinLengthValidator,ReactiveFormsModule, Validators  } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EMPTY, isEmpty, Observable } from 'rxjs';
 import { PatientsService } from 'src/app/services/patients/patients.service';
@@ -17,8 +18,10 @@ export class NewPatientComponent implements OnInit {
   btnLibelle: string="Ajouter";
   titre: string="Ajouter un nouveau Patient";
   submitted: boolean=false;
+  initialDate = new FormControl(new Date());
   //TODO validation du formulaire. particulièrment les mail; les dates
-  constructor(private formBuilder:FormBuilder, private patientService:PatientsService,private router:Router, private infosPath:ActivatedRoute) { 
+  
+  constructor(private formBuilder:FormBuilder, private patientService:PatientsService,private router:Router, private infosPath:ActivatedRoute, private datePipe: DatePipe) { 
     this.forme =  this.formBuilder.group({
       nom: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
       prenom: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
@@ -44,12 +47,16 @@ export class NewPatientComponent implements OnInit {
       this.patientService.getPatientById(idPatient).subscribe(x =>
         {
           this.patient = x; console.log(this.patient);
+          const dateTemp1 : any= this.datePipe.transform(this.patient.dateNaissance,'yyyy-MM-dd')
+          this.initialDate.setValue(new Date(dateTemp1))
+          const dateTemp = this.initialDate.value
+          console.log("la date :" + this.datePipe.transform(dateTemp,'yyyy-MM-dd'));
           this.forme.setValue({
             nom: this.patient.nom,
             prenom: this.patient.prenom,
             sexe: this.patient.sexe,
             mail: this.patient.mail,
-            dateNaissance:  this.patient.dateNaissance,
+            dateNaissance: this.datePipe.transform(dateTemp,'yyyy-MM-dd'), // this.patient.dateNaissance,
             telephone: this.patient.telephone,
             adresse: this.patient.adresse
           })   
