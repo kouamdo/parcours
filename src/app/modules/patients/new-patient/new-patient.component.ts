@@ -47,19 +47,16 @@ export class NewPatientComponent implements OnInit {
       this.patientService.getPatientById(idPatient).subscribe(x =>
         {
           this.patient = x; console.log(this.patient);
-          const dateTemp1 : any= this.datePipe.transform(this.patient.dateNaissance,'yyyy-MM-dd')
-          this.initialDate.setValue(new Date(dateTemp1))
-          const dateTemp = this.initialDate.value
-          console.log("la date :" + this.datePipe.transform(dateTemp,'yyyy-MM-dd'));
           this.forme.setValue({
             nom: this.patient.nom,
             prenom: this.patient.prenom,
             sexe: this.patient.sexe,
             mail: this.patient.mail,
-            dateNaissance: this.datePipe.transform(dateTemp,'yyyy-MM-dd'), // this.patient.dateNaissance,
+            dateNaissance: this.datePipe.transform(this.patient.dateNaissance,'yyyy-MM-dd'), // je change le format de la date de naissance pour pouvoir l'afficher dans mon input type date
             telephone: this.patient.telephone,
             adresse: this.patient.adresse
-          })   
+          }) 
+          console.log("la date temp est  :" + this.datePipe.transform(this.patient.dateNaissance,'yyyy-MM-dd'));  
         });
     }
     
@@ -84,6 +81,9 @@ export class NewPatientComponent implements OnInit {
       telephone:patientInput.telephone,
       dateNaissance:patientInput.dateNaissance
     }
+    patientTemp.dateNaissance = this.initialDate.value!
+    console.log("la date temp est  :" + this.initialDate.value);
+    console.log("patientTemp.dateNaissance est  :" + patientTemp.dateNaissance);
 
     if(this.patient != undefined){
       patientTemp.id = this.patient.id  
