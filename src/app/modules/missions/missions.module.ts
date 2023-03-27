@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 
 import { MissionsRoutingModule } from './missions-routing.module';
 import { ListMissionComponent } from './list-mission/list-mission.component';
@@ -44,6 +44,7 @@ import { HttpLoaderFactory } from 'src/app/app.module';
         extend:true
     }),
     BrowserModule
-  ]
+  ],
+  providers: [DatePipe],
 })
 export class MissionsModule { }

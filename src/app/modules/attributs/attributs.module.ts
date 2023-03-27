@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 
 import { AttributsRoutingModule } from './attributs-routing.module';
 import { ListAttributsComponent } from './list-attributs/list-attributs.component';
@@ -42,6 +42,7 @@ import { NewAttributComponent } from './new-attribut/new-attribut.component';
         extend:true
     }),
     BrowserModule
-  ]
+  ],
+  providers: [DatePipe],
 })
 export class AttributsModule { }

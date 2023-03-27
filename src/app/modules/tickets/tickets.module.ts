@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 
 import { TicketsRoutingModule } from './tickets-routing.module';
 import { ListTicketsComponent } from './list-tickets/list-tickets.component';
@@ -52,6 +52,7 @@ import { MatTableModule } from '@angular/material/table';
     // ngx-print
     NgxPrintModule,
   ],
+  providers: [DatePipe],
   exports: [
     NewTicketComponent,
     TicketCourantComponent

@@ -1,5 +1,6 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { IAttributs } from 'src/app/modele/attributs';
 import { TypeTicket } from 'src/app/modele/type-ticket';
@@ -16,6 +17,7 @@ export class NewAttributComponent implements OnInit {
   btnLibelle: string="Ajouter";
   titre: string="Ajouter un nouvel attribut";
   submitted: boolean=false;
+
   typeInt = TypeTicket.Int;
   typeString = TypeTicket.String;
   typeDouble = TypeTicket.Double;
@@ -23,11 +25,14 @@ export class NewAttributComponent implements OnInit {
   typeBoolean = TypeTicket.Boolean;
   typeDate = TypeTicket.Date;
 
-  constructor(private formBuilder:FormBuilder, private attributService:AttributService,private router:Router, private infosPath:ActivatedRoute) { 
+  initialDateCreation = new FormControl(new Date());
+  initialDateModification = new FormControl(new Date());
+
+  constructor(private formBuilder:FormBuilder, private attributService:AttributService,private router:Router, private infosPath:ActivatedRoute, private datePipe: DatePipe) { 
     this.forme = this.formBuilder.group({
       titre: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
       description: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
-      etat: ['False', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
+      etat: ['False', [Validators.required, Validators.minLength(1), Validators.maxLength(50)]],
       dateCreation: ['', [Validators.required]],
       dateModification: ['//'],
       type: ['']
@@ -42,12 +47,13 @@ export class NewAttributComponent implements OnInit {
       this.attributService.getAttributById(idAttribut).subscribe(x =>
         {
           this.attribut = x; console.log(this.attribut);
+          this.attribut.id = idAttribut!,
           this.forme.setValue({
             titre: this.attribut.titre,
             description: this.attribut.description,
             etat: this.attribut.etat,
-            dateCreation: this.attribut.dateCreation,
-            dateModification: this.attribut.dateModification,
+            dateCreation: this.datePipe.transform(this.attribut.dateCreation,'yyyy-MM-dd'),
+            dateModification: this.datePipe.transform(this.attribut.dateModification,'yyyy-MM-dd'),
             type: this.attribut.type
           })
       });
@@ -72,10 +78,10 @@ export class NewAttributComponent implements OnInit {
       dateModification: attributInput.dateModification,
       type: attributInput.type
     }
+    attributTemp.dateCreation = this.initialDateCreation.value!
+    attributTemp.dateModification = this.initialDateModification.value!
+    
 
-    if(this.attribut != undefined){
-      attributTemp.id = this.attribut.id  
-    }
     this.attributService.ajouterAttribut(attributTemp).subscribe(
       object => {
         this.router.navigate(['/list-attributs']);

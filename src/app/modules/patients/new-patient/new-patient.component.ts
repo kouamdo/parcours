@@ -55,8 +55,7 @@ export class NewPatientComponent implements OnInit {
             dateNaissance: this.datePipe.transform(this.patient.dateNaissance,'yyyy-MM-dd'), // je change le format de la date de naissance pour pouvoir l'afficher dans mon input type date
             telephone: this.patient.telephone,
             adresse: this.patient.adresse
-          }) 
-          console.log("la date temp est  :" + this.datePipe.transform(this.patient.dateNaissance,'yyyy-MM-dd'));  
+          })
         });
     }
     
@@ -82,12 +81,8 @@ export class NewPatientComponent implements OnInit {
       dateNaissance:patientInput.dateNaissance
     }
     patientTemp.dateNaissance = this.initialDate.value!
-    console.log("la date temp est  :" + this.initialDate.value);
     console.log("patientTemp.dateNaissance est  :" + patientTemp.dateNaissance);
 
-    if(this.patient != undefined){
-      patientTemp.id = this.patient.id  
-    }
     this.patientService.ajouterPatient(patientTemp).subscribe(
       object => {
         this.router.navigate(['/list-patients']);

@@ -1,5 +1,6 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { IMission } from 'src/app/modele/mission';
 import { MissionsService } from 'src/app/services/missions/missions.service';
@@ -16,11 +17,14 @@ export class NewMissionComponent implements OnInit {
   titre: string="Ajouter une nouvelle mission";
   submitted: boolean=false;
 
-  constructor(private formBuilder:FormBuilder, private missionService:MissionsService,private router:Router, private infosPath:ActivatedRoute) {
+  initialDateCreation = new FormControl(new Date());
+  initialDateModification = new FormControl(new Date());
+
+  constructor(private formBuilder:FormBuilder, private missionService:MissionsService,private router:Router, private infosPath:ActivatedRoute, private datePipe: DatePipe) {
     this.forme = this.formBuilder.group({
       libelle: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
       description: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
-      etat: ['False', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
+      etat: ['False', [Validators.required, Validators.minLength(1), Validators.maxLength(50)]],
       dateCreation: ['/', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
       dateModification: ['/']
     })
@@ -38,8 +42,8 @@ export class NewMissionComponent implements OnInit {
             libelle: this.mission.libelle,
             description: this.mission.description,
             etat: this.mission.etat,
-            dateCreation: this.mission.dateCreation,
-            dateModification: this.mission.dateModification
+            dateCreation: this.datePipe.transform(this.mission.dateCreation,'yyyy-MM-dd'),
+            dateModification: this.datePipe.transform(this.mission.dateModification,'yyyy-MM-dd')
           })
       });
     }
@@ -63,9 +67,9 @@ export class NewMissionComponent implements OnInit {
       dateModification: missionInput.dateModification
     }
 
-    if(this.mission != undefined){
-      missionTemp.id = this.mission.id  
-    }
+    missionTemp.dateCreation = this.initialDateCreation.value!
+    missionTemp.dateModification = this.initialDateModification.value!
+
     this.missionService.ajouterMission(missionTemp).subscribe(
       object => {
         this.router.navigate(['/list-missions']);

@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 
 import { DocumentsRoutingModule } from './documents-routing.module';
 import { NewFormDocumentComponent } from './new-form-document/new-form-document.component';
@@ -46,6 +46,7 @@ import { ViewFormDocumentComponent } from './view-form-document/view-form-docume
         extend:true
     }),
     BrowserModule
-  ]
+  ],
+  providers: [DatePipe],
 })
 export class DocumentsModule { }

@@ -1,5 +1,6 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, MaxLengthValidator,MinLengthValidator,ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, MaxLengthValidator,MinLengthValidator,ReactiveFormsModule, Validators, FormControl } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { EMPTY, Observable } from 'rxjs';
 import { IService } from 'src/app/modele/service';
@@ -17,8 +18,12 @@ export class NewServicesComponent implements OnInit {
   btnLibelle: string="Ajouter";
   titre: string="Ajouter un nouveau service";
   submitted: boolean=false;
+  
+  initialDateDerniereModification = new FormControl(new Date());
+  initialDateAttribution = new FormControl(new Date());
+  initialDateFin = new FormControl(new Date());
 
-  constructor(private formBuilder:FormBuilder, private serviceService:ServicesService,private router:Router, private infosPath:ActivatedRoute) { 
+  constructor(private formBuilder:FormBuilder, private serviceService:ServicesService,private router:Router, private infosPath:ActivatedRoute, private datePipe: DatePipe) { 
     this.forme = this.formBuilder.group({
       libelle: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
       etat: ['Non assigne', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
@@ -39,9 +44,9 @@ export class NewServicesComponent implements OnInit {
           this.forme.setValue({
             libelle: this.service.libelle,
             etat: this.service.etat,
-            dateDerniereModification: this.service.dateDerniereModification,
-            dateAttribution: this.service.dateAttribution,
-            dateFin:  this.service.dateFin
+            dateDerniereModification: this.datePipe.transform(this.service.dateDerniereModification,'yyyy-MM-dd'),
+            dateAttribution: this.datePipe.transform(this.service.dateAttribution,'yyyy-MM-dd'),
+            dateFin:  this.datePipe.transform(this.service.dateFin,'yyyy-MM-dd')
           })
       });
     }
@@ -65,10 +70,7 @@ export class NewServicesComponent implements OnInit {
       nombreTotalAttributions: serviceInput.nombreTotalAttributions
     }
 
-
-    if(this.service != undefined){
-      serviceTemp.id = this.service.id  
-    }
+    
     this.serviceService.ajouterService(serviceTemp).subscribe(
       object => {
         this.router.navigate(['/list-services']);
