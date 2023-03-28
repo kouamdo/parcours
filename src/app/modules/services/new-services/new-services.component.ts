@@ -70,6 +70,9 @@ export class NewServicesComponent implements OnInit {
       nombreTotalAttributions: serviceInput.nombreTotalAttributions
     }
 
+    if(this.service != undefined){
+      serviceTemp.id = this.service.id  
+    }
     
     this.serviceService.ajouterService(serviceTemp).subscribe(
       object => {

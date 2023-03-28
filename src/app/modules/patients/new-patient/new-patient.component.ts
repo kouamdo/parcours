@@ -83,6 +83,9 @@ export class NewPatientComponent implements OnInit {
     patientTemp.dateNaissance = this.initialDate.value!
     console.log("patientTemp.dateNaissance est  :" + patientTemp.dateNaissance);
 
+    if(this.patient != undefined){
+      patientTemp.id = this.patient.id  
+    }
     this.patientService.ajouterPatient(patientTemp).subscribe(
       object => {
         this.router.navigate(['/list-patients']);

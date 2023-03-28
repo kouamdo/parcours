@@ -81,6 +81,9 @@ export class NewAttributComponent implements OnInit {
     attributTemp.dateCreation = this.initialDateCreation.value!
     attributTemp.dateModification = this.initialDateModification.value!
     
+    if(this.attribut != undefined){
+      attributTemp.id = this.attribut.id  
+    }
 
     this.attributService.ajouterAttribut(attributTemp).subscribe(
       object => {

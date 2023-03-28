@@ -1,6 +1,6 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit, Input } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { EMPTY, Observable } from 'rxjs';
 import { IService } from 'src/app/modele/service';
@@ -31,8 +31,6 @@ export class NewTicketComponent implements OnInit {
   id_ticket : string = "0";
   libelle_service : string = "";
   step : any = 1;
-  
-  initialDate_heure = new FormControl(new Date());
 
   services$:Observable<IService[]>=EMPTY;
   tickets$:Observable<ITicket[]>=EMPTY;
@@ -64,7 +62,7 @@ export class NewTicketComponent implements OnInit {
           this.ticket = x; console.log(this.ticket);
           this.forme.setValue({
             idUnique: this.ticket.idUnique,
-            date_heure: this.datePipe.transform(this.ticket.date_heure,'yyyy-MM-dd'),
+            date_heure: this.ticket.date_heure,
             idFileAttente: this.ticket.idFileAttente,
             idPersonne: this.ticket.idPersonne,
             statut: this.ticket.statut
@@ -94,6 +92,7 @@ export class NewTicketComponent implements OnInit {
       )
 
     this.nextStep();
+    //this.removeData();
   }
 
   nextStep(){

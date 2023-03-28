@@ -70,6 +70,9 @@ export class NewMissionComponent implements OnInit {
     missionTemp.dateCreation = this.initialDateCreation.value!
     missionTemp.dateModification = this.initialDateModification.value!
 
+    if(this.mission != undefined){
+      missionTemp.id = this.mission.id  
+    }
     this.missionService.ajouterMission(missionTemp).subscribe(
       object => {
         this.router.navigate(['/list-missions']);
