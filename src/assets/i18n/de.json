@@ -95,7 +95,7 @@
         "table":{
             "title1":"Id",
             "title2":"Unique Id",
-            "title3":"last modification Date / time ",
+            "title3":"last modification's Date ",
             "title4":"Id in the queue",
             "title5":"Id person",
             "title6":"Status"
@@ -118,30 +118,32 @@
             "title1":"title",
             "title2":"Description",
             "title3":"Status",
-            "title4":"Date Creation",
-            "title5":"Date Modification",
+            "title4":"Allocation's Date",
+            "title5":"Modification's Date",
             "title6":"Type"
         },
         "form":{
-            "text1":"Le libelle est obligatoire.",
-            "text2":"L'etat est obligatoire.",
-            "text3":"La date de derniere modification est obligatoire."
+            "text1":"Label is required.",
+            "text2":"Status is requied",
+            "text3":"the Last modification's date is requied"
         }
     },
     "missions":{
         "table":{
-            "title1":"Libelle",
+            "title1":"Label",
             "title2":"Description",
-            "title3":"Etat",
-            "title4":"Date Creation",
-            "title5":"Date Modification"
+            "title3":"Statut",
+            "title4":"Allocation's Date",
+            "title5":"Modification's Date",
+            "title6":"Service"
         },
         "form":{
-            "text1":"Le titre est obligatoire.",
-            "text2":"La description est obligatoire.",
-            "text3":"L'etat est obligatoire.",
-            "text4":"La date de derniere modification est obligatoire.",
-            "text5":"Le type est obligatoire."
+            "text1":"Title is required.",
+            "text2":"Description is required.",
+            "text3":"Statut is required.",
+            "text4":"Last modification's date is required.",
+            "text5":"Type is required.",
+            "title6":"Service is required"
         }
     },
     "document":{
@@ -150,19 +152,24 @@
         "title1":"Affichage des resuttats",
         "table":{
             "title0":"Id",
-            "title1":"Titre",
+            "title1":"Title",
             "title2":"Description",
             "title3":"Missions",
             "title4":"Attributs",
-            "title5":"Selectionner les missions",
-            "title6":"Selectionner les attributs"
+            "title5":"Select missions",
+            "title6":"Select attributs"
         },
         "form":{
-            "text1":"Le Titre est obligatoire.",
-            "text2":"La Description est obligatoire.",
-            "text3":"Les Missions sont obligatoires.",
-            "text4":"Les attributs sont obligatoires."
-        }       
+            "text1":"Title is required.",
+            "text2":"Description is required.",
+            "text3":"Missions are required.",
+            "text4":"Attributs are required."
+        },
+        "view":{
+            "title":"Document's Model",
+            "text1":"missions's list of document",
+            "text2":"attributs's list of document"
+        }      
     },
     "theme":{
         "libelle":"theme"

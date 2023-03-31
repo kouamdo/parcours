@@ -1,3 +1,5 @@
+import { IService } from "./service"
+
 export interface IMission {
     id:string,
     libelle:string,
@@ -5,4 +7,5 @@ export interface IMission {
     etat:boolean,
     dateCreation:Date,
     dateModification:Date
+    service:IService
 }

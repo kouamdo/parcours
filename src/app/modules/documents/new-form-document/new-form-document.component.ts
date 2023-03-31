@@ -10,6 +10,7 @@ import { IAfficheDocument } from 'src/app/modele/affiche-document';
 import { IAttributs } from 'src/app/modele/attributs';
 import { IDocument } from 'src/app/modele/document';
 import { IMission } from 'src/app/modele/mission';
+import { IService } from 'src/app/modele/service';
 import { AttributService } from 'src/app/services/attributs/attribut.service';
 import { DocumentService } from 'src/app/services/documents/document.service';
 import { MissionsService } from 'src/app/services/missions/missions.service';
@@ -29,6 +30,7 @@ export class NewFormDocumentComponent implements OnInit {
   submitted: boolean=false;
   idMission : string = "";
   idAttribut : string = "";
+  serviceDeMission!: IService;
 
   missionsTemp : IMission = {
     id: '',
@@ -36,7 +38,8 @@ export class NewFormDocumentComponent implements OnInit {
     description: '',
     etat: false,
     dateCreation: new Date,
-    dateModification:  new Date
+    dateModification:  new Date,
+    service:  this.serviceDeMission
   }
 
   afficheDocument : IAfficheDocument = {
@@ -211,7 +214,8 @@ export class NewFormDocumentComponent implements OnInit {
             description: '',
             etat: false,
             dateCreation: new Date,
-            dateModification:  new Date
+            dateModification:  new Date,
+            service : object.service
           }
           this.missionsTemp.id = object.id
           this.missionsTemp.libelle = object.libelle
@@ -219,6 +223,7 @@ export class NewFormDocumentComponent implements OnInit {
           this.missionsTemp.etat = object.etat
           this.missionsTemp.dateCreation = object.dateCreation
           this.missionsTemp.dateModification = object.dateModification
+          this.missionsTemp.service = object.service
           
           this.dataMission.push(this.missionsTemp)
         }

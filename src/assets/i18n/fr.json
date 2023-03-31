@@ -96,7 +96,7 @@
         "table":{
             "title1":"Id",
             "title2":"Id unique",
-            "title3":"Date et heure derniere modification",
+            "title3":"Date derniere modification",
             "title4":"Id dans la File d'attente",
             "title5":"Id personne",
             "title6":"Statut"
@@ -137,14 +137,17 @@
             "title2":"Description",
             "title3":"Etat",
             "title4":"Date Creation",
-            "title5":"Date Modification"
+            "title5":"Date Modification",
+            "title6":"Service"
         },
         "form":{
             "text1":"Le libelle est obligatoire.",
             "text2":"La description est obligatoire.",
             "text3":"L'etat est obligatoire.",
             "text4":"La date de creation est obligatoire.",
-            "text5":"Le type est obligatoire."
+            "text5":"Le type est obligatoire.",
+            "text6":"Le service est obligatoire",
+            "text7":"Selectionner un service"
         }
     },
     "document":{

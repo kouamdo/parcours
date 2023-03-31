@@ -22,7 +22,7 @@ export class ListMissionComponent implements OnInit {
   ELEMENTS_TABLE: IMission[] = [];
   filteredOptions: IMission[] | undefined;
 
-  displayedColumns: string[] = ['id', 'libelle', 'description', 'etat', 'dateCreation', 'dateModification', 'actions'];
+  displayedColumns: string[] = ['id', 'libelle', 'description', 'etat', 'service', 'dateCreation', 'dateModification', 'actions'];
 
   dataSource = new MatTableDataSource<IMission>(this.ELEMENTS_TABLE);
 

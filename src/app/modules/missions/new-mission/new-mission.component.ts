@@ -2,8 +2,11 @@ import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
+import { Observable, EMPTY } from 'rxjs';
 import { IMission } from 'src/app/modele/mission';
+import { IService } from 'src/app/modele/service';
 import { MissionsService } from 'src/app/services/missions/missions.service';
+import { ServicesService } from 'src/app/services/services/services.service';
 
 @Component({
   selector: 'app-new-mission',
@@ -16,17 +19,20 @@ export class NewMissionComponent implements OnInit {
   btnLibelle: string="Ajouter";
   titre: string="Ajouter une nouvelle mission";
   submitted: boolean=false;
+  services$: Observable<IService[]>=EMPTY;
+  idService: string = ""
 
   initialDateCreation = new FormControl(new Date());
   initialDateModification = new FormControl(new Date());
 
-  constructor(private formBuilder:FormBuilder, private missionService:MissionsService,private router:Router, private infosPath:ActivatedRoute, private datePipe: DatePipe) {
+  constructor(private formBuilder:FormBuilder, private missionService:MissionsService,private router:Router, private infosPath:ActivatedRoute, private datePipe: DatePipe, private serviceService:ServicesService) {
     this.forme = this.formBuilder.group({
       libelle: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
       description: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
       etat: ['False', [Validators.required, Validators.minLength(1), Validators.maxLength(50)]],
       dateCreation: ['/', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
-      dateModification: ['/']
+      dateModification: ['/'],
+      service: ['', Validators.required]
     })
   }
 
@@ -43,10 +49,12 @@ export class NewMissionComponent implements OnInit {
             description: this.mission.description,
             etat: this.mission.etat,
             dateCreation: this.datePipe.transform(this.mission.dateCreation,'yyyy-MM-dd'),
-            dateModification: this.datePipe.transform(this.mission.dateModification,'yyyy-MM-dd')
+            dateModification: this.datePipe.transform(this.mission.dateModification,'yyyy-MM-dd'),
+            service: this.mission.service
           })
       });
     }
+    this.services$ = this.getAllServices();
   }
 
   get f(){
@@ -56,6 +64,9 @@ export class NewMissionComponent implements OnInit {
   onSubmit(missionInput:any){
 
     this.submitted=true;
+    const _serviceSelected = (this.forme.get('service'))!.value;
+    this.idService = _serviceSelected
+    console.log('le service est : ', _serviceSelected)
     if(this.forme.invalid) return;
 
     let missionTemp : IMission={
@@ -64,15 +75,23 @@ export class NewMissionComponent implements OnInit {
       description: missionInput.description,
       etat: missionInput.etat,
       dateCreation: missionInput.dateCreation,
-      dateModification: missionInput.dateModification
+      dateModification: missionInput.dateModification,
+      service: missionInput.service
     }
 
+    this.serviceService.getServiceById(this.idService).subscribe(
+      value => {
+        missionTemp.service = value
+        console.log('value est : ', missionTemp.service)
+      }
+    )
     missionTemp.dateCreation = this.initialDateCreation.value!
     missionTemp.dateModification = this.initialDateModification.value!
 
     if(this.mission != undefined){
       missionTemp.id = this.mission.id  
     }
+    console.log('le resultat est : ', missionTemp.service.libelle)
     this.missionService.ajouterMission(missionTemp).subscribe(
       object => {
         this.router.navigate(['/list-missions']);
@@ -81,5 +100,8 @@ export class NewMissionComponent implements OnInit {
         console.log(error)
       }
     )
+  }
+  private getAllServices(){
+    return this.serviceService.getAllServices();
   }
 }

@@ -33,8 +33,8 @@ export class MissionsService {
     );        
   }
  
-   ajouterMission(service:IMission )
+   ajouterMission(mission:IMission )
    {
-     return this.http.post("api/missions",service);
+     return this.http.post("api/missions",mission);
    }
 }

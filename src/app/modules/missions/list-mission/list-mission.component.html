@@ -52,6 +52,12 @@
                         <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'missions.table.title3' | translate}} </th>
                         <td class="text-dark text-center containCell" mat-cell *matCellDef="let element"> {{element.etat}} </td>
                     </ng-container>
+
+                    <!-- service Column -->
+                    <ng-container matColumnDef="service">
+                        <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'missions.table.title6' | translate}} </th>
+                        <td class="text-dark text-center containCell" mat-cell *matCellDef="let element"> {{element.service.libelle}} </td>
+                    </ng-container>
                     
                     <!-- dateCreation Column -->
                     <ng-container matColumnDef="dateCreation">

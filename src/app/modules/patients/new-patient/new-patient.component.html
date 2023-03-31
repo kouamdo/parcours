@@ -48,7 +48,7 @@
                                     <label for="dateNaissance" class="label" >
                                         {{"patient.table.title3" | translate}}
                                     </label>
-                                    <input  type="date" formControlName="dateNaissance" [formControl]="initialDate"  name="dateNaissance" id="dateNaissance" placeholder="{{'patient.table.title3' | translate}}" value="" required class="form-control">
+                                    <input  type="date" formControlName="dateNaissance"  name="dateNaissance" id="dateNaissance" placeholder="{{'patient.table.title3' | translate}}" value="" required class="form-control">
                                 </div>
                                 <div  *ngIf="submitted && f['dateNaissance'].errors"  class="alert alert-danger" >
                                     <div *ngIf="f['dateNaissance'].errors['required']">{{'patient.form.text3' | translate}}</div>
