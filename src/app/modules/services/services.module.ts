@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { ServicesRoutingModule } from './services-routing.module';
 import { ListServicesComponent } from './list-services/list-services.component';
 import { NewServicesComponent } from './new-services/new-services.component';
@@ -43,6 +43,7 @@ import { MatTableModule } from '@angular/material/table';
         extend:true
     }),
     BrowserModule 
-  ]
+  ],
+  providers: [DatePipe],
 })
 export class ServicesModule { }

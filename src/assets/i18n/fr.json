@@ -44,7 +44,10 @@
         "button2":"Retour",
         "button3":"Annuler",
         "button4":"Précédent",
-        "button5":"Aucune action"
+        "button5":"Aucune action",
+        "button6":"valider",
+        "button7":"Modifier",
+        "button8":"Supprimer"
     },
     "patient":{
         "text":"Patients retrouvé(e)s",
@@ -69,7 +72,7 @@
             "text1":"Le nom est obligatoire.",
             "text2":"Le prénom est obligatoire.",
             "text3":"La date de naissance est obligatoire.",
-            "text4":"L'addresse mail est obligatoire. est obligatoire."
+            "text4":"L'addresse mail est obligatoire."
         }       
     },
     "services":{
@@ -93,7 +96,7 @@
         "table":{
             "title1":"Id",
             "title2":"Id unique",
-            "title3":"Date et heure derniere modification",
+            "title3":"Date derniere modification",
             "title4":"Id dans la File d'attente",
             "title5":"Id personne",
             "title6":"Statut"
@@ -110,6 +113,67 @@
         "panel":{
             "text1":"voici les infos voici les infos voici les infos voici les infos voici les infos voici les infos"
         }
+    },
+    "attributs":{
+        "table":{
+            "title1":"titre",
+            "title2":"Description",
+            "title3":"Etat",
+            "title4":"Date Creation",
+            "title5":"Date Modification",
+            "title6":"Type"
+        },
+        "form":{
+            "text1":"Le titre est obligatoire.",
+            "text2":"La description est obligatoire.",
+            "text3":"L'etat est obligatoire.",
+            "text4":"La date de derniere modification est obligatoire.",
+            "text5":"Le type est obligatoire."
+        }
+    },
+    "missions":{
+        "table":{
+            "title1":"Libelle",
+            "title2":"Description",
+            "title3":"Etat",
+            "title4":"Date Creation",
+            "title5":"Date Modification",
+            "title6":"Service"
+        },
+        "form":{
+            "text1":"Le libelle est obligatoire.",
+            "text2":"La description est obligatoire.",
+            "text3":"L'etat est obligatoire.",
+            "text4":"La date de creation est obligatoire.",
+            "text5":"Le type est obligatoire.",
+            "text6":"Le service est obligatoire",
+            "text7":"Selectionner un service"
+        }
+    },
+    "document":{
+        "text":"documents retrouvé(e)s",
+        "search-bar":"Rechercher",
+        "title1":"Affichage des resuttats",
+        "table":{
+            "title0":"Id",
+            "title1":"Titre",
+            "title2":"Description",
+            "title3":"Missions",
+            "title4":"Attributs",
+            "title5":"Selectionner les missions",
+            "title6":"Selectionner les attributs"
+        },
+        "form":{
+            "text1":"Le Titre est obligatoire.",
+            "text2":"La Description est obligatoire.",
+            "text3":"Les Missions sont obligatoires.",
+            "text4":"Les attributs sont obligatoires."
+        },
+        "view":{
+            "title":"Modele du document",
+            "text1":"liste des missions du document",
+            "text2":"liste des attributs du document"
+        }      
     },
     "theme":{
         "libelle":"theme"

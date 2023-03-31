@@ -1,0 +1,244 @@
+<div id="mainSection">
+    <div class="card block">
+        <div class="card-header pt-4 pb-4 entete">{{ titre }}</div>
+        <div class="card-body">
+            <form [formGroup]="forme" (ngSubmit)="onSubmit(forme.value)" *ngIf="forme" >
+                <div class="">
+                    <div class="">
+                        <div class="form-group">
+                            <div>
+                                <div class="champs">
+                                    <label for="titre" class="label">
+                                        {{'document.table.title1' | translate}}
+                                    </label>
+                                    <input type="text" formControlName="titre" name="titre" id="titre"  placeholder="{{'document.table.title1' | translate}}"  class="form-control" required>
+                                </div>
+                                <div  *ngIf="submitted && f['titre'].errors"  class="alert alert-danger" >
+                                    <div *ngIf="f['titre'].errors['required']">{{'document.form.text1' | translate}}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div>
+                                <div class="champs">
+                                    <label for="description" class="label" >
+                                        {{"document.table.title2" | translate}}
+                                    </label>
+                                    <textarea type="textarea" formControlName="description" name="description" id="description" placeholder="{{'document.table.title2' | translate}}" class="form-control"  required></textarea>
+                                </div>
+                                <div  *ngIf="submitted && f['description'].errors"  class="alert alert-danger" >
+                                    <div *ngIf="f['description'].errors['required']">{{'document.form.text2' | translate}}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="champs">
+                                <label  for="missions" class="label">
+                                    {{"document.table.title3" | translate}}
+                                </label>
+                                <div class="dropdown w-100">
+                                    <button class="select dropdown-toggle btn" name="missions" id="missions" type="button" id="triggerId" data-toggle="dropdown" aria-haspopup="true"
+                                            aria-expanded="false">
+                                        {{'document.table.title5' | translate}}
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="triggerId" formArrayName="_missions">
+                                        <label class="dropdown-item" for="missions" *ngFor="let missions of (mission$ | async) as mission let i=index">
+                                            <input  type="checkbox" required   [value]="missions.id" name="missions" [id]="missions.id" (click)="getMissionId(missions.id)" (change)="onCheckMissionChange($event)">
+                                            {{missions.libelle}}
+                                        </label>
+                                    </div>
+                                </div>  
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="champs">
+                                <label  for="attributs" class="label">
+                                    {{"document.table.title4" | translate}}
+                                </label>
+                                <div class="dropdown w-100">
+
+                                    <!-- affichage list attributs selectiones -->
+                                    <div class="listAttr">
+                                        <button type="button" class="btn p-0" data-toggle="modal" data-target="#modalAttributs" title="{{'lists.button7' | translate}}">
+                                            <i class="fas fa-pen-square"></i>
+                                        </button>
+                                        <span *ngFor="let listeAttributs of dataSourceAttributResultat.data">
+                                            {{listeAttributs.titre | lowercase}}<span>, </span>
+                                        </span>
+                                    </div>
+                                </div>
+                                <!-- Modal -->
+                                <div class="modal fade" id="modalAttributs" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+                                    <div class="modal-dialog modal-xl" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title">{{'document.table.title6' | translate}}</h5>
+                                                <div class='card-hearder pt-3' >
+                                                </div>
+                                                <button type="button" class="close text-danger" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class='card-hearder pt-3' >
+                                                    <div class="d-flex align-items-center justify-content-end mr-4 tableTools">
+                                                        <div class="form-inline mr-3">
+                                                            <form class="example-form">
+                                                                <mat-form-field class="example-full-width" appearance="fill">
+                                                                  <mat-label class="searchBar">{{'patient.search-bar' | translate}}</mat-label>
+                                                                  <input type="text" matInput aria-label="Rechercher" [formControl]="myControl" [matAutocomplete]="auto">
+                                                                  <mat-autocomplete class="blockAutocomplate" #auto="matAutocomplete" [displayWith]="displayFn">
+                                                                    <mat-option class="options" *ngFor="let option of filteredOptions" [value]="option" (onSelectionChange)="rechercherListingAttribut(option)">
+                                                                      {{option.titre}}
+                                                                    </mat-option>
+                                                                  </mat-autocomplete>
+                                                                </mat-form-field>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!-- tableau listing des attributs -->
+                                                
+                                                <div class="card-body p-0 tableBlock" id="tableList">
+                                                    <div class='table-responsive w-100'>
+                                                        <table class='table table-sm table-centered table-striped table-bordered w-100' mat-table [dataSource]="dataSourceAttribut" matSort (matSortChange)="announceSortChange($event)">
+                                                        
+                                                            <!-- id Column -->
+                                                            <ng-container matColumnDef="id">
+                                                                <th class="text-dark containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'tickets.table.title1' | translate}} </th>
+                                                                <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.id}} </td>
+                                                            </ng-container>
+                                                        
+                                                            <!-- titre Column -->
+                                                            <ng-container matColumnDef="titre">
+                                                                <th class="text-dark containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'attributs.table.title1' | translate}} </th>
+                                                                <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.titre}} </td>
+                                                            </ng-container>
+                                                            
+                                                            <!-- description Column -->
+                                                            <ng-container matColumnDef="description">
+                                                                <th class="text-dark containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'attributs.table.title2' | translate}} </th>
+                                                                <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.description}} </td>
+                                                            </ng-container>
+                                                            
+                                                            <!-- etat Column -->
+                                                            <ng-container matColumnDef="etat">
+                                                                <th class="text-dark containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'attributs.table.title3' | translate}} </th>
+                                                                <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.etat}} </td>
+                                                            </ng-container>
+                                                            
+                                                            <!-- dateCreation Column -->
+                                                            <ng-container matColumnDef="dateCreation">
+                                                                <th class="text-dark containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'attributs.table.title4' | translate}} </th>
+                                                                <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.dateCreation | date: 'dd/MM/yyyy'}} </td>
+                                                            </ng-container>
+                                                            
+                                                            <!-- dateModification Column -->
+                                                            <ng-container matColumnDef="dateModification">
+                                                                <th class="text-dark containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'attributs.table.title5' | translate}} </th>
+                                                                <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.dateModification | date: 'dd/MM/yyyy'}} </td>
+                                                            </ng-container>
+
+                                                            <!-- type Column -->
+                                                            <ng-container matColumnDef="type">
+                                                                <th class="text-dark containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'attributs.table.title6' | translate}} </th>
+                                                                <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.type}} </td>
+                                                            </ng-container>
+
+                                                            <!-- Actions column -->
+                                                            <ng-container matColumnDef="actions">
+                                                                <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{"patient.table.title8" | translate}} </th>
+                                                                <td class="text-dark containCell" mat-cell *matCellDef="let element">
+                                                                    <div class="actions" class="">
+                                                                        <label style="width: 2px;" for="attributs">
+                                                                            <input type="checkbox" required formArrayName="_attributs" [value]="element.titre" name="attributs" id="attributs" (click)="getAttributId(element.id)" (change)="onCheckAttributChange($event)">
+                                                                        </label>
+                                                                    </div>
+                                                                </td>
+                                                            </ng-container>
+                                                            <tr mat-header-row *matHeaderRowDef="displayedAttributsColumns"></tr>
+                                                            <tr mat-row *matRowDef="let row; columns: displayedAttributsColumns;"></tr>
+                                                        </table>
+                                                        <mat-paginator style="background-color: rgba(126, 169, 126, 0.79);" [pageSizeOptions]="[2, 5, 10, 20]"
+                                                                       showFirstLastButtons
+                                                                       aria-label="Select page of periodic elements">
+                                                        </mat-paginator>
+                                                    </div>
+                                                </div>
+                                                <!-- tableau affichage des resultats -->
+                                                <div class="result">
+                                                    <h2>
+                                                        {{'document.title1' | translate}}
+                                                    </h2>
+                                                    <div class="card" >
+                                                        <div class="card-body p-0 tableBlock" id="tableResultats">
+                                                            <div class='table-responsive w-100 m-0'>
+                                                                <table class='table table-sm table-centered table-striped w-100' mat-table [dataSource]="dataSourceAttributResultat" matSort (matSortChange)="announceSortChange($event)">
+                                                                    <!-- titre Column -->
+                                                                    <ng-container matColumnDef="titre">
+                                                                        <th class="text-dark containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'attributs.table.title1' | translate}} </th>
+                                                                        <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.titre}} </td>
+                                                                    </ng-container>
+                                                                    <!-- description Column -->
+                                                                    <ng-container matColumnDef="description">
+                                                                        <th class="text-dark containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'attributs.table.title2' | translate}} </th>
+                                                                        <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.description}} </td>
+                                                                    </ng-container>
+                                                                    <!-- type Column -->
+                                                                    <ng-container matColumnDef="type">
+                                                                        <th class="text-dark containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'attributs.table.title6' | translate}} </th>
+                                                                        <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.type}} </td>
+                                                                    </ng-container>
+                                                                    <!-- actions Column -->
+                                                                    <ng-container matColumnDef="actions">
+                                                                        <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{"patient.table.title8" | translate}} </th>
+                                                                        <td class="text-dark containCell" mat-cell *matCellDef="let element;  let i=index">
+                                                                            <div class="actions">
+                                                                                <button class="btn p-0" name="attributs"  [value]="element.id" id="attributs" title="clicker pour annuler la selection" (click)="retirerSelectionAttribut(i)">
+                                                                                    <i class="fa fa-trash text-danger" aria-hidden="true"></i>
+                                                                                </button>
+                                                                            </div>
+                                                                        </td>
+                                                                    </ng-container>
+                                                                    <tr mat-header-row *matHeaderRowDef="displayedAttributsColumns"></tr>
+                                                                    <tr mat-row *matRowDef="let row; columns: displayedAttributsColumns;"></tr>
+                                                                </table>
+                                                                <mat-paginator style="background-color: rgba(126, 169, 126, 0.79);" [pageSizeOptions]="[5, 10, 20]"
+                                                                               showFirstLastButtons
+                                                                               aria-label="Select page of periodic elements">
+                                                                </mat-paginator>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">{{'lists.button6' | translate}}</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>  
+                    </div>
+                </div>
+                <div class="actionButton">
+                    <button class="btn" routerLink="../../list-documents">{{'lists.button2' | translate}}</button>
+                    <button type="submit" class="btn">{{btnLibelle}}</button>
+                </div>
+            </form>
+        </div>
+        <!-- <p class="card w-100 pt-5">{{ forme.value | json }}</p>
+
+        {{forme.value._attributs}} -->
+    </div>
+</div>
+<div>
+    <p *ngFor="let m of dataSourceMissionResultat.data">
+        {{m.id}} 
+          {{m.libelle}} 
+         {{m.etat}} 
+         {{m.dateCreation}}
+    </p>
+</div>

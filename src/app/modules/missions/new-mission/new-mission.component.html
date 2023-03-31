@@ -1,0 +1,103 @@
+<div id="mainSection">
+    <div class="card block">
+        <div class="card-header pt-4 pb-4 entete">{{ titre }}</div>
+        <div class="card-body">
+            <form [formGroup]="forme" (ngSubmit)="onSubmit(forme.value)" *ngIf="forme" >
+                <div class="">
+                    <div class="">
+                        <div class="form-group">
+                            <div>
+                                <div class="champs">
+                                    <label for="libelle" class="label">
+                                        {{'missions.table.title1' | translate}}
+                                    </label>
+                                    <input type="text" formControlName="libelle" name="libelle" id="libelle"  placeholder="{{'missions.table.title1' | translate}}"  class="form-control" required>
+                                </div>
+                                <div  *ngIf="submitted && f['libelle'].errors"  class="alert alert-danger" >
+                                    <div *ngIf="f['libelle'].errors['required']">{{'missions.form.text1' | translate}}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div>
+                                <div class="champs">
+                                    <label for="description" class="label" >
+                                        {{'missions.table.title2' | translate}}
+                                    </label>
+                                    <input  type="text" formControlName="description"  name="description" id="description" placeholder="{{'missions.table.title2' | translate}}" value="" required class="form-control">
+                                </div>
+                                <div  *ngIf="submitted && f['description'].errors"  class="alert alert-danger" >
+                                    <div *ngIf="f['description'].errors['required']">{{'missions.form.text2' | translate}}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div>
+                                <div class="champs">
+                                    <label for="etat" class="label" >
+                                        {{'missions.table.title3' | translate}}
+                                    </label>
+                                    <input  type="text" formControlName="etat"  name="etat" id="etat" placeholder="{{'missions.table.title3' | translate}}" value="" required class="form-control">
+                                </div>
+                                <div  *ngIf="submitted && f['etat'].errors"  class="alert alert-danger" >
+                                    <div *ngIf="f['etat'].errors['required']">{{'missions.form.text3' | translate}}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div>
+                                <div class="champs">
+                                    <label for="service" class="label" >
+                                        {{'missions.table.title6' | translate}}
+                                    </label>
+                                    <div class="dropdown w-100">
+                                        <button class="btn btn-outline-secondary w-100 dropdown-toggle text-left" type="button" id="triggerId" data-toggle="dropdown" aria-haspopup="true"
+                                                aria-expanded="false">
+                                                {{'missions.form.text7' | translate}}
+                                                </button>
+                                        <div class="dropdown-menu" aria-labelledby="triggerId">
+                                            <ul class="nav justify-content-center">
+                                                <li class="nav-item dropdown-item" *ngFor="let services of (services$ |async) as service let i=index">
+                                                    <label for="service">
+                                                        <input type="radio" formControlName="service"  name="service" id="{{service[i].id}}" value="{{service[i].id}}" required class="radioButton" (change)="associerService($event)">
+                                                        <span>{{services.libelle}}</span>
+                                                    </label>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div  *ngIf="submitted && f['service'].errors"  class="alert alert-danger" >
+                                    <div *ngIf="f['service'].errors['required']">{{'missions.form.text6' | translate}}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="champs">
+                                <label  for="dateCreation"  class="label" >
+                                    {{'missions.table.title4' | translate}}
+                                </label>
+                                <input type="date" formControlName="dateCreation" name="dateCreation" id="dateCreation" placeholder="{{'missions.table.title4' | translate}}" class="form-control" >
+                            </div>
+                            <div  *ngIf="submitted && f['dateCreation'].errors"  class="alert alert-danger" >
+                                <div *ngIf="f['dateCreation'].errors['required']">{{'missions.form.text4' | translate}}</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="champs">
+                                <label  for="dateModification"  class="label" >
+                                    {{'missions.table.title5' | translate}}
+                                </label>
+                                <input type="date" formControlName="dateModification" name="dateModification" id="dateModification" placeholder="{{'missions.table.title5' | translate}}" class="form-control" >
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="actionButton">
+                    <button class="btn" routerLink="../list-missions">{{'lists.button2' | translate}}</button>
+                    <button type="submit" class="btn">{{btnLibelle}}</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

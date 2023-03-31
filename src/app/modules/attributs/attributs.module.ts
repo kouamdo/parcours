@@ -1,30 +1,31 @@
 import { NgModule } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
-import { NewPatientComponent } from './new-patient/new-patient.component';
-import { ListPatientsComponent } from './list-patients/list-patients.component';
-import { AppRoutingModule } from 'src/app/app-routing.module';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { BrowserModule } from '@angular/platform-browser';
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import { HttpLoaderFactory } from 'src/app/app.module';
+
+import { AttributsRoutingModule } from './attributs-routing.module';
+import { ListAttributsComponent } from './list-attributs/list-attributs.component';
 import { HttpClient } from '@angular/common/http';
-import { TicketsModule } from '../tickets/tickets.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
+import { BrowserModule } from '@angular/platform-browser';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { HttpLoaderFactory } from 'src/app/app.module';
+import { NewAttributComponent } from './new-attribut/new-attribut.component';
+
 
 @NgModule({
   declarations: [
-    NewPatientComponent,
-    ListPatientsComponent
+    ListAttributsComponent,
+    NewAttributComponent
   ],
   imports: [
     CommonModule,
+    AttributsRoutingModule,
     FormsModule,
-    AppRoutingModule,
     ReactiveFormsModule,
     MatAutocompleteModule,
     MatInputModule,
@@ -32,7 +33,6 @@ import { MatTableModule } from '@angular/material/table';
     MatPaginatorModule,
     MatTableModule,
     MatSortModule,
-    TicketsModule,
     TranslateModule.forChild({
         loader: {
             provide: TranslateLoader,
@@ -41,8 +41,8 @@ import { MatTableModule } from '@angular/material/table';
         },
         extend:true
     }),
-    BrowserModule 
+    BrowserModule
   ],
   providers: [DatePipe],
 })
-export class PatientsModule { }
+export class AttributsModule { }

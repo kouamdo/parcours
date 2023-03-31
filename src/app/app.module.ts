@@ -18,6 +18,9 @@ import { MatSlideToggle, MatSlideToggleModule } from "@angular/material/slide-to
 import { ServicesModule } from './modules/services/services.module';
 import { MenuComponent } from './menu/menu.component';
 import { TicketsModule } from './modules/tickets/tickets.module';
+import { AttributsModule } from './modules/attributs/attributs.module';
+import { MissionsModule } from './modules/missions/missions.module';
+import { DocumentsModule } from './modules/documents/documents.module';
 
 @NgModule({
   declarations: [
@@ -34,6 +37,9 @@ import { TicketsModule } from './modules/tickets/tickets.module';
     PatientsModule,
     ServicesModule,
     TicketsModule,
+    AttributsModule,
+    MissionsModule,
+    DocumentsModule,
 
     // ngx-translate and the loader module
     HttpClientModule,
