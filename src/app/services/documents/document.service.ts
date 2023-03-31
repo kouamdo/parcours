@@ -12,12 +12,7 @@ export class DocumentService {
 
   getAllDocuments():Observable<IDocument[]>
   {
-    return this.http.get<IDocument[]>('api/documents').pipe(map(x=>x));
-  }
-
-  getTableauDocuments():Observable<IDocument>
-  {
-    return this.http.get<IDocument>('api/documents').pipe(map(x=>x));
+    return this.http.get<IDocument[]>('api/documents');
   }
 
   getDocumentById(id:string):Observable<IDocument>{

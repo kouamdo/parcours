@@ -69,15 +69,14 @@ export class ListFormDocumentComponent implements OnInit, AfterViewInit {
           this.afficheDocument.description = x.description;
           this.afficheDocument.missions = x.missions;
           this.afficheDocument.attributs = x.attributs;
-
-          if (x.id == this.afficheDocument.id) {
             x.missions.forEach(
-              m => this.afficheDocument.listeMissions += m.libelle + ","+ " "
+              m => {
+                this.afficheDocument.listeMissions += m.libelle + ", ";
+              } 
             )
             x.attributs.forEach(
-              a => this.afficheDocument.listAttributs += a.titre + ","+ " "
+              a => this.afficheDocument.listAttributs += a.titre + ", "
             ) 
-          }
           tableDocuments.push(this.afficheDocument)
         }
       )
