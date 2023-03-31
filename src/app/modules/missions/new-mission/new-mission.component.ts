@@ -21,6 +21,7 @@ export class NewMissionComponent implements OnInit {
   submitted: boolean=false;
   services$: Observable<IService[]>=EMPTY;
   idService: string = ""
+  service : IService | undefined 
 
   initialDateCreation = new FormControl(new Date());
   initialDateModification = new FormControl(new Date());
@@ -57,6 +58,19 @@ export class NewMissionComponent implements OnInit {
     this.services$ = this.getAllServices();
   }
 
+  associerService(event: any){
+    const _serviceSelected = (this.forme.get('service'))!.value;
+    console.log('le service est : ', _serviceSelected)
+    if (event.target.checked) {
+      this.idService = _serviceSelected
+      this.serviceService.getServiceById(this.idService).subscribe(
+        value => {
+          this.service = value
+          console.log('value est : ', this.service)
+        }
+      )
+    }
+  }
   get f(){
     return this.forme.controls;
   }
@@ -64,9 +78,9 @@ export class NewMissionComponent implements OnInit {
   onSubmit(missionInput:any){
 
     this.submitted=true;
-    const _serviceSelected = (this.forme.get('service'))!.value;
-    this.idService = _serviceSelected
-    console.log('le service est : ', _serviceSelected)
+    // const _serviceSelected = (this.forme.get('service'))!.value;
+    // this.idService = _serviceSelected
+    // console.log('le service est : ', _serviceSelected)
     if(this.forme.invalid) return;
 
     let missionTemp : IMission={
@@ -79,12 +93,13 @@ export class NewMissionComponent implements OnInit {
       service: missionInput.service
     }
 
-    this.serviceService.getServiceById(this.idService).subscribe(
-      value => {
-        missionTemp.service = value
-        console.log('value est : ', missionTemp.service)
-      }
-    )
+    // this.serviceService.getServiceById(this.idService).subscribe(
+    //   value => {
+    //     missionTemp.service = value
+    //     console.log('value est : ', missionTemp.service)
+    //   }
+    // )
+    missionTemp.service = this.service!
     missionTemp.dateCreation = this.initialDateCreation.value!
     missionTemp.dateModification = this.initialDateModification.value!
 

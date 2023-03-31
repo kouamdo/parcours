@@ -59,7 +59,7 @@
                                             <ul class="nav justify-content-center">
                                                 <li class="nav-item dropdown-item" *ngFor="let services of (services$ |async) as service let i=index">
                                                     <label for="service">
-                                                        <input type="radio" formControlName="service"  name="service" id="{{service[i].id}}" value="{{service[i].id}}" required class="radioButton">
+                                                        <input type="radio" formControlName="service"  name="service" id="{{service[i].id}}" value="{{service[i].id}}" required class="radioButton" (change)="associerService($event)">
                                                         <span>{{services.libelle}}</span>
                                                     </label>
                                                 </li>

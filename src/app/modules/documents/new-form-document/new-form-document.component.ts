@@ -32,16 +32,6 @@ export class NewFormDocumentComponent implements OnInit {
   idAttribut : string = "";
   serviceDeMission!: IService;
 
-  missionsTemp : IMission = {
-    id: '',
-    libelle: '',
-    description: '',
-    etat: false,
-    dateCreation: new Date,
-    dateModification:  new Date,
-    service:  this.serviceDeMission
-  }
-
   afficheDocument : IAfficheDocument = {
     id: '',
     titre: '',
