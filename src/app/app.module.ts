@@ -21,6 +21,7 @@ import { TicketsModule } from './modules/tickets/tickets.module';
 import { AttributsModule } from './modules/attributs/attributs.module';
 import { MissionsModule } from './modules/missions/missions.module';
 import { DocumentsModule } from './modules/documents/documents.module';
+import { ExemplaireDocumentModule } from './modules/exemplaire-document/exemplaire-document.module';
 
 @NgModule({
   declarations: [
@@ -55,8 +56,8 @@ import { DocumentsModule } from './modules/documents/documents.module';
     MatSliderModule,
     MatIconModule,
     MatToolbarModule,
-    MatSlideToggleModule
-
+    MatSlideToggleModule,
+    ExemplaireDocumentModule
   ],
   providers: [],
   bootstrap: [AppComponent]

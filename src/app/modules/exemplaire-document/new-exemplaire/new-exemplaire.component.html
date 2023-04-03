@@ -1,0 +1,27 @@
+<div class="mainBlock">
+    <form [formGroup]="forme" (ngSubmit)="onSubmit(forme.value)" *ngIf="forme" >
+                
+        <h1>
+            {{this.exemplaire.titre}}
+        </h1>
+        <div class="infos">
+            <p id="titre">
+                <span class="title"> {{'document.table.title1' | translate}} : </span>
+                {{this.exemplaire.titre}}
+            </p>
+            <p class="titre">
+                Enregistrez les informations de cet exemplaire
+            </p>
+            <div class="block">
+                <div class="inputBlock" formArrayName="_exemplaireDocument" *ngFor="let exemplaire of exemplaire.attributs">
+                    <label [for]="exemplaire.id" class="form-label">{{exemplaire.titre}}</label>
+                    <input type="text" class="form-control" [name]="exemplaire.id" [id]="exemplaire.id" placeholder="entrer la valeur ici" required>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<p>
+    {{forme.value | json}}
+</p>
