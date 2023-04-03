@@ -15,7 +15,7 @@
             <div class="block">
                 <div class="inputBlock" formArrayName="_exemplaireDocument" *ngFor="let exemplaire of exemplaire.attributs">
                     <label [for]="exemplaire.id" class="form-label">{{exemplaire.titre}}</label>
-                    <input type="text" class="form-control" [name]="exemplaire.id" [id]="exemplaire.id" placeholder="entrer la valeur ici" required>
+                    <input type="text" class="form-control" value="" [name]="exemplaire.id" [id]="exemplaire.id" placeholder="entrer la valeur ici" required>
                 </div>
             </div>
         </div>

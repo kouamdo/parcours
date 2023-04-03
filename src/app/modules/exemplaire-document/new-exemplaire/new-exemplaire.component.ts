@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { IExemplaireDocument } from 'src/app/modele/exemplaire-document';
 import { AttributService } from 'src/app/services/attributs/attribut.service';
@@ -37,6 +37,12 @@ export class NewExemplaireComponent implements OnInit {
     this.serviceExemplaire.getExemplaireDocumentById("1").subscribe(
       objet => {
         this.exemplaire = objet
+        this.exemplaire.attributs.forEach(
+          a => {
+            const _exemplaireDocument = (this.forme.controls['_exemplaireDocument'] as FormArray);
+            _exemplaireDocument.push(new FormControl())
+          }
+        )
       }
     )
   }

@@ -143,7 +143,7 @@ export class NewFormDocumentComponent implements OnInit {
       this.retirerSelectionAttribut(index)
       _attributs.removeAt(index);
     }
-    this._attributs = _attributs  
+    this._attributs = _attributs
   }
 
   getAttributId(idAttribut: string) {
