@@ -12,12 +12,16 @@
             <p class="titre">
                 Enregistrez les informations de cet exemplaire
             </p>
-            <div class="block">
-                <div class="inputBlock" formArrayName="_exemplaireDocument" *ngFor="let exemplaire of exemplaire.attributs">
+            <div class="block" formArrayName="_exemplaireDocument">
+                <div class="inputBlock" *ngFor="let exemplaire of exemplaire.attributs, let i = index">
                     <label [for]="exemplaire.id" class="form-label">{{exemplaire.titre}}</label>
-                    <input type="text" class="form-control" value="" [name]="exemplaire.id" [id]="exemplaire.id" placeholder="entrer la valeur ici" required>
+                    <input type="text" class="form-control" value="" formControlName="{{i}}" [name]="exemplaire.id" [id]="exemplaire.id" placeholder="entrer la valeur ici" required>
                 </div>
             </div>
+        </div>
+        <div class="actionButton">
+            <button class="btn">{{'lists.button2' | translate}}</button>
+            <button type="submit" class="btn">{{btnLibelle}}</button>
         </div>
     </form>
 </div>

@@ -26,6 +26,7 @@ export class NewExemplaireComponent implements OnInit {
   titre: string="Ajouter un nouvel exemplaire de document";
   submitted: boolean=false;
   //_exemplaireDocument :  FormArray | undefined;
+  controlExemplaire = new FormControl;
 
   constructor(private router:Router, private formBuilder: FormBuilder, private infosPath:ActivatedRoute, private serviceDocument:DocumentService, private serviceExemplaire : ExemplaireDocumentService, private serviceMission:MissionsService, private serviceAttribut:AttributService) { 
     this.forme = this.formBuilder.group({
@@ -38,9 +39,9 @@ export class NewExemplaireComponent implements OnInit {
       objet => {
         this.exemplaire = objet
         this.exemplaire.attributs.forEach(
-          a => {
+          exemplaire => {
             const _exemplaireDocument = (this.forme.controls['_exemplaireDocument'] as FormArray);
-            _exemplaireDocument.push(new FormControl())
+           _exemplaireDocument.push(new FormControl(this.controlExemplaire))
           }
         )
       }
@@ -61,6 +62,7 @@ export class NewExemplaireComponent implements OnInit {
       missions: [],
       attributs: []
     }
+    console.log(this.forme.value)
     this.serviceDocument.ajouterDocument(exemplaireTemp).subscribe(
       object => {
     }
