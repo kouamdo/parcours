@@ -21,15 +21,16 @@ export class NewExemplaireComponent implements OnInit {
     missions: [],
     attributs: []
   };
-  forme: FormGroup;
+  formeExemplaire: FormGroup;
   btnLibelle: string="Ajouter";
   titre: string="Ajouter un nouvel exemplaire de document";
   submitted: boolean=false;
   //_exemplaireDocument :  FormArray | undefined;
 
   constructor(private router:Router, private formBuilder: FormBuilder, private infosPath:ActivatedRoute, private serviceDocument:DocumentService, private serviceExemplaire : ExemplaireDocumentService, private serviceMission:MissionsService, private serviceAttribut:AttributService) { 
-    this.forme = this.formBuilder.group({
-      _exemplaireDocument :  new FormArray([])
+    this.formeExemplaire = this.formBuilder.group({
+      _exemplaireDocument: this.formBuilder.array([
+      ])
     });
   }
 
@@ -37,16 +38,27 @@ export class NewExemplaireComponent implements OnInit {
     this.serviceExemplaire.getExemplaireDocumentById("1").subscribe(
       objet => {
         this.exemplaire = objet
+        objet.attributs.forEach(
+          x => {this.addAttributs()}
+        )
       }
     )
   }
+
+  addAttributs() {
+    this._exemplaireDocument.push(this.formBuilder.control(''));
+  }
+  get _exemplaireDocument() {
+    return this.formeExemplaire.get('_exemplaireDocument') as FormArray;
+  }
   get f(){
-    return this.forme.controls;
+    return this.formeExemplaire.controls;
   }
   onSubmit(exemplaireInput:any){
-//    const _missionsSelected = (this.forme.get('_missions') as FormArray);
+    const exemplaireDocument = this._exemplaireDocument;
+    console.log('Exemplaire ', exemplaireDocument.value);
     this.submitted=true;
-    if(this.forme.invalid) return;
+    if(this.formeExemplaire.invalid) return;
     let exemplaireTemp : IExemplaireDocument={
       id: '9',
       idDocument: exemplaireInput.idDocument,

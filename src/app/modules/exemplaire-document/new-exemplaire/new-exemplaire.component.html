@@ -1,5 +1,5 @@
 <div class="mainBlock">
-    <form [formGroup]="forme" (ngSubmit)="onSubmit(forme.value)" *ngIf="forme" >
+    <form [formGroup]="formeExemplaire" (ngSubmit)="onSubmit(formeExemplaire.value)" *ngIf="formeExemplaire" >
                 
         <h1>
             {{this.exemplaire.titre}}
@@ -12,16 +12,19 @@
             <p class="titre">
                 Enregistrez les informations de cet exemplaire
             </p>
-            <div class="block">
-                <div class="inputBlock" formArrayName="_exemplaireDocument" *ngFor="let exemplaire of exemplaire.attributs">
+            <div class="block" formArrayName="_exemplaireDocument">
+                <div class="inputBlock"  *ngFor="let exemplaire of exemplaire.attributs; let i=index; ">
                     <label [for]="exemplaire.id" class="form-label">{{exemplaire.titre}}</label>
-                    <input type="text" class="form-control" [name]="exemplaire.id" [id]="exemplaire.id" placeholder="entrer la valeur ici" required>
+                    <input type="text" class="form-control" [formControlName]="i" [name]="exemplaire.id" [id]="exemplaire.id" placeholder="entrer la valeur ici" required>
                 </div>
             </div>
+        </div>
+        <div>
+            <input type="submit" value="Enregistrer"/>
         </div>
     </form>
 </div>
 
 <p>
-    {{forme.value | json}}
+    {{formeExemplaire.value | json}}
 </p>
