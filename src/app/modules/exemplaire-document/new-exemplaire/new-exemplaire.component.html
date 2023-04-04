@@ -13,9 +13,9 @@
                 Enregistrez les informations de cet exemplaire
             </p>
             <div class="block" formArrayName="_exemplaireDocument">
-                <div class="inputBlock"  *ngFor="let exemplaire of exemplaire.attributs; let i=index; ">
-                    <label [for]="exemplaire.id" class="form-label">{{exemplaire.titre}}</label>
-                    <input type="text" class="form-control" [formControlName]="i" [name]="exemplaire.id" [id]="exemplaire.id" placeholder="entrer la valeur ici" required>
+                <div class="inputBlock"  *ngFor="let attribut of exemplaire.attributs; let i=index; ">
+                    <label [for]="attribut.id" class="form-label">{{attribut.titre}}</label>
+                    <input [type]="attribut.type" class="form-control" [formControlName]="i" [name]="attribut.id" [id]="attribut.id" placeholder="entrer la valeur ici" required>
                 </div>
             </div>
         </div>
