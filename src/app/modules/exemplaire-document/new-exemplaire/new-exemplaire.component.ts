@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { IExemplaireDocument } from 'src/app/modele/exemplaire-document';
+import { TypeTicket } from 'src/app/modele/type-ticket';
 import { AttributService } from 'src/app/services/attributs/attribut.service';
 import { DocumentService } from 'src/app/services/documents/document.service';
 import { ExemplaireDocumentService } from 'src/app/services/exemplaire-document/exemplaire-document.service';
@@ -27,6 +28,14 @@ export class NewExemplaireComponent implements OnInit {
   submitted: boolean=false;
   //_exemplaireDocument :  FormArray | undefined;
   controlExemplaire = new FormControl;
+  typeAttribut : string = "";
+  
+  typeInt = TypeTicket.Int;
+  typeString = TypeTicket.String;
+  typeDouble = TypeTicket.Double;
+  typeFloat = TypeTicket.Float;
+  typeBoolean = TypeTicket.Boolean;
+  typeDate = TypeTicket.Date;
 
   constructor(private router:Router, private formBuilder: FormBuilder, private infosPath:ActivatedRoute, private serviceDocument:DocumentService, private serviceExemplaire : ExemplaireDocumentService, private serviceMission:MissionsService, private serviceAttribut:AttributService) { 
     this.formeExemplaire = this.formBuilder.group({
@@ -40,7 +49,43 @@ export class NewExemplaireComponent implements OnInit {
       objet => {
         this.exemplaire = objet
         objet.attributs.forEach(
-          x => {this.addAttributs()}
+          x => {
+            this.addAttributs()
+            switch (x.type) {
+              case this.typeInt:
+                
+                this.typeAttribut= "number"
+                break;
+            
+                case this.typeString:
+                
+                this.typeAttribut= "text"
+                break;
+            
+                case this.typeDouble:
+                
+                this.typeAttribut= "number"
+                break;
+            
+                case this.typeFloat:
+                
+                this.typeAttribut= "number"
+                break;
+                
+              case this.typeBoolean:
+                
+              this.typeAttribut= "radio"
+              break;
+          
+              case this.typeDate:
+                
+                this.typeAttribut= "date"
+                break;
+            
+              default:
+                break;
+            }
+          }
         )
       }
     )

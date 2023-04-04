@@ -1,8 +1,8 @@
 export enum TypeTicket {
     Int="number",
     String="string",
-    Double="number",
-    Float="number",
+    Double="double",
+    Float="float",
     Boolean="boolean",
     Date="Date",
 }
