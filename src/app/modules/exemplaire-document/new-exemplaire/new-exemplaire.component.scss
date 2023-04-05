@@ -11,17 +11,6 @@ h1{
     box-shadow: 0 0 2px #7ea97e;
     padding: 10px 0;
     margin: 0 5px;
-    position: relative;
-}
-h1 span{
-    position: absolute;
-    left: 5px;
-    transition: ease 0.2s;
-}
-h1 span:hover{
-    border: solid 1px #ffffff9a;
-    padding: 0 10px;
-    transition: ease-in-out 0.2s;
 }
 #titre{
     margin: 20px 0;
@@ -54,8 +43,8 @@ h1 span:hover{
 }
 .block{
     display: flex;
-    align-items: end;
-    justify-content: start;
+    align-items: start;
+    justify-content: space-between;
     width: 100%;
     background-color: #7ea97e2b;
     flex-wrap: wrap;
@@ -67,7 +56,7 @@ h1 span:hover{
     flex-wrap: nowrap;
     align-items: flex-start;
     width: 25%;
-    margin: 10px 0;
+    margin: 15px 0;
     padding: 5px;
 }
 .block .inputBlock label{
@@ -79,7 +68,7 @@ h1 span:hover{
     top: 8px;
     opacity: 0.8;
 }
-.block .inputBlock label, .block .inputBlock input{
+.block .inputBlock label, .block .inputBlock input, .block .inputBlock textarea{
     font-size: 13px;
 }
 .titre{
@@ -101,8 +90,40 @@ h1 span:hover{
         font-size: 15px;
     }
 }
+.inputSpecial{
+    width: fit-content !important;
+    input{
+        width: 20px;
+    }
+    label{
+        margin-left: 0 !important;
+    }
+}
 @media screen and (max-width: 872px) {
     .block .inputBlock{
         width: 33.2%;
+    }
+}
+@media screen and (max-width: 640px) {
+    .block .inputBlock{
+        width: 50%;
+    }
+    h1{
+        font-size: 18px;
+    }
+    p{
+        font-size: 13px;
+    }
+}
+@media screen and (max-width: 530px) {
+    .block .inputBlock{
+        width: 100%;
+        margin: 0 !important;
+    }
+    h1{
+        font-size: 15px;
+    }
+    p, span{
+        font-size: 12px;
     }
 }

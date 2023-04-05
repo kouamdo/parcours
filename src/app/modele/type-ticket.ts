@@ -8,6 +8,7 @@ export enum TypeTicket {
     Email="email",
     Radio="radio",
     Tel="tel",
-    Url="url"
+    Url="url",
+    Textarea="textarea"
 
 }

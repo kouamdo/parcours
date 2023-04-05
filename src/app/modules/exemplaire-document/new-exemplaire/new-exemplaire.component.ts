@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
+import { IDocument } from 'src/app/modele/document';
 import { IExemplaireDocument } from 'src/app/modele/exemplaire-document';
+import { ObjetCleValeur } from 'src/app/modele/objet-cle-valeur';
 import { TypeTicket } from 'src/app/modele/type-ticket';
 import { AttributService } from 'src/app/services/attributs/attribut.service';
 import { DocumentService } from 'src/app/services/documents/document.service';
@@ -17,11 +19,15 @@ export class NewExemplaireComponent implements OnInit {
   exemplaire : IExemplaireDocument = {
     id: '',
     idDocument: '',
+    objetEnregistre: []
+  };
+  document : IDocument = {
+    id: '',
     titre: '',
     description: '',
     missions: [],
     attributs: []
-  };
+  }
   formeExemplaire: FormGroup;
   btnLibelle: string="Ajouter";
   titre: string="Ajouter un nouvel exemplaire de document";
@@ -36,6 +42,8 @@ export class NewExemplaireComponent implements OnInit {
   typeFloat = TypeTicket.Float;
   typeBoolean = TypeTicket.Boolean;
   typeDate = TypeTicket.Date;
+  TypeBoolean = TypeTicket.Boolean
+  TypeRadio = TypeTicket.Radio
 
   constructor(private router:Router, private formBuilder: FormBuilder, private infosPath:ActivatedRoute, private serviceDocument:DocumentService, private serviceExemplaire : ExemplaireDocumentService, private serviceMission:MissionsService, private serviceAttribut:AttributService) { 
     this.formeExemplaire = this.formBuilder.group({
@@ -45,54 +53,68 @@ export class NewExemplaireComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.serviceExemplaire.getExemplaireDocumentById("1").subscribe(
-      objet => {
-        this.exemplaire = objet
-        objet.attributs.forEach(
-          x => {
-            this.addAttributs()
-            switch (x.type) {
-              case this.typeInt:
-                
-                this.typeAttribut= "number"
-                break;
-            
-                case this.typeString:
-                
-                this.typeAttribut= "text"
-                break;
-            
-                case this.typeDouble:
-                
-                this.typeAttribut= "number"
-                break;
-            
-                case this.typeFloat:
-                
-                this.typeAttribut= "number"
-                break;
-                
-              case this.typeBoolean:
-                
-              this.typeAttribut= "radio"
-              break;
-          
-              case this.typeDate:
-                
-                this.typeAttribut= "date"
-                break;
-            
-              default:
-                break;
+    let idExemplaire = this.infosPath.snapshot.paramMap.get('idExemplaire');
+    if((idExemplaire != null) && idExemplaire!==''){
+      this.btnLibelle="Modifier";
+      this.titre="Document à Modifier";
+      this.serviceExemplaire.getExemplaireDocumentById(idExemplaire).subscribe(
+        x => {
+          this.exemplaire = x; console.log(this.exemplaire);
+          this.serviceDocument.getDocumentById(x.idDocument).subscribe(
+            d  => {
+              const exemplaireDocument = this._exemplaireDocument;
+              this.document.attributs.forEach(
+                a => {
+                  const objetCleValeur : ObjetCleValeur={
+                    key: "",
+                    value: ""
+                  }
+                  const index = this.document.attributs.indexOf(a)
+                  objetCleValeur.key = a.id
+              this.formeExemplaire.setValue({
+
+              })
+                   exemplaireDocument.controls[index].value // = objetCleValeur.value
+                  console.log('id de atr ', a.id);
+                this.exemplaire.objetEnregistre.push(objetCleValeur)
+                }
+              )
             }
+        )   
+      });
+    }
+        this.serviceDocument.getDocumentById("4").subscribe(
+          document =>{
+            this.document = document
+            document.attributs.forEach(
+              x => {
+                this.addAttributs()
+              }
+            )
           }
         )
-      }
-    )
   }
 
   addAttributs() {
     this._exemplaireDocument.push(this.formBuilder.control(''));
+  }
+
+  enregistrerObjet(){
+    console.log("le document : " + this.document)
+    const exemplaireDocument = this._exemplaireDocument;
+      this.document.attributs.forEach(
+        a => {
+          const objetCleValeur : ObjetCleValeur={
+            key: "",
+            value: ""
+          }
+          const index = this.document.attributs.indexOf(a)
+          objetCleValeur.key = a.id
+          objetCleValeur.value = exemplaireDocument.controls[index].value
+          console.log('id de atr ', a.id);
+        this.exemplaire.objetEnregistre.push(objetCleValeur)
+        }
+      )
   }
   get _exemplaireDocument() {
     return this.formeExemplaire.get('_exemplaireDocument') as FormArray;
@@ -103,17 +125,18 @@ export class NewExemplaireComponent implements OnInit {
   onSubmit(exemplaireInput:any){
     const exemplaireDocument = this._exemplaireDocument;
     console.log('Exemplaire ', exemplaireDocument.value);
+    console.log('Exemplaire keys ', this.exemplaire.objetEnregistre);
     this.submitted=true;
     if(this.formeExemplaire.invalid) return;
     let exemplaireTemp : IExemplaireDocument={
       id: '9',
-      idDocument: exemplaireInput.idDocument,
-      titre: exemplaireInput.titre,
-      description: exemplaireInput.description,
-      missions: [],
-      attributs: []
+      idDocument: this.document.id,
+      objetEnregistre: []
     }
-    this.serviceDocument.ajouterDocument(exemplaireTemp).subscribe(
+        exemplaireTemp.objetEnregistre = this.exemplaire.objetEnregistre
+      
+    console.log("les objets cles-valeur : " + exemplaireTemp.objetEnregistre[0].key)
+    this.serviceExemplaire.ajouterExemplaireDocument(exemplaireTemp).subscribe(
       object => {
     }
     )

@@ -2,26 +2,31 @@
      <form [formGroup]="formeExemplaire" (ngSubmit)="onSubmit(formeExemplaire.value)" *ngIf="formeExemplaire" >
                 
         <h1>
-            {{this.exemplaire.titre}}
+            {{this.document.titre}}
         </h1>
         <div class="infos">
             <p id="titre">
                 <span class="title"> {{'document.table.title1' | translate}} : </span>
-                {{this.exemplaire.titre}}
+                {{this.document.titre}}
             </p>
             <p class="titre">
                 Enregistrez les informations de cet exemplaire
             </p>
             <div class="block" formArrayName="_exemplaireDocument">
-                <div class="inputBlock"  *ngFor="let attribut of exemplaire.attributs; let i=index; ">
+                <div class="inputBlock"  [ngClass]="{'inputSpecial':(attribut.type == TypeRadio) || (attribut.type == TypeBoolean)}" *ngFor="let attribut of document.attributs; let i=index; ">
                     <label [for]="attribut.id" class="form-label">{{attribut.titre}}</label>
-                    <input [type]="attribut.type" class="form-control" [formControlName]="i" [name]="attribut.id" [id]="attribut.id" placeholder="entrer la valeur ici" required>
+                    <input *ngIf="(attribut.type != 'textarea') && (attribut.type != TypeRadio) && (attribut.type != TypeBoolean)" [type]="attribut.type" class="form-control" [formControlName]="i" name="'id '+{{attribut.id}}" id="{{attribut.id}} + 'id'" placeholder="entrer la valeur ici" >
+                    <textarea *ngIf="attribut.type == 'textarea'" class="form-control" [formControlName]="i" [name]="attribut.id" [id]="attribut.id" placeholder="entrer la valeur ici" ></textarea>
+                    <select  class="form-control" *ngIf="(attribut.type == TypeRadio) || (attribut.type == TypeBoolean)" [formControlName]="i" [name]="attribut.id" [id]="attribut.id">
+                        <option value="oui" >oui</option>
+                        <option value="non">non</option>
+                    </select>
                 </div>
             </div>
         </div>
         <div class="actionButton">
             <button class="btn" type="reset">{{'lists.button2' | translate}}</button>
-            <button type="submit" class="btn">{{btnLibelle}}</button>
+            <button type="submit" class="btn" (click)="enregistrerObjet()">{{btnLibelle}}</button>
         </div>
     </form>
 </div>
