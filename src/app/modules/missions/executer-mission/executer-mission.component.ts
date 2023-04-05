@@ -10,7 +10,7 @@ import { MissionsService } from 'src/app/services/missions/missions.service';
 @Component({
   selector: 'app-executer-mission',
   templateUrl: './executer-mission.component.html',
-  styleUrls: ['./executer-mission.component.css']
+  styleUrls: ['./executer-mission.component.scss']
 })
 export class ExecuterMissionComponent implements OnInit {
 
