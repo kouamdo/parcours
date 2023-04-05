@@ -5,5 +5,5 @@ export interface IService {
     dateDerniereModification?:string,
     dateAttribution?:string,
     dateFin:string,
-    nombreTotalAttributions:number,
+    nombreTotalAttributions:number
 }

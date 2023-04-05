@@ -5,7 +5,7 @@ import { ViewExemplaireComponent } from './view-exemplaire/view-exemplaire.compo
 
 const routes: Routes = [
   {
-    path: 'exemplaire-nouveau',
+    path: 'exemplaire-nouveau/:idDocument',
     title: 'Nouvel exemplaire de documents',
     component: NewExemplaireComponent
   },
