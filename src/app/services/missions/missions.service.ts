@@ -37,4 +37,13 @@ export class MissionsService {
    {
      return this.http.post("api/missions",mission);
    }
+
+   getMissionByUser(idUser:string):Observable<IMission[]>{
+    return this.getAllMissions().pipe(
+      map(x=>
+        {
+          return x.filter(m=>  m.idLogin?.toLowerCase()==idUser.toLocaleLowerCase())
+        })
+    );
+  }
 }

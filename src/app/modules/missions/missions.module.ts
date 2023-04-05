@@ -16,12 +16,14 @@ import { HttpClient } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { HttpLoaderFactory } from 'src/app/app.module';
+import { ExecuterMissionComponent } from './executer-mission/executer-mission.component';
 
 
 @NgModule({
   declarations: [
     ListMissionComponent,
-    NewMissionComponent
+    NewMissionComponent,
+    ExecuterMissionComponent
   ],
   imports: [
     CommonModule,
