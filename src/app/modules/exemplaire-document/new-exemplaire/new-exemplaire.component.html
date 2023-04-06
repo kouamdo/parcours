@@ -6,11 +6,9 @@
         </h1>
         <div class="infos">
             <p id="titre">
-                <span class="title"> {{'document.table.title1' | translate}} : </span>
-                {{this.document.titre}}
-            </p>
-            <p class="titre">
-                Enregistrez les informations de cet exemplaire
+                {{'tickets.table.title5' | translate}} :
+                <span class="title">  {{this.nomPatientCourant}}</span>
+                
             </p>
             <div class="block" formArrayName="_exemplaireDocument">
                 <div class="inputBlock"  [ngClass]="{'inputSpecial':(attribut.type == TypeRadio) || (attribut.type == TypeBoolean)}" *ngFor="let attribut of document.attributs; let i=index; ">
