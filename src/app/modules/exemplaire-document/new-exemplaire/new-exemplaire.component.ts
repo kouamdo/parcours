@@ -57,7 +57,7 @@ export class NewExemplaireComponent implements OnInit {
   ngOnInit(): void {
     this.nomPatientCourant = sessionStorage.getItem("nomPatientCourant");
     let idExemplaire = this.infosPath.snapshot.paramMap.get('idExemplaire');
-    if((idExemplaire != null) && idExemplaire!==''){
+    /*if((idExemplaire != null) && idExemplaire!==''){
       this.btnLibelle="Modifier";
       this.titre="Document à Modifier";
       this.serviceExemplaire.getExemplaireDocumentById(idExemplaire).subscribe(
@@ -85,8 +85,9 @@ export class NewExemplaireComponent implements OnInit {
             }
         )   
       });
-    }
-        this.serviceDocument.getDocumentById("4").subscribe(
+    }*/
+      if(idExemplaire)
+        this.serviceDocument.getDocumentById(idExemplaire).subscribe(
           document =>{
             this.document = document
             document.attributs.forEach(

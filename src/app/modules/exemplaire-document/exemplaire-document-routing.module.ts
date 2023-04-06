@@ -5,13 +5,13 @@ import { ViewExemplaireComponent } from './view-exemplaire/view-exemplaire.compo
 
 const routes: Routes = [
   {
-    path: 'exemplaire-nouveau/:idDocument',
+    path: 'exemplaire-nouveau/:idExemplaire',
     title: 'Nouvel exemplaire de documents',
     component: NewExemplaireComponent
   },
   {
-    path: 'exemplaire-nouveau/:idExemplaire',
-    title: 'Nouveau formulaire de documents',
+    path: 'exemplaire-nouveau/modify/:idExemplaire',
+    title: 'Modifier formulaire de documents',
     component: NewExemplaireComponent
   },
   {
