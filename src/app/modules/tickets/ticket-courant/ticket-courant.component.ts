@@ -39,7 +39,9 @@ export class TicketCourantComponent implements OnInit {
 
       if(this.ticketRecent?.idPersonne){
         this.servicePatient.getPatientById(this.ticketRecent?.idPersonne).subscribe(
-          valeur =>{this.patientRecent= valeur;} 
+          valeur =>{this.patientRecent= valeur;
+            this.sauvegardeIdentitePatient();  
+          } 
         );
       }
             
@@ -67,7 +69,9 @@ export class TicketCourantComponent implements OnInit {
           this.ticketRecent = objet;
           if(this.ticketRecent?.idPersonne){
             this.servicePatient.getPatientById(this.ticketRecent?.idPersonne).subscribe(
-              valeur =>{this.patientRecent= valeur;} 
+              valeur =>{this.patientRecent= valeur;
+                this.sauvegardeIdentitePatient();              
+              } 
             );
           }
         }
@@ -99,6 +103,16 @@ export class TicketCourantComponent implements OnInit {
         }
       }
       return listTicketsActifs[indexChercher];
+    }
+  }
+
+  sauvegardeIdentitePatient(){
+    if(this.patientRecent){
+      sessionStorage.setItem("idPatientCourant",this.patientRecent.id);
+      let nomPersonne = this.patientRecent.nom.concat(" ");
+      if(this.patientRecent.prenom)
+        nomPersonne = nomPersonne.concat(this.patientRecent.prenom);
+      sessionStorage.setItem("nomPatientCourant", nomPersonne);
     }
   }
 }

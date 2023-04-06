@@ -35,6 +35,8 @@ export class NewExemplaireComponent implements OnInit {
   //_exemplaireDocument :  FormArray | undefined;
   controlExemplaire = new FormControl;
   typeAttribut : string = "";
+  idPatientCourant: string| null= "";
+  nomPatientCourant: string | null = "";
   
   typeInt = TypeTicket.Int;
   typeString = TypeTicket.String;
@@ -53,6 +55,7 @@ export class NewExemplaireComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.nomPatientCourant = sessionStorage.getItem("nomPatientCourant");
     let idExemplaire = this.infosPath.snapshot.paramMap.get('idExemplaire');
     if((idExemplaire != null) && idExemplaire!==''){
       this.btnLibelle="Modifier";

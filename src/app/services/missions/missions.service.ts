@@ -41,8 +41,8 @@ export class MissionsService {
    getMissionByUser(idUser:string):Observable<IMission[]>{
     return this.getAllMissions().pipe(
       map(x=>
-        {
-          return x.filter(m=>  m.idLogin?.toLowerCase()==idUser.toLocaleLowerCase())
+        {//m.idLogin?.toLowerCase()==idUser.toLocaleLowerCase()
+          return x.filter(m=>  true)
         })
     );
   }
