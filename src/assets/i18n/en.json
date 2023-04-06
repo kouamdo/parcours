@@ -145,6 +145,10 @@
             "text5":"Type is required.",
             "text6":"Service is required",
             "text7":"Selectionner un service"
+        },
+        "execution":{
+            "text1":"WHAT IS YOUR CHOISE ?",
+            "text2":"Document's choise for the Mission : "
         }
     },
     "document":{

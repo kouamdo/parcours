@@ -148,6 +148,10 @@
             "text5":"Le type est obligatoire.",
             "text6":"Le service est obligatoire",
             "text7":"Selectionner un service"
+        },
+        "execution":{
+            "text1":"QUEL EST VOTRE CHOIX ?",
+            "text2":"Choix Du Document Pour La Mission"
         }
     },
     "document":{

@@ -52,6 +52,7 @@
     justify-content: center;
     padding: 10px;
     color: #000000d4;
+    width: 250px !important;
     div{
         width: 100%;
     }
@@ -59,11 +60,13 @@
         position: relative;
         div{
             display: flex;
-            align-items: flex-start;
+            align-items: center;
             justify-content: space-between;
         }
         img{
-            width: 40px;
+            width: 45px;
+            margin-right: 8px;
+            margin-top: 10px;
         }
         small{
             position: absolute;
@@ -80,7 +83,7 @@
         }
     }
     #filigramme{
-        background: url("../../../../assets/img/logoNotep.png") no-repeat top center;
+        background: url("../../../../assets/img/logo_camnafaw.jpg") no-repeat top center;
         background-size: contain;
         #ticketContent{
             background-color: #ffffffe5;
