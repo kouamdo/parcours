@@ -46,7 +46,8 @@
         "button4":"Previous",
         "button5":"No action yet",
         "button6":"validate",
-        "button7":"Edit"
+        "button7":"Edit",
+        "button8":"Delete"
     },
     "patient":{
         "text":"Patients retrouvé(e)s",
@@ -162,7 +163,8 @@
             "title3":"Missions",
             "title4":"Attributs",
             "title5":"Select missions",
-            "title6":"Select attributs"
+            "title6":"Select attributs",
+            "title7":"Values"
         },
         "form":{
             "text1":"Title is required.",
@@ -174,6 +176,10 @@
             "title":"Document's Model",
             "text1":"missions's list of document",
             "text2":"attributs's list of document"
+        },
+        "exemplaire":{
+            "title":"Document's instance ",
+            "text1":"composition of this instance"
         }      
     },
     "theme":{

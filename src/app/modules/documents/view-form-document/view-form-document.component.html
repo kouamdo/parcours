@@ -1,17 +1,24 @@
-<div class="mainBlock">
-    <h1>
-        <span routerLink="../../list-documents" title="{{'lists.button2' | translate}}"><i class="fa fa-arrow-left" aria-hidden="true"></i></span>
-         {{'document.view.title' | translate}}
-    </h1>
+<div class="mainBlock card">
+    <div class="entete">
+        <h1>
+            <span routerLink="../../list-documents" title="{{'lists.button2' | translate}}"><i class="fa fa-arrow-left lien" aria-hidden="true"></i></span>
+            {{'document.view.title' | translate}}
+        </h1>
+        <div class="hoverBlock">
+            <p class="infoBuble">
+                <i class="fa fa-info-circle text-info" aria-hidden="true"></i>
+            </p>
+            <div class="hoverElement" id="description">
+                <span class="title"> {{'document.table.title2' | translate}} : </span>
+                <p>{{document.description}}</p>
+            </div>
+        </div>
+    </div>
     <div class="infos">
         <p id="titre">
             <span class="title"> {{'document.table.title1' | translate}} : </span>
             {{document.titre}}
         </p>
-        <div id="description">
-            <span class="title"> {{'document.table.title2' | translate}} : </span>
-            <p class="description">{{document.description}}</p>
-        </div>
         <p class="title">
             {{'document.view.text1' | translate}} : 
         </p>

@@ -19,6 +19,10 @@ export class NewExemplaireComponent implements OnInit {
   exemplaire : IExemplaireDocument = {
     id: '',
     idDocument: '',
+    titre: '',
+    description: '',
+    missions: [],
+    attributs: [],
     objetEnregistre: []
   };
   document : IDocument = {
@@ -57,7 +61,7 @@ export class NewExemplaireComponent implements OnInit {
   ngOnInit(): void {
     this.nomPatientCourant = sessionStorage.getItem("nomPatientCourant");
     let idExemplaire = this.infosPath.snapshot.paramMap.get('idExemplaire');
-    /*if((idExemplaire != null) && idExemplaire!==''){
+    if((idExemplaire != null) && idExemplaire!==''){
       this.btnLibelle="Modifier";
       this.titre="Document à Modifier";
       this.serviceExemplaire.getExemplaireDocumentById(idExemplaire).subscribe(
@@ -85,7 +89,7 @@ export class NewExemplaireComponent implements OnInit {
             }
         )   
       });
-    }*/
+    }
       if(idExemplaire)
         this.serviceDocument.getDocumentById(idExemplaire).subscribe(
           document =>{
@@ -135,13 +139,19 @@ export class NewExemplaireComponent implements OnInit {
     let exemplaireTemp : IExemplaireDocument={
       id: '9',
       idDocument: this.document.id,
+      titre: this.document.titre,
+      description: this.document.description,
+      missions: [],
+      attributs: [],
       objetEnregistre: []
     }
         exemplaireTemp.objetEnregistre = this.exemplaire.objetEnregistre
       
     console.log("les objets cles-valeur : " + exemplaireTemp.objetEnregistre[0].key)
+    console.log("le'id du document'r : " + exemplaireTemp.idDocument)
     this.serviceExemplaire.ajouterExemplaireDocument(exemplaireTemp).subscribe(
       object => {
+        this.router.navigate(['/list-exemplaire']);
     }
     )
   }

@@ -16,12 +16,14 @@ import { BrowserModule } from '@angular/platform-browser';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { AppRoutingModule } from 'src/app/app-routing.module';
 import { HttpLoaderFactory } from 'src/app/app.module';
+import { ListExemplaireComponent } from './list-exemplaire/list-exemplaire.component';
 
 
 @NgModule({
   declarations: [
     NewExemplaireComponent,
-    ViewExemplaireComponent
+    ViewExemplaireComponent,
+    ListExemplaireComponent
   ],
   imports: [
     CommonModule,

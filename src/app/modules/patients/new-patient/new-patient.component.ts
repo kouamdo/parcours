@@ -31,8 +31,7 @@ export class NewPatientComponent implements OnInit {
       dateNaissance: ['1980-01-01', Validators.required],
       telephone: [''],
       adresse: ['']
-    })
-    
+    })    
   }
 
   ngOnInit() {
@@ -45,20 +44,19 @@ export class NewPatientComponent implements OnInit {
       
       //trouver un autre moyen d'initialiser avec des valeurs
       this.patientService.getPatientById(idPatient).subscribe(x =>
-        {
-          this.patient = x; console.log(this.patient);
-          this.forme.setValue({
-            nom: this.patient.nom,
-            prenom: this.patient.prenom,
-            sexe: this.patient.sexe,
-            mail: this.patient.mail,
-            dateNaissance: this.datePipe.transform(this.patient.dateNaissance,'yyyy-MM-dd'), // je change le format de la date de naissance pour pouvoir l'afficher dans mon input type date
-            telephone: this.patient.telephone,
-            adresse: this.patient.adresse
-          })
-        });
-    }
-    
+      {
+        this.patient = x; console.log(this.patient);
+        this.forme.setValue({
+          nom: this.patient.nom,
+          prenom: this.patient.prenom,
+          sexe: this.patient.sexe,
+          mail: this.patient.mail,
+          dateNaissance: this.datePipe.transform(this.patient.dateNaissance,'yyyy-MM-dd'), // je change le format de la date de naissance pour pouvoir l'afficher dans mon input type date
+          telephone: this.patient.telephone,
+          adresse: this.patient.adresse
+        })
+      });
+    }    
   }
 
   get f(){
@@ -92,5 +90,4 @@ export class NewPatientComponent implements OnInit {
       }
     )
   }
-
 }

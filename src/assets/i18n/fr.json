@@ -165,7 +165,8 @@
             "title3":"Missions",
             "title4":"Attributs",
             "title5":"Selectionner les missions",
-            "title6":"Selectionner les attributs"
+            "title6":"Selectionner les attributs",
+            "title7":"Valeurs"
         },
         "form":{
             "text1":"Le Titre est obligatoire.",
@@ -177,6 +178,10 @@
             "title":"Modele du document",
             "text1":"liste des missions du document",
             "text2":"liste des attributs du document"
+        },
+        "exemplaire":{
+            "title":"Exemplaire du document",
+            "text1":"Composition de l'exemplaire"
         }      
     },
     "theme":{

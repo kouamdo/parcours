@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ListExemplaireComponent } from './list-exemplaire/list-exemplaire.component';
 import { NewExemplaireComponent } from './new-exemplaire/new-exemplaire.component';
 import { ViewExemplaireComponent } from './view-exemplaire/view-exemplaire.component';
 
@@ -18,6 +19,11 @@ const routes: Routes = [
     path: 'view-exemplaire/:idExemplaire',
     title: 'Voir le document',
     component: ViewExemplaireComponent
+  },
+  {
+    path: 'list-exemplaire',
+    title: 'Voir les exemplaires',
+    component: ListExemplaireComponent
   }
 ];
 
