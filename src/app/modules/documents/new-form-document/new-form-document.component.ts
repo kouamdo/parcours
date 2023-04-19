@@ -39,7 +39,8 @@ export class NewFormDocumentComponent implements OnInit {
     missions: [],
     attributs: [],
     listeMissions: '',
-    listAttributs: ''
+    listAttributs: '',
+    categories: []
   }
 
   // variables attributs, pour afficher le tableau d'attributs sur l'IHM
@@ -54,6 +55,7 @@ export class NewFormDocumentComponent implements OnInit {
   dataMission : IMission[] = [];
   dataSourceMissionResultat = new MatTableDataSource<IMission>();
   _missions :  FormArray | undefined;
+  ELEMENTS_TABLE_CATEGORIES: IAttributs[] = []; //tableau de listing des attributs a affecter a chaque categorie
 
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
@@ -160,10 +162,10 @@ export class NewFormDocumentComponent implements OnInit {
         this.ELEMENTS_TABLE_ATTRIBUTS = this.dataSourceAttributResultat.data;
         this.ELEMENTS_TABLE_ATTRIBUTS.push(val);
         this.dataSourceAttributResultat.data = this.ELEMENTS_TABLE_ATTRIBUTS;
+        this.ELEMENTS_TABLE_CATEGORIES = this.ELEMENTS_TABLE_ATTRIBUTS;
       }
     )    
   }
-
 
   retirerSelectionAttribut(index: number) {
     const _attributs = (this.forme.controls['_attributs'] as FormArray);
@@ -173,17 +175,17 @@ export class NewFormDocumentComponent implements OnInit {
     this.dataSourceAttributResultat.data = this.ELEMENTS_TABLE_ATTRIBUTS;
   }
 
-
   onSubmit(documentInput:any){
 //    const _missionsSelected = (this.forme.get('_missions') as FormArray);
     this.submitted=true;
     if(this.forme.invalid) return;
     let documentTemp : IDocument={
       id: String(9),
-      titre:documentInput.titre,
-      description:documentInput.description,
-      missions:[],
-      attributs:[]
+      titre: documentInput.titre,
+      description: documentInput.description,
+      missions: [],
+      attributs: [],
+      categories: []
     }
     //Faire un appel synchrone
     /*_missionsSelected.value.forEach((element: any) => {

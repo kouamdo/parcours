@@ -43,7 +43,8 @@ export class ListFormDocumentComponent implements OnInit, AfterViewInit {
     missions: [],
     attributs: [],
     listeMissions: '',
-    listAttributs: ''
+    listAttributs: '',
+    categories: []
   }
 
 
@@ -61,6 +62,7 @@ export class ListFormDocumentComponent implements OnInit, AfterViewInit {
             description: '',
             missions: [],
             attributs: [],
+            categories: [],
             listeMissions: '',
             listAttributs: ''
           }

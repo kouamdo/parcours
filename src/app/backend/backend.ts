@@ -91,20 +91,20 @@ export class InMemDBService implements InMemoryDbService{
             service : {id:"1", libelle:"Pharmacie", etat:"non attribue",dateDerniereModification: "07/03/2000",dateAttribution: "07/03/1990",dateFin: "07/03/1990",nombreTotalAttributions: 6}}
         ];
         let attributs:IAttributs[]=[
-          {id:"1", titre:"taille", description:"taille de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeDouble},
-          {id:"2", titre:"poids", description:"poids de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeDouble},
-          {id:"3", titre:"sexe", description:"sexe de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeString},
-          {id:"4", titre:"age", description:"age de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeDouble},
-          {id:"5", titre:"allergies", description:"allergies de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeString},
-          {id:"6", titre:"teint", description:"teint de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeString},
-          {id:"7", titre:"Groupe sangin", description:"Groupe sangin de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeString},
-          {id:"8", titre:"cicatrice", description:"cicatrice de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeBoolean},
-          {id:"9", titre:"date admission", description:"date admission de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeDate},
-          {id:"10", titre:"date decharge", description:"date decharge", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeDate},
-          {id:"11", titre:"date prochain rendez-vous", description:"date prochain rendez-vous de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeDate},
-          {id:"12", titre:"aprobation du medecin", description:"aprobation du medecin", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeBoolean},
-          {id:"13", titre:"motif de la decharge", description:"motif de la decharge ", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeBoolean},
-          {id:"14", titre:"nom", description:"nom de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeString}
+          {id:"1", titre:"taille", description:"taille de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeDouble, ordre:0, obligatoire: false, valeursParDefaut:""},
+          {id:"2", titre:"poids", description:"poids de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeDouble, ordre:0, obligatoire: false, valeursParDefaut:""},
+          {id:"3", titre:"sexe", description:"sexe de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeString, ordre:0, obligatoire: false, valeursParDefaut:""},
+          {id:"4", titre:"age", description:"age de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeDouble, ordre:0, obligatoire: false, valeursParDefaut:""},
+          {id:"5", titre:"allergies", description:"allergies de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeString, ordre:0, obligatoire: false, valeursParDefaut:""},
+          {id:"6", titre:"teint", description:"teint de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeString, ordre:0, obligatoire: false, valeursParDefaut:""},
+          {id:"7", titre:"Groupe sangin", description:"Groupe sangin de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeString, ordre:0, obligatoire: false, valeursParDefaut:""},
+          {id:"8", titre:"cicatrice", description:"cicatrice de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeBoolean, ordre:0, obligatoire: false, valeursParDefaut:""},
+          {id:"9", titre:"date admission", description:"date admission de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeDate, ordre:0, obligatoire: false, valeursParDefaut:""},
+          {id:"10", titre:"date decharge", description:"date decharge", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeDate, ordre:0, obligatoire: false, valeursParDefaut:""},
+          {id:"11", titre:"date prochain rendez-vous", description:"date prochain rendez-vous de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeDate, ordre:0, obligatoire: false, valeursParDefaut:""},
+          {id:"12", titre:"aprobation du medecin", description:"aprobation du medecin", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeBoolean, ordre:0, obligatoire: false, valeursParDefaut:""},
+          {id:"13", titre:"motif de la decharge", description:"motif de la decharge ", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeBoolean, ordre:0, obligatoire: false, valeursParDefaut:""},
+          {id:"14", titre:"nom", description:"nom de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeString, ordre:0, obligatoire: false, valeursParDefaut:""}
         ];
         let documents:IDocument[]=[
           {id:"1", titre:"Note intervention", description:"Document delivre par le medecin ou un infirmier de l'etablissement",
@@ -115,12 +115,24 @@ export class InMemDBService implements InMemoryDbService{
                     {id:"4", libelle:"recu de paiement", description:"recu de paiement est une mission", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), 
                       service : {id:"2", libelle:"Laboratoire", etat:"non attribue",dateDerniereModification: "06/08/1990",dateAttribution: "07/03/1990",dateFin: "07/03/1990",nombreTotalAttributions: 20}}
             ],
-           attributs:[{id:"1", titre:"taille", description:"taille de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: TypeTicket.Double},
-                      {id:"4", titre:"age", description:"age de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: TypeTicket.Boolean},
-                      {id:"5", titre:"allergies", description:"allergies de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: TypeTicket.String},
-                      {id:"6", titre:"teint", description:"teint de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: TypeTicket.Date},
-                      {id:"7", titre:"Groupe sangin", description:"Groupe sangin de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: TypeTicket.Radio},
-                      {id:"8", titre:"cicatrice", description:"cicatrice de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: TypeTicket.Tel}
+            attributs:[{id:"1", titre:"taille", description:"taille de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: TypeTicket.Double, ordre:0, obligatoire: false, valeursParDefaut:""},
+                       {id:"4", titre:"age", description:"age de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: TypeTicket.Boolean, ordre:0, obligatoire: false, valeursParDefaut:""},
+                       {id:"5", titre:"allergies", description:"allergies de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: TypeTicket.String, ordre:0, obligatoire: false, valeursParDefaut:""},
+                       {id:"6", titre:"teint", description:"teint de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: TypeTicket.Date, ordre:0, obligatoire: false, valeursParDefaut:""},
+                       {id:"7", titre:"Groupe sangin", description:"Groupe sangin de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: TypeTicket.Radio, ordre:0, obligatoire: false, valeursParDefaut:""},
+                       {id:"8", titre:"cicatrice", description:"cicatrice de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: TypeTicket.Tel, ordre:0, obligatoire: false, valeursParDefaut:""}
+            ],
+            categories:[{id:"1", nom:"informations personelles", ordre: 1,
+                        listAttributs:[{id:"1", titre:"taille", description:"taille de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: TypeTicket.Double, ordre:0, obligatoire: false, valeursParDefaut:""},
+                                    {id:"4", titre:"age", description:"age de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: TypeTicket.Boolean, ordre:0, obligatoire: false, valeursParDefaut:""},
+                                    {id:"6", titre:"teint", description:"teint de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: TypeTicket.Date, ordre:0, obligatoire: false, valeursParDefaut:""},
+                        ]},
+                        {id:"2", nom:"informations de sante", ordre: 2,
+                        listAttributs:[
+                                    {id:"5", titre:"allergies", description:"allergies de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: TypeTicket.String, ordre:0, obligatoire: false, valeursParDefaut:""},
+                                    {id:"7", titre:"Groupe sangin", description:"Groupe sangin de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: TypeTicket.Radio, ordre:0, obligatoire: false, valeursParDefaut:""},
+                                    {id:"8", titre:"cicatrice", description:"cicatrice de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: TypeTicket.Tel, ordre:0, obligatoire: false, valeursParDefaut:""}
+                        ]}
             ]
           },
           {id:"2", titre:"Fiche de suivi", description:"Document delivre par le medecin ou un infirmier de l'etablissement",
@@ -131,12 +143,24 @@ export class InMemDBService implements InMemoryDbService{
                     {id:"2", libelle:"recu de paiement", description:"recu de paiement est une mission", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), 
                       service : {id:"2", libelle:"Laboratoire", etat:"non attribue",dateDerniereModification: "06/08/1990",dateAttribution: "07/03/1990",dateFin: "07/03/1990",nombreTotalAttributions: 20}},
             ], 
-           attributs:[{id:"1", titre:"taille", description:"taille de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeDouble},
-                      {id:"6", titre:"teint", description:"teint de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeString},
-                      {id:"8", titre:"cicatrice", description:"cicatrice de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeBoolean},
-                      {id:"4", titre:"age", description:"age de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeDouble},
-                      {id:"7", titre:"Groupe sangin", description:"Groupe sangin de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeString},
-                      {id:"5", titre:"allergies", description:"allergies de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeString}
+           attributs:[{id:"1", titre:"taille", description:"taille de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeDouble, ordre:0, obligatoire: false, valeursParDefaut:""},
+                      {id:"6", titre:"teint", description:"teint de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeString, ordre:0, obligatoire: false, valeursParDefaut:""},
+                      {id:"8", titre:"cicatrice", description:"cicatrice de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeBoolean, ordre:0, obligatoire: false, valeursParDefaut:""},
+                      {id:"4", titre:"age", description:"age de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeDouble, ordre:0, obligatoire: false, valeursParDefaut:""},
+                      {id:"7", titre:"Groupe sangin", description:"Groupe sangin de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeString, ordre:0, obligatoire: false, valeursParDefaut:""},
+                      {id:"5", titre:"allergies", description:"allergies de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeString, ordre:0, obligatoire: false, valeursParDefaut:""}
+            ],
+            categories:[{id:"1", nom:"informations personelles", ordre: 1,
+                        listAttributs:[{id:"1", titre:"taille", description:"taille de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: TypeTicket.Double, ordre:2, obligatoire: false, valeursParDefaut:""},
+                                    {id:"4", titre:"age", description:"age de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: TypeTicket.Boolean, ordre:1, obligatoire: false, valeursParDefaut:""},
+                                    {id:"6", titre:"teint", description:"teint de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: TypeTicket.Date, ordre:3, obligatoire: false, valeursParDefaut:""},
+                        ]},
+                        {id:"2", nom:"informations de sante", ordre: 2,
+                        listAttributs:[
+                                    {id:"5", titre:"allergies", description:"allergies de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: TypeTicket.String, ordre:2, obligatoire: false, valeursParDefaut:""},
+                                    {id:"7", titre:"Groupe sangin", description:"Groupe sangin de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: TypeTicket.Radio, ordre:1, obligatoire: false, valeursParDefaut:""},
+                                    {id:"8", titre:"cicatrice", description:"cicatrice de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: TypeTicket.Tel, ordre:3, obligatoire: false, valeursParDefaut:""}
+                        ]}
             ]
           },
           {id:"3", titre:"Fiche de soin", description:"Document delivre par le medecin ou un infirmier de l'etablissement",
@@ -147,10 +171,20 @@ export class InMemDBService implements InMemoryDbService{
                     {id:"4", libelle:"recu de paiement", description:"recu de paiement est une mission", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"),
                       service :{id:"3", libelle:"Consultation", etat:"non attribue",dateDerniereModification: "12/06/1972",dateAttribution: "07/03/1990",dateFin: "07/03/1990",nombreTotalAttributions: 50}}
             ], 
-           attributs:[{id:"1", titre:"taille", description:"taille de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeDouble},
-                      {id:"4", titre:"age", description:"age de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeDouble},
-                      {id:"5", titre:"allergies", description:"allergies de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeString},
-                      {id:"8", titre:"cicatrice", description:"cicatrice de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeBoolean}
+           attributs:[{id:"1", titre:"taille", description:"taille de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeDouble, ordre:0, obligatoire: false, valeursParDefaut:""},
+                      {id:"4", titre:"age", description:"age de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeDouble, ordre:0, obligatoire: false, valeursParDefaut:""},
+                      {id:"5", titre:"allergies", description:"allergies de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeString, ordre:0, obligatoire: false, valeursParDefaut:""},
+                      {id:"8", titre:"cicatrice", description:"cicatrice de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeBoolean, ordre:0, obligatoire: false, valeursParDefaut:""}
+            ],
+            categories:[{id:"1", nom:"informations personelles", ordre: 1,
+                        listAttributs:[{id:"1", titre:"taille", description:"taille de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: TypeTicket.Double, ordre:2, obligatoire: false, valeursParDefaut:""},
+                                    {id:"4", titre:"age", description:"age de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: TypeTicket.Boolean, ordre:1, obligatoire: false, valeursParDefaut:""},
+                        ]},
+                        {id:"2", nom:"informations de sante", ordre: 2,
+                        listAttributs:[
+                                    {id:"5", titre:"allergies", description:"allergies de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: TypeTicket.String, ordre:1, obligatoire: false, valeursParDefaut:""},
+                                    {id:"8", titre:"cicatrice", description:"cicatrice de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: TypeTicket.Tel, ordre:2, obligatoire: false, valeursParDefaut:""}
+                        ]}
             ]
           },
           {id:"4", titre:"Formulaire de sortie", description:"Document delivre par le medecin ou un infirmier de l'etablissement",
@@ -161,17 +195,38 @@ export class InMemDBService implements InMemoryDbService{
                     {id:"4", libelle:"recu de paiement", description:"recu de paiement est une mission", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), 
                       service : {id:"2", libelle:"Laboratoire", etat:"non attribue",dateDerniereModification: "06/08/1990",dateAttribution: "07/03/1990",dateFin: "07/03/1990",nombreTotalAttributions: 20}}
             ], 
-           attributs:[{id:"14", titre:"Nom", description:"nom de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeString},
-                      {id:"4", titre:"age", description:"age de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeDouble},
-                      {id:"5", titre:"allergies", description:"allergies de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeTextarea},
-                      {id:"1", titre:"taille", description:"taille de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeDouble},
-                      {id:"7", titre:"Groupe sangin", description:"Groupe sangin de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeRadio},
-                      {id:"8", titre:"cicatrice", description:"cicatrice de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeBoolean},
-                      {id:"9", titre:"date admission", description:"date admission de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeDate},
-                      {id:"10", titre:"date decharge", description:"date decharge", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeDate},
-                      {id:"11", titre:"date prochain rendez-vous", description:"date prochain rendez-vous de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeDate},
-                      {id:"12", titre:"aprobation du medecin", description:"aprobation du medecin", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeBoolean},
-                      {id:"13", titre:"motif de la decharge", description:"motif de la decharge ", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeTextarea}
+           attributs:[{id:"14", titre:"Nom", description:"nom de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeString, ordre:0, obligatoire: false, valeursParDefaut:""},
+                      {id:"4", titre:"age", description:"age de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeDouble, ordre:0, obligatoire: false, valeursParDefaut:""},
+                      {id:"5", titre:"allergies", description:"allergies de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeTextarea, ordre:0, obligatoire: false, valeursParDefaut:""},
+                      {id:"1", titre:"taille", description:"taille de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeDouble, ordre:0, obligatoire: false, valeursParDefaut:""},
+                      {id:"7", titre:"Groupe sangin", description:"Groupe sangin de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeRadio, ordre:0, obligatoire: false, valeursParDefaut:""},
+                      {id:"8", titre:"cicatrice", description:"cicatrice de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeBoolean, ordre:0, obligatoire: false, valeursParDefaut:""},
+                      {id:"9", titre:"date admission", description:"date admission de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeDate, ordre:0, obligatoire: false, valeursParDefaut:""},
+                      {id:"10", titre:"date decharge", description:"date decharge", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeDate, ordre:0, obligatoire: false, valeursParDefaut:""},
+                      {id:"11", titre:"date prochain rendez-vous", description:"date prochain rendez-vous de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeDate, ordre:0, obligatoire: false, valeursParDefaut:""},
+                      {id:"12", titre:"aprobation du medecin", description:"aprobation du medecin", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeBoolean, ordre:0, obligatoire: false, valeursParDefaut:""},
+                      {id:"13", titre:"motif de la decharge", description:"motif de la decharge ", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeTextarea, ordre:0, obligatoire: false, valeursParDefaut:""}
+            ],
+            categories:[{id:"1", nom:"informations personelles", ordre: 1,
+                        listAttributs:[
+                                    {id:"14", titre:"Nom", description:"nom de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeString, ordre:1, obligatoire: false, valeursParDefaut:""},
+                                    {id:"1", titre:"taille", description:"taille de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: TypeTicket.Double, ordre:2, obligatoire: false, valeursParDefaut:""},
+                                    {id:"4", titre:"age", description:"age de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: TypeTicket.Boolean, ordre:3, obligatoire: false, valeursParDefaut:""},
+                        ]},
+                        {id:"2", nom:"informations de sante", ordre: 3,
+                        listAttributs:[
+                                    {id:"5", titre:"allergies", description:"allergies de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: TypeTicket.String, ordre:2, obligatoire: false, valeursParDefaut:""},
+                                    {id:"7", titre:"Groupe sangin", description:"Groupe sangin de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: TypeTicket.Radio, ordre:1, obligatoire: false, valeursParDefaut:""},
+                                    {id:"8", titre:"cicatrice", description:"cicatrice de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: TypeTicket.Tel, ordre:3, obligatoire: false, valeursParDefaut:""}
+                        ]},
+                        {id:"3", nom:"informations de suivi medical", ordre: 2,
+                        listAttributs:[
+                          {id:"9", titre:"date admission", description:"date admission de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeDate, ordre:1, obligatoire: false, valeursParDefaut:""},
+                          {id:"10", titre:"date decharge", description:"date decharge", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeDate, ordre:2, obligatoire: false, valeursParDefaut:""},
+                          {id:"11", titre:"date prochain rendez-vous", description:"date prochain rendez-vous de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeDate, ordre:3, obligatoire: false, valeursParDefaut:""},
+                          {id:"12", titre:"aprobation du medecin", description:"aprobation du medecin", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeBoolean, ordre:4, obligatoire: false, valeursParDefaut:""},
+                          {id:"13", titre:"motif de la decharge", description:"motif de la decharge ", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeTextarea, ordre:5, obligatoire: false, valeursParDefaut:""}
+                        ]}
             ]
           },
           {id:"5", titre:"ordonnance", description:"Document delivre par le medecin ou un infirmier de l'etablissement",
@@ -181,13 +236,25 @@ export class InMemDBService implements InMemoryDbService{
                       service : {id:"2", libelle:"Laboratoire", etat:"non attribue",dateDerniereModification: "06/08/1990",dateAttribution: "07/03/1990",dateFin: "07/03/1990",nombreTotalAttributions: 20}},
                     {id:"5", libelle:"recu de paiement", description:"recu de paiement est une mission", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), 
                       service : {id:"2", libelle:"Laboratoire", etat:"non attribue",dateDerniereModification: "06/08/1990",dateAttribution: "07/03/1990",dateFin: "07/03/1990",nombreTotalAttributions: 20}},
-            ], 
-           attributs:[{id:"1", titre:"taille", description:"taille de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeDouble},
-                      {id:"6", titre:"teint", description:"teint de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeString},
-                      {id:"8", titre:"cicatrice", description:"cicatrice de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeBoolean},
-                      {id:"4", titre:"age", description:"age de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeDouble},
-                      {id:"7", titre:"Groupe sangin", description:"Groupe sangin de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeString},
-                      {id:"5", titre:"allergies", description:"allergies de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeString}
+            ],
+           attributs:[{id:"1", titre:"taille", description:"taille de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeDouble , ordre: 0, obligatoire: false, valeursParDefaut:""},
+                      {id:"6", titre:"teint", description:"teint de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeString , ordre: 0, obligatoire: false, valeursParDefaut:""},
+                      {id:"8", titre:"cicatrice", description:"cicatrice de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeBoolean , ordre: 0, obligatoire: false, valeursParDefaut:""},
+                      {id:"4", titre:"age", description:"age de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeDouble , ordre: 0, obligatoire: false, valeursParDefaut:""},
+                      {id:"7", titre:"Groupe sangin", description:"Groupe sangin de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeString , ordre: 0, obligatoire: false, valeursParDefaut:""},
+                      {id:"5", titre:"allergies", description:"allergies de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeString , ordre: 0, obligatoire: false, valeursParDefaut:""}
+            ],
+            categories:[{id:"1", nom:"informations personelles", ordre: 1,
+                        listAttributs:[{id:"1", titre:"taille", description:"taille de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: TypeTicket.Double , ordre: 2, obligatoire: false, valeursParDefaut:""},
+                                    {id:"4", titre:"age", description:"age de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: TypeTicket.Boolean , ordre: 1, obligatoire: false, valeursParDefaut:""},
+                                    {id:"6", titre:"teint", description:"teint de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: TypeTicket.Date , ordre: 3, obligatoire: false, valeursParDefaut:""},
+                        ]},
+                        {id:"2", nom:"informations de sante", ordre: 2,
+                        listAttributs:[
+                                    {id:"5", titre:"allergies", description:"allergies de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: TypeTicket.String , ordre: 2, obligatoire: false, valeursParDefaut:""},
+                                    {id:"7", titre:"Groupe sangin", description:"Groupe sangin de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: TypeTicket.Radio , ordre: 1, obligatoire: false, valeursParDefaut:""},
+                                    {id:"8", titre:"cicatrice", description:"cicatrice de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: TypeTicket.Tel , ordre: 3, obligatoire: false, valeursParDefaut:""}
+                        ]}
             ]
           }
         ];
@@ -200,17 +267,38 @@ export class InMemDBService implements InMemoryDbService{
                       {id:"4", libelle:"recu de paiement", description:"recu de paiement est une mission", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), 
                         service : {id:"2", libelle:"Laboratoire", etat:"non attribue",dateDerniereModification: "06/08/1990",dateAttribution: "07/03/1990",dateFin: "07/03/1990",nombreTotalAttributions: 20}}
               ], 
-            attributs:[{id:"14", titre:"Nom", description:"nom de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeString},
-                        {id:"4", titre:"age", description:"age de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeDouble},
-                        {id:"5", titre:"allergies", description:"allergies de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeTextarea},
-                        {id:"1", titre:"taille", description:"taille de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeDouble},
-                        {id:"7", titre:"Groupe sangin", description:"Groupe sangin de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeRadio},
-                        {id:"8", titre:"cicatrice", description:"cicatrice de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeBoolean},
-                        {id:"9", titre:"date admission", description:"date admission de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeDate},
-                        {id:"10", titre:"date decharge", description:"date decharge", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeDate},
-                        {id:"11", titre:"date prochain rendez-vous", description:"date prochain rendez-vous de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeDate},
-                        {id:"12", titre:"aprobation du medecin", description:"aprobation du medecin", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeBoolean},
-                        {id:"13", titre:"motif de la decharge", description:"motif de la decharge ", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeTextarea}
+            attributs:[{id:"14", titre:"Nom", description:"nom de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeString , ordre: 0, obligatoire: false, valeursParDefaut:""},
+                        {id:"4", titre:"age", description:"age de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeDouble , ordre: 0, obligatoire: false, valeursParDefaut:""},
+                        {id:"5", titre:"allergies", description:"allergies de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeTextarea , ordre: 0, obligatoire: false, valeursParDefaut:""},
+                        {id:"1", titre:"taille", description:"taille de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeDouble , ordre: 0, obligatoire: false, valeursParDefaut:""},
+                        {id:"7", titre:"Groupe sangin", description:"Groupe sangin de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeRadio , ordre: 0, obligatoire: false, valeursParDefaut:""},
+                        {id:"8", titre:"cicatrice", description:"cicatrice de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeBoolean , ordre: 0, obligatoire: false, valeursParDefaut:""},
+                        {id:"9", titre:"date admission", description:"date admission de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeDate , ordre: 0, obligatoire: false, valeursParDefaut:""},
+                        {id:"10", titre:"date decharge", description:"date decharge", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeDate , ordre: 0, obligatoire: false, valeursParDefaut:""},
+                        {id:"11", titre:"date prochain rendez-vous", description:"date prochain rendez-vous de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeDate , ordre: 0, obligatoire: false, valeursParDefaut:""},
+                        {id:"12", titre:"aprobation du medecin", description:"aprobation du medecin", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeBoolean , ordre: 0, obligatoire: false, valeursParDefaut:""},
+                        {id:"13", titre:"motif de la decharge", description:"motif de la decharge ", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeTextarea , ordre: 0, obligatoire: false, valeursParDefaut:""}
+              ],
+              categories:[{id:"1", nom:"informations personelles", ordre: 1,
+                          listAttributs:[
+                                      {id:"14", titre:"Nom", description:"nom de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeString , ordre: 1, obligatoire: false, valeursParDefaut:""},
+                                      {id:"1", titre:"taille", description:"taille de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: TypeTicket.Double , ordre: 2, obligatoire: false, valeursParDefaut:""},
+                                      {id:"4", titre:"age", description:"age de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: TypeTicket.Boolean , ordre: 3, obligatoire: false, valeursParDefaut:""},
+                          ]},
+                          {id:"2", nom:"informations de sante", ordre: 3,
+                          listAttributs:[
+                                      {id:"5", titre:"allergies", description:"allergies de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: TypeTicket.String , ordre: 2, obligatoire: false, valeursParDefaut:""},
+                                      {id:"7", titre:"Groupe sangin", description:"Groupe sangin de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: TypeTicket.Radio , ordre: 1, obligatoire: false, valeursParDefaut:""},
+                                      {id:"8", titre:"cicatrice", description:"cicatrice de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: TypeTicket.Tel , ordre: 3, obligatoire: false, valeursParDefaut:""}
+                          ]},
+                          {id:"3", nom:"informations de suivi medical", ordre: 2,
+                          listAttributs:[
+                                      {id:"9", titre:"date admission", description:"date admission de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeDate , ordre: 1, obligatoire: false, valeursParDefaut:""},
+                                      {id:"10", titre:"date decharge", description:"date decharge", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeDate , ordre: 2, obligatoire: false, valeursParDefaut:""},
+                                      {id:"11", titre:"date prochain rendez-vous", description:"date prochain rendez-vous de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeDate , ordre: 3, obligatoire: false, valeursParDefaut:""},
+                                      {id:"12", titre:"aprobation du medecin", description:"aprobation du medecin", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeBoolean , ordre: 4, obligatoire: false, valeursParDefaut:""},
+                                      {id:"13", titre:"motif de la decharge", description:"motif de la decharge ", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeTextarea , ordre: 5, obligatoire: false, valeursParDefaut:""}
+                  ]}
               ],
               objetEnregistre:[
                 {key:"4", value:"23"},
@@ -233,12 +321,24 @@ export class InMemDBService implements InMemoryDbService{
                       {id:"5", libelle:"recu de paiement", description:"recu de paiement est une mission", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), 
                         service : {id:"2", libelle:"Laboratoire", etat:"non attribue",dateDerniereModification: "06/08/1990",dateAttribution: "07/03/1990",dateFin: "07/03/1990",nombreTotalAttributions: 20}},
               ], 
-              attributs:[{id:"1", titre:"taille", description:"taille de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeDouble},
-                        {id:"6", titre:"teint", description:"teint de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeString},
-                        {id:"8", titre:"cicatrice", description:"cicatrice de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeBoolean},
-                        {id:"4", titre:"age", description:"age de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeDouble},
-                        {id:"7", titre:"Groupe sangin", description:"Groupe sangin de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeString},
-                        {id:"5", titre:"allergies", description:"allergies de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeString}
+              attributs:[{id:"1", titre:"taille", description:"taille de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeDouble , ordre: 0, obligatoire: false, valeursParDefaut:""},
+                        {id:"6", titre:"teint", description:"teint de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeString , ordre: 0, obligatoire: false, valeursParDefaut:""},
+                        {id:"8", titre:"cicatrice", description:"cicatrice de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeBoolean , ordre: 0, obligatoire: false, valeursParDefaut:""},
+                        {id:"4", titre:"age", description:"age de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeDouble , ordre: 0, obligatoire: false, valeursParDefaut:""},
+                        {id:"7", titre:"Groupe sangin", description:"Groupe sangin de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeString , ordre: 0, obligatoire: false, valeursParDefaut:""},
+                        {id:"5", titre:"allergies", description:"allergies de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeString , ordre: 0, obligatoire: false, valeursParDefaut:""}
+              ],
+              categories:[{id:"1", nom:"informations personelles", ordre: 1,
+                          listAttributs:[{id:"1", titre:"taille", description:"taille de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: TypeTicket.Double , ordre: 1, obligatoire: false, valeursParDefaut:""},
+                                      {id:"4", titre:"age", description:"age de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: TypeTicket.Boolean , ordre: 2, obligatoire: false, valeursParDefaut:""},
+                                      {id:"6", titre:"teint", description:"teint de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: TypeTicket.Date , ordre: 3, obligatoire: false, valeursParDefaut:""},
+                          ]},
+                          {id:"2", nom:"informations de sante", ordre: 2,
+                          listAttributs:[
+                                      {id:"5", titre:"allergies", description:"allergies de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: TypeTicket.String , ordre: 2, obligatoire: false, valeursParDefaut:""},
+                                      {id:"7", titre:"Groupe sangin", description:"Groupe sangin de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: TypeTicket.Radio , ordre: 1, obligatoire: false, valeursParDefaut:""},
+                                      {id:"8", titre:"cicatrice", description:"cicatrice de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: TypeTicket.Tel , ordre: 3, obligatoire: false, valeursParDefaut:""}
+                          ]}
               ],
               objetEnregistre:[
                 {key:"1", value:"1.70"},

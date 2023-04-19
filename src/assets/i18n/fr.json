@@ -121,14 +121,18 @@
             "title3":"Etat",
             "title4":"Date Creation",
             "title5":"Date Modification",
-            "title6":"Type"
+            "title6":"Type",
+            "title7":"Ordre",
+            "title8":"Champs obligatoire ?",
+            "title9":"Valeurs par defaut"
         },
         "form":{
             "text1":"Le titre est obligatoire.",
             "text2":"La description est obligatoire.",
             "text3":"L'etat est obligatoire.",
             "text4":"La date de derniere modification est obligatoire.",
-            "text5":"Le type est obligatoire."
+            "text5":"Le type est obligatoire.",
+            "text6":"Ce champs est obligatoire."
         }
     },
     "missions":{

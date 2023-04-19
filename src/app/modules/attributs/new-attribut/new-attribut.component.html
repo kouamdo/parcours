@@ -49,10 +49,7 @@
                                 <label  for="dateCreation"  class="label" >
                                     {{'attributs.table.title4' | translate}}
                                 </label>
-                                <input type="date" formControlName="dateCreation" name="dateCreation" id="dateCreation" placeholder="{{'attributs.table.title4' | translate}}" class="form-control" >
-                            </div>
-                            <div  *ngIf="submitted && f['dateCreation'].errors"  class="alert alert-danger" >
-                                <div *ngIf="f['dateCreation'].errors['required']">{{'attributs.form.text4' | translate}}</div>
+                                <input type="number" formControlName="ordre" name="dateCreation" id="dateCreation" placeholder="{{'attributs.table.title4' | translate}}" class="form-control" value="0">
                             </div>
                         </div>
                         <div class="form-group">

@@ -19,14 +19,16 @@ export class ViewExemplaireComponent implements OnInit {
     missions: [],
     attributs: [],
     idDocument: '',
-    objetEnregistre: []
+    objetEnregistre: [],
+    categories: []
   }; 
   document : IDocument = {
     id: '',
     titre: '',
     description: '',
     missions: [],
-    attributs: []
+    attributs: [],
+    categories: []
   };
 
 

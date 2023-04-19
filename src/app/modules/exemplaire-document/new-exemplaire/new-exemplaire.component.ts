@@ -23,14 +23,16 @@ export class NewExemplaireComponent implements OnInit {
     description: '',
     missions: [],
     attributs: [],
-    objetEnregistre: []
+    objetEnregistre: [],
+    categories: []
   };
   document : IDocument = {
     id: '',
     titre: '',
     description: '',
     missions: [],
-    attributs: []
+    attributs: [],
+    categories: []
   }
   formeExemplaire: FormGroup;
   btnLibelle: string="Ajouter";
@@ -136,6 +138,7 @@ export class NewExemplaireComponent implements OnInit {
     console.log('Exemplaire keys ', this.exemplaire.objetEnregistre);
     this.submitted=true;
     if(this.formeExemplaire.invalid) return;
+
     let exemplaireTemp : IExemplaireDocument={
       id: '9',
       idDocument: this.document.id,
@@ -143,7 +146,8 @@ export class NewExemplaireComponent implements OnInit {
       description: this.document.description,
       missions: [],
       attributs: [],
-      objetEnregistre: []
+      objetEnregistre: [],
+      categories: this.document.categories
     }
         exemplaireTemp.objetEnregistre = this.exemplaire.objetEnregistre
       

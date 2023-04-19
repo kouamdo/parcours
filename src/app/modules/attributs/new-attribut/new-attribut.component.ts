@@ -35,6 +35,9 @@ export class NewAttributComponent implements OnInit {
       etat: ['False', [Validators.required, Validators.minLength(1), Validators.maxLength(50)]],
       dateCreation: ['', [Validators.required]],
       dateModification: ['//'],
+      ordre: [0],
+      obligatoire: [false, [Validators.required]],
+      valeursParDefaut: [''],
       type: ['']
     })
   }
@@ -54,6 +57,9 @@ export class NewAttributComponent implements OnInit {
             etat: this.attribut.etat,
             dateCreation: this.datePipe.transform(this.attribut.dateCreation,'yyyy-MM-dd'),
             dateModification: this.datePipe.transform(this.attribut.dateModification,'yyyy-MM-dd'),
+            ordre: this.attribut.ordre,
+            obligatoire: this.attribut.obligatoire,
+            valeursParDefaut: this.attribut.valeursParDefaut,
             type: this.attribut.type
           })
       });
@@ -76,7 +82,10 @@ export class NewAttributComponent implements OnInit {
       etat: attributInput.etat,
       dateCreation: attributInput.dateCreation,
       dateModification: attributInput.dateModification,
-      type: attributInput.type
+      type: attributInput.type,
+      ordre: 0,
+      obligatoire:  attributInput.obligatoire,
+      valeursParDefaut:  attributInput.valeursParDefaut
     }
     attributTemp.dateCreation = this.initialDateCreation.value!
     attributTemp.dateModification = this.initialDateModification.value!
