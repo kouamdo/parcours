@@ -33,10 +33,10 @@ export class NewAttributComponent implements OnInit {
       titre: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
       description: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
       etat: ['False', [Validators.required, Validators.minLength(1), Validators.maxLength(50)]],
-      dateCreation: ['', [Validators.required]],
-      dateModification: ['//'],
+      dateCreation: [],
+      dateModification: [new Date() ],
       ordre: [0],
-      obligatoire: [false, [Validators.required]],
+      obligatoire: [false],
       valeursParDefaut: [''],
       type: ['']
     })
@@ -76,7 +76,7 @@ export class NewAttributComponent implements OnInit {
     if(this.forme.invalid) return;
 
     let attributTemp : IAttributs={
-      id: "10",
+      id: "30",
       titre: attributInput.titre,
       description: attributInput.description,
       etat: attributInput.etat,

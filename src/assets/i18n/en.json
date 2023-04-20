@@ -121,12 +121,18 @@
             "title3":"Status",
             "title4":"Allocation's Date",
             "title5":"Modification's Date",
-            "title6":"Type"
+            "title6":"Type",
+            "title7":"Order",
+            "title8":"Is attribut required ?",
+            "title9":"Defaut values ",
+            "title10":"Separeted values with a comma"
         },
         "form":{
-            "text1":"Label is required.",
-            "text2":"Status is requied",
-            "text3":"the Last modification's date is requied"
+            "text1":"Title is required.",
+            "text2":"Description is required.",
+            "text3":"Status is requied",
+            "text4":"Type is required.",
+            "text5":"This champs is required."
         }
     },
     "missions":{
