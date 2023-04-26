@@ -360,7 +360,7 @@
                                                                     </ng-container>
                                                                     <!-- ordre Column -->
                                                                     <ng-container matColumnDef="ordre">
-                                                                        <th class="text-dark containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'attributs.table.title6' | translate}} </th>
+                                                                        <th class="text-dark containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'attributs.table.title7' | translate}} </th>
                                                                         <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.ordre}} </td>
                                                                     </ng-container>
                                                                     <!-- actions Column -->
@@ -374,8 +374,8 @@
                                                                             </div>
                                                                         </td>
                                                                     </ng-container>
-                                                                    <tr mat-header-row *matHeaderRowDef="displayedAttributsColumns"></tr>
-                                                                    <tr mat-row *matRowDef="let row; columns: displayedAttributsColumns;"></tr>
+                                                                    <tr mat-header-row *matHeaderRowDef="displayedCategorieAttributColumns"></tr>
+                                                                    <tr mat-row *matRowDef="let row; columns: displayedCategorieAttributColumns;"></tr>
                                                                 </table>
                                                             </div>
                                                         </div>

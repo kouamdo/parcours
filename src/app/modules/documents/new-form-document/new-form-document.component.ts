@@ -47,7 +47,8 @@ export class NewFormDocumentComponent implements OnInit {
   myControl = new FormControl<string | IAttributs>('');
   ELEMENTS_TABLE_ATTRIBUTS: IAttributs[] = [];
   filteredOptions: IAttributs[] | undefined;
-  displayedAttributsColumns: string[] = ['actions','titre', 'description', 'type', 'ordre'];
+  displayedAttributsColumns: string[] = ['actions','titre', 'description', 'type'];
+  displayedCategorieAttributColumns: string[] = ['actions','titre', 'description', 'type', 'ordre'];
   dataSourceAttribut = new MatTableDataSource<IAttributs>(this.ELEMENTS_TABLE_ATTRIBUTS);
   dataSourceAttributResultat = new MatTableDataSource<IAttributs>();
   _attributs :  FormArray | undefined;
