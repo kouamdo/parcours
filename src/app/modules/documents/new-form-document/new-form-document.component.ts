@@ -47,7 +47,7 @@ export class NewFormDocumentComponent implements OnInit {
   myControl = new FormControl<string | IAttributs>('');
   ELEMENTS_TABLE_ATTRIBUTS: IAttributs[] = [];
   filteredOptions: IAttributs[] | undefined;
-  displayedAttributsColumns: string[] = ['actions','titre', 'description', 'type'];
+  displayedAttributsColumns: string[] = ['actions','titre', 'description', 'type', 'ordre'];
   dataSourceAttribut = new MatTableDataSource<IAttributs>(this.ELEMENTS_TABLE_ATTRIBUTS);
   dataSourceAttributResultat = new MatTableDataSource<IAttributs>();
   _attributs :  FormArray | undefined;
@@ -57,6 +57,7 @@ export class NewFormDocumentComponent implements OnInit {
   _missions :  FormArray | undefined;
   ELEMENTS_TABLE_CATEGORIES: IAttributs[] = []; //tableau de listing des attributs a affecter a chaque categorie
 
+  dataSourceCategorieAttribut = new MatTableDataSource<IAttributs>(this.ELEMENTS_TABLE_CATEGORIES);
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -67,8 +68,10 @@ export class NewFormDocumentComponent implements OnInit {
       _attributs :  new FormArray([]),
       titre: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
       description: [''],
+      ordreCategorie: [''],
       missions: [],
-      attributs: []
+      attributs: [],
+      categories: []
     });
   }
   ngOnInit(): void {
@@ -160,9 +163,11 @@ export class NewFormDocumentComponent implements OnInit {
       val => {
         console.log('IdAttribut :' + val.id);
         this.ELEMENTS_TABLE_ATTRIBUTS = this.dataSourceAttributResultat.data;
+        this.dataSourceAttributResultat.data = this.dataSourceCategorieAttribut.data
         this.ELEMENTS_TABLE_ATTRIBUTS.push(val);
         this.dataSourceAttributResultat.data = this.ELEMENTS_TABLE_ATTRIBUTS;
-        this.ELEMENTS_TABLE_CATEGORIES = this.ELEMENTS_TABLE_ATTRIBUTS;
+       // this.ELEMENTS_TABLE_CATEGORIES = this.ELEMENTS_TABLE_ATTRIBUTS;
+        this.dataSourceCategorieAttribut.data = this.ELEMENTS_TABLE_ATTRIBUTS
       }
     )    
   }

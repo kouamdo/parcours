@@ -161,7 +161,8 @@
     "document":{
         "text":"documents retrouvé(e)s",
         "search-bar":"Rechercher",
-        "title1":"Affichage des resuttats",
+        "title1":"Affichage des resultats",
+        "title2":"Selectionner les attributs de la categories",
         "table":{
             "title0":"Id",
             "title1":"Titre",
@@ -170,7 +171,12 @@
             "title4":"Attributs",
             "title5":"Selectionner les missions",
             "title6":"Selectionner les attributs",
-            "title7":"Valeurs"
+            "title7":"Valeurs",
+            "title8":"Nom de la categorie",
+            "title9":"Entrez le nom de la categories",
+            "title10":"Ordre",
+            "title11":"Entrez l'ordre de la categories",
+            "title12":"Creer des categories"
         },
         "form":{
             "text1":"Le Titre est obligatoire.",
@@ -181,7 +187,8 @@
         "view":{
             "title":"Modele du document",
             "text1":"liste des missions du document",
-            "text2":"liste des attributs du document"
+            "text2":"liste des attributs du document",
+            "text3":"liste des attributs par categorie du document"
         },
         "exemplaire":{
             "title":"Exemplaire du document",
