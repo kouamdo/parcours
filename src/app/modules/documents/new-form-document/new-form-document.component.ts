@@ -8,6 +8,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Observable, EMPTY } from 'rxjs';
 import { IAfficheDocument } from 'src/app/modele/affiche-document';
 import { IAttributs } from 'src/app/modele/attributs';
+import { ICategoriesAttributs } from 'src/app/modele/categories-attributs';
 import { IDocument } from 'src/app/modele/document';
 import { IMission } from 'src/app/modele/mission';
 import { IService } from 'src/app/modele/service';
@@ -28,6 +29,7 @@ export class NewFormDocumentComponent implements OnInit {
   btnLibelle: string="Ajouter";
   titre: string="Ajouter un nouveau document";
   submitted: boolean=false;
+  validation: boolean=false;
   idMission : string = "";
   idAttribut : string = "";
   serviceDeMission!: IService;
@@ -47,17 +49,31 @@ export class NewFormDocumentComponent implements OnInit {
   myControl = new FormControl<string | IAttributs>('');
   ELEMENTS_TABLE_ATTRIBUTS: IAttributs[] = [];
   filteredOptions: IAttributs[] | undefined;
-  displayedAttributsColumns: string[] = ['actions','titre', 'description', 'type', 'ordre'];
+  displayedAttributsColumns: string[] = ['actions','titre', 'description', 'type'];  // structure du tableau presentant les attributs
+  displayedCategoriesAttributsColumns: string[] = ['actions','titre', 'description', 'type', 'ordreAtrParCat', 'ordreCat']; // structure du tableau presentant les categories creees avec leurs attributs
+  displayedCategoriesColumns: string[] = ['actions','titre', 'description', 'type', 'ordreAtrParCat'];  // structure du tableau presentant les choix des attributs lors de la creation des categories
   dataSourceAttribut = new MatTableDataSource<IAttributs>(this.ELEMENTS_TABLE_ATTRIBUTS);
   dataSourceAttributResultat = new MatTableDataSource<IAttributs>();
   _attributs :  FormArray | undefined;
 
+  // variables pour la gestion des missions
   dataMission : IMission[] = [];
   dataSourceMissionResultat = new MatTableDataSource<IMission>();
-  _missions :  FormArray | undefined;
+  _missions : FormArray | undefined;
   ELEMENTS_TABLE_CATEGORIES: IAttributs[] = []; //tableau de listing des attributs a affecter a chaque categorie
 
+  // variables pour la gestion des categories
   dataSourceCategorieAttribut = new MatTableDataSource<IAttributs>(this.ELEMENTS_TABLE_CATEGORIES);
+  categorieAttributs : ICategoriesAttributs = {
+    id: '',
+    nom: '',
+    ordre: 0,
+    listAttributs: []
+  }
+  ELEMENTS_TABLE_CATEGORIE_ATTRIBUTS: ICategoriesAttributs[] = [];
+  tableResultatsCategoriesAttributs  = new MatTableDataSource<ICategoriesAttributs>(this.ELEMENTS_TABLE_CATEGORIE_ATTRIBUTS);
+  tableFinaleCategoriesAttributs: ICategoriesAttributs[] = [];
+  
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -66,12 +82,15 @@ export class NewFormDocumentComponent implements OnInit {
     this.forme = this.formBuilder.group({
       _missions :  new FormArray([]),
       _attributs :  new FormArray([]),
+      _ordreAttribut: this.formBuilder.array([
+      ]),
       titre: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
       description: [''],
-      ordreCategorie: [''],
+      ordreCategorie: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(50)]],
+      ordreAttribut: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(50)]],
       missions: [],
       attributs: [],
-      categories: []
+      nomCategorie: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]]
     });
   }
   ngOnInit(): void {
@@ -166,8 +185,6 @@ export class NewFormDocumentComponent implements OnInit {
         this.dataSourceAttributResultat.data = this.dataSourceCategorieAttribut.data
         this.ELEMENTS_TABLE_ATTRIBUTS.push(val);
         this.dataSourceAttributResultat.data = this.ELEMENTS_TABLE_ATTRIBUTS;
-       // this.ELEMENTS_TABLE_CATEGORIES = this.ELEMENTS_TABLE_ATTRIBUTS;
-        this.dataSourceCategorieAttribut.data = this.ELEMENTS_TABLE_ATTRIBUTS
       }
     )    
   }
@@ -180,8 +197,27 @@ export class NewFormDocumentComponent implements OnInit {
     this.dataSourceAttributResultat.data = this.ELEMENTS_TABLE_ATTRIBUTS;
   }
 
+  ValiderCategorie(){
+    this.validation = true
+    if(this.forme.invalid) return;
+  }
+
+  ajoutInputOrdre() {
+    this._ordreAttribut.push(this.formBuilder.control(''));
+  }
+  get _ordreAttribut() {
+    return this.forme.get('_ordreAttribut') as FormArray;
+  }
+
+  creerCategorie(){
+    this.dataSourceCategorieAttribut.data = this.ELEMENTS_TABLE_ATTRIBUTS
+    this.dataSourceCategorieAttribut.data.forEach(
+      attribut => {
+        this.ajoutInputOrdre()
+    });
+  }
   onSubmit(documentInput:any){
-//    const _missionsSelected = (this.forme.get('_missions') as FormArray);
+    //    const _missionsSelected = (this.forme.get('_missions') as FormArray);
     this.submitted=true;
     if(this.forme.invalid) return;
     let documentTemp : IDocument={

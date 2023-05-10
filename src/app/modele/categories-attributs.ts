@@ -2,7 +2,7 @@ import { IAttributs } from "./attributs";
 
 export interface ICategoriesAttributs {
     id:string,
-    ordre : number
     nom:string,
+    ordre : number,
     listAttributs : IAttributs[]
 }

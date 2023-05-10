@@ -47,7 +47,8 @@
         "button5":"Aucune action",
         "button6":"valider",
         "button7":"Modifier",
-        "button8":"Supprimer"
+        "button8":"Supprimer",
+        "button9":"Ajouter"
     },
     "patient":{
         "text":"Patients retrouvé(e)s",
@@ -176,7 +177,10 @@
             "title9":"Entrez le nom de la categories",
             "title10":"Ordre",
             "title11":"Entrez l'ordre de la categories",
-            "title12":"Creer des categories"
+            "title12":"Creer des categories",
+            "title13":"Ordre attribut",
+            "title14":"Ordre categorie",
+            "title15":"Categories"
         },
         "form":{
             "text1":"Le Titre est obligatoire.",

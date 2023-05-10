@@ -47,7 +47,8 @@
         "button5":"No action yet",
         "button6":"validate",
         "button7":"Edit",
-        "button8":"Delete"
+        "button8":"Delete",
+        "button9":"Add"
     },
     "patient":{
         "text":"Patients retrouvé(e)s",
@@ -132,7 +133,7 @@
             "text2":"Description is required.",
             "text3":"Status is requied",
             "text4":"Type is required.",
-            "text5":"This champs is required."
+            "text5":"This field is required."
         }
     },
     "missions":{
@@ -176,7 +177,10 @@
             "title9":"Enter category's name",
             "title10":"Order",
             "title11":"Enter ordre's category",
-            "title12":"Create categories"
+            "title12":"Create categories",
+            "title13":"Attribut's range",
+            "title14":"Category's range",
+            "title15":"Categories"
         },
         "form":{
             "text1":"Title is required.",
