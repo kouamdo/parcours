@@ -142,11 +142,12 @@ export class NewFormDocumentComponent implements OnInit {
       const index = _missions.controls
       .findIndex(x => x.value === event.target.value);
       //this.retirerSelectionMission(index)
+      
       _missions.removeAt(index);
       this.dataMission.splice(index,1);
     }
-      this._missions = _missions;
-      console.log(this._missions.value);
+    this._missions = _missions;
+    console.log(this._missions.value);
   }
   //TODO mise en cache
   ajoutSelectionMission(value: any) {
