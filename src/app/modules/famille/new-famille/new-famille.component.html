@@ -1,0 +1,60 @@
+<div id="mainSection">
+  <div class="card block">
+      <div class="card-header pt-4 pb-4 entete">Famille</div>
+      <div class="card-body">
+        <form [formGroup]="forme" (ngSubmit)="onSubmit(forme.value)" *ngIf="forme" >
+              <div class="">
+                  <div class="">
+                      <div class="form-group">
+                          <div>
+                              <div class="champs">
+                                  <label for="libelle" class="label">
+                                    Libellé
+                                  </label>
+                                  <input type="text" formControlName="libelle" name="libelle" id="libelle"  placeholder="libellé"  class="form-control" required>
+                              </div>
+                              <div  *ngIf="submitted && f['libelle'].errors"  class="alert alert-danger" >
+                                  <div *ngIf="f['libelle'].errors['required']"></div>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          <div>
+                              <div class="champs">
+                                  <label for="description" class="label" >
+                                    Description
+                                  </label>
+                                  <input  type="text" formControlName="description" name="description" id="description" placeholder="description" class="form-control"  required  >
+                              </div>
+                              <!-- <div  *ngIf="submitted && f['description'].errors"  class="alert alert-danger" >
+                                  <div *ngIf="f['description'].errors['required']"></div>
+                              </div>-->
+                          </div>
+                      </div>
+
+
+                      <div class="form-group">
+                        <div>
+                            <div class="champs">
+                                <label for="etat" class="label" >
+                                  Etat
+                                </label>
+                                <input  type="text" formControlName="etat" name="etat" id="etat" placeholder="état" class="form-control"  required  >
+                            </div>
+                            <div  *ngIf="submitted && f['etat'].errors"  class="alert alert-danger" >
+                                <div *ngIf="f['etat'].errors['required']"></div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                  </div>
+              </div>
+              <div class="actionButton">
+                  <button class="btn" routerLink="../list-familles">Retour</button>
+                  <button type="submit" class="btn">{{btnLibelle}}</button>
+              </div>
+          </form>
+      </div>
+  </div>
+</div>

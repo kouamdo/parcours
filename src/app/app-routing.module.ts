@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { Routes, RouterModule } from '@angular/router';
 import { AttributsRoutingModule } from './modules/attributs/attributs-routing.module';
 import { DocumentsRoutingModule } from './modules/documents/documents-routing.module';
+import { FamilleRoutingModule } from './modules/famille/famille-routing.module';
 import { MissionsRoutingModule } from './modules/missions/missions-routing.module';
 import { PatientsRoutingModule } from './modules/patients/patient-routing.module';
 import { ServicesRoutingModule } from './modules/services/services-routing.module';
@@ -17,13 +18,14 @@ const routes: Routes = [
 
 @NgModule({
   imports: [
-    PatientsRoutingModule, 
-    RouterModule.forRoot(routes), 
-    ServicesRoutingModule, 
-    TicketsRoutingModule, 
+    PatientsRoutingModule,
+    RouterModule.forRoot(routes),
+    ServicesRoutingModule,
+    TicketsRoutingModule,
     AttributsRoutingModule,
     MissionsRoutingModule,
-    DocumentsRoutingModule
+    DocumentsRoutingModule,
+    FamilleRoutingModule
   ],
   exports: [RouterModule]
 })
