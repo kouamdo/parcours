@@ -50,11 +50,6 @@
                                 </div>  
                             </div>
                         </div>
-
-
-
-
-
                         
                         <div class="form-group">
                             <div class="champs">
@@ -238,10 +233,11 @@
                                 <div class="dropdown w-100">
 
                                     <!-- affichage list attributs selectiones -->
-                                    <div class="listAttr">
                                         <button type="button" class="btn p-0" data-toggle="modal" data-target="#modalCategories" title="{{'lists.button7' | translate}}" (click)="creerCategorie()">
                                             <i class="fas fa-pen-square"></i>
                                         </button>
+                                    <div class="listAttr">
+                                        <button type="button" class="btn btn-primary" (click)="openCategorieDialog(); creerCategorie()">open dialog</button>
                                         <!-- <span *ngFor="let listeAttributs of dataSourceAttributResultat.data">
                                             {{listeAttributs.titre | lowercase}}<span>, </span>
                                         </span> -->
@@ -419,9 +415,9 @@
     </div>
 </div>
 <div>
-    <p *ngFor="let m of ELEMENTS_TABLE_CATEGORIES">
-        {{m.id}} 
-          {{m.titre}} 
-         {{m.etat}}
+    <p *ngFor="let m of dataSourceCategorieAttribut.data">
+        {{m.id}}  id
+          {{m.titre}} title 
+         {{m.etat}} etat
     </p>
 </div>

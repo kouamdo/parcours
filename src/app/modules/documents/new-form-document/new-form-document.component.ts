@@ -15,6 +15,8 @@ import { IService } from 'src/app/modele/service';
 import { AttributService } from 'src/app/services/attributs/attribut.service';
 import { DocumentService } from 'src/app/services/documents/document.service';
 import { MissionsService } from 'src/app/services/missions/missions.service';
+import {MatDialog} from '@angular/material/dialog';
+import { ModalCategoriesComponent } from '../../shared/modal-categories/modal-categories.component';
 
 @Component({
   selector: 'app-new-form-document',
@@ -78,7 +80,7 @@ export class NewFormDocumentComponent implements OnInit {
   paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private router:Router, private formBuilder: FormBuilder, private infosPath:ActivatedRoute, private serviceDocument:DocumentService, private serviceMission:MissionsService, private serviceAttribut:AttributService,  private _liveAnnouncer: LiveAnnouncer) {
+  constructor(private router:Router, private formBuilder: FormBuilder, private infosPath:ActivatedRoute, private serviceDocument:DocumentService, private serviceMission:MissionsService, private serviceAttribut:AttributService,  private _liveAnnouncer: LiveAnnouncer, private dialogDef : MatDialog) {
     this.forme = this.formBuilder.group({
       _missions :  new FormArray([]),
       _attributs :  new FormArray([]),
@@ -132,6 +134,19 @@ export class NewFormDocumentComponent implements OnInit {
     );
   }
 
+  openCategorieDialog(){
+    this.dialogDef.open(ModalCategoriesComponent, 
+    {
+      width:'100%',
+      enterAnimationDuration:'1000ms',
+      exitAnimationDuration:'1000ms',
+      data:{
+        dataSourceCategorieAttribut : this.dataSourceCategorieAttribut,
+        name : 'adeline'
+      }
+    }
+    )
+  }
   onCheckMissionChange(event: any) {
     const _missions = (this.forme.controls['_missions'] as FormArray);
     if (event.target.checked) {
