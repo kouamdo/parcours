@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { NewFamilleComponent } from "./new-famille/new-famille.component";
+import { ListFamillesComponent } from './list-familles/list-familles.component';
 
 const routes=[
   {
@@ -13,7 +14,11 @@ const routes=[
     title: 'Modifier une famille',
     component: NewFamilleComponent
   },
-
+  {
+    path: 'list-familles',
+    title: 'Recherche de familles',
+    component: ListFamillesComponent
+  }
 
 ];
 @NgModule({

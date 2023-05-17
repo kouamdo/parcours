@@ -16,6 +16,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
+import { ListFamillesComponent } from './list-familles/list-familles.component';
 
 
 
@@ -27,6 +28,7 @@ import { MatTableModule } from '@angular/material/table';
 @NgModule({
   declarations: [
     NewFamilleComponent,
+    ListFamillesComponent,
 
   ],
   imports: [

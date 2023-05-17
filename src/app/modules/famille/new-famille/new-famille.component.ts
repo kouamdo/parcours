@@ -17,13 +17,13 @@ import { FamillesService } from 'src/app/services/familles/familles.service';
   styleUrls: ['./new-famille.component.scss']
 })
 export class NewFamilleComponent implements OnInit {
-  //patient$:Observable<patientient>=EMPTY;
+
   famille : IFamille|undefined;
   forme: FormGroup;
   btnLibelle: string="Envoyer";
   submitted: boolean=false;
 
-  //TODO validation du formulaire. particulièrment les mail; les dates
+
 
   constructor(private formBuilder:FormBuilder, private familleService:FamillesService,private router:Router, private infosPath:ActivatedRoute, private datePipe: DatePipe) {
     this.forme =  this.formBuilder.group({
@@ -62,10 +62,30 @@ export class NewFamilleComponent implements OnInit {
     return this.forme.controls;
   }
 
-  onSubmit(patientInput:any){
+  onSubmit(familleInput:any){
     this.submitted=true;
     //Todo la validation d'element non conforme passe
     if(this.forme.invalid) return;
+
+
+
+    let familleTemp : IFamille={
+      id: String(9),
+      libelle:familleInput.libelle,
+      description:familleInput.description,
+      etat:familleInput.etat,
+    }
+
+    if(this.famille != undefined){
+      familleTemp.id = this.famille.id
+    }
+    this.familleService.ajouterFamille(familleTemp).subscribe(
+      object => {
+        this.router.navigate(['/list-familles']);
+      }
+    )
+
+
 
 }
 }

@@ -13,7 +13,7 @@ export class FamillesService {
 
   getAllFamilles():Observable<IFamille[]>
   {
-    return this.http.get<IFamille[]>('api/familles').pipe(map(x=>x));
+    return this.http.get<IFamille[]>('api/famille').pipe(map(x=>x));
   }
 
   getFamilleById(id:string):Observable<IFamille>{
@@ -25,8 +25,8 @@ export class FamillesService {
     );
   }
 
-   getFamillesByName(libelle:string): Observable<IFamille[]> {
-    return this.http.get<IFamille[]>('api/familles').pipe(
+   getFamillesByLibelle(libelle:string): Observable<IFamille[]> {
+    return this.http.get<IFamille[]>('api/famille').pipe(
       map(x=>
         {
           return x.filter(p=> p.libelle.toLowerCase().startsWith(libelle))
@@ -36,6 +36,6 @@ export class FamillesService {
 
   ajouterFamille(famille:IFamille)
   {
-    return this.http.post("api/familles",famille);
+    return this.http.post("api/famille",famille);
   }
 }

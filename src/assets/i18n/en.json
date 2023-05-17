@@ -72,7 +72,7 @@
             "text2":"Surname is requied",
             "text3":"Birthday is requied",
             "text4":"mail address is requied is requied"
-        } 
+        }
     },
     "services":{
         "table":{
@@ -170,12 +170,41 @@
             "title":"Document's Model",
             "text1":"missions's list of document",
             "text2":"attributs's list of document"
-        }      
+        }
     },
     "theme":{
         "libelle":"theme"
     },
     "langue":{
         "libelle":"langages"
+    },
+    "famille":{
+      "header":"Ajouter Une Nouvelle Famille",
+      "table":{
+        "title1":"Libellé",
+        "title2":"Description",
+        "title3":"Etat"
+      },
+      "form":{
+        "text1":"Champ obligatoire",
+        "text2":"Champ obligatoire"
+    },
+    "lists":{
+      "button1":"Retour"
+    },
+    "title":"Listing familles",
+    "search-bar":"Rechercher",
+    "table1":{
+        "title1":"Libellé",
+        "title2":"Description",
+        "title3":"Etat",
+        "title4":"Actions",
+        "actions":{
+            "link1":"Orienter",
+            "link2":"Modifier",
+            "link3":"Détails",
+            "link4":"Supprimer"
+        }
     }
+  }
 }
