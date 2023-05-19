@@ -41,13 +41,10 @@
     clear: both;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-end;
     button{
         background-color: #7ea97e;
         color: white;
-        height: 30px;
-        padding: 0 10px;
-        font-size: 15px;
     }
 }
 .tableBlock{

@@ -66,10 +66,13 @@
                                     <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{"patient.table.title8" | translate}} </th>
                                     <td class="text-dark containCell" mat-cell *matCellDef="let element;  let i=index">
                                         <div class="actions">
-                                            <button class="btn p-0" name="attributs"  [value]="element.id" id="attributs" title="clicker pour ajouter un attributs a la categorie" (click)="ValiderCategorie()">
+                                            <button class="btn p-0" name="attributs"  [value]="element.id" id="attributs" title="clicker pour ajouter un attributs a la categorie" (click)="getIdAttribut(element.id)" (change)="ValiderCategorie(formeCategorieAttribut.value, i, $event)">
                                                 <span *ngIf="((formeCategorieAttribut.value._ordreAttribut[i] <= 0) || (formeCategorieAttribut.value._ordreAttribut[i] <= -1) || (formeCategorieAttribut.value._ordreAttribut[i] == ''))"><input type="checkbox" name="" id="" class="" [disabled]="true"></span>
                                                 <span *ngIf="((formeCategorieAttribut.value._ordreAttribut[i] >= 1))"><input type="checkbox" name="" id="" class="" [disabled]="false"></span>
                                             </button>
+                                            <p>
+                                                {{formeCategorieAttribut.value| json}}
+                                            </p>
                                         </div>
                                     </td>
                                 </ng-container>
@@ -84,7 +87,8 @@
                     </div>
                 </div>
                 <div class="d-flex w-100 align-items-center justify-content-end">
-                    <button type="button" class="btn btn-success" (click)="ValiderCategorie()">{{'lists.button9' | translate}}</button>
+                    <button type="button" class="btn btn-success" (click)="ok()">{{'lists.button9' | translate}}</button>
+                    <!-- (click)="ValiderCategorie(formeCategorieAttribut.value, i)" -->
                 </div>
             </div>
 
@@ -98,30 +102,25 @@
                     <div class="card-body p-0 tableBlock" id="tableResultats">
                         <div class='table-responsive w-100 m-0'>
                             <table class='table table-sm table-centered table-striped w-100' mat-table [dataSource]="tableResultatsCategoriesAttributs" matSort (matSortChange)="announceSortChange($event)">
-                                <!-- titre Column -->
-                                <ng-container matColumnDef="titre">
-                                    <th class="text-dark containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'attributs.table.title1' | translate}} </th>
-                                    <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.titre}} </td>
+                                <!-- nomCategorie Column -->
+                                <ng-container matColumnDef="nomCategorie">
+                                    <th class="text-dark containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'document.table.title8' | translate}} </th>
+                                    <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.nom}} </td>
                                 </ng-container>
-                                <!-- description Column -->
-                                <ng-container matColumnDef="description">
-                                    <th class="text-dark containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'attributs.table.title2' | translate}} </th>
-                                    <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.description}} </td>
+                                <!-- libelleAttribut Column -->
+                                <ng-container matColumnDef="libelleAttribut">
+                                    <th class="text-dark containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'document.table.title16' | translate}} </th>
+                                    <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.listAttributs}} </td>
                                 </ng-container>
-                                <!-- type Column -->
-                                <ng-container matColumnDef="type">
-                                    <th class="text-dark containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'attributs.table.title6' | translate}} </th>
-                                    <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.type}} </td>
-                                </ng-container>
-                                <!-- ordre Column -->
+                                <!-- ordre par categorie Column -->
                                 <ng-container matColumnDef="ordreAtrParCat">
                                     <th class="text-dark containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'document.table.title13' | translate}} </th>
-                                    <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.ordre}} </td>
+                                    <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.listAttributs[1].libelle}} </td>
                                 </ng-container>
                                 <!-- ordre Column -->
                                 <ng-container matColumnDef="ordreCat">
                                     <th class="text-dark containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'document.table.title14' | translate}} </th>
-                                    <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.ordre}} </td>
+                                    <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.listAttributs[1].ordre}} </td>
                                 </ng-container>
                                 <!-- actions Column -->
                                 <ng-container matColumnDef="actions">
@@ -140,7 +139,11 @@
                         </div>
                     </div>
                 </div>
-            </div>        
+            </div>
+            <div class="actionButton">
+                <!-- <button class="btn" routerLink="../../list-documents">{{btnLibelle}}</button> -->
+                <button type="submit" class="btn">{{'lists.button6' | translate}}</button>
+            </div>       
         </div>
     </form>
 </div>

@@ -180,7 +180,9 @@
             "title12":"Create categories",
             "title13":"Attribut's range",
             "title14":"Category's range",
-            "title15":"Categories"
+            "title15":"Categories",
+            "title16":"libelle attribut",
+            "title17":""
         },
         "form":{
             "text1":"Title is required.",

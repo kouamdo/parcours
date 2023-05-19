@@ -180,7 +180,9 @@
             "title12":"Creer des categories",
             "title13":"Ordre attribut",
             "title14":"Ordre categorie",
-            "title15":"Categories"
+            "title15":"Categories",
+            "title16":"libelle attribut",
+            "title17":""
         },
         "form":{
             "text1":"Le Titre est obligatoire.",

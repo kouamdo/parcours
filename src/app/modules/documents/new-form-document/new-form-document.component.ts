@@ -88,11 +88,8 @@ export class NewFormDocumentComponent implements OnInit {
       ]),
       titre: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
       description: [''],
-      ordreCategorie: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(50)]],
-      ordreAttribut: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(50)]],
       missions: [],
       attributs: [],
-      nomCategorie: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]]
     });
   }
   ngOnInit(): void {
@@ -213,24 +210,8 @@ export class NewFormDocumentComponent implements OnInit {
     this.dataSourceAttributResultat.data = this.ELEMENTS_TABLE_ATTRIBUTS;
   }
 
-  ValiderCategorie(){
-    this.validation = true
-    if(this.forme.invalid) return;
-  }
-
-  ajoutInputOrdre() {
-    this._ordreAttribut.push(this.formBuilder.control(''));
-  }
-  get _ordreAttribut() {
-    return this.forme.get('_ordreAttribut') as FormArray;
-  }
-
   creerCategorie(){
     this.dataSourceCategorieAttribut.data = this.ELEMENTS_TABLE_ATTRIBUTS
-    this.dataSourceCategorieAttribut.data.forEach(
-      attribut => {
-        this.ajoutInputOrdre()
-    });
   }
   onSubmit(documentInput:any){
     //    const _missionsSelected = (this.forme.get('_missions') as FormArray);

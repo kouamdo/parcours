@@ -20,7 +20,6 @@ import { DocumentService } from 'src/app/services/documents/document.service';
 export class ModalCategoriesComponent implements OnInit {
 
   myControl = new FormControl<string | IAttributs>('');
-  categorieAttribut : ICategoriesAttributs|undefined;
   formeCategorieAttribut: FormGroup;
   btnLibelle: string="Ajouter";
   titre: string="Ajouter une categorie";
@@ -28,8 +27,9 @@ export class ModalCategoriesComponent implements OnInit {
   validation: boolean=false;
   ELEMENTS_TABLE_CATEGORIES: IAttributs[] = []; //tableau de listing des attributs a affecter a chaque categorie
   filteredOptions: IAttributs[] | undefined;
-  displayedCategoriesAttributsColumns: string[] = ['actions','titre', 'description', 'type', 'ordreAtrParCat', 'ordreCat']; // structure du tableau presentant les categories creees avec leurs attributs
+  displayedCategoriesAttributsColumns: string[] = ['actions','nomCategorie', 'libelleAttribut', 'ordreAtrParCat', 'ordreCat']; // structure du tableau presentant les categories creees avec leurs attributs
   displayedCategoriesColumns: string[] = ['actions','titre', 'description', 'type', 'ordreAtrParCat'];  // structure du tableau presentant les choix des attributs lors de la creation des categories
+  idAttribut : string = ""
   
   // variables pour la gestion des categories
   dataSourceCategorieAttribut = new MatTableDataSource<IAttributs>(this.ELEMENTS_TABLE_CATEGORIES);
@@ -52,7 +52,7 @@ export class ModalCategoriesComponent implements OnInit {
       this.formeCategorieAttribut = this.formBuilder.group({
         _ordreAttribut: this.formBuilder.array([
         ]),
-        ordreAttribut: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(50)]],
+        //ordreAttribut: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(50)]],
 
         ordreCategorie: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(50)]],
         nomCategorie: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(50)]]
@@ -64,6 +64,7 @@ export class ModalCategoriesComponent implements OnInit {
     console.log(this.data.dataSourceCategorieAttribut.data)
     this.dataSourceCategorieAttribut = this.data.dataSourceCategorieAttribut
     this.getAllAttributs()
+    this.creerCategorie()
     this.myControl.valueChanges.subscribe(
       value => {
         const titre = typeof value === 'string' ? value : value?.titre;
@@ -80,9 +81,45 @@ export class ModalCategoriesComponent implements OnInit {
       }
     );
   }
-  ValiderCategorie(){
+  getIdAttribut(idAttribut : string){
+    this.idAttribut = idAttribut
+  }
+  ValiderCategorie(categorieAttributInput:any, index : number, event: any){
+    this.categorieAttributs  = {
+      id: '',
+      nom: '',
+      ordre: 0,
+      listAttributs: []
+    }
+
     this.validation = true
     if(this.formeCategorieAttribut.invalid) return;
+    
+    this.categorieAttributs  = {
+      id: '9'+ index,
+      nom: categorieAttributInput.nomCategorie,
+      ordre: categorieAttributInput.ordreCategorie,
+      listAttributs: []
+    }
+    if (event.target.checked) {
+      const _ordreAttribut = (this.formeCategorieAttribut.controls['_ordreAttribut'] as FormArray);
+      this.serviceAttribut.getAttributById(this.idAttribut).subscribe(
+        objet => {
+          objet.ordre = _ordreAttribut.value
+          this.categorieAttributs.listAttributs.push(objet)
+        }
+      )
+      this.ELEMENTS_TABLE_CATEGORIE_ATTRIBUTS.push(this.categorieAttributs)
+      console.log(this.categorieAttributs)
+      
+    } else {
+      this.retirerSelectionCategorieAttribut(index)
+    }
+    console.log( 'Voici le tableau avant validation : ' , this.tableResultatsCategoriesAttributs.data)
+  }
+
+  retirerSelectionCategorieAttribut(index: number){
+    this.ELEMENTS_TABLE_CATEGORIE_ATTRIBUTS.splice(index, 1)
   }
 
   ajoutInputOrdre() {
@@ -129,10 +166,14 @@ export class ModalCategoriesComponent implements OnInit {
     }
   }
   
-  retirerSelectionAttribut(index: number) {
+  retirerSelectionAttribut(index : number) {
     
   }
-  onSubmit(documentInput:any){
+
+  ok() {
+    this.tableResultatsCategoriesAttributs.data = this.ELEMENTS_TABLE_CATEGORIE_ATTRIBUTS
+  }
+  onSubmit(categorieAttributInput:any){
 
   }
 }
