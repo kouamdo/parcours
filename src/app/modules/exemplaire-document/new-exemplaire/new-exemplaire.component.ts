@@ -9,6 +9,7 @@ import { AttributService } from 'src/app/services/attributs/attribut.service';
 import { DocumentService } from 'src/app/services/documents/document.service';
 import { ExemplaireDocumentService } from 'src/app/services/exemplaire-document/exemplaire-document.service';
 import { MissionsService } from 'src/app/services/missions/missions.service';
+import {v4 as uuidv4} from 'uuid';
 
 @Component({
   selector: 'app-new-exemplaire',
@@ -140,7 +141,7 @@ export class NewExemplaireComponent implements OnInit {
     if(this.formeExemplaire.invalid) return;
 
     let exemplaireTemp : IExemplaireDocument={
-      id: '9',
+      id: uuidv4(),
       idDocument: this.document.id,
       titre: this.document.titre,
       description: this.document.description,

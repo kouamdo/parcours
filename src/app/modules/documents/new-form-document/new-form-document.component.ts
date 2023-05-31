@@ -17,6 +17,8 @@ import { DocumentService } from 'src/app/services/documents/document.service';
 import { MissionsService } from 'src/app/services/missions/missions.service';
 import {MatDialog} from '@angular/material/dialog';
 import { ModalCategoriesComponent } from '../../shared/modal-categories/modal-categories.component';
+import {v4 as uuidv4} from 'uuid';
+
 
 @Component({
   selector: 'app-new-form-document',
@@ -218,7 +220,7 @@ export class NewFormDocumentComponent implements OnInit {
     this.submitted=true;
     if(this.forme.invalid) return;
     let documentTemp : IDocument={
-      id: String(9),
+      id: uuidv4(),
       titre: documentInput.titre,
       description: documentInput.description,
       missions: [],

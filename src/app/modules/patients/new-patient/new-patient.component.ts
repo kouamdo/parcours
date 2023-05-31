@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { EMPTY, isEmpty, Observable } from 'rxjs';
 import { PatientsService } from 'src/app/services/patients/patients.service';
 import {IPatient} from '../../../modele/Patient';
+import {v4 as uuidv4} from 'uuid';
 
 @Component({
   selector: 'app-new-patient',
@@ -69,7 +70,7 @@ export class NewPatientComponent implements OnInit {
     if(this.forme.invalid) return;
 
     let patientTemp : IPatient={
-      id: String(9),
+      id: uuidv4(),
       nom:patientInput.nom,
       prenom:patientInput.prenom,
       sexe:patientInput.sexe,

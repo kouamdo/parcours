@@ -7,6 +7,7 @@ import { IMission } from 'src/app/modele/mission';
 import { IService } from 'src/app/modele/service';
 import { MissionsService } from 'src/app/services/missions/missions.service';
 import { ServicesService } from 'src/app/services/services/services.service';
+import {v4 as uuidv4} from 'uuid';
 
 @Component({
   selector: 'app-new-mission',
@@ -84,7 +85,7 @@ export class NewMissionComponent implements OnInit {
     if(this.forme.invalid) return;
 
     let missionTemp : IMission={
-      id: "29",
+      id: uuidv4(),
       libelle: missionInput.libelle,
       description: missionInput.description,
       etat: missionInput.etat,

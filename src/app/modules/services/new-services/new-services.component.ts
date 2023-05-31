@@ -5,6 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { EMPTY, Observable } from 'rxjs';
 import { IService } from 'src/app/modele/service';
 import { ServicesService } from 'src/app/services/services/services.service';
+import {v4 as uuidv4} from 'uuid';
 
 @Component({
   selector: 'app-new-services',
@@ -61,7 +62,7 @@ export class NewServicesComponent implements OnInit {
     if(this.forme.invalid) return;
 
     let serviceTemp : IService={
-      id: "9",
+      id: uuidv4(),
       libelle: serviceInput.libelle,
       etat: serviceInput.etat,
       dateDerniereModification: serviceInput.dateDerniereModification,
