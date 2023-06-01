@@ -11,6 +11,8 @@ import { IService } from "../modele/service";
 import { StatutTicket } from "../modele/statut-ticket";
 import { ITicket } from "../modele/ticket";
 import { TypeTicket } from "../modele/type-ticket";
+import { IRessource } from "../modele/ressource";
+
 
 export class InMemDBService implements InMemoryDbService{
   statutTicketActif = StatutTicket.actif
@@ -62,6 +64,7 @@ export class InMemDBService implements InMemoryDbService{
             {"fonction":"Mission", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"Créer", "lien":"./mission-nouveau", "bouton":"false"}  , {"nom":"Rechercher", "lien":"./list-missions", "bouton":"false"}]},
             {"fonction":"Documents", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"Créer model documents", "lien":"./document-nouveau", "bouton":"false"}, {"nom":"Rechercher", "lien":"./list-documents", "bouton":"false"}]},
             {"fonction":"Famille", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"Créer", "lien":"famille-nouvelle", "bouton":"false"}, {"nom":"Rechercher", "lien":"./list-familles", "bouton":"false"}]},
+            {"fonction":"Ressource", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"Créer", "lien":"ressource-nouvelle", "bouton":"false"},{"nom":"Rechercher", "lien":"./list-ressources", "bouton":"false"}]},
           ]},
           {"idUser":"phil", "langue":"en","fonctionnalites":[
             {"fonction":"People", "icone":"fas fa-user-cog", "actif":"menu-close", "elements":[{"nom":"New", "lien":"patient-nouveau", "bouton":"false"}  , {"nom":"Search", "lien":"list-patients", "bouton":"false"}]},
@@ -71,6 +74,7 @@ export class InMemDBService implements InMemoryDbService{
             {"fonction":"Mission", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"New", "lien":"./mission-nouveau", "bouton":"false"}  , {"nom":"Search", "lien":"./list-missions", "bouton":"false"}]},
             {"fonction":"Documents", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"New document's model", "lien":"./document-nouveau", "bouton":"false"}, {"nom":"Search", "lien":"./list-documents", "bouton":"false"}]},
             {"fonction":"Famille", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"new", "lien":"famille-nouvelle", "bouton":"false"},  {"nom":"Search", "lien":"./list-familles", "bouton":"false"}]},
+            {"fonction":"Ressource", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"Créer", "lien":"ressource-nouvelle", "bouton":"false"},{"nom":"Search", "lien":"./list-ressources", "bouton":"false"}]},
           ]}
         ];
         let missions:IMission[]=[
@@ -146,12 +150,27 @@ export class InMemDBService implements InMemoryDbService{
           }
         ];
         let famille:IFamille[]=[
-          {id:"1", libelle:"transfusion", description:"sang", etat:"gl"},
+          {id:"1", libelle:"trans", description:"sang", etat:"gl"},
           {id:"2", libelle:"néonat", description:"nouveau-né", etat:"malade"},
           {id:"3", libelle:"pediatrie", description:"enfant", etat:"souffrant"},
           {id:"4", libelle:"néonat", description:"nouveau-né", etat:"malade"},
           {id:"5", libelle:"transfusion", description:"sang", etat:"gl"},
       ];
-        return{patients, services, menus, tickets, missions, attributs, documents,famille};
+      let ressource:IRessource[]=[
+        {id:"1", libelle:"transfusion",etat:true, /*dateCreation:new Date("07/03/2000"),dateModification:new Date("07/03/1990"),*/ quantite:10,unite:"kg",prix:1000,
+          famille:{id:"1", libelle:"trans", description:"sang", etat:"gl"}},
+       {id:"2", libelle:"néonat",etat: true,/* dateCreation:new Date("07/03/2000"),dateModification:new Date("07/03/1990"),*/quantite:20,unite:"kg",prix:2000,
+        famille: {id:"2", libelle:"néonat", description:"nouveau-né", etat:"malade"}},
+        {id:"2", libelle:"néonat",etat: true,/* dateCreation:new Date("07/03/2000"),dateModification:new Date("07/03/1990"),*/quantite:20,unite:"kg",prix:2000,
+        famille:{id:"3", libelle:"pediatrie", description:"enfant", etat:"souffrant"}},
+        {id:"3", libelle:"pediatrie",etat: true, /*dateCreation:new Date("07/03/2000"),dateModification:new Date("07/03/1990"),*/quantite:30,unite:"kg",prix:3000,
+        famille:{id:"4", libelle:"néonat", description:"nouveau-né", etat:"malade"}},
+        {id:"4", libelle:"néonat",etat: true,/*dateCreation:new Date("07/03/2000"),dateModification:new Date("07/03/1990"),*/quantite:40,unite:"kg",prix:4000,
+        famille:{id:"5", libelle:"transfusion", description:"sang", etat:"gl"}},
+      ];
+
+
+
+        return{patients, services, menus, tickets, missions, attributs, documents,famille,ressource};
     }
 }

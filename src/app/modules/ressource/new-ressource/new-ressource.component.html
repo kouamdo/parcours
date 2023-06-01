@@ -1,0 +1,120 @@
+<div id="mainSection">
+  <div class="card block">
+      <div class="card-header pt-4 pb-4 entete">Ajouter une nouvelle ressource</div>
+      <div class="card-body">
+          <form [formGroup]="forme" (ngSubmit)="onSubmit(forme.value)" *ngIf="forme" >
+              <div class="">
+                  <div class="">
+                      <div class="form-group">
+                          <div>
+                              <div class="champs">
+                                  <label for="libelle" class="label">
+                                      Libellé
+                                  </label>
+                                  <input type="text" formControlName="libelle" name="libelle" id="libelle"  placeholder="libellé"  class="form-control" required>
+                              </div>
+                              <div  *ngIf="submitted && f['libelle'].errors"  class="alert alert-danger" >
+                                  <div *ngIf="f['libelle'].errors['required']">Champ Obligatoire</div>
+                              </div>
+                          </div>
+                      </div>
+
+                      <div class="form-group">
+                          <div>
+                              <div class="champs">
+                                  <label for="etat" class="label" >
+                                      Etat
+                                  </label>
+                                  <input  type="checkbox" formControlName="etat"  name="etat" id="etat" placeholder="" required class="form-control" checked>
+
+                              </div>
+                              <div  *ngIf="submitted && f['etat'].errors"  class="alert alert-danger" >
+                                  <div *ngIf="f['etat'].errors['required']">Champ Obligatoire</div>
+                              </div>
+                          </div>
+                      </div>
+                      <!-- <div class="form-group">
+                          <div class="champs">
+                              <label  for="dateCreation"  class="label" >
+                                Date de Creation
+                              </label>
+                              <input type="date" formControlName="dateCreation" name="dateCreation" id="dateCreation" placeholder="11" class="form-control" >
+                          </div>
+                          <div  *ngIf="submitted && f['dateCreation'].errors"  class="alert alert-danger" >
+                              <div *ngIf="f['dateCreation'].errors['required']">champ obligatoire</div>
+                          </div>
+                      </div>
+                       <div class="form-group">
+                          <div class="champs">
+                              <label  for="dateModification"  class="label" >
+                                 Date de Modification
+                              </label>
+                              <input type="date" formControlName="dateModification" name="dateModification" id="dateModification" placeholder="dateModification" class="form-control" >
+                          </div>
+                      </div>-->
+                      <div class="form-group">
+                          <div class="champs">
+                              <label  for="quantite"  class="label" >
+                                 Quantité
+                              </label>
+                              <input type="quantite" list="" formControlName="quantite" name="quantite" id="quantite" placeholder="quantité" class="form-control" >
+
+                          </div>
+                      </div>
+                      <div class="form-group">
+                        <div class="champs">
+                            <label  for="unite"  class="label" >
+                              Unité
+                            </label>
+                            <!-- <input type="unite" list="" formControlName="unite" name="unite" id="unite" placeholder="unité" class="form-control" >-->
+                        <select  class="form-control" formControlName="unite" name="unite" id="unite" required>
+                          <option>litre</option>
+                          <option>kg</option>
+                          <option>m²</option>
+                          <option>quintaux</option>
+                      </select>
+                        </div>
+                    </div>
+                       <div class="form-group">
+                          <div class="champs">
+                              <label  for="prix"  class="label" >
+                                 Prix
+                              </label>
+                              <input type="prix" formControlName="prix" name="prix" id="prix" placeholder="prix" class="form-control" >
+                          </div>
+                      </div>
+
+
+
+
+
+                      <form class="example-form">
+                        <div class="champs">
+                            <label  for="famille"  class="label" >
+                              Famille
+                            </label>
+                            <mat-form-field class="">
+                              <mat-label class="">famille</mat-label>
+                              <input  type="famille" matInput [matAutocomplete]="auto"  aria-label="famille" [value]=""  placeholder="" formControlName="famille" name="famille" id="famille" placeholder="famille" class="form-control">
+                              <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn" >
+                                <mat-option *ngFor="let option of filteredOptions" [value]="option"  (onSelectionChange)="rechercherListingFamille(option)">
+                                  {{option.libelle}}
+                                </mat-option>
+                              </mat-autocomplete>
+                            </mat-form-field>
+                        </div>
+                        </form>
+
+                  </div>
+              </div>
+              <div class="actionButton">
+                <button class="btn" routerLink="../list-ressources">Retour</button>
+                  <button type="submit" class="btn">{{btnLibelle}}</button>
+              </div>
+          </form>
+      </div>
+  </div>
+</div>
+
+<p>{{forme.value|json}}</p>
+

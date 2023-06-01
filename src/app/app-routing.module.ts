@@ -8,6 +8,7 @@ import { PatientsRoutingModule } from './modules/patients/patient-routing.module
 import { ServicesRoutingModule } from './modules/services/services-routing.module';
 import { TicketsRoutingModule } from './modules/tickets/tickets-routing.module';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { RessourceRoutingModule } from './modules/ressource/ressource-routing.module';
 
 const routes: Routes = [
   {
@@ -25,7 +26,8 @@ const routes: Routes = [
     AttributsRoutingModule,
     MissionsRoutingModule,
     DocumentsRoutingModule,
-    FamilleRoutingModule
+    FamilleRoutingModule,
+    RessourceRoutingModule
   ],
   exports: [RouterModule]
 })
