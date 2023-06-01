@@ -28,7 +28,7 @@ export class ModalCategoriesComponent implements OnInit {
   titre: string="Ajouter une categorie";
   submitted: boolean=false;
   validation: boolean=false;
-  ELEMENTS_TABLE_CATEGORIES: IAttributs[] = []; //tableau de listing des attributs a affecter a chaque categorie
+ // ELEMENTS_TABLE_CATEGORIES: IAttributs[] = []; 
   filteredOptions: IAttributs[] | undefined;
   displayedCategoriesAttributsColumns: string[] = ['actions','nomCategorie', 'ordreCat', 'libelleAttribut', 'ordreAtrParCat']; // structure du tableau presentant les categories creees avec leurs attributs
   displayedCategoriesColumns: string[] = ['actions','titre', 'description', 'type', 'ordreAtrParCat'];  // structure du tableau presentant les choix des attributs lors de la creation des categories
@@ -36,7 +36,7 @@ export class ModalCategoriesComponent implements OnInit {
   conteur : any = 0
   
   // variables pour la gestion des categories
-  dataSourceCategorieAttribut = new MatTableDataSource<IAttributs>(this.ELEMENTS_TABLE_CATEGORIES);
+  dataSourceCategorieAttribut = new MatTableDataSource<IAttributs>(); //tableau de listing des attributs a affecter a chaque categorie
   categorieAttributs : ICategoriesAttributs = {
     id: '',
     nom: '',
@@ -55,14 +55,16 @@ export class ModalCategoriesComponent implements OnInit {
     valeursParDefaut: '',
     type: TypeTicket.Int
   }
-  // categorieAttributsTemp : ICategorieAffichage | undefined
 
   ELEMENTS_TABLE_CATEGORIE_ATTRIBUTS: ICategoriesAttributs[] = [];
-  ELEMENTS_TABLE_CATEGORIE_AFFICHAGE: ICategorieAffichage[] = [];
+
+  TABLE_CATEGORIE_AFFICHAGE_TEMP: ICategorieAffichage[] = []; // tableau contenant les categories creees a partir du premier tableau de la modal
   tableResultatsCategoriesAttributs  = new MatTableDataSource<ICategoriesAttributs>(this.ELEMENTS_TABLE_CATEGORIE_ATTRIBUTS);
-  tableResultatsCategoriesAffichage  = new MatTableDataSource<ICategorieAffichage>(this.ELEMENTS_TABLE_CATEGORIE_AFFICHAGE);
+  tableResultatsCategoriesAffichage  = new MatTableDataSource<ICategorieAffichage>(this.TABLE_CATEGORIE_AFFICHAGE_TEMP);
   tableFinaleCategoriesAttributs: ICategoriesAttributs[] = [];
-  
+
+  tableauAttributsTemp : IAttributs[] = []
+  sauvegardeTempAttributsDeCat : IAttributs[] = [] // tableau de sauvegarde temporaire des attributs des categoriesAffiche enregistrees
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -77,15 +79,12 @@ export class ModalCategoriesComponent implements OnInit {
         nomCategorie: ['', [Validators.required, Validators.minLength(1)]]
       });
     }
-    AttributsTableau : IAttributs[] = []
-    AttributsTableauTemp : IAttributs[] = []
     
   ngOnInit(): void {
     console.log(this.data.name)
-    console.log(this.diffSymetriqueTableau())
     
     this.dataSourceCategorieAttribut.data = this.data.dataSourceCategorieAttribut.data
-    this.AttributsTableau = this.dataSourceCategorieAttribut.data
+    this.tableauAttributsTemp  = this.dataSourceCategorieAttribut.data
     
     this.getAllAttributs()
     this.creerCategorie()
@@ -130,16 +129,16 @@ export class ModalCategoriesComponent implements OnInit {
           attribut: this.attributTemp
         }
 
-      this.ELEMENTS_TABLE_CATEGORIE_AFFICHAGE.push(categorieAttributsTemp)
-      this.AttributsTableauTemp.push(categorieAttributsTemp.attribut)
-      //this.ELEMENTS_TABLE_CATEGORIE_ATTRIBUTS.push(this.categorieAttributs)
+      this.TABLE_CATEGORIE_AFFICHAGE_TEMP.push(categorieAttributsTemp)
+      this.sauvegardeTempAttributsDeCat.push(categorieAttributsTemp.attribut)
+      
       console.log("categorieAttributsTemp :  ", categorieAttributsTemp)
         }
       )
       
     } else {
       this.retirerSelectionCategorieAttribut(index)
-      this.AttributsTableauTemp.splice(index, 1)
+      this.sauvegardeTempAttributsDeCat.splice(index, 1)
     }
 
     console.log( 'Voici le tableau avant validation : ' , this.tableResultatsCategoriesAttributs.data)
@@ -147,27 +146,32 @@ export class ModalCategoriesComponent implements OnInit {
   }
   
   AjouterCategorieTemp() {
-    this.tableResultatsCategoriesAffichage.data = this.ELEMENTS_TABLE_CATEGORIE_AFFICHAGE
-    let index : number = 0
-    this.data.dataSourceCategorieAttribut.data.forEach(
+
+    this.tableauAttributsTemp.forEach(
       (element: IAttributs) => {
 
-        this.tableResultatsCategoriesAffichage.data.forEach(
-          attribut => {
-            if (element.titre == attribut.attribut.titre) {
-              this.dataSourceCategorieAttribut.data.splice(index, 1)
+        this.TABLE_CATEGORIE_AFFICHAGE_TEMP.forEach(
+          categorieAttributAff => {
+            if (element.titre == categorieAttributAff.attribut.titre) {
+              
+              const index = this.tableauAttributsTemp.indexOf(element)
+
+              this.tableauAttributsTemp.splice(index, 1)
+
+              console.log("reduction du tableau initial d'attribut", this.tableauAttributsTemp)
             }
-            index++
         });
     });
+
+    this.tableResultatsCategoriesAffichage.data = this.TABLE_CATEGORIE_AFFICHAGE_TEMP
   }
 
-  diffSymetriqueTableau(): IAttributs[]{
-    const diffSymTableau = this.AttributsTableau
-                          .filter(x => !this.AttributsTableauTemp.includes(x))
-                          .concat(this.AttributsTableauTemp.filter(y => !this.AttributsTableau.includes(y)))
-    return diffSymTableau
-  }
+  // diffSymetriqueTableau(): IAttributs[]{
+  //   const diffSymTableau = this.AttributsTableau
+  //                         .filter(x => !this.sauvegardeTempAttributsDeCat.includes(x))
+  //                         .concat(this.sauvegardeTempAttributsDeCat.filter(y => !this.AttributsTableau.includes(y)))
+  //   return diffSymTableau
+  // }
 
   validerCategorieAttribut(){
     this.categorieAttributs  = {
@@ -205,13 +209,10 @@ export class ModalCategoriesComponent implements OnInit {
       }
     );
       console.log('liste des catAttr finaux : ', this.ELEMENTS_TABLE_CATEGORIE_ATTRIBUTS)
-          //alert('ok')
-          //this.ELEMENTS_TABLE_CATEGORIE_ATTRIBUTS.push(this.categorieAttributs)
   }
 
   retirerSelectionCategorieAttribut(index: number){
-    this.ELEMENTS_TABLE_CATEGORIE_AFFICHAGE.splice(index, 1)
-    //this.ELEMENTS_TABLE_CATEGORIE_ATTRIBUTS.splice(index, 1)
+    this.TABLE_CATEGORIE_AFFICHAGE_TEMP.splice(index, 1)
   }
 
   ajoutInputOrdre() {
