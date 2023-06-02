@@ -64,6 +64,7 @@ export class ModalCategoriesComponent implements OnInit {
   tableFinaleCategoriesAttributs: ICategoriesAttributs[] = [];
 
   tableauAttributsTemp : IAttributs[] = []
+  tableauIntermediaireAttributsTemp : IAttributs[] = []
   sauvegardeTempAttributsDeCat : IAttributs[] = [] // tableau de sauvegarde temporaire des attributs des categoriesAffiche enregistrees
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
@@ -84,7 +85,8 @@ export class ModalCategoriesComponent implements OnInit {
     console.log(this.data.name)
     
     this.dataSourceCategorieAttribut.data = this.data.dataSourceCategorieAttribut.data
-    this.tableauAttributsTemp  = this.dataSourceCategorieAttribut.data
+    this.tableauIntermediaireAttributsTemp  = this.dataSourceCategorieAttribut.data
+    this.tableauAttributsTemp  = this.tableauIntermediaireAttributsTemp
     
     this.getAllAttributs()
     this.creerCategorie()
@@ -103,6 +105,21 @@ export class ModalCategoriesComponent implements OnInit {
         }
       }
     );
+    // this.tableauAttributsTemp.forEach(
+    //   (element: IAttributs) => {
+
+    //     // this.TABLE_CATEGORIE_AFFICHAGE_TEMP.forEach(
+    //     //   categorieAttributAff => {
+    //     //     if (element.titre == categorieAttributAff.attribut.titre) {
+              
+    //     //       const index = this.tableauAttributsTemp.indexOf(element)
+
+    //     //       this.tableauAttributsTemp.splice(index, 1)
+
+    //     //       console.log("reduction du tableau initial d'attribut", this.tableauAttributsTemp)
+    //     //     }
+    //     // });
+    // });
   }
 
   getIdAttribut(idAttribut : string){
@@ -147,16 +164,16 @@ export class ModalCategoriesComponent implements OnInit {
   
   AjouterCategorieTemp() {
 
-    this.tableauAttributsTemp.forEach(
+    this.tableauIntermediaireAttributsTemp.forEach(
       (element: IAttributs) => {
 
         this.TABLE_CATEGORIE_AFFICHAGE_TEMP.forEach(
           categorieAttributAff => {
             if (element.titre == categorieAttributAff.attribut.titre) {
               
-              const index = this.tableauAttributsTemp.indexOf(element)
+              const index = this.tableauIntermediaireAttributsTemp.indexOf(element)
 
-              this.tableauAttributsTemp.splice(index, 1)
+              this.tableauIntermediaireAttributsTemp.splice(index, 1)
 
               console.log("reduction du tableau initial d'attribut", this.tableauAttributsTemp)
             }
@@ -165,14 +182,7 @@ export class ModalCategoriesComponent implements OnInit {
 
     this.tableResultatsCategoriesAffichage.data = this.TABLE_CATEGORIE_AFFICHAGE_TEMP
   }
-
-  // diffSymetriqueTableau(): IAttributs[]{
-  //   const diffSymTableau = this.AttributsTableau
-  //                         .filter(x => !this.sauvegardeTempAttributsDeCat.includes(x))
-  //                         .concat(this.sauvegardeTempAttributsDeCat.filter(y => !this.AttributsTableau.includes(y)))
-  //   return diffSymTableau
-  // }
-
+  
   validerCategorieAttribut(){
     this.categorieAttributs  = {
       id: '',
