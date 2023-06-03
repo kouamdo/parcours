@@ -33,10 +33,6 @@ export class NewRessourceComponent implements OnInit {
   myControl = new FormControl<string | IFamille>('');
   filteredOptions: IFamille[] | undefined;
   dataSource = new MatTableDataSource<IFamille>();
-  id: any;
-  idfamille: any;
-  idFamille: string='';
-
   familleDeRessource: IFamille = {
     id: '',
     libelle: '',
