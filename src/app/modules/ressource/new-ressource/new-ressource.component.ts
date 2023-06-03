@@ -13,10 +13,6 @@ import { MatTableDataSource } from '@angular/material/table';
 import { EMPTY, Observable } from 'rxjs';
 import { IFamille } from 'src/app/modele/famille';
 import { FamillesService } from 'src/app/services/familles/familles.service';
-import { ListFamillesComponent } from '../../famille/list-familles/list-familles.component';
-
-
-
 
 @Component({
   selector: 'app-new-ressource',
@@ -41,7 +37,12 @@ export class NewRessourceComponent implements OnInit {
   idfamille: any;
   idFamille: string='';
 
-
+  familleDeRessource: IFamille = {
+    id: '',
+    libelle: '',
+    description: '',
+    etat: ''
+  };
 
 
   constructor(private formBuilder:FormBuilder,private familleService:FamillesService,private ressourceService:RessourcesService,private serviceRessource:RessourcesService,private serviceFamille:FamillesService,private router:Router, private infosPath:ActivatedRoute, private datePipe: DatePipe) {
@@ -51,7 +52,7 @@ export class NewRessourceComponent implements OnInit {
       quantite: ['', [Validators.required]],
       unite: ['', [Validators.required]],
       prix: ['', [Validators.required]],
-      famille: ['',],
+      famille: [''],
      // dateCreation: ['', [Validators.required]],
       //dateModification: ['',[Validators.required]],
     })
@@ -100,14 +101,23 @@ export class NewRessourceComponent implements OnInit {
     }
   }
 
-  getIdFamille(idfamille :string){
+ /* getIdFamille(idfamille :string){
     this.idFamille= idfamille
-  }
+  }*/
 
 
 
   get f(){
     return this.forme.controls;
+  }
+
+  getIdFamille(id_famille : string){
+
+    this.serviceFamille.getFamilleById(id_famille).subscribe(
+      famille =>{
+        this.familleDeRessource = famille
+      }
+    )
   }
 
   onSubmit(ressourceInput:any){
@@ -126,12 +136,18 @@ export class NewRessourceComponent implements OnInit {
       prix: ressourceInput.prix,
       famille:ressourceInput.famille
     }
+
    // ressourceTemp.dateCreation = this.initialDateCreation.value!
     //ressourceTemp.dateModification = this.initialDateModification.value!
 
     if(this.ressource != undefined){
       ressourceTemp.id = this.ressource.id
     }
+
+    ressourceTemp.famille = this.familleDeRessource
+
+    console.log('voici la famille de cette ressource : ', ressourceTemp.famille)
+
     this.ressourceService.ajouterRessource(ressourceTemp).subscribe(
       object => {
         this.router.navigate(['list-ressources']);
@@ -146,23 +162,16 @@ export class NewRessourceComponent implements OnInit {
   private getAllFamilles(){
     return this.serviceFamille.getAllFamilles();
   }
+// ici il faut remplacer attribut par famille, ce sera plus comprehensible
   displayFn(attribue: IFamille): string {
     return attribue && attribue.libelle ? attribue.libelle : '';
   }
-
 
   public rechercherListingFamille(option: IFamille){
     this.serviceFamille.getFamillesByLibelle(option.libelle.toLowerCase()).subscribe(
         valeurs => {this.dataSource.data = valeurs;}
     )
   }
-
-
-
-
-
-
-
 
 }
 function getIdfamille(idfamille: any, string: any) {

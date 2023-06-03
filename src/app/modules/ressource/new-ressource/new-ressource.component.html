@@ -86,26 +86,22 @@
 
 
 
-                      <div class="form-group">
 
 
-                        <div class="champs">
-                            <label  for="famille"  class="label" >
-                              Famille
-                            </label>
-                            <mat-form-field class="example-full-width" appearance="fill">
-                              <mat-label class="famill">famille</mat-label>
-                              <input  type="famille" matInput [matAutocomplete]="auto"  aria-label="famille" formControlName="famille" name="famille" id="famille" placeholder="Famille" class="form-control">
-                              <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn" >
-                                <mat-option *ngFor="let option of filteredOptions" [value]="option"  (onSelectionChange)="rechercherListingFamille(option)">
-                                  {{option.libelle}}
-                                </mat-option>
-                              </mat-autocomplete>
-                            </mat-form-field>
-                        </div>
-
-                      </div>
-
+                    <div class="champs">
+                        <label  for="famille"  class="label" >
+                            Famille
+                        </label>
+                        <mat-form-field class="">
+                            <mat-label class="">famille</mat-label>
+                            <input  type="famille" matInput [matAutocomplete]="auto"  aria-label="famille" [formControl]="myControl" name="famille" id="famille" placeholder="famille" class="form-control">
+                            <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn" >
+                            <mat-option *ngFor="let option of filteredOptions" [value]="option" (click)="getIdFamille(option.id)" (onSelectionChange)="rechercherListingFamille(option)">
+                                {{option.libelle}}
+                            </mat-option>
+                            </mat-autocomplete>
+                        </mat-form-field>
+                    </div>
 
                   </div>
               </div>
@@ -113,7 +109,8 @@
                 <button class="btn" routerLink="../list-ressources">Retour</button>
                   <button type="submit" class="btn">{{btnLibelle}}</button>
               </div>
-          </form>
+            </div>
+            </form>
       </div>
   </div>
 </div>
