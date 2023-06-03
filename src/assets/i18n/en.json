@@ -206,5 +206,42 @@
             "link4":"Supprimer"
         }
     }
-  }
+  },
+  "ressource":{
+    "table":{
+        "title":"Ajouter une nouvelle ressource",
+        "title1":" Libellé",
+        "title2":"Etat",
+        "title3":"Quantité",
+        "title4":"Unité",
+        "title5":"Prix",
+        "title6":" Famille"
+    },
+    "form":{
+        "text1":"Champ Obligatoire",
+        "text2":"Champ Obligatoire",
+        "text4":"litre",
+        "text5":"kg",
+        "text6":"m²",
+        "text7":"quintaux",
+        "text8":"Champ Obligatoire",
+        "text9":"Champ Obligatoire"
+    },
+    "lists":{
+      "button2":"Retour"
+    },
+    "title":"Listing Ressource",
+    "search-bar":"Rechercher",
+    "table2":{
+        "title1":"Ajouter une ressource",
+        "title2":"id",
+        "title3":"libelle",
+        "title4":"Etat",
+        "title5":" Quantité ",
+        "title6":" Unité",
+        "title7":"prix",
+        "title8":"famille ",
+        "title9":"Actions "
+    }
+}
 }

@@ -1,4 +1,5 @@
 
+
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
@@ -20,15 +21,10 @@ import { FamillesService } from 'src/app/services/familles/familles.service';
   styleUrls: ['./new-ressource.component.scss']
 })
 export class NewRessourceComponent implements OnInit {
-
   ressource : IRessource|undefined;
   forme: FormGroup;
   btnLibelle: string="Ajouter";
   submitted: boolean=false;
-
-
-  //initialDateCreation = new FormControl(new Date());
-  //initialDateModification = new FormControl(new Date());
   ressources$:Observable<IFamille>=EMPTY;
   myControl = new FormControl<string | IFamille>('');
   filteredOptions: IFamille[] | undefined;
@@ -40,7 +36,6 @@ export class NewRessourceComponent implements OnInit {
     etat: ''
   };
 
-
   constructor(private formBuilder:FormBuilder,private familleService:FamillesService,private ressourceService:RessourcesService,private serviceRessource:RessourcesService,private serviceFamille:FamillesService,private router:Router, private infosPath:ActivatedRoute, private datePipe: DatePipe) {
     this.forme = this.formBuilder.group({
       libelle: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
@@ -49,11 +44,8 @@ export class NewRessourceComponent implements OnInit {
       unite: ['', [Validators.required]],
       prix: ['', [Validators.required]],
       famille: [''],
-     // dateCreation: ['', [Validators.required]],
-      //dateModification: ['',[Validators.required]],
     })
   };
-
 
   ngOnInit(): void {
     this.getAllFamilles().subscribe(valeurs => {
@@ -75,7 +67,6 @@ export class NewRessourceComponent implements OnInit {
 
       }
     );
-
     let idRessource = this.infosPath.snapshot.paramMap.get('idRessource');
     if((idRessource != null) && idRessource!==''){
       this.btnLibelle="Modifier";
@@ -86,8 +77,6 @@ export class NewRessourceComponent implements OnInit {
           this.forme.setValue({
             libelle: this.ressource?.libelle,
             etat: this.ressource.etat,
-           // dateCreation: this.datePipe.transform(this.ressource.dateCreation,'yyyy-MM-dd'),
-           // dateModification: this.datePipe.transform(this.ressource.dateModification,'yyyy-MM-dd'),
             quantite: this.ressource?.quantite,
             unite: this.ressource.unite,
             prix: this.ressource?.prix,
@@ -96,13 +85,6 @@ export class NewRessourceComponent implements OnInit {
       });
     }
   }
-
- /* getIdFamille(idfamille :string){
-    this.idFamille= idfamille
-  }*/
-
-
-
   get f(){
     return this.forme.controls;
   }
@@ -117,33 +99,23 @@ export class NewRessourceComponent implements OnInit {
   }
 
   onSubmit(ressourceInput:any){
-
     this.submitted=true;
     if(this.forme.invalid) return;
-
     let ressourceTemp : IRessource={
       id: uuidv4(),
       libelle: ressourceInput.libelle,
       etat: ressourceInput.etat,
-     // dateCreation: ressourceInput.dateCreation,
-      //dateModification: ressourceInput.dateModification,
       quantite: ressourceInput.quantite,
       unite: ressourceInput.unite,
       prix: ressourceInput.prix,
       famille:ressourceInput.famille
     }
 
-   // ressourceTemp.dateCreation = this.initialDateCreation.value!
-    //ressourceTemp.dateModification = this.initialDateModification.value!
-
     if(this.ressource != undefined){
       ressourceTemp.id = this.ressource.id
     }
-
     ressourceTemp.famille = this.familleDeRessource
-
     console.log('voici la famille de cette ressource : ', ressourceTemp.famille)
-
     this.ressourceService.ajouterRessource(ressourceTemp).subscribe(
       object => {
         this.router.navigate(['list-ressources']);
@@ -153,22 +125,17 @@ export class NewRessourceComponent implements OnInit {
       }
     )
   }
-
-
   private getAllFamilles(){
     return this.serviceFamille.getAllFamilles();
   }
-// ici il faut remplacer attribut par famille, ce sera plus comprehensible
-  displayFn(attribue: IFamille): string {
-    return attribue && attribue.libelle ? attribue.libelle : '';
+  displayFn(famille: IFamille): string {
+    return famille && famille.libelle ? famille.libelle : '';
   }
-
   public rechercherListingFamille(option: IFamille){
     this.serviceFamille.getFamillesByLibelle(option.libelle.toLowerCase()).subscribe(
         valeurs => {this.dataSource.data = valeurs;}
     )
   }
-
 }
 function getIdfamille(idfamille: any, string: any) {
   throw new Error('Function not implemented.');

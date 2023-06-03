@@ -37,13 +37,18 @@
 input[ type=checkbox ]{
   border: none;
   color: red;
-  margin-right: 270px;
+  margin-right: 250px;
   height: 17px;
   }
   input, #etat{
     border: none;
     box-shadow: none;
   }
+  input, #famille{
+    border:none;
+    box-shadow:none;
+    margin-top: -23px;
+   }
 option{
   height: 200px;
   word-spacing: 3px;
@@ -60,11 +65,6 @@ option{
       font-size: 15px;
   }
 }
-/*mat-form-field{
-  border-radius: #000 1px;
-  width: 650px;
-  top: -25px;
-}*/
 mat-form-field{
   width: 570px;
   padding: 0;
@@ -91,15 +91,13 @@ mat-form-field:focus{
       top: -10px;
   }
 }
-
 .example-full-width {
   height: 42px !important;
-  border: 1px solid #7ea97e;
+  border: 1px solid #000;
   border-radius: 5px;
   background-color: transparent;
   padding: 0;
   margin: 0;
-  top: -10px;
 }
 .famill {
   position: relative;
@@ -117,4 +115,22 @@ mat-form-field:focus{
   margin: 0;
   color: #7ea97e96;
   border: none;
+}
+@media screen and (max-width: 1200px) {
+  input[ type=checkbox ]{
+    margin-right: 150px;
+
+    }
+}
+@media screen and (max-width: 1100px) {
+  input[ type=checkbox ]{
+    margin-right: 150px;
+
+    }
+}
+@media screen and (max-width: 1060px) {
+  input[ type=checkbox ]{
+    margin-right: 150px;
+
+    }
 }
