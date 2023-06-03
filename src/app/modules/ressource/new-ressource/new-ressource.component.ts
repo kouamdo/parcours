@@ -37,6 +37,10 @@ export class NewRessourceComponent implements OnInit {
   myControl = new FormControl<string | IFamille>('');
   filteredOptions: IFamille[] | undefined;
   dataSource = new MatTableDataSource<IFamille>();
+  id: any;
+  idfamille: any;
+  idFamille: string='';
+
 
 
 
@@ -94,8 +98,13 @@ export class NewRessourceComponent implements OnInit {
           })
       });
     }
-
   }
+
+  getIdFamille(idfamille :string){
+    this.idFamille= idfamille
+  }
+
+
 
   get f(){
     return this.forme.controls;
@@ -156,3 +165,7 @@ export class NewRessourceComponent implements OnInit {
 
 
 }
+function getIdfamille(idfamille: any, string: any) {
+  throw new Error('Function not implemented.');
+}
+

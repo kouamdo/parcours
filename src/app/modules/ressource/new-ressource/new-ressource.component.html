@@ -86,16 +86,16 @@
 
 
 
+                      <div class="form-group">
 
 
-                      <form class="example-form">
                         <div class="champs">
                             <label  for="famille"  class="label" >
                               Famille
                             </label>
-                            <mat-form-field class="">
-                              <mat-label class="">famille</mat-label>
-                              <input  type="famille" matInput [matAutocomplete]="auto"  aria-label="famille" [value]=""  placeholder="" formControlName="famille" name="famille" id="famille" placeholder="famille" class="form-control">
+                            <mat-form-field class="example-full-width" appearance="fill">
+                              <mat-label class="famill">famille</mat-label>
+                              <input  type="famille" matInput [matAutocomplete]="auto"  aria-label="famille" formControlName="famille" name="famille" id="famille" placeholder="Famille" class="form-control">
                               <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn" >
                                 <mat-option *ngFor="let option of filteredOptions" [value]="option"  (onSelectionChange)="rechercherListingFamille(option)">
                                   {{option.libelle}}
@@ -103,7 +103,9 @@
                               </mat-autocomplete>
                             </mat-form-field>
                         </div>
-                        </form>
+
+                      </div>
+
 
                   </div>
               </div>
