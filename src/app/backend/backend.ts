@@ -12,6 +12,8 @@ import { StatutTicket } from "../modele/statut-ticket";
 import { ITicket } from "../modele/ticket";
 import { TypeTicket } from "../modele/type-ticket";
 import { IRessource } from "../modele/ressource";
+import { IPrecoMvtQte } from "../modele/preco-mvt-qte";
+import { TypeMvt } from "../modele/type-mvt";
 
 
 export class InMemDBService implements InMemoryDbService{
@@ -25,6 +27,10 @@ export class InMemDBService implements InMemoryDbService{
   typeFloat = TypeTicket.Float;
   typeBoolean = TypeTicket.Boolean;
   typeDate = TypeTicket.Date;
+
+  TypeMvtAssigner = TypeMvt.assigner
+  TypeMvtRetrait = TypeMvt.retrait
+  TypeMvtReduire = TypeMvt.reduire
 
     createDb(){
         let patients:IPatient[]=[
@@ -53,7 +59,7 @@ export class InMemDBService implements InMemoryDbService{
             {id:"7", idUnique:"20221206S1A03", date_heure: new Date("01/11/2018"), idFileAttente: "S1A03", idPersonne: "1", statut: this.statutTicketAttente},
             {id:"8", idUnique:"20221206S1A04", date_heure: new Date("01/14/2017"), idFileAttente: "S1A04", idPersonne: "2", statut: this.statutTicketAttente},
             {id:"9", idUnique:"20221206S1A05", date_heure: new Date("01/11/2017"), idFileAttente: "S1A05", idPersonne: "1", statut: this.statutTicketAttente},
-            {id:"10", idUnique:"20221206S1A06", date_heure: new Date("01/14/2016"), idFileAttente: "S1A06", idPersonne: "2", statut: this.statutTicketAttente}
+            {id:"10", idUnique:"20221206S1A06", date_heure: new Date("01/14/2016"), idFileAttente: "S1A06", idPersonne: "2",statut: this.statutTicketAttente}
         ];
         let menus:IMenus[] =[
           {"idUser":"phil", "langue":"fr","fonctionnalites":[
@@ -65,6 +71,7 @@ export class InMemDBService implements InMemoryDbService{
             {"fonction":"Documents", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"Créer model documents", "lien":"./document-nouveau", "bouton":"false"}, {"nom":"Rechercher", "lien":"./list-documents", "bouton":"false"}]},
             {"fonction":"Famille", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"Créer", "lien":"famille-nouvelle", "bouton":"false"}, {"nom":"Rechercher", "lien":"./list-familles", "bouton":"false"}]},
             {"fonction":"Ressource", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"Créer", "lien":"ressource-nouvelle", "bouton":"false"},{"nom":"Rechercher", "lien":"./list-ressources", "bouton":"false"}]},
+            {"fonction":"precomvtqte", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"Créer", "lien":"PrecoMvtQte-nouvelle", "bouton":"false"},]},
           ]},
           {"idUser":"phil", "langue":"en","fonctionnalites":[
             {"fonction":"People", "icone":"fas fa-user-cog", "actif":"menu-close", "elements":[{"nom":"New", "lien":"patient-nouveau", "bouton":"false"}  , {"nom":"Search", "lien":"list-patients", "bouton":"false"}]},
@@ -75,6 +82,7 @@ export class InMemDBService implements InMemoryDbService{
             {"fonction":"Documents", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"New document's model", "lien":"./document-nouveau", "bouton":"false"}, {"nom":"Search", "lien":"./list-documents", "bouton":"false"}]},
             {"fonction":"Famille", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"new", "lien":"famille-nouvelle", "bouton":"false"},  {"nom":"Search", "lien":"./list-familles", "bouton":"false"}]},
             {"fonction":"Ressource", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"Créer", "lien":"ressource-nouvelle", "bouton":"false"},{"nom":"Search", "lien":"./list-ressources", "bouton":"false"}]},
+            {"fonction":"precomvtqte", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"Créer", "lien":"PrecoMvtQte-nouvelle", "bouton":"false"},]},
           ]}
         ];
         let missions:IMission[]=[
@@ -169,8 +177,13 @@ export class InMemDBService implements InMemoryDbService{
         famille:{id:"5", libelle:"transfusion", description:"sang", etat:"gl"}},
       ];
 
+      let precomvtqte:IPrecoMvtQte[]=[
+        {id:"1", quantiteMin:10,  quantiteMax:20,  montantMin:1000, montantMax:7000, types:this.TypeMvtAssigner},
+        {id:"2", quantiteMin:15,  quantiteMax:25,  montantMin:2000, montantMax:8000, types:this.TypeMvtRetrait},
+        {id:"3", quantiteMin:20,  quantiteMax:30,  montantMin:3000, montantMax:9000, types:this.TypeMvtReduire},
 
+    ];
 
-        return{patients, services, menus, tickets, missions, attributs, documents,famille,ressource};
+        return{patients, services, menus, tickets, missions, attributs, documents,famille,ressource,precomvtqte};
     }
 }

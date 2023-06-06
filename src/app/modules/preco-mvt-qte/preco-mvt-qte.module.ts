@@ -1,7 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
-import { NewPatientComponent } from './new-patient/new-patient.component';
-import { ListPatientsComponent } from './list-patients/list-patients.component';
 import { AppRoutingModule } from 'src/app/app-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -15,11 +13,13 @@ import { MatInputModule } from '@angular/material/input';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
+//import { NewPrecomvtqteComponent } from './new-precomvtqte/new-precomvtqte.component';
+import { MatStepperIntl, MatStepperModule } from '@angular/material/stepper';
 
 @NgModule({
   declarations: [
-    NewPatientComponent,
-    ListPatientsComponent
+    //NewPrecomvtqteComponent,
+
   ],
   imports: [
     CommonModule,
@@ -33,7 +33,7 @@ import { MatTableModule } from '@angular/material/table';
     MatTableModule,
     MatSortModule,
     TicketsModule,
-    
+    MatStepperModule,
     TranslateModule.forChild({
         loader: {
             provide: TranslateLoader,
@@ -44,6 +44,9 @@ import { MatTableModule } from '@angular/material/table';
     }),
     BrowserModule
   ],
-  providers: [DatePipe],
+  providers: [DatePipe,
+  {provide: MatStepperIntl,
+     useClass:MatStepperIntl
+    }],
 })
-export class PatientsModule { }
+export class PrecoMvtQteModule { }
