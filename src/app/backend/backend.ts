@@ -61,7 +61,7 @@ export class InMemDBService implements InMemoryDbService{
             {"fonction":"Attribut", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"Créer", "lien":"./attribut-nouveau", "bouton":"false"}  , {"nom":"Rechercher", "lien":"./list-attributs", "bouton":"false"}]},
             {"fonction":"Mission", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"Créer", "lien":"./mission-nouveau", "bouton":"false"}  , {"nom":"Rechercher", "lien":"./list-missions", "bouton":"false"}]},
             {"fonction":"Documents", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"Créer model documents", "lien":"./document-nouveau", "bouton":"false"}, {"nom":"Rechercher", "lien":"./list-documents", "bouton":"false"}]},
-            {"fonction":"Famille", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"Créer", "lien":"famille-nouvelle", "bouton":"false"}, {"nom":"Rechercher", "lien":"./list-familles", "bouton":"false"}]},
+            {"fonction":"Categorie de Ressource", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"Créer", "lien":"famille-nouvelle", "bouton":"false"}, {"nom":"Rechercher", "lien":"./list-familles", "bouton":"false"}]},
           ]},
           {"idUser":"phil", "langue":"en","fonctionnalites":[
             {"fonction":"People", "icone":"fas fa-user-cog", "actif":"menu-close", "elements":[{"nom":"New", "lien":"patient-nouveau", "bouton":"false"}  , {"nom":"Search", "lien":"list-patients", "bouton":"false"}]},
@@ -70,7 +70,7 @@ export class InMemDBService implements InMemoryDbService{
             {"fonction":"Attribut", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"New", "lien":"./attribut-nouveau", "bouton":"false"}  , {"nom":"Search", "lien":"./list-attributs", "bouton":"false"}]},
             {"fonction":"Mission", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"New", "lien":"./mission-nouveau", "bouton":"false"}  , {"nom":"Search", "lien":"./list-missions", "bouton":"false"}]},
             {"fonction":"Documents", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"New document's model", "lien":"./document-nouveau", "bouton":"false"}, {"nom":"Search", "lien":"./list-documents", "bouton":"false"}]},
-            {"fonction":"Famille", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"new", "lien":"famille-nouvelle", "bouton":"false"},  {"nom":"Search", "lien":"./list-familles", "bouton":"false"}]},
+            {"fonction":"Resource Category", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"new", "lien":"famille-nouvelle", "bouton":"false"},  {"nom":"Search", "lien":"./list-familles", "bouton":"false"}]},
           ]}
         ];
         let missions:IMission[]=[
