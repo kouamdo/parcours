@@ -74,7 +74,7 @@ export class InMemDBService implements InMemoryDbService{
             {"fonction":"Mission", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"New", "lien":"./mission-nouveau", "bouton":"false"}  , {"nom":"Search", "lien":"./list-missions", "bouton":"false"}]},
             {"fonction":"Documents", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"New document's model", "lien":"./document-nouveau", "bouton":"false"}, {"nom":"Search", "lien":"./list-documents", "bouton":"false"}]},
             {"fonction":"Famille", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"new", "lien":"famille-nouvelle", "bouton":"false"},  {"nom":"Search", "lien":"./list-familles", "bouton":"false"}]},
-            {"fonction":"Ressource", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"Créer", "lien":"ressource-nouvelle", "bouton":"false"},{"nom":"Search", "lien":"./list-ressources", "bouton":"false"}]},
+            {"fonction":"Ressources", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"New", "lien":"ressource-nouvelle", "bouton":"false"},{"nom":"Search", "lien":"./list-ressources", "bouton":"false"}]},
           ]}
         ];
         let missions:IMission[]=[

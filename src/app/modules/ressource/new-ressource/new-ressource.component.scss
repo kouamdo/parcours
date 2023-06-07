@@ -28,6 +28,9 @@
       font-weight: normal;
   }
 }
+select{
+  margin: 20px 0;
+}
 .champs, select, input{
   font-size: 15px;
 }
@@ -40,6 +43,7 @@ input[ type=checkbox ]{
   margin-right: 250px;
   height: 17px;
   }
+
   input, #etat{
     border: none;
     box-shadow: none;
