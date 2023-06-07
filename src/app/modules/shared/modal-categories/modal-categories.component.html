@@ -38,7 +38,7 @@
                 <div class="card">
                     <div class="card-body p-0 tableBlock" id="tableResultats">
                         <div class='table-responsive w-100 m-0'>
-                            <table class='table table-sm table-centered table-striped w-100' mat-table [dataSource]="tableauAttributsTemp" matSort (matSortChange)="announceSortChange($event)">
+                            <table class='table table-sm table-centered table-striped w-100' mat-table [dataSource]="dataSourceAttributTemp" matSort (matSortChange)="announceSortChange($event)">
                                 <!-- titre Column -->
                                 <ng-container matColumnDef="titre">
                                     <th class="text-dark containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'attributs.table.title1' | translate}} </th>

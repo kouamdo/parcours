@@ -36,7 +36,7 @@ export class ModalCategoriesComponent implements OnInit {
   conteur : any = 0
   
   // variables pour la gestion des categories
-  dataSourceCategorieAttribut = new MatTableDataSource<IAttributs>(); //tableau de listing des attributs a affecter a chaque categorie
+  dataSourceAttributTemp = new MatTableDataSource<IAttributs>(); //tableau de listing des attributs a affecter a chaque categorie
   categorieAttributs : ICategoriesAttributs = {
     id: '',
     nom: '',
@@ -61,7 +61,7 @@ export class ModalCategoriesComponent implements OnInit {
   TABLE_CATEGORIE_AFFICHAGE_TEMP: ICategorieAffichage[] = []; // tableau contenant les categories creees a partir du premier tableau de la modal
   tableResultatsCategoriesAttributs  = new MatTableDataSource<ICategoriesAttributs>(this.ELEMENTS_TABLE_CATEGORIE_ATTRIBUTS);
   tableResultatsCategoriesAffichage  = new MatTableDataSource<ICategorieAffichage>(this.TABLE_CATEGORIE_AFFICHAGE_TEMP);
-  tableFinaleCategoriesAttributs: ICategoriesAttributs[] = [];
+  //tableFinaleCategoriesAttributs: ICategoriesAttributs[] = [];
 
   tableauAttributsTemp : IAttributs[] = []
   tableauIntermediaireAttributsTemp : IAttributs[] = []
@@ -84,9 +84,8 @@ export class ModalCategoriesComponent implements OnInit {
   ngOnInit(): void {
     console.log(this.data.name)
     
-    this.dataSourceCategorieAttribut.data = this.data.dataSourceCategorieAttribut.data
-    this.tableauIntermediaireAttributsTemp  = this.dataSourceCategorieAttribut.data
-    this.tableauAttributsTemp  = this.tableauIntermediaireAttributsTemp
+    this.dataSourceAttributTemp.data = this.data.dataSourceAttributDocument.data
+    this.tableauAttributsTemp = this.dataSourceAttributTemp.data
     
     this.getAllAttributs()
     this.creerCategorie()
@@ -105,21 +104,6 @@ export class ModalCategoriesComponent implements OnInit {
         }
       }
     );
-    // this.tableauAttributsTemp.forEach(
-    //   (element: IAttributs) => {
-
-    //     // this.TABLE_CATEGORIE_AFFICHAGE_TEMP.forEach(
-    //     //   categorieAttributAff => {
-    //     //     if (element.titre == categorieAttributAff.attribut.titre) {
-              
-    //     //       const index = this.tableauAttributsTemp.indexOf(element)
-
-    //     //       this.tableauAttributsTemp.splice(index, 1)
-
-    //     //       console.log("reduction du tableau initial d'attribut", this.tableauAttributsTemp)
-    //     //     }
-    //     // });
-    // });
   }
 
   getIdAttribut(idAttribut : string){
@@ -164,23 +148,24 @@ export class ModalCategoriesComponent implements OnInit {
   
   AjouterCategorieTemp() {
 
-    this.tableauIntermediaireAttributsTemp.forEach(
+    this.tableauAttributsTemp.forEach(
       (element: IAttributs) => {
 
         this.TABLE_CATEGORIE_AFFICHAGE_TEMP.forEach(
           categorieAttributAff => {
             if (element.titre == categorieAttributAff.attribut.titre) {
               
-              const index = this.tableauIntermediaireAttributsTemp.indexOf(element)
+              const index = this.tableauAttributsTemp.indexOf(element)
 
-              this.tableauIntermediaireAttributsTemp.splice(index, 1)
+              this.tableauAttributsTemp.splice(index, 1)
 
               console.log("reduction du tableau initial d'attribut", this.tableauAttributsTemp)
             }
         });
     });
-
+    this.dataSourceAttributTemp.data = this.tableauAttributsTemp
     this.tableResultatsCategoriesAffichage.data = this.TABLE_CATEGORIE_AFFICHAGE_TEMP
+    this.creerCategorie()
   }
   
   validerCategorieAttribut(){
@@ -233,8 +218,8 @@ export class ModalCategoriesComponent implements OnInit {
   }
 
   creerCategorie(){
-    this.dataSourceCategorieAttribut.data = this.data.dataSourceCategorieAttribut.data
-    this.dataSourceCategorieAttribut.data.forEach(
+    this.dataSourceAttributTemp.data = this.data.dataSourceAttributDocument.data
+    this.dataSourceAttributTemp.data.forEach(
       attribut => {
         this.ajoutInputOrdre()
     });
@@ -251,13 +236,13 @@ export class ModalCategoriesComponent implements OnInit {
   }
 
   ngAfterViewInit() {
-    this.dataSourceCategorieAttribut.paginator = this.paginator;
-    this.dataSourceCategorieAttribut.sort = this.sort;
+    this.dataSourceAttributTemp.paginator = this.paginator;
+    this.dataSourceAttributTemp.sort = this.sort;
   }
 
   public rechercherListingAttribut(option: IAttributs){
     this.serviceAttribut.getAttributsByTitre(option.titre.toLowerCase()).subscribe(
-        valeurs => {this.dataSourceCategorieAttribut.data = valeurs;}
+        valeurs => {this.dataSourceAttributTemp.data = valeurs;}
     )
   }
   

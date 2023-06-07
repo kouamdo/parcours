@@ -67,7 +67,7 @@ export class NewFormDocumentComponent implements OnInit {
   ELEMENTS_TABLE_CATEGORIES: IAttributs[] = []; //tableau de listing des attributs a affecter a chaque categorie
 
   // variables pour la gestion des categories
-  dataSourceCategorieAttribut = new MatTableDataSource<IAttributs>(this.ELEMENTS_TABLE_CATEGORIES);
+  dataSourceAttributDocument = new MatTableDataSource<IAttributs>(this.ELEMENTS_TABLE_CATEGORIES);
   categorieAttributs : ICategoriesAttributs = {
     id: '',
     nom: '',
@@ -140,7 +140,7 @@ export class NewFormDocumentComponent implements OnInit {
       enterAnimationDuration:'1000ms',
       exitAnimationDuration:'1000ms',
       data:{
-        dataSourceCategorieAttribut : this.dataSourceCategorieAttribut,
+        dataSourceAttributDocument : this.dataSourceAttributDocument,
         name : 'adeline'
       }
     }
@@ -197,7 +197,7 @@ export class NewFormDocumentComponent implements OnInit {
       val => {
         console.log('IdAttribut :' + val.id);
         this.ELEMENTS_TABLE_ATTRIBUTS = this.dataSourceAttributResultat.data;
-        this.dataSourceAttributResultat.data = this.dataSourceCategorieAttribut.data
+        this.dataSourceAttributResultat.data = this.dataSourceAttributDocument.data
         this.ELEMENTS_TABLE_ATTRIBUTS.push(val);
         this.dataSourceAttributResultat.data = this.ELEMENTS_TABLE_ATTRIBUTS;
       }
@@ -213,7 +213,7 @@ export class NewFormDocumentComponent implements OnInit {
   }
 
   creerCategorie(){
-    this.dataSourceCategorieAttribut.data = this.ELEMENTS_TABLE_ATTRIBUTS
+    this.dataSourceAttributDocument.data = this.ELEMENTS_TABLE_ATTRIBUTS
   }
   onSubmit(documentInput:any){
     //    const _missionsSelected = (this.forme.get('_missions') as FormArray);
