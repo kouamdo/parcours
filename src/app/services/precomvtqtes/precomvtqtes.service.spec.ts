@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { PrecoMvtQtesService } from './preco-mvt-qtes.service';
+import { PrecomvtqtesService } from './precomvtqtes.service';
 
-describe('PrecoMvtQtesService', () => {
-  let service: PrecoMvtQtesService;
+describe('PrecomvtqtesService', () => {
+  let service: PrecomvtqtesService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(PrecoMvtQtesService);
+    service = TestBed.inject(PrecomvtqtesService);
   });
 
   it('should be created', () => {

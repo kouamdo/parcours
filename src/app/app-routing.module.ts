@@ -9,7 +9,7 @@ import { ServicesRoutingModule } from './modules/services/services-routing.modul
 import { TicketsRoutingModule } from './modules/tickets/tickets-routing.module';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { RessourceRoutingModule } from './modules/ressource/ressource-routing.module';
-import { PrecoMvtQteRoutingModule } from './modules/preco-mvt-qte/preco-mvt-qte-routing.module';
+import { PrecomvtqteRoutingModule } from './modules/precomvtqte/precomvtqte-routing.module';
 
 const routes: Routes = [
   {
@@ -29,7 +29,7 @@ const routes: Routes = [
     DocumentsRoutingModule,
     FamilleRoutingModule,
     RessourceRoutingModule,
-    PrecoMvtQteRoutingModule
+    PrecomvtqteRoutingModule
   ],
   exports: [RouterModule]
 })

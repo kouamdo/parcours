@@ -1,0 +1,114 @@
+<div id="mainSection" class="d-flex flex-column justify-content-around">
+  <div class="title">
+      <h2>Listing PrecoMvtQte</h2>
+  </div>
+  <div class="card container-fluid" >
+      <div class='card-hearder pt-3' >
+          <div class="d-flex align-items-center justify-content-end mr-4 tableTools">
+              <div class="form-inline mr-3">
+                <form class="example-form">
+                  <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label class="searchBar">Rechercher</mat-label>
+                    <input type="text" matInput aria-label="Rechercher" [formControl]="myControl" [matAutocomplete]="auto">
+                    <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+                      <mat-option *ngFor="let option of filteredOptions" [value]="option" (onSelectionChange)="rechercherListingPrecomvtqte(option)">
+                        {{option.libelle}}
+                      </mat-option>
+                    </mat-autocomplete>
+                  </mat-form-field>
+              </form>
+              </div>
+              <div role="button" id="addUserBotton" routerLink="../precomvtqte-nouvelle">
+                  <span title="1">
+                      <i class="fa fa-user-plus" aria-hidden="true"></i>
+                  </span>
+              </div>
+          </div>
+      </div>
+      <div class="card-body p-0" id="tableBlock">
+          <div class='table-responsive w-100'>
+              <table class='table table-sm table-centered table-striped table-bordered w-100' mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)">
+
+                  <!-- id Column -->
+                  <ng-container matColumnDef="id">
+                      <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header>id</th>
+                      <td class="text-dark text-center containCell" mat-cell *matCellDef="let element"> {{element.id}} </td>
+                  </ng-container>
+
+                  <!-- libellé Column -->
+                  <ng-container matColumnDef="libelle">
+                      <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header>libelle</th>
+                      <td class="text-dark text-center containCell" mat-cell *matCellDef="let element"> {{element.libelle}} </td>
+                  </ng-container>
+
+                  <!-- etat Column -->
+                  <ng-container matColumnDef="quantiteMin">
+                      <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header>quantiteMin</th>
+                      <td class="text-dark text-center containCell" mat-cell *matCellDef="let element"> {{element.quantiteMin}} </td>
+                  </ng-container>
+
+                    <!-- quantité Column -->
+                    <ng-container matColumnDef="quantiteMax">
+                      <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header>quantiteMax</th>
+                      <td class="text-dark text-center containCell" mat-cell *matCellDef="let element"> {{element.quantiteMax}} </td>
+                  </ng-container>
+
+                   <!-- unité Column -->
+                   <ng-container matColumnDef="montantMin">
+                    <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header>montantMin</th>
+                    <td class="text-dark text-center containCell" mat-cell *matCellDef="let element"> {{element.montantMin}} </td>
+                </ng-container>
+
+                    <!-- prix Column -->
+                    <ng-container matColumnDef="montantMax">
+                      <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header>montantMax</th>
+                      <td class="text-dark text-center containCell" mat-cell *matCellDef="let element"> {{element.montantMax}} </td>
+                  </ng-container>
+
+                      <!-- famille Column -->
+                    <ng-container matColumnDef="type">
+                      <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header>type</th>
+                      <td class="text-dark text-center containCell" mat-cell *matCellDef="let element"> {{element.type}} </td>
+                    </ng-container>
+
+                  <ng-container matColumnDef="actions">
+                      <th class="text-dark containHead" mat-header-cell *matHeaderCellDef>Actions</th>
+                      <td class="text-dark text-center containCell" mat-cell *matCellDef="let element">
+                          <div id="actions" class="dropdown open">
+                              <button class="btn dropdown-toggle" type="button" id="triggerId" data-toggle="dropdown" aria-haspopup="true"
+                                      aria-expanded="false">
+                                  <span>...</span>
+                              </button>
+                              <div class="dropdown-menu" aria-labelledby="triggerId">
+                                  <button class="dropdown-item nav-link" [routerLink]="['/ressource-nouvelle']" title="{{'patient.table.actions.link1' | translate}}">
+                                      <i class="fa fa-map-pin" aria-hidden="true"></i>
+                                      <span>{{'patient.table.actions.link1' | translate}}</span>
+                                  </button>
+                                  <button class="dropdown-item nav-link" [routerLink]="['/ressource-nouvelle',element.id]" title="{{'patient.table.actions.link3' | translate}}">
+                                      <i class="fa fa-eye text-secondary" aria-hidden="true"></i>
+                                      <span>{{'patient.table.actions.link3' | translate}}</span>
+                                  </button>
+                                  <button class="dropdown-item nav-link" [routerLink]="['/ressource-nouvelle',element.id]" title="{{'patient.table.actions.link2' | translate}}">
+                                      <i class="fa fa-pen text-info" aria-hidden="true"></i>
+                                      <span>{{'patient.table.actions.link2' | translate}}</span>
+                                  </button>
+                                  <button class="dropdown-item nav-link" [routerLink]="['/ressource-nouvelle',element.id]" title="{{'patient.table.actions.link4' | translate}}">
+                                    <i class="fa fa-times-circle text-danger" aria-hidden="true"></i>
+                                    <span>{{'patient.table.actions.link4' | translate}}</span>
+                                </button>
+                              </div>
+                          </div>
+                      </td>
+                  </ng-container>
+                  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+              </table>
+              <mat-paginator style="background-color: rgba(126, 169, 126, 0.79);" [pageSizeOptions]="[5, 10, 20]"
+                             showFirstLastButtons
+                             aria-label="Select page of periodic elements">
+              </mat-paginator>
+          </div>
+      </div>
+  </div>
+</div>
+

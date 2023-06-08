@@ -12,8 +12,9 @@ import { StatutTicket } from "../modele/statut-ticket";
 import { ITicket } from "../modele/ticket";
 import { TypeTicket } from "../modele/type-ticket";
 import { IRessource } from "../modele/ressource";
-import { IPrecoMvtQte } from "../modele/preco-mvt-qte";
+import { IPrecomvtqte } from "../modele/precomvtqte";
 import { TypeMvt } from "../modele/type-mvt";
+
 
 
 export class InMemDBService implements InMemoryDbService{
@@ -71,7 +72,7 @@ export class InMemDBService implements InMemoryDbService{
             {"fonction":"Documents", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"Créer model documents", "lien":"./document-nouveau", "bouton":"false"}, {"nom":"Rechercher", "lien":"./list-documents", "bouton":"false"}]},
             {"fonction":"Famille", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"Créer", "lien":"famille-nouvelle", "bouton":"false"}, {"nom":"Rechercher", "lien":"./list-familles", "bouton":"false"}]},
             {"fonction":"Ressource", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"Créer", "lien":"ressource-nouvelle", "bouton":"false"},{"nom":"Rechercher", "lien":"./list-ressources", "bouton":"false"}]},
-            {"fonction":"precomvtqte", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"Créer", "lien":"PrecoMvtQte-nouvelle", "bouton":"false"},]},
+            {"fonction":"PrecoMvtQte", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"Créer", "lien":"precomvtqte-nouvelle", "bouton":"false"},{"nom":"Rechercher", "lien":"./list-precomvtqtes", "bouton":"false"}]},
           ]},
           {"idUser":"phil", "langue":"en","fonctionnalites":[
             {"fonction":"People", "icone":"fas fa-user-cog", "actif":"menu-close", "elements":[{"nom":"New", "lien":"patient-nouveau", "bouton":"false"}  , {"nom":"Search", "lien":"list-patients", "bouton":"false"}]},
@@ -82,7 +83,7 @@ export class InMemDBService implements InMemoryDbService{
             {"fonction":"Documents", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"New document's model", "lien":"./document-nouveau", "bouton":"false"}, {"nom":"Search", "lien":"./list-documents", "bouton":"false"}]},
             {"fonction":"Famille", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"new", "lien":"famille-nouvelle", "bouton":"false"},  {"nom":"Search", "lien":"./list-familles", "bouton":"false"}]},
             {"fonction":"Ressource", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"Créer", "lien":"ressource-nouvelle", "bouton":"false"},{"nom":"Search", "lien":"./list-ressources", "bouton":"false"}]},
-            {"fonction":"precomvtqte", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"Créer", "lien":"PrecoMvtQte-nouvelle", "bouton":"false"},]},
+            {"fonction":"PrecoMvtQte", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"Créer", "lien":"precomvtqte-nouvelle", "bouton":"false"},{"nom":"Search", "lien":"./list-precomvtqtes", "bouton":"false"}]},
           ]}
         ];
         let missions:IMission[]=[
@@ -177,12 +178,12 @@ export class InMemDBService implements InMemoryDbService{
         famille:{id:"5", libelle:"transfusion", description:"sang", etat:"gl"}},
       ];
 
-      let precomvtqte:IPrecoMvtQte[]=[
-        {id:"1", quantiteMin:10,  quantiteMax:20,  montantMin:1000, montantMax:7000, types:this.TypeMvtAssigner},
-        {id:"2", quantiteMin:15,  quantiteMax:25,  montantMin:2000, montantMax:8000, types:this.TypeMvtRetrait},
-        {id:"3", quantiteMin:20,  quantiteMax:30,  montantMin:3000, montantMax:9000, types:this.TypeMvtReduire},
+      let precomvtqte:IPrecomvtqte[]=[
+        {id:"1",libelle:"achat", quantiteMin:10,  quantiteMax:20,  montantMin:1000, montantMax:7000, type:this.TypeMvtAssigner},
+        {id:"2",libelle:"achat",quantiteMin:15,  quantiteMax:25,  montantMin:2000, montantMax:8000, type:this.TypeMvtRetrait},
+        {id:"3",libelle:"achat",quantiteMin:20,  quantiteMax:30,  montantMin:3000, montantMax:9000, type:this.TypeMvtReduire},
 
-    ];
+      ];
 
         return{patients, services, menus, tickets, missions, attributs, documents,famille,ressource,precomvtqte};
     }

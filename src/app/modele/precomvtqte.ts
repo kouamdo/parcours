@@ -1,10 +1,11 @@
 import { TypeMvt } from "./type-mvt";
 
-export interface IPrecoMvtQte {
+export interface IPrecomvtqte {
   id:string,
+  libelle:string,
   quantiteMin:number,
   quantiteMax:number,
   montantMin:number,
   montantMax:number,
-  types:TypeMvt,
+  type:TypeMvt,
 }

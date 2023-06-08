@@ -23,8 +23,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { FamilleModule } from './modules/famille/famille.module';
 import { RessourceModule } from './modules/ressource/ressource.module';
-import { PrecoMvtQteModule } from './modules/preco-mvt-qte/preco-mvt-qte.module';
-import { MatStepperModule } from '@angular/material/stepper';
+import { PrecomvtqteModule } from './modules/precomvtqte/precomvtqte.module';
 
 
 
@@ -49,8 +48,7 @@ import { MatStepperModule } from '@angular/material/stepper';
     DocumentsModule,
     FamilleModule,
     RessourceModule,
-    PrecoMvtQteModule,
-    MatStepperModule,
+    PrecomvtqteModule,
     // ngx-translate and the loader module
     HttpClientModule,
     TranslateModule.forRoot({

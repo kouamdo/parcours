@@ -1,22 +1,28 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { NewPrecomvtqteComponent } from './new-precomvtqte/new-precomvtqte.component';
+import { ListPrecomvtqtesComponent } from './list-precomvtqtes/list-precomvtqtes.component';
 
-const routes: Routes = [
+const routes = [
   {
-    path: 'PrecoMvtQte-nouvelle',
+    path: 'precomvtqte-nouvelle',
     title: 'Enregistrer une nouvelle precomvtqte',
     component: NewPrecomvtqteComponent
   },
   {
-    path: 'PrecoMvtQte-nouvelle',
+    path: 'precomvtqte-nouvelle/:idPrecomvtqte',
     title: 'Modifier une precomvtqte',
-    component: NewPrecomvtqteComponent
+    component:NewPrecomvtqteComponent
   },
+  {
+    path: 'list-precomvtqtes',
+    title: 'Rechercher une precomvtqte',
+    component: ListPrecomvtqtesComponent
+  }
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class PrecoMvtQteRoutingModule { }
+export class PrecomvtqteRoutingModule { }

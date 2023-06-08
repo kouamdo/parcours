@@ -1,7 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
+import { PrecomvtqteRoutingModule } from './precomvtqte-routing.module';
+import { NewPrecomvtqteComponent } from './new-precomvtqte/new-precomvtqte.component';
+
 import { AppRoutingModule } from 'src/app/app-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 import { BrowserModule } from '@angular/platform-browser';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { HttpLoaderFactory } from 'src/app/app.module';
@@ -13,19 +17,19 @@ import { MatInputModule } from '@angular/material/input';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
-//import { NewPrecomvtqteComponent } from './new-precomvtqte/new-precomvtqte.component';
-import { MatStepperIntl, MatStepperModule } from '@angular/material/stepper';
+import { ListPrecomvtqtesComponent } from './list-precomvtqtes/list-precomvtqtes.component';
 
 @NgModule({
   declarations: [
-    //NewPrecomvtqteComponent,
-
+    NewPrecomvtqteComponent,
+    ListPrecomvtqtesComponent
   ],
   imports: [
     CommonModule,
     FormsModule,
     AppRoutingModule,
     ReactiveFormsModule,
+
     MatAutocompleteModule,
     MatInputModule,
     MatFormFieldModule,
@@ -33,7 +37,6 @@ import { MatStepperIntl, MatStepperModule } from '@angular/material/stepper';
     MatTableModule,
     MatSortModule,
     TicketsModule,
-    MatStepperModule,
     TranslateModule.forChild({
         loader: {
             provide: TranslateLoader,
@@ -44,9 +47,6 @@ import { MatStepperIntl, MatStepperModule } from '@angular/material/stepper';
     }),
     BrowserModule
   ],
-  providers: [DatePipe,
-  {provide: MatStepperIntl,
-     useClass:MatStepperIntl
-    }],
+  providers: [DatePipe],
 })
-export class PrecoMvtQteModule { }
+export class PrecomvtqteModule { }
