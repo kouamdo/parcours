@@ -14,6 +14,7 @@ import { TypeTicket } from "../modele/type-ticket";
 import { IRessource } from "../modele/ressource";
 import { IPrecomvtqte } from "../modele/precomvtqte";
 import { TypeMvt } from "../modele/type-mvt";
+import { IPrecomvt } from "../modele/precomvt";
 
 
 
@@ -73,7 +74,10 @@ export class InMemDBService implements InMemoryDbService{
             {"fonction":"Famille", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"Créer", "lien":"famille-nouvelle", "bouton":"false"}, {"nom":"Rechercher", "lien":"./list-familles", "bouton":"false"}]},
             {"fonction":"Ressource", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"Créer", "lien":"ressource-nouvelle", "bouton":"false"},{"nom":"Rechercher", "lien":"./list-ressources", "bouton":"false"}]},
             {"fonction":"PrecoMvtQte", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"Créer", "lien":"precomvtqte-nouvelle", "bouton":"false"},{"nom":"Rechercher", "lien":"./list-precomvtqtes", "bouton":"false"}]},
+            {"fonction":"PrecoMvt","icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"Créer", "lien":"precomvt-nouvelle", "bouton":"false"},]},
           ]},
+
+
           {"idUser":"phil", "langue":"en","fonctionnalites":[
             {"fonction":"People", "icone":"fas fa-user-cog", "actif":"menu-close", "elements":[{"nom":"New", "lien":"patient-nouveau", "bouton":"false"}  , {"nom":"Search", "lien":"list-patients", "bouton":"false"}]},
             {"fonction":"Service", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"New", "lien":"./service-nouveau", "bouton":"false"}  , {"nom":"Search", "lien":"./list-services", "bouton":"false"}]},
@@ -84,6 +88,7 @@ export class InMemDBService implements InMemoryDbService{
             {"fonction":"Famille", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"new", "lien":"famille-nouvelle", "bouton":"false"},  {"nom":"Search", "lien":"./list-familles", "bouton":"false"}]},
             {"fonction":"Ressource", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"Créer", "lien":"ressource-nouvelle", "bouton":"false"},{"nom":"Search", "lien":"./list-ressources", "bouton":"false"}]},
             {"fonction":"PrecoMvtQte", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"Créer", "lien":"precomvtqte-nouvelle", "bouton":"false"},{"nom":"Search", "lien":"./list-precomvtqtes", "bouton":"false"}]},
+            {"fonction":"PrecoMvt","icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"Créer", "lien":"precomvt-nouvelle", "bouton":"false"}, ]}
           ]}
         ];
         let missions:IMission[]=[
@@ -185,6 +190,13 @@ export class InMemDBService implements InMemoryDbService{
 
       ];
 
-        return{patients, services, menus, tickets, missions, attributs, documents,famille,ressource,precomvtqte};
+      let precomvt:IPrecomvt[]=[
+        {id:"1",libelle:"rachat",etat: true,type:this.TypeMvtAssigner, quantiteMin:10,  quantiteMax:20,  montantMin:1000, montantMax:7000},
+        {id:"2",libelle:"rachat",etat: true, type:this.TypeMvtRetrait, quantiteMin:15,  quantiteMax:25,  montantMin:2000, montantMax:8000},
+        {id:"3",libelle:"rachat",etat: true, type:this.TypeMvtReduire, quantiteMin:20,  quantiteMax:30,  montantMin:3000, montantMax:9000,},
+
+      ];
+
+        return{patients, services, menus, tickets, missions, attributs, documents,famille,ressource,precomvtqte,precomvt};
     }
 }

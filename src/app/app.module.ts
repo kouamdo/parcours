@@ -24,6 +24,7 @@ import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { FamilleModule } from './modules/famille/famille.module';
 import { RessourceModule } from './modules/ressource/ressource.module';
 import { PrecomvtqteModule } from './modules/precomvtqte/precomvtqte.module';
+import { PrecomvtModule } from './modules/precomvt/precomvt.module';
 
 
 
@@ -49,6 +50,7 @@ import { PrecomvtqteModule } from './modules/precomvtqte/precomvtqte.module';
     FamilleModule,
     RessourceModule,
     PrecomvtqteModule,
+    PrecomvtModule,
     // ngx-translate and the loader module
     HttpClientModule,
     TranslateModule.forRoot({
