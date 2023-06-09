@@ -158,6 +158,7 @@ export class ModalCategoriesComponent implements OnInit {
               const index = this.tableauAttributsTemp.indexOf(element)
 
               this.tableauAttributsTemp.splice(index, 1)
+              this._ordreAttribut.removeAt(index);
 
               console.log("reduction du tableau initial d'attribut", this.tableauAttributsTemp)
             }
@@ -165,7 +166,6 @@ export class ModalCategoriesComponent implements OnInit {
     });
     this.dataSourceAttributTemp.data = this.tableauAttributsTemp
     this.tableResultatsCategoriesAffichage.data = this.TABLE_CATEGORIE_AFFICHAGE_TEMP
-    this.creerCategorie()
   }
   
   validerCategorieAttribut(){
@@ -218,7 +218,7 @@ export class ModalCategoriesComponent implements OnInit {
   }
 
   creerCategorie(){
-    this.dataSourceAttributTemp.data = this.data.dataSourceAttributDocument.data
+    this.dataSourceAttributTemp.data = this.tableauAttributsTemp
     this.dataSourceAttributTemp.data.forEach(
       attribut => {
         this.ajoutInputOrdre()
