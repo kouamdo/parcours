@@ -156,9 +156,14 @@ export class ModalCategoriesComponent implements OnInit {
             if (element.titre == categorieAttributAff.attribut.titre) {
               
               const index = this.tableauAttributsTemp.indexOf(element)
+              console.log("index : ", index)
 
+              const indexControlFormArray = this._ordreAttribut.controls
+              .findIndex(x => x.value === categorieAttributAff.attribut.ordre);
+              console.log("indexControlFormArray : ", indexControlFormArray)
+
+              this._ordreAttribut.removeAt(indexControlFormArray);
               this.tableauAttributsTemp.splice(index, 1)
-              this._ordreAttribut.removeAt(index);
 
               console.log("reduction du tableau initial d'attribut", this.tableauAttributsTemp)
             }
