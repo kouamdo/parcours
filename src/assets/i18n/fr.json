@@ -182,7 +182,7 @@
         "libelle":"langues"
     },
     "famille":{
-      "header":"Ajouter Une Nouvelle Famille",
+      "header":"Ajouter Une Nouvelle Categorie de Ressource",
       "table":{
         "title1":"Libellé",
         "title2":"Description",
@@ -195,7 +195,7 @@
     "lists":{
       "button1":"Retour"
     },
-    "title":"Listing familles",
+    "title":"Listing Categorie de Ressource",
     "search-bar":"Rechercher",
     "table1":{
         "title1":"Libellé",
