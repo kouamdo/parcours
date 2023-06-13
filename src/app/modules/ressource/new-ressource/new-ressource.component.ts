@@ -37,7 +37,7 @@ export class NewRessourceComponent implements OnInit {
   constructor(private formBuilder:FormBuilder,private familleService:FamillesService,private ressourceService:RessourcesService,private serviceRessource:RessourcesService,private serviceFamille:FamillesService,private router:Router, private infosPath:ActivatedRoute, private datePipe: DatePipe) {
     this.forme = this.formBuilder.group({
       libelle: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
-      etat: [ '', [Validators.required,]],
+      etat: [ ''],
       quantite: ['', [Validators.required]],
       unite: ['', [Validators.required]],
       prix: ['', [Validators.required]],

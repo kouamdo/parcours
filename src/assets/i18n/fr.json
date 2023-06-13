@@ -218,7 +218,7 @@
         "title3":"Quantité",
         "title4":"Unité",
         "title5":"Prix",
-        "title6":" Famille"
+        "title6":"Catégorie de Ressource"
     },
     "form":{
         "text1":"Champ Obligatoire",
@@ -243,7 +243,7 @@
         "title5":" Quantité ",
         "title6":" Unité",
         "title7":"Prix",
-        "title8":"Famille ",
+        "title8":"Catégorie de Ressource",
         "title9":"Actions "
     }
     }
