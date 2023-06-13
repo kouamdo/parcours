@@ -17,11 +17,13 @@ import { MatInputModule } from '@angular/material/input';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
+import { ListPrecomvtsComponent } from './list-precomvts/list-precomvts.component';
 
 
 @NgModule({
   declarations: [
-    NewPrecomvtComponent
+    NewPrecomvtComponent,
+    ListPrecomvtsComponent
   ],
   imports: [
     CommonModule,

@@ -74,7 +74,7 @@ export class InMemDBService implements InMemoryDbService{
             {"fonction":"Famille", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"Créer", "lien":"famille-nouvelle", "bouton":"false"}, {"nom":"Rechercher", "lien":"./list-familles", "bouton":"false"}]},
             {"fonction":"Ressource", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"Créer", "lien":"ressource-nouvelle", "bouton":"false"},{"nom":"Rechercher", "lien":"./list-ressources", "bouton":"false"}]},
             {"fonction":"PrecoMvtQte", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"Créer", "lien":"precomvtqte-nouvelle", "bouton":"false"},{"nom":"Rechercher", "lien":"./list-precomvtqtes", "bouton":"false"}]},
-            {"fonction":"PrecoMvt","icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"Créer", "lien":"precomvt-nouvelle", "bouton":"false"},]},
+            {"fonction":"PrecoMvt","icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"Créer", "lien":"precomvt-nouvelle", "bouton":"false"},{"nom":"Rechercher", "lien":"./list-precomvts", "bouton":"false"}]},
           ]},
 
 
@@ -88,7 +88,7 @@ export class InMemDBService implements InMemoryDbService{
             {"fonction":"Famille", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"new", "lien":"famille-nouvelle", "bouton":"false"},  {"nom":"Search", "lien":"./list-familles", "bouton":"false"}]},
             {"fonction":"Ressource", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"Créer", "lien":"ressource-nouvelle", "bouton":"false"},{"nom":"Search", "lien":"./list-ressources", "bouton":"false"}]},
             {"fonction":"PrecoMvtQte", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"Créer", "lien":"precomvtqte-nouvelle", "bouton":"false"},{"nom":"Search", "lien":"./list-precomvtqtes", "bouton":"false"}]},
-            {"fonction":"PrecoMvt","icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"Créer", "lien":"precomvt-nouvelle", "bouton":"false"}, ]}
+            {"fonction":"PrecoMvt","icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"Créer", "lien":"precomvt-nouvelle", "bouton":"false"}, {"nom":"Search", "lien":"./list-precomvts", "bouton":"false"}]}
           ]}
         ];
         let missions:IMission[]=[
@@ -171,7 +171,7 @@ export class InMemDBService implements InMemoryDbService{
           {id:"5", libelle:"transfusion", description:"sang", etat:"gl"},
       ];
       let ressource:IRessource[]=[
-        {id:"1", libelle:"transfusion",etat:true, /*dateCreation:new Date("07/03/2000"),dateModification:new Date("07/03/1990"),*/ quantite:10,unite:"kg",prix:1000,
+        {id:"1", libelle:"transfusion",etat:true, /*dateCreation:new Date("07/03/2000"),dateModification:new Date("07/03/1990"),*/quantite:10,unite:"kg",prix:1000,
           famille:{id:"1", libelle:"trans", description:"sang", etat:"gl"}},
        {id:"2", libelle:"néonat",etat: true,/* dateCreation:new Date("07/03/2000"),dateModification:new Date("07/03/1990"),*/quantite:20,unite:"kg",prix:2000,
         famille: {id:"2", libelle:"néonat", description:"nouveau-né", etat:"malade"}},
@@ -191,9 +191,9 @@ export class InMemDBService implements InMemoryDbService{
       ];
 
       let precomvt:IPrecomvt[]=[
-        {id:"1",libelle:"rachat",etat: true,type:this.TypeMvtAssigner, quantiteMin:10,  quantiteMax:20,  montantMin:1000, montantMax:7000},
-        {id:"2",libelle:"rachat",etat: true, type:this.TypeMvtRetrait, quantiteMin:15,  quantiteMax:25,  montantMin:2000, montantMax:8000},
-        {id:"3",libelle:"rachat",etat: true, type:this.TypeMvtReduire, quantiteMin:20,  quantiteMax:30,  montantMin:3000, montantMax:9000,},
+        {id:"1",libelle:"rachat",etat: true, /*dateCreation:new Date("07/03/2000"),dateModification:new Date("07/03/1990"),*/type:this.TypeMvtAssigner, quantiteMin:10,  quantiteMax:20,  montantMin:1000, montantMax:7000},
+        {id:"2",libelle:"rachat",etat: true,  /*dateCreation:new Date("07/03/2000"),dateModification:new Date("07/03/1990"),*/type:this.TypeMvtRetrait, quantiteMin:15,  quantiteMax:25,  montantMin:2000, montantMax:8000},
+        {id:"3",libelle:"rachat",etat: true, /*dateCreation:new Date("07/03/2000"),dateModification:new Date("07/03/1990"),*/ type:this.TypeMvtReduire, quantiteMin:20,  quantiteMax:30,  montantMin:3000, montantMax:9000,},
 
       ];
 
