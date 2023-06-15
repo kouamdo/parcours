@@ -5,6 +5,7 @@
           <form [formGroup]="forme" (ngSubmit)="onSubmit(forme.value)" *ngIf="forme" >
               <div class="">
                   <div class="">
+                    <div *ngIf="steps==1">
                       <div class="form-group">
                           <div>
                               <div class="champs">
@@ -19,7 +20,7 @@
                           </div>
                       </div>
 
-                      <div class="form-group">
+                      <div class="form-group" id="eta">
                         <div>
                             <div class="champs">
                                 <label for="etat" class="label" >
@@ -33,11 +34,10 @@
                         </div>
                     </div>
 
-
                       <div class="form-group">
                         <div class="champs">
                             <label  for="type"  class="label" >
-                              Type
+                              TypeMvt
                             </label>
                         <select  class="form-control" formControlName="type" name="type" id="type" required>
                           <option>Assigner</option>
@@ -46,62 +46,143 @@
                       </select>
                         </div>
                     </div>
-
-                      <div class="form-group">
-                        <div class="champs">
-                            <label  for="quantiteMin"  class="label" >
-                              QuantiteMin
-                            </label>
-                            <input type="number" list="" formControlName="quantiteMin" name="quantiteMin" id="quantiteMin" placeholder="quantiteMin" class="form-control" >
-                        </div>
-                        <div  *ngIf="submitted && f['quantiteMin'].errors"  class="alert alert-danger" >
-                          <div *ngIf="f['quantiteMin'].errors['quantiteMin']">Champ obligatoire</div>
-                      </div>
-                    </div>
+                  </div>
 
 
-                      <div class="form-group">
+                  <div *ngIf="steps==2">
+                    <div class="form-group">
                           <div class="champs">
-                              <label  for="quantiteMax"  class="label" >
-                                QuantiteMax
+                              <label for="famille" class="label">
+                                Famille
                               </label>
-                              <input type="number" formControlName="quantiteMax" name="quantiteMax" id="quantiteMax" placeholder="quantiteMax" class="form-control" >
+                              <input type="text" formControlName="famille" name="famille" id="famille"  placeholder="famille"  class="form-control" required>
                           </div>
-                          <div  *ngIf="submitted && f['quantiteMax'].errors"  class="alert alert-danger" >
-                            <div *ngIf="f['quantiteMax'].errors['required']">Champ obligatoire</div>
-                        </div>
-                      </div>
+                          <div  *ngIf="submitted && f['famille'].errors"  class="alert alert-danger" >
+                              <div *ngIf="f['famille'].errors['required']">Champ obligatoire</div>
+                          </div>
+                  </div>
 
-                      <div class="form-group">
+                    <div class="form-group">
+                      <div class="champs">
+                          <label  for="quantiteMin"  class="label" >
+                            quantiteMin
+                          </label>
+                          <input type="number" list="" formControlName="quantiteMin" name="quantiteMin" id="quantiteMin" placeholder="quantiteMin" class="form-control" >
+                      </div>
+                      <div  *ngIf="submitted && f['quantiteMin'].errors"  class="alert alert-danger" >
+                        <div *ngIf="f['quantiteMin'].errors['quantiteMin']">Champ obligatoire</div>
+                    </div>
+                  </div>
+
+                    <div class="form-group">
                         <div class="champs">
-                            <label  for="montantMin"  class="label" >
-                              MontantMin
+                            <label  for="quantiteMax"  class="label" >
+                              quantiteMax
                             </label>
-                            <input type="number" formControlName="montantMin" name="montantMin" id="montantMin" placeholder="montantMin" class="form-control" >
+                            <input type="number" formControlName="quantiteMax" name="quantiteMax" id="quantiteMax" placeholder="quantiteMax" class="form-control" >
                         </div>
-                        <div  *ngIf="submitted && f['montantMin'].errors"  class="alert alert-danger" >
-                          <div *ngIf="f['montantMin'].errors['required']">Champ obligatoire</div>
+                        <div  *ngIf="submitted && f['quantiteMax'].errors"  class="alert alert-danger" >
+                          <div *ngIf="f['quantiteMax'].errors['required']">Champ obligatoire</div>
                       </div>
                     </div>
 
                     <div class="form-group">
                       <div class="champs">
-                          <label  for="montantMax"  class="label" >
+                          <label  for="montantMin"  class="label" >
                             MontantMax
                           </label>
-                          <input type="number" formControlName="montantMax" name="montantMax" id="montantMax" placeholder="montantMax" class="form-control" >
+                          <input type="number" formControlName="montantMin" name="montantMin" id="montantMin" placeholder="montantMin" class="form-control" >
                       </div>
-                      <div  *ngIf="submitted && f['montantMax'].errors"  class="alert alert-danger" >
-                        <div *ngIf="f['montantMax'].errors['required']">Champ obligatoire</div>
+                      <div  *ngIf="submitted && f['montantMin'].errors"  class="alert alert-danger" >
+                        <div *ngIf="f['montantMin'].errors['required']">Champ obligatoire</div>
                     </div>
                   </div>
+
+                  <div class="form-group">
+                    <div class="champs">
+                        <label  for="montantMax"  class="label" >
+                          MontantMin
+                        </label>
+                        <input type="number" formControlName="montantMax" name="montantMax" id="montantMax" placeholder="montantMax" class="form-control" >
+                    </div>
+                    <div  *ngIf="submitted && f['montantMax'].errors"  class="alert alert-danger" >
+                      <div *ngIf="f['montantMax'].errors['required']">Champ obligatoire</div>
+                  </div>
+                </div>
+              </div>
+
+
+
+              <div *ngIf="steps==3">
+                <div class="form-group">
+                      <div class="champs">
+                          <label for="ressource" class="label">
+                            Ressource
+                          </label>
+                          <input type="text" formControlName="ressource" name="ressource" id="ressource"  placeholder="ressource"  class="form-control" required>
+                      </div>
+                      <div  *ngIf="submitted && f['ressource'].errors"  class="alert alert-danger" >
+                          <div *ngIf="f['ressource'].errors['required']">Champ obligatoire</div>
+                      </div>
+              </div>
+
+                <div class="form-group">
+                  <div class="champs">
+                      <label  for="quantiteMin"  class="label" >
+                        quantiteMin
+                      </label>
+                      <input type="number" list="" formControlName="quantiteMin" name="quantiteMin" id="quantiteMin" placeholder="quantiteMin" class="form-control" >
+                  </div>
+                  <div  *ngIf="submitted && f['quantiteMin'].errors"  class="alert alert-danger" >
+                    <div *ngIf="f['quantiteMin'].errors['quantiteMin']">Champ obligatoire</div>
+                </div>
+              </div>
+
+                <div class="form-group">
+                    <div class="champs">
+                        <label  for="quantiteMax"  class="label" >
+                          quantiteMax
+                        </label>
+                        <input type="number" formControlName="quantiteMax" name="quantiteMax" id="quantiteMax" placeholder="quantiteMax" class="form-control" >
+                    </div>
+                    <div  *ngIf="submitted && f['quantiteMax'].errors"  class="alert alert-danger" >
+                      <div *ngIf="f['quantiteMax'].errors['required']">Champ obligatoire</div>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <div class="champs">
+                      <label  for="montantMin"  class="label" >
+                        MontantMax
+                      </label>
+                      <input type="number" formControlName="montantMin" name="montantMin" id="montantMin" placeholder="montantMin" class="form-control" >
+                  </div>
+                  <div  *ngIf="submitted && f['montantMin'].errors"  class="alert alert-danger" >
+                    <div *ngIf="f['montantMin'].errors['required']">Champ obligatoire</div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <div class="champs">
+                    <label  for="montantMax"  class="label" >
+                      MontantMin
+                    </label>
+                    <input type="number" formControlName="montantMax" name="montantMax" id="montantMax" placeholder="montantMax" class="form-control" >
+                </div>
+                <div  *ngIf="submitted && f['montantMax'].errors"  class="alert alert-danger" >
+                  <div *ngIf="f['montantMax'].errors['required']">Champ obligatoire</div>
+              </div>
+            </div>
+          </div>
 
 
 
               </div>
               <div class="actionButton">
-                <button class="btn" routerLink="../list-ressources">{{'lists.button2' | translate}}</button>
-                  <button type="submit" class="btn">{{btnLibelle}}</button>
+                <a class="btn" class="btn" *ngIf="steps !=1" (click)="back()">Back</a>
+                <button class="btn" class="btn" *ngIf="steps !=3">Next</button>
+                <button type="submit" routerLink="../list-ressources" *ngIf="steps ==3">Envoyer</button>
+                <!--<button type="submit" class="btn" *ngIf="steps ==3">{{btnLibelle}}</button>-->
               </div>
             </div>
             </form>

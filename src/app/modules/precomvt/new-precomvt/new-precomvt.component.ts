@@ -22,6 +22,7 @@ export class NewPrecomvtComponent implements OnInit {
   forme: FormGroup;
   btnLibelle: string="Ajouter";
   submitted: boolean=false;
+  steps:any =1;
 
 
   constructor(private formBuilder:FormBuilder,private precomvtService:PrecomvtsService,private servicePrecomvt:PrecomvtsService,private router:Router, private infosPath:ActivatedRoute, private datePipe: DatePipe) {
@@ -58,12 +59,12 @@ export class NewPrecomvtComponent implements OnInit {
   }
   get f(){
     return this.forme.controls;
+
   }
-
-
 
   onSubmit(precomvtInput:any){
     this.submitted=true;
+    this.steps= this.steps +1;
     if(this.forme.invalid) return;
     let precomvtTemp : IPrecomvt={
       id: uuidv4(),
@@ -88,6 +89,9 @@ export class NewPrecomvtComponent implements OnInit {
         console.log(error)
       }
     )
-  }
 
+  }
+  back(){
+    this.steps= this.steps -1;
+  }
 }

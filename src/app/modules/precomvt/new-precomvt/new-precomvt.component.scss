@@ -57,12 +57,22 @@ input[ type=checkbox ]{
   color: red;
   margin-right: 250px;
   height: 17px;
+  margin-left: 30px;
+
   }
 input, #etat{
   border: none;
   box-shadow: none;
 }
-
+a{
+  //border: solid 1px;
+  background-color: #7ea97e;
+  width: 65px;
+  height:27px;
+ // text-align: center;
+  color: #fff;
+ padding-bottom: -5px;
+}
 @media screen and (max-width: 1200px) {
   input[ type=checkbox ]{
     margin-right: 150px;
