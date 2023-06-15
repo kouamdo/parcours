@@ -225,7 +225,8 @@
         "text6":"m²",
         "text7":"quintals",
         "text8":"Field Required",
-        "text9":"Field Required"
+        "text9":"Field Required",
+        "text11":"Select a Unit"
     },
     "lists":{
       "button2":"Retour"

@@ -1,4 +1,5 @@
 import { IFamille } from "./famille";
+import { Unites } from "./unites";
 
 export interface IRessource {
     id:string,
@@ -6,8 +7,9 @@ export interface IRessource {
     etat:boolean,
     quantite:number,
     prix:number,
-    unite:string,
+    unite:Unites,
+    famille:IFamille,
     //dateCreation:Date,
    // dateModification:Date,
-    famille:IFamille,
+
 }

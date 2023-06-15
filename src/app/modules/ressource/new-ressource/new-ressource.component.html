@@ -11,7 +11,7 @@
                                   <label for="libelle" class="label">
                                     {{'ressource.table.title1' | translate}}
                                   </label>
-                                  <input type="text" formControlName="libelle" name="libelle" id="libelle"  placeholder="{{'ressource.table.title1' | translate}}"  class="form-control" required>
+                                  <input type="text" formControlName="libelle" name="libelle" id="libelle"  placeholder="{{'ressource.table.title1' | translate}}"  class="form-control">
                               </div>
                               <div  *ngIf="submitted && f['libelle'].errors"  class="alert alert-danger" >
                                   <div *ngIf="f['libelle'].errors['required']">{{'ressource.form.text1' | translate}}</div>
@@ -24,11 +24,9 @@
                                   <label for="etat" class="label" >
                                     {{'ressource.table.title2' | translate}}
                                   </label>
-                                  <input  type="checkbox" formControlName="etat"  name="etat" id="etat" placeholder="" required class="form-control" checked>
+                                  <input  type="checkbox" formControlName="etat"  name="etat" id="etat" placeholder="" class="form-control" checked>
                               </div>
-                              <div  *ngIf="submitted && f['etat'].errors"  class="alert alert-danger" >
-                                  <div *ngIf="f['etat'].errors['required']">{{'ressource.form.text2' | translate}}</div>
-                              </div>
+
                           </div>
                       </div>
                       <div class="form-group">
@@ -47,7 +45,8 @@
                             <label  for="unite"  class="label" >
                               {{'ressource.table.title4' | translate}}
                             </label>
-                        <select  class="form-control" formControlName="unite" name="unite" id="unite" required>
+                        <select  class="form-control" formControlName="unite" name="unite" id="unite">
+                          <option>{{'ressource.form.text11' | translate}}</option>
                           <option>{{'ressource.form.text4' | translate}}</option>
                           <option>{{'ressource.form.text5' | translate}}</option>
                           <option>{{'ressource.form.text6' | translate}}</option>

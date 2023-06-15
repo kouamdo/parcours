@@ -228,7 +228,8 @@
         "text6":"m²",
         "text7":"quintaux",
         "text8":"Champ Obligatoire",
-        "text9":"Champ Obligatoire"
+        "text9":"Champ Obligatoire",
+        "text11":"Selectionnez une Unité"
     },
     "lists":{
       "button2":"Retour"

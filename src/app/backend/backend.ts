@@ -15,6 +15,7 @@ import { IRessource } from "../modele/ressource";
 import { IPrecomvtqte } from "../modele/precomvtqte";
 import { TypeMvt } from "../modele/type-mvt";
 import { IPrecomvt } from "../modele/precomvt";
+import { Unites } from "../modele/unites";
 
 
 
@@ -33,6 +34,10 @@ export class InMemDBService implements InMemoryDbService{
   TypeMvtAssigner = TypeMvt.assigner
   TypeMvtRetrait = TypeMvt.retrait
   TypeMvtReduire = TypeMvt.reduire
+
+  UnitesLitre = Unites.litre
+  UnitesKg = Unites.kg
+  UnitesTonne = Unites.tonne
 
     createDb(){
         let patients:IPatient[]=[
@@ -171,15 +176,15 @@ export class InMemDBService implements InMemoryDbService{
           {id:"5", libelle:"transfusion", description:"sang", etat:"gl"},
       ];
       let ressource:IRessource[]=[
-        {id:"1", libelle:"transfusion",etat:true, /*dateCreation:new Date("07/03/2000"),dateModification:new Date("07/03/1990"),*/quantite:10,unite:"kg",prix:1000,
+        {id:"1", libelle:"transfusion",etat:true, /*dateCreation:new Date("07/03/2000"),dateModification:new Date("07/03/1990"),*/quantite:10,unite:this.UnitesLitre,prix:1000,
           famille:{id:"1", libelle:"trans", description:"sang", etat:"gl"}},
-       {id:"2", libelle:"néonat",etat: true,/* dateCreation:new Date("07/03/2000"),dateModification:new Date("07/03/1990"),*/quantite:20,unite:"kg",prix:2000,
+       {id:"2", libelle:"néonat",etat: true,/* dateCreation:new Date("07/03/2000"),dateModification:new Date("07/03/1990"),*/quantite:20,unite:this.UnitesLitre,prix:2000,
         famille: {id:"2", libelle:"néonat", description:"nouveau-né", etat:"malade"}},
-        {id:"2", libelle:"néonat",etat: true,/* dateCreation:new Date("07/03/2000"),dateModification:new Date("07/03/1990"),*/quantite:20,unite:"kg",prix:2000,
+        {id:"2", libelle:"néonat",etat: true,/* dateCreation:new Date("07/03/2000"),dateModification:new Date("07/03/1990"),*/quantite:20,unite:this.UnitesLitre,prix:2000,
         famille:{id:"3", libelle:"pediatrie", description:"enfant", etat:"souffrant"}},
-        {id:"3", libelle:"pediatrie",etat: true, /*dateCreation:new Date("07/03/2000"),dateModification:new Date("07/03/1990"),*/quantite:30,unite:"kg",prix:3000,
+        {id:"3", libelle:"pediatrie",etat: true, /*dateCreation:new Date("07/03/2000"),dateModification:new Date("07/03/1990"),*/quantite:30,unite:this.UnitesLitre,prix:3000,
         famille:{id:"4", libelle:"néonat", description:"nouveau-né", etat:"malade"}},
-        {id:"4", libelle:"néonat",etat: true,/*dateCreation:new Date("07/03/2000"),dateModification:new Date("07/03/1990"),*/quantite:40,unite:"kg",prix:4000,
+        {id:"4", libelle:"néonat",etat: true,/*dateCreation:new Date("07/03/2000"),dateModification:new Date("07/03/1990"),*/quantite:40,unite:this.UnitesLitre,prix:4000,
         famille:{id:"5", libelle:"transfusion", description:"sang", etat:"gl"}},
       ];
 
