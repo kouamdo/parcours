@@ -27,6 +27,7 @@
                 </div>
             </div>
         </div>
+    </form>
         <div>
 
             <!-- tableau listing des attributs -->
@@ -55,24 +56,23 @@
                                     <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.type}} </td>
                                 </ng-container>
                                 <!-- ordre Column -->
-                                <ng-container matColumnDef="ordreAtrParCat" formArrayName="_ordreAttribut">
+                                <ng-container matColumnDef="ordreAtrParCat">
                                     <th class="text-dark containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'document.table.title13' | translate}} </th>
-                                    <td class="text-dark containCell" mat-cell *matCellDef="let element, let i = index">
-                                        <input type="number" name="" id="" [formControlName]="i" [name]="element.id" [id]="element.id" class="form-control ordreInput">
+                                    <td class="text-dark containCell" mat-cell *matCellDef="let element">
+                                        <mat-form-field appearance="fill">
+                                            <mat-label>ordre</mat-label>
+                                            <input matInput type="number" [(ngModel)]="element.ordre">
+                                        </mat-form-field>
                                     </td>
                                 </ng-container>
                                 <!-- actions Column -->
                                 <ng-container matColumnDef="actions">
                                     <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{"patient.table.title8" | translate}} </th>
-                                    <td class="text-dark containCell" mat-cell *matCellDef="let element;  let i=index">
+                                    <td class="text-dark containCell"  mat-cell *matCellDef="let element;  let i=index">
                                         <div class="actions">
-                                            <button class="btn p-0" name="attributs"  [value]="element.id" id="attributs" title="clicker pour ajouter un attributs a la categorie" (click)="getIdAttribut(element.id)" (change)="ValiderCategorie(formeCategorieAttribut.value, i, $event)">
-                                                <span *ngIf="((formeCategorieAttribut.value._ordreAttribut[i] <= 0) || (formeCategorieAttribut.value._ordreAttribut[i] <= -1) || (formeCategorieAttribut.value._ordreAttribut[i] == ''))"><input type="checkbox" name="" id="" class="" [disabled]="true"></span>
-                                                <span *ngIf="((formeCategorieAttribut.value._ordreAttribut[i] >= 1))"><input type="checkbox" name="" id="" class="" [disabled]="false"></span>
+                                            <button class="btn p-0" name="attributs"  [value]="element" id="attributs" title="clicker pour ajouter un attributs a la categorie"  (change)="ValiderCategorie(formeCategorieAttribut.value,this.element, i, $event)">
+                                                <span><input type="checkbox" name="" id="" class="" [disabled]="false"></span>
                                             </button>
-                                            <p>
-                                                {{formeCategorieAttribut.value| json}}
-                                            </p>
                                         </div>
                                     </td>
                                 </ng-container>
@@ -127,7 +127,7 @@
                                     <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{"patient.table.title8" | translate}} </th>
                                     <td class="text-dark containCell" mat-cell *matCellDef="let element;  let i=index">
                                         <div class="actions">
-                                            <button class="btn p-0" name="attributs"  [value]="element.id" id="attributs" title="clicker pour annuler la selection" (click)="retirerSelectionAttribut(i)">
+                                            <button class="btn p-0" name="attributs"  [value]="element.id" id="attributs" title="clicker pour annuler la selection">
                                                 <i class="fa fa-trash text-danger" aria-hidden="true"></i>
                                             </button>
                                         </div>
@@ -145,5 +145,4 @@
                 <button type="submit" class="btn" (click)="validerCategorieAttribut()">{{'lists.button6' | translate}}</button>
             </div>       
         </div>
-    </form>
 </div>

@@ -18,6 +18,7 @@ import { MissionsService } from 'src/app/services/missions/missions.service';
 import {MatDialog} from '@angular/material/dialog';
 import { ModalCategoriesComponent } from '../../shared/modal-categories/modal-categories.component';
 import {v4 as uuidv4} from 'uuid';
+import { ICategorieAffichage } from 'src/app/modele/categorie-affichage';
 
 
 @Component({
@@ -74,9 +75,10 @@ export class NewFormDocumentComponent implements OnInit {
     ordre: 0,
     listAttributs: []
   }
-  ELEMENTS_TABLE_CATEGORIE_ATTRIBUTS: ICategoriesAttributs[] = [];
-  tableResultatsCategoriesAttributs  = new MatTableDataSource<ICategoriesAttributs>(this.ELEMENTS_TABLE_CATEGORIE_ATTRIBUTS);
-  tableFinaleCategoriesAttributs: ICategoriesAttributs[] = [];
+ // ELEMENTS_TABLE_CATEGORIE_ATTRIBUTS: ICategoriesAttributs[] = []; 
+  TABLE_CATEGORIE_AFFICHAGE_TEMP: ICategorieAffichage[] = []; 
+ // tableResultatsCategoriesAttributs  = new MatTableDataSource<ICategoriesAttributs>(this.ELEMENTS_TABLE_CATEGORIE_ATTRIBUTS);
+  tableFinaleCategoriesAttributs: ICategoriesAttributs[] = []; // tableau contenant les categories creees
   
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
@@ -141,6 +143,7 @@ export class NewFormDocumentComponent implements OnInit {
       exitAnimationDuration:'1000ms',
       data:{
         dataSourceAttributDocument : this.dataSourceAttributDocument,
+        dataICategorieAffiche : this.TABLE_CATEGORIE_AFFICHAGE_TEMP,
         name : 'adeline'
       }
     }
