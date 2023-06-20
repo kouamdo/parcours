@@ -34,7 +34,7 @@ export class NewAttributComponent implements OnInit {
       titre: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
       description: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
       etat: ['False', [Validators.required, Validators.minLength(1), Validators.maxLength(50)]],
-      dateCreation: [],
+      dateCreation: [new Date()],
       dateModification: [new Date() ],
       ordre: [0],
       obligatoire: [false],

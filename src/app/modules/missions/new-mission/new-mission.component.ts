@@ -32,8 +32,6 @@ export class NewMissionComponent implements OnInit {
       libelle: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
       description: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
       etat: ['False', [Validators.required, Validators.minLength(1), Validators.maxLength(50)]],
-      dateCreation: ['/', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
-      dateModification: ['/'],
       service: ['', Validators.required]
     })
   }
@@ -89,8 +87,8 @@ export class NewMissionComponent implements OnInit {
       libelle: missionInput.libelle,
       description: missionInput.description,
       etat: missionInput.etat,
-      dateCreation: missionInput.dateCreation,
-      dateModification: missionInput.dateModification,
+      dateCreation: new Date,
+      dateModification: new Date,
       service: missionInput.service
     }
 
@@ -101,8 +99,6 @@ export class NewMissionComponent implements OnInit {
     //   }
     // )
     missionTemp.service = this.service!
-    missionTemp.dateCreation = this.initialDateCreation.value!
-    missionTemp.dateModification = this.initialDateModification.value!
 
     if(this.mission != undefined){
       missionTemp.id = this.mission.id  

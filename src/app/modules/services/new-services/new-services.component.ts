@@ -28,7 +28,6 @@ export class NewServicesComponent implements OnInit {
     this.forme = this.formBuilder.group({
       libelle: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
       etat: ['Non assigne', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
-      dateDerniereModification: ['/', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
       dateAttribution: ['/'],
       dateFin: ['/']
     })
@@ -45,7 +44,7 @@ export class NewServicesComponent implements OnInit {
           this.forme.setValue({
             libelle: this.service.libelle,
             etat: this.service.etat,
-            dateDerniereModification: this.datePipe.transform(this.service.dateDerniereModification,'yyyy-MM-dd'),
+            dateDerniereModification: "",
             dateAttribution: this.datePipe.transform(this.service.dateAttribution,'yyyy-MM-dd'),
             dateFin:  this.datePipe.transform(this.service.dateFin,'yyyy-MM-dd')
           })
