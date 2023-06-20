@@ -35,6 +35,9 @@ export class ModalCategoriesComponent implements OnInit {
   displayedCategoriesColumns: string[] = ['actions','titre', 'description', 'type', 'ordreAtrParCat'];  // structure du tableau presentant les choix des attributs lors de la creation des categories
   //idAttribut : string = ""
   //conteur : any = 0
+  ordreAttributExiste : boolean = false
+  ordreCategorieExiste : boolean = false
+  nomValide : boolean = false
   
   // variables pour la gestion des categories
   dataSourceAttributTemp = new MatTableDataSource<IAttributs>(); //tableau de listing des attributs a affecter a chaque categorie
@@ -86,40 +89,22 @@ export class ModalCategoriesComponent implements OnInit {
     console.log(this.data.dataICategorieAffiche)
     this.tableauAttributsTemp = this.data.dataSourceAttributDocument.data
     this.dataSourceAttributTemp.data = this.tableauAttributsTemp;
-    //this.tableResultatsCategoriesAffichage=this.data.dataICategorieAffiche;
-    
-   // this.getAllAttributs()
-    //this.creerCategorie()
-/*    this.myControl.valueChanges.subscribe(
-      value => {
-        const titre = typeof value === 'string' ? value : value?.titre;
-        if(titre != undefined && titre?.length >0){
-          this.serviceAttribut.getAttributsByTitre(titre.toLowerCase() as string).subscribe(
-            reponse => { 
-              this.filteredOptions = reponse;
-            }
-          )
-        }
-        else{
-          this.filteredOptions = [];
-        }
-      }
-    );*/
+
+    if (this.data.dataICategorieAffiche != null) {
+      this.TABLE_CATEGORIE_AFFICHAGE_TEMP = this.data.dataICategorieAffiche
+      this.tableResultatsCategoriesAffichage.data = this.TABLE_CATEGORIE_AFFICHAGE_TEMP;
+    }
   }
 
- /* getIdAttribut(idAttribut : string){
-    this.idAttribut = idAttribut
-  }
-*/
   ValiderCategorie(categorieAttributInput:any,value : any, index : number, event: any){
     console.log(this.dataSourceAttributTemp.data);
     console.log(value);
     console.log(index);
+
     this.validation = true
     if(this.formeCategorieAttribut.invalid) return;
     
     if (event.target.checked) {
-      //const _ordreAttribut = (this.formeCategorieAttribut.controls['_ordreAttribut'] as FormArray);
         const categorieAttributsTemp : ICategorieAffichage ={
           id: uuidv4(),
           nom: categorieAttributInput.nomCategorie,
@@ -127,43 +112,63 @@ export class ModalCategoriesComponent implements OnInit {
           attribut: value
         }
       
-      //this.TABLE_CATEGORIE_AFFICHAGE_TEMP.push(categorieAttributsTemp)
      // this.sauvegardeTempAttributsDeCat[index]= categorieAttributsTemp;
       this.tableauIndexSelectionner.set(index,categorieAttributsTemp);
-      console.log("categorieAttributsTemp :  ", categorieAttributsTemp)
         
     } else {
-      //this.retirerSelectionCategorieAttribut(index)
       this.tableauIndexSelectionner.delete(index);
      // this.sauvegardeTempAttributsDeCat.splice(index, 1)
     }
-
-   // console.log( 'Voici le tableau avant validation : ' , this.tableResultatsCategoriesAttributs.data)
-   // console.log( 'Voici le second tableau avant validation : ' , this.tableResultatsCategoriesAffichage.data)
+ }
+  verifierSiExiste(attributDeCategorie : IAttributs): boolean{
+    let listAtt : String[] = [];
+    this.tableauIndexSelectionner.forEach((valeur, cle)=>{
+      listAtt.push(valeur.attribut.id);
+    });
+    this.tableauAttributsTemp = [];
+    let tmpTab =  this.dataSourceAttributTemp.data;
+    tmpTab.forEach(
+      (att : IAttributs) =>{
+        this.ordreAttributExiste = false
+        if (listAtt.includes(attributDeCategorie.ordre.toString())) {
+          this.ordreAttributExiste = true
+        }
+    });
+    return this.ordreAttributExiste
   }
-  
+
   AjouterCategorieTemp() {
+    this.validation = true
+    if(this.formeCategorieAttribut.invalid) return;
+
     //Ajout des valeurs dans le second tableau 
+
     this.TABLE_CATEGORIE_AFFICHAGE_TEMP=this.tableResultatsCategoriesAffichage.data;
     this.tableauIndexSelectionner.forEach((valeur, cle)=>{
       this.TABLE_CATEGORIE_AFFICHAGE_TEMP.push(valeur);
     });
     this.tableResultatsCategoriesAffichage.data =  this.TABLE_CATEGORIE_AFFICHAGE_TEMP;
-    //this.data.dataICategorieAffiche = this.TABLE_CATEGORIE_AFFICHAGE_TEMP;
+    
     //récupération des id attributs selectionnés 
+
     let listAtt : String[] = [];
     this.tableauIndexSelectionner.forEach((valeur, cle)=>{
-      //this._ordreAttribut.removeAt(cle);
       listAtt.push(valeur.attribut.id);
     });
+
     //construction du tableau résiduel
+
     this.tableauAttributsTemp = [];
     let tmpTab =  this.dataSourceAttributTemp.data;
     tmpTab.forEach(
       (att : IAttributs) =>{
         if(!listAtt.includes(att.id)){
           this.tableauAttributsTemp.push(att);
-        }     
+        }
+        // if (listAtt.includes(att.ordre.toString())) {
+        //   this.ordreAttributExiste = true
+        //   return
+        // }
     });
     this.dataSourceAttributTemp = new MatTableDataSource<IAttributs>(this.tableauAttributsTemp);
     this.tableauIndexSelectionner = new Map;
@@ -179,59 +184,36 @@ export class ModalCategoriesComponent implements OnInit {
 
     this.tableResultatsCategoriesAffichage.data.forEach(
       categorieAttributsTemp => {
+        
+        if (categorieAttributsTemp.nom != this.categorieAttributs.nom) {
 
-          /*  this.ELEMENTS_TABLE_CATEGORIE_ATTRIBUTS.forEach(
-              element => {
-                if (categorieAttributsTemp.nom == element.nom) {
-                    element.listAttributs.push(categorieAttributsTemp.attribut)
-                }
-            });*/
-
-            if (categorieAttributsTemp.nom != this.categorieAttributs.nom) {
-
-              this.categorieAttributs  = {
-                id: '',
-                nom: '',
-                ordre: 0,
-                listAttributs: []
-              }
-              this.categorieAttributs.nom = categorieAttributsTemp.nom,
-              this.categorieAttributs.ordre = categorieAttributsTemp.ordre,
-              this.categorieAttributs.listAttributs.push(categorieAttributsTemp.attribut)
-              this.categorieAttributs.id = categorieAttributsTemp.id 
-            //  this.ELEMENTS_TABLE_CATEGORIE_ATTRIBUTS.push(this.categorieAttributs)
-            }
+          this.categorieAttributs  = {
+            id: '',
+            nom: '',
+            ordre: 0,
+            listAttributs: []
+          }
+          this.categorieAttributs.nom = categorieAttributsTemp.nom,
+          this.categorieAttributs.ordre = categorieAttributsTemp.ordre,
+          this.categorieAttributs.listAttributs.push(categorieAttributsTemp.attribut)
+          this.categorieAttributs.id = categorieAttributsTemp.id 
+        }
  
       }
     );
-     // console.log('liste des catAttr finaux : ', this.ELEMENTS_TABLE_CATEGORIE_ATTRIBUTS)
   }
 
   retirerSelectionCategorieAttribut(index: number){
     this.TABLE_CATEGORIE_AFFICHAGE_TEMP.splice(index, 1)
   }
 
- /* ajoutInputOrdre() {
-    this._ordreAttribut.push(this.formBuilder.control(''));
-  }
-  get _ordreAttribut() {
-    return this.formeCategorieAttribut.get('_ordreAttribut') as FormArray;
-  }
-*/
- /* creerCategorie(){
-    this.dataSourceAttributTemp.data = this.tableauAttributsTemp
-    this.dataSourceAttributTemp.data.forEach(
-      attribut => {
-        this.ajoutInputOrdre()
-    });
-  }
-*/
   get f(){
     return this.formeCategorieAttribut.controls;
   }
   private getAllAttributs(){
     return this.serviceAttribut.getAllAttributs();
   }
+
  /* displayFn(attribue: IAttributs): string {
     return attribue && attribue.titre ? attribue.titre : '';
   }*/

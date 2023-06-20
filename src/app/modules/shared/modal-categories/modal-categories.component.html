@@ -63,6 +63,9 @@
                                             <mat-label>ordre</mat-label>
                                             <input matInput type="number" [(ngModel)]="element.ordre">
                                         </mat-form-field>
+                                        <div  *ngIf="validation && verifierSiExiste(element.ordre)"  class="alert alert-danger blockErreur" >
+                                            <p> cet ordre existe deja pour cette categorie </p>
+                                        </div>
                                     </td>
                                 </ng-container>
                                 <!-- actions Column -->
@@ -71,7 +74,7 @@
                                     <td class="text-dark containCell"  mat-cell *matCellDef="let element;  let i=index">
                                         <div class="actions">
                                             <button class="btn p-0" name="attributs"  [value]="element" id="attributs" title="clicker pour ajouter un attributs a la categorie"  (change)="ValiderCategorie(formeCategorieAttribut.value,this.element, i, $event)">
-                                                <span><input type="checkbox" name="" id="" class="" [disabled]="false"></span>
+                                                <span><input type="checkbox" [disabled] = "((formeCategorieAttribut.value.ordreCategorie < 0 ) || ((formeCategorieAttribut.value.ordreCategorie == 0 )) )" name="" id="" class=""></span>
                                             </button>
                                         </div>
                                     </td>
@@ -87,8 +90,7 @@
                     </div>
                 </div>
                 <div class="d-flex w-100 align-items-center justify-content-end">
-                    <button type="reset" class="btn btn-success" (click)="AjouterCategorieTemp()">{{'lists.button9' | translate}}</button>
-                    <!-- (click)="ValiderCategorie(formeCategorieAttribut.value, i)" -->
+                    <button type="btn" class="btn btn-success" (click)="AjouterCategorieTemp()">{{'lists.button9' | translate}}</button>
                 </div>
             </div>
 
