@@ -1,24 +1,27 @@
 .mainBlock{
-    background-color: #ffffff;
-    padding-top: 5px;
+    padding-top: 5px;;
 }
-h1{
+.entete{
     text-align: center;
-    text-transform: uppercase;
     background-color: #7ea97e;
-    color: rgba(255, 255, 255, 0.7);
     border-radius: 5px;
     box-shadow: 0 0 2px #7ea97e;
-    padding: 10px 0;
     margin: 0 5px;
-    position: relative;
+    padding: 10px 0;
+    h1{
+        margin: auto;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.7);
+        position: relative;
+        width: 100%;
+    }
 }
-h1 span{
+.entete .lien{
     position: absolute;
     left: 5px;
     transition: ease 0.2s;
 }
-h1 span:hover{
+.entete .lien:hover{
     border: solid 1px #ffffff9a;
     padding: 0 10px;
     transition: ease-in-out 0.2s;
@@ -26,19 +29,51 @@ h1 span:hover{
 #titre{
     margin: 20px 0;
 }
-#description{
+.entete{
     display: flex;
-    align-items: flex-start;
-    justify-content: flex-start;
-    p{
-        margin: 0;
-        margin-left: 5px;
-        width: 50%;
+    align-items: center;
+}
+.hoverBlock{
+    display: flex;
+    position: absolute;
+    right: 40px;
+}
+.hoverBlock:hover{
+    #description{
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-start;
+        width: 400px;
+        position: absolute;
+        right: 0px;
+        top: 50px;
+        font-size: 12px;
         background-color: #7ea97e0e;
         padding: 10px;
         padding-top: 0;
-        border-radius: 5px;
+        p{
+            margin: 0;
+            margin-left: 5px;
+            border-radius: 5px;
+        }
+        .title{
+            font-weight: normal;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
     }
+}
+.hoverBlock .infoBuble{
+    width: fit-content;
+    height: fit-content;
+    border-radius: 50%;
+    background-color: #ffffff;
+}
+.hoverBlock .infoBuble i{
+    font-size: 20px;
+}
+#description{
+    display: none;
 }
 .infos{
     padding: 0 20px;

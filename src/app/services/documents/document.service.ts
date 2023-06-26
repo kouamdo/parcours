@@ -37,4 +37,21 @@ export class DocumentService {
    {
      return this.http.post("api/documents",document);
    }
+
+   getDocumentByMission(idMission:string): Observable<IDocument[]> {
+    return this.http.get<IDocument[]>('api/documents').pipe(
+      map(x=>
+        {
+          return x.filter(d=> {
+            let b:boolean=false;
+            d.missions.forEach(m =>{
+              if(m.id==idMission)
+                b=true;
+            } );
+            if(b) return d;
+            else return 
+          })
+        })
+    );        
+  }
 }

@@ -1,0 +1,150 @@
+<div id="mainSection" class="bg-light card">
+    <form [formGroup]="formeCategorieAttribut" (ngSubmit)="onSubmit(formeCategorieAttribut.value)" *ngIf="formeCategorieAttribut" class="w-100">
+
+        <div class="form-group mt-5">
+            <div class="newCatSection">
+                <div class="content">
+                    <div class="champs mr-4 ml-4">
+                        <label for="categories" class="label">
+                            {{'document.table.title8' | translate}}
+                        </label>
+                        <input type="text" formControlName="nomCategorie" name="categories" id="categories"  placeholder="{{'document.table.title9' | translate}}"  class="form-control" required>
+                    </div>
+                    <div  *ngIf="validation && f['nomCategorie'].errors"  class="alert alert-danger blockErreur" >
+                        <div *ngIf="f['nomCategorie'].errors['required']">{{'attributs.form.text5' | translate}}</div>
+                    </div>
+                </div>
+                <div class="content">
+                    <div class="champs mr-4 ml-4">
+                        <label for="ordreCategorie" class="label">
+                            {{'document.table.title10' | translate}}
+                        </label>
+                        <input type="number" formControlName="ordreCategorie" name="ordreCategorie" id="ordreCategorie" class="form-control" required>
+                    </div>
+                    <div  *ngIf="validation && f['ordreCategorie'].errors"  class="alert alert-danger blockErreur" >
+                        <div *ngIf="f['ordreCategorie'].errors['required']">{{'attributs.form.text5' | translate}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+        <div>
+
+            <!-- tableau listing des attributs -->
+
+            <div class="result">
+                <h2>
+                    {{'document.title2' | translate}}
+                </h2>
+                <div class="card">
+                    <div class="card-body p-0 tableBlock" id="tableResultats">
+                        <div class='table-responsive w-100 m-0'>
+                            <table class='table table-sm table-centered table-striped w-100' mat-table [dataSource]="dataSourceAttributTemp" matSort (matSortChange)="announceSortChange($event)">
+                                <!-- titre Column -->
+                                <ng-container matColumnDef="titre">
+                                    <th class="text-dark containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'attributs.table.title1' | translate}} </th>
+                                    <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.titre}} </td>
+                                </ng-container>
+                                <!-- description Column -->
+                                <ng-container matColumnDef="description">
+                                    <th class="text-dark containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'attributs.table.title2' | translate}} </th>
+                                    <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.description}} </td>
+                                </ng-container>
+                                <!-- type Column -->
+                                <ng-container matColumnDef="type">
+                                    <th class="text-dark containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'attributs.table.title6' | translate}} </th>
+                                    <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.type}} </td>
+                                </ng-container>
+                                <!-- ordre Column -->
+                                <ng-container matColumnDef="ordreAtrParCat">
+                                    <th class="text-dark containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'document.table.title13' | translate}} </th>
+                                    <td class="text-dark containCell" mat-cell *matCellDef="let element">
+                                        <mat-form-field appearance="fill">
+                                            <mat-label>ordre</mat-label>
+                                            <input matInput type="number" [(ngModel)]="element.ordre">
+                                        </mat-form-field>
+                                        <div  *ngIf="validation && verifierSiExiste(element.ordre)" class="alert alert-danger blockErreur" >
+                                            <p> cet ordre existe deja pour cette categorie </p>
+                                        </div>
+                                    </td>
+                                </ng-container>
+                                <!-- actions Column -->
+                                <ng-container matColumnDef="actions">
+                                    <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{"patient.table.title8" | translate}} </th>
+                                    <td class="text-dark containCell"  mat-cell *matCellDef="let element;  let i=index">
+                                        <div class="actions">
+                                            <button class="btn p-0" name="attributs"  [value]="element" id="attributs" title="clicker pour ajouter un attributs a la categorie"  (change)="validerCategorie(formeCategorieAttribut.value,this.element, i, $event)">
+                                                <span><input type="checkbox" [disabled] = "((formeCategorieAttribut.value.ordreCategorie < 0 ) || (formeCategorieAttribut.value.ordreCategorie == 0 )  || (formeCategorieAttribut.value.nomCategorie == '' ) )" name="" id="" class=""></span>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </ng-container>
+                                <tr mat-header-row *matHeaderRowDef="displayedCategoriesColumns"></tr>
+                                <tr mat-row *matRowDef="let row; columns: displayedCategoriesColumns;"></tr>
+                            </table>
+                            <mat-paginator style="background-color: rgba(126, 169, 126, 0.79);" [pageSizeOptions]="[5, 10, 20]"
+                                        showFirstLastButtons
+                                        aria-label="Select page of periodic elements">
+                            </mat-paginator>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex w-100 align-items-center justify-content-end">
+                    <button type="btn" class="btn btn-success" (click)="AjouterCategorieTemp()">{{'lists.button9' | translate}}</button>
+                </div>
+            </div>
+
+            <!-- tableau listing des categories -->
+
+            <div class="result">
+                <h2>
+                    {{'document.title1' | translate}}
+                </h2>
+                <div class="card">
+                    <div class="card-body p-0 tableBlock" id="tableResultats">
+                        <div class='table-responsive w-100 m-0'>
+                            <table class='table table-sm table-centered table-striped w-100' mat-table [dataSource]="tableResultatsCategoriesAffichage" matSort (matSortChange)="announceSortChange($event)">
+                                <!-- nomCategorie Column -->
+                                <ng-container matColumnDef="nomCategorie">
+                                    <th class="text-dark containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'document.table.title8' | translate}} </th>
+                                    <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.nom}} </td>
+                                </ng-container>
+                                <!-- libelleAttribut Column -->
+                                <ng-container matColumnDef="libelleAttribut">
+                                    <th class="text-dark containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'document.table.title16' | translate}} </th>
+                                    <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.attribut.titre}} </td>
+                                </ng-container>
+                                <!-- ordre par categorie Column -->
+                                <ng-container matColumnDef="ordreAtrParCat">
+                                    <th class="text-dark containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'document.table.title13' | translate}} </th>
+                                    <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.attribut.ordre}} </td>
+                                </ng-container>
+                                <!-- ordre Column -->
+                                <ng-container matColumnDef="ordreCat">
+                                    <th class="text-dark containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'document.table.title14' | translate}} </th>
+                                    <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.ordre}} </td>
+                                </ng-container>
+                                <!-- actions Column -->
+                                <ng-container matColumnDef="actions">
+                                    <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{"patient.table.title8" | translate}} </th>
+                                    <td class="text-dark containCell" mat-cell *matCellDef="let element;  let i=index">
+                                        <div class="actions">
+                                            <button class="btn p-0" name="attributs"  [value]="element.id" id="attributs" title="clicker pour annuler la selection">
+                                                <i class="fa fa-trash text-danger" aria-hidden="true"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </ng-container>
+                                <tr mat-header-row *matHeaderRowDef="displayedCategoriesAttributsColumns"></tr>
+                                <tr mat-row *matRowDef="let row; columns: displayedCategoriesAttributsColumns;"></tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="actionButton">
+                <!-- <button class="btn" routerLink="../../list-documents">{{btnLibelle}}</button> -->
+                <button type="submit" class="btn" (click)="validerCategorieAttribut()">{{'lists.button6' | translate}}</button>
+            </div>       
+        </div>
+</div>

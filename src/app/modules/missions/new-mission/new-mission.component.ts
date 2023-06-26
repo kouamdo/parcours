@@ -7,6 +7,7 @@ import { IMission } from 'src/app/modele/mission';
 import { IService } from 'src/app/modele/service';
 import { MissionsService } from 'src/app/services/missions/missions.service';
 import { ServicesService } from 'src/app/services/services/services.service';
+import {v4 as uuidv4} from 'uuid';
 
 @Component({
   selector: 'app-new-mission',
@@ -31,8 +32,6 @@ export class NewMissionComponent implements OnInit {
       libelle: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
       description: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
       etat: ['False', [Validators.required, Validators.minLength(1), Validators.maxLength(50)]],
-      dateCreation: ['/', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
-      dateModification: ['/'],
       service: ['', Validators.required]
     })
   }
@@ -84,12 +83,12 @@ export class NewMissionComponent implements OnInit {
     if(this.forme.invalid) return;
 
     let missionTemp : IMission={
-      id: "29",
+      id: uuidv4(),
       libelle: missionInput.libelle,
       description: missionInput.description,
       etat: missionInput.etat,
-      dateCreation: missionInput.dateCreation,
-      dateModification: missionInput.dateModification,
+      dateCreation: new Date,
+      dateModification: new Date,
       service: missionInput.service
     }
 
@@ -100,8 +99,6 @@ export class NewMissionComponent implements OnInit {
     //   }
     // )
     missionTemp.service = this.service!
-    missionTemp.dateCreation = this.initialDateCreation.value!
-    missionTemp.dateModification = this.initialDateModification.value!
 
     if(this.mission != undefined){
       missionTemp.id = this.mission.id  

@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, map, of, filter, EMPTY } from 'rxjs';
 import { StatutTicket } from 'src/app/modele/statut-ticket';
 import { ITicket } from 'src/app/modele/ticket';
+import {v4 as uuidv4} from 'uuid';
 
 @Injectable({
   providedIn: 'root'
@@ -92,7 +93,7 @@ export class TicketsService {
   attribuerTicket(id_patient : string | null, id_service : string | null):Observable<ITicket>
   {
     let ticket : ITicket = {
-      id: "9",
+      id: uuidv4(),
       idUnique: '123456',
       date_heure: new Date,
       idFileAttente: id_service,
@@ -109,7 +110,7 @@ export class TicketsService {
   {
     this.http.post("api/tickets",ticketRecent).subscribe();
     let ticket : ITicket = {
-      id: "23",
+      id: uuidv4(),
       idUnique: '123456',
       date_heure: new Date,
       idFileAttente: "ABC",

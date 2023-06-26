@@ -28,7 +28,7 @@ export class ListServicesComponent implements OnInit, AfterViewInit {
   ELEMENTS_TABLE: IService[] = [];
   filteredOptions: IService[] | undefined;
 
-  displayedColumns: string[] = ['libelle', 'etat', 'dateDerniereModification', 'dateAttribution', 'dateFin', 'actions'];
+  displayedColumns: string[] = ['libelle', 'etat', 'actions'];
   
   dataSource = new MatTableDataSource<IService>(this.ELEMENTS_TABLE);
 

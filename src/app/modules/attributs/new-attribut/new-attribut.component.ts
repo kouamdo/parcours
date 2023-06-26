@@ -5,6 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { IAttributs } from 'src/app/modele/attributs';
 import { TypeTicket } from 'src/app/modele/type-ticket';
 import { AttributService } from 'src/app/services/attributs/attribut.service';
+import {v4 as uuidv4} from 'uuid';
 
 @Component({
   selector: 'app-new-attribut',
@@ -33,8 +34,11 @@ export class NewAttributComponent implements OnInit {
       titre: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
       description: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
       etat: ['False', [Validators.required, Validators.minLength(1), Validators.maxLength(50)]],
-      dateCreation: ['', [Validators.required]],
-      dateModification: ['//'],
+      dateCreation: [new Date()],
+      dateModification: [new Date() ],
+      ordre: [0],
+      obligatoire: [false],
+      valeursParDefaut: [''],
       type: ['']
     })
   }
@@ -54,6 +58,9 @@ export class NewAttributComponent implements OnInit {
             etat: this.attribut.etat,
             dateCreation: this.datePipe.transform(this.attribut.dateCreation,'yyyy-MM-dd'),
             dateModification: this.datePipe.transform(this.attribut.dateModification,'yyyy-MM-dd'),
+            ordre: this.attribut.ordre,
+            obligatoire: this.attribut.obligatoire,
+            valeursParDefaut: this.attribut.valeursParDefaut,
             type: this.attribut.type
           })
       });
@@ -70,13 +77,16 @@ export class NewAttributComponent implements OnInit {
     if(this.forme.invalid) return;
 
     let attributTemp : IAttributs={
-      id: "10",
+      id:  uuidv4(),
       titre: attributInput.titre,
       description: attributInput.description,
       etat: attributInput.etat,
       dateCreation: attributInput.dateCreation,
       dateModification: attributInput.dateModification,
-      type: attributInput.type
+      type: attributInput.type,
+      ordre: 0,
+      obligatoire:  attributInput.obligatoire,
+      valeursParDefaut:  attributInput.valeursParDefaut
     }
     attributTemp.dateCreation = this.initialDateCreation.value!
     attributTemp.dateModification = this.initialDateModification.value!

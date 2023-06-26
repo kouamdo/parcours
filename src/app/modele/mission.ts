@@ -6,6 +6,7 @@ export interface IMission {
     description:string,
     etat:boolean,
     dateCreation:Date,
-    dateModification:Date
-    service:IService
+    dateModification:Date,
+    service:IService,
+    idLogin?:string 
 }

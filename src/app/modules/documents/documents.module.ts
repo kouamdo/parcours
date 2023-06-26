@@ -17,6 +17,7 @@ import { AppRoutingModule } from 'src/app/app-routing.module';
 import { HttpLoaderFactory } from 'src/app/app.module';
 import { ListFormDocumentComponent } from './list-form-document/list-form-document.component';
 import { ViewFormDocumentComponent } from './view-form-document/view-form-document.component';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
@@ -37,6 +38,7 @@ import { ViewFormDocumentComponent } from './view-form-document/view-form-docume
     MatPaginatorModule,
     MatTableModule,
     MatSortModule,
+    SharedModule,
     TranslateModule.forChild({
         loader: {
             provide: TranslateLoader,

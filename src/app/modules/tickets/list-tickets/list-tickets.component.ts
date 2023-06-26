@@ -39,7 +39,7 @@ export class ListTicketsComponent implements OnInit, AfterViewInit {
   ELEMENTS_TABLE: ITicket[] = [];
   filteredOptions: ITicket[] | undefined;
 
-  displayedColumns: string[] = ['id', 'idUnique', 'date_heure', 'idFileAttente', 'idPersonne', 'statut', 'actions'];
+  displayedColumns: string[] = ['id', 'idUnique', 'idFileAttente', 'idPersonne', 'statut', 'actions'];
   
   dataSource = new MatTableDataSource<ITicket>(this.ELEMENTS_TABLE);
   @ViewChild(MatPaginator)

@@ -1,3 +1,6 @@
+*{
+    clear: both;
+}
 #mainSection{
     display: flex;
     flex-direction: column;
@@ -158,6 +161,40 @@ th{
 
         }
     }
+}
+.ordreInput{
+    width: 70px;
+    height: 22px;
+    font-size: 11px;
+}
+.newCatSection{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 98%;
+    label{
+        width: fit-content;
+        white-space: nowrap;
+        margin-right: 20px;
+    }
+    input{
+        font-size: 12px;
+    }
+    #ordreCategorie{
+        width: 50px;
+    }
+}
+.blockErreur{
+    width: fit-content;
+    padding: 0;
+    padding: 10px;
+    background-color: rgba(255, 0, 0, 0.427);
+    color: red;
+    margin: 8px;
+    margin-top: 0;
+    margin-right: 0;
+    float: right;
+    border: none;
 }
 @media screen and (max-width: 1200px) {
     .title h2{

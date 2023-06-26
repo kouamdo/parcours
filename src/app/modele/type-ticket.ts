@@ -1,8 +1,14 @@
 export enum TypeTicket {
     Int="number",
-    String="string",
+    String="text",
     Double="number",
     Float="number",
-    Boolean="boolean",
-    Date="Date",
+    Boolean="checkbox",
+    Date="date",
+    Email="email",
+    Radio="radio",
+    Tel="tel",
+    Url="url",
+    Textarea="textarea"
+
 }

@@ -72,25 +72,6 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <div class="champs">
-                                <label  for="dateCreation"  class="label" >
-                                    {{'missions.table.title4' | translate}}
-                                </label>
-                                <input type="date" formControlName="dateCreation" name="dateCreation" id="dateCreation" placeholder="{{'missions.table.title4' | translate}}" class="form-control" >
-                            </div>
-                            <div  *ngIf="submitted && f['dateCreation'].errors"  class="alert alert-danger" >
-                                <div *ngIf="f['dateCreation'].errors['required']">{{'missions.form.text4' | translate}}</div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="champs">
-                                <label  for="dateModification"  class="label" >
-                                    {{'missions.table.title5' | translate}}
-                                </label>
-                                <input type="date" formControlName="dateModification" name="dateModification" id="dateModification" placeholder="{{'missions.table.title5' | translate}}" class="form-control" >
-                            </div>
-                        </div>
                     </div>
                 </div>
                 <div class="actionButton">
