@@ -63,7 +63,7 @@
                                             <mat-label>ordre</mat-label>
                                             <input matInput type="number" [(ngModel)]="element.ordre">
                                         </mat-form-field>
-                                        <div  *ngIf="validation && verifierSiExiste(element.ordre)"  class="alert alert-danger blockErreur" >
+                                        <div  *ngIf="validation && verifierSiExiste(element.ordre)" class="alert alert-danger blockErreur" >
                                             <p> cet ordre existe deja pour cette categorie </p>
                                         </div>
                                     </td>
@@ -73,8 +73,8 @@
                                     <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{"patient.table.title8" | translate}} </th>
                                     <td class="text-dark containCell"  mat-cell *matCellDef="let element;  let i=index">
                                         <div class="actions">
-                                            <button class="btn p-0" name="attributs"  [value]="element" id="attributs" title="clicker pour ajouter un attributs a la categorie"  (change)="ValiderCategorie(formeCategorieAttribut.value,this.element, i, $event)">
-                                                <span><input type="checkbox" [disabled] = "((formeCategorieAttribut.value.ordreCategorie < 0 ) || ((formeCategorieAttribut.value.ordreCategorie == 0 )) )" name="" id="" class=""></span>
+                                            <button class="btn p-0" name="attributs"  [value]="element" id="attributs" title="clicker pour ajouter un attributs a la categorie"  (change)="validerCategorie(formeCategorieAttribut.value,this.element, i, $event)">
+                                                <span><input type="checkbox" [disabled] = "((formeCategorieAttribut.value.ordreCategorie < 0 ) || (formeCategorieAttribut.value.ordreCategorie == 0 )  || (formeCategorieAttribut.value.nomCategorie == '' ) )" name="" id="" class=""></span>
                                             </button>
                                         </div>
                                     </td>

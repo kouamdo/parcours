@@ -23,18 +23,13 @@ import { map } from 'rxjs';
 })
 export class ModalCategoriesComponent implements OnInit {
 
- // myControl = new FormControl<string | IAttributs>('');
   formeCategorieAttribut: FormGroup;
   btnLibelle: string="Ajouter";
   titre: string="Ajouter une categorie";
   submitted: boolean=false;
   validation: boolean=false;
- // ELEMENTS_TABLE_CATEGORIES: IAttributs[] = []; 
-  //filteredOptions: IAttributs[] | undefined;
   displayedCategoriesAttributsColumns: string[] = ['actions','nomCategorie', 'ordreCat', 'libelleAttribut', 'ordreAtrParCat']; // structure du tableau presentant les categories creees avec leurs attributs
   displayedCategoriesColumns: string[] = ['actions','titre', 'description', 'type', 'ordreAtrParCat'];  // structure du tableau presentant les choix des attributs lors de la creation des categories
-  //idAttribut : string = ""
-  //conteur : any = 0
   ordreAttributExiste : boolean = false
   ordreCategorieExiste : boolean = false
   nomValide : boolean = false
@@ -60,16 +55,11 @@ export class ModalCategoriesComponent implements OnInit {
     type: TypeTicket.Int
   }
 
-  //ELEMENTS_TABLE_CATEGORIE_ATTRIBUTS: ICategoriesAttributs[] = [];
-
   TABLE_CATEGORIE_AFFICHAGE_TEMP: ICategorieAffichage[] = []; // tableau contenant les categories creees a partir du premier tableau de la modal
- // tableResultatsCategoriesAttributs  = new MatTableDataSource<ICategoriesAttributs>(this.ELEMENTS_TABLE_CATEGORIE_ATTRIBUTS);
   tableResultatsCategoriesAffichage  = new MatTableDataSource<ICategorieAffichage>(this.TABLE_CATEGORIE_AFFICHAGE_TEMP);
-  //tableFinaleCategoriesAttributs: ICategoriesAttributs[] = [];
 
   tableauAttributsTemp : IAttributs[] = []
   tableauIndexSelectionner = new Map(); 
-  //sauvegardeTempAttributsDeCat : ICategorieAffichage[] = [] // tableau de sauvegarde temporaire des attributs des categoriesAffiche enregistrees
   
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
@@ -79,7 +69,6 @@ export class ModalCategoriesComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any) {
 
       this.formeCategorieAttribut = this.formBuilder.group({
-       // _ordreAttribut: this.formBuilder.array([]),
         ordreCategorie: ['', [Validators.required, Validators.minLength(1)]],
         nomCategorie: ['', [Validators.required, Validators.minLength(1)]]
       });
@@ -96,7 +85,7 @@ export class ModalCategoriesComponent implements OnInit {
     }
   }
 
-  ValiderCategorie(categorieAttributInput:any,value : any, index : number, event: any){
+  validerCategorie(categorieAttributInput:any,value : any, index : number, event: any){
     console.log(this.dataSourceAttributTemp.data);
     console.log(value);
     console.log(index);
@@ -104,7 +93,7 @@ export class ModalCategoriesComponent implements OnInit {
     this.validation = true
     if(this.formeCategorieAttribut.invalid) return;
     
-    if (event.target.checked) {
+    if (event.target.checked && !this.verifierSiExiste(value.ordre)) {
         const categorieAttributsTemp : ICategorieAffichage ={
           id: uuidv4(),
           nom: categorieAttributInput.nomCategorie,
@@ -112,29 +101,23 @@ export class ModalCategoriesComponent implements OnInit {
           attribut: value
         }
       
-     // this.sauvegardeTempAttributsDeCat[index]= categorieAttributsTemp;
       this.tableauIndexSelectionner.set(index,categorieAttributsTemp);
-        
-    } else {
+
+    } else if(!event.target.checked && this.verifierSiExiste(value.ordre)) {
       this.tableauIndexSelectionner.delete(index);
-     // this.sauvegardeTempAttributsDeCat.splice(index, 1)
     }
  }
-  verifierSiExiste(attributDeCategorie : IAttributs): boolean{
-    let listAtt : String[] = [];
-    this.tableauIndexSelectionner.forEach((valeur, cle)=>{
-      listAtt.push(valeur.attribut.id);
-    });
-    this.tableauAttributsTemp = [];
-    let tmpTab =  this.dataSourceAttributTemp.data;
+  verifierSiExiste(ordre : any): boolean{
+    
+    let tmpTab =  this.tableResultatsCategoriesAffichage.data;
+    let ordreAttributExiste = false
     tmpTab.forEach(
-      (att : IAttributs) =>{
-        this.ordreAttributExiste = false
-        if (listAtt.includes(attributDeCategorie.ordre.toString())) {
-          this.ordreAttributExiste = true
+      (cat : ICategorieAffichage) =>{
+        if (cat.attribut.ordre == ordre) {
+          ordreAttributExiste = true
         }
     });
-    return this.ordreAttributExiste
+    return ordreAttributExiste
   }
 
   AjouterCategorieTemp() {
@@ -145,6 +128,8 @@ export class ModalCategoriesComponent implements OnInit {
 
     this.TABLE_CATEGORIE_AFFICHAGE_TEMP=this.tableResultatsCategoriesAffichage.data;
     this.tableauIndexSelectionner.forEach((valeur, cle)=>{
+      this.verifierSiExiste(valeur.ordre)
+      if(this.verifierSiExiste(valeur.ordre)) return;
       this.TABLE_CATEGORIE_AFFICHAGE_TEMP.push(valeur);
     });
     this.tableResultatsCategoriesAffichage.data =  this.TABLE_CATEGORIE_AFFICHAGE_TEMP;
@@ -152,8 +137,10 @@ export class ModalCategoriesComponent implements OnInit {
     //récupération des id attributs selectionnés 
 
     let listAtt : String[] = [];
+    let listOrdre : number[] = [];
     this.tableauIndexSelectionner.forEach((valeur, cle)=>{
       listAtt.push(valeur.attribut.id);
+      listOrdre.push(valeur.attribut.ordre);
     });
 
     //construction du tableau résiduel
@@ -162,13 +149,9 @@ export class ModalCategoriesComponent implements OnInit {
     let tmpTab =  this.dataSourceAttributTemp.data;
     tmpTab.forEach(
       (att : IAttributs) =>{
-        if(!listAtt.includes(att.id)){
+        if(!listAtt.includes(att.id) && !this.verifierSiExiste(att.ordre)){
           this.tableauAttributsTemp.push(att);
         }
-        // if (listAtt.includes(att.ordre.toString())) {
-        //   this.ordreAttributExiste = true
-        //   return
-        // }
     });
     this.dataSourceAttributTemp = new MatTableDataSource<IAttributs>(this.tableauAttributsTemp);
     this.tableauIndexSelectionner = new Map;
@@ -214,20 +197,10 @@ export class ModalCategoriesComponent implements OnInit {
     return this.serviceAttribut.getAllAttributs();
   }
 
- /* displayFn(attribue: IAttributs): string {
-    return attribue && attribue.titre ? attribue.titre : '';
-  }*/
-
   ngAfterViewInit() {
     this.dataSourceAttributTemp.paginator = this.paginator;
     this.dataSourceAttributTemp.sort = this.sort;
   }
-
- /* public rechercherListingAttribut(option: IAttributs){
-    this.serviceAttribut.getAttributsByTitre(option.titre.toLowerCase()).subscribe(
-        valeurs => {this.dataSourceAttributTemp.data = valeurs;}
-    )
-  }*/
   
   announceSortChange(sortState: Sort) {
     if (sortState.direction) {
