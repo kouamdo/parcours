@@ -19,12 +19,12 @@ export class NewServicesComponent implements OnInit {
   btnLibelle: string="Ajouter";
   titre: string="Ajouter un nouveau service";
   submitted: boolean=false;
-  
+
   initialDateDerniereModification = new FormControl(new Date());
   initialDateAttribution = new FormControl(new Date());
   initialDateFin = new FormControl(new Date());
 
-  constructor(private formBuilder:FormBuilder, private serviceService:ServicesService,private router:Router, private infosPath:ActivatedRoute, private datePipe: DatePipe) { 
+  constructor(private formBuilder:FormBuilder, private serviceService:ServicesService,private router:Router, private infosPath:ActivatedRoute, private datePipe: DatePipe) {
     this.forme = this.formBuilder.group({
       libelle: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
       etat: ['Non assigne', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
@@ -55,6 +55,7 @@ export class NewServicesComponent implements OnInit {
   get f(){
     return this.forme.controls;
   }
+  
   onSubmit(serviceInput:any){
     this.submitted=true;
     //Todo la validation d'element non conforme passe
@@ -71,9 +72,9 @@ export class NewServicesComponent implements OnInit {
     }
 
     if(this.service != undefined){
-      serviceTemp.id = this.service.id  
+      serviceTemp.id = this.service.id
     }
-    
+
     this.serviceService.ajouterService(serviceTemp).subscribe(
       object => {
         this.router.navigate(['/list-services']);

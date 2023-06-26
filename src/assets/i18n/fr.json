@@ -74,7 +74,7 @@
             "text2":"Le prénom est obligatoire.",
             "text3":"La date de naissance est obligatoire.",
             "text4":"L'addresse mail est obligatoire."
-        }       
+        }
     },
     "services":{
         "table":{
@@ -206,5 +206,34 @@
     },
     "langue":{
         "libelle":"langues"
+    },
+    "famille":{
+      "header":"Ajouter Une Nouvelle Famille",
+      "table":{
+        "title1":"Libellé",
+        "title2":"Description",
+        "title3":"Etat"
+      },
+      "form":{
+        "text1":"Champ obligatoire",
+        "text2":"Champ obligatoire"
+    },
+    "lists":{
+      "button1":"Retour"
+    },
+    "title":"Listing familles",
+    "search-bar":"Rechercher",
+    "table1":{
+        "title1":"Libellé",
+        "title2":"Description",
+        "title3":"Etat",
+        "title4":"Actions",
+        "actions":{
+            "link1":"Orienter",
+            "link2":"Modifier",
+            "link3":"Détails",
+            "link4":"Supprimer"
+        }
     }
+  }
 }

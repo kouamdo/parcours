@@ -23,7 +23,7 @@
     </ul>
     <!-- recherche sur la barre horizontale du menu -->
     <ul class="navbar-nav ml-auto">
-    
+
       <li class="nav-item">
         <a class="nav-link" data-widget="navbar-search" href="#" role="button">
           <i class="fas fa-search"></i>
@@ -52,7 +52,7 @@
         </a>
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
         <a href="#" class="dropdown-item">
-        
+
           <div class="media">
             <img src="assets/img/avatar.png" alt="User Avatar" class="img-size-50 mr-3 img-circle">
             <div class="media-body">
@@ -64,11 +64,11 @@
               <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
             </div>
           </div>
-        
+
         </a>
         <div class="dropdown-divider"></div>
         <a href="#" class="dropdown-item">
-        
+
           <div class="media">
             <img src="assets/img/avatar.png" alt="User Avatar" class="img-size-50 img-circle mr-3">
             <div class="media-body">
@@ -80,11 +80,11 @@
               <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
             </div>
           </div>
-        
+
         </a>
         <div class="dropdown-divider"></div>
         <a href="#" class="dropdown-item">
-        
+
           <div class="media">
             <img src="assets/img/avatar.png" alt="User Avatar" class="img-size-50 img-circle mr-3">
             <div class="media-body">
@@ -96,7 +96,7 @@
               <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
             </div>
           </div>
-        
+
         </a>
         <div class="dropdown-divider"></div>
         <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
@@ -143,16 +143,18 @@
   </nav>
 
       <!-- menu vertical -->
+
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
   
     <a class="brand-link" id="logo">
       <img src="../assets/img/logo_camnafaw.jpg" width="25px" alt="CAMNAFAW Logo" class="brand-image elevation-3" style="opacity: .8">
       <span class="brand-text font-weight-light">CAMNAFAW</span>
     </a>
-  
-    <div class="sidebar" id="userActions">
+
+
+    <div class="sidebar" id="userActions" >
       <!-- Identité du user en dessous du logo haut gauche-->
-      <div class="user">
+      <div class="user" >
         <div class="image text-center">
           <img src="assets/img/avatar.png" class="img-circle elevation-2" alt="User Image">
         </div>
@@ -164,7 +166,10 @@
       <!-- Menu gauche-->
       <app-menu [langueParent]=langueChoisi></app-menu>
     </div>
+  
   </aside>
+
+
     <!-- panneau central -->
 <div class="content-wrapper">
    <!-- barre en dessous du menu horizontal-->
@@ -191,11 +196,11 @@
       </div>
     </div>
   </div>
-  
+
   <!-- zone d'affichage principale-->
   <section class="content">
-    <div class="container-fluid">      
-      
+    <div class="container-fluid">
+
       <div class="row">
         <div class="col-md-12">
           <div class="card-body">
@@ -209,7 +214,7 @@
 
 
 <aside class="control-sidebar control-sidebar-dark" [ngClass]="{'control-sidebar-light': toggle, 'control-sidebar-dark': !toggle}">
-  <label class="m-2" for="language">{{"langue.libelle" | translate}} 
+  <label class="m-2" for="language">{{"langue.libelle" | translate}}
     <select name="language" id="language" (change)="valeurChange($event)">
       <option *ngFor="let langue of langues" [value]="langue">{{ langue }}</option>
     </select><br>

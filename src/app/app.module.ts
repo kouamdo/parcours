@@ -1,11 +1,8 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PatientsModule } from './modules/patients/patients.module';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemDBService } from './backend/backend';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
@@ -22,6 +19,10 @@ import { AttributsModule } from './modules/attributs/attributs.module';
 import { MissionsModule } from './modules/missions/missions.module';
 import { DocumentsModule } from './modules/documents/documents.module';
 import { ExemplaireDocumentModule } from './modules/exemplaire-document/exemplaire-document.module';
+import { BrowserModule } from '@angular/platform-browser';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
+import { FamilleModule } from './modules/famille/famille.module';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { ExemplaireDocumentModule } from './modules/exemplaire-document/exemplai
     AttributsModule,
     MissionsModule,
     DocumentsModule,
+    FamilleModule,
 
     // ngx-translate and the loader module
     HttpClientModule,
