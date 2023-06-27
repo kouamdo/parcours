@@ -10,6 +10,10 @@ import { EMPTY, Observable } from 'rxjs';
 
 import { PrecomvtsService } from 'src/app/services/precomvts/precomvts.service';
 import { IPrecomvt } from 'src/app/modele/precomvt';
+import { IRessource } from 'src/app/modele/ressource';
+import { IFamille } from 'src/app/modele/famille';
+import { Unites } from 'src/app/modele/unites';
+import { RessourcesService } from 'src/app/services/ressources/ressources.service';
 
 @Component({
   selector: 'app-new-precomvt',
@@ -18,80 +22,40 @@ import { IPrecomvt } from 'src/app/modele/precomvt';
 })
 export class NewPrecomvtComponent implements OnInit {
 
-  precomvt : IPrecomvt|undefined;
-  forme: FormGroup;
-  btnLibelle: string="Ajouter";
-  submitted: boolean=false;
-  steps:any =1;
-
-
-  constructor(private formBuilder:FormBuilder,private precomvtService:PrecomvtsService,private servicePrecomvt:PrecomvtsService,private router:Router, private infosPath:ActivatedRoute, private datePipe: DatePipe) {
-    this.forme = this.formBuilder.group({
-      libelle: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
-      etat: [ '',],
-      type: ['',],
-      quantiteMin: ['', [Validators.required]],
-      quantiteMax: ['', [Validators.required]],
-      montantMin: ['', [Validators.required]],
-      montantMax: ['', [Validators.required]],
+forme=new FormGroup({
+  libelle:new FormControl(''),
+  etat:new FormControl(''),
+  type:new FormControl(''),
+famille:new FormGroup({
+  quantiteMin:new FormControl(''),
+  quantiteMax:new FormControl(''),
+  montantMin:new FormControl(''),
+  montantMax:new FormControl('')
+  }),
+ressource:new FormGroup({
+  quantiteMin:new FormControl(''),
+  quantiteMax:new FormControl(''),
+  montantMin:new FormControl(''),
+  montantMax:new FormControl('')
     })
-  };
+});
+btnLibelle: string="Ajouter";
+steps:any =1;
 
-  ngOnInit(): void {
-    let idPrecomvt = this.infosPath.snapshot.paramMap.get('idPrecomvt');
-    if((idPrecomvt != null) && idPrecomvt!==''){
-      this.btnLibelle="Modifier";
-      this.precomvtService.getPrecomvtById(idPrecomvt).subscribe(x =>
-        {
-          this.precomvt = x; console.log(this.precomvt);
-          this.precomvt.id = idPrecomvt!,
-          this.forme.setValue({
-            libelle: this.precomvt?.libelle,
-            etat: this.precomvt?.etat,
-            type: this.precomvt?.type,
-            quantiteMin: this.precomvt?. quantiteMin,
-            quantiteMax: this.precomvt?.quantiteMax,
-            montantMin: this.precomvt?.montantMin,
-            montantMax: this.precomvt?. montantMax,
-          })
-      });
-    }
-  }
-  get f(){
-    return this.forme.controls;
+
+constructor(){ }
+
+  ngOnInit() {
+
 
   }
-
-  onSubmit(precomvtInput:any){
-    this.submitted=true;
-    this.steps= this.steps +1;
-    if(this.forme.invalid) return;
-    let precomvtTemp : IPrecomvt={
-      id: uuidv4(),
-      libelle:precomvtInput.libelle,
-      etat:precomvtInput.etat,
-      type:precomvtInput.type,
-      quantiteMin:precomvtInput.quantiteMin,
-      quantiteMax:precomvtInput.quantiteMax,
-      montantMin:precomvtInput.montantMin,
-      montantMax:precomvtInput.montantMax,
-    }
-
-    if(this.precomvt != undefined){
-      precomvtTemp.id = this.precomvt.id
-    }
-
-    this.precomvtService.ajouterPrecomvt(precomvtTemp).subscribe(
-      object => {
-        this.router.navigate(['list-precomvts']);
-      },
-      error =>{
-        console.log(error)
-      }
-    )
-
-  }
-  back(){
-    this.steps= this.steps -1;
-  }
+onSubmit() {
+ this.steps= this.steps +1;
+ console.log(this.forme.value);
 }
+back(){
+  this.steps= this.steps -1;
+}
+}
+
+

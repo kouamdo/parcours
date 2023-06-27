@@ -23,7 +23,7 @@ export class ListPrecomvtsComponent implements OnInit {
 
     ELEMENTS_TABLE: IPrecomvt[] = [];
     filteredOptions: IPrecomvt[] | undefined;
-    displayedColumns: string[] = ['id','libelle','etat','type','quantiteMin','quantiteMax','montantMin','montantMax','actions'];
+    displayedColumns: string[] = ['id','libelle','etat','type','famille','quantiteMinfamille','quantiteMaxfamille','montantMinfamille','montantMaxfamille','ressource','quantiteMinressource','quantiteMaxressource','montantMinressource','montantMaxressource','actions'];
 
     dataSource = new MatTableDataSource<IPrecomvt>(this.ELEMENTS_TABLE);
 

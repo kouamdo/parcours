@@ -1,4 +1,7 @@
 import { TypeMvt } from "./type-mvt";
+import { IRessource } from "./ressource";
+import { IFamille } from "./famille";
+
 
 export interface IPrecomvtqte {
   id:string,
@@ -8,4 +11,6 @@ export interface IPrecomvtqte {
   montantMin:number,
   montantMax:number,
   type:TypeMvt,
+  ressource:IRessource,
+  famille:IFamille[],
 }

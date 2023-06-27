@@ -78,8 +78,7 @@ export class InMemDBService implements InMemoryDbService{
             {"fonction":"Documents", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"Créer model documents", "lien":"./document-nouveau", "bouton":"false"}, {"nom":"Rechercher", "lien":"./list-documents", "bouton":"false"}]},
             {"fonction":"Categorie de Ressource", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"Créer", "lien":"famille-nouvelle", "bouton":"false"}, {"nom":"Rechercher", "lien":"./list-familles", "bouton":"false"}]},
             {"fonction":"Ressource", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"Créer", "lien":"ressource-nouvelle", "bouton":"false"},{"nom":"Rechercher", "lien":"./list-ressources", "bouton":"false"}]},
-            {"fonction":"PrecoMvtQte", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"Créer", "lien":"precomvtqte-nouvelle", "bouton":"false"},{"nom":"Rechercher", "lien":"./list-precomvtqtes", "bouton":"false"}]},
-            {"fonction":"PrecoMvt","icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"Créer", "lien":"precomvt-nouvelle", "bouton":"false"},{"nom":"Rechercher", "lien":"./list-precomvts", "bouton":"false"}]},
+            {"fonction":"Préconisations","icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"Créer", "lien":"precomvt-nouvelle", "bouton":"false"},{"nom":"Rechercher", "lien":"./list-precomvts", "bouton":"false"}]},
           ]},
 
 
@@ -92,8 +91,7 @@ export class InMemDBService implements InMemoryDbService{
             {"fonction":"Documents", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"New document's model", "lien":"./document-nouveau", "bouton":"false"}, {"nom":"Search", "lien":"./list-documents", "bouton":"false"}]},
             {"fonction":"Resource Category", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"new", "lien":"famille-nouvelle", "bouton":"false"},  {"nom":"Search", "lien":"./list-familles", "bouton":"false"}]},
             {"fonction":"Ressource", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"Créer", "lien":"ressource-nouvelle", "bouton":"false"},{"nom":"Search", "lien":"./list-ressources", "bouton":"false"}]},
-            {"fonction":"PrecoMvtQte", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"Créer", "lien":"precomvtqte-nouvelle", "bouton":"false"},{"nom":"Search", "lien":"./list-precomvtqtes", "bouton":"false"}]},
-            {"fonction":"PrecoMvt","icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"Créer", "lien":"precomvt-nouvelle", "bouton":"false"}, {"nom":"Search", "lien":"./list-precomvts", "bouton":"false"}]}
+            {"fonction":"Préconisations","icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"Créer", "lien":"precomvt-nouvelle", "bouton":"false"}, {"nom":"Search", "lien":"./list-precomvts", "bouton":"false"}]}
           ]}
         ];
         let missions:IMission[]=[
@@ -189,18 +187,30 @@ export class InMemDBService implements InMemoryDbService{
       ];
 
       let precomvtqte:IPrecomvtqte[]=[
-        {id:"1",libelle:"achat", quantiteMin:10,  quantiteMax:20,  montantMin:1000, montantMax:7000, type:this.TypeMvtAssigner},
-        {id:"2",libelle:"achat",quantiteMin:15,  quantiteMax:25,  montantMin:2000, montantMax:8000, type:this.TypeMvtRetrait},
-        {id:"3",libelle:"achat",quantiteMin:20,  quantiteMax:30,  montantMin:3000, montantMax:9000, type:this.TypeMvtReduire},
-
-      ];
+        {id:"1",libelle:"achat",quantiteMin:10,  quantiteMax:20,  montantMin:1000, montantMax:7000, type:this.TypeMvtAssigner,
+        ressource:{id:"1", libelle:"transfusion",etat:true,quantite:10,unite:this.UnitesLitre,prix:1000,
+                famille:{id:"4", libelle:"néonat", description:"nouveau-né", etat:"malade"}},
+        famille:[
+                {id:"1", libelle:"trans", description:"sang", etat:"gl"},
+                {id:"2", libelle:"néonat", description:"nouveau-né", etat:"malade"},
+                {id:"3", libelle:"pediatrie", description:"enfant", etat:"souffrant"}
+              ]
+            },];
 
       let precomvt:IPrecomvt[]=[
-        {id:"1",libelle:"rachat",etat: true, /*dateCreation:new Date("07/03/2000"),dateModification:new Date("07/03/1990"),*/type:this.TypeMvtAssigner, quantiteMin:10,  quantiteMax:20,  montantMin:1000, montantMax:7000},
-        {id:"2",libelle:"rachat",etat: true,  /*dateCreation:new Date("07/03/2000"),dateModification:new Date("07/03/1990"),*/type:this.TypeMvtRetrait, quantiteMin:15,  quantiteMax:25,  montantMin:2000, montantMax:8000},
-        {id:"3",libelle:"rachat",etat: true, /*dateCreation:new Date("07/03/2000"),dateModification:new Date("07/03/1990"),*/ type:this.TypeMvtReduire, quantiteMin:20,  quantiteMax:30,  montantMin:3000, montantMax:9000,},
-
-      ];
+                {id:"1",libelle:"rachat",etat: true,type:this.TypeMvtAssigner,
+                precomvtqte:[
+                  {id:"1",libelle:"achat",quantiteMin:10,  quantiteMax:20,  montantMin:1000, montantMax:7000, type:this.TypeMvtAssigner,
+        ressource:{id:"1", libelle:"transfusion",etat:true,quantite:10,unite:this.UnitesLitre,prix:1000,
+                famille:{id:"4", libelle:"néonat", description:"nouveau-né", etat:"malade"}},
+        famille:[
+                {id:"1", libelle:"trans", description:"sang", etat:"gl"},
+                {id:"2", libelle:"néonat", description:"nouveau-né", etat:"malade"},
+                {id:"3", libelle:"pediatrie", description:"enfant", etat:"souffrant"}
+              ]
+            },
+               ],
+              }];
 
         return{patients, services, menus, tickets, missions, attributs, documents,famille,ressource,precomvtqte,precomvt};
     }

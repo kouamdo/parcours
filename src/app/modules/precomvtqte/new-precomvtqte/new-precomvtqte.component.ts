@@ -69,13 +69,14 @@ export class NewPrecomvtqteComponent implements OnInit {
     if(this.forme.invalid) return;
     let precomvtqteTemp : IPrecomvtqte={
       id: uuidv4(),
-      libelle:precomvtqteInput.libelle,
-      quantiteMin:precomvtqteInput.quantiteMin,
-      quantiteMax:precomvtqteInput.quantiteMax,
-      montantMin:precomvtqteInput.montantMin,
-      montantMax:precomvtqteInput.montantMax,
-      type:precomvtqteInput.type,
-
+      libelle: precomvtqteInput.libelle,
+      quantiteMin: precomvtqteInput.quantiteMin,
+      quantiteMax: precomvtqteInput.quantiteMax,
+      montantMin: precomvtqteInput.montantMin,
+      montantMax: precomvtqteInput.montantMax,
+      type: precomvtqteInput.type,
+      ressource: precomvtqteInput.ressource,
+      famille: []
     }
 
     if(this.precomvtqte != undefined){

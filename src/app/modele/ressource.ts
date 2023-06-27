@@ -1,6 +1,7 @@
 import { IFamille } from "./famille";
 import { Unites } from "./unites";
 
+
 export interface IRessource {
     id:string,
     libelle:string,
@@ -9,7 +10,8 @@ export interface IRessource {
     prix:number,
     unite:Unites,
     famille:IFamille,
-    //dateCreation:Date,
-   // dateModification:Date,
+
+   /* dateCreation:Date,
+    dateModification:Date,*/
 
 }

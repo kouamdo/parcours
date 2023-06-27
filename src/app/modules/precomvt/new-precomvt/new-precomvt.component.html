@@ -1,11 +1,13 @@
 <div id="mainSection">
   <div class="card block">
-      <div class="card-header pt-4 pb-4 entete">Effectuer une Nouvelle PrecoMvt</div>
+  <!--<div class="card-header pt-4 pb-4 entete">Effectuer une Nouvelle PrecoMvt</div>-->
       <div class="card-body">
-          <form [formGroup]="forme" (ngSubmit)="onSubmit(forme.value)" *ngIf="forme" >
+          <form [formGroup]="forme" (ngSubmit)="onSubmit()" *ngIf="forme" >
               <div class="">
                   <div class="">
+
                     <div *ngIf="steps==1">
+                      <div class="card-header pt-4 pb-4 entete">Nouvelle Préconisation</div>
                       <div class="form-group">
                           <div>
                               <div class="champs">
@@ -14,9 +16,9 @@
                                   </label>
                                   <input type="text" formControlName="libelle" name="libelle" id="libelle"  placeholder="{{'ressource.table.title1' | translate}}"  class="form-control" required>
                               </div>
-                              <div  *ngIf="submitted && f['libelle'].errors"  class="alert alert-danger" >
+                              <!-- <div  *ngIf="submitted && f['libelle'].errors"  class="alert alert-danger" >
                                   <div *ngIf="f['libelle'].errors['required']">Champ obligatoire</div>
-                              </div>
+                              </div>-->
                           </div>
                       </div>
 
@@ -28,62 +30,61 @@
                                 </label>
                                 <input  type="checkbox" formControlName="etat"  name="etat" id="etat" placeholder="" required class="form-control" checked>
                             </div>
-                            <div  *ngIf="submitted && f['etat'].errors"  class="alert alert-danger" >
-                                <div *ngIf="f['etat'].errors['required']">{{'ressource.form.text2' | translate}}</div>
-                            </div>
+
                         </div>
                     </div>
 
                       <div class="form-group">
                         <div class="champs">
                             <label  for="type"  class="label" >
-                              TypeMvt
+                              Type
                             </label>
                         <select  class="form-control" formControlName="type" name="type" id="type" required>
-                          <option>Assigner</option>
-                          <option>Assigner</option>
-                          <option>Assigner</option>
+                          <option>Neutre</option>
+                          <option>Entrée</option>
+                          <option>Sortie</option>
                       </select>
                         </div>
                     </div>
                   </div>
 
 
-                  <div *ngIf="steps==2">
+                  <div formGroupName="assignerFamilles"   *ngIf="steps==2">
+                    <div class="card-header pt-4 pb-4 entete1" >Assigner aux Familles</div>
                     <div class="form-group">
                           <div class="champs">
                               <label for="famille" class="label">
-                                Famille
+                              Famille
                               </label>
                               <input type="text" formControlName="famille" name="famille" id="famille"  placeholder="famille"  class="form-control" required>
                           </div>
-                          <div  *ngIf="submitted && f['famille'].errors"  class="alert alert-danger" >
+                           <!--<div  *ngIf="submitted && f['famille'].errors"  class="alert alert-danger" >
                               <div *ngIf="f['famille'].errors['required']">Champ obligatoire</div>
-                          </div>
+                          </div>-->
                   </div>
 
                     <div class="form-group">
                       <div class="champs">
-                          <label  for="quantiteMin"  class="label" >
-                            quantiteMin
+                          <label  for="quantiteMinfamille"  class="label" >
+                            QuantiteMin
                           </label>
                           <input type="number" list="" formControlName="quantiteMin" name="quantiteMin" id="quantiteMin" placeholder="quantiteMin" class="form-control" >
                       </div>
-                      <div  *ngIf="submitted && f['quantiteMin'].errors"  class="alert alert-danger" >
-                        <div *ngIf="f['quantiteMin'].errors['quantiteMin']">Champ obligatoire</div>
-                    </div>
+                     <!--<div  *ngIf="submitted && f['quantiteMinfamille'].errors"  class="alert alert-danger" >
+                        <div *ngIf="f['quantiteMinfamille'].errors['required']">Champ obligatoire</div>
+                    </div>-->
                   </div>
 
                     <div class="form-group">
                         <div class="champs">
                             <label  for="quantiteMax"  class="label" >
-                              quantiteMax
+                              QuantiteMax
                             </label>
                             <input type="number" formControlName="quantiteMax" name="quantiteMax" id="quantiteMax" placeholder="quantiteMax" class="form-control" >
                         </div>
-                        <div  *ngIf="submitted && f['quantiteMax'].errors"  class="alert alert-danger" >
-                          <div *ngIf="f['quantiteMax'].errors['required']">Champ obligatoire</div>
-                      </div>
+                       <!--<div  *ngIf="submitted && f['quantiteMaxfamille'].errors"  class="alert alert-danger" >
+                          <div *ngIf="f['quantiteMaxfamille'].errors['required']">Champ obligatoire</div>
+                      </div>-->
                     </div>
 
                     <div class="form-group">
@@ -93,9 +94,9 @@
                           </label>
                           <input type="number" formControlName="montantMin" name="montantMin" id="montantMin" placeholder="montantMin" class="form-control" >
                       </div>
-                      <div  *ngIf="submitted && f['montantMin'].errors"  class="alert alert-danger" >
-                        <div *ngIf="f['montantMin'].errors['required']">Champ obligatoire</div>
-                    </div>
+                      <!--<div  *ngIf="submitted && f['montantMinfamille'].errors"  class="alert alert-danger" >
+                        <div *ngIf="f['montantMinfamille'].errors['required']">Champ obligatoire</div>
+                    </div>-->
                   </div>
 
                   <div class="form-group">
@@ -105,85 +106,104 @@
                         </label>
                         <input type="number" formControlName="montantMax" name="montantMax" id="montantMax" placeholder="montantMax" class="form-control" >
                     </div>
-                    <div  *ngIf="submitted && f['montantMax'].errors"  class="alert alert-danger" >
-                      <div *ngIf="f['montantMax'].errors['required']">Champ obligatoire</div>
-                  </div>
+                    <!--<div  *ngIf="submitted && f['montantMaxfamille'].errors"  class="alert alert-danger" >
+                      <div *ngIf="f['montantMaxfamille'].errors['required']">Champ obligatoire</div>
+                  </div>-->
                 </div>
               </div>
 
 
 
-              <div *ngIf="steps==3">
+              <div formGroupName="assignerRessource" *ngIf="steps==3">
+                <div class="card-header pt-4 pb-4 entete2">Assigner Une Ressource</div>
                 <div class="form-group">
-                      <div class="champs">
-                          <label for="ressource" class="label">
-                            Ressource
-                          </label>
-                          <input type="text" formControlName="ressource" name="ressource" id="ressource"  placeholder="ressource"  class="form-control" required>
-                      </div>
-                      <div  *ngIf="submitted && f['ressource'].errors"  class="alert alert-danger" >
-                          <div *ngIf="f['ressource'].errors['required']">Champ obligatoire</div>
-                      </div>
-              </div>
+                  <div class="champs" >
+                      <label  for="ressource"  class="label" id="label3">
+                        Ressource
+                      </label>
+                      <!--<mat-form-field class="example-full-width" appearance="fill">
+                          <mat-label class="famill">  </mat-label>
+                          <input  type="text" matInput [matAutocomplete]="auto"  aria-label="ressource" [formControl]="myControl" formControlName="ressource" name="ressource" id="ressource" placeholder="" class="form-control">
+                          <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn" >
+                          <mat-option *ngFor="let option of filteredOptions" [value]="option" (click)="getIdRessource(option.id)" (onSelectionChange)="rechercherListingRessource(option)">
+                              {{option.libelle}}
+                          </mat-option>
+                          </mat-autocomplete>
+                      </mat-form-field>-->
+                  </div>
+                  <!-- <div  *ngIf="submitted && f['libelle'].errors"  class="alert alert-danger" >
+                    <div *ngIf="f['libelle'].errors['required']">{{'ressource.form.text9' | translate}}</div>
+                </div>-->
+                </div>
 
                 <div class="form-group">
-                  <div class="champs">
-                      <label  for="quantiteMin"  class="label" >
-                        quantiteMin
+                  <div class="champs" id="essai">
+                      <label  for="quantiteMin"  class="label3" >
+                        Quantité Minimum
                       </label>
                       <input type="number" list="" formControlName="quantiteMin" name="quantiteMin" id="quantiteMin" placeholder="quantiteMin" class="form-control" >
                   </div>
-                  <div  *ngIf="submitted && f['quantiteMin'].errors"  class="alert alert-danger" >
-                    <div *ngIf="f['quantiteMin'].errors['quantiteMin']">Champ obligatoire</div>
-                </div>
+               <!--<div *ngIf="submitted && f['quantiteMinressource'].errors"  class="alert alert-danger" >
+                    <div *ngIf="f['quantiteMinressource'].errors['required']">Champ obligatoire</div>
+                </div>-->
               </div>
 
                 <div class="form-group">
-                    <div class="champs">
-                        <label  for="quantiteMax"  class="label" >
-                          quantiteMax
+                    <div class="champs" id="essai">
+                        <label  for="quantiteMax"  class="label3" >
+                          Quantité Maximum
                         </label>
                         <input type="number" formControlName="quantiteMax" name="quantiteMax" id="quantiteMax" placeholder="quantiteMax" class="form-control" >
                     </div>
-                    <div  *ngIf="submitted && f['quantiteMax'].errors"  class="alert alert-danger" >
-                      <div *ngIf="f['quantiteMax'].errors['required']">Champ obligatoire</div>
-                  </div>
+                  <!--<div  *ngIf="submitted && f['quantiteMaxressource'].errors"  class="alert alert-danger" >
+                      <div *ngIf="f['quantiteMaxressource'].errors['required']">Champ obligatoire</div>
+                  </div>-->
                 </div>
 
                 <div class="form-group">
-                  <div class="champs">
-                      <label  for="montantMin"  class="label" >
-                        MontantMax
+                  <div class="champs" id="essai">
+                      <label  for="montantMin"  class="label3" >
+                        Montant Maximum
                       </label>
                       <input type="number" formControlName="montantMin" name="montantMin" id="montantMin" placeholder="montantMin" class="form-control" >
                   </div>
-                  <div  *ngIf="submitted && f['montantMin'].errors"  class="alert alert-danger" >
-                    <div *ngIf="f['montantMin'].errors['required']">Champ obligatoire</div>
-                </div>
+                 <!--<div  *ngIf="submitted && f['montantMinressource'].errors"  class="alert alert-danger" >
+                    <div *ngIf="f['montantMinressource'].errors['required']">Champ obligatoire</div>
+                </div>-->
               </div>
 
               <div class="form-group">
-                <div class="champs">
-                    <label  for="montantMax"  class="label" >
-                      MontantMin
+                <div class="champs" id="essai">
+                    <label  for="montantMax"  class="label3" >
+                      Montant Minimum
                     </label>
                     <input type="number" formControlName="montantMax" name="montantMax" id="montantMax" placeholder="montantMax" class="form-control" >
                 </div>
-                <div  *ngIf="submitted && f['montantMax'].errors"  class="alert alert-danger" >
-                  <div *ngIf="f['montantMax'].errors['required']">Champ obligatoire</div>
-              </div>
+                <!--<div  *ngIf="submitted && f['montantMaxressource'].errors"  class="alert alert-danger" >
+                  <div *ngIf="f['montantMaxressource'].errors['required']">Champ obligatoire</div>
+              </div>-->
             </div>
           </div>
 
 
 
+
+
+
+
+
+
+
               </div>
               <div class="actionButton">
-                <a class="btn" class="btn" *ngIf="steps !=1" (click)="back()">Back</a>
-                <button class="btn" class="btn" *ngIf="steps !=3">Next</button>
-                <button type="submit" routerLink="../list-ressources" *ngIf="steps ==3">Envoyer</button>
+                <a class="btn"  *ngIf="steps  !=1" (click)="back()">Back</a>
+                <button class="btn" id="next" *ngIf="steps ==3">Next</button>
+                <button class="btn"  *ngIf="steps !==2" (click)="steps =2">Famille</button>
+                <button class="btn" *ngIf="steps  !==3" (click)="steps =3" >Ressource</button>
+                <button type="submit" class="btn" routerLink="../list-precomvts" *ngIf="steps ==4">Envoyer</button>
+                <button type="submit" class="btn" *ngIf="steps  ==4">Annuler</button>
                 <!--<button type="submit" class="btn" *ngIf="steps ==3">{{btnLibelle}}</button>-->
-              </div>
+                </div>
             </div>
             </form>
       </div>

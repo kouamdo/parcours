@@ -18,7 +18,7 @@
                   </mat-form-field>
               </form>
               </div>
-              <div role="button" id="addUserBotton" routerLink="../precomvtqte-nouvelle">
+              <div role="button" id="addUserBotton" routerLink="../precomvt-nouvelle">
                   <span title="1">
                       <i class="fa fa-user-plus" aria-hidden="true"></i>
                   </span>
@@ -50,30 +50,63 @@
                       <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header>type</th>
                       <td class="text-dark text-center containCell" mat-cell *matCellDef="let element"> {{element.type}} </td>
                   </ng-container>
+                    <!-- libellé Column -->
+                    <ng-container matColumnDef="famille">
+                      <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header>famille</th>
+                      <td class="text-dark text-center containCell" mat-cell *matCellDef="let element"> {{element.famille}} </td>
+                  </ng-container>
 
                   <!-- etat Column -->
-                  <ng-container matColumnDef="quantiteMin">
+                  <ng-container matColumnDef="quantiteMinfamille">
                       <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header>quantiteMin</th>
-                      <td class="text-dark text-center containCell" mat-cell *matCellDef="let element"> {{element.quantiteMin}} </td>
+                      <td class="text-dark text-center containCell" mat-cell *matCellDef="let element"> {{element.quantiteMinfamille}} </td>
                   </ng-container>
 
                     <!-- quantité Column -->
-                    <ng-container matColumnDef="quantiteMax">
+                    <ng-container matColumnDef="quantiteMaxfamille">
                       <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header>quantiteMax</th>
-                      <td class="text-dark text-center containCell" mat-cell *matCellDef="let element"> {{element.quantiteMax}} </td>
+                      <td class="text-dark text-center containCell" mat-cell *matCellDef="let element"> {{element.quantiteMaxfamille}} </td>
                   </ng-container>
 
                    <!-- unité Column -->
-                   <ng-container matColumnDef="montantMin">
+                   <ng-container matColumnDef="montantMinfamille">
                     <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header>montantMin</th>
-                    <td class="text-dark text-center containCell" mat-cell *matCellDef="let element"> {{element.montantMin}} </td>
+                    <td class="text-dark text-center containCell" mat-cell *matCellDef="let element"> {{element.montantMinfamille}} </td>
                 </ng-container>
 
                     <!-- prix Column -->
-                    <ng-container matColumnDef="montantMax">
+                    <ng-container matColumnDef="montantMaxfamille">
                       <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header>montantMax</th>
-                      <td class="text-dark text-center containCell" mat-cell *matCellDef="let element"> {{element.montantMax}} </td>
+                      <td class="text-dark text-center containCell" mat-cell *matCellDef="let element"> {{element.montantMaxfamille}} </td>
                   </ng-container>
+                   <!-- libellé Column -->
+                   <ng-container matColumnDef="ressource">
+                    <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header>ressource</th>
+                    <td class="text-dark text-center containCell" mat-cell *matCellDef="let element"> {{element.ressource}} </td>
+                </ng-container>
+                <!-- etat Column -->
+                <ng-container matColumnDef="quantiteMinressource">
+                  <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header>quantiteMin</th>
+                  <td class="text-dark text-center containCell" mat-cell *matCellDef="let element"> {{element.quantiteMinressource}} </td>
+              </ng-container>
+
+                <!-- quantité Column -->
+                <ng-container matColumnDef="quantiteMaxressource">
+                  <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header>quantiteMax</th>
+                  <td class="text-dark text-center containCell" mat-cell *matCellDef="let element"> {{element.quantiteMaxressource}} </td>
+              </ng-container>
+
+               <!-- unité Column -->
+               <ng-container matColumnDef="montantMinressource">
+                <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header>montantMin</th>
+                <td class="text-dark text-center containCell" mat-cell *matCellDef="let element"> {{element.montantMinressource}} </td>
+            </ng-container>
+
+                <!-- prix Column -->
+                <ng-container matColumnDef="montantMaxressource">
+                  <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header>montantMax</th>
+                  <td class="text-dark text-center containCell" mat-cell *matCellDef="let element"> {{element.montantMaxressource}} </td>
+              </ng-container>
 
                   <ng-container matColumnDef="actions">
                       <th class="text-dark containHead" mat-header-cell *matHeaderCellDef>Actions</th>
