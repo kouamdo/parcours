@@ -76,13 +76,33 @@ export class ModalCategoriesComponent implements OnInit {
     
   ngOnInit(): void {
     console.log(this.data.dataICategorieAffiche)
-    this.tableauAttributsTemp = this.data.dataSourceAttributDocument.data
-    this.dataSourceAttributTemp.data = this.tableauAttributsTemp;
+    // this.tableauAttributsTemp = this.data.dataSourceAttributDocument.data
+    // this.dataSourceAttributTemp.data = this.tableauAttributsTemp;
 
-    if (this.data.dataICategorieAffiche != null) {
       this.TABLE_CATEGORIE_AFFICHAGE_TEMP = this.data.dataICategorieAffiche
       this.tableResultatsCategoriesAffichage.data = this.TABLE_CATEGORIE_AFFICHAGE_TEMP;
+    if (this.data.dataICategorieAffiche != null) {
+
+      let listAtt : String[] = [];
+      this.tableauIndexSelectionner.forEach((valeur, cle)=>{
+        listAtt.push(valeur.attribut.id);
+      });
+    
+      this.tableauAttributsTemp = [];
+      let tmpTab =  this.data.dataSourceAttributDocument.data;
+      tmpTab.forEach(
+        (att : IAttributs) =>{
+          if(!listAtt.includes(att.id) && !this.verifierSiExiste(att.ordre)){
+            this.tableauAttributsTemp.push(att);
+          }
+      });
+      this.dataSourceAttributTemp = new MatTableDataSource<IAttributs>(this.tableauAttributsTemp);
+      this.tableauIndexSelectionner = new Map;
+    }else{
+
+      this.tableauAttributsTemp = this.data.dataSourceAttributDocument.data
     }
+      this.dataSourceAttributTemp.data = this.tableauAttributsTemp;
   }
 
   validerCategorie(categorieAttributInput:any,value : any, index : number, event: any){
@@ -92,8 +112,10 @@ export class ModalCategoriesComponent implements OnInit {
 
     this.validation = true
     if(this.formeCategorieAttribut.invalid) return;
-    
-    if (event.target.checked && !this.verifierSiExiste(value.ordre)) {
+
+    //this.verifierSiExiste(value.ordre)
+
+    if (event.target.checked && this.ordreAttributExiste == false) {
         const categorieAttributsTemp : ICategorieAffichage ={
           id: uuidv4(),
           nom: categorieAttributInput.nomCategorie,
@@ -103,7 +125,7 @@ export class ModalCategoriesComponent implements OnInit {
       
       this.tableauIndexSelectionner.set(index,categorieAttributsTemp);
 
-    } else if(!event.target.checked && this.verifierSiExiste(value.ordre)) {
+    } else if(!event.target.checked && this.ordreAttributExiste == true) {
       this.tableauIndexSelectionner.delete(index);
     }
  }
@@ -111,12 +133,14 @@ export class ModalCategoriesComponent implements OnInit {
     
     let tmpTab =  this.tableResultatsCategoriesAffichage.data;
     let ordreAttributExiste = false
+    this.ordreAttributExiste = false
     tmpTab.forEach(
       (cat : ICategorieAffichage) =>{
         if (cat.attribut.ordre == ordre) {
           ordreAttributExiste = true
         }
     });
+    this.ordreAttributExiste = ordreAttributExiste
     return ordreAttributExiste
   }
 
@@ -128,8 +152,7 @@ export class ModalCategoriesComponent implements OnInit {
 
     this.TABLE_CATEGORIE_AFFICHAGE_TEMP=this.tableResultatsCategoriesAffichage.data;
     this.tableauIndexSelectionner.forEach((valeur, cle)=>{
-      this.verifierSiExiste(valeur.ordre)
-      if(this.verifierSiExiste(valeur.ordre)) return;
+      if(this.ordreAttributExiste == true) return;
       this.TABLE_CATEGORIE_AFFICHAGE_TEMP.push(valeur);
     });
     this.tableResultatsCategoriesAffichage.data =  this.TABLE_CATEGORIE_AFFICHAGE_TEMP;
@@ -149,7 +172,7 @@ export class ModalCategoriesComponent implements OnInit {
     let tmpTab =  this.dataSourceAttributTemp.data;
     tmpTab.forEach(
       (att : IAttributs) =>{
-        if(!listAtt.includes(att.id) && !this.verifierSiExiste(att.ordre)){
+        if(!listAtt.includes(att.id) && this.ordreAttributExiste == false){
           this.tableauAttributsTemp.push(att);
         }
     });
