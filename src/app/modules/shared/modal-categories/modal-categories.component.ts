@@ -28,14 +28,17 @@ export class ModalCategoriesComponent implements OnInit {
   titre: string="Ajouter une categorie";
   submitted: boolean=false;
   validation: boolean=false;
-  displayedCategoriesAttributsColumns: string[] = ['actions','nomCategorie', 'ordreCat', 'libelleAttribut', 'ordreAtrParCat']; // structure du tableau presentant les categories creees avec leurs attributs
-  displayedCategoriesColumns: string[] = ['actions','titre', 'description', 'type', 'ordreAtrParCat'];  // structure du tableau presentant les choix des attributs lors de la creation des categories
-  ordreAttributExiste : boolean = false
-  ordreCategorieExiste : boolean = false
+
+  // structure du tableau presentant les categories creees avec leurs attributs
+  displayedCategoriesAttributsColumns: string[] = ['actions','nomCategorie', 'ordreCat', 'libelleAttribut', 'ordreAtrParCat']; 
+  // structure du tableau presentant les choix des attributs lors de la creation des categories
+  displayedCategoriesColumns: string[] = ['actions','titre', 'description', 'type', 'ordreAtrParCat'];  
+  
   nomValide : boolean = false
   
-  // variables pour la gestion des categories
-  dataSourceAttributTemp = new MatTableDataSource<IAttributs>(); //tableau de listing des attributs a affecter a chaque categorie
+  //tableau de listing des attributs a affecter a chaque categorie
+  dataSourceAttributTemp = new MatTableDataSource<IAttributs>(); 
+  
   categorieAttributs : ICategoriesAttributs = {
     id: '',
     nom: '',
@@ -54,8 +57,8 @@ export class ModalCategoriesComponent implements OnInit {
     valeursParDefaut: '',
     type: TypeTicket.Int
   }
-
-  TABLE_CATEGORIE_AFFICHAGE_TEMP: ICategorieAffichage[] = []; // tableau contenant les categories creees a partir du premier tableau de la modal
+// tableau contenant les categories creees a partir du premier tableau de la modal
+  TABLE_CATEGORIE_AFFICHAGE_TEMP: ICategorieAffichage[] = []; 
   tableResultatsCategoriesAffichage  = new MatTableDataSource<ICategorieAffichage>(this.TABLE_CATEGORIE_AFFICHAGE_TEMP);
 
   tableauAttributsTemp : IAttributs[] = []
@@ -112,10 +115,13 @@ export class ModalCategoriesComponent implements OnInit {
 
     this.validation = true
     if(this.formeCategorieAttribut.invalid) return;
-
-    //this.verifierSiExiste(value.ordre)
-
-    if (event.target.checked && this.ordreAttributExiste == false) {
+    /**
+     * il est préférable d'appeler vérifierSiExiste au besoin car il faut travailler avec l'ordre courant
+     * si besoin de réutiliser une variable dans ce cas alors tu la déclares en local 
+     *  let ordreAttributExiste : boolean = this.verifierSiExiste(value.ordre)
+     */
+//&& ordreAttributExiste == false
+    if (event.target.checked ) {
         const categorieAttributsTemp : ICategorieAffichage ={
           id: uuidv4(),
           nom: categorieAttributInput.nomCategorie,
@@ -124,8 +130,8 @@ export class ModalCategoriesComponent implements OnInit {
         }
       
       this.tableauIndexSelectionner.set(index,categorieAttributsTemp);
-
-    } else if(!event.target.checked && this.ordreAttributExiste == true) {
+//&& this.ordreAttributExiste == true
+    } else if(!event.target.checked ) {
       this.tableauIndexSelectionner.delete(index);
     }
  }
@@ -133,14 +139,12 @@ export class ModalCategoriesComponent implements OnInit {
     
     let tmpTab =  this.tableResultatsCategoriesAffichage.data;
     let ordreAttributExiste = false
-    this.ordreAttributExiste = false
     tmpTab.forEach(
       (cat : ICategorieAffichage) =>{
         if (cat.attribut.ordre == ordre) {
           ordreAttributExiste = true
         }
     });
-    this.ordreAttributExiste = ordreAttributExiste
     return ordreAttributExiste
   }
 
@@ -152,7 +156,9 @@ export class ModalCategoriesComponent implements OnInit {
 
     this.TABLE_CATEGORIE_AFFICHAGE_TEMP=this.tableResultatsCategoriesAffichage.data;
     this.tableauIndexSelectionner.forEach((valeur, cle)=>{
-      if(this.ordreAttributExiste == true) return;
+     //inutile controle déjà fait sur le clic du checkbox 
+     //en plus ici tu ne controles pas l'ordre courant donc si le dernier controlé a déjà un autre les prochains ne marcheront pas
+      // if(this.ordreAttributExiste == true) return;
       this.TABLE_CATEGORIE_AFFICHAGE_TEMP.push(valeur);
     });
     this.tableResultatsCategoriesAffichage.data =  this.TABLE_CATEGORIE_AFFICHAGE_TEMP;
@@ -171,8 +177,8 @@ export class ModalCategoriesComponent implements OnInit {
     this.tableauAttributsTemp = [];
     let tmpTab =  this.dataSourceAttributTemp.data;
     tmpTab.forEach(
-      (att : IAttributs) =>{
-        if(!listAtt.includes(att.id) && this.ordreAttributExiste == false){
+      (att : IAttributs) =>{ //&& this.ordreAttributExiste == false 
+        if(!listAtt.includes(att.id) ){
           this.tableauAttributsTemp.push(att);
         }
     });
