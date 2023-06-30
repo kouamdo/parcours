@@ -95,7 +95,7 @@ export class ModalCategoriesComponent implements OnInit {
       let tmpTab =  this.data.dataSourceAttributDocument.data;
       tmpTab.forEach(
         (att : IAttributs) =>{
-          if(!listAtt.includes(att.id) && !this.verifierSiExiste(att.ordre)){
+          if(!listAtt.includes(att.id) ){
             this.tableauAttributsTemp.push(att);
           }
       });
@@ -108,9 +108,10 @@ export class ModalCategoriesComponent implements OnInit {
       this.dataSourceAttributTemp.data = this.tableauAttributsTemp;
   }
 
-  validerCategorie(categorieAttributInput:any,value : any, index : number, event: any){
+
+  validerCategorie(categorieAttributInput:any,attribut : any, index : number, event: any){
     console.log(this.dataSourceAttributTemp.data);
-    console.log(value);
+    console.log(attribut);
     console.log(index);
 
     this.validation = true
@@ -120,13 +121,40 @@ export class ModalCategoriesComponent implements OnInit {
      * si besoin de réutiliser une variable dans ce cas alors tu la déclares en local 
      *  let ordreAttributExiste : boolean = this.verifierSiExiste(value.ordre)
      */
-//&& ordreAttributExiste == false
+
+    //controle des doublons dans le premier tableau
+    let ordreExist : boolean = this.verifierSiOrdreExistePremierTableau(attribut.ordre);
+    if(ordreExist){
+      alert("interdit doublon d'ordre d'attribut");
+      event.target.checked=false;
+      return;
+    }
+
+    //controle des doublons dans le second tableau
+    let ordreAttributExiste : number =  this.verifierSiExisteCategorieAttributOrdre(attribut.ordre, categorieAttributInput.nomCategorie, categorieAttributInput.ordreCategorie);
+    if(ordreAttributExiste==1){
+      alert("doublon d'ordre d'attribut interdit");
+      event.target.checked=false;
+      return;
+    }
+    else if(ordreAttributExiste==2){
+      alert("Catégorie avec deux ordres différents interdit");
+      event.target.checked=false;
+      return;
+    }
+    else if(ordreAttributExiste==3){
+      alert("Catégorie différente avec un ordre existant interdit");
+      event.target.checked=false;
+      return;
+    }
+
+    //si pas de doublon, on sauvegarde l'information cochée
     if (event.target.checked ) {
         const categorieAttributsTemp : ICategorieAffichage ={
           id: uuidv4(),
           nom: categorieAttributInput.nomCategorie,
           ordre: categorieAttributInput.ordreCategorie,
-          attribut: value
+          attribut: attribut
         }
       
       this.tableauIndexSelectionner.set(index,categorieAttributsTemp);
@@ -135,9 +163,14 @@ export class ModalCategoriesComponent implements OnInit {
       this.tableauIndexSelectionner.delete(index);
     }
  }
-  verifierSiExiste(ordre : any): boolean{
+ /**
+  * vérifie que l'ordre de l'attribut nouvelle selectionnée n'existe pas dans le meme tableau
+  * @param ordre 
+  * @returns 
+  */
+  verifierSiOrdreExistePremierTableau(ordre : number): boolean{
     
-    let tmpTab =  this.tableResultatsCategoriesAffichage.data;
+    let tmpTab =  this.tableauIndexSelectionner;
     let ordreAttributExiste = false
     tmpTab.forEach(
       (cat : ICategorieAffichage) =>{
@@ -145,6 +178,42 @@ export class ModalCategoriesComponent implements OnInit {
           ordreAttributExiste = true
         }
     });
+    return ordreAttributExiste
+  }
+
+  /**
+   * Methode qui permet de vérifier dans le second tableau si chaque catégorie a un ordre distinct
+   * et si tous les attributs d'une même catégorie ont des ordres distincts
+   * @param ordreAttribut 
+   * @param nomCategorie 
+   * @param ordreCategorie 
+   * @returns 
+   */
+  verifierSiExisteCategorieAttributOrdre(ordreAttribut : number, nomCategorie : string, ordreCategorie : number) : number{
+    let tmpTab =  this.tableResultatsCategoriesAffichage.data;
+    let ordreAttributExiste :number = 0;
+
+    for (let index = 0; index < tmpTab.length; index++) {
+      const element = tmpTab[index];
+      if(element.nom.localeCompare(nomCategorie)==0){
+        //si deux attributs de la meme catégorie ont un meme ordre
+         if (element.attribut.ordre == ordreAttribut) {
+           ordreAttributExiste = 1;
+           break;
+         }
+         //si la même catégorie a un ordre différent
+         if(element.ordre != ordreCategorie){
+           ordreAttributExiste = 2;
+           break;
+         }
+       }
+       else{ //si c'est une nouvelle catégorie dans le tableau  
+         if(element.ordre == ordreCategorie){ //si la même catégorie a un ordre différent
+           ordreAttributExiste = 3;
+           break;
+         }
+       }
+    }
     return ordreAttributExiste
   }
 
