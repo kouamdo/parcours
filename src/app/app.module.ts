@@ -25,7 +25,9 @@ import { FamilleModule } from './modules/famille/famille.module';
 import { RessourceModule } from './modules/ressource/ressource.module';
 import { PrecomvtqteModule } from './modules/precomvtqte/precomvtqte.module';
 import { PrecomvtModule } from './modules/precomvt/precomvt.module';
-
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { CommonModule } from '@angular/common';
 
 
 @NgModule({
@@ -40,6 +42,7 @@ import { PrecomvtModule } from './modules/precomvt/precomvt.module';
     AppRoutingModule,
     ReactiveFormsModule,
     FormsModule,
+    MatCheckboxModule,
     HttpClientInMemoryWebApiModule.forRoot(InMemDBService, {dataEncapsulation: false, passThruUnknownUrl: true}),
     PatientsModule,
     ServicesModule,
@@ -51,6 +54,8 @@ import { PrecomvtModule } from './modules/precomvt/precomvt.module';
     RessourceModule,
     PrecomvtqteModule,
     PrecomvtModule,
+    NgMultiSelectDropDownModule.forRoot(),
+    CommonModule,
     // ngx-translate and the loader module
     HttpClientModule,
     TranslateModule.forRoot({

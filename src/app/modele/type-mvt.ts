@@ -1,5 +1,5 @@
 export enum TypeMvt {
-  assigner = "Assigner",
+  neutre = "Neutre",
   retrait = "Retrait",
   reduire = "Reduire",
 }

@@ -31,7 +31,7 @@ export class InMemDBService implements InMemoryDbService{
   typeBoolean = TypeTicket.Boolean;
   typeDate = TypeTicket.Date;
 
-  TypeMvtAssigner = TypeMvt.assigner
+  TypeMvtNeutre = TypeMvt.neutre
   TypeMvtRetrait = TypeMvt.retrait
   TypeMvtReduire = TypeMvt.reduire
 
@@ -187,7 +187,7 @@ export class InMemDBService implements InMemoryDbService{
       ];
 
       let precomvtqte:IPrecomvtqte[]=[
-        {id:"1",libelle:"achat",quantiteMin:10,  quantiteMax:20,  montantMin:1000, montantMax:7000, type:this.TypeMvtAssigner,
+        {id:"1",libelle:"achat",quantiteMin:10,  quantiteMax:20,  montantMin:1000, montantMax:7000, type:this.TypeMvtNeutre,
         ressource:{id:"1", libelle:"transfusion",etat:true,quantite:10,unite:this.UnitesLitre,prix:1000,
                 famille:{id:"4", libelle:"néonat", description:"nouveau-né", etat:"malade"}},
         famille:[
@@ -198,9 +198,9 @@ export class InMemDBService implements InMemoryDbService{
             },];
 
       let precomvt:IPrecomvt[]=[
-                {id:"1",libelle:"rachat",etat: true,type:this.TypeMvtAssigner,
+                {id:"1",libelle:"rachat",etat: true,type:this.TypeMvtNeutre,
                 precomvtqte:[
-                  {id:"1",libelle:"achat",quantiteMin:10,  quantiteMax:20,  montantMin:1000, montantMax:7000, type:this.TypeMvtAssigner,
+                  {id:"1",libelle:"achat",quantiteMin:10,  quantiteMax:20,  montantMin:1000, montantMax:7000, type:this.TypeMvtNeutre,
         ressource:{id:"1", libelle:"transfusion",etat:true,quantite:10,unite:this.UnitesLitre,prix:1000,
                 famille:{id:"4", libelle:"néonat", description:"nouveau-né", etat:"malade"}},
         famille:[

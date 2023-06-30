@@ -6,7 +6,7 @@ import { TypeUnite } from 'src/app/modele/type-unite';
 
 import {v4 as uuidv4} from 'uuid';
 import { MatTableDataSource } from '@angular/material/table';
-import { EMPTY, Observable } from 'rxjs';
+import { EMPTY, Observable, single } from 'rxjs';
 
 import { PrecomvtsService } from 'src/app/services/precomvts/precomvts.service';
 import { IPrecomvt } from 'src/app/modele/precomvt';
@@ -14,6 +14,10 @@ import { IRessource } from 'src/app/modele/ressource';
 import { IFamille } from 'src/app/modele/famille';
 import { Unites } from 'src/app/modele/unites';
 import { RessourcesService } from 'src/app/services/ressources/ressources.service';
+import { IPrecomvtqte } from 'src/app/modele/precomvtqte';
+import { TypeMvt } from 'src/app/modele/type-mvt';
+import { PrecomvtqtesService } from 'src/app/services/precomvtqtes/precomvtqtes.service';
+import { IDropdownSettings} from 'ng-multiselect-dropdown/multiselect.model';
 
 @Component({
   selector: 'app-new-precomvt',
@@ -22,40 +26,196 @@ import { RessourcesService } from 'src/app/services/ressources/ressources.servic
 })
 export class NewPrecomvtComponent implements OnInit {
 
-forme=new FormGroup({
-  libelle:new FormControl(''),
-  etat:new FormControl(''),
-  type:new FormControl(''),
-famille:new FormGroup({
-  quantiteMin:new FormControl(''),
-  quantiteMax:new FormControl(''),
-  montantMin:new FormControl(''),
-  montantMax:new FormControl('')
-  }),
-ressource:new FormGroup({
-  quantiteMin:new FormControl(''),
-  quantiteMax:new FormControl(''),
-  montantMin:new FormControl(''),
-  montantMax:new FormControl('')
-    })
-});
-btnLibelle: string="Ajouter";
-steps:any =1;
+  forme=new FormGroup({
+    libelle:new FormControl(''),
+    etat:new FormControl(''),
+    type:new FormControl(''),
+  assignerFamilles:new FormGroup({
+    famille:new FormControl(''),
+    quantiteMin:new FormControl(''),
+    quantiteMax:new FormControl(''),
+    montantMin:new FormControl(''),
+    montantMax:new FormControl('')
+    }),
+  assignerRessource:new FormGroup({
+    ressource:new FormControl(''),
+    quantiteMin:new FormControl(''),
+    quantiteMax:new FormControl(''),
+    montantMin:new FormControl(''),
+    montantMax:new FormControl('')
+      })
+  });
 
+  precomvt : IPrecomvt|undefined;
+  //forme: FormGroup;
+  btnLibelle: string="Ajouter";
+  submitted: boolean=false;
+  steps:any =1;
+  btnRessource: string="Ressource";
+  precomvts$:Observable<IRessource>=EMPTY;
+  myControl = new FormControl<string | IRessource>('');
+  filteredOptions: IRessource[] | undefined;
+  dataSource = new MatTableDataSource<IRessource>();
+  famille$:Observable<IFamille[]>=EMPTY;
+  typeEchange!: TypeMvt;
+  Laressource: IRessource = {
+    id: '',
+    libelle: '',
+    etat:true,
+    quantite: 0,
+    prix: 0,
+    unite:Unites.litre,
+    famille:{
+      id: '',
+      libelle: '',
+      description: '',
+      etat: ''
+    },
 
-constructor(){ }
+  };
+  famille:IFamille ={
+    id: '',
+    libelle: '',
+    description: '',
+    etat: ''
+  };
 
-  ngOnInit() {
+  precomvtqte : IPrecomvtqte = {
+    id:'',
+    libelle:'',
+    quantiteMin:0,
+    quantiteMax:0,
+    montantMin:0,
+    montantMax:0,
+    type:this. typeEchange,
+    ressource:this. Laressource,
+    famille:[],
+  }
 
+  dropdownList:any = [];
+  selectedItems:any = [];
+  dropdownSettings = {};
+
+  constructor(private formBuilder:FormBuilder,private precomvtqteService:PrecomvtqtesService ,private ressourceService:RessourcesService ,private precomvtService:PrecomvtsService,private serviceRessource:RessourcesService,private servicePrecomvt:PrecomvtsService,private servicePrecomvtqte:PrecomvtqtesService,private router:Router, private infosPath:ActivatedRoute, private datePipe: DatePipe) {
+
+  };
+
+  ngOnInit(): void {
+    this.getAllRessources().subscribe(valeurs => {
+      this.dataSource.data = valeurs;
+    });
+    this.myControl.valueChanges.subscribe(
+      value => {
+        const libelle = typeof value === 'string' ? value : value?.libelle;
+        if(libelle != undefined && libelle?.length >0){
+          this.serviceRessource.getRessourcesByLibelle(libelle.toLowerCase() as string).subscribe(
+            reponse => {
+              this.filteredOptions = reponse;
+            }
+          )
+        }
+        else{
+          this.filteredOptions = [];
+        }
+
+      }
+    );
+
+    this.dropdownList= [
+      {item_id: 1, item_text: 'trans'},
+      {item_id: 2, item_text: 'trans'},
+      {item_id: 3, item_text: 'trans'},
+      {item_id: 4, item_text: 'trans'}
+    ];
+
+    this.selectedItems = [
+      {item_id: 3, item_text: 'trans'},
+      {item_id: 4, item_text: 'trans'}
+    ];
+    this.dropdownSettings = {
+      singleSelection: false,
+      idField: 'item_id',
+      textField: 'item_text',
+      selectAllText: 'Select All',
+      unSelectAllText: 'UnSelect All',
+      itemsShowLimit: 3,
+      allowSearchFilter: true
+    };
+    console.log(this.selectedItems)
+}
+onItemSelect(ev:any){
+ console.log(ev);
+}
+onSelectAll(ev:any){
+  console.log(ev);
+}
+
+  get f(){
+    return this.forme.controls;
 
   }
-onSubmit() {
- this.steps= this.steps +1;
- console.log(this.forme.value);
+  back(){
+    this.steps= this.steps -1;
+  }
+
+  getIdRessource(id_ressource : string){
+
+    this.serviceRessource.getRessourceById(id_ressource).subscribe(
+      ressource =>{
+        this.Laressource = ressource
+      }
+    )
+  }
+
+  onSubmit(){
+    this.steps= this.steps +1;
+    console.log(this.forme.value);
 }
-back(){
-  this.steps= this.steps -1;
+
+private getAllRessources(){
+  return this.serviceRessource.getAllRessources();
 }
+displayFn(ressource: IRessource): string {
+  return ressource && ressource.libelle ? ressource.libelle : '';
+}
+public rechercherListingRessource(option: IRessource){
+  this.serviceRessource.getRessourcesByLibelle(option.libelle.toLowerCase()).subscribe(
+      valeurs => {this.dataSource.data = valeurs;}
+  )
+}
+
+valPrecomvtqte(precomvtqteInput:any){
+  this.submitted=true;
+  if(this.forme.invalid) return;
+  let precomvtqteTemp : IPrecomvtqte={
+    id: uuidv4(),
+    libelle: precomvtqteInput.libelle,
+    //etat: precomvtqteInput.etat,
+    type: precomvtqteInput.type,
+    ressource: this.Laressource,
+    famille:[],
+    quantiteMin:precomvtqteInput.quantiteMin,
+    quantiteMax:precomvtqteInput.quantiteMax,
+    montantMin:precomvtqteInput.montantMin,
+    montantMax:precomvtqteInput.montantMax,
+ }
+ if(this.precomvtqte != undefined){
+  precomvtqteTemp.id = this.precomvtqte.id
+}
+precomvtqteTemp.ressource = this.Laressource
+console.log('voici la ressource de cette ressource : ', precomvtqteTemp.ressource)
+this.precomvtqteService.ajouterPrecomvtqte(precomvtqteTemp).subscribe(
+  object => {
+    this.router.navigate(['list-precomvts']);
+  },
+  error =>{
+    console.log(error)
+  }
+)
 }
 
 
+}
+function getIdressource(idressource: any, string: any) {
+throw new Error('Function not implemented.');
+}
