@@ -49,7 +49,7 @@
                   </div>
 
 
-                  <div formGroupName="assignerFamilles"   *ngIf="steps==2">
+                  <div formGroupName= "assignerFamilles"   *ngIf="steps==2">
                     <div class="card-header pt-4 pb-4 entete1" >Assigner aux Familles</div>
                     <div class="form-group">
                           <div class="champs">
@@ -57,14 +57,14 @@
                               Famille
                               </label>
                              <!-- <input type="text" formControlName="famille" name="famille" id="famille"  placeholder="famille"  class="form-control" required>-->
-                             <ng-multiselect-dropdown
+                             <!-- <ng-multiselect-dropdown
                              [placeholder]="'custom placeholder'"
                              [data]= "dropdownList"
                              [(ngModel)]= "selectedItems" formControlName="selectedItems"
                              [settings]= "dropdownSettings"
                              (onSelect)="onItemSelect($event)"
                              (onSelectAll)="onSelectAll($event)">
-                           </ng-multiselect-dropdown>
+                           </ng-multiselect-dropdown>-->
 
                           </div>
                            <!--<div  *ngIf="submitted && f['famille'].errors"  class="alert alert-danger" >
@@ -195,6 +195,15 @@
           </div>
 
 
+          <div formGroupName="verifiezInformations" *ngIf="steps==4">
+            <div class="card-header pt-4 pb-4 entete3">Verifiez vos Informations</div>
+            <div>{{forme.value.libelle}}</div>
+            <div>{{forme.value.etat}}</div>
+            <div>{{forme.value.type}}</div>
+            <div>{{forme.value.assignerFamilles}}</div>
+
+
+        </div>
 
 
 
@@ -206,10 +215,11 @@
               </div>
               <div class="actionButton">
                 <a class="btn"  *ngIf="steps !=1" (click)="back()">Back</a>
-                <button class="btn"  *ngIf="steps !==3" (click)="steps =2">Famille</button>
-                <button class="btn" *ngIf="steps  !==3" (click)="steps =3" >Ressource</button>
+                <button  type="submit" class="btn" *ngIf="steps !=1" (click)="forSubmit()" value="envoie des données">Enregistrer</button>
+                <button class="btn" *ngIf="steps !=4" (click)="steps =2">Famille</button>
+                <button class="btn" *ngIf="steps  !=4" (click)="steps =3" >Ressource</button>
                 <button type="submit" class="btn" routerLink="../list-precomvts" *ngIf="steps ==4">Envoyer</button>
-                <button type="submit" class="btn" *ngIf="steps  ==4">Annuler</button>
+                <button class="btn" *ngIf="steps  ==4">Annuler</button>
                 <!--<button type="submit" class="btn" *ngIf="steps ==3">{{btnLibelle}}</button>-->
                 </div>
             </div>

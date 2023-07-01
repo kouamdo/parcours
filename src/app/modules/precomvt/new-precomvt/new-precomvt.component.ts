@@ -43,7 +43,26 @@ export class NewPrecomvtComponent implements OnInit {
     quantiteMax:new FormControl(''),
     montantMin:new FormControl(''),
     montantMax:new FormControl('')
-      })
+      }),
+  verifiezInformations:new FormGroup({
+    libelle:new FormControl(''),
+    etat:new FormControl(''),
+    type:new FormControl(''),
+  assignerFamilles:new FormGroup({
+    famille:new FormControl(''),
+    quantiteMin:new FormControl(''),
+    quantiteMax:new FormControl(''),
+    montantMin:new FormControl(''),
+    montantMax:new FormControl('')
+    }),
+  assignerRessource:new FormGroup({
+    ressource:new FormControl(''),
+    quantiteMin:new FormControl(''),
+    quantiteMax:new FormControl(''),
+    montantMin:new FormControl(''),
+    montantMax:new FormControl('')
+    }),
+  })
   });
 
   precomvt : IPrecomvt|undefined;
@@ -95,6 +114,9 @@ export class NewPrecomvtComponent implements OnInit {
   dropdownList:any = [];
   selectedItems:any = [];
   dropdownSettings = {};
+  assignerFamilles: any;
+  assignerRessource: any;
+
 
   constructor(private formBuilder:FormBuilder,private precomvtqteService:PrecomvtqtesService ,private ressourceService:RessourcesService ,private precomvtService:PrecomvtsService,private serviceRessource:RessourcesService,private servicePrecomvt:PrecomvtsService,private servicePrecomvtqte:PrecomvtqtesService,private router:Router, private infosPath:ActivatedRoute, private datePipe: DatePipe) {
 
@@ -213,7 +235,9 @@ this.precomvtqteService.ajouterPrecomvtqte(precomvtqteTemp).subscribe(
   }
 )
 }
-
+forSubmit(){
+   this.assignerRessource.push(new FormControl());
+}
 
 }
 function getIdressource(idressource: any, string: any) {
