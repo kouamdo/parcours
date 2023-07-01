@@ -79,15 +79,16 @@ export class ModalCategoriesComponent implements OnInit {
     
   ngOnInit(): void {
     console.log(this.data.dataICategorieAffiche)
-    // this.tableauAttributsTemp = this.data.dataSourceAttributDocument.data
-    // this.dataSourceAttributTemp.data = this.tableauAttributsTemp;
 
       this.TABLE_CATEGORIE_AFFICHAGE_TEMP = this.data.dataICategorieAffiche
       this.tableResultatsCategoriesAffichage.data = this.TABLE_CATEGORIE_AFFICHAGE_TEMP;
     if (this.data.dataICategorieAffiche != null) {
 
       let listAtt : String[] = [];
-      this.tableauIndexSelectionner.forEach((valeur, cle)=>{
+      let listCatAtt  = this.tableResultatsCategoriesAffichage.data;
+
+      // je recupere les attributs dans le deuxieme tableau de la modal
+      listCatAtt.forEach((valeur, cle)=>{
         listAtt.push(valeur.attribut.id);
       });
     
