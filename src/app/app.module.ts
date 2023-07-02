@@ -26,7 +26,7 @@ import { RessourceModule } from './modules/ressource/ressource.module';
 import { PrecomvtqteModule } from './modules/precomvtqte/precomvtqte.module';
 import { PrecomvtModule } from './modules/precomvt/precomvt.module';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+//import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { CommonModule } from '@angular/common';
 
 
@@ -54,7 +54,7 @@ import { CommonModule } from '@angular/common';
     RessourceModule,
     PrecomvtqteModule,
     PrecomvtModule,
-    NgMultiSelectDropDownModule.forRoot(),
+    //NgMultiSelectDropDownModule.forRoot(),
     CommonModule,
     // ngx-translate and the loader module
     HttpClientModule,
