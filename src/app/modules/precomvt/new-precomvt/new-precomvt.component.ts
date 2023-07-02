@@ -17,7 +17,7 @@ import { RessourcesService } from 'src/app/services/ressources/ressources.servic
 import { IPrecomvtqte } from 'src/app/modele/precomvtqte';
 import { TypeMvt } from 'src/app/modele/type-mvt';
 import { PrecomvtqtesService } from 'src/app/services/precomvtqtes/precomvtqtes.service';
-import { IDropdownSettings} from 'ng-multiselect-dropdown/multiselect.model';
+//import { IDropdownSettings} from 'ng-multiselect-dropdown/multiselect.model';
 
 @Component({
   selector: 'app-new-precomvt',
@@ -48,7 +48,7 @@ export class NewPrecomvtComponent implements OnInit {
 
   precomvt : IPrecomvt|undefined;
   //forme: FormGroup;
-  btnLibelle: string="Ajouter";
+  btnLibelle: string="Enregistrer";
   submitted: boolean=false;
   steps:any =1;
   btnRessource: string="Ressource";
@@ -142,20 +142,25 @@ export class NewPrecomvtComponent implements OnInit {
       allowSearchFilter: true
     };
     console.log(this.selectedItems)
-}
-onItemSelect(ev:any){
- console.log(ev);
-}
-onSelectAll(ev:any){
+  }
+  onItemSelect(ev:any){
   console.log(ev);
-}
+  }
+  onSelectAll(ev:any){
+    console.log(ev);
+  }
 
   get f(){
     return this.forme.controls;
 
   }
+
+  next(){
+    this.steps= this.steps + 1;
+  }
+
   back(){
-    this.steps= this.steps -1;
+    this.steps= this.steps - 1;
   }
 
   getIdRessource(id_ressource : string){
@@ -168,54 +173,52 @@ onSelectAll(ev:any){
   }
 
   onSubmit(){
-    this.steps= this.steps +1;
+    //this.steps= this.steps +1;
     console.log(this.forme.value);
-}
-
-private getAllRessources(){
-  return this.serviceRessource.getAllRessources();
-}
-displayFn(ressource: IRessource): string {
-  return ressource && ressource.libelle ? ressource.libelle : '';
-}
-public rechercherListingRessource(option: IRessource){
-  this.serviceRessource.getRessourcesByLibelle(option.libelle.toLowerCase()).subscribe(
-      valeurs => {this.dataSource.data = valeurs;}
-  )
-}
-
-valPrecomvtqte(precomvtqteInput:any){
-  this.submitted=true;
-  if(this.forme.invalid) return;
-  let precomvtqteTemp : IPrecomvtqte={
-    id: uuidv4(),
-    libelle: precomvtqteInput.libelle,
-    //etat: precomvtqteInput.etat,
-    type: precomvtqteInput.type,
-    ressource: this.Laressource,
-    famille:[],
-    quantiteMin:precomvtqteInput.quantiteMin,
-    quantiteMax:precomvtqteInput.quantiteMax,
-    montantMin:precomvtqteInput.montantMin,
-    montantMax:precomvtqteInput.montantMax,
- }
- if(this.precomvtqte != undefined){
-  precomvtqteTemp.id = this.precomvtqte.id
-}
-precomvtqteTemp.ressource = this.Laressource
-console.log('voici la ressource de cette ressource : ', precomvtqteTemp.ressource)
-this.precomvtqteService.ajouterPrecomvtqte(precomvtqteTemp).subscribe(
-  object => {
-    this.router.navigate(['list-precomvts']);
-  },
-  error =>{
-    console.log(error)
   }
-)
-}
 
+  private getAllRessources(){
+    return this.serviceRessource.getAllRessources();
+  }
+  displayFn(ressource: IRessource): string {
+    return ressource && ressource.libelle ? ressource.libelle : '';
+  }
+  public rechercherListingRessource(option: IRessource){
+    this.serviceRessource.getRessourcesByLibelle(option.libelle.toLowerCase()).subscribe(
+        valeurs => {this.dataSource.data = valeurs;}
+    )
+  }
 
-}
-function getIdressource(idressource: any, string: any) {
-throw new Error('Function not implemented.');
+  valPrecomvtqte(precomvtqteInput:any){
+    this.submitted=true;
+    if(this.forme.invalid) return;
+    let precomvtqteTemp : IPrecomvtqte={
+      id: uuidv4(),
+      libelle: precomvtqteInput.libelle,
+      //etat: precomvtqteInput.etat,
+      type: precomvtqteInput.type,
+      ressource: this.Laressource,
+      famille:[],
+      quantiteMin:precomvtqteInput.quantiteMin,
+      quantiteMax:precomvtqteInput.quantiteMax,
+      montantMin:precomvtqteInput.montantMin,
+      montantMax:precomvtqteInput.montantMax,
+    }
+    if(this.precomvtqte != undefined){
+      precomvtqteTemp.id = this.precomvtqte.id
+    }
+    precomvtqteTemp.ressource = this.Laressource
+    console.log('voici la ressource de cette ressource : ', precomvtqteTemp.ressource)
+    this.precomvtqteService.ajouterPrecomvtqte(precomvtqteTemp).subscribe(
+      object => {
+        this.router.navigate(['list-precomvts']);
+      },
+      error =>{
+        console.log(error)
+      }
+    )}
+  }
+
+  function getIdressource(idressource: any, string: any) {
+  throw new Error('Function not implemented.');
 }
