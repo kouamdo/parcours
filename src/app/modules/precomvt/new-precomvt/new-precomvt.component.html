@@ -57,14 +57,13 @@
                               Famille
                               </label>
                              <!-- <input type="text" formControlName="famille" name="famille" id="famille"  placeholder="famille"  class="form-control" required>-->
-                             <!-- <ng-multiselect-dropdown
+                             <ng-multiselect-dropdown
                              [placeholder]="'custom placeholder'"
-                             [data]= "dropdownList"
-                             [(ngModel)]= "selectedItems" formControlName="selectedItems"
-                             [settings]= "dropdownSettings"
-                             (onSelect)="onItemSelect($event)"
-                             (onSelectAll)="onSelectAll($event)">
-                           </ng-multiselect-dropdown>-->
+                             [data]= "dropdownData"
+                             formControlName="myItems"
+                             [settings]= "settings"
+                             >
+                           </ng-multiselect-dropdown>
 
                           </div>
                            <!--<div  *ngIf="submitted && f['famille'].errors"  class="alert alert-danger" >
@@ -215,7 +214,7 @@
               </div>
               <div class="actionButton">
                 <a class="btn"  *ngIf="steps !=1" (click)="back()">Back</a>
-                <button  type="submit" class="btn" *ngIf="steps !=1" (click)="forSubmit()" value="envoie des données">Enregistrer</button>
+                <button  type="submit" class="btn" *ngIf="steps !=1" value="envoie des données">Enregistrer</button>
                 <button class="btn" *ngIf="steps !=4" (click)="steps =2">Famille</button>
                 <button class="btn" *ngIf="steps  !=4" (click)="steps =3" >Ressource</button>
                 <button type="submit" class="btn" routerLink="../list-precomvts" *ngIf="steps ==4">Envoyer</button>

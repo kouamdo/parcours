@@ -111,14 +111,16 @@ export class NewPrecomvtComponent implements OnInit {
     famille:[],
   }
 
-  dropdownList:any = [];
-  selectedItems:any = [];
-  dropdownSettings = {};
-  assignerFamilles: any;
-  assignerRessource: any;
+
+  dropdownData : any [] = [];
+  settings: IDropdownSettings = {};
+  selectedItems: any[] = [];
 
 
-  constructor(private formBuilder:FormBuilder,private precomvtqteService:PrecomvtqtesService ,private ressourceService:RessourcesService ,private precomvtService:PrecomvtsService,private serviceRessource:RessourcesService,private servicePrecomvt:PrecomvtsService,private servicePrecomvtqte:PrecomvtqtesService,private router:Router, private infosPath:ActivatedRoute, private datePipe: DatePipe) {
+
+
+
+  constructor(private fb:FormBuilder,private precomvtqteService:PrecomvtqtesService ,private ressourceService:RessourcesService ,private precomvtService:PrecomvtsService,private serviceRessource:RessourcesService,private servicePrecomvt:PrecomvtsService,private servicePrecomvtqte:PrecomvtqtesService,private router:Router, private infosPath:ActivatedRoute, private datePipe: DatePipe) {
 
   };
 
@@ -143,34 +145,27 @@ export class NewPrecomvtComponent implements OnInit {
       }
     );
 
-    this.dropdownList= [
-      {item_id: 1, item_text: 'trans'},
-      {item_id: 2, item_text: 'trans'},
-      {item_id: 3, item_text: 'trans'},
-      {item_id: 4, item_text: 'trans'}
+    this.dropdownData = [
+      {ID: 1, value: 'Data1'},
+      {ID: 2, value: 'Data2'},
+      {ID: 3, value: 'Data3'},
+      {ID: 4, value: 'Data4'},
     ];
 
-    this.selectedItems = [
-      {item_id: 3, item_text: 'trans'},
-      {item_id: 4, item_text: 'trans'}
-    ];
-    this.dropdownSettings = {
-      singleSelection: false,
-      idField: 'item_id',
-      textField: 'item_text',
-      selectAllText: 'Select All',
-      unSelectAllText: 'UnSelect All',
-      itemsShowLimit: 3,
-      allowSearchFilter: true
+    this.settings = {
+      idField: 'ID',
+      textField: 'value'
     };
-    console.log(this.selectedItems)
+
+    this.selectedItems =  [
+      {ID: 2, value: 'Data2'},
+      {ID: 3, value: 'Data3'},
+   ]
+    //this.forme = this.fb.group ({myItems: [this.selectedItems]});
+
 }
-onItemSelect(ev:any){
- console.log(ev);
-}
-onSelectAll(ev:any){
-  console.log(ev);
-}
+
+
 
   get f(){
     return this.forme.controls;
@@ -235,9 +230,7 @@ this.precomvtqteService.ajouterPrecomvtqte(precomvtqteTemp).subscribe(
   }
 )
 }
-forSubmit(){
-   this.assignerRessource.push(new FormControl());
-}
+
 
 }
 function getIdressource(idressource: any, string: any) {
