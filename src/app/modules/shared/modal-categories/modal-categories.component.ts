@@ -109,19 +109,22 @@ export class ModalCategoriesComponent implements OnInit {
       this.dataSourceAttributTemp.data = this.tableauAttributsTemp;
   }
 
-
-  validerCategorie(categorieAttributInput:any,attribut : any, index : number, event: any){
+  /**
+   * fonction qui permet d'ajouter des categories au check dans un tableau temporaire
+   * avant des les enregistrer dans le deuxieme tableau de la modale
+   * @param categorieAttributInput 
+   * @param attribut 
+   * @param index 
+   * @param event 
+   * @returns 
+   */
+  selectionnerCategorieCheck(categorieAttributInput:any,attribut : any, index : number, event: any){
     console.log(this.dataSourceAttributTemp.data);
     console.log(attribut);
     console.log(index);
 
     this.validation = true
     if(this.formeCategorieAttribut.invalid) return;
-    /**
-     * il est préférable d'appeler vérifierSiExiste au besoin car il faut travailler avec l'ordre courant
-     * si besoin de réutiliser une variable dans ce cas alors tu la déclares en local 
-     *  let ordreAttributExiste : boolean = this.verifierSiExiste(value.ordre)
-     */
 
     //controle des doublons dans le premier tableau
     let ordreExist : boolean = this.verifierSiOrdreExistePremierTableau(attribut.ordre);
@@ -159,11 +162,11 @@ export class ModalCategoriesComponent implements OnInit {
         }
       
       this.tableauIndexSelectionner.set(index,categorieAttributsTemp);
-//&& this.ordreAttributExiste == true
     } else if(!event.target.checked ) {
       this.tableauIndexSelectionner.delete(index);
     }
  }
+
  /**
   * vérifie que l'ordre de l'attribut nouvelle selectionnée n'existe pas dans le meme tableau
   * @param ordre 
@@ -226,9 +229,6 @@ export class ModalCategoriesComponent implements OnInit {
 
     this.TABLE_CATEGORIE_AFFICHAGE_TEMP=this.tableResultatsCategoriesAffichage.data;
     this.tableauIndexSelectionner.forEach((valeur, cle)=>{
-     //inutile controle déjà fait sur le clic du checkbox 
-     //en plus ici tu ne controles pas l'ordre courant donc si le dernier controlé a déjà un autre les prochains ne marcheront pas
-      // if(this.ordreAttributExiste == true) return;
       this.TABLE_CATEGORIE_AFFICHAGE_TEMP.push(valeur);
     });
     this.tableResultatsCategoriesAffichage.data =  this.TABLE_CATEGORIE_AFFICHAGE_TEMP;
@@ -247,11 +247,26 @@ export class ModalCategoriesComponent implements OnInit {
     this.tableauAttributsTemp = [];
     let tmpTab =  this.dataSourceAttributTemp.data;
     tmpTab.forEach(
-      (att : IAttributs) =>{ //&& this.ordreAttributExiste == false 
+      (att : IAttributs) =>{ 
         if(!listAtt.includes(att.id) ){
           this.tableauAttributsTemp.push(att);
         }
     });
+    this.dataSourceAttributTemp = new MatTableDataSource<IAttributs>(this.tableauAttributsTemp);
+    this.tableauIndexSelectionner = new Map;
+  }
+
+  supprimerCategorieAffiche(categorieAffichage : ICategorieAffichage, attribut : any, index : number){
+
+    //suppression des valeurs dans le second tableau 
+
+    this.TABLE_CATEGORIE_AFFICHAGE_TEMP=this.tableResultatsCategoriesAffichage.data;
+      this.TABLE_CATEGORIE_AFFICHAGE_TEMP.splice(index, 1);
+    this.tableResultatsCategoriesAffichage.data = this.TABLE_CATEGORIE_AFFICHAGE_TEMP;
+
+    //construction du tableau résiduel
+
+    this.tableauAttributsTemp.push(categorieAffichage.attribut);
     this.dataSourceAttributTemp = new MatTableDataSource<IAttributs>(this.tableauAttributsTemp);
     this.tableauIndexSelectionner = new Map;
   }

@@ -73,7 +73,7 @@
                                 <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{"patient.table.title8" | translate}} </th>
                                 <td class="text-dark containCell"  mat-cell *matCellDef="let element;  let i=index">
                                     <div class="actions">
-                                        <button class="btn p-0" name="attributs"  [value]="element" id="attributs" title="clicker pour ajouter un attributs a la categorie"  (change)="validerCategorie(formeCategorieAttribut.value,this.element, i, $event);">
+                                        <button class="btn p-0" name="attributs"  [value]="element" id="attributs" title="clicker pour ajouter un attributs a la categorie"  (change)="selectionnerCategorieCheck(formeCategorieAttribut.value,this.element, i, $event);">
                                             <span><input type="checkbox" [disabled] = "((formeCategorieAttribut.value.ordreCategorie < 0 ) || (formeCategorieAttribut.value.ordreCategorie == 0 )  || (formeCategorieAttribut.value.nomCategorie == '' ) )" name="" id="" class=""></span>
                                         </button>
                                     </div>
@@ -129,7 +129,8 @@
                                 <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{"patient.table.title8" | translate}} </th>
                                 <td class="text-dark containCell" mat-cell *matCellDef="let element;  let i=index">
                                     <div class="actions">
-                                        <button class="btn p-0" name="attributs"  [value]="element.id" id="attributs" title="clicker pour annuler la selection">
+                                        <button class="btn p-0" name="attributs"  [value]="element.id" id="attributs" title="clicker pour annuler la selection"
+                                                (click)="supprimerCategorieAffiche(element, element.attribut.ordre, i)">
                                             <i class="fa fa-trash text-danger" aria-hidden="true"></i>
                                         </button>
                                     </div>
