@@ -1,3 +1,4 @@
+
 <div id="mainSection">
   <div class="card block">
   <!--<div class="pt-4 pb-4 entete">Effectuer une Nouvelle PrecoMvt</div>-->
@@ -58,15 +59,14 @@
                               Famille
                               </label>
                              <!-- <input type="text" formControlName="famille" name="famille" id="famille"  placeholder="famille"  class="form-control" required>-->
-                             <!-- <ng-multiselect-dropdown
-                             <!-- <ng-multiselect-dropdown
-                             [placeholder]="'custom placeholder'"
-                             [data]= "dropdownList"
-                             [(ngModel)]= "selectedItems" formControlName="selectedItems"
-                             [settings]= "dropdownSettings"
-                             (onSelect)="onItemSelect($event)"
-                             (onSelectAll)="onSelectAll($event)">
-                           </ng-multiselect-dropdown> -->
+                             <select  type="text" formControlName="famille" name="famille" id="famille"  placeholder="famille"  class="form-control" required>
+                              <option>--select--</option>
+                              <option>trans</option>
+                              <option>trans</option>
+                              <option>trans</option>
+                              <option>trans</option>
+                          </select>
+
 
                           </div>
                            <!--<div  *ngIf="submitted && f['famille'].errors"  class="alert alert-danger" >
@@ -199,22 +199,24 @@
               <p>resume</p>
             </div>
 
-            <!-- les boutons pour l'enregistrement d'une prcoMvtQte -->
+            <!-- les boutons pour l'enregistrement d'une prcoMvtQte
             <div class="precoMvtQteButton">
               <button class="btn circleBtn" *ngIf="steps == 2 || steps == 3" (click)="back()" disabled>&laquo;</button>
-              <button class="btn" *ngIf="steps == 2 || steps == 3">Ajouter une prcoMvtQte</button>
+              <button class="btn" *ngIf="steps == 2 || steps == 3">Ajouter une PrécoMvtQte</button>
               <button class="btn circleBtn" *ngIf="steps == 2 || steps == 3" (click)="next()" disabled>&raquo;</button>
-            </div>
+            </div>-->
 
             <div class="actionButton">
               <button class="btn" *ngIf="steps == 0" (click)="back()">Back</button>
-              <button type="btn" class="btn" routerLink="../list-precomvts" >Annuler</button>
-              <button class="btn" (click)="steps = 1"> proco </button>
+              <button type="btn" class="btn"  routerLink="../list-precomvts">Annuler</button>
+             <!-- <button type="btn" class="btn" routerLink="../list-precomvts" >Ajouter</button>
+              <button class="btn" *ngIf="steps !=1" (click)="steps = 1"> préco </button>
+              <button class="btn" *ngIf="steps == 0" (click)="next()">Next</button> -->
               <button class="btn" (click)="steps = 2">Famille</button>
               <button class="btn" (click)="steps = 3" >Ressource</button>
-              <button type="btn" class="btn" *ngIf="steps != 4" (click)="steps = 4">Envoyer</button>
+              <button type="btn" class="btn" *ngIf="steps != 4" (click)="steps = 4">Recap</button>
               <button type="submit" class="btn" *ngIf="steps == 4">{{btnLibelle}}</button>
-              <button class="btn" *ngIf="steps == 0" (click)="next()">Next</button>
+
             </div>
             <!-- <div class="actionButton">
               <a class="btn"  *ngIf="steps > 1" (click)="back()">Back</a>

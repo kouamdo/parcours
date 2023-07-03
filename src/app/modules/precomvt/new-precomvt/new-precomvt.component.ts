@@ -17,6 +17,7 @@ import { RessourcesService } from 'src/app/services/ressources/ressources.servic
 import { IPrecomvtqte } from 'src/app/modele/precomvtqte';
 import { TypeMvt } from 'src/app/modele/type-mvt';
 import { PrecomvtqtesService } from 'src/app/services/precomvtqtes/precomvtqtes.service';
+import { IDropdownSettings } from 'ng-multiselect-dropdown';
 //import { IDropdownSettings} from 'ng-multiselect-dropdown/multiselect.model';
 
 @Component({
