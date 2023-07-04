@@ -130,7 +130,7 @@
                                 <td class="text-dark containCell" mat-cell *matCellDef="let element;  let i=index">
                                     <div class="actions">
                                         <button class="btn p-0" name="attributs"  [value]="element.id" id="attributs" title="clicker pour annuler la selection"
-                                                (click)="supprimerCategorieAffiche(element, element.attribut.ordre, i)">
+                                                (click)="supprimerCategorieAffiche(element, i)">
                                             <i class="fa fa-trash text-danger" aria-hidden="true"></i>
                                         </button>
                                     </div>

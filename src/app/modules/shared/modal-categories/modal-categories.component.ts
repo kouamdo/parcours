@@ -57,6 +57,7 @@ export class ModalCategoriesComponent implements OnInit {
     valeursParDefaut: '',
     type: TypeTicket.Int
   }
+
 // tableau contenant les categories creees a partir du premier tableau de la modal
   TABLE_CATEGORIE_AFFICHAGE_TEMP: ICategorieAffichage[] = []; 
   tableResultatsCategoriesAffichage  = new MatTableDataSource<ICategorieAffichage>(this.TABLE_CATEGORIE_AFFICHAGE_TEMP);
@@ -85,21 +86,33 @@ export class ModalCategoriesComponent implements OnInit {
     if (this.data.dataICategorieAffiche != null) {
 
       let listAtt : String[] = [];
+      let CATEGORIE_AFFICHAGE_TEMP : ICategorieAffichage[] = [];
       let listCatAtt  = this.tableResultatsCategoriesAffichage.data;
 
       // je recupere les attributs dans le deuxieme tableau de la modal
       listCatAtt.forEach((valeur, cle)=>{
         listAtt.push(valeur.attribut.id);
+        CATEGORIE_AFFICHAGE_TEMP.push(valeur);
       });
     
       this.tableauAttributsTemp = [];
       let tmpTab =  this.data.dataSourceAttributDocument.data;
       tmpTab.forEach(
         (att : IAttributs) =>{
-          if(!listAtt.includes(att.id) ){
+          if(!listAtt.includes(att.id)){
             this.tableauAttributsTemp.push(att);
           }
       });
+
+      //suppression des valeurs dans le second tableau
+      let TABLE_CATEGORIE_AFFICHAGE_TEMP : ICategorieAffichage[] = [];
+      CATEGORIE_AFFICHAGE_TEMP.forEach(
+        (attCat) =>{
+          if(!tmpTab.includes(attCat.attribut) ){
+            TABLE_CATEGORIE_AFFICHAGE_TEMP.push(attCat);
+          }
+      });
+      this.tableResultatsCategoriesAffichage = new MatTableDataSource<ICategorieAffichage>(TABLE_CATEGORIE_AFFICHAGE_TEMP);
       this.dataSourceAttributTemp = new MatTableDataSource<IAttributs>(this.tableauAttributsTemp);
       this.tableauIndexSelectionner = new Map;
     }else{
@@ -231,7 +244,7 @@ export class ModalCategoriesComponent implements OnInit {
     this.tableauIndexSelectionner.forEach((valeur, cle)=>{
       this.TABLE_CATEGORIE_AFFICHAGE_TEMP.push(valeur);
     });
-    this.tableResultatsCategoriesAffichage.data =  this.TABLE_CATEGORIE_AFFICHAGE_TEMP;
+    this.tableResultatsCategoriesAffichage.data = this.TABLE_CATEGORIE_AFFICHAGE_TEMP;
     
     //récupération des id attributs selectionnés 
 
@@ -256,12 +269,17 @@ export class ModalCategoriesComponent implements OnInit {
     this.tableauIndexSelectionner = new Map;
   }
 
-  supprimerCategorieAffiche(categorieAffichage : ICategorieAffichage, attribut : any, index : number){
+  /**
+   * methode de suppression des categories deja enregistrees dans le deuxieme tableau
+   * @param categorieAffichage 
+   * @param index 
+   */
+  supprimerCategorieAffiche(categorieAffichage : ICategorieAffichage, index : number){
 
     //suppression des valeurs dans le second tableau 
 
     this.TABLE_CATEGORIE_AFFICHAGE_TEMP=this.tableResultatsCategoriesAffichage.data;
-      this.TABLE_CATEGORIE_AFFICHAGE_TEMP.splice(index, 1);
+    this.TABLE_CATEGORIE_AFFICHAGE_TEMP.splice(index, 1);
     this.tableResultatsCategoriesAffichage.data = this.TABLE_CATEGORIE_AFFICHAGE_TEMP;
 
     //construction du tableau résiduel
