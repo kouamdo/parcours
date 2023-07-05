@@ -83,18 +83,15 @@ export class ModalCategoriesComponent implements OnInit {
 
       this.TABLE_CATEGORIE_AFFICHAGE_TEMP = this.data.dataICategorieAffiche
       this.tableResultatsCategoriesAffichage.data = this.TABLE_CATEGORIE_AFFICHAGE_TEMP;
-    if (this.data.dataICategorieAffiche != null) {
-
+    if (this.data.dataICategorieAffiche != null && this.data.dataICategorieAffiche.length >0) {
+      //Création du premier tableau si le deuxième n'est pas vide
       let listAtt : String[] = [];
-      let CATEGORIE_AFFICHAGE_TEMP : ICategorieAffichage[] = [];
       let listCatAtt  = this.tableResultatsCategoriesAffichage.data;
-
-      // je recupere les attributs dans le deuxieme tableau de la modal
+      //recuperation des id des attributs dans le deuxieme tableau de la modal
       listCatAtt.forEach((valeur, cle)=>{
         listAtt.push(valeur.attribut.id);
-        CATEGORIE_AFFICHAGE_TEMP.push(valeur);
       });
-    
+      //comparaison avec les ids du tableau initial pour exclure ce présent dans le second
       this.tableauAttributsTemp = [];
       let tmpTab =  this.data.dataSourceAttributDocument.data;
       tmpTab.forEach(
@@ -104,11 +101,11 @@ export class ModalCategoriesComponent implements OnInit {
           }
       });
 
-      //suppression des valeurs dans le second tableau
+      //suppression des valeurs dans le second tableau si les attributs ont été supprimé dans le tableau initial des attributs
       let TABLE_CATEGORIE_AFFICHAGE_TEMP : ICategorieAffichage[] = [];
-      CATEGORIE_AFFICHAGE_TEMP.forEach(
+      listCatAtt.forEach(
         (attCat) =>{
-          if(!tmpTab.includes(attCat.attribut) ){
+          if(tmpTab.includes(attCat.attribut) ){
             TABLE_CATEGORIE_AFFICHAGE_TEMP.push(attCat);
           }
       });
@@ -116,7 +113,7 @@ export class ModalCategoriesComponent implements OnInit {
       this.dataSourceAttributTemp = new MatTableDataSource<IAttributs>(this.tableauAttributsTemp);
       this.tableauIndexSelectionner = new Map;
     }else{
-
+      //Création du premier tableau si le deuxième est vide
       this.tableauAttributsTemp = this.data.dataSourceAttributDocument.data
     }
       this.dataSourceAttributTemp.data = this.tableauAttributsTemp;
@@ -245,6 +242,7 @@ export class ModalCategoriesComponent implements OnInit {
       this.TABLE_CATEGORIE_AFFICHAGE_TEMP.push(valeur);
     });
     this.tableResultatsCategoriesAffichage.data = this.TABLE_CATEGORIE_AFFICHAGE_TEMP;
+    this.data.dataICategorieAffiche.data = this.TABLE_CATEGORIE_AFFICHAGE_TEMP;
     
     //récupération des id attributs selectionnés 
 
