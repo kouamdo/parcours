@@ -88,7 +88,7 @@ export class ModalCategoriesComponent implements OnInit {
       let listAtt : String[] = [];
       let listCatAtt  = this.tableResultatsCategoriesAffichage.data;
       //recuperation des id des attributs dans le deuxieme tableau de la modal
-      listCatAtt.forEach((valeur, cle)=>{
+      listCatAtt.forEach(valeur=>{
         listAtt.push(valeur.attribut.id);
       });
       //comparaison avec les ids du tableau initial pour exclure ce présent dans le second
@@ -100,23 +100,28 @@ export class ModalCategoriesComponent implements OnInit {
             this.tableauAttributsTemp.push(att);
           }
       });
+      this.dataSourceAttributTemp = new MatTableDataSource<IAttributs>(this.tableauAttributsTemp);
 
       //suppression des valeurs dans le second tableau si les attributs ont été supprimé dans le tableau initial des attributs
       let TABLE_CATEGORIE_AFFICHAGE_TEMP : ICategorieAffichage[] = [];
-      listCatAtt.forEach(
-        (attCat) =>{
-          if(tmpTab.includes(attCat.attribut) ){
+      listCatAtt.forEach(attCat =>{
+        for (let index = 0; index < tmpTab.length; index++) {
+          const element = tmpTab[index];
+           if(element.id ==attCat.attribut.id ){
             TABLE_CATEGORIE_AFFICHAGE_TEMP.push(attCat);
+            break;
           }
+        }    
       });
       this.tableResultatsCategoriesAffichage = new MatTableDataSource<ICategorieAffichage>(TABLE_CATEGORIE_AFFICHAGE_TEMP);
-      this.dataSourceAttributTemp = new MatTableDataSource<IAttributs>(this.tableauAttributsTemp);
       this.tableauIndexSelectionner = new Map;
+      //sauvegarde de la nouvelle valeur du 2ème tableau
+      this.data.dataICategorieAffiche.data =  TABLE_CATEGORIE_AFFICHAGE_TEMP;
     }else{
       //Création du premier tableau si le deuxième est vide
       this.tableauAttributsTemp = this.data.dataSourceAttributDocument.data
     }
-      this.dataSourceAttributTemp.data = this.tableauAttributsTemp;
+    this.dataSourceAttributTemp.data = this.tableauAttributsTemp;
   }
 
   /**
