@@ -42,6 +42,7 @@ export class NewRessourceComponent implements OnInit {
       unite: ['', [Validators.required]],
       prix: ['', [Validators.required]],
       famille: [''],
+      caracteristique:['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]]
     })
   };
 
@@ -78,7 +79,8 @@ export class NewRessourceComponent implements OnInit {
             quantite: this.ressource?.quantite,
             unite: this.ressource.unite,
             prix: this.ressource?.prix,
-            famille: this.ressource.famille
+            famille: this.ressource.famille,
+            caracteristique:this.ressource.caracteristique
           })
       });
     }
@@ -106,7 +108,8 @@ export class NewRessourceComponent implements OnInit {
       quantite: ressourceInput.quantite,
       unite: ressourceInput.unite,
       prix: ressourceInput.prix,
-      famille:ressourceInput.famille
+      famille:ressourceInput.famille,
+      caracteristique:ressourceInput.caracteristique
     }
 
     if(this.ressource != undefined){

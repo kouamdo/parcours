@@ -215,7 +215,9 @@
         "title3":"Quantity",
         "title4":"Unit",
         "title5":"Price",
-        "title6":"Resource Category"
+        "title6":"Category",
+        "title7":"Caracteristic"
+
     },
     "form":{
         "text1":"Field Required",
@@ -226,7 +228,11 @@
         "text7":"quintals",
         "text8":"Field Required",
         "text9":"Field Required",
-        "text11":"Select a Unit"
+        "text11":"Select a Unit",
+        "text12":"soft",
+        "text13":"hard",
+        "text14":"light",
+        "text15":"Select your Characteristics"
     },
     "lists":{
       "button2":"Retour"
@@ -241,7 +247,7 @@
         "title5":" Quantity",
         "title6":" Unit",
         "title7":"price",
-        "title8":"Resource Category",
+        "title8":"Category",
         "title9":"Actions "
     }
 }

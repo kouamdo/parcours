@@ -11,6 +11,7 @@ export interface IPrecomvtqte {
   montantMin:number,
   montantMax:number,
   type:TypeMvt,
+  fournisseur:string,
   ressource:IRessource,
   famille:IFamille[],
 }

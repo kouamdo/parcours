@@ -57,56 +57,62 @@
                   </ng-container>
 
                   <!-- etat Column -->
-                  <ng-container matColumnDef="quantiteMinfamille">
+                  <ng-container matColumnDef="quantiteMin">
                       <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header>quantiteMin</th>
-                      <td class="text-dark text-center containCell" mat-cell *matCellDef="let element"> {{element.quantiteMinfamille}} </td>
+                      <td class="text-dark text-center containCell" mat-cell *matCellDef="let element"> {{element.quantiteMin}} </td>
                   </ng-container>
 
                     <!-- quantité Column -->
-                    <ng-container matColumnDef="quantiteMaxfamille">
+                    <ng-container matColumnDef="quantiteMax">
                       <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header>quantiteMax</th>
-                      <td class="text-dark text-center containCell" mat-cell *matCellDef="let element"> {{element.quantiteMaxfamille}} </td>
+                      <td class="text-dark text-center containCell" mat-cell *matCellDef="let element"> {{element.quantiteMax}} </td>
                   </ng-container>
 
                    <!-- unité Column -->
-                   <ng-container matColumnDef="montantMinfamille">
+                   <ng-container matColumnDef="montantMin">
                     <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header>montantMin</th>
-                    <td class="text-dark text-center containCell" mat-cell *matCellDef="let element"> {{element.montantMinfamille}} </td>
+                    <td class="text-dark text-center containCell" mat-cell *matCellDef="let element"> {{element.montantMin}} </td>
                 </ng-container>
 
                     <!-- prix Column -->
-                    <ng-container matColumnDef="montantMaxfamille">
+                    <ng-container matColumnDef="montantMax">
                       <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header>montantMax</th>
-                      <td class="text-dark text-center containCell" mat-cell *matCellDef="let element"> {{element.montantMaxfamille}} </td>
+                      <td class="text-dark text-center containCell" mat-cell *matCellDef="let element"> {{element.montantMax}} </td>
                   </ng-container>
-                   <!-- libellé Column -->
+                  <!-- fournisseur Column -->
+                  <ng-container matColumnDef="fournisseur">
+                    <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header>fournisseur</th>
+                    <td class="text-dark text-center containCell" mat-cell *matCellDef="let element"> {{element.fournisseur}} </td>
+                </ng-container>
+                   <!--ressource Column -->
                    <ng-container matColumnDef="ressource">
                     <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header>ressource</th>
                     <td class="text-dark text-center containCell" mat-cell *matCellDef="let element"> {{element.ressource}} </td>
                 </ng-container>
-                <!-- etat Column -->
-                <ng-container matColumnDef="quantiteMinressource">
+
+                 <!-- etat Column
+                 <ng-container matColumnDef="quantiteMin">
                   <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header>quantiteMin</th>
-                  <td class="text-dark text-center containCell" mat-cell *matCellDef="let element"> {{element.quantiteMinressource}} </td>
-              </ng-container>
+                  <td class="text-dark text-center containCell" mat-cell *matCellDef="let element"> {{element.quantiteMin}} </td>
+              </ng-container> -->
 
-                <!-- quantité Column -->
-                <ng-container matColumnDef="quantiteMaxressource">
+                <!-- quantité Column
+                <ng-container matColumnDef="quantiteMax">
                   <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header>quantiteMax</th>
-                  <td class="text-dark text-center containCell" mat-cell *matCellDef="let element"> {{element.quantiteMaxressource}} </td>
-              </ng-container>
+                  <td class="text-dark text-center containCell" mat-cell *matCellDef="let element"> {{element.quantiteMax}} </td>
+              </ng-container> -->
 
-               <!-- unité Column -->
-               <ng-container matColumnDef="montantMinressource">
+               <!-- unité Column
+               <ng-container matColumnDef="montantMin">
                 <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header>montantMin</th>
-                <td class="text-dark text-center containCell" mat-cell *matCellDef="let element"> {{element.montantMinressource}} </td>
-            </ng-container>
+                <td class="text-dark text-center containCell" mat-cell *matCellDef="let element"> {{element.montantMin}} </td>
+            </ng-container> -->
 
-                <!-- prix Column -->
-                <ng-container matColumnDef="montantMaxressource">
+                <!-- prix Column
+                <ng-container matColumnDef="montantMax">
                   <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header>montantMax</th>
-                  <td class="text-dark text-center containCell" mat-cell *matCellDef="let element"> {{element.montantMaxressource}} </td>
-              </ng-container>
+                  <td class="text-dark text-center containCell" mat-cell *matCellDef="let element"> {{element.montantMax}} </td>
+              </ng-container> -->
 
                   <ng-container matColumnDef="actions">
                       <th class="text-dark containHead" mat-header-cell *matHeaderCellDef>Actions</th>

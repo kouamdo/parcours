@@ -71,6 +71,12 @@
                       <td class="text-dark text-center containCell" mat-cell *matCellDef="let element"> {{element.type}} </td>
                     </ng-container>
 
+                       <!-- famille Column -->
+                       <ng-container matColumnDef="fournisseur">
+                        <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header>fournisseur</th>
+                        <td class="text-dark text-center containCell" mat-cell *matCellDef="let element"> {{element.fournisseur}} </td>
+                      </ng-container>
+
                   <ng-container matColumnDef="actions">
                       <th class="text-dark containHead" mat-header-cell *matHeaderCellDef>Actions</th>
                       <td class="text-dark text-center containCell" mat-cell *matCellDef="let element">

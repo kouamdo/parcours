@@ -76,7 +76,7 @@ export class InMemDBService implements InMemoryDbService{
             {"fonction":"Attribut", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"Créer", "lien":"./attribut-nouveau", "bouton":"false"}  , {"nom":"Rechercher", "lien":"./list-attributs", "bouton":"false"}]},
             {"fonction":"Mission", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"Créer", "lien":"./mission-nouveau", "bouton":"false"}  , {"nom":"Rechercher", "lien":"./list-missions", "bouton":"false"}]},
             {"fonction":"Documents", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"Créer model documents", "lien":"./document-nouveau", "bouton":"false"}, {"nom":"Rechercher", "lien":"./list-documents", "bouton":"false"}]},
-            {"fonction":"Categorie de Ressource", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"Créer", "lien":"famille-nouvelle", "bouton":"false"}, {"nom":"Rechercher", "lien":"./list-familles", "bouton":"false"}]},
+            {"fonction":"Categorie", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"Créer", "lien":"famille-nouvelle", "bouton":"false"}, {"nom":"Rechercher", "lien":"./list-familles", "bouton":"false"}]},
             {"fonction":"Ressource", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"Créer", "lien":"ressource-nouvelle", "bouton":"false"},{"nom":"Rechercher", "lien":"./list-ressources", "bouton":"false"}]},
             {"fonction":"Préconisations","icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"Créer", "lien":"precomvt-nouvelle", "bouton":"false"},{"nom":"Rechercher", "lien":"./list-precomvts", "bouton":"false"}]},
           ]},
@@ -89,7 +89,7 @@ export class InMemDBService implements InMemoryDbService{
             {"fonction":"Attribut", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"New", "lien":"./attribut-nouveau", "bouton":"false"}  , {"nom":"Search", "lien":"./list-attributs", "bouton":"false"}]},
             {"fonction":"Mission", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"New", "lien":"./mission-nouveau", "bouton":"false"}  , {"nom":"Search", "lien":"./list-missions", "bouton":"false"}]},
             {"fonction":"Documents", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"New document's model", "lien":"./document-nouveau", "bouton":"false"}, {"nom":"Search", "lien":"./list-documents", "bouton":"false"}]},
-            {"fonction":"Resource Category", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"new", "lien":"famille-nouvelle", "bouton":"false"},  {"nom":"Search", "lien":"./list-familles", "bouton":"false"}]},
+            {"fonction":"Resource", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"new", "lien":"famille-nouvelle", "bouton":"false"},  {"nom":"Search", "lien":"./list-familles", "bouton":"false"}]},
             {"fonction":"Ressource", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"Créer", "lien":"ressource-nouvelle", "bouton":"false"},{"nom":"Search", "lien":"./list-ressources", "bouton":"false"}]},
             {"fonction":"Préconisations","icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"Créer", "lien":"precomvt-nouvelle", "bouton":"false"}, {"nom":"Search", "lien":"./list-precomvts", "bouton":"false"}]}
           ]}
@@ -174,21 +174,21 @@ export class InMemDBService implements InMemoryDbService{
           {id:"5", libelle:"transfusion", description:"sang", etat:"gl"},
       ];
       let ressource:IRessource[]=[
-        {id:"1", libelle:"transfusion",etat:true, /*dateCreation:new Date("07/03/2000"),dateModification:new Date("07/03/1990"),*/quantite:10,unite:this.UnitesLitre,prix:1000,
+        {id:"1", libelle:"transfusion",etat:true, /*dateCreation:new Date("07/03/2000"),dateModification:new Date("07/03/1990"),*/quantite:10,unite:this.UnitesLitre,prix:1000,caracteristique:"souple",
           famille:{id:"1", libelle:"trans", description:"sang", etat:"gl"}},
-       {id:"2", libelle:"néonat",etat: true,/* dateCreation:new Date("07/03/2000"),dateModification:new Date("07/03/1990"),*/quantite:20,unite:this.UnitesLitre,prix:2000,
+       {id:"2", libelle:"néonat",etat: true,/* dateCreation:new Date("07/03/2000"),dateModification:new Date("07/03/1990"),*/quantite:20,unite:this.UnitesLitre,prix:2000,caracteristique:"souple",
         famille: {id:"2", libelle:"néonat", description:"nouveau-né", etat:"malade"}},
-        {id:"2", libelle:"néonat",etat: true,/* dateCreation:new Date("07/03/2000"),dateModification:new Date("07/03/1990"),*/quantite:20,unite:this.UnitesLitre,prix:2000,
+        {id:"2", libelle:"néonat",etat: true,/* dateCreation:new Date("07/03/2000"),dateModification:new Date("07/03/1990"),*/quantite:20,unite:this.UnitesLitre,prix:2000,caracteristique:"souple",
         famille:{id:"3", libelle:"pediatrie", description:"enfant", etat:"souffrant"}},
-        {id:"3", libelle:"pediatrie",etat: true, /*dateCreation:new Date("07/03/2000"),dateModification:new Date("07/03/1990"),*/quantite:30,unite:this.UnitesLitre,prix:3000,
+        {id:"3", libelle:"pediatrie",etat: true, /*dateCreation:new Date("07/03/2000"),dateModification:new Date("07/03/1990"),*/quantite:30,unite:this.UnitesLitre,prix:3000,caracteristique:"souple",
         famille:{id:"4", libelle:"néonat", description:"nouveau-né", etat:"malade"}},
-        {id:"4", libelle:"néonat",etat: true,/*dateCreation:new Date("07/03/2000"),dateModification:new Date("07/03/1990"),*/quantite:40,unite:this.UnitesLitre,prix:4000,
+        {id:"4", libelle:"néonat",etat: true,/*dateCreation:new Date("07/03/2000"),dateModification:new Date("07/03/1990"),*/quantite:40,unite:this.UnitesLitre,prix:4000,caracteristique:"souple",
         famille:{id:"5", libelle:"transfusion", description:"sang", etat:"gl"}},
       ];
 
       let precomvtqte:IPrecomvtqte[]=[
-        {id:"1",libelle:"achat",quantiteMin:10,  quantiteMax:20,  montantMin:1000, montantMax:7000, type:this.TypeMvtNeutre,
-        ressource:{id:"1", libelle:"transfusion",etat:true,quantite:10,unite:this.UnitesLitre,prix:1000,
+        {id:"1",libelle:"achat",quantiteMin:10,  quantiteMax:20,  montantMin:1000, montantMax:7000, type:this.TypeMvtNeutre,fournisseur:'gc',
+        ressource:{id:"1", libelle:"transfusion",etat:true,quantite:10,unite:this.UnitesLitre,prix:1000,caracteristique:"souple",
                 famille:{id:"4", libelle:"néonat", description:"nouveau-né", etat:"malade"}},
         famille:[
                 {id:"1", libelle:"trans", description:"sang", etat:"gl"},
@@ -200,8 +200,8 @@ export class InMemDBService implements InMemoryDbService{
       let precomvt:IPrecomvt[]=[
                 {id:"1",libelle:"rachat",etat: true,type:this.TypeMvtNeutre,
                 precomvtqte:[
-                  {id:"1",libelle:"achat",quantiteMin:10,  quantiteMax:20,  montantMin:1000, montantMax:7000, type:this.TypeMvtNeutre,
-        ressource:{id:"1", libelle:"transfusion",etat:true,quantite:10,unite:this.UnitesLitre,prix:1000,
+                  {id:"1",libelle:"achat",quantiteMin:10,  quantiteMax:20,  montantMin:1000, montantMax:7000, type:this.TypeMvtNeutre,fournisseur:'gc',
+        ressource:{id:"1", libelle:"transfusion",etat:true,quantite:10,unite:this.UnitesLitre,prix:1000,caracteristique:"souple",
                 famille:{id:"4", libelle:"néonat", description:"nouveau-né", etat:"malade"}},
         famille:[
                 {id:"1", libelle:"trans", description:"sang", etat:"gl"},

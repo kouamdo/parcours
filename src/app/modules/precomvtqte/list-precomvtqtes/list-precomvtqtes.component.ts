@@ -26,7 +26,7 @@ export class ListPrecomvtqtesComponent implements OnInit {
 
   ELEMENTS_TABLE: IPrecomvtqte[] = [];
   filteredOptions: IPrecomvtqte[] | undefined;
-  displayedColumns: string[] = ['id','libelle','quantiteMin','quantiteMax','montantMin','montantMax','type','actions'];
+  displayedColumns: string[] = ['id','libelle','quantiteMin','quantiteMax','montantMin','montantMax','type','fournisseur','actions'];
 
   dataSource = new MatTableDataSource<IPrecomvtqte>(this.ELEMENTS_TABLE);
 

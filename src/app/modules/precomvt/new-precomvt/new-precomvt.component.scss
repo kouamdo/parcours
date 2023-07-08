@@ -138,6 +138,17 @@ input[ type=checkbox ]{
   //margin-left: 5px;
 
   }
+
+ng-multiselect-dropdown {
+width: 110%;
+border: solid 1px;
+margin-top: -46px;
+}
+input, #famille{
+  border:none;
+  box-shadow:none;
+  //margin-top: -23px;
+ }
 input, #etat{
   border: none;
   box-shadow: none;

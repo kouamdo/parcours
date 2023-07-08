@@ -10,7 +10,7 @@ export interface IRessource {
     prix:number,
     unite:Unites,
     famille:IFamille,
-
+    caracteristique:string,
    /* dateCreation:Date,
     dateModification:Date,*/
 

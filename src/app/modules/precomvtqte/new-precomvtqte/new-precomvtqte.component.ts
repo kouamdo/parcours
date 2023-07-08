@@ -36,6 +36,7 @@ export class NewPrecomvtqteComponent implements OnInit {
       montantMin: ['', [Validators.required]],
       montantMax: ['', [Validators.required]],
       type: ['',],
+      fournisseur: ['',],
     })
   };
 
@@ -54,6 +55,7 @@ export class NewPrecomvtqteComponent implements OnInit {
             montantMin: this.precomvtqte?.montantMin,
             montantMax: this.precomvtqte?. montantMax,
             type: this.precomvtqte?.type,
+            fournisseur: this.precomvtqte?.fournisseur,
           })
       });
     }
@@ -75,6 +77,7 @@ export class NewPrecomvtqteComponent implements OnInit {
       montantMin: precomvtqteInput.montantMin,
       montantMax: precomvtqteInput.montantMax,
       type: precomvtqteInput.type,
+      fournisseur:precomvtqteInput.fournisseur,
       ressource: precomvtqteInput.ressource,
       famille: []
     }
