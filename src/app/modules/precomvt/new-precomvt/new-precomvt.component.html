@@ -1,23 +1,22 @@
-
 <div id="mainSection">
   <div class="card block">
-  <!--<div class="pt-4 pb-4 entete">Effectuer une Nouvelle PrecoMvt</div>-->
+    <!--<div class="card-header pt-4 pb-4 entete">Achat de Produits</div>-->
       <div class="card-body p-0 m-0">
-          <form [formGroup]="forme" (ngSubmit)="onSubmit(forme.value)" *ngIf="forme" ng-reflect-forme="[object Object]" class="ng-valid ng-untouched ng-pristine ng-submitted">
-              <div *ngIf="steps != 2 && steps != 3" class="w-100 pt-4 pb-4 entete">Nouvelle Préconisation</div>
+          <form [formGroup]="forme" (ngSubmit)="onSubmit(forme.value)" *ngIf="forme" g-reflect-forme="[object Object]" class="ng-valid ng-untouched ng-pristine ng-submitted">
+            <div *ngIf="steps != 2 && steps != 3" class="w-100 pt-4 pb-4 entete">Nouvelle Préconisation</div>
               <div *ngIf="steps==2" class="w-100 pt-4 pb-4 entete1" >Assigner aux Familles</div>
               <div *ngIf="steps==3" class="w-100 pt-4 pb-4 entete2">Assigner Une Ressource</div>
-              <div class="w-100 mt-4 p-1">
-                  <div class="w-100">
 
+               <div class="w-100 mt-4 p-1">
+                  <div class="w-100">
                     <div  *ngIf="steps==1" class="w-100">
                       <div class="form-group">
                           <div>
                               <div class="champs">
                                   <label for="libelle" class="label">
-                                    Libelle
+                                    libelle
                                   </label>
-                                  <input type="text" formControlName="libelle" ng-reflect-name="libelle" class="ng-valid ng-untouched ng-pristine" id="libelle"  placeholder="{{'ressource.table.title1' | translate}}"  class="form-control" required>
+                                  <input type="text" formControlName="libelle" name="libelle" class="ng-valid ng-untouched ng-pristine" id="libelle"  placeholder="{{'ressource.table.title1' | translate}}"  class="form-control" required>
                               </div>
                               <!-- <div  *ngIf="submitted && f['libelle'].errors"  class="alert alert-danger" >
                                   <div *ngIf="f['libelle'].errors['required']">Champ obligatoire</div>
@@ -31,7 +30,7 @@
                                 <label for="etat" class="label" >
                                   Etat
                                 </label>
-                                <input  type="checkbox" formControlName="etat" ng-reflect-name="etat" class="ng-valid ng-untouched ng-pristine" id="etat" placeholder="" required class="form-control" checked>
+                                <input  type="checkbox" formControlName="etat" name="etat" class="ng-valid ng-untouched ng-pristine" class="ng-valid ng-untouched ng-pristine" id="etat" placeholder="" required class="form-control" checked>
                             </div>
 
                         </div>
@@ -42,7 +41,7 @@
                             <label  for="type"  class="label" >
                               Type
                             </label>
-                        <select  class="form-control" formControlName="type" ng-reflect-name="type" class="ng-valid ng-untouched ng-pristine" id="type" required>
+                        <select  class="form-control" formControlName="type" name="type"  id="type" required>
                           <option>select</option>
                           <option>Neutre</option>
                           <option>Entrée</option>
@@ -51,182 +50,176 @@
                         </div>
                     </div>
                   </div>
+                    </div>
 
 
-                  <div formGroupName="assignerFamilles"   *ngIf="steps==2">
+                    <div  formGroupName="assignerFamilles" *ngIf="steps==2">
 
-                    <div class="form-group">
-                          <div class="champs">
-                              <label for="famille" class="label">
-                              Famille
-                              </label>
-                             <!-- <input type="text" formControlName="famille" name="famille" id="famille"  placeholder="famille"  class="form-control" required>
-                             -->
-                          <ng-multiselect-dropdown ng-reflect-name="famille" class="ng-valid ng-untouched ng-pristine" id="famille" class="form-control" required
-                             [settings]= "settings"
-                             [data]= "dropdownData"
-                             formControlName="famille"
-                             [placeholder]="'selectionnez une famille'"
-                             (onSelect)="onDataSelect($event)"
-                             (onSelectAll)="onSelectAll($event)"
-                             (onDeSelect)="onDataUnSelect($event)"
-                             (onDeSelectAll)="onUnSelectAll()">
-                            </ng-multiselect-dropdown>
+                      <div class="form-group">
+                            <div class="champs">
+                                <label for="famille" class="label">
+                                famille
+                                </label>
+                                <div class="dropdown w-100">
+                                <button class="select dropdown-toggle btn" name="famille" id="famille"  type="button" id="triggerId" data-toggle="dropdown" aria-haspopup="true"
+                                        aria-expanded="false">
+                                        famille
+                                </button>
 
+                                <div class="dropdown-menu" aria-labelledby="triggerId" formArrayName="_familles">
+                                    <label class="dropdown-item" for="famille" *ngFor="let famille of (famille$ | async) as familles let i=index">
+                                        <input  type="checkbox" required   [value]="famille.id" name="familles" [id]="famille.id" (click)="getFamilleId(famille.id)" (change)="onCheckFamilleChange($event)">
+                                        {{famille.libelle}}
+                                    </label>
+                                </div>
+                            </div>
+                            </div>
+                             <!--<div  *ngIf="submitted && f['famille'].errors"  class="alert alert-danger" >
+                                <div *ngIf="f['famille'].errors['required']">Champ obligatoire</div>
+                            </div>-->
+                    </div>
 
-
-                          </div>
-                           <!--<div  *ngIf="submitted && f['famille'].errors"  class="alert alert-danger" >
-                              <div *ngIf="f['famille'].errors['required']">Champ obligatoire</div>
-                          </div>-->
-                  </div>
-
-                    <div class="form-group">
-                      <div class="champs">
-                          <label  for="quantiteMinfamille"  class="label" >
-                            QuantiteMin
-                          </label>
-                          <input type="number"  formControlName="quantiteMin" ng-reflect-name="quantiteMin" class="ng-valid ng-untouched ng-pristine" id="quantiteMin" placeholder="quantiteMin" class="form-control" >
-                      </div>
-                     <!--<div  *ngIf="submitted && f['quantiteMinfamille'].errors"  class="alert alert-danger" >
-                        <div *ngIf="f['quantiteMinfamille'].errors['required']">Champ obligatoire</div>
-                    </div>-->
-                  </div>
-
-                    <div class="form-group">
+                      <div class="form-group">
                         <div class="champs">
-                            <label  for="quantiteMax"  class="label" >
-                              QuantiteMax
+                            <label  for="quantiteMin"  class="label" >
+                              QuantiteMin
                             </label>
-                            <input type="number" formControlName="quantiteMax" ng-reflect-name="quantiteMax" class="ng-valid ng-untouched ng-pristine" id="quantiteMax" placeholder="quantiteMax" class="form-control" >
+                            <input type="number"  formControlName="quantiteMin" name="quantiteMin" class="ng-valid ng-untouched ng-pristine" id="quantiteMin" placeholder="quantiteMin" class="form-control" >
                         </div>
-                       <!--<div  *ngIf="submitted && f['quantiteMaxfamille'].errors"  class="alert alert-danger" >
-                          <div *ngIf="f['quantiteMaxfamille'].errors['required']">Champ obligatoire</div>
+                       <!--<div  *ngIf="submitted && f['quantiteMinfamille'].errors"  class="alert alert-danger" >
+                          <div *ngIf="f['quantiteMinfamille'].errors['required']">Champ obligatoire</div>
+                      </div>-->
+                    </div>
+
+                      <div class="form-group">
+                          <div class="champs">
+                              <label  for="quantiteMax"  class="label" >
+                                QuantiteMax
+                              </label>
+                              <input type="number" formControlName="quantiteMax" name="quantiteMax" class="ng-valid ng-untouched ng-pristine" id="quantiteMax" placeholder="quantiteMax" class="form-control" >
+                          </div>
+                         <!--<div  *ngIf="submitted && f['quantiteMaxfamille'].errors"  class="alert alert-danger" >
+                            <div *ngIf="f['quantiteMaxfamille'].errors['required']">Champ obligatoire</div>
+                        </div>-->
+                      </div>
+
+                      <div class="form-group">
+                        <div class="champs">
+                            <label  for="montantMin"  class="label" >
+                              MontantMax
+                            </label>
+                            <input type="number" formControlName="montantMin" name="montantMin" class="ng-valid ng-untouched ng-pristine" id="montantMin" placeholder="montantMin" class="form-control" >
+                        </div>
+                        <!--<div  *ngIf="submitted && f['montantMinfamille'].errors"  class="alert alert-danger" >
+                          <div *ngIf="f['montantMinfamille'].errors['required']">Champ obligatoire</div>
                       </div>-->
                     </div>
 
                     <div class="form-group">
                       <div class="champs">
-                          <label  for="montantMin"  class="label" >
-                            MontantMax
+                          <label  for="montantMax"  class="label" >
+                            MontantMin
                           </label>
-                          <input type="number" formControlName="montantMin" ng-reflect-name="montantMin" class="ng-valid ng-untouched ng-pristine" id="montantMin" placeholder="montantMin" class="form-control" >
+                          <input type="number" formControlName="montantMax" name="montantMax" class="ng-valid ng-untouched ng-pristine" id="montantMax" placeholder="montantMax" class="form-control" >
                       </div>
-                      <!--<div  *ngIf="submitted && f['montantMinfamille'].errors"  class="alert alert-danger" >
-                        <div *ngIf="f['montantMinfamille'].errors['required']">Champ obligatoire</div>
+                      <!--<div  *ngIf="submitted && f['montantMaxfamille'].errors"  class="alert alert-danger" >
+                        <div *ngIf="f['montantMaxfamille'].errors['required']">Champ obligatoire</div>
                     </div>-->
                   </div>
 
                   <div class="form-group">
                     <div class="champs">
-                        <label  for="montantMax"  class="label" >
-                          MontantMin
+                        <label  for="fournisseur"  class="label" >
+                          Fournisseur
                         </label>
-                        <input type="number" formControlName="montantMax" ng-reflect-name="montantMax" class="ng-valid ng-untouched ng-pristine" id="montantMax" placeholder="montantMax" class="form-control" >
+                    <select  class="form-control" formControlName="fournisseur" name="fournisseur" id="fournisseur">
+                      <option>Selectionnez un fournisseur</option>
+                      <option>EVC</option>
+                      <option>ACC</option>
+                      <option>DCD</option>
+
+                  </select>
                     </div>
-                    <!--<div  *ngIf="submitted && f['montantMaxfamille'].errors"  class="alert alert-danger" >
-                      <div *ngIf="f['montantMaxfamille'].errors['required']">Champ obligatoire</div>
-                  </div>-->
                 </div>
 
-                <div class="form-group">
-                  <div class="champs">
-                      <label  for="fournisseur"  class="label" >
-                        Fournisseur
-                      </label>
-                  <select  class="form-control" formControlName="fournisseur" ng-reflect-name="fournisseur"  class="ng-valid ng-untouched ng-pristine" id="fournisseur">
-                    <option>Selectionnez un fournisseur</option>
-                    <option>EVC</option>
-                    <option>ACC</option>
-                    <option>DCD</option>
+                </div>
 
-                </select>
+
+                <div  formGroupName="assignerRessource" *ngIf="steps==3">
+                  <div class="form-group">
+                    <div class="champs" >
+                        <label  for="ressource"  class="label" id="label3">
+                          Ressource
+                        </label>
+                        <mat-form-field class="example-full-width" appearance="fill">
+                            <mat-label class="famill">  </mat-label>
+                            <input  type="text" matInput [matAutocomplete]="auto" class="ng-valid ng-untouched ng-pristine" aria-label="ressource" [formControl]="myControl" formControlName="myControl" ng-reflect-name="ressource" class="ng-valid ng-untouched ng-pristine" id="ressource" placeholder="" class="form-control">
+                            <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn" >
+                            <mat-option *ngFor="let option of filteredOptions" [value]="option" (click)="getIdRessource(option.id)" (onSelectionChange)="rechercherListingRessource(option)">
+                                {{option.libelle}}
+                            </mat-option>
+                            </mat-autocomplete>
+                        </mat-form-field>
+                    </div>
+                    <!-- <div  *ngIf="submitted && f['libelle'].errors"  class="alert alert-danger" >
+                      <div *ngIf="f['libelle'].errors['required']">{{'ressource.form.text9' | translate}}</div>
+                    </div>-->
+                    </div>
+
+                    <div class="form-group">
+                      <div class="champs" id="essai">
+                          <label  for="quantiteMin"  class="label3" >
+                            Quantité Minimum
+                          </label>
+                          <input type="number" list="" formControlName="quantiteMin" name="quantiteMin" class="ng-valid ng-untouched ng-pristine" id="quantiteMin" placeholder="quantiteMin" class="form-control" >
+                      </div>
+                    <!--<div *ngIf="submitted && f['quantiteMinressource'].errors"  class="alert alert-danger" >
+                          <div *ngIf="f['quantiteMinressource'].errors['required']">Champ obligatoire</div>
+                      </div>-->
                   </div>
-              </div>
 
-              </div>
-
-
-
-              <div formGroupName="assignerRessource" *ngIf="steps==3">
-                <div class="form-group">
-                  <div class="champs" >
-                      <label  for="ressource"  class="label" id="label3">
-                        Ressource
-                      </label>
-                      <mat-form-field class="example-full-width" appearance="fill">
-                          <mat-label class="famill">  </mat-label>
-                          <input  type="text" matInput [matAutocomplete]="auto"  aria-label="ressource" [formControl]="myControl" formControlName="myControl" ng-reflect-name="ressource" class="ng-valid ng-untouched ng-pristine" id="ressource" placeholder="" class="form-control">
-                          <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn" >
-                          <mat-option *ngFor="let option of filteredOptions" [value]="option" (click)="getIdRessource(option.id)" (onSelectionChange)="rechercherListingRessource(option)">
-                              {{option.libelle}}
-                          </mat-option>
-                          </mat-autocomplete>
-                      </mat-form-field>
-                  </div>
-                  <!-- <div  *ngIf="submitted && f['libelle'].errors"  class="alert alert-danger" >
-                    <div *ngIf="f['libelle'].errors['required']">{{'ressource.form.text9' | translate}}</div>
-                  </div>-->
+                  <div class="form-group">
+                      <div class="champs" id="essai">
+                          <label  for="quantiteMax"  class="label3" >
+                            Quantité Maximum
+                          </label>
+                          <input type="number" formControlName="quantiteMax" name="quantiteMax" class="ng-valid ng-untouched ng-pristine" id="quantiteMax" placeholder="quantiteMax" class="form-control" >
+                      </div>
+                    <!--<div  *ngIf="submitted && f['quantiteMaxressource'].errors"  class="alert alert-danger" >
+                        <div *ngIf="f['quantiteMaxressource'].errors['required']">Champ obligatoire</div>
+                    </div>-->
                   </div>
 
                   <div class="form-group">
                     <div class="champs" id="essai">
-                        <label  for="quantiteMin"  class="label3" >
-                          Quantité Minimum
+                        <label  for="montantMin"  class="label3" >
+                          Montant Maximum
                         </label>
-                        <input type="number" list="" formControlName="quantiteMin" ng-reflect-name="quantiteMin" class="ng-valid ng-untouched ng-pristine" id="quantiteMin" placeholder="quantiteMin" class="form-control" >
+                        <input type="number" formControlName="montantMin" name="montantMin" class="ng-valid ng-untouched ng-pristine" id="montantMin" placeholder="montantMin" class="form-control" >
                     </div>
-                  <!--<div *ngIf="submitted && f['quantiteMinressource'].errors"  class="alert alert-danger" >
-                        <div *ngIf="f['quantiteMinressource'].errors['required']">Champ obligatoire</div>
+                    <!--<div  *ngIf="submitted && f['montantMinressource'].errors"  class="alert alert-danger" >
+                      <div *ngIf="f['montantMinressource'].errors['required']">Champ obligatoire</div>
                     </div>-->
-                </div>
+                  </div>
 
-                <div class="form-group">
+                  <div class="form-group">
                     <div class="champs" id="essai">
-                        <label  for="quantiteMax"  class="label3" >
-                          Quantité Maximum
+                        <label  for="montantMax"  class="label3" >
+                          Montant Minimum
                         </label>
-                        <input type="number" formControlName="quantiteMax" ng-reflect-name="quantiteMax" class="ng-valid ng-untouched ng-pristine" id="quantiteMax" placeholder="quantiteMax" class="form-control" >
+                        <input type="number" formControlName="montantMax" name="montantMax" class="ng-valid ng-untouched ng-pristine" id="montantMax" placeholder="montantMax" class="form-control" >
                     </div>
-                  <!--<div  *ngIf="submitted && f['quantiteMaxressource'].errors"  class="alert alert-danger" >
-                      <div *ngIf="f['quantiteMaxressource'].errors['required']">Champ obligatoire</div>
+                    <!--<div  *ngIf="submitted && f['montantMaxressource'].errors"  class="alert alert-danger" >
+                      <div *ngIf="f['montantMaxressource'].errors['required']">Champ obligatoire</div>
                   </div>-->
-                </div>
-
-                <div class="form-group">
-                  <div class="champs" id="essai">
-                      <label  for="montantMin"  class="label3" >
-                        Montant Maximum
-                      </label>
-                      <input type="number" formControlName="montantMin" ng-reflect-name="montantMin" class="ng-valid ng-untouched ng-pristine" id="montantMin" placeholder="montantMin" class="form-control" >
                   </div>
-                  <!--<div  *ngIf="submitted && f['montantMinressource'].errors"  class="alert alert-danger" >
-                    <div *ngIf="f['montantMinressource'].errors['required']">Champ obligatoire</div>
-                  </div>-->
+
+
                 </div>
-
-                <div class="form-group">
-                  <div class="champs" id="essai">
-                      <label  for="montantMax"  class="label3" >
-                        Montant Minimum
-                      </label>
-                      <input type="number" formControlName="montantMax" ng-reflect-name="montantMax" class="ng-valid ng-untouched ng-pristine" id="montantMax" placeholder="montantMax" class="form-control" >
-                  </div>
-                  <!--<div  *ngIf="submitted && f['montantMaxressource'].errors"  class="alert alert-danger" >
-                    <div *ngIf="f['montantMaxressource'].errors['required']">Champ obligatoire</div>
-                </div>-->
-                </div>
-
-
               </div>
-            </div>
-            <div *ngIf="steps==4">
 
 
-
-            </div>
-
-            <!-- les boutons pour l'enregistrement d'une prcoMvtQte
+                <!-- les boutons pour l'enregistrement d'une prcoMvtQte
             <div class="precoMvtQteButton">
               <button class="btn circleBtn" *ngIf="steps == 2 || steps == 3" (click)="back()" disabled>&laquo;</button>
               <button class="btn" *ngIf="steps == 2 || steps == 3">Ajouter une PrécoMvtQte</button>
@@ -235,14 +228,14 @@
 
             <div class="actionButton">
               <button class="btn" *ngIf="steps == 0" (click)="back()">Back</button>
-              <button type="btn" class="btn" (click)="clear()" >Annuler</button>
+              <button type="btn" class="btn">Annuler</button>
              <!-- <button type="btn" class="btn" routerLink="../list-precomvts" >Ajouter</button>
               <button class="btn" *ngIf="steps !=1" (click)="steps = 1"> préco </button>
               <button class="btn" *ngIf="steps == 0" (click)="next()">Next</button>
               <button type="btn" class="btn" *ngIf="steps != 4" (click)="steps = 4" >Recap</button>
               <button type="submit" class="btn" *ngIf="steps == 4" routerLink="../list-precomvts">Enregistrer</button>-->
               <button type="submit" class="btn" (click)="steps = 2" >Famille</button>
-              <button type="submit" class="btn" (click)="steps = 3" valPrecoMvtQte="assignerRessource()">Ressource</button>
+              <button type="submit" class="btn" (click)="steps = 3" >Ressource</button>
 
               <button type="submit" class="btn" *ngIf="steps != 4" (click)="steps = 4"  routerLink="../list-precomvts">Enregistrer</button>
 
@@ -255,7 +248,6 @@
               <button type="submit" class="btn">Annuler</button>
               <button type="submit" class="btn" *ngIf="steps == 4">{{btnLibelle}}</button>
             </div> -->
-          </div>
         </form>
       </div>
   </div>
@@ -265,4 +257,16 @@
 
 
 <P>{{forme.value|json}}</P>
+
+
+
+
+
+
+
+
+
+
+
+
 

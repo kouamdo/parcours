@@ -71,7 +71,7 @@
       font-weight: normal;
   }
 }
-.champs, select, input{
+.champs, select, .select,input{
   font-size: 15px;
 }
 select{
@@ -82,6 +82,15 @@ select{
   color: rgb(108, 108, 108);
   padding: 0 10px;
   border-radius: 5px;
+}
+.select{
+  border: none;
+  box-shadow: 0 0 2px rgb(220, 220, 220);
+  background-color: #7ea97e63;
+  color: rgb(108, 108, 108);
+  border-radius: 5px;
+  width: 100%;
+
 }
 .actionButton{
   display: flex;
@@ -133,7 +142,7 @@ select{
 input[ type=checkbox ]{
   border: none;
   color: red;
-  margin-right: 250px;
+ // margin-right: 250px;
   height: 17px;
   //margin-left: 5px;
 
@@ -144,11 +153,11 @@ width: 110%;
 border: solid 1px;
 margin-top: -46px;
 }
-input, #famille{
+/*input, #famille{
   border:none;
   box-shadow:none;
   //margin-top: -23px;
- }
+ }*/
 input, #etat{
   border: none;
   box-shadow: none;
@@ -254,4 +263,7 @@ mat-form-field:focus{
 
     }
 }
+
+
+
 
