@@ -18,7 +18,7 @@ import { IPrecomvtqte } from 'src/app/modele/precomvtqte';
 import { TypeMvt } from 'src/app/modele/type-mvt';
 import { PrecomvtqtesService } from 'src/app/services/precomvtqtes/precomvtqtes.service';
 //import { IDropdownSettings } from 'ng-multiselect-dropdown';
-import { IDropdownSettings} from 'ng-multiselect-dropdown/multiselect.model';
+// import { IDropdownSettings} from 'ng-multiselect-dropdown/multiselect.model';
 import { IService } from 'src/app/modele/service';
 import { FamillesService } from 'src/app/services/familles/familles.service';
 
@@ -33,17 +33,19 @@ export class NewPrecomvtComponent implements OnInit {
 
   precomvt : IPrecomvt|undefined;
   forme: FormGroup;
+  assignerRessource : FormGroup;
   btnLibelle: string="Enregistrer";
   submitted: boolean=false;
   steps:any =1;
   btnRessource: string="Ressource";
-  precomvts$:Observable<IRessource>=EMPTY;
+  //precomvts$:Observable<IRessource>=EMPTY;
   myControl = new FormControl<string | IRessource>('');
   filteredOptions: IRessource[] | undefined;
-  dataSource = new MatTableDataSource<IRessource>();
+  //dataSource = new MatTableDataSource<IRessource>();
   famille$:Observable<IFamille[]>=EMPTY;
   typeEchange!: TypeMvt;
   idFamille : string = "";
+  idRessource : string = "";
 
   Laressource: IRessource = {
     id: '',
@@ -81,13 +83,13 @@ export class NewPrecomvtComponent implements OnInit {
   }
 
   dropdownData : any [] = [];
-  settings: IDropdownSettings = {};
+  //settings: IDropdownSettings = {};
   selectedItems: any[] = [];
 
   dataFamille : IFamille[] = [];
   dataSourceFamilleResultat = new MatTableDataSource<IFamille>();
   _famille :  FormArray | undefined;
-  dataSourceRessource: any;
+  dataSourceRessource = new MatTableDataSource<IRessource>();
   dataprecomvtqte: IPrecomvtqte[] = [];
   dataSourceprecomvtqteResultat= new MatTableDataSource<IPrecomvtqte>();
 
@@ -107,31 +109,31 @@ export class NewPrecomvtComponent implements OnInit {
       montantMin:new FormControl(),
       montantMax:new FormControl(),
       fournisseur:new FormControl(),
+    })
     }),
-    assignerRessource:formBuilder.group({
+    this.assignerRessource = this.formBuilder.group({
       ressource:new FormControl(),
       quantiteMin:new FormControl(),
       quantiteMax:new FormControl(),
       montantMin:new FormControl(),
       montantMax:new FormControl()
     })
-    })
   };
   ngOnInit(): void {
+    // this.getAllRessources().subscribe(valeurs => {
+    //   this.dataSource.data = valeurs;
+    // });
+
+    //debut this famille
+    this.famille$ = this.getAllFamilles();
     this.getAllRessources().subscribe(valeurs => {
-      this.dataSource.data = valeurs;
+      this.dataSourceRessource.data = valeurs;
     });
 
-//debut this famille
-this.famille$ = this.getAllFamilles();
-this.getAllRessources().subscribe(valeurs => {
-  this.dataSourceRessource.data = valeurs;
-});
+    //fin this famille
 
-//fin this famille
-
- //let idprecomvt debut
- let idPrecomvt = this.infosPath.snapshot.paramMap.get('idPrecomvt');
+    //let idprecomvt debut
+    let idPrecomvt = this.infosPath.snapshot.paramMap.get('idPrecomvt');
     if((idPrecomvt != null) && idPrecomvt!==''){
       //this.btnLibelle="Modifier";
       //this.titre="Document à Modifier";
@@ -222,7 +224,8 @@ private getAllFamilles(){
     }
  //fin stepper
  getIdRessource(id_ressource : string){
-
+  this.idRessource = id_ressource
+  console.log("id de la ressource : ", this.idRessource);
   this.serviceRessource.getRessourceById(id_ressource).subscribe(
     ressource =>{
       this.Laressource = ressource
@@ -264,20 +267,20 @@ displayFn(ressource: IRessource): string {
   }
  public rechercherListingRessource(option: IRessource){
  this.serviceRessource.getRessourcesByLibelle(option.libelle.toLowerCase()).subscribe(
-   valeurs => {this.dataSource.data = valeurs;}
+   valeurs => {this.dataSourceRessource.data = valeurs;}
  )
 }
+
  //fonction valPrecomvtqte debut
  valPrecomvtqte(precomvtqteInput:any){
   this.submitted=true;
   if(this.forme.invalid) return;
   let precomvtqteTemp : IPrecomvtqte={
     id: uuidv4(),
-    libelle: precomvtqteInput.libelle,
-    //etat: precomvtqteInput.etat,
-    type: precomvtqteInput.type,
+    libelle: "un libelle",
+    type: TypeMvt.neutre,
     ressource: this.Laressource,
-    fournisseur:precomvtqteInput.fournisseur,
+    fournisseur: "un fourrnisseur",
     famille:[],
     quantiteMin:precomvtqteInput.quantiteMin,
     quantiteMax:precomvtqteInput.quantiteMax,
@@ -288,9 +291,25 @@ displayFn(ressource: IRessource): string {
   if(this.precomvtqte != undefined){
     precomvtqteTemp.id = this.precomvtqte.id
   }
-  precomvtqteTemp.ressource = this.Laressource
- console.log('voici la ressource de cette ressource : ', precomvtqteTemp.ressource)
- console.log('valeur precomvtqte: ', precomvtqteTemp)
+  //precomvtqteTemp.ressource = this.Laressource
+  this.Laressource = {
+    id: '',
+    libelle: '',
+    etat:true,
+    quantite: 0,
+    prix: 0,
+    unite:Unites.litre,
+    famille:{
+      id: '',
+      libelle: '',
+      description: '',
+      etat: ''
+    },
+    caracteristique:'',
+  };
+  this.assignerRessource.reset()
+  console.log('voici la ressource de cette ressource : ', precomvtqteTemp.ressource)
+  console.log('valeur precomvtqte: ', precomvtqteTemp)
     }
  //fonction valPrecomvtqte fin
   }

@@ -143,9 +143,11 @@
                 </div>
 
                 </div>
+              </div>
+              </form>
 
 
-                <div  formGroupName="assignerRessource" *ngIf="steps==3">
+                <div [formGroup]="assignerRessource" *ngIf="steps==3">
                   <div class="form-group">
                     <div class="champs" >
                         <label  for="ressource"  class="label" id="label3">
@@ -153,7 +155,7 @@
                         </label>
                         <mat-form-field class="example-full-width" appearance="fill">
                             <mat-label class="famill">  </mat-label>
-                            <input  type="text" matInput [matAutocomplete]="auto" class="ng-valid ng-untouched ng-pristine" aria-label="ressource" [formControl]="myControl" formControlName="myControl" ng-reflect-name="ressource" class="ng-valid ng-untouched ng-pristine" id="ressource" placeholder="" class="form-control">
+                            <input  type="text" matInput [matAutocomplete]="auto" class="ng-valid ng-untouched ng-pristine" aria-label="ressource" formControlName="ressource" [formControl]="myControl" ng-reflect-name="ressource" class="ng-valid ng-untouched ng-pristine" id="ressource" placeholder="" class="form-control">
                             <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn" >
                             <mat-option *ngFor="let option of filteredOptions" [value]="option" (click)="getIdRessource(option.id)" (onSelectionChange)="rechercherListingRessource(option)">
                                 {{option.libelle}}
@@ -216,7 +218,6 @@
 
 
                 </div>
-              </div>
 
 
                 <!-- les boutons pour l'enregistrement d'une prcoMvtQte
@@ -235,7 +236,7 @@
               <button type="btn" class="btn" *ngIf="steps != 4" (click)="steps = 4" >Recap</button>
               <button type="submit" class="btn" *ngIf="steps == 4" routerLink="../list-precomvts">Enregistrer</button>-->
               <button type="submit" class="btn" (click)="steps = 2" >Famille</button>
-              <button type="submit" class="btn" (click)="steps = 3" >Ressource</button>
+              <button type="submit" class="btn" (click)="steps = 3; valPrecomvtqte(assignerRessource.value)" >Ressource</button>
 
               <button type="submit" class="btn" *ngIf="steps != 4" (click)="steps = 4"  routerLink="../list-precomvts">Enregistrer</button>
 
@@ -248,7 +249,6 @@
               <button type="submit" class="btn">Annuler</button>
               <button type="submit" class="btn" *ngIf="steps == 4">{{btnLibelle}}</button>
             </div> -->
-        </form>
       </div>
   </div>
 </div>
@@ -257,6 +257,7 @@
 
 
 <P>{{forme.value|json}}</P>
+<P>{{assignerRessource.value|json}}</P>
 
 
 
