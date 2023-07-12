@@ -297,12 +297,12 @@ export class ModalCategoriesComponent implements OnInit {
   }
   
   validerCategorieAttribut(){
-    this.categorieAttributs  = {
-      id: '',
-      nom: '',
-      ordre: 0,
-      listAttributs: []
-    }
+    // this.categorieAttributs  = {
+    //   id: '',
+    //   nom: '',
+    //   ordre: 0,
+    //   listAttributs: []
+    // }
     this.TABLE_FINAL_CATEGORIES_ATTRIBUTS = []
    // let categorieAttributsTemp = this.tableResultatsCategoriesAffichage.data
  
@@ -310,8 +310,11 @@ export class ModalCategoriesComponent implements OnInit {
       objet => {
         for (let index = 0; index < this.TABLE_FINAL_CATEGORIES_ATTRIBUTS.length; index++) {
           const element = this.TABLE_FINAL_CATEGORIES_ATTRIBUTS[index];
-           if(element.nom == objet.nom ){
-            this.categorieAttributs.listAttributs.push(objet.attribut)
+          if(element.nom == objet.nom ){
+            this.categorieAttributs.nom = objet.nom,
+            this.categorieAttributs.ordre = objet.ordre,
+            element.listAttributs.push(objet.attribut)
+            this.categorieAttributs.id = objet.id
             break;
           }else{
             this.categorieAttributs  = {
