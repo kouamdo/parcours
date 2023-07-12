@@ -146,33 +146,32 @@ export class ModalCategoriesComponent implements OnInit {
     if(this.formeCategorieAttribut.invalid) return;
 
     //controle des doublons dans le premier tableau
-    let ordreExist : boolean = this.verifierSiOrdreExistePremierTableau(attribut.ordre);
-    if(ordreExist){
-      alert("interdit doublon d'ordre d'attribut");
-      event.target.checked=false;
-      return;
-    }
+    if (event.target.checked == true) {
+      let ordreExist : boolean = this.verifierSiOrdreExistePremierTableau(attribut.ordre);
+      if(ordreExist){
+        alert("interdit doublon d'ordre d'attribut");
+        event.target.checked=false;
+        return;
+      }
 
-    //controle des doublons dans le second tableau
-    let ordreAttributExiste : number =  this.verifierSiExisteCategorieAttributOrdre(attribut.ordre, categorieAttributInput.nomCategorie, categorieAttributInput.ordreCategorie);
-    if(ordreAttributExiste==1){
-      alert("doublon d'ordre d'attribut interdit");
-      event.target.checked=false;
-      return;
-    }
-    else if(ordreAttributExiste==2){
-      alert("Catégorie avec deux ordres différents interdit");
-      event.target.checked=false;
-      return;
-    }
-    else if(ordreAttributExiste==3){
-      alert("Catégorie différente avec un ordre existant interdit");
-      event.target.checked=false;
-      return;
-    }
-
-    //si pas de doublon, on sauvegarde l'information cochée
-    if (event.target.checked ) {
+      //controle des doublons dans le second tableau au check
+      let ordreAttributExiste : number =  this.verifierSiExisteCategorieAttributOrdre(attribut.ordre, categorieAttributInput.nomCategorie, categorieAttributInput.ordreCategorie);
+      if(ordreAttributExiste==1){
+        alert("doublon d'ordre d'attribut interdit");
+        event.target.checked=false;
+        return;
+      }
+      else if(ordreAttributExiste==2){
+        alert("Catégorie avec deux ordres différents interdit");
+        event.target.checked=false;
+        return;
+      }
+      else if(ordreAttributExiste==3){
+        alert("Catégorie différente avec un ordre existant interdit");
+        event.target.checked=false;
+        return;
+      }else{
+        
         const categorieAttributsTemp : ICategorieAffichage ={
           id: uuidv4(),
           nom: categorieAttributInput.nomCategorie,
@@ -181,9 +180,11 @@ export class ModalCategoriesComponent implements OnInit {
         }
       
       this.tableauIndexSelectionner.set(index,categorieAttributsTemp);
-    } else if(!event.target.checked ) {
+      }
+    } else if(event.target.checked == false) { //si pas de doublon, on sauvegarde l'information cochée
       this.tableauIndexSelectionner.delete(index);
     }
+    console.log("tableau temp index : " ,this.tableauIndexSelectionner);
  }
 
  /**
@@ -303,43 +304,6 @@ export class ModalCategoriesComponent implements OnInit {
       this.tableauIndexSelectionner.delete(indexASupprimer);
   }
   
-  validerCategorieAttribut(){
-    
-    let tmpCatAtt = new Map(); 
-    let categorieAttributsFinal : ICategoriesAttributs[] = [];
-
-
-    this.tableResultatsCategoriesAffichage.data.forEach(
-      objet => {
-        let categorieAttributTemp : ICategoriesAttributs = {
-          id: '',
-          nom: '',
-          ordre: 0,
-          listAttributs: []
-        }
-          //si la map ne contient pas la catégorie courante 
-          if(tmpCatAtt.get(objet.nom)== null){
-            categorieAttributTemp.id = objet.id;
-            categorieAttributTemp.nom = objet.nom;
-            categorieAttributTemp.ordre = objet.ordre;
-            categorieAttributTemp.listAttributs.push(objet.attribut);
-            let index : number  = categorieAttributsFinal.push(categorieAttributTemp);
-            tmpCatAtt.set(objet.nom, index-1);
-          }
-          else{
-            //si la valeur trouvée dans la map
-            let index : number = tmpCatAtt.get(objet.nom);
-            categorieAttributTemp = categorieAttributsFinal[index];
-            categorieAttributTemp.listAttributs.push(objet.attribut);
-            categorieAttributsFinal[index] = categorieAttributTemp;
-          }
-        } 
-    );
-
-    console.log("voici l'objet final a enregistrer : ", categorieAttributsFinal)
-  }
-
-
   retirerSelectionCategorieAttribut(index: number){
     this.TABLE_CATEGORIE_AFFICHAGE_TEMP.splice(index, 1)
   }

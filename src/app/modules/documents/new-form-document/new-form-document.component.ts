@@ -39,17 +39,6 @@ export class NewFormDocumentComponent implements OnInit {
   idAttribut : string = "";
   serviceDeMission!: IService;
 
-  afficheDocument : IAfficheDocument = {
-    id: '',
-    titre: '',
-    description: '',
-    missions: [],
-    attributs: [],
-    listeMissions: '',
-    listAttributs: '',
-    categories: []
-  }
-
   // variables attributs, pour afficher le tableau d'attributs sur l'IHM
   myControl = new FormControl<string | IAttributs>('');
   ELEMENTS_TABLE_ATTRIBUTS: IAttributs[] = [];
@@ -77,8 +66,9 @@ export class NewFormDocumentComponent implements OnInit {
   }
  // ELEMENTS_TABLE_CATEGORIE_ATTRIBUTS: ICategoriesAttributs[] = []; 
   TABLE_CATEGORIE_AFFICHAGE_TEMP: ICategorieAffichage[] = []; 
- // tableResultatsCategoriesAttributs  = new MatTableDataSource<ICategoriesAttributs>(this.ELEMENTS_TABLE_CATEGORIE_ATTRIBUTS);
-  tableFinaleCategoriesAttributs: ICategoriesAttributs[] = []; // tableau contenant les categories creees
+
+  // tableau contenant les categories creees
+  tableFinaleCategoriesAttributs: ICategoriesAttributs[] = []; 
   
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
@@ -218,6 +208,46 @@ export class NewFormDocumentComponent implements OnInit {
   creerCategorie(){
     this.dataSourceAttributDocument.data = this.ELEMENTS_TABLE_ATTRIBUTS
   }
+
+  /**
+   * methode quiu permet de fusionner les categories en fontion du meme nom tout en regroupant leurs attributs
+   * ceci permet de former le tableau d'objets ICategoriesAttriut qui sera rattache au document lors de l'enregistrement
+   */
+  validerCategorieAttribut(){
+    let tmpCatAtt = new Map(); 
+    let categorieAttributsFinal : ICategoriesAttributs[] = [];
+
+    this.TABLE_CATEGORIE_AFFICHAGE_TEMP.forEach(
+      objet => {
+        let categorieAttributTemp : ICategoriesAttributs = {
+          id: '',
+          nom: '',
+          ordre: 0,
+          listAttributs: []
+        }
+          //si la map ne contient pas la catégorie courante 
+          if(tmpCatAtt.get(objet.nom)== null){
+            categorieAttributTemp.id = objet.id;
+            categorieAttributTemp.nom = objet.nom;
+            categorieAttributTemp.ordre = objet.ordre;
+            categorieAttributTemp.listAttributs.push(objet.attribut);
+
+            // sauvegarde de l'indice de l'élément enregistré
+            let index : number  = categorieAttributsFinal.push(categorieAttributTemp);
+            tmpCatAtt.set(objet.nom, index-1);
+          }
+          else{
+            //si la valeur est trouvée dans la map
+            let index : number = tmpCatAtt.get(objet.nom); // récuperation de l'indice de l'élément enregistré
+            categorieAttributTemp = categorieAttributsFinal[index];
+            categorieAttributTemp.listAttributs.push(objet.attribut);
+            categorieAttributsFinal[index] = categorieAttributTemp;
+          }
+        } 
+    );
+      this.tableFinaleCategoriesAttributs = categorieAttributsFinal;
+    console.log("voici le tebleau d'attributs final a enregistrer : ", this.tableFinaleCategoriesAttributs)
+  }
   onSubmit(documentInput:any){
     //    const _missionsSelected = (this.forme.get('_missions') as FormArray);
     this.submitted=true;
@@ -244,6 +274,12 @@ export class NewFormDocumentComponent implements OnInit {
     this.dataSourceAttributResultat.data.forEach(
       a => documentTemp.attributs.push(a)
     )
+
+    this.tableFinaleCategoriesAttributs.forEach(
+      cat => documentTemp.categories.push(cat)
+    )
+    console.log("voici le tebleau d'attributs final a enregistrer pour ce document : ", documentTemp.categories)
+
     this.serviceDocument.ajouterDocument(documentTemp).subscribe(
       object => {
         this.router.navigate(['/list-documents']);

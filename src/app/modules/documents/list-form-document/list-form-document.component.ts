@@ -24,7 +24,7 @@ export class ListFormDocumentComponent implements OnInit, AfterViewInit {
   ELEMENTS_TABLE: IDocument[] = [];
   filteredOptions: IDocument[] | undefined;
 
-  displayedColumns: string[] = ['id', 'titre', 'description', 'missions', 'attributs', 'actions'];
+  displayedColumns: string[] = ['id', 'titre', 'description', 'missions', 'attributs', 'categories', 'actions'];
 
   dataSource = new MatTableDataSource<IDocument>(this.ELEMENTS_TABLE);
 
@@ -42,9 +42,10 @@ export class ListFormDocumentComponent implements OnInit, AfterViewInit {
     description: '',
     missions: [],
     attributs: [],
+    categories: [],
     listeMissions: '',
     listAttributs: '',
-    categories: []
+    listCategories: ''
   }
 
 
@@ -64,7 +65,8 @@ export class ListFormDocumentComponent implements OnInit, AfterViewInit {
             attributs: [],
             categories: [],
             listeMissions: '',
-            listAttributs: ''
+            listAttributs: '',
+            listCategories: ''
           }
           this.afficheDocument.id = x.id;
           this.afficheDocument.titre = x.titre;
@@ -78,6 +80,9 @@ export class ListFormDocumentComponent implements OnInit, AfterViewInit {
             )
             x.attributs.forEach(
               a => this.afficheDocument.listAttributs += a.titre + ", "
+            )
+            x.categories.forEach(
+              a => this.afficheDocument.listCategories += a.nom + ", "
             ) 
           tableDocuments.push(this.afficheDocument)
         }

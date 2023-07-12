@@ -62,6 +62,14 @@
                             <span> {{element.listAttributs}} </span>
                         </td>
                     </ng-container>
+                    
+                    <!-- categories Column -->
+                    <ng-container matColumnDef="categories">
+                        <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'document.table.title17' | translate}} </th>
+                        <td class="text-dark text-center containCell" mat-cell *matCellDef="let element">
+                            <span> {{element.listCategories}} </span>
+                        </td>
+                    </ng-container>
 
                     <!-- action column -->
                     <ng-container matColumnDef="actions">
