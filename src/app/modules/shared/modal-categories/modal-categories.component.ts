@@ -65,6 +65,10 @@ export class ModalCategoriesComponent implements OnInit {
   tableauAttributsTemp : IAttributs[] = []
   tableauIndexSelectionner = new Map(); 
   
+// structure du tableau presentant les objets categoriesAttributs finaux formes en regroupant les categories
+// du meme nom avec ces attributs, a partir du deuuxieme tableau de la modal
+  TABLE_FINAL_CATEGORIES_ATTRIBUTS: ICategoriesAttributs[] = [];
+
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -306,26 +310,33 @@ export class ModalCategoriesComponent implements OnInit {
       ordre: 0,
       listAttributs: []
     }
-
-    this.tableResultatsCategoriesAffichage.data.forEach(
-      categorieAttributsTemp => {
-        
-        if (categorieAttributsTemp.nom != this.categorieAttributs.nom) {
-
-          this.categorieAttributs  = {
-            id: '',
-            nom: '',
-            ordre: 0,
-            listAttributs: []
-          }
-          this.categorieAttributs.nom = categorieAttributsTemp.nom,
-          this.categorieAttributs.ordre = categorieAttributsTemp.ordre,
-          this.categorieAttributs.listAttributs.push(categorieAttributsTemp.attribut)
-          this.categorieAttributs.id = categorieAttributsTemp.id 
-        }
+    this.TABLE_FINAL_CATEGORIES_ATTRIBUTS = []
+   // let categorieAttributsTemp = this.tableResultatsCategoriesAffichage.data
  
+    this.tableResultatsCategoriesAffichage.data.forEach(
+      objet => {
+        for (let index = 0; index < this.TABLE_FINAL_CATEGORIES_ATTRIBUTS.length; index++) {
+          const element = this.TABLE_FINAL_CATEGORIES_ATTRIBUTS[index];
+           if(element.nom == objet.nom ){
+            this.categorieAttributs.listAttributs.push(objet.attribut)
+            break;
+          }else{
+            this.categorieAttributs  = {
+              id: '',
+              nom: '',
+              ordre: 0,
+              listAttributs: []
+            }
+            this.categorieAttributs.nom = objet.nom,
+            this.categorieAttributs.ordre = objet.ordre,
+            this.categorieAttributs.listAttributs.push(objet.attribut)
+            this.categorieAttributs.id = objet.id
+          }
+        } 
+          this.TABLE_FINAL_CATEGORIES_ATTRIBUTS.push(this.categorieAttributs);
       }
-    );
+    )
+    console.log("voici l'objet final a enregistrer : ", this.TABLE_FINAL_CATEGORIES_ATTRIBUTS)
   }
 
   retirerSelectionCategorieAttribut(index: number){
