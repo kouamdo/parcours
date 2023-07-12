@@ -284,12 +284,19 @@ export class ModalCategoriesComponent implements OnInit {
     this.TABLE_CATEGORIE_AFFICHAGE_TEMP=this.tableResultatsCategoriesAffichage.data;
     this.TABLE_CATEGORIE_AFFICHAGE_TEMP.splice(index, 1);
     this.tableResultatsCategoriesAffichage.data = this.TABLE_CATEGORIE_AFFICHAGE_TEMP;
+    this.data.dataICategorieAffiche.data = this.TABLE_CATEGORIE_AFFICHAGE_TEMP;
 
-    //construction du tableau résiduel
-
+    //construction du premier tableau
     this.tableauAttributsTemp.push(categorieAffichage.attribut);
     this.dataSourceAttributTemp = new MatTableDataSource<IAttributs>(this.tableauAttributsTemp);
-    this.tableauIndexSelectionner = new Map;
+    //suppression dans les index selectionnés
+    let indexASupprimer : number  = -1;
+    this.tableauIndexSelectionner.forEach((valeur, cle)=>{
+      if(valeur.attribut.id==categorieAffichage.attribut.id)
+        indexASupprimer = cle;
+    });
+    if(indexASupprimer>=0)
+      this.tableauIndexSelectionner.delete(indexASupprimer);
   }
   
   validerCategorieAttribut(){
