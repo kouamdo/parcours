@@ -304,40 +304,41 @@ export class ModalCategoriesComponent implements OnInit {
   }
   
   validerCategorieAttribut(){
-    this.categorieAttributs  = {
-      id: '',
-      nom: '',
-      ordre: 0,
-      listAttributs: []
-    }
-    this.TABLE_FINAL_CATEGORIES_ATTRIBUTS = []
-   // let categorieAttributsTemp = this.tableResultatsCategoriesAffichage.data
- 
+    
+    let tmpCatAtt = new Map(); 
+    let categorieAttributsFinal : ICategoriesAttributs[] = [];
+
+
     this.tableResultatsCategoriesAffichage.data.forEach(
       objet => {
-        for (let index = 0; index < this.TABLE_FINAL_CATEGORIES_ATTRIBUTS.length; index++) {
-          const element = this.TABLE_FINAL_CATEGORIES_ATTRIBUTS[index];
-           if(element.nom == objet.nom ){
-            this.categorieAttributs.listAttributs.push(objet.attribut)
-            break;
-          }else{
-            this.categorieAttributs  = {
-              id: '',
-              nom: '',
-              ordre: 0,
-              listAttributs: []
-            }
-            this.categorieAttributs.nom = objet.nom,
-            this.categorieAttributs.ordre = objet.ordre,
-            this.categorieAttributs.listAttributs.push(objet.attribut)
-            this.categorieAttributs.id = objet.id
+        let categorieAttributTemp : ICategoriesAttributs = {
+          id: '',
+          nom: '',
+          ordre: 0,
+          listAttributs: []
+        }
+          //si la map ne contient pas la catégorie courante 
+          if(tmpCatAtt.get(objet.nom)== null){
+            categorieAttributTemp.id = objet.id;
+            categorieAttributTemp.nom = objet.nom;
+            categorieAttributTemp.ordre = objet.ordre;
+            categorieAttributTemp.listAttributs.push(objet.attribut);
+            let index : number  = categorieAttributsFinal.push(categorieAttributTemp);
+            tmpCatAtt.set(objet.nom, index-1);
+          }
+          else{
+            //si la valeur trouvée dans la map
+            let index : number = tmpCatAtt.get(objet.nom);
+            categorieAttributTemp = categorieAttributsFinal[index];
+            categorieAttributTemp.listAttributs.push(objet.attribut);
+            categorieAttributsFinal[index] = categorieAttributTemp;
           }
         } 
-          this.TABLE_FINAL_CATEGORIES_ATTRIBUTS.push(this.categorieAttributs);
-      }
-    )
-    console.log("voici l'objet final a enregistrer : ", this.TABLE_FINAL_CATEGORIES_ATTRIBUTS)
+    );
+
+    console.log("voici l'objet final a enregistrer : ", categorieAttributsFinal)
   }
+
 
   retirerSelectionCategorieAttribut(index: number){
     this.TABLE_CATEGORIE_AFFICHAGE_TEMP.splice(index, 1)
