@@ -37,7 +37,7 @@ export class NewPrecomvtComponent implements OnInit {
   submitted: boolean=false;
   steps:any =1;
   btnRessource: string="Ressource";
-  precomvts$:Observable<IRessource>=EMPTY;
+  precomvts$:Observable<IPrecomvt>=EMPTY;
   myControl = new FormControl<string | IRessource>('');
   filteredOptions: IRessource[] | undefined;
   dataSource = new MatTableDataSource<IRessource>();
@@ -100,15 +100,16 @@ export class NewPrecomvtComponent implements OnInit {
       libelle: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
       etat: [ ],
       type: [ ],
-      assignerFamilles:formBuilder.group({
+    assignerFamilles:this.formBuilder.group({
       famille : [],
       quantiteMin:new FormControl(),
       quantiteMax:new FormControl(),
       montantMin:new FormControl(),
       montantMax:new FormControl(),
       fournisseur:new FormControl(),
-    }),
-    assignerRessource:formBuilder.group({
+     }),
+
+    assignerRessource:this.formBuilder.group({
       ressource:new FormControl(),
       quantiteMin:new FormControl(),
       quantiteMax:new FormControl(),
@@ -123,10 +124,10 @@ export class NewPrecomvtComponent implements OnInit {
     });
 
 //debut this famille
-this.famille$ = this.getAllFamilles();
+/*this.famille$ = this.getAllFamilles();
 this.getAllRessources().subscribe(valeurs => {
   this.dataSourceRessource.data = valeurs;
-});
+});*/
 
 //fin this famille
 
@@ -168,34 +169,40 @@ this.getAllRessources().subscribe(valeurs => {
       }
     );
 
-  }
-//oncheckdebut
-onCheckFamilleChange(event: any) {
-    const _familles = (this.forme.controls ['_familles'] as FormArray);
-    if (event.target.checked) {
-      _familles.push(new FormControl(event.target.value));
-      this.ajoutSelectionFamille(event.target.value);
+    //début multiselect
+    this.dropdownData = [
+      {ID: 1, value: 'Transfusion'},
+      {ID: 2, value: 'Néonat'},
+      {ID: 3, value: 'Transfusion'},
+      {ID: 4, value: 'Néonat'},
 
-    } else {
-      const index = _familles.controls
-      .findIndex(x => x.value === event.target.value);
-      _familles.removeAt(index);
-      this.dataFamille.splice(index,1);
+    ];
+    this.settings = {
+      idField: 'ID',
+      textField: 'value',
+      allowSearchFilter: true
+    };
+    //fin multiselect
+
+  }
+
+  //debut du multiselect dropdown
+onDataSelect(item:any){
+  console.log('onData Select',item)
+  }
+  onSelectAll(item:any){
+    console.log('onData UnSelect',item)
+  }
+  onDataUnSelect(items:any){
+    console.log('onSelect All',items)
+  }
+  onUnSelectAll(){
+    console.log('onUnSelect All fires')
     }
-      this._famille = _familles;
-      console.log(this._famille.value);
-  }
-  //TODO mise en cache
-  ajoutSelectionFamille(value: any) {
-    this.serviceFamille.getFamilleById(value).subscribe(
-      object => {
-        this.dataFamille.push(object);
-      }
-    )
-  }
-  //Tout selectionner début
+//fin du multiselect dropdown
 
-   //Tout selectionner fin
+
+
 
   getFamilleId(idFamille: string) {
     this.idFamille = idFamille
@@ -203,7 +210,7 @@ onCheckFamilleChange(event: any) {
 
 
 
-//oncheckfin
+
 
  get f(){
       return this.forme.controls;
@@ -229,6 +236,16 @@ private getAllFamilles(){
     }
   )
 }
+reset(){
+  this.forme.reset();
+}
+get assignerFamilles(): FormGroup{
+  return this.forme.get("assignerFamilles") as FormGroup;
+}
+
+/*get assignerFamilles(){
+  return this.forme.get("assignerFamilles") as FormArray;
+}*/
  //fonction onSubmit debut
 onSubmit(precomvtInput:any){
   //this.steps= this.steps +1;
@@ -242,12 +259,13 @@ let precomvtTemp : IPrecomvt={
     type:precomvtInput.type,
     precomvtqte:[],
   }
-  console.log("Form Submitted!", this.forme.value);
+
+ /* console.log("Form Submitted!", this.forme.value);
   this.formDirective.resetForm();
   precomvtTemp.precomvtqte = this.dataprecomvtqte;
   this.dataSourceprecomvtqteResultat.data.forEach(
     a => precomvtTemp.precomvtqte.push(a)
-  )
+  )*/
   this.servicePrecomvt.ajouterPrecomvt(precomvtTemp).subscribe(
     object => {
       this.router.navigate(['/list-precomvts']);
