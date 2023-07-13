@@ -277,7 +277,8 @@ displayFn(ressource: IRessource): string {
       precomvtqte:[]
     }
     this.eltsPreco.push(precomvtTemp);
-  }else  {//if (precomvtInput.ressource != null && precomvtInput.ressource !="")
+  }else if (this.myControl != null && this.myControl.value !=""){
+    precomvtInput.ressource = this.myControl.value
     let premvtqte : IPrecoMvtQte={
       ressource: this.Laressource,
       quantiteMax: precomvtInput.quantiteMax,
