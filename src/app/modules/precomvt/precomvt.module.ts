@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
-import { PrecomvtRoutingModule } from './precomvt-routing.module';
+import { PrecoMvtRoutingModule } from './precomvt-routing.module';
 import { NewPrecomvtComponent } from './new-precomvt/new-precomvt.component';
 
 import { AppRoutingModule } from 'src/app/app-routing.module';
@@ -28,7 +28,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
   ],
   imports: [
     CommonModule,
-    PrecomvtRoutingModule,
+    PrecoMvtRoutingModule,
     FormsModule,
     AppRoutingModule,
     ReactiveFormsModule,

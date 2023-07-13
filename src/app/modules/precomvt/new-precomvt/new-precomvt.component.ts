@@ -8,19 +8,18 @@ import {v4 as uuidv4} from 'uuid';
 import { MatTableDataSource } from '@angular/material/table';
 import { EMPTY, Observable, single } from 'rxjs';
 
-import { PrecomvtsService } from 'src/app/services/precomvts/precomvts.service';
-import { IPrecomvt } from 'src/app/modele/precomvt';
+import { PrecoMvtsService } from 'src/app/services/precomvts/precomvts.service';
+import { IPrecoMvt } from 'src/app/modele/precomvt';
 import { IRessource } from 'src/app/modele/ressource';
 import { IFamille } from 'src/app/modele/famille';
 import { Unites } from 'src/app/modele/unites';
 import { RessourcesService } from 'src/app/services/ressources/ressources.service';
-import { IPrecomvtqte } from 'src/app/modele/precomvtqte';
 import { TypeMvt } from 'src/app/modele/type-mvt';
-import { PrecomvtqtesService } from 'src/app/services/precomvtqtes/precomvtqtes.service';
 //import { IDropdownSettings } from 'ng-multiselect-dropdown';
 // import { IDropdownSettings} from 'ng-multiselect-dropdown/multiselect.model';
 import { IService } from 'src/app/modele/service';
 import { FamillesService } from 'src/app/services/familles/familles.service';
+import { IPrecoMvtQte } from 'src/app/modele/precomvtqte';
 
 @Component({
   selector: 'app-new-precomvt',
@@ -31,9 +30,8 @@ import { FamillesService } from 'src/app/services/familles/familles.service';
 export class NewPrecomvtComponent implements OnInit {
 
 
-  precomvt : IPrecomvt|undefined;
+  precomvt : IPrecoMvt|undefined;
   forme: FormGroup;
-  assignerRessource : FormGroup;
   btnLibelle: string="Enregistrer";
   submitted: boolean=false;
   steps:any =1;
@@ -47,9 +45,12 @@ export class NewPrecomvtComponent implements OnInit {
   idFamille : string = "";
   idRessource : string = "";
 
+ //représente l'ensemble des éléments de précoMvt en cours de création
+  eltsPreco : IPrecoMvt[] = [];
+
   Laressource: IRessource = {
     id: '',
-    libelle: '',
+    libelle: 'test',
     etat:true,
     quantite: 0,
     prix: 0,
@@ -69,14 +70,12 @@ export class NewPrecomvtComponent implements OnInit {
     etat: ''
   };
 
-  precomvtqte : IPrecomvtqte = {
+  precomvtqte : IPrecoMvtQte = {
     id:'',
-    libelle:'',
     quantiteMin:0,
     quantiteMax:0,
     montantMin:0,
     montantMax:0,
-    type:this. typeEchange,
     fournisseur:'',
     ressource:this. Laressource,
     famille:[],
@@ -87,36 +86,25 @@ export class NewPrecomvtComponent implements OnInit {
   selectedItems: any[] = [];
 
   dataFamille : IFamille[] = [];
-  dataSourceFamilleResultat = new MatTableDataSource<IFamille>();
   _famille :  FormArray | undefined;
-  dataSourceRessource = new MatTableDataSource<IRessource>();
-  dataprecomvtqte: IPrecomvtqte[] = [];
-  dataSourceprecomvtqteResultat= new MatTableDataSource<IPrecomvtqte>();
+  dataprecomvtqte: IPrecoMvtQte[] = [];
 
   @ViewChild(FormGroupDirective)
   formDirective!: FormGroupDirective;
 
-  constructor(private formBuilder:FormBuilder,private serviceFamille:FamillesService,private precomvtqteService:PrecomvtqtesService ,private ressourceService:RessourcesService ,private precomvtService:PrecomvtsService,private serviceRessource:RessourcesService,private servicePrecomvt:PrecomvtsService,private servicePrecomvtqte:PrecomvtqtesService,private router:Router, private infosPath:ActivatedRoute, private datePipe: DatePipe) {
+  constructor(private formBuilder:FormBuilder,private serviceFamille:FamillesService,private ressourceService:RessourcesService ,private precoMvtService:PrecoMvtsService,private serviceRessource:RessourcesService,private router:Router, private infosPath:ActivatedRoute, private datePipe: DatePipe) {
     this.forme = this.formBuilder.group({
       _famille :  new FormArray([]),
-      libelle: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
-      etat: [ ],
-      type: [ ],
-      assignerFamilles:formBuilder.group({
-      famille : [],
-      quantiteMin:new FormControl(),
-      quantiteMax:new FormControl(),
-      montantMin:new FormControl(),
-      montantMax:new FormControl(),
-      fournisseur:new FormControl(),
-    })
-    }),
-    this.assignerRessource = this.formBuilder.group({
+      libelle: new FormControl(),
+      etat: new FormControl(),
+      type: new FormControl(),
       ressource:new FormControl(),
       quantiteMin:new FormControl(),
       quantiteMax:new FormControl(),
       montantMin:new FormControl(),
-      montantMax:new FormControl()
+      montantMax:new FormControl(),
+      famille : new FormControl(),
+      fournisseur:new FormControl()
     })
   };
   ngOnInit(): void {
@@ -127,7 +115,7 @@ export class NewPrecomvtComponent implements OnInit {
     //debut this famille
     this.famille$ = this.getAllFamilles();
     this.getAllRessources().subscribe(valeurs => {
-      this.dataSourceRessource.data = valeurs;
+    //  this.dataSourceRessource.data = valeurs;
     });
 
     //fin this famille
@@ -137,7 +125,7 @@ export class NewPrecomvtComponent implements OnInit {
     if((idPrecomvt != null) && idPrecomvt!==''){
       //this.btnLibelle="Modifier";
       //this.titre="Document à Modifier";
-      this.servicePrecomvt.getPrecomvtById(idPrecomvt).subscribe(x =>
+      /*this.servicePrecoMvt.getPrecomvtById(idPrecomvt).subscribe(x =>
       {
         this.precomvt = x; console.log(this.precomvt);
         this.forme.setValue({
@@ -146,12 +134,12 @@ export class NewPrecomvtComponent implements OnInit {
         type:this.precomvt.type,
         precomvtqte:this.precomvt.precomvtqte,
         })
-      });
+      });*/
     }
 
 
 //let idprecomvt fin
-
+ 
 
     this.myControl.valueChanges.subscribe(
       value => {
@@ -238,7 +226,7 @@ onSubmit(precomvtInput:any){
 // console.warn(this.forme.value);
 this.submitted=true;
 if(this.forme.invalid) return;
-let precomvtTemp : IPrecomvt={
+let precomvtTemp : IPrecoMvt={
     id: uuidv4(),
     libelle:precomvtInput.libelle,
     etat:precomvtInput.etat,
@@ -248,14 +236,12 @@ let precomvtTemp : IPrecomvt={
   console.log("Form Submitted!", this.forme.value);
   this.formDirective.resetForm();
   precomvtTemp.precomvtqte = this.dataprecomvtqte;
-  this.dataSourceprecomvtqteResultat.data.forEach(
-    a => precomvtTemp.precomvtqte.push(a)
-  )
-  this.servicePrecomvt.ajouterPrecomvt(precomvtTemp).subscribe(
+ 
+  /*this.servicePrecomvt.ajouterPrecomvt(precomvtTemp).subscribe(
     object => {
       this.router.navigate(['/list-precomvts']);
     }
-  )
+  )*/
 }
  //fonction onSubmit fin
 
@@ -267,49 +253,73 @@ displayFn(ressource: IRessource): string {
   }
  public rechercherListingRessource(option: IRessource){
  this.serviceRessource.getRessourcesByLibelle(option.libelle.toLowerCase()).subscribe(
-   valeurs => {this.dataSourceRessource.data = valeurs;}
+   //valeurs => {this.dataSourceRessource.data = valeurs;}
  )
 }
 
  //fonction valPrecomvtqte debut
- valPrecomvtqte(precomvtqteInput:any){
-  this.submitted=true;
-  if(this.forme.invalid) return;
-  let precomvtqteTemp : IPrecomvtqte={
-    id: uuidv4(),
-    libelle: "un libelle",
-    type: TypeMvt.neutre,
-    ressource: this.Laressource,
-    fournisseur: "un fourrnisseur",
-    famille:[],
-    quantiteMin:precomvtqteInput.quantiteMin,
-    quantiteMax:precomvtqteInput.quantiteMax,
-    montantMin:precomvtqteInput.montantMin,
-    montantMax:precomvtqteInput.montantMax,
-  }
-
-  if(this.precomvtqte != undefined){
-    precomvtqteTemp.id = this.precomvtqte.id
-  }
-  //precomvtqteTemp.ressource = this.Laressource
-  this.Laressource = {
-    id: '',
-    libelle: '',
-    etat:true,
-    quantite: 0,
-    prix: 0,
-    unite:Unites.litre,
-    famille:{
-      id: '',
-      libelle: '',
-      description: '',
-      etat: ''
-    },
-    caracteristique:'',
-  };
-  this.assignerRessource.reset()
-  console.log('voici la ressource de cette ressource : ', precomvtqteTemp.ressource)
-  console.log('valeur precomvtqte: ', precomvtqteTemp)
+ /**
+  * 
+  * @param precomvtqteInput 
+  * @returns 
+  */
+ valPrecomvtqte(precomvtInput:any){
+  //this.submitted=true;
+  //if(this.forme.invalid) return;
+  
+  //sauvegarde des valeurs de precoMvt <=> premier ecran
+  if(precomvtInput.libelle != null && precomvtInput.libelle!=""){
+    let precomvtTemp : IPrecoMvt={
+      id: uuidv4(),
+      libelle: precomvtInput.libelle,
+      etat: precomvtInput.etat,
+      type: precomvtInput.TypeMvt,
+      precomvtqte:[]
+    }
+    this.eltsPreco.push(precomvtTemp);
+  }else  {//if (precomvtInput.ressource != null && precomvtInput.ressource !="")
+    let premvtqte : IPrecoMvtQte={
+      ressource: this.Laressource,
+      quantiteMax: precomvtInput.quantiteMax,
+      quantiteMin: precomvtInput.quantiteMin,
+      montantMax: precomvtInput.montantMax,
+      montantMin: precomvtInput.montantMin,
+      id:"",
+      fournisseur:""
+    };
+    let precomvtTemp : IPrecoMvt={
+      id: "uuidv4()",
+      libelle: precomvtInput.ressource.libelle,
+      etat: false,
+      type: precomvtInput.TypeMvt,
+      precomvtqte:[]
+    }
+    precomvtTemp.precomvtqte.push(premvtqte);
+    this.eltsPreco.push(precomvtTemp);
+  }/* else {
+    let premvtqte : IPrecoMvtQte={
+      famille: precomvtInput.famille,
+      quantiteMax: precomvtInput.quantiteMax,
+      quantiteMin: precomvtInput.quantiteMin,
+      montantMax: precomvtInput.montantMax,
+      montantMin: precomvtInput.montantMin,
+      id:"",
+      fournisseur:""
+    }
+    let precomvtTemp : IPrecoMvt={
+      id: uuidv4(),
+      libelle: "familleeee",
+      etat: false,
+      type: precomvtInput.TypeMvt,
+      precomvtqte:[]
+    }
+    precomvtTemp.precomvtqte.push(premvtqte);
+    this.eltsPreco.push(precomvtTemp);
+  }*/
+  
+  this.forme.reset();
+ // console.log('voici la ressource de cette ressource : ', precomvtqteTemp.ressource)
+ // console.log('valeur precomvtqte: ', precomvtqteTemp)
     }
  //fonction valPrecomvtqte fin
   }

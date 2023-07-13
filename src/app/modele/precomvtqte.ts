@@ -3,15 +3,13 @@ import { IRessource } from "./ressource";
 import { IFamille } from "./famille";
 
 
-export interface IPrecomvtqte {
+export interface IPrecoMvtQte {
   id:string,
-  libelle:string,
   quantiteMin:number,
   quantiteMax:number,
   montantMin:number,
   montantMax:number,
-  type:TypeMvt,
   fournisseur:string,
-  ressource:IRessource,
-  famille:IFamille[],
+  ressource?:IRessource,
+  famille?:IFamille[],
 }
