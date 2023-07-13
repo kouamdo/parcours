@@ -12,9 +12,9 @@ import { StatutTicket } from "../modele/statut-ticket";
 import { ITicket } from "../modele/ticket";
 import { TypeTicket } from "../modele/type-ticket";
 import { IRessource } from "../modele/ressource";
-import { IPrecomvtqte } from "../modele/precomvtqte";
+import { IPrecoMvtQte } from "../modele/precomvtqte";
 import { TypeMvt } from "../modele/type-mvt";
-import { IPrecomvt } from "../modele/precomvt";
+import { IPrecoMvt } from "../modele/precomvt";
 import { Unites } from "../modele/unites";
 
 
@@ -32,7 +32,7 @@ export class InMemDBService implements InMemoryDbService{
   typeDate = TypeTicket.Date;
 
   TypeMvtNeutre = TypeMvt.neutre
-  TypeMvtRetrait = TypeMvt.retrait
+  TypeMvtAjout = TypeMvt.ajout
   TypeMvtReduire = TypeMvt.reduire
 
   UnitesLitre = Unites.litre
@@ -186,32 +186,21 @@ export class InMemDBService implements InMemoryDbService{
         famille:{id:"5", libelle:"transfusion", description:"sang", etat:"gl"}},
       ];
 
-      let precomvtqte:IPrecomvtqte[]=[
-        {id:"1",libelle:"achat",quantiteMin:10,  quantiteMax:20,  montantMin:1000, montantMax:7000, type:this.TypeMvtNeutre,fournisseur:'gc',
-        ressource:{id:"1", libelle:"transfusion",etat:true,quantite:10,unite:this.UnitesLitre,prix:1000,caracteristique:"souple",
-                famille:{id:"4", libelle:"néonat", description:"nouveau-né", etat:"malade"}},
-        famille:[
-                {id:"1", libelle:"trans", description:"sang", etat:"gl"},
-                {id:"2", libelle:"néonat", description:"nouveau-né", etat:"malade"},
-                {id:"3", libelle:"pediatrie", description:"enfant", etat:"souffrant"}
-              ]
-            },];
-
-      let precomvt:IPrecomvt[]=[
+      let precomvt:IPrecoMvt[]=[
                 {id:"1",libelle:"rachat",etat: true,type:this.TypeMvtNeutre,
-                precomvtqte:[
-                  {id:"1",libelle:"achat",quantiteMin:10,  quantiteMax:20,  montantMin:1000, montantMax:7000, type:this.TypeMvtNeutre,fournisseur:'gc',
-        ressource:{id:"1", libelle:"transfusion",etat:true,quantite:10,unite:this.UnitesLitre,prix:1000,caracteristique:"souple",
-                famille:{id:"4", libelle:"néonat", description:"nouveau-né", etat:"malade"}},
-        famille:[
-                {id:"1", libelle:"trans", description:"sang", etat:"gl"},
-                {id:"2", libelle:"néonat", description:"nouveau-né", etat:"malade"},
-                {id:"3", libelle:"pediatrie", description:"enfant", etat:"souffrant"}
-              ]
-            },
-               ],
-              }];
+                  precomvtqte:[{id:"1",quantiteMin:10,  quantiteMax:20,  montantMin:1000, montantMax:7000,fournisseur:'gc',
+                              ressource:{id:"1", libelle:"transfusion",etat:true,quantite:10,unite:this.UnitesLitre,prix:1000,caracteristique:"souple", famille:{id:"4", libelle:"néonat", description:"nouveau-né", etat:"malade"}}
+                          }]},
+                {id:"2",libelle:"vente",etat: true,type:this.TypeMvtReduire,
+                precomvtqte:[{id:"1",quantiteMin:30,  quantiteMax:40,  montantMin:100, montantMax:7000,fournisseur:'gc',
+                            famille:[
+                                    {id:"1", libelle:"trans", description:"sang", etat:"gl"},
+                                    {id:"2", libelle:"néonat", description:"nouveau-né", etat:"malade"},
+                                    {id:"3", libelle:"pediatrie", description:"enfant", etat:"souffrant"}
+                                  ]
+                        }]}          
+            ];
 
-        return{patients, services, menus, tickets, missions, attributs, documents,famille,ressource,precomvtqte,precomvt};
+        return{patients, services, menus, tickets, missions, attributs, documents,famille,ressource,precomvt};
     }
 }

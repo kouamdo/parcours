@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
-import { PrecomvtRoutingModule } from './precomvt-routing.module';
+import { PrecoMvtRoutingModule } from './precomvt-routing.module';
 import { NewPrecomvtComponent } from './new-precomvt/new-precomvt.component';
 
 import { AppRoutingModule } from 'src/app/app-routing.module';
@@ -18,7 +18,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { ListPrecomvtsComponent } from './list-precomvts/list-precomvts.component';
-import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+// import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @NgModule({
@@ -28,11 +28,11 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
   ],
   imports: [
     CommonModule,
-    PrecomvtRoutingModule,
+    PrecoMvtRoutingModule,
     FormsModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    NgMultiSelectDropDownModule.forRoot(),
+    // NgMultiSelectDropDownModule.forRoot(),
     MatAutocompleteModule,
     MatInputModule,
     MatFormFieldModule,

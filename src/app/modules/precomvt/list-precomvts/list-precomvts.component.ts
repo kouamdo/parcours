@@ -7,8 +7,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { Observable, EMPTY } from 'rxjs';
-import { IPrecomvt } from 'src/app/modele/precomvt';
-import { PrecomvtsService } from 'src/app/services/precomvts/precomvts.service';
+import { IPrecoMvt } from 'src/app/modele/precomvt';
+import { PrecoMvtsService } from 'src/app/services/precomvts/precomvts.service';
 
 @Component({
   selector: 'app-list-precomvts',
@@ -17,25 +17,25 @@ import { PrecomvtsService } from 'src/app/services/precomvts/precomvts.service';
 })
 export class ListPrecomvtsComponent implements OnInit {
 
-    precomvt$:Observable<IPrecomvt>=EMPTY;
+    precomvt$:Observable<IPrecoMvt>=EMPTY;
 
-    myControl = new FormControl<string | IPrecomvt>('');
+    myControl = new FormControl<string | IPrecoMvt>('');
 
-    ELEMENTS_TABLE: IPrecomvt[] = [];
-    filteredOptions: IPrecomvt[] | undefined;
+    ELEMENTS_TABLE: IPrecoMvt[] = [];
+    filteredOptions: IPrecoMvt[] | undefined;
     displayedColumns: string[] = ['id','libelle','etat','type','famille','quantiteMin','quantiteMax','montantMin','montantMax','fournisseur','ressource','actions'];
 
-    dataSource = new MatTableDataSource<IPrecomvt>(this.ELEMENTS_TABLE);
+    dataSource = new MatTableDataSource<IPrecoMvt>(this.ELEMENTS_TABLE);
 
     @ViewChild(MatPaginator)
     paginator!: MatPaginator;
 
     @ViewChild(MatSort) sort!: MatSort;
 
-    constructor(private translate: TranslateService,private router:Router, private servicePrecomvt:PrecomvtsService, private _liveAnnouncer: LiveAnnouncer) { }
+    constructor(private translate: TranslateService,private router:Router, private servicePrecoMvt:PrecoMvtsService, private _liveAnnouncer: LiveAnnouncer) { }
 
     ngOnInit(): void {
-      this.getAllPrecomvts().subscribe(valeurs => {
+      this.getAllPrecomvts().subscribe((valeurs: IPrecoMvt[]) => {
         this.dataSource.data = valeurs;
       });
 
@@ -43,7 +43,7 @@ export class ListPrecomvtsComponent implements OnInit {
         value => {
           const libelle = typeof value === 'string' ? value : value?.libelle;
           if(libelle != undefined && libelle?.length >0){
-            this.servicePrecomvt.getPrecomvtsByLibelle(libelle.toLowerCase() as string).subscribe(
+            this.servicePrecoMvt.getPrecomvtsByLibelle(libelle.toLowerCase() as string).subscribe(
               reponse => {
                 this.filteredOptions = reponse;
               }
@@ -57,9 +57,9 @@ export class ListPrecomvtsComponent implements OnInit {
     }
 
     private getAllPrecomvts(){
-      return this.servicePrecomvt.getAllPrecomvts();
+      return this.servicePrecoMvt.getAllPrecomvts();
     }
-    displayFn(precomvt: IPrecomvt): string {
+    displayFn(precomvt: IPrecoMvt): string {
       return precomvt && precomvt.libelle ? precomvt.libelle : '';
     }
 
@@ -68,9 +68,9 @@ export class ListPrecomvtsComponent implements OnInit {
       this.dataSource.sort = this.sort;
     }
 
-    public rechercherListingPrecomvt(option: IPrecomvt){
-      this.servicePrecomvt.getPrecomvtsByLibelle(option.libelle.toLowerCase()).subscribe(
-          valeurs => {this.dataSource.data = valeurs;}
+    public rechercherListingPrecomvt(option: IPrecoMvt){
+      this.servicePrecoMvt.getPrecomvtsByLibelle(option.libelle.toLowerCase()).subscribe(
+        //  valeurs => {this.dataSource.data = valeurs;}
       )
     }
 
