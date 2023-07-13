@@ -1,4 +1,4 @@
-import { TypeMvt } from "./type-mvt";
+//import { TypeMvt } from "./type-mvt";
 import { IPrecoMvtQte } from "./precomvtqte";
 
 
@@ -9,7 +9,8 @@ export interface IPrecoMvt {
   etat:boolean,
   /*dateCreation:Date,
   dateModification:Date,*/
-  type:TypeMvt,
+  //type:TypeMvt,
+  type:string,
   precomvtqte:IPrecoMvtQte[],
 
 }

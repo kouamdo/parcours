@@ -38,16 +38,19 @@
 
                       <div class="form-group">
                         <div class="champs">
-                            <label  for="type"  class="label" >
+                          <!-- <label  for="type"  class="label"*ngFor="let type of eltsPreco" ngvalue="type.id"  (click)="getPrecoMvtId(type.id)" >
                               Type
-                            </label>
-                        <select  class="form-control" formControlName="type" name="type"  id="type" required>
-                          <option>select</option>
-                          <option>Neutre</option>
-                          <option>Entrée</option>
-                          <option>Sortie</option>
-                      </select>
-                        </div>
+                            </label>-->
+
+                            <label for="type">Type</label>
+                            <select class="form-control" formControlName="type"  >
+                              <option class="label"*ngFor="let type of eltsPreco" ngvalue="type.id"  (click)="getPrecoMvtId(type.id)">
+
+                              </option>
+
+                            </select>
+
+
                     </div>
                   </div>
                     </div>
@@ -60,6 +63,17 @@
                             <label for="famille" class="label">
                             famille
                             </label>
+
+                            <ng-multiselect-dropdown ng-reflect-name="famille" class="ng-valid ng-untouched ng-pristine" id="famille" class="form-control" required
+                            [settings]= "settings"
+                            [data]= "dropdownData"
+                            formControlName="famille"
+                            [placeholder]="'selectionnez une famille'"
+                            (onSelect)="onDataSelect($event)"
+                            (onSelectAll)="onSelectAll($event)"
+                            (onDeSelect)="onDataUnSelect($event)"
+                            (onDeSelectAll)="onUnSelectAll()">
+                           </ng-multiselect-dropdown>
                            <!-- <div class="dropdown w-100">
                             <button class="select dropdown-toggle btn" name="famille" id="famille"  type="button" id="triggerId" data-toggle="dropdown" aria-haspopup="true"
                                     aria-expanded="false">
@@ -129,14 +143,15 @@
 
               <div class="form-group">
                 <div class="champs">
-                    <label  for="fournisseur"  class="label" >
-                      Fournisseur
-                    </label>
+                  <label for="fournisseur">Fournisseur</label>
                 <select  class="form-control" formControlName="fournisseur" name="fournisseur" id="fournisseur">
-                  <option>Selectionnez un fournisseur</option>
-                  <option>EVC</option>
-                  <option>ACC</option>
-                  <option>DCD</option>
+
+                  <select class="form-control" formControlName="fournisseur"  name="fournisseur" id="fournisseur" ngModel >
+                    <option class="label" *ngFor="let fournisseurs of  eltsPrecoMvtQte" [value]="fournisseurs.fournisseur">
+                      {{fournisseurs.fournisseur}}
+                    </option>
+
+                  </select>
 
               </select>
                 </div>
@@ -245,6 +260,7 @@
               <button type="submit" class="btn">Annuler</button>
               <button type="submit" class="btn" *ngIf="steps == 4">{{btnLibelle}}</button>
             </div> -->
+          </div>
           </form>
       </div>
   </div>

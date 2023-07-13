@@ -14,13 +14,15 @@ import { IRessource } from 'src/app/modele/ressource';
 import { IFamille } from 'src/app/modele/famille';
 import { Unites } from 'src/app/modele/unites';
 import { RessourcesService } from 'src/app/services/ressources/ressources.service';
-import { TypeMvt } from 'src/app/modele/type-mvt';
+//import { TypeMvt } from 'src/app/modele/type-mvt';
 //import { IDropdownSettings } from 'ng-multiselect-dropdown';
 // import { IDropdownSettings} from 'ng-multiselect-dropdown/multiselect.model';
 import { IService } from 'src/app/modele/service';
 import { FamillesService } from 'src/app/services/familles/familles.service';
 import { IPrecoMvtQte } from 'src/app/modele/precomvtqte';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
+import { TypeMvt } from 'src/app/modele/type-mvt';
+import { Typemvt } from 'src/app/modele/typemvt';
 
 @Component({
   selector: 'app-new-precomvt',
@@ -31,7 +33,7 @@ import { IDropdownSettings } from 'ng-multiselect-dropdown';
 export class NewPrecomvtComponent implements OnInit {
 
 
-  precomvt : IPrecoMvt|undefined;
+  //precomvt : IPrecoMvt|undefined;
   forme: FormGroup;
   btnLibelle: string="Enregistrer";
   submitted: boolean=false;
@@ -43,13 +45,14 @@ export class NewPrecomvtComponent implements OnInit {
   filteredOptions: IRessource[] | undefined;
   //dataSource = new MatTableDataSource<IRessource>();
   famille$:Observable<IFamille[]>=EMPTY;
-  typeEchange!: TypeMvt;
+  //type:'';
   idFamille : string = "";
   idRessource : string = "";
-
+  idPrecoMvt: string = "";
+  
  //représente l'ensemble des éléments de précoMvt en cours de création
   eltsPreco : IPrecoMvt[] = [];
-
+  eltsPrecoMvtQte : IPrecoMvtQte[] = [];
   Laressource: IRessource = {
     id: '',
     libelle: 'test',
@@ -71,7 +74,15 @@ export class NewPrecomvtComponent implements OnInit {
     description: '',
     etat: ''
   };
-
+  precomvt :IPrecoMvt = {
+  id:'',
+  libelle:'',
+  etat:true,
+  /*dateCreation:Date,
+  dateModification:Date,*/
+  type:'',
+  precomvtqte : []
+}
   precomvtqte : IPrecoMvtQte = {
     id:'',
     quantiteMin:0,
@@ -84,7 +95,7 @@ export class NewPrecomvtComponent implements OnInit {
   }
 
   dropdownData : any [] = [];
-  //settings: IDropdownSettings = {};
+  settings: IDropdownSettings = {};
   selectedItems: any[] = [];
 
   dataFamille : IFamille[] = [];
@@ -93,7 +104,7 @@ export class NewPrecomvtComponent implements OnInit {
 
   @ViewChild(FormGroupDirective)
   formDirective!: FormGroupDirective;
-  settings: { idField: string; textField: string; allowSearchFilter: boolean; } | undefined;
+  //settings: { idField: string; textField: string; allowSearchFilter: boolean; } | undefined;
 
   constructor(private formBuilder:FormBuilder,private serviceFamille:FamillesService,private ressourceService:RessourcesService ,private precoMvtService:PrecoMvtsService,private serviceRessource:RessourcesService,private router:Router, private infosPath:ActivatedRoute, private datePipe: DatePipe) {
     this.forme = this.formBuilder.group({
@@ -122,6 +133,7 @@ export class NewPrecomvtComponent implements OnInit {
     });
 
     //fin this famille
+
 
     //let idprecomvt debut
     let idPrecomvt = this.infosPath.snapshot.paramMap.get('idPrecomvt');
@@ -201,6 +213,9 @@ onDataSelect(item:any){
   }
 
 
+  getPrecoMvtId(idPrecoMvt: string) {
+    this.idPrecoMvt = idPrecoMvt
+  }
 
 
 
@@ -293,7 +308,8 @@ displayFn(ressource: IRessource): string {
       id: uuidv4(),
       libelle: precomvtInput.libelle,
       etat: precomvtInput.etat,
-      type: precomvtInput.TypeMvt,
+      //type: precomvtInput.TypeMvt,
+       type: precomvtInput.type,
       precomvtqte:[]
     }
     this.eltsPreco.push(precomvtTemp);
