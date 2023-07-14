@@ -18,7 +18,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { ListPrecomvtsComponent } from './list-precomvts/list-precomvts.component';
-import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+//import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @NgModule({
@@ -32,7 +32,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     FormsModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    NgMultiSelectDropDownModule.forRoot(),
+    //NgMultiSelectDropDownModule.forRoot(),
     MatAutocompleteModule,
     MatInputModule,
     MatFormFieldModule,
