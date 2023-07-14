@@ -13,7 +13,7 @@ import { ITicket } from "../modele/ticket";
 import { TypeTicket } from "../modele/type-ticket";
 import { IRessource } from "../modele/ressource";
 import { IPrecoMvtQte } from "../modele/precomvtqte";
-import { TypeMvt } from "../modele/type-mvt";
+//import { TypeMvt } from "../modele/type-mvt";
 import { IPrecoMvt } from "../modele/precomvt";
 import { Unites } from "../modele/unites";
 
@@ -31,9 +31,9 @@ export class InMemDBService implements InMemoryDbService{
   typeBoolean = TypeTicket.Boolean;
   typeDate = TypeTicket.Date;
 
-  TypeMvtNeutre = TypeMvt.neutre
+  /*TypeMvtNeutre = TypeMvt.neutre
   TypeMvtAjout = TypeMvt.ajout
-  TypeMvtReduire = TypeMvt.reduire
+  TypeMvtReduire = TypeMvt.reduire*/
 
   UnitesLitre = Unites.litre
   UnitesKg = Unites.kg
@@ -187,18 +187,18 @@ export class InMemDBService implements InMemoryDbService{
       ];
 
       let precomvt:IPrecoMvt[]=[
-                {id:"1",libelle:"rachat",etat: true,type:this.TypeMvtNeutre,
+                {id:"1",libelle:"rachat",etat: true,type:'neutre',/*type:this.TypeMvtNeutre*/
                   precomvtqte:[{id:"1",quantiteMin:10,  quantiteMax:20,  montantMin:1000, montantMax:7000,fournisseur:'gc',
                               ressource:{id:"1", libelle:"transfusion",etat:true,quantite:10,unite:this.UnitesLitre,prix:1000,caracteristique:"souple", famille:{id:"4", libelle:"néonat", description:"nouveau-né", etat:"malade"}}
                           }]},
-                {id:"2",libelle:"vente",etat: true,type:this.TypeMvtReduire,
+                {id:"2",libelle:"vente",etat: true,type:'reduire',/*type:this.TypeMvtReduire*/
                 precomvtqte:[{id:"1",quantiteMin:30,  quantiteMax:40,  montantMin:100, montantMax:7000,fournisseur:'gc',
                             famille:[
                                     {id:"1", libelle:"trans", description:"sang", etat:"gl"},
                                     {id:"2", libelle:"néonat", description:"nouveau-né", etat:"malade"},
                                     {id:"3", libelle:"pediatrie", description:"enfant", etat:"souffrant"}
                                   ]
-                        }]}          
+                        }]}
             ];
 
         return{patients, services, menus, tickets, missions, attributs, documents,famille,ressource,precomvt};

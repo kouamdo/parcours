@@ -1,4 +1,4 @@
-import { TypeMvt } from "./type-mvt";
+//import { TypeMvt } from "./type-mvt";
 import { IRessource } from "./ressource";
 import { IFamille } from "./famille";
 

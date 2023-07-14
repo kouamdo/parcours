@@ -14,12 +14,15 @@ import { IRessource } from 'src/app/modele/ressource';
 import { IFamille } from 'src/app/modele/famille';
 import { Unites } from 'src/app/modele/unites';
 import { RessourcesService } from 'src/app/services/ressources/ressources.service';
-import { TypeMvt } from 'src/app/modele/type-mvt';
+//import { TypeMvt } from 'src/app/modele/type-mvt';
 //import { IDropdownSettings } from 'ng-multiselect-dropdown';
 // import { IDropdownSettings} from 'ng-multiselect-dropdown/multiselect.model';
 import { IService } from 'src/app/modele/service';
 import { FamillesService } from 'src/app/services/familles/familles.service';
 import { IPrecoMvtQte } from 'src/app/modele/precomvtqte';
+//import { IDropdownSettings } from 'ng-multiselect-dropdown';
+import { TypeMvt } from 'src/app/modele/type-mvt';
+import { Typemvt } from 'src/app/modele/typemvt';
 
 @Component({
   selector: 'app-new-precomvt',
@@ -30,24 +33,26 @@ import { IPrecoMvtQte } from 'src/app/modele/precomvtqte';
 export class NewPrecomvtComponent implements OnInit {
 
 
-  precomvt : IPrecoMvt|undefined;
+  //precomvt : IPrecoMvt|undefined;
   forme: FormGroup;
   btnLibelle: string="Enregistrer";
   submitted: boolean=false;
   steps:any =1;
   btnRessource: string="Ressource";
   //precomvts$:Observable<IRessource>=EMPTY;
+  precomvts$:Observable<IPrecoMvt>=EMPTY;
   myControl = new FormControl<string | IRessource>('');
   filteredOptions: IRessource[] | undefined;
   //dataSource = new MatTableDataSource<IRessource>();
   famille$:Observable<IFamille[]>=EMPTY;
-  typeEchange!: TypeMvt;
+  //type:'';
   idFamille : string = "";
   idRessource : string = "";
-
+  idPrecoMvt: string = "";
+  
  //représente l'ensemble des éléments de précoMvt en cours de création
   eltsPreco : IPrecoMvt[] = [];
-
+  eltsPrecoMvtQte : IPrecoMvtQte[] = [];
   Laressource: IRessource = {
     id: '',
     libelle: 'test',
@@ -69,7 +74,15 @@ export class NewPrecomvtComponent implements OnInit {
     description: '',
     etat: ''
   };
-
+  precomvt :IPrecoMvt = {
+  id:'',
+  libelle:'',
+  etat:true,
+  /*dateCreation:Date,
+  dateModification:Date,*/
+  type:'',
+  precomvtqte : []
+}
   precomvtqte : IPrecoMvtQte = {
     id:'',
     quantiteMin:0,
@@ -91,6 +104,7 @@ export class NewPrecomvtComponent implements OnInit {
 
   @ViewChild(FormGroupDirective)
   formDirective!: FormGroupDirective;
+  //settings: { idField: string; textField: string; allowSearchFilter: boolean; } | undefined;
 
   constructor(private formBuilder:FormBuilder,private serviceFamille:FamillesService,private ressourceService:RessourcesService ,private precoMvtService:PrecoMvtsService,private serviceRessource:RessourcesService,private router:Router, private infosPath:ActivatedRoute, private datePipe: DatePipe) {
     this.forme = this.formBuilder.group({
@@ -120,6 +134,7 @@ export class NewPrecomvtComponent implements OnInit {
 
     //fin this famille
 
+
     //let idprecomvt debut
     let idPrecomvt = this.infosPath.snapshot.paramMap.get('idPrecomvt');
     if((idPrecomvt != null) && idPrecomvt!==''){
@@ -139,7 +154,7 @@ export class NewPrecomvtComponent implements OnInit {
 
 
 //let idprecomvt fin
- 
+
 
     this.myControl.valueChanges.subscribe(
       value => {
@@ -158,42 +173,51 @@ export class NewPrecomvtComponent implements OnInit {
       }
     );
 
-  }
-//oncheckdebut
-onCheckFamilleChange(event: any) {
-    const _familles = (this.forme.controls ['_familles'] as FormArray);
-    if (event.target.checked) {
-      _familles.push(new FormControl(event.target.value));
-      this.ajoutSelectionFamille(event.target.value);
+    //début multiselect
+    this.dropdownData = [
+      {ID: 1, value: 'Transfusion'},
+      {ID: 2, value: 'Néonat'},
+      {ID: 3, value: 'Transfusion'},
+      {ID: 4, value: 'Néonat'},
 
-    } else {
-      const index = _familles.controls
-      .findIndex(x => x.value === event.target.value);
-      _familles.removeAt(index);
-      this.dataFamille.splice(index,1);
+    ];
+    // this.settings = {
+    //   idField: 'ID',
+    //   textField: 'value',
+    //   allowSearchFilter: true
+    // };
+    //fin multiselect
+
+  }
+
+  //debut du multiselect dropdown
+onDataSelect(item:any){
+  console.log('onData Select',item)
+  }
+  onSelectAll(item:any){
+    console.log('onData UnSelect',item)
+  }
+  onDataUnSelect(items:any){
+    console.log('onSelect All',items)
+  }
+  onUnSelectAll(){
+    console.log('onUnSelect All fires')
     }
-      this._famille = _familles;
-      console.log(this._famille.value);
-  }
-  //TODO mise en cache
-  ajoutSelectionFamille(value: any) {
-    this.serviceFamille.getFamilleById(value).subscribe(
-      object => {
-        this.dataFamille.push(object);
-      }
-    )
-  }
-  //Tout selectionner début
+//fin du multiselect dropdown
 
-   //Tout selectionner fin
+
+
 
   getFamilleId(idFamille: string) {
     this.idFamille = idFamille
   }
 
 
+  getPrecoMvtId(idPrecoMvt: string) {
+    this.idPrecoMvt = idPrecoMvt
+  }
 
-//oncheckfin
+
 
  get f(){
       return this.forme.controls;
@@ -220,6 +244,16 @@ private getAllFamilles(){
     }
   )
 }
+reset(){
+  this.forme.reset();
+}
+get assignerFamilles(): FormGroup{
+  return this.forme.get("assignerFamilles") as FormGroup;
+}
+
+/*get assignerFamilles(){
+  return this.forme.get("assignerFamilles") as FormArray;
+}*/
  //fonction onSubmit debut
 onSubmit(precomvtInput:any){
   //this.steps= this.steps +1;
@@ -233,10 +267,11 @@ let precomvtTemp : IPrecoMvt={
     type:precomvtInput.type,
     precomvtqte:[],
   }
-  console.log("Form Submitted!", this.forme.value);
+
+ /* console.log("Form Submitted!", this.forme.value);
   this.formDirective.resetForm();
   precomvtTemp.precomvtqte = this.dataprecomvtqte;
- 
+
   /*this.servicePrecomvt.ajouterPrecomvt(precomvtTemp).subscribe(
     object => {
       this.router.navigate(['/list-precomvts']);
@@ -259,9 +294,9 @@ displayFn(ressource: IRessource): string {
 
  //fonction valPrecomvtqte debut
  /**
-  * 
-  * @param precomvtqteInput 
-  * @returns 
+  *
+  * @param precomvtqteInput
+  * @returns
   */
  valPrecomvtqte(precomvtInput:any){
     //this.submitted=true;
