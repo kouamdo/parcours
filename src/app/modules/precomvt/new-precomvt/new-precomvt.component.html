@@ -37,7 +37,8 @@
                       Type
                     </label>
                     <select class="form-control" formControlName="type">
-                      <option class="label"*ngFor="let type of eltsPreco" ngvalue="type.id"  (click)="getPrecoMvtId(type.id)">
+                      <option class="label" *ngFor="let typeM of typeMvt" value="{{ typeM }}" >
+                        {{ typeM }}
                       </option>
                     </select>
                   </div>
@@ -49,94 +50,89 @@
         <div *ngIf="steps == 2" class="form-group pt-0 pl-2 pr-2 pb-0">
           <div class="champs">
             <label for="famille" class="label">
-            famille
+              famille
             </label>
-            <div class="dropdown w-100">
-              <button class="select dropdown-toggle btn" name="famille" id="famille"  type="button" id="triggerId" data-toggle="dropdown" aria-haspopup="true"
-                      aria-expanded="false">
-                famille
-              </button>
-                <div class="dropdown-menu" aria-labelledby="triggerId" formArrayName="_familles">
-                    <label class="dropdown-item" for="famille" *ngFor="let famille of (famille$ | async) as familles let i=index">
-                        <input type="checkbox" required [value]="famille.id" name="familles" [id]="famille.id" (click)="getFamilleId(famille.id)">
-                        {{famille.libelle}}
-                    </label>
-                </div>
-              </div>
-              </div>
+            <mat-form-field class="example-full-width" appearance="fill">
+              <mat-label>Famille</mat-label>
+              <mat-select [formControl]="famille" multiple>
+                <mat-option *ngFor="let membre of familles$ |async" [value]="membre">{{membre.libelle}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+            
+          </div>
+        </div>
+        <div  *ngIf="steps==3" class="form-group pt-0 pl-2 pr-2 pb-0">
+          <div class="champs"  id="ressource">
+              <label  for="ressource"  class="label" id="label3">
+                Ressource
+              </label>
+              <mat-form-field class="example-full-width" appearance="fill">
+                  <input  type="text" matInput [matAutocomplete]="auto" aria-label="ressource" formControlName="ressource" [formControl]="myControl" ng-reflect-name="ressource">
+                  <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn" >
+                  <mat-option *ngFor="let option of filteredOptions" [value]="option">
+                      {{option.libelle}}
+                  </mat-option>
+                  </mat-autocomplete>
+              </mat-form-field>
+          </div>
+        </div>
+
+        <div *ngIf="steps == 2 || steps == 3" class="pt-0 pl-2 pr-2 pb-0">
+          <div class="form-group">
+            <div class="champs">
+                <label  for="quantiteMin"  class="label" >
+                  Qte Min
+                </label>
+                <input type="number" formControlName="quantiteMin" name="quantiteMin" class="form-control" id="quantiteMin" placeholder="Entrer la quantite minimale" >
             </div>
+          </div>
 
-            <div  *ngIf="steps==3" class="form-group pt-0 pl-2 pr-2 pb-0">
-              <div class="champs"  id="ressource">
-                  <label  for="ressource"  class="label" id="label3">
-                    Ressource
+          <div class="form-group">
+              <div class="champs">
+                  <label  for="quantiteMax"  class="label" >
+                    Qte Max
                   </label>
-                  <mat-form-field class="example-full-width" appearance="fill">
-                      <input  type="text" matInput [matAutocomplete]="auto" aria-label="ressource" formControlName="ressource" [formControl]="myControl" ng-reflect-name="ressource">
-                      <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn" >
-                      <mat-option *ngFor="let option of filteredOptions" [value]="option" (click)="getIdRessource(option.id)" (onSelectionChange)="rechercherListingRessource(option)">
-                          {{option.libelle}}
-                      </mat-option>
-                      </mat-autocomplete>
-                  </mat-form-field>
+                  <input type="number" formControlName="quantiteMax" name="quantiteMax" class="form-control" id="quantiteMax" placeholder="Entrer la quantite miximale" >
               </div>
+          </div>
+
+          <div class="form-group">
+            <div class="champs">
+              <label  for="montantMax"  class="label" >
+                Mt Min
+              </label>
+              <input type="number" formControlName="montantMax" name="montantMax" id="montantMax" placeholder="Entrer le montant minimal" class="form-control" >
             </div>
+          </div>
 
-            <div *ngIf="steps == 2 || steps == 3" class="pt-0 pl-2 pr-2 pb-0">
-              <div class="form-group">
-                <div class="champs">
-                    <label  for="quantiteMin"  class="label" >
-                      Qte Min
-                    </label>
-                    <input type="number" formControlName="quantiteMin" name="quantiteMin" class="form-control" id="quantiteMin" placeholder="Entrer la quantite minimale" >
-                </div>
-              </div>
+          <div class="form-group">
+            <div class="champs">
+                <label  for="montantMin"  class="label" >
+                  Mt Max
+                </label>
+                <input type="number" formControlName="montantMin" name="montantMin" class="form-control" id="montantMin" placeholder="Entrer le montant miximal" >
+            </div>
+          </div>
 
-              <div class="form-group">
-                  <div class="champs">
-                      <label  for="quantiteMax"  class="label" >
-                        Qte Max
-                      </label>
-                      <input type="number" formControlName="quantiteMax" name="quantiteMax" class="form-control" id="quantiteMax" placeholder="Entrer la quantite miximale" >
-                  </div>
-              </div>
-
-              <div class="form-group">
-                <div class="champs">
-                  <label  for="montantMax"  class="label" >
-                    Mt Min
-                  </label>
-                  <input type="number" formControlName="montantMax" name="montantMax" id="montantMax" placeholder="Entrer le montant minimal" class="form-control" >
-                </div>
-              </div>
-
-              <div class="form-group">
-                <div class="champs">
-                    <label  for="montantMin"  class="label" >
-                      Mt Max
-                    </label>
-                    <input type="number" formControlName="montantMin" name="montantMin" class="form-control" id="montantMin" placeholder="Entrer le montant miximal" >
-                </div>
-              </div>
-
-              <div class="form-group">
-                <div class="champs">
-                  <label  for="fournisseur"  class="label" >
-                    Fournisseur
-                  </label>
-                  <select class="form-control" formControlName="fournisseur"  name="fournisseur" id="fournisseur" ngModel >
-                    <option class="label" *ngFor="let fournisseurs of  eltsPrecoMvtQte" [value]="fournisseurs.fournisseur">
-                      {{fournisseurs.fournisseur}}
-                    </option>
-                  </select>
-                </div>
+          <div class="form-group">
+            <div class="champs">
+              <label  for="fournisseur"  class="label" >
+                Fournisseur
+              </label>
+              <select class="form-control" formControlName="fournisseur"  name="fournisseur" id="fournisseur" ngModel >
+                <option>Selectionnez un fournisseur</option>
+                <option>EVC</option>
+                <option>ACC</option>
+                <option>DCD</option>
+              </select>
             </div>
         </div>
+        </div>
         <div class="actionButton">
-          <button class="btn" *ngIf="steps == 0" (click)="back()">Back</button>
+          <button class="btn" *ngIf="steps == 0">Back</button>
           <button type="btn" class="btn" routerLink="../list-precomvts">Annuler</button>
-          <button type="submit" class="btn" (click)="steps = 2; valPrecomvtqte(forme.value)">Famille</button>
-          <button type="submit" class="btn" (click)="steps = 3; valPrecomvtqte(forme.value)">Ressource</button>
+          <button type="submit" class="btn" (click)="steps = 2; enregistrerValeurPrecomvtqte(forme.value)">Famille</button>
+          <button type="submit" class="btn" (click)="steps = 3; enregistrerValeurPrecomvtqte(forme.value)">Ressource</button>
           <button type="submit" class="btn" *ngIf="steps != 4" (click)="steps = 4">Enregistrer</button>
         </div>
       </form>
@@ -147,8 +143,8 @@
       <h2>Etape</h2>
     </div>
     <div class="contentBlock">
-      <div *ngFor="let elt of eltsPreco">
-        <input type="button" id="" value="{{elt.libelle}}"><br/>
+      <div *ngFor="let elt of eltsPreco let i=index">
+        <input type="button" id="{{i}}" value="{{elt.libelle}}" (click)="chargerValeurPrecoMvt(i)"><br/>
       </div>
     </div>
   </div>
