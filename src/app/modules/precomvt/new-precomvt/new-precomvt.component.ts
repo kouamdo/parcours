@@ -14,13 +14,11 @@ import { IRessource } from 'src/app/modele/ressource';
 import { IFamille } from 'src/app/modele/famille';
 import { Unites } from 'src/app/modele/unites';
 import { RessourcesService } from 'src/app/services/ressources/ressources.service';
-//import { TypeMvt } from 'src/app/modele/type-mvt';
-//import { IDropdownSettings } from 'ng-multiselect-dropdown';
 // import { IDropdownSettings} from 'ng-multiselect-dropdown/multiselect.model';
 import { IService } from 'src/app/modele/service';
 import { FamillesService } from 'src/app/services/familles/familles.service';
 import { IPrecoMvtQte } from 'src/app/modele/precomvtqte';
-//import { IDropdownSettings } from 'ng-multiselect-dropdown';
+import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { TypeMvt } from 'src/app/modele/type-mvt';
 import { Typemvt } from 'src/app/modele/typemvt';
 
@@ -95,7 +93,7 @@ export class NewPrecomvtComponent implements OnInit {
   }
 
   dropdownData : any [] = [];
-  //settings: IDropdownSettings = {};
+  settings: IDropdownSettings = {};
   selectedItems: any[] = [];
 
   dataFamille : IFamille[] = [];
@@ -181,11 +179,11 @@ export class NewPrecomvtComponent implements OnInit {
       {ID: 4, value: 'Néonat'},
 
     ];
-    // this.settings = {
-    //   idField: 'ID',
-    //   textField: 'value',
-    //   allowSearchFilter: true
-    // };
+    this.settings = {
+      idField: 'ID',
+      textField: 'value',
+      allowSearchFilter: true
+    };
     //fin multiselect
 
   }
