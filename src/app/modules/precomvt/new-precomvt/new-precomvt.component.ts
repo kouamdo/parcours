@@ -264,63 +264,63 @@ displayFn(ressource: IRessource): string {
   * @returns 
   */
  valPrecomvtqte(precomvtInput:any){
-  //this.submitted=true;
-  //if(this.forme.invalid) return;
-  
-  //sauvegarde des valeurs de precoMvt <=> premier ecran
-  if(precomvtInput.libelle != null && precomvtInput.libelle!=""){
-    let precomvtTemp : IPrecoMvt={
-      id: uuidv4(),
-      libelle: precomvtInput.libelle,
-      etat: precomvtInput.etat,
-      type: precomvtInput.TypeMvt,
-      precomvtqte:[]
+    //this.submitted=true;
+    //if(this.forme.invalid) return;
+    
+    //sauvegarde des valeurs de precoMvt <=> premier ecran
+    if(precomvtInput.libelle != null && precomvtInput.libelle!=""){
+      let precomvtTemp : IPrecoMvt={
+        id: uuidv4(),
+        libelle: precomvtInput.libelle,
+        etat: precomvtInput.etat,
+        type: precomvtInput.TypeMvt,
+        precomvtqte:[]
+      }
+      this.eltsPreco.push(precomvtTemp);
+    }else if (this.myControl != null && this.myControl.value !=""){
+      precomvtInput.ressource = this.myControl.value
+      let premvtqte : IPrecoMvtQte={
+        ressource: this.Laressource,
+        quantiteMax: precomvtInput.quantiteMax,
+        quantiteMin: precomvtInput.quantiteMin,
+        montantMax: precomvtInput.montantMax,
+        montantMin: precomvtInput.montantMin,
+        id:"",
+        fournisseur:""
+      };
+      let precomvtTemp : IPrecoMvt={
+        id: "uuidv4()",
+        libelle: precomvtInput.ressource.libelle,
+        etat: false,
+        type: precomvtInput.TypeMvt,
+        precomvtqte:[]
+      }
+      precomvtTemp.precomvtqte.push(premvtqte);
+      this.eltsPreco.push(precomvtTemp);
+      this.myControl.reset()
+    }else if(precomvtInput.famille != null && precomvtInput.famille !="") {
+      let premvtqte : IPrecoMvtQte={
+        famille: precomvtInput.famille,
+        quantiteMax: precomvtInput.quantiteMax,
+        quantiteMin: precomvtInput.quantiteMin,
+        montantMax: precomvtInput.montantMax,
+        montantMin: precomvtInput.montantMin,
+        id:"",
+        fournisseur:""
+      }
+      let precomvtTemp : IPrecoMvt={
+        id: uuidv4(),
+        libelle: "familleeee",
+        etat: false,
+        type: precomvtInput.TypeMvt,
+        precomvtqte:[]
+      }
+      precomvtTemp.precomvtqte.push(premvtqte);
+      this.eltsPreco.push(precomvtTemp);
+      this.forme.reset();
     }
-    this.eltsPreco.push(precomvtTemp);
-  }else if (this.myControl != null && this.myControl.value !=""){
-    precomvtInput.ressource = this.myControl.value
-    let premvtqte : IPrecoMvtQte={
-      ressource: this.Laressource,
-      quantiteMax: precomvtInput.quantiteMax,
-      quantiteMin: precomvtInput.quantiteMin,
-      montantMax: precomvtInput.montantMax,
-      montantMin: precomvtInput.montantMin,
-      id:"",
-      fournisseur:""
-    };
-    let precomvtTemp : IPrecoMvt={
-      id: "uuidv4()",
-      libelle: precomvtInput.ressource.libelle,
-      etat: false,
-      type: precomvtInput.TypeMvt,
-      precomvtqte:[]
-    }
-    precomvtTemp.precomvtqte.push(premvtqte);
-    this.eltsPreco.push(precomvtTemp);
-  }/* else {
-    let premvtqte : IPrecoMvtQte={
-      famille: precomvtInput.famille,
-      quantiteMax: precomvtInput.quantiteMax,
-      quantiteMin: precomvtInput.quantiteMin,
-      montantMax: precomvtInput.montantMax,
-      montantMin: precomvtInput.montantMin,
-      id:"",
-      fournisseur:""
-    }
-    let precomvtTemp : IPrecoMvt={
-      id: uuidv4(),
-      libelle: "familleeee",
-      etat: false,
-      type: precomvtInput.TypeMvt,
-      precomvtqte:[]
-    }
-    precomvtTemp.precomvtqte.push(premvtqte);
-    this.eltsPreco.push(precomvtTemp);
-  }*/
-  
-  this.forme.reset();
- // console.log('voici la ressource de cette ressource : ', precomvtqteTemp.ressource)
- // console.log('valeur precomvtqte: ', precomvtqteTemp)
-    }
- //fonction valPrecomvtqte fin
+    
+    this.forme.reset();
   }
+ //fonction valPrecomvtqte fin
+}
