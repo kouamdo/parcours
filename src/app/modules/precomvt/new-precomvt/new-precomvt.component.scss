@@ -15,15 +15,16 @@
   width: 25%;
   padding: 5px;
 }
+
 .titleBlock{
   color: #595757;
-  
+
 }
 .contentBlock{
   display: flex;
   flex-direction: column;
   align-items: start;
-  justify-content: center;
+
   div{
     margin: 5px;
     input{
@@ -32,7 +33,12 @@
       border-radius: 5px;
     }
   }
-  
+.info{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+ // align-items: center;
+}
 }
 .block{
   width: 60%;
@@ -126,6 +132,7 @@ select{
   align-items: center;
   justify-content: center;
   margin: 10px auto;
+  flex-wrap: wrap;
   button{
       background-color: #7ea97e;
       color: white;
@@ -139,6 +146,7 @@ select{
       opacity: 1;
   }
 }
+
 .precoMvtQteButton{
   display: flex;
   align-items: center;
@@ -168,13 +176,14 @@ select{
     border-radius: 100%;
   }
 }
-input[ type=checkbox ]{
+
+  input[ type=checkbox ]{
   border: none;
   color: red;
-  margin-right: 250px;
+  margin-right: 265px;
   height: 17px;
-  //margin-left: 5px;
-
+  //row-direction: row-reverse;
+  //justify-content:start;
   }
 
 ng-multiselect-dropdown {
@@ -205,6 +214,7 @@ a{
  justify-content: space-between;
  //margin-left: 460px;
 }
+
 #essai{
   margin-top:25px;
 }
@@ -237,7 +247,7 @@ mat-form-field:focus{
   margin: 0;
   margin-bottom: 10px;
 
-  width: 100%;/*570px*/
+  width: 100%;
   position: relative;
   color: #7ea97e;
   line-height: normal;
@@ -269,23 +279,109 @@ mat-form-field:focus{
 }
 @media screen and (max-width: 1200px) {
   input[ type=checkbox ]{
-    margin-right: 150px;
+    margin-right: 185px;
+   }
 
-    }
 }
 @media screen and (max-width: 1100px) {
   input[ type=checkbox ]{
-    margin-right: 150px;
-
+    margin-right: 180px;
     }
+
 }
 @media screen and (max-width: 1060px) {
   input[ type=checkbox ]{
     margin-right: 150px;
+    }
 
+}
+@media screen and (max-width: 900px) {
+  input[ type=checkbox ]{
+    margin-right: 200px;
+    }
+
+}
+@media screen and (max-width: 990px) {
+  input[ type=checkbox ]{
+    margin-right:200px;
+    }
+
+}
+@media screen and (max-width: 866px) {
+  input[ type=checkbox ]{
+    margin-right:180px;
+    }
+
+}
+@media screen and (max-width: 751px) {
+  input[ type=checkbox ]{
+    margin-right:140px;
+    }
+
+}
+@media screen and (max-width: 699px) {
+  input[ type=checkbox ]{
+    margin-right:120px;
+    }
+
+}
+@media screen and (max-width: 594px) {
+  input[ type=checkbox ]{
+    margin-right:80px;
+    }
+
+}
+@media screen and (max-width: 522px) {
+  input[ type=checkbox ]{
+    margin-right:60px;
     }
 }
+@media screen and (max-width: 428px) {
+  input[ type=checkbox ]{
+    margin-right:30px;
+    }
 
+}
 
+@media screen and (max-width: 500px) {
 
+  .example-full-width{
+       width:80px;
+       display:flex;
+       justify-content:space-around;
+     }
+}
+
+@media screen and (max-width: 990px) {
+  input[ type=checkbox ]{
+    margin-right:200px;
+    }
+
+}
+@media screen and (max-width: 866px) {
+  input[ type=checkbox ]{
+    margin-right:180px;
+    }
+
+}
+@media screen and (max-width: 751px) {
+  input[ type=checkbox ]{
+    margin-right:140px;
+    }
+
+}
+@media screen and (max-width: 699px) {
+  input[ type=checkbox ]{
+    margin-right:10px;
+    }
+
+}
+@media screen and (max-width: 500px) {
+
+  .example-full-width{
+       width:100px;
+       display:flex;
+       justify-content:space-around;
+     }
+}
 
