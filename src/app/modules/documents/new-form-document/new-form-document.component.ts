@@ -19,6 +19,7 @@ import {MatDialog} from '@angular/material/dialog';
 import { ModalCategoriesComponent } from '../../shared/modal-categories/modal-categories.component';
 import {v4 as uuidv4} from 'uuid';
 import { ICategorieAffichage } from 'src/app/modele/categorie-affichage';
+import { TypeTicket } from 'src/app/modele/type-ticket';
 
 
 @Component({
@@ -28,7 +29,14 @@ import { ICategorieAffichage } from 'src/app/modele/categorie-affichage';
 })
 export class NewFormDocumentComponent implements OnInit {
   
-  document : IDocument|undefined;
+  document : IDocument = {
+    id: '',
+    titre: '',
+    description: '',
+    missions: [],
+    attributs: [],
+    categories: []
+  };
   mission$:Observable<IMission[]>=EMPTY;
   forme: FormGroup;
   btnLibelle: string="Ajouter";
@@ -78,12 +86,10 @@ export class NewFormDocumentComponent implements OnInit {
     this.forme = this.formBuilder.group({
       _missions :  new FormArray([]),
       _attributs :  new FormArray([]),
-      _ordreAttribut: this.formBuilder.array([
-      ]),
       titre: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
       description: [''],
-      missions: [],
-      attributs: [],
+      // missions: [],
+      // attributs: [],
     });
   }
   ngOnInit(): void {
@@ -92,6 +98,7 @@ export class NewFormDocumentComponent implements OnInit {
       this.dataSourceAttribut.data = valeurs;
     });
 
+    // chargement de la page a partir d'un Id pour la modification d'un document
     let idDocument = this.infosPath.snapshot.paramMap.get('idDocument');
     if((idDocument != null) && idDocument!==''){
       this.btnLibelle="Modifier";
@@ -102,10 +109,56 @@ export class NewFormDocumentComponent implements OnInit {
         this.forme.setValue({
           titre: this.document.titre,
           description: this.document.description,
-          missions: this.document.missions,
-          attributs: this.document.attributs
-        })   
+          _missions: [],
+          _attributs: []
+          // missions: this.document.missions,
+          // attributs: this.document.attributs
+          })
+        // Initialisation du tableau d'attributs du document
+        this.document?.attributs.forEach(
+          objet => {
+            this.ELEMENTS_TABLE_ATTRIBUTS.push(objet)
+            this.dataSourceAttributResultat.data = this.ELEMENTS_TABLE_ATTRIBUTS;
+          }
+        )
+        // Initialisation du tableau de categories temp du document qui reconstitue
+        // le deuxieme tableau de la modal
+        let categorieAfficheFinal : ICategorieAffichage[] = [];
+        this.document.categories.forEach(
+          catAttribut => {
+            let categorieAfficheTemp : ICategorieAffichage = {
+              id: '',
+              nom: '',
+              ordre: 0,
+              attribut: {
+                id: '',
+                titre: '',
+                description: '',
+                etat: false,
+                dateCreation: new Date(),
+                dateModification: new Date(),
+                ordre: 0,
+                obligatoire: false,
+                valeursParDefaut: '',
+                type: TypeTicket.Int
+              }
+            }
+            catAttribut.listAttributs.forEach(
+              att => {
+                categorieAfficheTemp.id = catAttribut.id
+                categorieAfficheTemp.nom = catAttribut.nom
+                categorieAfficheTemp.ordre = catAttribut.ordre
+                categorieAfficheTemp.attribut = att
+                categorieAfficheFinal.push(categorieAfficheTemp)
+              }
+            )
+          }
+        )
+            this.TABLE_CATEGORIE_AFFICHAGE_TEMP = categorieAfficheFinal
+            console.log("contenu de document.categories", this.document.categories)
+            console.log("contenu de TABLE_CATEGORIE_AFFICHAGE_TEMP", this.TABLE_CATEGORIE_AFFICHAGE_TEMP)   
       });
+
     }
     this.getAllAttributs()
     this.myControl.valueChanges.subscribe(
