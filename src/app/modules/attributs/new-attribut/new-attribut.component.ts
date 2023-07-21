@@ -5,6 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { IAttributs } from 'src/app/modele/attributs';
 import { TypeTicket } from 'src/app/modele/type-ticket';
 import { AttributService } from 'src/app/services/attributs/attribut.service';
+import {v4 as uuidv4} from 'uuid';
 
 @Component({
   selector: 'app-new-attribut',
@@ -54,7 +55,7 @@ export class NewAttributComponent implements OnInit {
             etat: this.attribut.etat,
             dateCreation: this.datePipe.transform(this.attribut.dateCreation,'yyyy-MM-dd'),
             dateModification: this.datePipe.transform(this.attribut.dateModification,'yyyy-MM-dd'),
-            unite: this.attribut.type
+            type: this.attribut.type
           })
       });
     }
@@ -70,13 +71,16 @@ export class NewAttributComponent implements OnInit {
     if(this.forme.invalid) return;
 
     let attributTemp : IAttributs={
-      id: "10",
+      id:  uuidv4(),
       titre: attributInput.titre,
       description: attributInput.description,
       etat: attributInput.etat,
       dateCreation: attributInput.dateCreation,
       dateModification: attributInput.dateModification,
-      type: attributInput.type
+      type: attributInput.type,
+      ordre: 0,
+      obligatoire:  attributInput.obligatoire,
+      valeursParDefaut:  attributInput.valeursParDefaut
     }
     attributTemp.dateCreation = this.initialDateCreation.value!
     attributTemp.dateModification = this.initialDateModification.value!

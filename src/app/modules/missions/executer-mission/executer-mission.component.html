@@ -1,0 +1,29 @@
+<div class="mainBlock">
+    <form [formGroup]="formeMissionExec"  *ngIf="formeMissionExec" >
+                
+        <h1>
+            {{'missions.execution.text1' | translate}}
+        </h1>
+        <div class="infos">  
+            <div class="block" >
+                <div class="inputBlock"  *ngFor="let mission of (missions$ | async); let i=index;">
+                    <input type="button" class="button-control" 
+                            [ngStyle]="{'background-color': (i%2 == 0) ? '#' + i + i+'a' + 'a' + i+ 'c'  : ((i%2 != 0) ? '#11aca1': null)}"  [name]="mission.id" [id]="mission.id" 
+                            [title]="mission.description" [value]="mission.libelle" (click)="choisirMission(mission.id, mission.libelle)">
+                </div>
+            </div>
+        </div>
+        <div class="infos" *ngIf="aDesDocumentsDispo">  
+            <h3>
+                {{'missions.execution.text2' | translate}} {{missionChoisieLibelle}} ?
+            </h3>
+            <div class="block">
+                <div class="inputBlock"  *ngFor="let document of documents; let i=index;">
+                    <input type="button" class="button-options" style="font-weight: 400;"  [name]="document.id" [id]="document.id" 
+                             [title]="document.description" [value]="document.titre"  (click)="choisirDocument(document.id)">
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<!-- [ngClass]="{'boutonAppelEffet': (aDesDocumentsDispo == true) && (!i)} -->

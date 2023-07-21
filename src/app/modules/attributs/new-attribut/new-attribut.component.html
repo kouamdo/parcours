@@ -11,7 +11,7 @@
                                     <label for="titre" class="label">
                                         {{'attributs.table.title1' | translate}}
                                     </label>
-                                    <input type="text" formControlName="titre" name="titre" id="titre"  placeholder="{{'attributs.table.title1' | translate}}"  class="form-control" required>
+                                    <input type="text" formControlName="titre" name="titre" id="titre"  placeholder="{{'attributs.table.title1' | translate}}"  class="form-control">
                                 </div>
                                 <div  *ngIf="submitted && f['titre'].errors"  class="alert alert-danger" >
                                     <div *ngIf="f['titre'].errors['required']">{{'attributs.form.text1' | translate}}</div>
@@ -24,7 +24,7 @@
                                     <label for="description" class="label" >
                                         {{'attributs.table.title2' | translate}}
                                     </label>
-                                    <input  type="text" formControlName="description"  name="description" id="description" placeholder="{{'attributs.table.title2' | translate}}" value="" required class="form-control">
+                                    <input  type="text" formControlName="description"  name="description" id="description" placeholder="{{'attributs.table.title2' | translate}}" value="" class="form-control">
                                 </div>
                                 <div  *ngIf="submitted && f['description'].errors"  class="alert alert-danger" >
                                     <div *ngIf="f['description'].errors['required']">{{'attributs.form.text2' | translate}}</div>
@@ -37,7 +37,7 @@
                                     <label for="etat" class="label" >
                                         {{'attributs.table.title3' | translate}}
                                     </label>
-                                    <input  type="text" formControlName="etat"  name="etat" id="etat" placeholder="{{'attributs.table.title3' | translate}}" value="" required class="form-control">
+                                    <input  type="text" formControlName="etat"  name="etat" id="etat" placeholder="{{'attributs.table.title3' | translate}}" value="" class="form-control">
                                 </div>
                                 <div  *ngIf="submitted && f['etat'].errors"  class="alert alert-danger" >
                                     <div *ngIf="f['etat'].errors['required']">{{'attributs.form.text3' | translate}}</div>
@@ -46,21 +46,10 @@
                         </div>
                         <div class="form-group">
                             <div class="champs">
-                                <label  for="dateCreation"  class="label" >
-                                    {{'attributs.table.title4' | translate}}
+                                <label  for="ordre"  class="label" >
+                                    {{'attributs.table.title7' | translate}}
                                 </label>
-                                <input type="date" formControlName="dateCreation" name="dateCreation" id="dateCreation" placeholder="{{'attributs.table.title4' | translate}}" class="form-control" >
-                            </div>
-                            <div  *ngIf="submitted && f['dateCreation'].errors"  class="alert alert-danger" >
-                                <div *ngIf="f['dateCreation'].errors['required']">{{'attributs.form.text4' | translate}}</div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="champs">
-                                <label  for="dateModification"  class="label" >
-                                    {{'attributs.table.title5' | translate}}
-                                </label>
-                                <input type="date" formControlName="dateModification" name="dateModification" id="dateModification" placeholder="{{'attributs.table.title5' | translate}}" class="form-control" >
+                                <input type="number" formControlName="ordre" name="ordre" id="ordre" placeholder="{{'attributs.table.title4' | translate}}" class="form-control" value="0">
                             </div>
                         </div>
                         <div class="form-group">
@@ -68,7 +57,7 @@
                                 <label  for="type" class="label">
                                     {{"attributs.table.title6" | translate}}
                                 </label>
-                                <select  class="form-control" formControlName="type" name="type" id="type" required>
+                                <select  class="form-control" formControlName="type" name="type" id="type">
                                     <option value="{{typeInt}}" >{{typeInt}}</option>
                                     <option value="{{typeString}}" >{{typeString}}</option>
                                     <option value="{{typeDouble}}" >{{typeDouble}}</option>
@@ -76,6 +65,24 @@
                                     <option value="{{typeBoolean}}" >{{typeBoolean}}</option>
                                     <option value="{{typeDate}}" >{{typeDate}}</option>
                                 </select>        
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="champs">
+                                <label  for="obligatoire"  class="label" >
+                                    {{'attributs.table.title8' | translate}}
+                                </label>
+                                <p class="w-100 d-flex align-items-center choix" >
+                                    <input type="checkbox" value="true" formControlName="obligatoire" name="obligatoire" id="obligatoire" placeholder="{{'attributs.table.title5' | translate}}" class="ml-2" > oui 
+                                </p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="champs">
+                                <label  for="valeursParDefaut"  class="label" >
+                                    {{'attributs.table.title9' | translate}}
+                                </label>
+                                <input type="text" formControlName="valeursParDefaut" name="valeursParDefaut" id="valeursParDefaut" placeholder="{{'attributs.table.title10' | translate}}" class="form-control">
                             </div>
                         </div>
                     </div>

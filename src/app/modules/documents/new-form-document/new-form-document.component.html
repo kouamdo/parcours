@@ -13,7 +13,7 @@
                                     </label>
                                     <input type="text" formControlName="titre" name="titre" id="titre"  placeholder="{{'document.table.title1' | translate}}"  class="form-control" required>
                                 </div>
-                                <div  *ngIf="submitted && f['titre'].errors"  class="alert alert-danger" >
+                                <div  *ngIf="submitted && f['titre'].errors"  class="alert alert-danger blockErreur" >
                                     <div *ngIf="f['titre'].errors['required']">{{'document.form.text1' | translate}}</div>
                                 </div>
                             </div>
@@ -26,14 +26,14 @@
                                     </label>
                                     <textarea type="textarea" formControlName="description" name="description" id="description" placeholder="{{'document.table.title2' | translate}}" class="form-control"  required></textarea>
                                 </div>
-                                <div  *ngIf="submitted && f['description'].errors"  class="alert alert-danger" >
+                                <div  *ngIf="submitted && f['description'].errors"  class="alert alert-danger blockErreur" >
                                     <div *ngIf="f['description'].errors['required']">{{'document.form.text2' | translate}}</div>
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="champs">
-                                <label  for="missions" class="label">
+                                <label  for="" class="label">
                                     {{"document.table.title3" | translate}}
                                 </label>
                                 <div class="dropdown w-100">
@@ -50,9 +50,10 @@
                                 </div>
                             </div>
                         </div>
+
                         <div class="form-group">
                             <div class="champs">
-                                <label  for="attributs" class="label">
+                                <label  for="" class="label">
                                     {{"document.table.title4" | translate}}
                                 </label>
                                 <div class="dropdown w-100">
@@ -229,9 +230,6 @@
                 </div>
             </form>
         </div>
-        <!-- <p class="card w-100 pt-5">{{ forme.value | json }}</p>
-
-        {{forme.value._attributs}} -->
     </div>
 </div>
 <div>

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AttributsRoutingModule } from './modules/attributs/attributs-routing.module';
 import { DocumentsRoutingModule } from './modules/documents/documents-routing.module';
+import { ExemplaireDocumentRoutingModule } from './modules/exemplaire-document/exemplaire-document-routing.module';
 import { FamilleRoutingModule } from './modules/famille/famille-routing.module';
 import { MissionsRoutingModule } from './modules/missions/missions-routing.module';
 import { PatientsRoutingModule } from './modules/patients/patient-routing.module';
@@ -29,7 +30,9 @@ const routes: Routes = [
     DocumentsRoutingModule,
     FamilleRoutingModule,
     RessourceRoutingModule,
-    PrecoMvtRoutingModule
+    PrecoMvtRoutingModule,
+    ExemplaireDocumentRoutingModule,
+    FamilleRoutingModule
   ],
   exports: [RouterModule]
 })

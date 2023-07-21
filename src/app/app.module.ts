@@ -18,6 +18,7 @@ import { TicketsModule } from './modules/tickets/tickets.module';
 import { AttributsModule } from './modules/attributs/attributs.module';
 import { MissionsModule } from './modules/missions/missions.module';
 import { DocumentsModule } from './modules/documents/documents.module';
+import { ExemplaireDocumentModule } from './modules/exemplaire-document/exemplaire-document.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
@@ -68,8 +69,8 @@ import { CommonModule } from '@angular/common';
     MatSliderModule,
     MatIconModule,
     MatToolbarModule,
-    MatSlideToggleModule
-
+    MatSlideToggleModule,
+    ExemplaireDocumentModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -53,16 +53,22 @@
                         <td class="text-dark text-center containCell" mat-cell *matCellDef="let element"> {{element.etat}} </td>
                     </ng-container>
                     
-                    <!-- dateCreation Column -->
-                    <ng-container matColumnDef="dateCreation">
-                        <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'attributs.table.title4' | translate}} </th>
-                        <td class="text-dark text-center containCell" mat-cell *matCellDef="let element"> {{element.dateCreation | date: 'dd/MM/yyyy'}} </td>
+                    <!-- ordre Column -->
+                    <ng-container matColumnDef="ordre">
+                        <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'attributs.table.title7' | translate}} </th>
+                        <td class="text-dark text-center containCell" mat-cell *matCellDef="let element"> {{element.ordre}} </td>
                     </ng-container>
                     
-                    <!-- dateModification Column -->
-                    <ng-container matColumnDef="dateModification">
-                        <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'attributs.table.title5' | translate}} </th>
-                        <td class="text-dark text-center containCell" mat-cell *matCellDef="let element"> {{element.dateModification | date: 'dd/MM/yyyy'}} </td>
+                    <!-- obligatoire Column -->
+                    <ng-container matColumnDef="obligatoire">
+                        <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'attributs.table.title8' | translate}} </th>
+                        <td class="text-dark text-center containCell" mat-cell *matCellDef="let element"> {{element.obligatoire}} </td>
+                    </ng-container>
+                    
+                    <!-- valeursParDefaut Column -->
+                    <ng-container matColumnDef="valeursParDefaut">
+                        <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'attributs.table.title9' | translate}} </th>
+                        <td class="text-dark text-center containCell" mat-cell *matCellDef="let element"> {{element.valeursParDefaut}} </td>
                     </ng-container>
 
                     <!-- type Column -->

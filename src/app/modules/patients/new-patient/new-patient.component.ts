@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { EMPTY, isEmpty, Observable } from 'rxjs';
 import { PatientsService } from 'src/app/services/patients/patients.service';
 import {IPatient} from '../../../modele/Patient';
+import {v4 as uuidv4} from 'uuid';
 
 @Component({
   selector: 'app-new-patient',
@@ -31,8 +32,7 @@ export class NewPatientComponent implements OnInit {
       dateNaissance: ['1980-01-01', Validators.required],
       telephone: [''],
       adresse: ['']
-    })
-    
+    })    
   }
 
   ngOnInit() {
@@ -45,20 +45,19 @@ export class NewPatientComponent implements OnInit {
       
       //trouver un autre moyen d'initialiser avec des valeurs
       this.patientService.getPatientById(idPatient).subscribe(x =>
-        {
-          this.patient = x; console.log(this.patient);
-          this.forme.setValue({
-            nom: this.patient.nom,
-            prenom: this.patient.prenom,
-            sexe: this.patient.sexe,
-            mail: this.patient.mail,
-            dateNaissance: this.datePipe.transform(this.patient.dateNaissance,'yyyy-MM-dd'), // je change le format de la date de naissance pour pouvoir l'afficher dans mon input type date
-            telephone: this.patient.telephone,
-            adresse: this.patient.adresse
-          })
-        });
-    }
-    
+      {
+        this.patient = x; console.log(this.patient);
+        this.forme.setValue({
+          nom: this.patient.nom,
+          prenom: this.patient.prenom,
+          sexe: this.patient.sexe,
+          mail: this.patient.mail,
+          dateNaissance: this.datePipe.transform(this.patient.dateNaissance,'yyyy-MM-dd'), // je change le format de la date de naissance pour pouvoir l'afficher dans mon input type date
+          telephone: this.patient.telephone,
+          adresse: this.patient.adresse
+        })
+      });
+    }    
   }
 
   get f(){
@@ -71,7 +70,7 @@ export class NewPatientComponent implements OnInit {
     if(this.forme.invalid) return;
 
     let patientTemp : IPatient={
-      id: String(9),
+      id: uuidv4(),
       nom:patientInput.nom,
       prenom:patientInput.prenom,
       sexe:patientInput.sexe,
@@ -92,5 +91,4 @@ export class NewPatientComponent implements OnInit {
       }
     )
   }
-
 }

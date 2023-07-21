@@ -47,7 +47,8 @@
         "button5":"Aucune action",
         "button6":"valider",
         "button7":"Modifier",
-        "button8":"Supprimer"
+        "button8":"Supprimer",
+        "button9":"Ajouter"
     },
     "patient":{
         "text":"Patients retrouvé(e)s",
@@ -121,14 +122,18 @@
             "title3":"Etat",
             "title4":"Date Creation",
             "title5":"Date Modification",
-            "title6":"Type"
+            "title6":"Type",
+            "title7":"Ordre",
+            "title8":"Attribut obligatoire ?",
+            "title9":"Valeurs par defaut",
+            "title10":"Separer les valeurs par une virgule"
         },
         "form":{
             "text1":"Le titre est obligatoire.",
             "text2":"La description est obligatoire.",
             "text3":"L'etat est obligatoire.",
-            "text4":"La date de derniere modification est obligatoire.",
-            "text5":"Le type est obligatoire."
+            "text4":"Le type est obligatoire.",
+            "text5":"Ce champs est obligatoire."
         }
     },
     "missions":{
@@ -148,12 +153,17 @@
             "text5":"Le type est obligatoire.",
             "text6":"Le service est obligatoire",
             "text7":"Selectionner un service"
+        },
+        "execution":{
+            "text1":"QUEL EST VOTRE CHOIX ?",
+            "text2":"Choix Du Document Pour La Mission"
         }
     },
     "document":{
         "text":"documents retrouvé(e)s",
         "search-bar":"Rechercher",
-        "title1":"Affichage des resuttats",
+        "title1":"Affichage des resultats",
+        "title2":"Selectionner les attributs de la categories",
         "table":{
             "title0":"Id",
             "title1":"Titre",
@@ -161,7 +171,18 @@
             "title3":"Missions",
             "title4":"Attributs",
             "title5":"Selectionner les missions",
-            "title6":"Selectionner les attributs"
+            "title6":"Selectionner les attributs",
+            "title7":"Valeurs",
+            "title8":"Nom de la categorie",
+            "title9":"Entrez le nom de la categories",
+            "title10":"Ordre",
+            "title11":"Entrez l'ordre de la categories",
+            "title12":"Creer des categories",
+            "title13":"Ordre attribut",
+            "title14":"Ordre categorie",
+            "title15":"Categories",
+            "title16":"libelle attribut",
+            "title17":""
         },
         "form":{
             "text1":"Le Titre est obligatoire.",
@@ -172,8 +193,13 @@
         "view":{
             "title":"Modele du document",
             "text1":"liste des missions du document",
-            "text2":"liste des attributs du document"
-        }
+            "text2":"liste des attributs du document",
+            "text3":"liste des attributs par categorie du document"
+        },
+        "exemplaire":{
+            "title":"Exemplaire du document",
+            "text1":"Composition de l'exemplaire"
+        }      
     },
     "theme":{
         "libelle":"theme"
