@@ -1,4 +1,5 @@
 
+
 <div id="mainSection">
   <div class="card block">
     <div class="card-body p-0 m-0">
@@ -56,7 +57,7 @@
             <mat-form-field class="example-full-width" appearance="fill">
               <mat-label>Famille</mat-label>
               <mat-select [formControl]="famille" multiple>
-                <mat-option *ngFor="let membre of familles$ |async" [value]="membre" >{{membre.libelle}}</mat-option>
+                <mat-option *ngFor="let membre of familles$ |async" [value]="membre">{{membre.libelle}}</mat-option>
               </mat-select>
             </mat-form-field>
 
@@ -68,7 +69,7 @@
                 Ressource
               </label>
               <mat-form-field class="example-full-width" appearance="fill">
-                  <input  type="text" matInput [matAutocomplete]="auto" aria-label="ressource" formControlName="ressource" [formControl]="myRessource" ng-reflect-name="ressource">
+                  <input  type="text" matInput [matAutocomplete]="auto" aria-label="ressource" formControlName="ressource" [formControl]="myControl" name="ressource">
                   <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn" >
                   <mat-option *ngFor="let option of filteredOptions" [value]="option">
                       {{option.libelle}}
@@ -129,9 +130,9 @@
             </div>
         </div>
         </div>
-        <div class="actionButton" >
+        <div class="actionButton">
           <button class="btn" *ngIf="steps == 0">Back</button>
-          <button  type="btn" class="btn" routerLink="../list-precomvts">Annuler</button>
+          <button type="btn" class="btn" routerLink="../list-precomvts">Annuler</button>
           <button type="submit" class="btn" (click)="steps = 2; enregistrerValeurPrecomvtqte(forme.value)">Famille</button>
           <button type="submit" class="btn" (click)="steps = 3; enregistrerValeurPrecomvtqte(forme.value)">Ressource</button>
           <button type="submit" class="btn" *ngIf="steps != 4" (click)="steps = 4">Enregistrer</button>
@@ -144,10 +145,18 @@
       <h2>Etape</h2>
     </div>
     <div class="contentBlock">
-      <div *ngFor="let elt of eltsPreco let i=index">
-        <input class="info"   type="button" id="{{i}}" value="{{elt.libelle}}" (click)="chargerValeurPrecoMvt(i)"><br/>
+      <div *ngFor="let elt of eltsPreco let i=index" >
+        <label class="info">Libelle:<input type="button" id="{{i}}" value="{{elt.libelle}}"(click)="chargerValeurPrecoMvt(i)"><br/></label>
+        <label class="info">Etat:<input type="button" id="{{i}}" value="{{elt.etat}}" (click)="chargerValeurPrecoMvt(i)"><br/></label>
+        <label class="info">Type:<input type="button" id="{{i}}" value="{{elt.type}}" (click)="chargerValeurPrecoMvt(i)"><br/></label>
       </div>
-
+      <div *ngFor="let elt of eltsPreco let i=index" >
+        <label class="info"><input type="button" id="{{i}}" value="{{elt.precomvtqte[i].quantiteMin}}"><br/></label>
+        <label class="info"><input type="button" id="{{i}}" value="{{elt.precomvtqte[i].quantiteMax}}"><br/></label>
+        <label class="info"><input type="button" id="{{i}}" value="{{elt.precomvtqte[i].montantMax}}"><br/></label>
+        <label class="info"><input  type="button" id="{{i}}" value="{{elt.precomvtqte[i].montantMin}}"><br/></label>
+        <label class="info"><input  type="button" id="{{i}}" value="{{elt.precomvtqte[i].fournisseur}}"><br/></label>
+      </div>
     </div>
   </div>
 </div>

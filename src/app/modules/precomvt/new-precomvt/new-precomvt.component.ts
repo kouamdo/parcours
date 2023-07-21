@@ -15,7 +15,6 @@ import { IFamille } from 'src/app/modele/famille';
 import { RessourcesService } from 'src/app/services/ressources/ressources.service';
 import { FamillesService } from 'src/app/services/familles/familles.service';
 import { IPrecoMvtQte } from 'src/app/modele/precomvtqte';
-
 import { TypeMvt } from 'src/app/modele/type-mvt';
 
 @Component({
@@ -25,7 +24,6 @@ import { TypeMvt } from 'src/app/modele/type-mvt';
 })
 
 export class NewPrecomvtComponent implements OnInit {
-[x: string]: any;
 
 
   //precomvt : IPrecoMvt|undefined;
@@ -34,17 +32,16 @@ export class NewPrecomvtComponent implements OnInit {
   //permet d'identifier la section du formulaire à ouvrir
   steps:any =1;
 
-  myRessource = new FormControl<string | IRessource>('');
+  myControl = new FormControl<string | IRessource>('');
   filteredOptions: IRessource[] | undefined;
 
   familles$:Observable<IFamille[]>=EMPTY;
-
   typeMvt: string[] = [TypeMvt.Ajout,TypeMvt.Neutre,TypeMvt.Reduire];
   famille = new FormControl<string | IFamille[]>('');
 
  //représente l'ensemble des éléments de précoMvtQte en cours de création
  eltsPreco : IPrecoMvt[] = [];
- eltsPrecoQte : IPrecoMvtQte[] = [];
+
  //précise l'index de eltPreco qu'on souhaite modifier
  indexModification = -1;
 
@@ -66,7 +63,7 @@ export class NewPrecomvtComponent implements OnInit {
       libelle: new FormControl(),
       etat: new FormControl(),
       type: new FormControl(),
-      ressource: this.myRessource,
+      ressource: this.myControl,
       quantiteMin:new FormControl(),
       quantiteMax:new FormControl(),
       montantMin:new FormControl(),
@@ -79,12 +76,10 @@ export class NewPrecomvtComponent implements OnInit {
 
   ngOnInit(): void {
 
-   this.familles$ = this.getAllFamilles()
-
-
+    this.familles$ = this.getAllFamilles();
 
     //code autocompletion qui retourne les éléments du type déclaré
-    this.myRessource.valueChanges.subscribe(
+    this.myControl.valueChanges.subscribe(
       value => {
         const libelle = typeof value === 'string' ? value : value?.libelle;
         if(libelle != undefined && libelle?.length >0){
@@ -125,8 +120,6 @@ displayFn(ressource: IRessource): string {
  return ressource && ressource.libelle ? ressource.libelle : '';
   }
 
-
-
 reset():void{
   this.forme.reset();
   //reset de l'index pour laisser le choix à l'utilisateur de remplir des nouvelles precoMvtQte
@@ -158,7 +151,7 @@ reset():void{
     if(this.indexModification==-1)
       this.eltsPreco.push(this.creerPrecoMvtQteFamille(precomvtInput));
     else
-    this.eltsPreco[this.indexModification]= this.creerPrecoMvtQteFamille(precomvtInput);
+    this.eltsPreco[this.indexModification]=this.creerPrecoMvtQteFamille(precomvtInput);
   }
 
   this.reset();
@@ -225,7 +218,7 @@ reset():void{
       id:"",
       fournisseur: precomvtInput.fournisseur
     }
-   let libel = "Familles : " ;
+    let libel = "Familles : ";
     for (let index = 0; index < precomvtInput.famille.length; index++) {
       const element = precomvtInput.famille[index];
       libel += element.libelle + ", "
@@ -240,7 +233,6 @@ reset():void{
     precomvtTemp.precomvtqte.push(premvtqte);
     return precomvtTemp;
   }
-
   /**
    * a partir des inputs html on crée un occurrence de PrecoMvt
    * uniquement pour le cas des ressources
@@ -282,7 +274,7 @@ reset():void{
       montantMax: 0,
       montantMin: 0,
       id:"",
-      fournisseur: "DCD"
+      fournisseur: ""
     };
     let precomvtTemp : IPrecoMvt={
       id: uuidv4(),
@@ -296,4 +288,6 @@ reset():void{
   }
 
 }
+
+
 
