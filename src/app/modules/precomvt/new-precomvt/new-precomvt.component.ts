@@ -60,8 +60,8 @@ export class NewPrecomvtComponent implements OnInit {
 
   constructor(private formBuilder:FormBuilder,private serviceFamille:FamillesService,private ressourceService:RessourcesService ,private precoMvtService:PrecoMvtsService,private serviceRessource:RessourcesService,private router:Router, private infosPath:ActivatedRoute, private datePipe: DatePipe) {
     this.forme = this.formBuilder.group({
-      libelle: new FormControl(),
-      etat: new FormControl(),
+      libelle:new FormControl(),
+      etat:new FormControl(),
       type: new FormControl(),
       ressource: this.myControl,
       quantiteMin:new FormControl(),
@@ -69,7 +69,7 @@ export class NewPrecomvtComponent implements OnInit {
       montantMin:new FormControl(),
       montantMax:new FormControl(),
       famille : this.famille,
-      fournisseur:new FormControl()
+      fournisseur:new FormControl(),
     });
 
   }
@@ -134,6 +134,8 @@ reset():void{
   */
   enregistrerValeurPrecomvtqte(precomvtInput:any){
   console.log("enregistrerValeurPrecomvtqte indexModification : " + this.indexModification)
+ // this.submitted=true;
+ // if(this.forme.invalid) return;
   //sauvegarde des valeurs de precoMvt <=> premier ecran
   if(precomvtInput.libelle != null && precomvtInput.libelle!=""){
     if(this.indexModification==-1) //si vaut -1 alors création

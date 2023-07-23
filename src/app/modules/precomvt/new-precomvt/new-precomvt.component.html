@@ -17,7 +17,7 @@
                       <label for="libelle" class="label">
                         libelle
                       </label>
-                      <input type="text" formControlName="libelle" name="libelle" id="libelle"  placeholder="{{'ressource.table.title1' | translate}}"  class="form-control" required>
+                      <input [disabled]="true" type="text" formControlName="libelle" name="libelle" id="libelle"  placeholder="{{'ressource.table.title1' | translate}}"  class="form-control" >
                     </div>
                   </div>
               </div>
@@ -28,7 +28,7 @@
                         <label for="etat" class="label" >
                           Etat
                         </label>
-                        <input  type="checkbox" formControlName="etat" name="etat" class="form-control" id="etat" placeholder="" required checked>
+                        <input   type="checkbox" formControlName="etat" name="etat" class="form-control" id="etat" placeholder="" required checked>
                       </div>
                   </div>
                 </div>
@@ -38,7 +38,7 @@
                     <label  for="type"  class="label" >
                       Type
                     </label>
-                    <select class="form-control" formControlName="type">
+                    <select  class="form-control" formControlName="type">
                       <option class="label" *ngFor="let typeM of typeMvt" value="{{ typeM }}" >
                         {{ typeM }}
                       </option>
@@ -85,7 +85,7 @@
                 <label  for="quantiteMin"  class="label" >
                   Quantité Min
                 </label>
-                <input type="number" formControlName="quantiteMin" name="quantiteMin" class="form-control" id="quantiteMin" placeholder="Entrer la quantite minimale" >
+                <input  type="number" formControlName="quantiteMin" name="quantiteMin" class="form-control" id="quantiteMin" placeholder="Entrer la quantite minimale" >
             </div>
           </div>
 
@@ -94,7 +94,7 @@
                   <label  for="quantiteMax"  class="label" >
                     Quantité Max
                   </label>
-                  <input type="number" formControlName="quantiteMax" name="quantiteMax" class="form-control" id="quantiteMax" placeholder="Entrer la quantite miximale" >
+                  <input  type="number" formControlName="quantiteMax" name="quantiteMax" class="form-control" id="quantiteMax" placeholder="Entrer la quantite miximale" >
               </div>
           </div>
 
@@ -103,7 +103,7 @@
               <label  for="montantMax"  class="label" >
                 Montant Min
               </label>
-              <input type="number" formControlName="montantMax" name="montantMax" id="montantMax" placeholder="Entrer le montant minimal" class="form-control" >
+              <input  type="number" formControlName="montantMax" name="montantMax" id="montantMax" placeholder="Entrer le montant minimal" class="form-control" >
             </div>
           </div>
 
@@ -112,7 +112,7 @@
                 <label  for="montantMin"  class="label" >
                   Montant Max
                 </label>
-                <input type="number" formControlName="montantMin" name="montantMin" class="form-control" id="montantMin" placeholder="Entrer le montant miximal" >
+                <input  type="number" formControlName="montantMin" name="montantMin" class="form-control" id="montantMin" placeholder="Entrer le montant miximal">
             </div>
           </div>
 
@@ -145,18 +145,24 @@
       <h2>Etape</h2>
     </div>
     <div class="contentBlock">
+      <div *ngIf="steps==1">
+        <div  *ngFor="let elt of eltsPreco let i=index">
+          <label class="info">Libelle:<input type="button" id="{{i}}" value="{{elt.libelle}}"(click)="chargerValeurPrecoMvt(i)"><br/></label>
+          <label class="info">Etat:<input type="button" id="{{i}}" value="{{elt.etat}}" (click)="chargerValeurPrecoMvt(i)"><br/></label>
+          <label class="info">Type:<input type="button" id="{{i}}" value="{{elt.type}}" (click)="chargerValeurPrecoMvt(i)"><br/></label>
+        </div>
+      </div>
+      <div *ngIf="steps==2">
       <div *ngFor="let elt of eltsPreco let i=index" >
         <label class="info">Libelle:<input type="button" id="{{i}}" value="{{elt.libelle}}"(click)="chargerValeurPrecoMvt(i)"><br/></label>
-        <label class="info">Etat:<input type="button" id="{{i}}" value="{{elt.etat}}" (click)="chargerValeurPrecoMvt(i)"><br/></label>
-        <label class="info">Type:<input type="button" id="{{i}}" value="{{elt.type}}" (click)="chargerValeurPrecoMvt(i)"><br/></label>
-      </div>
-      <div *ngFor="let elt of eltsPreco let i=index" >
         <label class="info"><input type="button" id="{{i}}" value="{{elt.precomvtqte[i].quantiteMin}}"><br/></label>
         <label class="info"><input type="button" id="{{i}}" value="{{elt.precomvtqte[i].quantiteMax}}"><br/></label>
         <label class="info"><input type="button" id="{{i}}" value="{{elt.precomvtqte[i].montantMax}}"><br/></label>
         <label class="info"><input  type="button" id="{{i}}" value="{{elt.precomvtqte[i].montantMin}}"><br/></label>
         <label class="info"><input  type="button" id="{{i}}" value="{{elt.precomvtqte[i].fournisseur}}"><br/></label>
       </div>
+      </div>
     </div>
   </div>
 </div>
+
