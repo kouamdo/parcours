@@ -12,6 +12,7 @@ import { ITicket } from "../modele/ticket";
 import { TypeTicket } from "../modele/type-ticket";
 import { IExemplaireDocument } from "../modele/exemplaire-document";
 import { IFamille } from "../modele/famille";
+import { IDistributeur } from "../modele/distributeur";
 
 export class InMemDBService implements InMemoryDbService{
   statutTicketActif = StatutTicket.actif
@@ -68,6 +69,7 @@ export class InMemDBService implements InMemoryDbService{
            {"fonction":"Mission", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"Créer", "lien":"./mission-nouveau", "bouton":"false"}  , {"nom":"Rechercher", "lien":"./list-missions", "bouton":"false"}, {"nom":"Exécuter", "lien":"./executer-missions", "bouton":"false"}]},
             {"fonction":"Documents", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"Créer model documents", "lien":"./document-nouveau", "bouton":"false"}, {"nom":"Rechercher", "lien":"./list-documents", "bouton":"false"}, {"nom":"Creer un exemplaire", "lien":"exemplaire-nouveau/1", "bouton":"false"}, {"nom":"liste des exemplaires", "lien":"./list-exemplaire", "bouton":"false"}]},
             {"fonction":"Famille", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"Créer", "lien":"famille-nouvelle", "bouton":"false"}, {"nom":"Rechercher", "lien":"./list-familles", "bouton":"false"}]},
+            {"fonction":"Distributeur", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"Créer", "lien":"distributeur-nouveau", "bouton":"false"},{"nom":"Rechercher", "lien":"./list-distributeurs", "bouton":"false"}]},
           ]},
           {"idUser":"phil", "langue":"en","fonctionnalites":[
             {"fonction":"People", "icone":"fas fa-user-cog", "actif":"menu-close", "elements":[{"nom":"New", "lien":"patient-nouveau", "bouton":"false"}  , {"nom":"Search", "lien":"list-patients", "bouton":"false"}]},
@@ -80,9 +82,9 @@ export class InMemDBService implements InMemoryDbService{
           ]}
         ];
         let missions:IMission[]=[
-          {id:"1", libelle:"Consultation", description:"Consultation faite par une infirmière", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), idLogin: "admin", 
+          {id:"1", libelle:"Consultation", description:"Consultation faite par une infirmière", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), idLogin: "admin",
             service : {id:"1", libelle:"Pharmacie", etat:"non attribue",dateDerniereModification: new Date("07/03/2000"),dateAttribution: new Date("07/03/1990"),dateFin: new Date("07/03/1990"),nombreTotalAttributions: 6}},
-          {id:"2", libelle:"Consultation Spécialiste", description:"Consultation faite par un médecin", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990") , idLogin: "admin", 
+          {id:"2", libelle:"Consultation Spécialiste", description:"Consultation faite par un médecin", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990") , idLogin: "admin",
             service : {id:"2", libelle:"Laboratoire", etat:"non attribue",dateDerniereModification: new Date("06/08/1990"),dateAttribution: new Date("07/03/1990"),dateFin: new Date("07/03/1990"),nombreTotalAttributions: 20}},
           {id:"3", libelle:"Prelevement Labo", description:"Prélévement fait par laboratoire", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"),  idLogin: "admin",
             service : {id:"3", libelle:"Consultation", etat:"non attribue",dateDerniereModification: new Date("12/06/1972"),dateAttribution: new Date("07/03/1990"),dateFin: new Date("07/03/1990"),nombreTotalAttributions: 50}},
@@ -111,11 +113,11 @@ export class InMemDBService implements InMemoryDbService{
         ];
         let documents:IDocument[]=[
           {id:"1", titre:"Note intervention", description:"Document delivre par le medecin ou un infirmier de l'etablissement",
-           missions:[{id:"1", libelle:"fiche de soin", description:"fiche de soin est une mission", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), 
+           missions:[{id:"1", libelle:"fiche de soin", description:"fiche de soin est une mission", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"),
                       service : {id:"3", libelle:"Consultation", etat:"non attribue",dateDerniereModification: new Date("12/06/1972"),dateAttribution: new Date("07/03/1990"),dateFin: new Date("07/03/1990"),nombreTotalAttributions: 50}},
-                    {id:"3", libelle:"bon de commande", description:"bon de commande est une mission", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), 
+                    {id:"3", libelle:"bon de commande", description:"bon de commande est une mission", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"),
                       service : {id:"1", libelle:"Pharmacie", etat:"non attribue",dateDerniereModification: new Date("07/03/2000"),dateAttribution: new Date("07/03/1990"),dateFin: new Date("07/03/1990"),nombreTotalAttributions: 6}},
-                    {id:"4", libelle:"recu de paiement", description:"recu de paiement est une mission", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), 
+                    {id:"4", libelle:"recu de paiement", description:"recu de paiement est une mission", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"),
                       service : {id:"2", libelle:"Laboratoire", etat:"non attribue",dateDerniereModification: new Date("06/08/1990"),dateAttribution: new Date("07/03/1990"),dateFin: new Date("07/03/1990"),nombreTotalAttributions: 20}}
             ],
             attributs:[{id:"1", titre:"taille", description:"taille de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: TypeTicket.Double, ordre:0, obligatoire: false, valeursParDefaut:""},
@@ -139,13 +141,13 @@ export class InMemDBService implements InMemoryDbService{
             ]
           },
          {id:"2", titre:"Fiche de suivi", description:"Document delivre par le medecin ou un infirmier de l'etablissement",
-           missions:[{id:"1", libelle:"fiche de soin", description:"fiche de soin est une mission", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), 
+           missions:[{id:"1", libelle:"fiche de soin", description:"fiche de soin est une mission", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"),
                       service : {id:"3", libelle:"Consultation", etat:"non attribue",dateDerniereModification: new Date("12/06/1972"),dateAttribution: new Date("07/03/1990"),dateFin: new Date("07/03/1990"),nombreTotalAttributions: 50}},
                     {id:"3", libelle:"bon de commande", description:"bon de commande est une mission", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"),
                       service : {id:"2", libelle:"Laboratoire", etat:"non attribue",dateDerniereModification: new Date("06/08/1990"),dateAttribution: new Date("07/03/1990"),dateFin: new Date("07/03/1990"),nombreTotalAttributions: 20}},
-                    {id:"2", libelle:"recu de paiement", description:"recu de paiement est une mission", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), 
+                    {id:"2", libelle:"recu de paiement", description:"recu de paiement est une mission", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"),
                       service : {id:"2", libelle:"Laboratoire", etat:"non attribue",dateDerniereModification: new Date("06/08/1990"),dateAttribution: new Date("07/03/1990"),dateFin: new Date("07/03/1990"),nombreTotalAttributions: 20}},
-            ], 
+            ],
            attributs:[{id:"1", titre:"taille", description:"taille de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeDouble, ordre:0, obligatoire: false, valeursParDefaut:""},
                       {id:"6", titre:"teint", description:"teint de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeString, ordre:0, obligatoire: false, valeursParDefaut:""},
                       {id:"8", titre:"cicatrice", description:"cicatrice de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeBoolean, ordre:0, obligatoire: false, valeursParDefaut:"true, false"},
@@ -173,7 +175,7 @@ export class InMemDBService implements InMemoryDbService{
                       service :{id:"3", libelle:"Consultation", etat:"non attribue",dateDerniereModification: new Date("12/06/1972"),dateAttribution: new Date("07/03/1990"),dateFin: new Date("07/03/1990"),nombreTotalAttributions: 50}},
                     {id:"4", libelle:"recu de paiement", description:"recu de paiement est une mission", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"),
                       service :{id:"3", libelle:"Consultation", etat:"non attribue",dateDerniereModification: new Date("12/06/1972"),dateAttribution: new Date("07/03/1990"),dateFin: new Date("07/03/1990"),nombreTotalAttributions: 50}}
-            ], 
+            ],
            attributs:[{id:"1", titre:"taille", description:"taille de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeDouble, ordre:0, obligatoire: false, valeursParDefaut:""},
                       {id:"4", titre:"age", description:"age de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeDouble, ordre:0, obligatoire: false, valeursParDefaut:""},
                       {id:"5", titre:"allergies", description:"allergies de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeString, ordre:0, obligatoire: false, valeursParDefaut:""},
@@ -191,13 +193,13 @@ export class InMemDBService implements InMemoryDbService{
             ]
           },
           {id:"4", titre:"Formulaire de sortie", description:"Document delivre par le medecin ou un infirmier de l'etablissement",
-           missions:[{id:"2", libelle:"fiche de soin", description:"fiche de soin est une mission", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), 
+           missions:[{id:"2", libelle:"fiche de soin", description:"fiche de soin est une mission", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"),
                       service : {id:"3", libelle:"Consultation", etat:"non attribue",dateDerniereModification: new Date("12/06/1972"),dateAttribution: new Date("07/03/1990"),dateFin: new Date("07/03/1990"),nombreTotalAttributions: 50}},
-                    {id:"3", libelle:"bon de commande", description:"bon de commande est une mission", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), 
+                    {id:"3", libelle:"bon de commande", description:"bon de commande est une mission", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"),
                       service : {id:"1", libelle:"Pharmacie", etat:"non attribue",dateDerniereModification: new Date("07/03/2000"),dateAttribution: new Date("07/03/1990"),dateFin: new Date("07/03/1990"),nombreTotalAttributions: 6}},
-                    {id:"4", libelle:"recu de paiement", description:"recu de paiement est une mission", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), 
+                    {id:"4", libelle:"recu de paiement", description:"recu de paiement est une mission", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"),
                       service : {id:"2", libelle:"Laboratoire", etat:"non attribue",dateDerniereModification: new Date("06/08/1990"),dateAttribution: new Date("07/03/1990"),dateFin: new Date("07/03/1990"),nombreTotalAttributions: 20}}
-            ], 
+            ],
            attributs:[{id:"14", titre:"Nom", description:"nom de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeString, ordre:0, obligatoire: false, valeursParDefaut:""},
                       {id:"4", titre:"age", description:"age de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeDouble, ordre:0, obligatoire: false, valeursParDefaut:""},
                       {id:"5", titre:"allergies", description:"allergies de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeTextarea, ordre:0, obligatoire: false, valeursParDefaut:""},
@@ -233,11 +235,11 @@ export class InMemDBService implements InMemoryDbService{
             ]
           },
           {id:"5", titre:"ordonnance", description:"Document delivre par le medecin ou un infirmier de l'etablissement",
-           missions:[{id:"1", libelle:"fiche de soin", description:"fiche de soin est une mission", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), 
+           missions:[{id:"1", libelle:"fiche de soin", description:"fiche de soin est une mission", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"),
                       service : {id:"3", libelle:"Consultation", etat:"non attribue",dateDerniereModification: new Date("12/06/1972"),dateAttribution: new Date("07/03/1990"),dateFin: new Date("07/03/1990"),nombreTotalAttributions: 50}},
                     {id:"2", libelle:"bon de commande", description:"bon de commande est une mission", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"),
                       service : {id:"2", libelle:"Laboratoire", etat:"non attribue",dateDerniereModification: new Date("06/08/1990"),dateAttribution: new Date("07/03/1990"),dateFin: new Date("07/03/1990"),nombreTotalAttributions: 20}},
-                    {id:"5", libelle:"recu de paiement", description:"recu de paiement est une mission", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), 
+                    {id:"5", libelle:"recu de paiement", description:"recu de paiement est une mission", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"),
                       service : {id:"2", libelle:"Laboratoire", etat:"non attribue",dateDerniereModification: new Date("06/08/1990"),dateAttribution: new Date("07/03/1990"),dateFin: new Date("07/03/1990"),nombreTotalAttributions: 20}},
             ],
            attributs:[{id:"1", titre:"taille", description:"taille de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeDouble , ordre: 0, obligatoire: false, valeursParDefaut:""},
@@ -263,13 +265,13 @@ export class InMemDBService implements InMemoryDbService{
         ];
         let exemplaires:IExemplaireDocument[]=[
           {id:"1", idDocument:"4", titre:"Formulaire de sortie", description:"Document delivre par le medecin ou un infirmier de l'etablissement",
-            missions:[{id:"2", libelle:"fiche de soin", description:"fiche de soin est une mission", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), 
+            missions:[{id:"2", libelle:"fiche de soin", description:"fiche de soin est une mission", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"),
                         service : {id:"3", libelle:"Consultation", etat:"non attribue",dateDerniereModification: new Date("12/06/1972"),dateAttribution: new Date("07/03/1990"),dateFin: new Date("07/03/1990"),nombreTotalAttributions: 50}},
-                      {id:"3", libelle:"bon de commande", description:"bon de commande est une mission", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), 
+                      {id:"3", libelle:"bon de commande", description:"bon de commande est une mission", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"),
                         service : {id:"1", libelle:"Pharmacie", etat:"non attribue",dateDerniereModification: new Date("07/03/2000"),dateAttribution: new Date("07/03/1990"),dateFin: new Date("07/03/1990"),nombreTotalAttributions: 6}},
-                      {id:"4", libelle:"recu de paiement", description:"recu de paiement est une mission", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), 
+                      {id:"4", libelle:"recu de paiement", description:"recu de paiement est une mission", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"),
                         service : {id:"2", libelle:"Laboratoire", etat:"non attribue",dateDerniereModification: new Date("06/08/1990"),dateAttribution: new Date("07/03/1990"),dateFin: new Date("07/03/1990"),nombreTotalAttributions: 20}}
-              ], 
+              ],
             attributs:[{id:"14", titre:"Nom", description:"nom de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeString , ordre: 0, obligatoire: false, valeursParDefaut:""},
                         {id:"4", titre:"age", description:"age de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeDouble , ordre: 0, obligatoire: false, valeursParDefaut:""},
                         {id:"5", titre:"allergies", description:"allergies de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeTextarea , ordre: 0, obligatoire: false, valeursParDefaut:""},
@@ -317,13 +319,13 @@ export class InMemDBService implements InMemoryDbService{
               ]
           },
           {id:"2", idDocument:"5", titre:"ordonnance", description:"Document delivre par le medecin ou un infirmier de l'etablissement",
-              missions:[{id:"1", libelle:"fiche de soin", description:"fiche de soin est une mission", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), 
+              missions:[{id:"1", libelle:"fiche de soin", description:"fiche de soin est une mission", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"),
                         service : {id:"3", libelle:"Consultation", etat:"non attribue",dateDerniereModification: new Date("12/06/1972"),dateAttribution: new Date("07/03/1990"),dateFin: new Date("07/03/1990"),nombreTotalAttributions: 50}},
                       {id:"2", libelle:"bon de commande", description:"bon de commande est une mission", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"),
                         service : {id:"2", libelle:"Laboratoire", etat:"non attribue",dateDerniereModification: new Date("06/08/1990"),dateAttribution: new Date("07/03/1990"),dateFin: new Date("07/03/1990"),nombreTotalAttributions: 20}},
-                      {id:"5", libelle:"recu de paiement", description:"recu de paiement est une mission", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), 
+                      {id:"5", libelle:"recu de paiement", description:"recu de paiement est une mission", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"),
                         service : {id:"2", libelle:"Laboratoire", etat:"non attribue",dateDerniereModification: new Date("06/08/1990"),dateAttribution: new Date("07/03/1990"),dateFin: new Date("07/03/1990"),nombreTotalAttributions: 20}},
-              ], 
+              ],
               attributs:[{id:"1", titre:"taille", description:"taille de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeDouble , ordre: 0, obligatoire: false, valeursParDefaut:""},
                         {id:"6", titre:"teint", description:"teint de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeString , ordre: 0, obligatoire: false, valeursParDefaut:""},
                         {id:"8", titre:"cicatrice", description:"cicatrice de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeBoolean , ordre: 0, obligatoire: false, valeursParDefaut:""},
@@ -360,6 +362,11 @@ export class InMemDBService implements InMemoryDbService{
           {id:"4", libelle:"néonat", description:"nouveau-né", etat:"malade"},
           {id:"5", libelle:"transfusion", description:"sang", etat:"gl"},
       ];
-        return{patients, services, menus, tickets, missions, attributs, documents, exemplaires,famille};
+      let distributeur:IDistributeur[]=[
+        {id:"1", raisonSocial:"malade", adresse:"Dla", telephone:"655554488", mail: "ngong@yad.fr"},
+        {id:"2", raisonSocial:"fatigué",adresse:"Ydé", telephone: "655554481", mail: "ngong@yad.fr"},
+        {id:"3", raisonSocial:"fatigué", adresse:"Buéa", telephone:"655554486", mail:"ngong@yad.fr"},
+      ];
+        return{patients, services, menus, tickets, missions, attributs, documents, exemplaires,famille,distributeur};
   }
 }

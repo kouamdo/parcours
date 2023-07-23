@@ -9,6 +9,7 @@ import { PatientsRoutingModule } from './modules/patients/patient-routing.module
 import { ServicesRoutingModule } from './modules/services/services-routing.module';
 import { TicketsRoutingModule } from './modules/tickets/tickets-routing.module';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { DistributeurRoutingModule } from './modules/distributeur/distributeur-routing.module';
 
 const routes: Routes = [
   {
@@ -27,7 +28,8 @@ const routes: Routes = [
     MissionsRoutingModule,
     DocumentsRoutingModule,
     ExemplaireDocumentRoutingModule,
-    FamilleRoutingModule
+    FamilleRoutingModule,
+    DistributeurRoutingModule
   ],
   exports: [RouterModule]
 })

@@ -1,0 +1,63 @@
+<div id="mainSection">
+  <div class="card block">
+      <div class="card-header pt-4 pb-4 entete">Ajouter un nouveau Distributeur</div>
+      <div class="card-body">
+          <form [formGroup]="forme" (ngSubmit)="onSubmit(forme.value)" *ngIf="forme" >
+              <div class="">
+                  <div class="">
+                      <div class="form-group">
+                          <div>
+                              <div class="champs">
+                                  <label for="raisonSocial" class="label">
+                                    Raison Social
+                                  </label>
+                                  <input type="text" formControlName="raisonSocial" name="raisonSocial" id="raisonSocial"  placeholder="raisonSocial"  class="form-control" required>
+                              </div>
+                              <div  *ngIf="submitted && f['raisonSocial'].errors"  class="alert alert-danger" >
+                                  <div *ngIf="f['raisonSocial'].errors['required']">Champ Obligatoire</div>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="form-group">
+                        <div>
+                            <div class="champs">
+                                <label for="adresse" class="label" >
+                                  Adresse
+                                </label>
+                                <input type="text" formControlName="adresse"  name="adresse"  id="adresse" placeholder="adresse" class="form-control" >
+                            </div>
+                        </div>
+                    </div>
+                      <div class="form-group">
+                          <div class="champs">
+                              <label  for="telephone"  class="label" >
+                                Telephone
+                              </label>
+                              <input type="text" formControlName="telephone" name="telephone" id="telephone" placeholder="telephone" class="form-control" >
+                          </div>
+                      </div>
+
+                      <div class="form-group">
+                        <div>
+                            <div class="champs">
+                                <label for="mail" class="label" >
+                                  Mail
+                                </label>
+                                <input type="email" formControlName="mail"  name="mail"  id="mail" placeholder="mail"   required  class="form-control" >
+                            </div>
+                            <div  *ngIf="submitted && f['mail'].errors"  class="alert alert-danger" >
+                            <div *ngIf="f['mail'].errors['required']"></div>
+                            </div>
+                        </div>
+                    </div>
+                  </div>
+              </div>
+              <div class="actionButton">
+                <button class="btn" routerLink="../list-distributeurs">Envoyer</button>
+                  <button type="submit" class="btn">{{btnLibelle}}</button>
+              </div>
+          </form>
+      </div>
+  </div>
+</div>
+

@@ -23,6 +23,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { FamilleModule } from './modules/famille/famille.module';
+import { DistributeurModule } from './modules/distributeur/distributeur.module';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,7 @@ import { FamilleModule } from './modules/famille/famille.module';
     MissionsModule,
     DocumentsModule,
     FamilleModule,
-
+    DistributeurModule,
     // ngx-translate and the loader module
     HttpClientModule,
     TranslateModule.forRoot({
