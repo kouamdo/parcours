@@ -54,7 +54,7 @@
             </label>
             <mat-form-field class="example-full-width" appearance="fill">
               <mat-label>Famille</mat-label>
-              <mat-select [formControl]="famille" multiple>
+              <mat-select formControlName="famille" multiple [compareWith]="compareItem">
                 <mat-option *ngFor="let membre of familles$ |async" [value]="membre">{{membre.libelle}}</mat-option>
               </mat-select>
             </mat-form-field>
@@ -67,7 +67,7 @@
                 Ressource
               </label>
               <mat-form-field class="example-full-width" appearance="fill">
-                  <input  type="text" matInput [matAutocomplete]="auto" aria-label="ressource" formControlName="ressource" [formControl]="myControl" ng-reflect-name="ressource">
+                  <input  type="text" matInput [matAutocomplete]="auto" aria-label="ressource" formControlName="ressource"  ng-reflect-name="ressource">
                   <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn" >
                   <mat-option *ngFor="let option of filteredOptions" [value]="option">
                       {{option.libelle}}

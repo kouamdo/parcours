@@ -31,12 +31,10 @@ export class NewPrecomvtComponent implements OnInit {
   //permet d'identifier la section du formulaire à ouvrir
   steps:any =1;
   
-  myControl = new FormControl<string | IRessource>('');
   filteredOptions: IRessource[] | undefined;
   
   familles$:Observable<IFamille[]>=EMPTY;
   typeMvt: string[] = [TypeMvt.Ajout,TypeMvt.Neutre,TypeMvt.Reduire];
-  famille = new FormControl<string | IFamille[]>('');
   
  //représente l'ensemble des éléments de précoMvtQte en cours de création
  eltsPreco : IPrecoMvt[] = [];
@@ -61,12 +59,12 @@ export class NewPrecomvtComponent implements OnInit {
       libelle: new FormControl(),
       etat: new FormControl(),
       type: new FormControl(),
-      ressource: this.myControl,
+      ressource: new FormControl<string | IRessource>(''),
       quantiteMin:new FormControl(),
       quantiteMax:new FormControl(),
       montantMin:new FormControl(),
       montantMax:new FormControl(),
-      famille : this.famille,
+      famille :  new FormControl<string | IFamille[]>(''),
       fournisseur:new FormControl()
     });
     
@@ -77,7 +75,7 @@ export class NewPrecomvtComponent implements OnInit {
     this.familles$ = this.getAllFamilles();
 
     //code autocompletion qui retourne les éléments du type déclaré
-    this.myControl.valueChanges.subscribe(
+    this.forme.controls["ressource"].valueChanges.subscribe(
       value => {
         const libelle = typeof value === 'string' ? value : value?.libelle;
         if(libelle != undefined && libelle?.length >0){
@@ -192,7 +190,7 @@ reset():void{
     else if(precoTmp.precomvtqte[0].famille!= undefined && precoTmp.precomvtqte[0].famille!=null && precoTmp.precomvtqte[0].famille.length>0){
       this.steps = 2;
       this.forme.controls["famille"].setValue(precoTmp.precomvtqte[0].famille);
-      this.famille.setValue(precoTmp.precomvtqte[0].famille);
+      //this.forme.famille.setValue(precoTmp.precomvtqte[0].famille);
       //this.forme.controls["id"].setValue(precoTmp.precomvtqte[0].id);
       this.forme.controls["montantMax"].setValue(precoTmp.precomvtqte[0].montantMax);
       this.forme.controls["montantMin"].setValue(precoTmp.precomvtqte[0].montantMin);
@@ -286,5 +284,9 @@ reset():void{
     precomvtTemp.precomvtqte.push(premvtqte);
     return precomvtTemp;
   }
+
+  compareItem(famille1: IFamille, famille2: IFamille) {
+    return famille2 && famille1 ? famille2.id === famille1.id : famille2 === famille1;
+}
 
 }
