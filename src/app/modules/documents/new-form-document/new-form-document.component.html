@@ -36,7 +36,13 @@
                                 <label  for="" class="label">
                                     {{"document.table.title3" | translate}}
                                 </label>
-                                <div class="dropdown w-100">
+                                <mat-form-field class="example-full-width" appearance="fill">
+                                    <mat-label>Missions</mat-label>
+                                    <mat-select [formControl]="missions" multiple>
+                                    <mat-option *ngFor="let missionsDocument of mission$ |async as mission$" [value]="missionsDocument">{{missionsDocument.libelle}}</mat-option>
+                                    </mat-select>
+                                </mat-form-field> 
+                                <!-- <div class="dropdown w-100">
                                     <button class="select dropdown-toggle btn" name="missions" id="missions" type="button" id="triggerId" data-toggle="dropdown" aria-haspopup="true"
                                             aria-expanded="false">
                                         {{'document.table.title5' | translate}}
@@ -47,7 +53,7 @@
                                             {{missions.libelle}}
                                         </label>
                                     </div>
-                                </div>  
+                                </div>  -->
                             </div>
                         </div>
                         

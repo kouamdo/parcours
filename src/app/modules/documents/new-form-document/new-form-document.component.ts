@@ -61,8 +61,10 @@ export class NewFormDocumentComponent implements OnInit {
   // variables pour la gestion des missions
   dataMission : IMission[] = [];
   dataSourceMissionResultat = new MatTableDataSource<IMission>();
-  _missions : FormArray | undefined;
+  // _missions : FormArray | undefined;
   ELEMENTS_TABLE_CATEGORIES: IAttributs[] = []; //tableau de listing des attributs a affecter a chaque categorie
+
+  missions = new FormControl<string | IMission[]>('');
 
   // variables pour la gestion des categories
   dataSourceAttributDocument = new MatTableDataSource<IAttributs>(this.ELEMENTS_TABLE_CATEGORIES);
@@ -78,17 +80,23 @@ export class NewFormDocumentComponent implements OnInit {
   // tableau contenant les categories creees
   tableFinaleCategoriesAttributs: ICategoriesAttributs[] = []; 
   
+
+  // dropdownData : any [] = [];
+  // settings: IDropdownSettings = {};
+  // selectedItems: any[] = [];
+
+  // dataFamille : IFamille[] = [];
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
   constructor(private router:Router, private formBuilder: FormBuilder, private infosPath:ActivatedRoute, private serviceDocument:DocumentService, private serviceMission:MissionsService, private serviceAttribut:AttributService,  private _liveAnnouncer: LiveAnnouncer, private dialogDef : MatDialog) {
     this.forme = this.formBuilder.group({
-      _missions :  new FormArray([]),
+      // _missions :  new FormArray([]),
       _attributs :  new FormArray([]),
       titre: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
       description: [''],
-      // missions: [],
+      missions: this.missions,
       // attributs: [],
     });
   }
@@ -106,10 +114,16 @@ export class NewFormDocumentComponent implements OnInit {
       this.serviceDocument.getDocumentById(idDocument).subscribe(x =>
       {
         this.document = x; console.log(this.document);
+        
+        //initialisation du control mission du formulaure
+        this.missions = new FormControl(this.document.missions)
+        console.log("contenu du control mission : ", this.missions)
+
         this.forme.setValue({
           titre: this.document.titre,
           description: this.document.description,
-          _missions: [],
+          // _missions: [],
+          missions: this.missions,
           _attributs: []
           // missions: this.document.missions,
           // attributs: this.document.attributs
@@ -126,25 +140,25 @@ export class NewFormDocumentComponent implements OnInit {
         let categorieAfficheFinal : ICategorieAffichage[] = [];
         this.document.categories.forEach(
           catAttribut => {
-            let categorieAfficheTemp : ICategorieAffichage = {
-              id: '',
-              nom: '',
-              ordre: 0,
-              attribut: {
-                id: '',
-                titre: '',
-                description: '',
-                etat: false,
-                dateCreation: new Date(),
-                dateModification: new Date(),
-                ordre: 0,
-                obligatoire: false,
-                valeursParDefaut: '',
-                type: TypeTicket.Int
-              }
-            }
             catAttribut.listAttributs.forEach(
               att => {
+                let categorieAfficheTemp : ICategorieAffichage = {
+                  id: '',
+                  nom: '',
+                  ordre: 0,
+                  attribut: {
+                    id: '',
+                    titre: '',
+                    description: '',
+                    etat: false,
+                    dateCreation: new Date(),
+                    dateModification: new Date(),
+                    ordre: 0,
+                    obligatoire: false,
+                    valeursParDefaut: '',
+                    type: TypeTicket.Int
+                  }
+                }
                 categorieAfficheTemp.id = catAttribut.id
                 categorieAfficheTemp.nom = catAttribut.nom
                 categorieAfficheTemp.ordre = catAttribut.ordre
@@ -192,23 +206,23 @@ export class NewFormDocumentComponent implements OnInit {
     }
     )
   }
-  onCheckMissionChange(event: any) {
-    const _missions = (this.forme.controls['_missions'] as FormArray);
-    if (event.target.checked) {
-      _missions.push(new FormControl(event.target.value));
-      this.ajoutSelectionMission(event.target.value);
+  // onCheckMissionChange(event: any) {
+  //   const _missions = (this.forme.controls['_missions'] as FormArray);
+  //   if (event.target.checked) {
+  //     _missions.push(new FormControl(event.target.value));
+  //     this.ajoutSelectionMission(event.target.value);
       
-    } else {
-      const index = _missions.controls
-      .findIndex(x => x.value === event.target.value);
-      //this.retirerSelectionMission(index)
+  //   } else {
+  //     const index = _missions.controls
+  //     .findIndex(x => x.value === event.target.value);
+  //     //this.retirerSelectionMission(index)
       
-      _missions.removeAt(index);
-      this.dataMission.splice(index,1);
-    }
-    this._missions = _missions;
-    console.log(this._missions.value);
-  }
+  //     _missions.removeAt(index);
+  //     this.dataMission.splice(index,1);
+  //   }
+  //   this._missions = _missions;
+  //   console.log(this._missions.value);
+  // }
   //TODO mise en cache
   ajoutSelectionMission(value: any) {
     this.serviceMission.getMissionById(value).subscribe(
@@ -322,7 +336,9 @@ export class NewFormDocumentComponent implements OnInit {
         }
       )
     });*/
-    documentTemp.missions = this.dataMission;
+    documentTemp.missions = documentInput.missions;
+    console.log("voici les missions pour ce document : ", documentTemp.missions)
+
     
     this.dataSourceAttributResultat.data.forEach(
       a => documentTemp.attributs.push(a)
