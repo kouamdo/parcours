@@ -41,7 +41,6 @@ export class NewPrecomvtComponent implements OnInit {
 
  //représente l'ensemble des éléments de précoMvtQte en cours de création
  eltsPreco : IPrecoMvt[] = [];
-
  //précise l'index de eltPreco qu'on souhaite modifier
  indexModification = -1;
 
@@ -56,12 +55,12 @@ export class NewPrecomvtComponent implements OnInit {
 
   @ViewChild(FormGroupDirective)
   formDirective!: FormGroupDirective;
-
+  //settings: { idField: string; textField: string; allowSearchFilter: boolean; } | undefined;
 
   constructor(private formBuilder:FormBuilder,private serviceFamille:FamillesService,private ressourceService:RessourcesService ,private precoMvtService:PrecoMvtsService,private serviceRessource:RessourcesService,private router:Router, private infosPath:ActivatedRoute, private datePipe: DatePipe) {
     this.forme = this.formBuilder.group({
-      libelle:new FormControl(),
-      etat:new FormControl(),
+      libelle:  new FormControl(),
+      etat: new FormControl(),
       type: new FormControl(),
       ressource: this.myControl,
       quantiteMin:new FormControl(),
@@ -69,7 +68,7 @@ export class NewPrecomvtComponent implements OnInit {
       montantMin:new FormControl(),
       montantMax:new FormControl(),
       famille : this.famille,
-      fournisseur:new FormControl(),
+      fournisseur:new FormControl()
     });
 
   }
@@ -133,9 +132,9 @@ reset():void{
   * @returns
   */
   enregistrerValeurPrecomvtqte(precomvtInput:any){
+  //this.submitted=true;
+  //if(this.forme.invalid) return;
   console.log("enregistrerValeurPrecomvtqte indexModification : " + this.indexModification)
- // this.submitted=true;
- // if(this.forme.invalid) return;
   //sauvegarde des valeurs de precoMvt <=> premier ecran
   if(precomvtInput.libelle != null && precomvtInput.libelle!=""){
     if(this.indexModification==-1) //si vaut -1 alors création
@@ -276,7 +275,7 @@ reset():void{
       montantMax: 0,
       montantMin: 0,
       id:"",
-      fournisseur: ""
+      fournisseur: "DCD"
     };
     let precomvtTemp : IPrecoMvt={
       id: uuidv4(),
@@ -290,6 +289,3 @@ reset():void{
   }
 
 }
-
-
-
