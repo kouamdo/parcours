@@ -15,6 +15,7 @@ import { DocumentService } from 'src/app/services/documents/document.service';
 import { TypeTicket } from "src/app/modele/type-ticket";
 import {v4 as uuidv4} from 'uuid';
 import { map } from 'rxjs';
+import { DonneesEchangeService } from 'src/app/services/donnees-echange/donnees-echange.service';
 
 @Component({
   selector: 'app-modal-categories',
@@ -73,7 +74,9 @@ export class ModalCategoriesComponent implements OnInit {
   paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor( private router:Router, private formBuilder: FormBuilder, private infosPath:ActivatedRoute, private serviceDocument:DocumentService, private serviceCategorieAttribut:CategorieAttributService, private serviceAttribut:AttributService,  private _liveAnnouncer: LiveAnnouncer,
+  constructor( private router:Router, private formBuilder: FormBuilder, private infosPath:ActivatedRoute, private serviceDocument:DocumentService,
+     private serviceCategorieAttribut:CategorieAttributService, private serviceAttribut:AttributService,  
+     private donneeDocCatService:DonneesEchangeService, private _liveAnnouncer: LiveAnnouncer,
     @Inject(MAT_DIALOG_DATA) public data: any) {
 
       this.formeCategorieAttribut = this.formBuilder.group({
@@ -83,14 +86,14 @@ export class ModalCategoriesComponent implements OnInit {
     }
     
   ngOnInit(): void {
-    console.log(this.data.dataICategorieAffiche)
+    console.log(this.donneeDocCatService.dataDocumentCategorie)
 
-      this.TABLE_CATEGORIE_AFFICHAGE_TEMP = this.data.dataICategorieAffiche
+      this.TABLE_CATEGORIE_AFFICHAGE_TEMP = this.donneeDocCatService.dataDocumentCategorie
       this.tableResultatsCategoriesAffichage.data = this.TABLE_CATEGORIE_AFFICHAGE_TEMP;
-    if (this.data.dataICategorieAffiche != null && this.data.dataICategorieAffiche.length >0) {
+    if (this.donneeDocCatService.dataDocumentCategorie != null && this.donneeDocCatService.dataDocumentCategorie.length >0) {
       //Création du premier tableau si le deuxième n'est pas vide
       let listAtt : String[] = [];
-      let listCatAtt  = this.tableResultatsCategoriesAffichage.data;
+      let listCatAtt :ICategorieAffichage[] = this.tableResultatsCategoriesAffichage.data;
       //recuperation des id des attributs dans le deuxieme tableau de la modal
       listCatAtt.forEach(valeur=>{
         listAtt.push(valeur.attribut.id);
@@ -120,7 +123,7 @@ export class ModalCategoriesComponent implements OnInit {
       this.tableResultatsCategoriesAffichage = new MatTableDataSource<ICategorieAffichage>(TABLE_CATEGORIE_AFFICHAGE_TEMP);
       this.tableauIndexSelectionner = new Map;
       //sauvegarde de la nouvelle valeur du 2ème tableau
-      this.data.dataICategorieAffiche.data =  TABLE_CATEGORIE_AFFICHAGE_TEMP;
+      this.donneeDocCatService.dataDocumentCategorie =  TABLE_CATEGORIE_AFFICHAGE_TEMP;
     }else{
       //Création du premier tableau si le deuxième est vide
       this.tableauAttributsTemp = this.data.dataSourceAttributDocument.data
@@ -252,7 +255,7 @@ export class ModalCategoriesComponent implements OnInit {
       this.TABLE_CATEGORIE_AFFICHAGE_TEMP.push(valeur);
     });
     this.tableResultatsCategoriesAffichage.data = this.TABLE_CATEGORIE_AFFICHAGE_TEMP;
-    this.data.dataICategorieAffiche.data = this.TABLE_CATEGORIE_AFFICHAGE_TEMP;
+    this.donneeDocCatService.dataDocumentCategorie = this.TABLE_CATEGORIE_AFFICHAGE_TEMP;
     
     //récupération des id attributs selectionnés 
 
@@ -289,7 +292,7 @@ export class ModalCategoriesComponent implements OnInit {
     this.TABLE_CATEGORIE_AFFICHAGE_TEMP=this.tableResultatsCategoriesAffichage.data;
     this.TABLE_CATEGORIE_AFFICHAGE_TEMP.splice(index, 1);
     this.tableResultatsCategoriesAffichage.data = this.TABLE_CATEGORIE_AFFICHAGE_TEMP;
-    this.data.dataICategorieAffiche.data = this.TABLE_CATEGORIE_AFFICHAGE_TEMP;
+    this.donneeDocCatService.dataDocumentCategorie = this.TABLE_CATEGORIE_AFFICHAGE_TEMP;
 
     //construction du premier tableau
     this.tableauAttributsTemp.push(categorieAffichage.attribut);
