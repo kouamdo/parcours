@@ -6,7 +6,6 @@ import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Observable, EMPTY } from 'rxjs';
-import { IAfficheDocument } from 'src/app/modele/affiche-document';
 import { IAttributs } from 'src/app/modele/attributs';
 import { ICategoriesAttributs } from 'src/app/modele/categories-attributs';
 import { IDocument } from 'src/app/modele/document';
@@ -43,7 +42,7 @@ export class NewFormDocumentComponent implements OnInit {
   titre: string="Ajouter un nouveau document";
   submitted: boolean=false;
   validation: boolean=false;
-  idMission : string = "";
+  //idMission : string = "";
   idAttribut : string = "";
   serviceDeMission!: IService;
 
@@ -58,13 +57,7 @@ export class NewFormDocumentComponent implements OnInit {
   dataSourceAttributResultat = new MatTableDataSource<IAttributs>();
   _attributs :  FormArray | undefined;
 
-  // variables pour la gestion des missions
-  dataMission : IMission[] = [];
-  dataSourceMissionResultat = new MatTableDataSource<IMission>();
-  // _missions : FormArray | undefined;
-  ELEMENTS_TABLE_CATEGORIES: IAttributs[] = []; //tableau de listing des attributs a affecter a chaque categorie
-
-  missions = new FormControl<string | IMission[]>('');
+   ELEMENTS_TABLE_CATEGORIES: IAttributs[] = []; //tableau de listing des attributs a affecter a chaque categorie
 
   // variables pour la gestion des categories
   dataSourceAttributDocument = new MatTableDataSource<IAttributs>(this.ELEMENTS_TABLE_CATEGORIES);
@@ -74,30 +67,21 @@ export class NewFormDocumentComponent implements OnInit {
     ordre: 0,
     listAttributs: []
   }
- // ELEMENTS_TABLE_CATEGORIE_ATTRIBUTS: ICategoriesAttributs[] = []; 
   TABLE_CATEGORIE_AFFICHAGE_TEMP: ICategorieAffichage[] = []; 
 
   // tableau contenant les categories creees
   tableFinaleCategoriesAttributs: ICategoriesAttributs[] = []; 
   
-
-  // dropdownData : any [] = [];
-  // settings: IDropdownSettings = {};
-  // selectedItems: any[] = [];
-
-  // dataFamille : IFamille[] = [];
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
   constructor(private router:Router, private formBuilder: FormBuilder, private infosPath:ActivatedRoute, private serviceDocument:DocumentService, private serviceMission:MissionsService, private serviceAttribut:AttributService,  private _liveAnnouncer: LiveAnnouncer, private dialogDef : MatDialog) {
     this.forme = this.formBuilder.group({
-      // _missions :  new FormArray([]),
+      _missions :  new FormControl<string | IMission[]>(''),
       _attributs :  new FormArray([]),
       titre: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
-      description: [''],
-      missions: this.missions,
-      // attributs: [],
+      description: ['']
     });
   }
   ngOnInit(): void {
@@ -114,20 +98,16 @@ export class NewFormDocumentComponent implements OnInit {
       this.serviceDocument.getDocumentById(idDocument).subscribe(x =>
       {
         this.document = x; console.log(this.document);
-        
-        //initialisation du control mission du formulaure
-        this.missions = new FormControl(this.document.missions)
-        console.log("contenu du control mission : ", this.missions)
-
         this.forme.setValue({
           titre: this.document.titre,
           description: this.document.description,
-          // _missions: [],
-          missions: this.missions,
+          _missions: this.document.missions,
           _attributs: []
           // missions: this.document.missions,
           // attributs: this.document.attributs
           })
+          this.forme.controls["_missions"].setValue(this.document.missions);
+
         // Initialisation du tableau d'attributs du document
         this.document?.attributs.forEach(
           objet => {
@@ -206,31 +186,7 @@ export class NewFormDocumentComponent implements OnInit {
     }
     )
   }
-  // onCheckMissionChange(event: any) {
-  //   const _missions = (this.forme.controls['_missions'] as FormArray);
-  //   if (event.target.checked) {
-  //     _missions.push(new FormControl(event.target.value));
-  //     this.ajoutSelectionMission(event.target.value);
-      
-  //   } else {
-  //     const index = _missions.controls
-  //     .findIndex(x => x.value === event.target.value);
-  //     //this.retirerSelectionMission(index)
-      
-  //     _missions.removeAt(index);
-  //     this.dataMission.splice(index,1);
-  //   }
-  //   this._missions = _missions;
-  //   console.log(this._missions.value);
-  // }
-  //TODO mise en cache
-  ajoutSelectionMission(value: any) {
-    this.serviceMission.getMissionById(value).subscribe(
-      object => {
-        this.dataMission.push(object);
-      }
-    )
-  }
+  
   onCheckAttributChange(event: any) {
     const _attributs = (this.forme.controls['_attributs'] as FormArray);
     if (event.target.checked) {
@@ -247,9 +203,6 @@ export class NewFormDocumentComponent implements OnInit {
 
   getAttributId(idAttribut: string) {
     this.idAttribut = idAttribut
-  }
-  getMissionId(idMission: string) {
-    this.idMission = idMission
   }
 
   ajoutSelectionAttribut(idAttribut: string) {
@@ -316,29 +269,22 @@ export class NewFormDocumentComponent implements OnInit {
     console.log("voici le tebleau d'attributs final a enregistrer : ", this.tableFinaleCategoriesAttributs)
   }
   onSubmit(documentInput:any){
-    //    const _missionsSelected = (this.forme.get('_missions') as FormArray);
     this.submitted=true;
     if(this.forme.invalid) return;
     let documentTemp : IDocument={
       id: uuidv4(),
       titre: documentInput.titre,
       description: documentInput.description,
-      missions: [],
+      missions: documentInput._missions,
       attributs: [],
       categories: []
     }
-    //Faire un appel synchrone
-    /*_missionsSelected.value.forEach((element: any) => {
-      console.log("_missionsSelected est : " ,element);
-      this.serviceMission.getMissionById(element).subscribe(
-        object => {
-          documentTemp.missions.push(object);
-        }
-      )
-    });*/
-    documentTemp.missions = documentInput.missions;
+    
     console.log("voici les missions pour ce document : ", documentTemp.missions)
 
+    if(this.document.id != ""){
+      documentTemp.id = this.document.id  
+    }
     
     this.dataSourceAttributResultat.data.forEach(
       a => documentTemp.attributs.push(a)
@@ -386,5 +332,8 @@ export class NewFormDocumentComponent implements OnInit {
       this._liveAnnouncer.announce('Sorting cleared');
     }
   }
+  compareItem(mission1: IMission, mission2: IMission) {
+    return mission2 && mission1 ? mission2.id === mission1.id : mission2 === mission1;
+}
 }
 

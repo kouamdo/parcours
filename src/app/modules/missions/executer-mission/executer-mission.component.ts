@@ -19,6 +19,7 @@ export class ExecuterMissionComponent implements OnInit {
   documents: IDocument[]=[];
   aDesDocumentsDispo:boolean=false;
   missionChoisieLibelle: string="";
+  estClique : boolean = false
 
   constructor(private formBuilder:FormBuilder, private missionService:MissionsService,private router:Router, private infosPath:ActivatedRoute, private documentService:DocumentService ) {
     this.formeMissionExec = this.formBuilder.group({

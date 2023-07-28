@@ -42,7 +42,8 @@ export class NewExemplaireComponent implements OnInit {
   //_exemplaireDocument :  FormArray | undefined;
   controlExemplaire = new FormControl;
   typeAttribut : string = "";
-  idPatientCourant: string| null= "";
+  idDocument : string | null = "";
+  idPatientCourant: string | null= "";
   nomPatientCourant: string | null = "";
   
   typeInt = TypeTicket.Int;
@@ -56,15 +57,20 @@ export class NewExemplaireComponent implements OnInit {
 
   constructor(private router:Router, private formBuilder: FormBuilder, private infosPath:ActivatedRoute, private serviceDocument:DocumentService, private serviceExemplaire : ExemplaireDocumentService, private serviceMission:MissionsService, private serviceAttribut:AttributService) { 
     this.formeExemplaire = this.formBuilder.group({
-      _exemplaireDocument: this.formBuilder.array([
-      ])
+      _exemplaireDocument: new FormArray([])
     });
   }
 
   ngOnInit(): void {
     this.nomPatientCourant = sessionStorage.getItem("nomPatientCourant");
-    let idExemplaire = this.infosPath.snapshot.paramMap.get('idExemplaire');
-    if((idExemplaire != null) && idExemplaire!==''){
+
+    // recuperation de l'id de l'exemplaire
+    let idExemplaire = this.infosPath.snapshot.paramMap.get('modify/idExemplaire'); console.log(idExemplaire);
+
+    // recuperation de l'id du document
+    this.idDocument = this.infosPath.snapshot.paramMap.get('idDocument'); console.log(this.idDocument);
+
+    if((idExemplaire != null) && idExemplaire !==''){
       this.btnLibelle="Modifier";
       this.titre="Document à Modifier";
       this.serviceExemplaire.getExemplaireDocumentById(idExemplaire).subscribe(
@@ -79,31 +85,32 @@ export class NewExemplaireComponent implements OnInit {
                     key: "",
                     value: ""
                   }
-                  const index = this.document.attributs.indexOf(a)
+                  //const index = this.document.attributs.indexOf(a)
                   objetCleValeur.key = a.id
-              this.formeExemplaire.setValue({
+                  // this.formeExemplaire.setValue({
 
-              })
-                   exemplaireDocument.controls[index].value // = objetCleValeur.value
+                  // })
+                   //exemplaireDocument.controls[index].value // = objetCleValeur.value
                   console.log('id de atr ', a.id);
-                this.exemplaire.objetEnregistre.push(objetCleValeur)
+                  this.exemplaire.objetEnregistre.push(objetCleValeur)
                 }
               )
             }
         )   
       });
     }
-      if(idExemplaire)
-        this.serviceDocument.getDocumentById(idExemplaire).subscribe(
-          document =>{
-            this.document = document
-            document.attributs.forEach(
-              x => {
-                this.addAttributs()
-              }
-            )
-          }
-        )
+    if(this.idDocument){
+      this.serviceDocument.getDocumentById(this.idDocument).subscribe(
+        document =>{
+          this.document = document
+          document.attributs.forEach(
+            x => {
+              this.addAttributs()
+            }
+          )
+        }
+      )
+    }
   }
 
   addAttributs() {
@@ -111,7 +118,6 @@ export class NewExemplaireComponent implements OnInit {
   }
 
   enregistrerObjet(){
-    console.log("le document : " + this.document)
     const exemplaireDocument = this._exemplaireDocument;
       this.document.attributs.forEach(
         a => {
@@ -150,10 +156,10 @@ export class NewExemplaireComponent implements OnInit {
       objetEnregistre: [],
       categories: this.document.categories
     }
-        exemplaireTemp.objetEnregistre = this.exemplaire.objetEnregistre
+    exemplaireTemp.objetEnregistre = this.exemplaire.objetEnregistre
       
     console.log("les objets cles-valeur : " + exemplaireTemp.objetEnregistre[0].key)
-    console.log("le'id du document'r : " + exemplaireTemp.idDocument)
+    console.log("l'id du document' : " + exemplaireTemp.idDocument)
     this.serviceExemplaire.ajouterExemplaireDocument(exemplaireTemp).subscribe(
       object => {
         this.router.navigate(['/list-exemplaire']);

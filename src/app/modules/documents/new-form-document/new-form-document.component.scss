@@ -11,7 +11,7 @@
     width: 60%;
 }
 .entete{
-    background-color: #7ea97e;
+    background-color: #28a745;
     color: white;
     text-align: center;
     font-size: 22px;
@@ -30,6 +30,17 @@
         width: 300px;
         font-weight: normal;
     }
+    mat-label{
+        font-weight: normal;
+        font-size: 12px;
+        position: relative;
+        bottom: 5px;
+    }
+    .example-full-width{
+        background-color: #28a745;
+        padding: 0;
+        width: 100%;
+    }
 }
 .champs, .select, input, textarea{
     font-size: 15px;
@@ -40,7 +51,7 @@
 .select{
     border: none;
     box-shadow: 0 0 2px rgb(220, 220, 220);
-    background-color: #7ea97e63;
+    background-color: #28a74563;
     color: rgb(108, 108, 108);
     border-radius: 5px;
     width: 100%;
@@ -51,11 +62,14 @@
     align-items: center;
     justify-content: space-between;
     button{
-        background-color: #7ea97e;
+        background-color: #28a745;
         color: white;
         height: 30px;
         padding: 0 10px;
         font-size: 15px;
+    }
+    .btnValidation{
+        background-color: #1473e6;
     }
 }
 .tableBlock{
@@ -81,7 +95,7 @@
 mat-form-field{
     padding: 0;
     margin: 0;
-    color: #7ea97e;
+    color: #28a745;
     line-height: normal;
     box-sizing: initial;
     input{
@@ -96,14 +110,14 @@ mat-form-field:focus{
     margin: 0;
     input{
         padding: 0;
-        color: #7ea97e;
+        color: #28a745;
         border: none;
         margin: 0;
     }
 }  
 .example-full-width {
     height: 42px !important;
-    border: 2px solid #7ea97e;
+    border: 2px solid #28a745;
     border-radius: 5px;
     background-color: transparent;
     padding: 0;
@@ -114,7 +128,7 @@ mat-form-field:focus{
     top: -2px;
     padding: 0;
     margin: 0;
-    color: #7ea97e96;
+    color: #28a74596;
     border: none;
     font-size: small;
 }
@@ -123,7 +137,7 @@ mat-form-field:focus{
     top: -2px;
     padding: 0;
     margin: 0;
-    color: #7ea97e96;
+    color: #28a74596;
     border: none;
 }
 .containHead{
@@ -136,8 +150,8 @@ td{
     font-size: 13px;
 }
 th{
-    background-color: rgba(126, 169, 126, 0.2);
-    color: #7ea97e !important;
+    background-color: rgba(40, 167, 69, 0.2);
+    color: #28a745 !important;
 }
 .listAttr{
     width: 100%;
@@ -157,7 +171,8 @@ th{
         border-radius: 5px;
         i{
             box-shadow: 0 0 2px rgb(220, 220, 220);
-            color: #7ea97ea6;
+            color: #FFD700;
+            opacity: 0.8;
 
         }
     }
@@ -184,25 +199,13 @@ th{
         width: 50px;
     }
 }
-.blockErreur{
-    width: fit-content;
-    padding: 0;
-    padding: 10px;
-    background-color: rgba(255, 0, 0, 0.427);
-    color: red;
-    margin: 8px;
-    margin-top: 0;
-    margin-right: 0;
-    float: right;
-    border: none;
-}
 @media screen and (max-width: 1200px) {
     .title h2{
         font-size: 15px;
     }  
     .example-full-width {
         height: 42px !important;
-        border: 2px solid #7ea97e;
+        border: 2px solid #28a745;
     }
 }
 @media screen and (max-width: 1100px) {

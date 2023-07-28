@@ -4,7 +4,7 @@
     </div>
     <div class="card container-fluid" >
         <div class='card-hearder pt-3' >
-            <div class="d-flex align-items-center justify-content-end mr-4 tableTools">
+            <div class="d-flex align-items-center justify-content-end tableTools">
                 <div class="form-inline mr-3">
                     <form class="example-form">
                         <mat-form-field class="example-full-width" appearance="fill">
@@ -41,24 +41,6 @@
                         <td class="text-dark text-center containCell" mat-cell *matCellDef="let element"> {{element.etat}} </td>
                     </ng-container>
                     
-                    <!-- date de derniere modification Column -->
-                    <!-- <ng-container matColumnDef="dateDerniereModification">
-                        <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'services.table.title3' | translate}} </th>
-                        <td class="text-dark text-center containCell" mat-cell *matCellDef="let element"> {{element.dateDerniereModification}} </td>
-                    </ng-container> -->
-                    
-                    <!-- date d'attribution Column -->
-                    <!-- <ng-container matColumnDef="dateAttribution">
-                        <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'services.table.title4' | translate}} </th>
-                        <td class="text-dark text-center containCell" mat-cell *matCellDef="let element"> {{element.dateAttribution}} </td>
-                    </ng-container> -->
-                    
-                    <!-- date de fin Column -->
-                    <!-- <ng-container matColumnDef="dateFin">
-                        <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'services.table.title5' | translate}} </th>
-                        <td class="text-dark text-center containCell" mat-cell *matCellDef="let element"> {{element.dateFin}} </td>
-                    </ng-container> -->
-
                     <ng-container matColumnDef="actions">
                         <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{"patient.table.title8" | translate}} </th>
                         <td class="text-dark text-center containCell" mat-cell *matCellDef="let element">
@@ -87,7 +69,7 @@
                     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
                 </table>
-                <mat-paginator style="background-color: rgba(126, 169, 126, 0.79);" [pageSizeOptions]="[5, 10, 20]"
+                <mat-paginator style="background-color: rgba(40, 167, 69, 0.79);" [pageSizeOptions]="[5, 10, 20]"
                                showFirstLastButtons
                                aria-label="Select page of periodic elements">
                 </mat-paginator>

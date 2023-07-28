@@ -11,7 +11,7 @@
                                     <label for="titre" class="label">
                                         {{'document.table.title1' | translate}}
                                     </label>
-                                    <input type="text" formControlName="titre" name="titre" id="titre"  placeholder="{{'document.table.title1' | translate}}"  class="form-control" required>
+                                    <input type="text" formControlName="titre" name="titre" id="titre"  placeholder="{{'document.table.title1' | translate}}" class="form-control" required>
                                 </div>
                                 <div  *ngIf="submitted && f['titre'].errors"  class="alert alert-danger blockErreur" >
                                     <div *ngIf="f['titre'].errors['required']">{{'document.form.text1' | translate}}</div>
@@ -33,27 +33,15 @@
                         </div>
                         <div class="form-group">
                             <div class="champs">
-                                <label  for="" class="label">
+                                <label  for="_missions" class="label">
                                     {{"document.table.title3" | translate}}
                                 </label>
                                 <mat-form-field class="example-full-width" appearance="fill">
-                                    <mat-label>Missions</mat-label>
-                                    <mat-select [formControl]="missions" multiple>
-                                    <mat-option *ngFor="let missionsDocument of mission$ |async as mission$" [value]="missionsDocument">{{missionsDocument.libelle}}</mat-option>
+                                    <!-- <mat-label>{{'document.table.title5' | translate}}</mat-label> -->
+                                    <mat-select formControlName="_missions" multiple [compareWith]="compareItem">
+                                    <mat-option *ngFor="let missionsDocument of mission$ |async" [value]="missionsDocument">{{missionsDocument.libelle}}</mat-option>
                                     </mat-select>
-                                </mat-form-field> 
-                                <!-- <div class="dropdown w-100">
-                                    <button class="select dropdown-toggle btn" name="missions" id="missions" type="button" id="triggerId" data-toggle="dropdown" aria-haspopup="true"
-                                            aria-expanded="false">
-                                        {{'document.table.title5' | translate}}
-                                    </button>
-                                    <div class="dropdown-menu" aria-labelledby="triggerId" formArrayName="_missions">
-                                        <label class="dropdown-item" for="missions" *ngFor="let missions of (mission$ | async) as mission let i=index">
-                                            <input  type="checkbox" required  [value]="missions.id" [name]="missions.id" [id]="missions.id" (click)="getMissionId(missions.id)" (change)="onCheckMissionChange($event)">
-                                            {{missions.libelle}}
-                                        </label>
-                                    </div>
-                                </div>  -->
+                                </mat-form-field>
                             </div>
                         </div>
                         
@@ -88,7 +76,7 @@
                                             </div>
                                             <div class="modal-body">
                                                 <div class='card-hearder pt-3' >
-                                                    <div class="d-flex align-items-center justify-content-end mr-4 tableTools">
+                                                    <div class="d-flex align-items-center justify-content-end tableTools">
                                                         <div class="form-inline mr-3">
                                                             <form class="example-form">
                                                                 <mat-form-field class="example-full-width" appearance="fill">
@@ -167,7 +155,7 @@
                                                             <tr mat-header-row *matHeaderRowDef="displayedAttributsColumns"></tr>
                                                             <tr mat-row *matRowDef="let row; columns: displayedAttributsColumns;"></tr>
                                                         </table>
-                                                        <mat-paginator style="background-color: rgba(126, 169, 126, 0.79);" [pageSizeOptions]="[2, 5, 10, 20]"
+                                                        <mat-paginator style="background-color: rgba(40, 167, 69, 0.79);" [pageSizeOptions]="[2, 5, 10, 20]"
                                                                        showFirstLastButtons
                                                                        aria-label="Select page of periodic elements">
                                                         </mat-paginator>
@@ -211,7 +199,7 @@
                                                                     <tr mat-header-row *matHeaderRowDef="displayedAttributsColumns"></tr>
                                                                     <tr mat-row *matRowDef="let row; columns: displayedAttributsColumns;"></tr>
                                                                 </table>
-                                                                <mat-paginator style="background-color: rgba(126, 169, 126, 0.79);" [pageSizeOptions]="[5, 10, 20]"
+                                                                <mat-paginator style="background-color: rgba(40, 167, 69, 0.79);" [pageSizeOptions]="[5, 10, 20]"
                                                                                showFirstLastButtons
                                                                                aria-label="Select page of periodic elements">
                                                                 </mat-paginator>
@@ -250,8 +238,8 @@
                     </div>
                 </div>
                 <div class="actionButton">
-                    <button class="btn" routerLink="../../list-documents">{{'lists.button2' | translate}}</button>
-                    <button type="submit" class="btn" (click)="validerCategorieAttribut()">{{btnLibelle}}</button>
+                    <button class="btn" routerLink="../../list-documents"><i class="fa fa-reply mr-1" aria-hidden="true"></i><i class="fa fa-reply mr-1" aria-hidden="true"></i>{{'lists.button2' | translate}}</button>
+                    <button type="submit" class="btn btnValidation" (click)="validerCategorieAttribut()">{{btnLibelle}}</button>
                 </div>
             </form>
         </div>

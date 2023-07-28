@@ -65,7 +65,7 @@ export class InMemDBService implements InMemoryDbService{
             {"fonction":"Service", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"Créer", "lien":"./service-nouveau", "bouton":"false"}  , {"nom":"Rechercher", "lien":"./list-services", "bouton":"false"}]},
             {"fonction":"Ticket", "icone":"fas fa-chart-pie", "actif":"", "elements":[{"nom":"Rechercher", "lien":"list-tickets", "bouton":"false"}, {"nom":"Afficher le panneau", "lien":"panneau-tickets", "bouton":"false"}]},
             {"fonction":"Attribut", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"Créer", "lien":"./attribut-nouveau", "bouton":"false"}  , {"nom":"Rechercher", "lien":"./list-attributs", "bouton":"false"}]},
-           {"fonction":"Mission", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"Créer", "lien":"./mission-nouveau", "bouton":"false"}  , {"nom":"Rechercher", "lien":"./list-missions", "bouton":"false"}, {"nom":"Exécuter", "lien":"./executer-missions", "bouton":"false"}]},
+            {"fonction":"Mission", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"Créer", "lien":"./mission-nouveau", "bouton":"false"}  , {"nom":"Rechercher", "lien":"./list-missions", "bouton":"false"}, {"nom":"Exécuter", "lien":"./executer-missions", "bouton":"false"}]},
             {"fonction":"Documents", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"Créer model documents", "lien":"./document-nouveau", "bouton":"false"}, {"nom":"Rechercher", "lien":"./list-documents", "bouton":"false"}, {"nom":"Creer un exemplaire", "lien":"exemplaire-nouveau/1", "bouton":"false"}, {"nom":"liste des exemplaires", "lien":"./list-exemplaire", "bouton":"false"}]},
             {"fonction":"Famille", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"Créer", "lien":"famille-nouvelle", "bouton":"false"}, {"nom":"Rechercher", "lien":"./list-familles", "bouton":"false"}]},
           ]},
@@ -74,7 +74,7 @@ export class InMemDBService implements InMemoryDbService{
             {"fonction":"Service", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"New", "lien":"./service-nouveau", "bouton":"false"}  , {"nom":"Search", "lien":"./list-services", "bouton":"false"}]},
             {"fonction":"Ticket", "icone":"fas fa-chart-pie", "actif":"", "elements":[{"nom":"Search", "lien":"list-tickets", "bouton":"false"}, {"nom":"View panel", "lien":"panneau-tickets", "bouton":"false"}]},
             {"fonction":"Attribut", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"New", "lien":"./attribut-nouveau", "bouton":"false"}  , {"nom":"Search", "lien":"./list-attributs", "bouton":"false"}]},
-           {"fonction":"Mission", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"New", "lien":"./mission-nouveau", "bouton":"false"}  , {"nom":"Search", "lien":"./list-missions", "bouton":"false"}, {"nom":"Execute", "lien":"./executer-missions", "bouton":"false"}]},
+            {"fonction":"Mission", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"New", "lien":"./mission-nouveau", "bouton":"false"}  , {"nom":"Search", "lien":"./list-missions", "bouton":"false"}, {"nom":"Execute", "lien":"./executer-missions", "bouton":"false"}]},
             {"fonction":"Documents", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"New document's model", "lien":"./document-nouveau", "bouton":"false"}, {"nom":"Search", "lien":"./list-documents", "bouton":"false"}, {"nom":"Creat an exemplaire", "lien":"exemplaire-nouveau/1", "bouton":"false"}, {"nom":"list of exemplaires", "lien":"./list-exemplaire", "bouton":"false"}]},
             {"fonction":"Famille", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"new", "lien":"famille-nouvelle", "bouton":"false"},  {"nom":"Search", "lien":"./list-familles", "bouton":"false"}]},
           ]}
@@ -267,98 +267,98 @@ export class InMemDBService implements InMemoryDbService{
           }
         ];
         let exemplaires:IExemplaireDocument[]=[
-          {id:"1", idDocument:"4", titre:"Formulaire de sortie", description:"Document delivre par le medecin ou un infirmier de l'etablissement",
-            missions:[
-                    {id:"2", libelle:"Consultation Spécialiste", description:"Consultation faite par un médecin", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990") , idLogin: "admin", 
-                      service : {id:"2", libelle:"Laboratoire", etat:"non attribue",dateDerniereModification: new Date("06/08/1990"),dateAttribution: new Date("07/03/1990"),dateFin: new Date("07/03/1990"),nombreTotalAttributions: 20}},
-                    {id:"3", libelle:"Prelevement Labo", description:"Prélévement fait par laboratoire", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"),  idLogin: "admin",
-                      service : {id:"3", libelle:"Consultation", etat:"non attribue",dateDerniereModification: new Date("12/06/1972"),dateAttribution: new Date("07/03/1990"),dateFin: new Date("07/03/1990"),nombreTotalAttributions: 50}},
-                    {id:"4", libelle:"Encaissement", description:"recu de paiement lié à une mission", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"),  idLogin: "admin",
-                      service : {id:"1", libelle:"Pharmacie", etat:"non attribue",dateDerniereModification: new Date("07/03/2000"),dateAttribution: new Date("07/03/1990"),dateFin: new Date("07/03/1990"),nombreTotalAttributions: 6}}
-            ], 
-            attributs:[{id:"14", titre:"Nom", description:"nom de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeString , ordre: 0, obligatoire: false, valeursParDefaut:""},
-                        {id:"4", titre:"age", description:"age de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeDouble , ordre: 0, obligatoire: false, valeursParDefaut:""},
-                        {id:"5", titre:"allergies", description:"allergies de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeTextarea , ordre: 0, obligatoire: false, valeursParDefaut:""},
-                        {id:"1", titre:"taille", description:"taille de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeDouble , ordre: 0, obligatoire: false, valeursParDefaut:""},
-                        {id:"7", titre:"Groupe sangin", description:"Groupe sangin de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeString, ordre:0, obligatoire: false, valeursParDefaut:"A, A+, A-, B, B+, B-, AB, AB+, AB-, O, O+, O-"},
-                        {id:"8", titre:"cicatrice", description:"cicatrice de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeBoolean , ordre: 0, obligatoire: false, valeursParDefaut:""},
-                        {id:"9", titre:"date admission", description:"date admission de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeDate , ordre: 0, obligatoire: false, valeursParDefaut:""},
-                        {id:"10", titre:"date decharge", description:"date decharge", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeDate , ordre: 0, obligatoire: false, valeursParDefaut:""},
-                        {id:"11", titre:"date prochain rendez-vous", description:"date prochain rendez-vous de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeDate , ordre: 0, obligatoire: false, valeursParDefaut:""},
-                        {id:"12", titre:"aprobation du medecin", description:"aprobation du medecin", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeBoolean , ordre: 0, obligatoire: false, valeursParDefaut:""},
-                        {id:"13", titre:"motif de la decharge", description:"motif de la decharge ", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeString , ordre: 0, obligatoire: false, valeursParDefaut:""}
-              ],
-              categories:[{id:"1", nom:"informations personelles", ordre: 1,
-                          listAttributs:[
-                                      {id:"14", titre:"Nom", description:"nom de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeString , ordre: 1, obligatoire: false, valeursParDefaut:""},
-                                      {id:"1", titre:"taille", description:"taille de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: TypeTicket.Double , ordre: 2, obligatoire: false, valeursParDefaut:""},
-                                      {id:"4", titre:"age", description:"age de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: TypeTicket.Boolean , ordre: 3, obligatoire: false, valeursParDefaut:""},
-                          ]},
-                          {id:"2", nom:"informations de sante", ordre: 3,
-                          listAttributs:[
-                                      {id:"5", titre:"allergies", description:"allergies de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: TypeTicket.String , ordre: 2, obligatoire: false, valeursParDefaut:""},
-                                      {id:"7", titre:"Groupe sangin", description:"Groupe sangin de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeString, ordre:0, obligatoire: false, valeursParDefaut:"A, A+, A-, B, B+, B-, AB, AB+, AB-, O, O+, O-"},
-                                      {id:"8", titre:"cicatrice", description:"cicatrice de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: TypeTicket.Tel , ordre: 3, obligatoire: false, valeursParDefaut:""}
-                          ]},
-                          {id:"3", nom:"informations de suivi medical", ordre: 2,
-                          listAttributs:[
-                                      {id:"9", titre:"date admission", description:"date admission de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeDate , ordre: 1, obligatoire: false, valeursParDefaut:""},
-                                      {id:"10", titre:"date decharge", description:"date decharge", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeDate , ordre: 2, obligatoire: false, valeursParDefaut:""},
-                                      {id:"11", titre:"date prochain rendez-vous", description:"date prochain rendez-vous de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeDate , ordre: 3, obligatoire: false, valeursParDefaut:""},
-                                      {id:"12", titre:"aprobation du medecin", description:"aprobation du medecin", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeBoolean , ordre: 4, obligatoire: false, valeursParDefaut:""},
-                                      {id:"13", titre:"motif de la decharge", description:"motif de la decharge ", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeString , ordre: 5, obligatoire: false, valeursParDefaut:""}
-                  ]}
-              ],
-              objetEnregistre:[
-                {key:"4", value:"23"},
-                {key:"5", value:"oignon, lait, mangue"},
-                {key:"1", value:"1.78"},
-                {key:"7", value:"A+"},
-                {key:"8", value:"non"},
-                {key:"9", value:  new Date("07/03/2023")},
-                {key:"10", value:  new Date("17/03/2023")},
-                {key:"11", value:  new Date("17/06/2023")},
-                {key:"12", value:"oui"},
-                {key:"13", value:"Fin traitement"}
-              ]
-          },
-          {id:"2", idDocument:"5", titre:"ordonnance", description:"Document delivre par le medecin ou un infirmier de l'etablissement",
-            missions:[
-                    {id:"1", libelle:"Consultation", description:"Consultation faite par une infirmière", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), idLogin: "admin", 
-                      service : {id:"1", libelle:"Pharmacie", etat:"non attribue",dateDerniereModification: new Date("07/03/2000"),dateAttribution: new Date("07/03/1990"),dateFin: new Date("07/03/1990"),nombreTotalAttributions: 6}},
-                    {id:"2", libelle:"Consultation Spécialiste", description:"Consultation faite par un médecin", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990") , idLogin: "admin", 
-                      service : {id:"2", libelle:"Laboratoire", etat:"non attribue",dateDerniereModification: new Date("06/08/1990"),dateAttribution: new Date("07/03/1990"),dateFin: new Date("07/03/1990"),nombreTotalAttributions: 20}},
-                    {id:"5", libelle:"Resultat Labo", description:"Communiquer les résultats du labo aux patients", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990") , idLogin: "admin",
-                      service : {id:"3", libelle:"Consultation", etat:"non attribue",dateDerniereModification: new Date("12/06/1972"),dateAttribution: new Date("07/03/1990"),dateFin: new Date("07/03/1990"),nombreTotalAttributions: 50}}
-            ], 
-              attributs:[{id:"1", titre:"taille", description:"taille de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeDouble , ordre: 0, obligatoire: false, valeursParDefaut:""},
-                        {id:"6", titre:"teint", description:"teint de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeString , ordre: 0, obligatoire: false, valeursParDefaut:""},
-                        {id:"8", titre:"cicatrice", description:"cicatrice de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeBoolean , ordre: 0, obligatoire: false, valeursParDefaut:""},
-                        {id:"4", titre:"age", description:"age de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeDouble , ordre: 0, obligatoire: false, valeursParDefaut:""},
-                        {id:"7", titre:"Groupe sangin", description:"Groupe sangin de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeString, ordre:0, obligatoire: false, valeursParDefaut:"A, A+, A-, B, B+, B-, AB, AB+, AB-, O, O+, O-"},
-                        {id:"5", titre:"allergies", description:"allergies de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeString , ordre: 0, obligatoire: false, valeursParDefaut:""}
-              ],
-              categories:[{id:"1", nom:"informations personelles", ordre: 1,
-                          listAttributs:[{id:"1", titre:"taille", description:"taille de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: TypeTicket.Double , ordre: 1, obligatoire: false, valeursParDefaut:""},
-                                      {id:"4", titre:"age", description:"age de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: TypeTicket.Boolean , ordre: 2, obligatoire: false, valeursParDefaut:""},
-                                      {id:"6", titre:"teint", description:"teint de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: TypeTicket.Date , ordre: 3, obligatoire: false, valeursParDefaut:""},
-                          ]},
-                          {id:"2", nom:"informations de sante", ordre: 2,
-                          listAttributs:[
-                                      {id:"5", titre:"allergies", description:"allergies de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: TypeTicket.String , ordre: 2, obligatoire: false, valeursParDefaut:""},
-                                      {id:"7", titre:"Groupe sangin", description:"Groupe sangin de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeString, ordre:0, obligatoire: false, valeursParDefaut:"A, A+, A-, B, B+, B-, AB, AB+, AB-, O, O+, O-"},
-                                      {id:"8", titre:"cicatrice", description:"cicatrice de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: TypeTicket.Tel , ordre: 3, obligatoire: false, valeursParDefaut:""}
-                          ]}
-              ],
-              objetEnregistre:[
-                {key:"1", value:"1.70"},
-                {key:"6", value:"noir"},
-                {key:"8", value:"oui"},
-                {key:"4", value:"23"},
-                {key:"7", value:"A+"},
-                {key:"5", value:"oignon, lait, mangue"}
-              ]
-          }
+          // {id:"1", idDocument:"4", titre:"Formulaire de sortie", description:"Document delivre par le medecin ou un infirmier de l'etablissement",
+          //   missions:[
+          //           {id:"2", libelle:"Consultation Spécialiste", description:"Consultation faite par un médecin", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990") , idLogin: "admin", 
+          //             service : {id:"2", libelle:"Laboratoire", etat:"non attribue",dateDerniereModification: new Date("06/08/1990"),dateAttribution: new Date("07/03/1990"),dateFin: new Date("07/03/1990"),nombreTotalAttributions: 20}},
+          //           {id:"3", libelle:"Prelevement Labo", description:"Prélévement fait par laboratoire", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"),  idLogin: "admin",
+          //             service : {id:"3", libelle:"Consultation", etat:"non attribue",dateDerniereModification: new Date("12/06/1972"),dateAttribution: new Date("07/03/1990"),dateFin: new Date("07/03/1990"),nombreTotalAttributions: 50}},
+          //           {id:"4", libelle:"Encaissement", description:"recu de paiement lié à une mission", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"),  idLogin: "admin",
+          //             service : {id:"1", libelle:"Pharmacie", etat:"non attribue",dateDerniereModification: new Date("07/03/2000"),dateAttribution: new Date("07/03/1990"),dateFin: new Date("07/03/1990"),nombreTotalAttributions: 6}}
+          //   ], 
+          //   attributs:[{id:"14", titre:"Nom", description:"nom de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeString , ordre: 0, obligatoire: false, valeursParDefaut:""},
+          //               {id:"4", titre:"age", description:"age de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeDouble , ordre: 0, obligatoire: false, valeursParDefaut:""},
+          //               {id:"5", titre:"allergies", description:"allergies de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeTextarea , ordre: 0, obligatoire: false, valeursParDefaut:""},
+          //               {id:"1", titre:"taille", description:"taille de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeDouble , ordre: 0, obligatoire: false, valeursParDefaut:""},
+          //               {id:"7", titre:"Groupe sangin", description:"Groupe sangin de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeString, ordre:0, obligatoire: false, valeursParDefaut:"A, A+, A-, B, B+, B-, AB, AB+, AB-, O, O+, O-"},
+          //               {id:"8", titre:"cicatrice", description:"cicatrice de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeBoolean , ordre: 0, obligatoire: false, valeursParDefaut:""},
+          //               {id:"9", titre:"date admission", description:"date admission de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeDate , ordre: 0, obligatoire: false, valeursParDefaut:""},
+          //               {id:"10", titre:"date decharge", description:"date decharge", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeDate , ordre: 0, obligatoire: false, valeursParDefaut:""},
+          //               {id:"11", titre:"date prochain rendez-vous", description:"date prochain rendez-vous de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeDate , ordre: 0, obligatoire: false, valeursParDefaut:""},
+          //               {id:"12", titre:"aprobation du medecin", description:"aprobation du medecin", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeBoolean , ordre: 0, obligatoire: false, valeursParDefaut:""},
+          //               {id:"13", titre:"motif de la decharge", description:"motif de la decharge ", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeString , ordre: 0, obligatoire: false, valeursParDefaut:""}
+          //     ],
+          //     categories:[{id:"1", nom:"informations personelles", ordre: 1,
+          //                 listAttributs:[
+          //                             {id:"14", titre:"Nom", description:"nom de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeString , ordre: 1, obligatoire: false, valeursParDefaut:""},
+          //                             {id:"1", titre:"taille", description:"taille de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: TypeTicket.Double , ordre: 2, obligatoire: false, valeursParDefaut:""},
+          //                             {id:"4", titre:"age", description:"age de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: TypeTicket.Boolean , ordre: 3, obligatoire: false, valeursParDefaut:""},
+          //                 ]},
+          //                 {id:"2", nom:"informations de sante", ordre: 3,
+          //                 listAttributs:[
+          //                             {id:"5", titre:"allergies", description:"allergies de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: TypeTicket.String , ordre: 2, obligatoire: false, valeursParDefaut:""},
+          //                             {id:"7", titre:"Groupe sangin", description:"Groupe sangin de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeString, ordre:0, obligatoire: false, valeursParDefaut:"A, A+, A-, B, B+, B-, AB, AB+, AB-, O, O+, O-"},
+          //                             {id:"8", titre:"cicatrice", description:"cicatrice de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: TypeTicket.Tel , ordre: 3, obligatoire: false, valeursParDefaut:""}
+          //                 ]},
+          //                 {id:"3", nom:"informations de suivi medical", ordre: 2,
+          //                 listAttributs:[
+          //                             {id:"9", titre:"date admission", description:"date admission de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeDate , ordre: 1, obligatoire: false, valeursParDefaut:""},
+          //                             {id:"10", titre:"date decharge", description:"date decharge", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeDate , ordre: 2, obligatoire: false, valeursParDefaut:""},
+          //                             {id:"11", titre:"date prochain rendez-vous", description:"date prochain rendez-vous de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeDate , ordre: 3, obligatoire: false, valeursParDefaut:""},
+          //                             {id:"12", titre:"aprobation du medecin", description:"aprobation du medecin", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeBoolean , ordre: 4, obligatoire: false, valeursParDefaut:""},
+          //                             {id:"13", titre:"motif de la decharge", description:"motif de la decharge ", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeString , ordre: 5, obligatoire: false, valeursParDefaut:""}
+          //         ]}
+          //     ],
+          //     objetEnregistre:[
+          //       {key:"4", value:"23"},
+          //       {key:"5", value:"oignon, lait, mangue"},
+          //       {key:"1", value:"1.78"},
+          //       {key:"7", value:"A+"},
+          //       {key:"8", value:"non"},
+          //       {key:"9", value:  new Date("07/03/2023")},
+          //       {key:"10", value:  new Date("17/03/2023")},
+          //       {key:"11", value:  new Date("17/06/2023")},
+          //       {key:"12", value:"oui"},
+          //       {key:"13", value:"Fin traitement"}
+          //     ]
+          // },
+          // {id:"2", idDocument:"5", titre:"ordonnance", description:"Document delivre par le medecin ou un infirmier de l'etablissement",
+          //   missions:[
+          //           {id:"1", libelle:"Consultation", description:"Consultation faite par une infirmière", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), idLogin: "admin", 
+          //             service : {id:"1", libelle:"Pharmacie", etat:"non attribue",dateDerniereModification: new Date("07/03/2000"),dateAttribution: new Date("07/03/1990"),dateFin: new Date("07/03/1990"),nombreTotalAttributions: 6}},
+          //           {id:"2", libelle:"Consultation Spécialiste", description:"Consultation faite par un médecin", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990") , idLogin: "admin", 
+          //             service : {id:"2", libelle:"Laboratoire", etat:"non attribue",dateDerniereModification: new Date("06/08/1990"),dateAttribution: new Date("07/03/1990"),dateFin: new Date("07/03/1990"),nombreTotalAttributions: 20}},
+          //           {id:"5", libelle:"Resultat Labo", description:"Communiquer les résultats du labo aux patients", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990") , idLogin: "admin",
+          //             service : {id:"3", libelle:"Consultation", etat:"non attribue",dateDerniereModification: new Date("12/06/1972"),dateAttribution: new Date("07/03/1990"),dateFin: new Date("07/03/1990"),nombreTotalAttributions: 50}}
+          //   ], 
+          //     attributs:[{id:"1", titre:"taille", description:"taille de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeDouble , ordre: 0, obligatoire: false, valeursParDefaut:""},
+          //               {id:"6", titre:"teint", description:"teint de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeString , ordre: 0, obligatoire: false, valeursParDefaut:""},
+          //               {id:"8", titre:"cicatrice", description:"cicatrice de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeBoolean , ordre: 0, obligatoire: false, valeursParDefaut:""},
+          //               {id:"4", titre:"age", description:"age de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeDouble , ordre: 0, obligatoire: false, valeursParDefaut:""},
+          //               {id:"7", titre:"Groupe sangin", description:"Groupe sangin de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeString, ordre:0, obligatoire: false, valeursParDefaut:"A, A+, A-, B, B+, B-, AB, AB+, AB-, O, O+, O-"},
+          //               {id:"5", titre:"allergies", description:"allergies de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeString , ordre: 0, obligatoire: false, valeursParDefaut:""}
+          //     ],
+          //     categories:[{id:"1", nom:"informations personelles", ordre: 1,
+          //                 listAttributs:[{id:"1", titre:"taille", description:"taille de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: TypeTicket.Double , ordre: 1, obligatoire: false, valeursParDefaut:""},
+          //                             {id:"4", titre:"age", description:"age de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: TypeTicket.Boolean , ordre: 2, obligatoire: false, valeursParDefaut:""},
+          //                             {id:"6", titre:"teint", description:"teint de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: TypeTicket.Date , ordre: 3, obligatoire: false, valeursParDefaut:""},
+          //                 ]},
+          //                 {id:"2", nom:"informations de sante", ordre: 2,
+          //                 listAttributs:[
+          //                             {id:"5", titre:"allergies", description:"allergies de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: TypeTicket.String , ordre: 2, obligatoire: false, valeursParDefaut:""},
+          //                             {id:"7", titre:"Groupe sangin", description:"Groupe sangin de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeString, ordre:0, obligatoire: false, valeursParDefaut:"A, A+, A-, B, B+, B-, AB, AB+, AB-, O, O+, O-"},
+          //                             {id:"8", titre:"cicatrice", description:"cicatrice de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: TypeTicket.Tel , ordre: 3, obligatoire: false, valeursParDefaut:""}
+          //                 ]}
+          //     ],
+          //     objetEnregistre:[
+          //       {key:"1", value:"1.70"},
+          //       {key:"6", value:"noir"},
+          //       {key:"8", value:"oui"},
+          //       {key:"4", value:"23"},
+          //       {key:"7", value:"A+"},
+          //       {key:"5", value:"oignon, lait, mangue"}
+          //     ]
+          // }
         ];
         let famille:IFamille[]=[
           {id:"1", libelle:"transfusion", description:"sang", etat:"gl"},
