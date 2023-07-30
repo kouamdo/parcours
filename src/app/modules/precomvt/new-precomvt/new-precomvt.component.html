@@ -1,7 +1,7 @@
 <div id="mainSection">
   <div class="card block">
     <div class="card-body p-0 m-0">
-      <form [formGroup]="forme" (ngSubmit)="onSubmit(forme.value)" *ngIf="forme" g-reflect-forme="[object Object]" class="ng-valid ng-untouched ng-pristine ng-submitted">
+      <form [formGroup]="forme" (ngSubmit)="onSubmit(forme.value)" *ngIf="forme" #localForm="ngForm" >
         <div *ngIf="steps != 2 && steps != 3" class="w-100 pt-4 pb-4 entete">Nouvelle Préconisation</div>
           <div *ngIf="steps==2" class="w-100 pt-4 pb-4 entete1" >Assigner aux Familles</div>
           <div *ngIf="steps==3" class="w-100 pt-4 pb-4 entete2">Assigner Une Ressource</div>
@@ -12,13 +12,16 @@
                 <div class="form-group">
                   <div>
                     <div class="champs">
-                      <label for="libelle" class="label">
+                      <label for="libelle" class="label" class="libe">
                         libelle
                       </label>
-                      <input type="text" formControlName="libelle" name="libelle" id="libelle"  placeholder="{{'ressource.table.title1' | translate}}"  class="form-control" required>
+                      <input type="text" formControlName="libelle"  name="libelle" id="libelle"  placeholder="libelle"  class="form-control">
+                      <div  class="form text text-danger" id="libe" *ngIf="forme.get('libelle')?.touched && forme.get('libelle')?.hasError('required')">libellé is required </div>
                     </div>
+
                   </div>
               </div>
+
 
                 <div class="form-group" id="eta">
                   <div>
@@ -27,6 +30,7 @@
                           Etat
                         </label>
                         <input  type="checkbox" formControlName="etat" name="etat" class="form-control" id="etat" placeholder="" required checked>
+
                       </div>
                   </div>
                 </div>
@@ -41,6 +45,7 @@
                         {{ typeM }}
                       </option>
                     </select>
+
                   </div>
                 </div>
             </div>
@@ -50,13 +55,15 @@
         <div *ngIf="steps == 2" class="form-group pt-0 pl-2 pr-2 pb-0">
           <div class="champs">
             <label for="famille" class="label">
-              famille
+              Famille
             </label>
             <mat-form-field class="example-full-width" appearance="fill">
               <mat-label>Famille</mat-label>
               <mat-select formControlName="famille" multiple [compareWith]="compareItem">
                 <mat-option *ngFor="let membre of familles$ |async" [value]="membre">{{membre.libelle}}</mat-option>
               </mat-select>
+              <mat-error *ngIf="" class="alert">
+              </mat-error>
             </mat-form-field>
 
           </div>
@@ -81,34 +88,34 @@
           <div class="form-group">
             <div class="champs">
                 <label  for="quantiteMin"  class="label" >
-                  Qte Min
+                  Quantité Min
                 </label>
-                <input type="number" formControlName="quantiteMin" name="quantiteMin" class="form-control" id="quantiteMin" placeholder="Entrer la quantite minimale" >
+                <input  type="number" formControlName="quantiteMin" name="quantiteMin" class="form-control" id="quantiteMin" placeholder="Entrer la quantite minimale" >
             </div>
           </div>
 
           <div class="form-group">
               <div class="champs">
                   <label  for="quantiteMax"  class="label" >
-                    Qte Max
+                    Quantité Max
                   </label>
-                  <input type="number" formControlName="quantiteMax" name="quantiteMax" class="form-control" id="quantiteMax" placeholder="Entrer la quantite miximale" >
+                  <input type="number"   formControlName="quantiteMax" name="quantiteMax" class="form-control" id="quantiteMax" placeholder="Entrer la quantite miximale" >
               </div>
           </div>
 
           <div class="form-group">
             <div class="champs">
               <label  for="montantMax"  class="label" >
-                Mt Min
+                Montant Min
               </label>
-              <input type="number" formControlName="montantMax" name="montantMax" id="montantMax" placeholder="Entrer le montant minimal" class="form-control" >
+              <input type="number"  formControlName="montantMax" name="montantMax" id="montantMax" placeholder="Entrer le montant minimal" class="form-control" >
             </div>
           </div>
 
           <div class="form-group">
             <div class="champs">
                 <label  for="montantMin"  class="label" >
-                  Mt Max
+                  Montant Max
                 </label>
                 <input type="number" formControlName="montantMin" name="montantMin" class="form-control" id="montantMin" placeholder="Entrer le montant miximal" >
             </div>
@@ -119,7 +126,7 @@
               <label  for="fournisseur"  class="label" >
                 Fournisseur
               </label>
-              <select class="form-control" formControlName="fournisseur"  name="fournisseur" id="fournisseur" ngModel >
+              <select  formControlName="fournisseur"  name="fournisseur" id="fournisseur">
                 <option>Selectionnez un fournisseur</option>
                 <option>EVC</option>
                 <option>ACC</option>
@@ -133,18 +140,70 @@
           <button type="btn" class="btn" routerLink="../list-precomvts">Annuler</button>
           <button type="submit" class="btn" (click)="steps = 2; enregistrerValeurPrecomvtqte(forme.value)">Famille</button>
           <button type="submit" class="btn" (click)="steps = 3; enregistrerValeurPrecomvtqte(forme.value)">Ressource</button>
-          <button type="submit" class="btn" *ngIf="steps != 4" (click)="steps = 4">Enregistrer</button>
+
         </div>
       </form>
     </div>
   </div>
-  <div id="rigthSection" class="card">
+
+    <div id="rigthSection" class="card">
     <div class="titleBlock" id="titleBlock">
       <h2>Etape</h2>
     </div>
     <div class="contentBlock">
-      <div *ngFor="let elt of eltsPreco let i=index">
-        <input type="button" id="{{i}}" value="{{elt.libelle}}" (click)="chargerValeurPrecoMvt(i)"><br/>
+      <div *ngFor="let elt of eltsPreco let i=index" class="color">
+            <div *ngIf="i==0 || steps == 1">
+                    <label class="info"><input type="button" id="{{i}}" value="{{elt.libelle}}" (click)="chargerValeurPrecoMvt(i)"><br/></label>
+                    <input type="button" id="{{i}}" value="{{elt.etat}}" (click)="chargerValeurPrecoMvt(i)"><br/>
+                  <div class="suppression">
+                    <div>
+                        <button class="" title=""  id="left" >
+                          <i class="fa fa-pen text-info" aria-hidden="true"  (click)="chargerValeurPrecoMvt(i)"></i>
+                      </button>
+                      <button class="" title="" id="right">
+                        <i class="fa fa-times-circle text-danger" aria-hidden="true" (click)="chargerValeurPrecoMvt(i)"></i>
+                    </button>
+                  </div>
+                 </div>
+            </div>
+      </div>
+
+       <div *ngFor="let elt of eltsPreco let i=index" class="color1">
+        <div *ngIf="">
+          <label class="info"><input type="button" id="{{i}}" value="{{elt.precomvtqte[i].fournisseur}}" (click)="chargerValeurPrecoMvt(i)"><br/></label>
+        <input type="button" id="{{i}}" value="{{elt.precomvtqte[i].fournisseur}}" (click)="chargerValeurPrecoMvt(i)"><br/>
+        <div class="suppression1">
+          <div>
+            <button class="" title=""  id="left" >
+             <i class="fa fa-pen text-info" aria-hidden="true"  (click)="chargerValeurPrecoMvt(i)"></i>
+          </button>
+          <button class="" title="" id="right">
+            <i class="fa fa-times-circle text-danger" aria-hidden="true" (click)="chargerValeurPrecoMvt(i)"></i>
+        </button>
+      </div>
+        </div>
+      </div>
+      </div>--><!--
+
+       <!-- <div *ngFor="let elt of eltsPreco let i=index" class="color2">
+        <div *ngIf="steps == 2">
+          <label class="info"><input type="button" id="{{i}}" value="{{elt.precomvtqte[i].fournisseur}}" (click)="chargerValeurPrecoMvt(i)"><br/></label>
+        <input type="button" id="{{i}}" value="{{elt.precomvtqte[i].fournisseur}}" (click)="chargerValeurPrecoMvt(i)"><br/>
+        <div class="suppression2">
+          <div>
+            <button class="" title=""  id="left" >
+              <i class="fa fa-pen text-info" aria-hidden="true"  (click)="chargerValeurPrecoMvt(i)"></i>
+          </button>
+          <button class="" title="" id="right">
+            <i class="fa fa-times-circle text-danger" aria-hidden="true" (click)="chargerValeurPrecoMvt(i)"></i>
+        </button>
+      </div>
+        </div>
+      </div>
+      </div>-->
+
+      <div class="actionButtons">
+        <button type="submit" class="btn" routerLink="../list-precomvts" *ngIf="steps != 4" (click)="steps = 4">Enregistrer</button>
       </div>
     </div>
   </div>

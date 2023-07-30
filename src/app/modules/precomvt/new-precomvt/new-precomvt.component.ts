@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { DatePipe } from '@angular/common';
-import {  FormBuilder, FormControl, FormGroup, FormGroupDirective, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import {  FormBuilder, FormControl, FormGroup, FormGroupDirective, FormsModule, NgForm, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import {MatSelectModule} from '@angular/material/select';
 import {MatFormFieldModule} from '@angular/material/form-field';
@@ -15,11 +15,14 @@ import { RessourcesService } from 'src/app/services/ressources/ressources.servic
 import { FamillesService } from 'src/app/services/familles/familles.service';
 import { IPrecoMvtQte } from 'src/app/modele/precomvtqte';
 import { TypeMvt } from 'src/app/modele/type-mvt';
+import { ErrorStateMatcher, ShowOnDirtyErrorStateMatcher } from '@angular/material/core';
 
 @Component({
   selector: 'app-new-precomvt',
   templateUrl: './new-precomvt.component.html',
-  styleUrls: ['./new-precomvt.component.scss']
+  styleUrls: ['./new-precomvt.component.scss'],
+  providers:[{provide:ErrorStateMatcher,
+  useClass:ShowOnDirtyErrorStateMatcher}]
 })
 
 export class NewPrecomvtComponent implements OnInit {
@@ -27,19 +30,20 @@ export class NewPrecomvtComponent implements OnInit {
 
   //precomvt : IPrecoMvt|undefined;
   forme: FormGroup;
-  submitted: boolean=false;
+  //submitted: boolean=false;
   //permet d'identifier la section du formulaire à ouvrir
   steps:any =1;
 
-  myControl = new FormControl<string | IRessource>('');
+ // myControl = new FormControl<string | IRessource>('');
   filteredOptions: IRessource[] | undefined;
 
   familles$:Observable<IFamille[]>=EMPTY;
   typeMvt: string[] = [TypeMvt.Ajout,TypeMvt.Neutre,TypeMvt.Reduire];
-  famille = new FormControl<string | IFamille[]>('');
+  //famille = new FormControl<string | IFamille[]>('');
 
  //représente l'ensemble des éléments de précoMvtQte en cours de création
  eltsPreco : IPrecoMvt[] = [];
+ eltsPrecoMvtQte : IPrecoMvtQte[] = [];
  //précise l'index de eltPreco qu'on souhaite modifier
  indexModification = -1;
 
@@ -51,22 +55,23 @@ export class NewPrecomvtComponent implements OnInit {
   precomvtqte:[]
  };
 
-
+ //submitted=false;
   @ViewChild(FormGroupDirective)
   formDirective!: FormGroupDirective;
   //settings: { idField: string; textField: string; allowSearchFilter: boolean; } | undefined;
 
+
   constructor(private formBuilder:FormBuilder,private serviceFamille:FamillesService,private ressourceService:RessourcesService ,private precoMvtService:PrecoMvtsService,private serviceRessource:RessourcesService,private router:Router, private infosPath:ActivatedRoute, private datePipe: DatePipe) {
     this.forme = this.formBuilder.group({
-      libelle: new FormControl(),
+      libelle: new FormControl('',[Validators.required,Validators.minLength(1), Validators.maxLength(50)]),
       etat: new FormControl(),
       type: new FormControl(),
-      ressource: this.myControl,
+      ressource: new FormControl<string | IRessource>(''),
       quantiteMin:new FormControl(),
       quantiteMax:new FormControl(),
       montantMin:new FormControl(),
       montantMax:new FormControl(),
-      famille : this.famille,
+      famille :  new FormControl<string | IFamille[]>(''),
       fournisseur:new FormControl()
     });
 
@@ -77,7 +82,8 @@ export class NewPrecomvtComponent implements OnInit {
     this.familles$ = this.getAllFamilles();
 
     //code autocompletion qui retourne les éléments du type déclaré
-    this.myControl.valueChanges.subscribe(
+    //this.myControl.valueChanges.subscribe(
+      this.forme.controls["ressource"].valueChanges.subscribe(
       value => {
         const libelle = typeof value === 'string' ? value : value?.libelle;
         if(libelle != undefined && libelle?.length >0){
@@ -94,7 +100,10 @@ export class NewPrecomvtComponent implements OnInit {
       }
     );
 
+
   }
+
+
 
 
  get f(){
@@ -106,11 +115,18 @@ private getAllFamilles(){
     }
 
  //fonction onSubmit debut
-onSubmit(precomvtInput:any){
-this.submitted=true;
-if(this.forme.invalid) return;
+/*onSubmit(){
+//this.submitted=true;
+//if(this.forme.invalid) return;
 
-}
+}*/
+
+onSubmit(precomvtInput:any){
+ console.log (this.forme.value)
+  }
+get libelle():FormControl{return this.forme.get('libelle')as FormControl}
+get etat():FormControl{return this.forme.get('etat')as FormControl}
+get type():FormControl{return this.forme.get('type')as FormControl}
  //fonction onSubmit fin
 
 
@@ -131,8 +147,9 @@ reset():void{
   * @returns
   */
   enregistrerValeurPrecomvtqte(precomvtInput:any){
+ //console.log (this.submitted=true);
   //this.submitted=true;
-  //if(this.forme.invalid) return;
+ //if(this.forme.invalid) return;
   console.log("enregistrerValeurPrecomvtqte indexModification : " + this.indexModification)
   //sauvegarde des valeurs de precoMvt <=> premier ecran
   if(precomvtInput.libelle != null && precomvtInput.libelle!=""){
@@ -192,7 +209,7 @@ reset():void{
     else if(precoTmp.precomvtqte[0].famille!= undefined && precoTmp.precomvtqte[0].famille!=null && precoTmp.precomvtqte[0].famille.length>0){
       this.steps = 2;
       this.forme.controls["famille"].setValue(precoTmp.precomvtqte[0].famille);
-      this.famille.setValue(precoTmp.precomvtqte[0].famille);
+      //this.famille.setValue(precoTmp.precomvtqte[0].famille);
       //this.forme.controls["id"].setValue(precoTmp.precomvtqte[0].id);
       this.forme.controls["montantMax"].setValue(precoTmp.precomvtqte[0].montantMax);
       this.forme.controls["montantMin"].setValue(precoTmp.precomvtqte[0].montantMin);
@@ -286,5 +303,8 @@ reset():void{
     precomvtTemp.precomvtqte.push(premvtqte);
     return precomvtTemp;
   }
+  compareItem(famille1: IFamille, famille2: IFamille) {
+    return famille2 && famille1 ? famille2.id === famille1.id : famille2 === famille1;
+}
 
 }
