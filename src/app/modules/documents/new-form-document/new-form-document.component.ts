@@ -19,6 +19,7 @@ import { ModalCategoriesComponent } from '../../shared/modal-categories/modal-ca
 import {v4 as uuidv4} from 'uuid';
 import { ICategorieAffichage } from 'src/app/modele/categorie-affichage';
 import { TypeTicket } from 'src/app/modele/type-ticket';
+import { DonneesEchangeService } from 'src/app/services/donnees-echange/donnees-echange.service';
 
 
 @Component({
@@ -76,7 +77,9 @@ export class NewFormDocumentComponent implements OnInit {
   paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private router:Router, private formBuilder: FormBuilder, private infosPath:ActivatedRoute, private serviceDocument:DocumentService, private serviceMission:MissionsService, private serviceAttribut:AttributService,  private _liveAnnouncer: LiveAnnouncer, private dialogDef : MatDialog) {
+  constructor(private router:Router, private formBuilder: FormBuilder, private infosPath:ActivatedRoute,
+     private serviceDocument:DocumentService, private serviceMission:MissionsService, private serviceAttribut:AttributService, 
+      private _liveAnnouncer: LiveAnnouncer, private donneeDocCatService:DonneesEchangeService, private dialogDef : MatDialog) {
     this.forme = this.formBuilder.group({
       _missions :  new FormControl<string | IMission[]>(''),
       _attributs :  new FormArray([]),
@@ -148,9 +151,8 @@ export class NewFormDocumentComponent implements OnInit {
             )
           }
         )
-            this.TABLE_CATEGORIE_AFFICHAGE_TEMP = categorieAfficheFinal
-            console.log("contenu de document.categories", this.document.categories)
-            console.log("contenu de TABLE_CATEGORIE_AFFICHAGE_TEMP", this.TABLE_CATEGORIE_AFFICHAGE_TEMP)   
+        //sauvegarde dans le service pour le communiquer à la modale
+        this.donneeDocCatService.dataDocumentCategorie = categorieAfficheFinal
       });
 
     }
@@ -173,6 +175,9 @@ export class NewFormDocumentComponent implements OnInit {
   }
 
   openCategorieDialog(){
+    //envoi des données à la fenetre enfant
+   // this.donneeDocCatService.dataDocumentCategorie =  this.TABLE_CATEGORIE_AFFICHAGE_TEMP;
+
     this.dialogDef.open(ModalCategoriesComponent, 
     {
       width:'100%',
@@ -180,7 +185,6 @@ export class NewFormDocumentComponent implements OnInit {
       exitAnimationDuration:'1000ms',
       data:{
         dataSourceAttributDocument : this.dataSourceAttributDocument,
-        dataICategorieAffiche : this.TABLE_CATEGORIE_AFFICHAGE_TEMP,
         name : 'adeline'
       }
     }
@@ -237,7 +241,9 @@ export class NewFormDocumentComponent implements OnInit {
     let tmpCatAtt = new Map(); 
     let categorieAttributsFinal : ICategoriesAttributs[] = [];
 
-    this.TABLE_CATEGORIE_AFFICHAGE_TEMP.forEach(
+    //récupération des données du service
+    this.TABLE_CATEGORIE_AFFICHAGE_TEMPO = this.donneeDocCatService.dataDocumentCategorie;
+    this.TABLE_CATEGORIE_AFFICHAGE_TEMPO.forEach(
       objet => {
         let categorieAttributTemp : ICategoriesAttributs = {
           id: '',
