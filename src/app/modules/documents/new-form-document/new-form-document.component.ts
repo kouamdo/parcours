@@ -69,6 +69,8 @@ export class NewFormDocumentComponent implements OnInit {
     listAttributs: []
   }
   TABLE_CATEGORIE_AFFICHAGE_TEMP: ICategorieAffichage[] = []; 
+ // ELEMENTS_TABLE_CATEGORIE_ATTRIBUTS: ICategoriesAttributs[] = []; 
+  TABLE_CATEGORIE_AFFICHAGE_TEMPO: ICategorieAffichage[] = []; 
 
   // tableau contenant les categories creees
   tableFinaleCategoriesAttributs: ICategoriesAttributs[] = []; 
