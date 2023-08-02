@@ -43,6 +43,7 @@ export class NewExemplaireComponent implements OnInit {
   controlExemplaire = new FormControl;
   typeAttribut : string = "";
   idDocument : string | null = "";
+  idExemplaire : string | null = "";
   idPatientCourant: string | null= "";
   nomPatientCourant: string | null = "";
   
@@ -65,15 +66,15 @@ export class NewExemplaireComponent implements OnInit {
     this.nomPatientCourant = sessionStorage.getItem("nomPatientCourant");
 
     // recuperation de l'id de l'exemplaire
-    let idExemplaire = this.infosPath.snapshot.paramMap.get('modify/idExemplaire'); console.log(idExemplaire);
+    this.idExemplaire = this.infosPath.snapshot.paramMap.get('idExemplaire'); console.log("id de l'exemplaire ", this.idExemplaire);
 
     // recuperation de l'id du document
-    this.idDocument = this.infosPath.snapshot.paramMap.get('idDocument'); console.log(this.idDocument);
+    this.idDocument = this.infosPath.snapshot.paramMap.get('idDocument'); console.log("l'id du document", this.idDocument);
 
-    if((idExemplaire != null) && idExemplaire !==''){
+    if((this.idExemplaire != null) && this.idExemplaire !==''){
       this.btnLibelle="Modifier";
       this.titre="Document à Modifier";
-      this.serviceExemplaire.getExemplaireDocumentById(idExemplaire).subscribe(
+      this.serviceExemplaire.getExemplaireDocumentById(this.idExemplaire).subscribe(
         x => {
           this.exemplaire = x; console.log(this.exemplaire);
           this.serviceDocument.getDocumentById(x.idDocument).subscribe(
@@ -91,12 +92,28 @@ export class NewExemplaireComponent implements OnInit {
 
                   // })
                    //exemplaireDocument.controls[index].value // = objetCleValeur.value
-                  console.log('id de atr ', a.id);
                   this.exemplaire.objetEnregistre.push(objetCleValeur)
                 }
               )
             }
-        )   
+        )
+        this.exemplaire.attributs.forEach(
+          x => {
+            // this._exemplaireDocument.push(this.formBuilder.control(''));
+          }
+        )
+        this.serviceDocument.getDocumentById(this.exemplaire.idDocument).subscribe(
+          document =>{
+            this.document = document
+            document.attributs.forEach(
+              x => {
+                this._exemplaireDocument.push(this.formBuilder.control(''));
+              }
+            )
+          }
+        )
+      
+        console.log("l'exemplaire est : ", this.exemplaire);   
       });
     }
     if(this.idDocument){
