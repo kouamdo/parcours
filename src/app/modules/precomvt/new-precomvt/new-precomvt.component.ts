@@ -30,7 +30,7 @@ export class NewPrecomvtComponent implements OnInit {
 
   //precomvt : IPrecoMvt|undefined;
   forme: FormGroup;
-  //submitted: boolean=false;
+  submitted: boolean=false;
   //permet d'identifier la section du formulaire à ouvrir
   steps:any =1;
 
@@ -115,15 +115,26 @@ private getAllFamilles(){
     }
 
  //fonction onSubmit debut
-/*onSubmit(){
-//this.submitted=true;
-//if(this.forme.invalid) return;
-
-}*/
-
 onSubmit(precomvtInput:any){
+this.submitted=true;
+if(this.forme.invalid) return;
+}
+
+/*onSubmit(precomvtInput:any){
  console.log (this.forme.value)
-  }
+
+ if(this.PrecoMvt= undefined){
+  precomvtTemp.id = this.precomvt.id
+}
+precomvtTemp.precomvtqte = this.premvtqte
+ console.log('voici une precomvt : ',  precomvtTemp.precomvtqte)
+    this.precoMvtService.ajouterPrecomvt(precomvtTemp).subscribe(
+      object => {
+        this.router.navigate(['list-precomvts']);
+      },
+    )
+  }*/
+
 get libelle():FormControl{return this.forme.get('libelle')as FormControl}
 get etat():FormControl{return this.forme.get('etat')as FormControl}
 get type():FormControl{return this.forme.get('type')as FormControl}
@@ -147,9 +158,9 @@ reset():void{
   * @returns
   */
   enregistrerValeurPrecomvtqte(precomvtInput:any){
- //console.log (this.submitted=true);
+  //console.log (this.submitted=true);
   //this.submitted=true;
- //if(this.forme.invalid) return;
+  //if(this.forme.invalid) return;
   console.log("enregistrerValeurPrecomvtqte indexModification : " + this.indexModification)
   //sauvegarde des valeurs de precoMvt <=> premier ecran
   if(precomvtInput.libelle != null && precomvtInput.libelle!=""){
