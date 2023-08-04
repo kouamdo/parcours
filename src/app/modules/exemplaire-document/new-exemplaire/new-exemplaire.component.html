@@ -19,8 +19,7 @@
                             <input *ngIf="(attribut.type != 'textarea') && (attribut.type != TypeRadio) && (attribut.type != TypeBoolean)" [type]="attribut.type" class="form-control"  formArrayName="_exemplaireDocument" name="'id '+{{attribut.id}}" id="{{attribut.id}} + 'id'" placeholder="entrer la valeur ici" >
                             <textarea *ngIf="attribut.type == 'textarea'" class="form-control"  formArrayName="_exemplaireDocument" [name]="attribut.id" [id]="attribut.id" placeholder="entrer la valeur ici" ></textarea>
                             <select  class="form-control" *ngIf="(attribut.type == TypeRadio) || (attribut.type == TypeBoolean)"  formArrayName="_exemplaireDocument" [name]="attribut.id" [id]="attribut.id">
-                                <option value="oui" >oui</option>
-                                <option value="non">non</option>
+                                <option value="oui" >{{attribut.valeursParDefaut}}</option>
                             </select>
                         </div>
                     </div>

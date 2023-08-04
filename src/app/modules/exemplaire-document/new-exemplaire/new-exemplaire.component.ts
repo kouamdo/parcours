@@ -77,43 +77,25 @@ export class NewExemplaireComponent implements OnInit {
       this.serviceExemplaire.getExemplaireDocumentById(this.idExemplaire).subscribe(
         x => {
           this.exemplaire = x; console.log(this.exemplaire);
-          this.serviceDocument.getDocumentById(x.idDocument).subscribe(
-            d  => {
-              const exemplaireDocument = this._exemplaireDocument;
-              this.document.attributs.forEach(
-                a => {
-                  const objetCleValeur : ObjetCleValeur={
-                    key: "",
-                    value: ""
-                  }
-                  //const index = this.document.attributs.indexOf(a)
-                  objetCleValeur.key = a.id
-                  // this.formeExemplaire.setValue({
-
-                  // })
-                   //exemplaireDocument.controls[index].value // = objetCleValeur.value
-                  this.exemplaire.objetEnregistre.push(objetCleValeur)
-                }
-              )
+          const exemplaireDocument = this._exemplaireDocument;
+          this.serviceDocument.getDocumentById(this.exemplaire.idDocument).subscribe(
+            document =>{
+              this.document = document
             }
-        )
-        this.exemplaire.attributs.forEach(
-          x => {
-            // this._exemplaireDocument.push(this.formBuilder.control(''));
-          }
-        )
-        this.serviceDocument.getDocumentById(this.exemplaire.idDocument).subscribe(
-          document =>{
-            this.document = document
-            document.attributs.forEach(
-              x => {
-                this._exemplaireDocument.push(this.formBuilder.control(''));
-              }
-            )
-          }
-        )
-      
-        console.log("l'exemplaire est : ", this.exemplaire);   
+          )
+          this.exemplaire.objetEnregistre.forEach(
+            element => {
+              // let valueControl = new FormControl()
+              // valueControl.setValue(element.value)
+              // this._exemplaireDocument.push(valueControl)
+              
+              this.addAttributs()
+              
+              const index = this.exemplaire.objetEnregistre.indexOf(element)
+              this._exemplaireDocument.controls[index].setValue(element.value)
+          });
+        console.log("l'exemplaire est : ", this.exemplaire); 
+        console.log("les controles du formulaire de l'exemplaire sont : ", this._exemplaireDocument.controls.values);   
       });
     }
     if(this.idDocument){
@@ -123,6 +105,12 @@ export class NewExemplaireComponent implements OnInit {
           document.attributs.forEach(
             x => {
               this.addAttributs()
+              const objetCleValeur : ObjetCleValeur={
+                key: "",
+                value: ""
+              }
+              objetCleValeur.key = x.id
+              this.exemplaire.objetEnregistre.push(objetCleValeur)
             }
           )
         }
@@ -156,6 +144,15 @@ export class NewExemplaireComponent implements OnInit {
   get f(){
     return this.formeExemplaire.controls;
   }
+
+  /**
+   * methode qui permet d'extraire le premier element d'une chaine de caractere
+   * Elle permettra d'afficher les valeurs par defaut des attributs un a un
+   * @param chaine 
+   */
+  couperLaChaine(chaine : string){
+    chaine.slice
+  }
   onSubmit(exemplaireInput:any){
     const exemplaireDocument = this._exemplaireDocument;
     console.log('Exemplaire ', exemplaireDocument.value);
@@ -174,7 +171,7 @@ export class NewExemplaireComponent implements OnInit {
       categories: this.document.categories
     }
     exemplaireTemp.objetEnregistre = this.exemplaire.objetEnregistre
-      
+    
     console.log("les objets cles-valeur : " + exemplaireTemp.objetEnregistre[0].key)
     console.log("l'id du document' : " + exemplaireTemp.idDocument)
     this.serviceExemplaire.ajouterExemplaireDocument(exemplaireTemp).subscribe(
