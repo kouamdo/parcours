@@ -363,9 +363,9 @@ export class InMemDBService implements InMemoryDbService{
           {id:"5", libelle:"transfusion", description:"sang", etat:"gl"},
       ];
       let distributeur:IDistributeur[]=[
-        {id:"1", raisonSocial:"malade", adresse:"Dla", telephone:"655554488", mail: "ngong@yad.fr"},
-        {id:"2", raisonSocial:"fatigué",adresse:"Ydé", telephone: "655554481", mail: "ngong@yad.fr"},
-        {id:"3", raisonSocial:"fatigué", adresse:"Buéa", telephone:"655554486", mail:"ngong@yad.fr"},
+        {id:"1", raisonSocial:"cgb", adresse:"Dla", telephone:"655554488", mail: "ngong@yad.fr"},
+        {id:"2", raisonSocial:"bgb",adresse:"Ydé", telephone: "655554481", mail: "ngong@yad.fr"},
+        {id:"3", raisonSocial:"cvc", adresse:"Buéa", telephone:"655554486", mail:"ngong@yad.fr"},
       ];
         return{patients, services, menus, tickets, missions, attributs, documents, exemplaires,famille,distributeur};
   }
