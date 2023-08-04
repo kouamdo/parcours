@@ -29,6 +29,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 //import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { CommonModule } from '@angular/common';
 
+import { DistributeurModule } from './modules/distributeur/distributeur.module';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,7 @@ import { CommonModule } from '@angular/common';
     RessourceModule,
     PrecomvtModule,
     //NgMultiSelectDropDownModule.forRoot(),
-    CommonModule,
+    CommonModule,    DistributeurModule,
     // ngx-translate and the loader module
     HttpClientModule,
     TranslateModule.forRoot({

@@ -21,6 +21,7 @@ import { IExemplaireDocument } from "../modele/exemplaire-document";
 
 // { IExemplaireDocument } from "../modele/exemplaire-document";
 //import { IFamille } from "../modele/famille";
+import { IDistributeur } from "../modele/distributeur";
 
 export class InMemDBService implements InMemoryDbService{
   statutTicketActif = StatutTicket.actif
@@ -90,6 +91,7 @@ export class InMemDBService implements InMemoryDbService{
             {"fonction":"Mission", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"Créer", "lien":"./mission-nouveau", "bouton":"false"}  , {"nom":"Rechercher", "lien":"./list-missions", "bouton":"false"}, {"nom":"Exécuter", "lien":"./executer-missions", "bouton":"false"}]},
             {"fonction":"Documents", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"Créer model documents", "lien":"./document-nouveau", "bouton":"false"}, {"nom":"Rechercher", "lien":"./list-documents", "bouton":"false"}, {"nom":"Creer un exemplaire", "lien":"exemplaire-nouveau/1", "bouton":"false"}, {"nom":"liste des exemplaires", "lien":"./list-exemplaire", "bouton":"false"}]},
 
+            {"fonction":"Distributeur", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"Créer", "lien":"distributeur-nouveau", "bouton":"false"},{"nom":"Rechercher", "lien":"./list-distributeurs", "bouton":"false"}]},
           ]},
 
 
@@ -105,7 +107,7 @@ export class InMemDBService implements InMemoryDbService{
             {"fonction":"Préconisations","icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"Créer", "lien":"precomvt-nouvelle", "bouton":"false"}, {"nom":"Search", "lien":"./list-precomvts", "bouton":"false"}]},
            {"fonction":"Mission", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"New", "lien":"./mission-nouveau", "bouton":"false"}  , {"nom":"Search", "lien":"./list-missions", "bouton":"false"}, {"nom":"Execute", "lien":"./executer-missions", "bouton":"false"}]},
             {"fonction":"Documents", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"New document's model", "lien":"./document-nouveau", "bouton":"false"}, {"nom":"Search", "lien":"./list-documents", "bouton":"false"}, {"nom":"Creat an exemplaire", "lien":"exemplaire-nouveau/1", "bouton":"false"}, {"nom":"list of exemplaires", "lien":"./list-exemplaire", "bouton":"false"}]},
-           
+
           ]}
         ];
         let missions:IMission[]=[
@@ -167,7 +169,7 @@ export class InMemDBService implements InMemoryDbService{
                         ]}
             ]
           },
-         {id:"2", titre:"Fiche de suivi",description:"Document delivre par le medecin ou un infirmier de l'etablissement",
+         {id:"2", titre:"Fiche de suivi", description:"Document delivre par le medecin ou un infirmier de l'etablissement",
            missions:[{id:"1", libelle:"fiche de soin", description:"fiche de soin est une mission", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"),
                       service : {id:"3", libelle:"Consultation", etat:"non attribue",dateDerniereModification: new Date("12/06/1972"),dateAttribution: new Date("07/03/1990"),dateFin: new Date("07/03/1990"),nombreTotalAttributions: 50}},
                     {id:"3", libelle:"bon de commande", description:"bon de commande est une mission", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"),
@@ -203,7 +205,7 @@ export class InMemDBService implements InMemoryDbService{
                     {id:"4", libelle:"recu de paiement", description:"recu de paiement est une mission", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"),
                       service :{id:"3", libelle:"Consultation", etat:"non attribue",dateDerniereModification: new Date("12/06/1972"),dateAttribution: new Date("07/03/1990"),dateFin: new Date("07/03/1990"),nombreTotalAttributions: 50}}
             ],
-           attributs:[{id:"1", titre:"taille",  description:"taille de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeDouble, ordre:0, obligatoire: false, valeursParDefaut:""},
+           attributs:[{id:"1", titre:"taille", description:"taille de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeDouble, ordre:0, obligatoire: false, valeursParDefaut:""},
                       {id:"4", titre:"age", description:"age de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeDouble, ordre:0, obligatoire: false, valeursParDefaut:""},
                       {id:"5", titre:"allergies", description:"allergies de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeString, ordre:0, obligatoire: false, valeursParDefaut:""},
                       {id:"8", titre:"cicatrice", description:"cicatrice de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeBoolean, ordre:0, obligatoire: false, valeursParDefaut:"true, false"}
@@ -219,15 +221,15 @@ export class InMemDBService implements InMemoryDbService{
                         ]}
             ]
           },
-          {id:"4", titre:"Formulaire de sortie",  description:"Document delivre par le medecin ou un infirmier de l'etablissement",
+          {id:"4", titre:"Formulaire de sortie", description:"Document delivre par le medecin ou un infirmier de l'etablissement",
            missions:[{id:"2", libelle:"fiche de soin", description:"fiche de soin est une mission", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"),
                       service : {id:"3", libelle:"Consultation", etat:"non attribue",dateDerniereModification: new Date("12/06/1972"),dateAttribution: new Date("07/03/1990"),dateFin: new Date("07/03/1990"),nombreTotalAttributions: 50}},
                     {id:"3", libelle:"bon de commande", description:"bon de commande est une mission", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"),
-                     service : {id:"1", libelle:"Pharmacie", etat:"non attribue",dateDerniereModification: new Date("07/03/2000"),dateAttribution: new Date("07/03/1990"),dateFin: new Date("07/03/1990"),nombreTotalAttributions: 6}},
+                      service : {id:"1", libelle:"Pharmacie", etat:"non attribue",dateDerniereModification: new Date("07/03/2000"),dateAttribution: new Date("07/03/1990"),dateFin: new Date("07/03/1990"),nombreTotalAttributions: 6}},
                     {id:"4", libelle:"recu de paiement", description:"recu de paiement est une mission", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"),
                       service : {id:"2", libelle:"Laboratoire", etat:"non attribue",dateDerniereModification: new Date("06/08/1990"),dateAttribution: new Date("07/03/1990"),dateFin: new Date("07/03/1990"),nombreTotalAttributions: 20}}
             ],
-           attributs:[{id:"14", titre:"Nom",  description:"nom de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeString, ordre:0, obligatoire: false, valeursParDefaut:""},
+           attributs:[{id:"14", titre:"Nom", description:"nom de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeString, ordre:0, obligatoire: false, valeursParDefaut:""},
                       {id:"4", titre:"age", description:"age de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeDouble, ordre:0, obligatoire: false, valeursParDefaut:""},
                       {id:"5", titre:"allergies", description:"allergies de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeTextarea, ordre:0, obligatoire: false, valeursParDefaut:""},
                       {id:"1", titre:"taille", description:"taille de l'individu", etat: true, dateCreation:  new Date("07/03/2000"), dateModification:  new Date("07/03/1990"), type: this.typeDouble, ordre:0, obligatoire: false, valeursParDefaut:""},
@@ -389,34 +391,6 @@ export class InMemDBService implements InMemoryDbService{
           {id:"4", libelle:"néonat", description:"nouveau-né", etat:"malade"},
           {id:"5", libelle:"transfusion", description:"sang", etat:"gl"},
       ];
-      let ressource:IRessource[]=[
-        {id:"1", libelle:"transfusion",etat:true, /*dateCreation:new Date("07/03/2000"),dateModification:new Date("07/03/1990"),*/quantite:10,unite:this.UnitesLitre,prix:1000,caracteristique:"souple",
-          famille:{id:"1", libelle:"trans", description:"sang", etat:"gl"}},
-       {id:"2", libelle:"néonat",etat: true,/* dateCreation:new Date("07/03/2000"),dateModification:new Date("07/03/1990"),*/quantite:20,unite:this.UnitesLitre,prix:2000,caracteristique:"souple",
-        famille: {id:"2", libelle:"néonat", description:"nouveau-né", etat:"malade"}},
-        {id:"2", libelle:"néonat",etat: true,/* dateCreation:new Date("07/03/2000"),dateModification:new Date("07/03/1990"),*/quantite:20,unite:this.UnitesLitre,prix:2000,caracteristique:"souple",
-        famille:{id:"3", libelle:"pediatrie", description:"enfant", etat:"souffrant"}},
-        {id:"3", libelle:"pediatrie",etat: true, /*dateCreation:new Date("07/03/2000"),dateModification:new Date("07/03/1990"),*/quantite:30,unite:this.UnitesLitre,prix:3000,caracteristique:"souple",
-        famille:{id:"4", libelle:"néonat", description:"nouveau-né", etat:"malade"}},
-        {id:"4", libelle:"néonat",etat: true,/*dateCreation:new Date("07/03/2000"),dateModification:new Date("07/03/1990"),*/quantite:40,unite:this.UnitesLitre,prix:4000,caracteristique:"souple",
-        famille:{id:"5", libelle:"transfusion", description:"sang", etat:"gl"}},
-      ];
-
-      let precomvt:IPrecoMvt[]=[
-                {id:"1",libelle:"rachat",etat: true,type:'neutre',/*type:this.TypeMvtNeutre*/
-                  precomvtqte:[{id:"1",quantiteMin:10,  quantiteMax:20,  montantMin:1000, montantMax:7000,fournisseur:'gc',
-                              ressource:{id:"1", libelle:"transfusion",etat:true,quantite:10,unite:this.UnitesLitre,prix:1000,caracteristique:"souple", famille:{id:"4", libelle:"néonat", description:"nouveau-né", etat:"malade"}}
-                          }]},
-                {id:"2",libelle:"vente",etat: true,type:'reduire',/*type:this.TypeMvtReduire*/
-                precomvtqte:[{id:"1",quantiteMin:30,  quantiteMax:40,  montantMin:100, montantMax:7000,fournisseur:'gc',
-                            famille:[
-                                    {id:"1", libelle:"trans", description:"sang", etat:"gl"},
-                                    {id:"2", libelle:"néonat", description:"nouveau-né", etat:"malade"},
-                                    {id:"3", libelle:"pediatrie", description:"enfant", etat:"souffrant"}
-                                  ]
-                        }]}
-            ];
-
-       return{patients, services, menus, tickets, missions, attributs,documents,exemplaires,famille,ressource,precomvt};
-    }
+        return{patients, services, menus, tickets, missions, attributs, documents, exemplaires,famille,};
+  }
 }
