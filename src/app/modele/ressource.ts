@@ -1,3 +1,4 @@
+import { IDistributeur } from "./distributeur";
 import { IFamille } from "./famille";
 import { Unites } from "./unites";
 
@@ -13,5 +14,4 @@ export interface IRessource {
     caracteristique:string,
    /* dateCreation:Date,
     dateModification:Date,*/
-
 }

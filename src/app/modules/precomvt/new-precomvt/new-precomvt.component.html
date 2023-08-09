@@ -6,7 +6,7 @@
           <div *ngIf="steps==2" class="w-100 pt-4 pb-4 entete1" >Assigner aux Familles</div>
           <div *ngIf="steps==3" class="w-100 pt-4 pb-4 entete2">Assigner Une Ressource</div>
 
-          <div class="w-100 mt-4 pt-0 pl-2 pr-2 pb-0">
+          <div class="w-100 mt-4 pt-0 pl-2 pr-2 pb-0" >
             <div class="w-100">
               <div  *ngIf="steps==1" class="w-100">
                 <div class="form-group">
@@ -15,13 +15,12 @@
                       <label for="libelle" class="label" class="libe">
                         Libelle
                       </label>
-                      <input   [attr.disabled]="steps != 1 || null" type="text" formControlName="libelle"  name="libelle" id="libelle"  placeholder="libelle"  class="form-control">
-                      <div  class="form text  text-danger" id="libe" *ngIf="forme.get('libelle')?.touched && forme.get('libelle')?.hasError('required')">libellé is required </div>
+                      <input type="text" formControlName="libelle" name="libelle" id="libelle"  placeholder="libelle"  class="form-control" required>
                     </div>
-
+                    <mat-error *ngIf="steps.controls?.['libelle']?.status==='INVALID'" >E
+                    </mat-error>
                   </div>
               </div>
-
 
                 <div class="form-group" id="eta">
                   <div>
@@ -57,12 +56,12 @@
             <label for="famille" class="label">
               Famille
             </label>
-            <mat-form-field class="example-full-width" appearance="fill">
+            <mat-form-field class="example-full-width" appearance="fill" >
               <mat-label>Famille</mat-label>
               <mat-select formControlName="famille" multiple [compareWith]="compareItem">
                 <mat-option *ngFor="let membre of familles$ |async" [value]="membre">{{membre.libelle}}</mat-option>
               </mat-select>
-              <mat-error *ngIf="" class="alert">
+              <mat-error *ngIf="forme.controls?.['famille']?.status==='INVALID'" >E
               </mat-error>
             </mat-form-field>
 
@@ -80,6 +79,8 @@
                       {{option.libelle}}
                   </mat-option>
                   </mat-autocomplete>
+                  <mat-error *ngIf="forme.controls?.['famille']?.status==='INVALID'" >E
+                  </mat-error>
               </mat-form-field>
           </div>
         </div>
@@ -92,6 +93,8 @@
                 </label>
                 <input  type="number" formControlName="quantiteMin" name="quantiteMin" class="form-control" id="quantiteMin" placeholder="Entrer la quantite minimale" >
             </div>
+            <mat-error *ngIf="forme.controls?.['famille']?.status==='INVALID'" >E
+            </mat-error>
           </div>
 
           <div class="form-group">
@@ -123,23 +126,23 @@
 
           <div class="form-group">
             <div class="champs">
-              <label  for="fournisseur"  class="label" >
-                Fournisseur
+              <label  for="distributeur"  class="label" >
+                Fournisseurs
+
               </label>
-              <select  formControlName="fournisseur"  name="fournisseur" id="fournisseur" class="form-control">
-                <option>Selectionnez un fournisseur</option>
-                <option>EVC</option>
-                <option>ACC</option>
-                <option>DCD</option>
+              <select  formControlName="distributeur"  name="distributeur" id=" distributeur" class="form-control">
+                <option *ngFor="let membre of distributeurs$ |async" [value]="membre">{{membre.raisonSocial}}</option>
               </select>
             </div>
         </div>
         </div>
+
         <div class="actionButton">
           <button class="btn" *ngIf="steps == 0">Back</button>
           <button type="btn" class="btn" routerLink="../list-precomvts">Annuler</button>
-          <button type="submit" class="btn" (click)="steps = 2; enregistrerValeurPrecomvtqte(forme.value)">Famille</button>
           <button type="submit" class="btn" (click)="steps = 3; enregistrerValeurPrecomvtqte(forme.value)">Ressource</button>
+          <button type="submit" class="btn" (click)="steps = 2; enregistrerValeurPrecomvtqte(forme.value)">Famille</button>
+
 
         </div>
       </form>

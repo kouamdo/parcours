@@ -16,13 +16,13 @@ import { FamillesService } from 'src/app/services/familles/familles.service';
 import { IPrecoMvtQte } from 'src/app/modele/precomvtqte';
 import { TypeMvt } from 'src/app/modele/type-mvt';
 import { ErrorStateMatcher, ShowOnDirtyErrorStateMatcher } from '@angular/material/core';
+import { IDistributeur } from 'src/app/modele/distributeur';
+import { DistributeursService } from 'src/app/services/distributeurs/distributeurs.service';
 
 @Component({
   selector: 'app-new-precomvt',
   templateUrl: './new-precomvt.component.html',
   styleUrls: ['./new-precomvt.component.scss'],
-  providers:[{provide:ErrorStateMatcher,
-  useClass:ShowOnDirtyErrorStateMatcher}]
 })
 
 export class NewPrecomvtComponent implements OnInit {
@@ -36,7 +36,7 @@ export class NewPrecomvtComponent implements OnInit {
 
  // myControl = new FormControl<string | IRessource>('');
   filteredOptions: IRessource[] | undefined;
-
+  distributeurs$:Observable<IDistributeur[]>=EMPTY;
   familles$:Observable<IFamille[]>=EMPTY;
   typeMvt: string[] = [TypeMvt.Ajout,TypeMvt.Neutre,TypeMvt.Reduire];
   //famille = new FormControl<string | IFamille[]>('');
@@ -57,30 +57,31 @@ export class NewPrecomvtComponent implements OnInit {
 
  //submitted=false;
   @ViewChild(FormGroupDirective)
+
   formDirective!: FormGroupDirective;
   //settings: { idField: string; textField: string; allowSearchFilter: boolean; } | undefined;
 
 
-  constructor(private formBuilder:FormBuilder,private serviceFamille:FamillesService,private ressourceService:RessourcesService ,private precoMvtService:PrecoMvtsService,private serviceRessource:RessourcesService,private router:Router, private infosPath:ActivatedRoute, private datePipe: DatePipe) {
+  constructor(private formBuilder:FormBuilder,private serviceFamille:FamillesService,private serviceDistributeur:DistributeursService,private ressourceService:RessourcesService ,private precoMvtService:PrecoMvtsService,private serviceRessource:RessourcesService,private router:Router, private infosPath:ActivatedRoute, private datePipe: DatePipe) {
     this.forme = this.formBuilder.group({
       libelle: new FormControl('',[Validators.required,Validators.minLength(1), Validators.maxLength(50)]),
       etat: new FormControl(),
-      type: new FormControl(),
-      ressource: new FormControl<string | IRessource>(''),
-      quantiteMin:new FormControl(),
-      quantiteMax:new FormControl(),
-      montantMin:new FormControl(),
-      montantMax:new FormControl(),
-      famille :  new FormControl<string | IFamille[]>(''),
-      fournisseur:new FormControl()
+      type: new FormControl('',[Validators.required,Validators.minLength(1), Validators.maxLength(50)]),
+      ressource: new FormControl<string | IRessource>('',Validators.required),
+      quantiteMin:new FormControl('',Validators.required),
+      quantiteMax:new FormControl('',Validators.required),
+      montantMin:new FormControl('',Validators.required),
+      montantMax:new FormControl('',Validators.required),
+      famille :  new FormControl<string | IFamille[]>('',Validators.required),
+      //fournisseur:new FormControl(),
+      distributeur:new FormControl<string | IDistributeur[]>('',Validators.required),
     });
-
-  }
+ }
 
   ngOnInit(): void {
 
     this.familles$ = this.getAllFamilles();
-
+    this.distributeurs$ = this.getAllDistributeurs();
     //code autocompletion qui retourne les éléments du type déclaré
     //this.myControl.valueChanges.subscribe(
       this.forme.controls["ressource"].valueChanges.subscribe(
@@ -89,7 +90,7 @@ export class NewPrecomvtComponent implements OnInit {
         if(libelle != undefined && libelle?.length >0){
           this.serviceRessource.getRessourcesByLibelle(libelle.toLowerCase() as string).subscribe(
             reponse => {
-              this.filteredOptions = reponse;
+             this.filteredOptions = reponse;
             }
           )
         }
@@ -104,7 +105,9 @@ export class NewPrecomvtComponent implements OnInit {
   }
 
 
-
+get formeControls():any{
+  return this.forme['controls'];
+}
 
  get f(){
       return this.forme.controls;
@@ -114,15 +117,20 @@ private getAllFamilles(){
       return this.serviceFamille.getAllFamilles();
     }
 
+private getAllDistributeurs(){
+      return this.serviceDistributeur.getAllDistributeurs();
+    }
  //fonction onSubmit debut
 onSubmit(precomvtInput:any){
-this.submitted=true;
-if(this.forme.invalid) return;
+console.log(this.forme.value)
+  if(this.forme.status==="VALID"){
 }
-
+}
 /*onSubmit(precomvtInput:any){
  console.log (this.forme.value)
-
+this.submitted=true;
+if(this.forme.invalid)
+  return;
  if(this.PrecoMvt= undefined){
   precomvtTemp.id = this.precomvt.id
 }
@@ -135,9 +143,9 @@ precomvtTemp.precomvtqte = this.premvtqte
     )
   }*/
 
-get libelle():FormControl{return this.forme.get('libelle')as FormControl}
+/*get libelle():FormControl{return this.forme.get('libelle')as FormControl}
 get etat():FormControl{return this.forme.get('etat')as FormControl}
-get type():FormControl{return this.forme.get('type')as FormControl}
+get type():FormControl{return this.forme.get('type')as FormControl}*/
  //fonction onSubmit fin
 
 
@@ -215,7 +223,8 @@ reset():void{
       this.forme.controls["quantiteMax"].setValue(precoTmp.precomvtqte[0].quantiteMax);
       this.forme.controls["quantiteMin"].setValue(precoTmp.precomvtqte[0].quantiteMin);
       //TODO bug de l'affichage au premier clic. C'est le second qui affiche la bonne valeur
-      this.forme.controls["fournisseur"].setValue(precoTmp.precomvtqte[0].fournisseur);
+      //this.forme.controls["fournisseur"].setValue(precoTmp.precomvtqte[0].fournisseur);
+      this.forme.controls["distributeur"].setValue(precoTmp.precomvtqte[0].distributeur);
     }
     else if(precoTmp.precomvtqte[0].famille!= undefined && precoTmp.precomvtqte[0].famille!=null && precoTmp.precomvtqte[0].famille.length>0){
       this.steps = 2;
@@ -227,7 +236,8 @@ reset():void{
       this.forme.controls["quantiteMax"].setValue(precoTmp.precomvtqte[0].quantiteMax);
       this.forme.controls["quantiteMin"].setValue(precoTmp.precomvtqte[0].quantiteMin);
       //TODO bug de l'affichage au premier clic. C'est le second qui affiche la bonne valeur
-      this.forme.controls["fournisseur"].setValue(precoTmp.precomvtqte[0].fournisseur);
+      //this.forme.controls["fournisseur"].setValue(precoTmp.precomvtqte[0].fournisseur);
+      this.forme.controls["distributeur"].setValue(precoTmp.precomvtqte[0].distributeur);
     }
   }
 
@@ -244,7 +254,8 @@ reset():void{
       montantMax: precomvtInput.montantMax,
       montantMin: precomvtInput.montantMin,
       id:"",
-      fournisseur: precomvtInput.fournisseur
+      //fournisseur: precomvtInput.fournisseur,
+      distributeur: precomvtInput.distributeur
     }
     let libel = "Familles : ";
     for (let index = 0; index < precomvtInput.famille.length; index++) {
@@ -275,7 +286,8 @@ reset():void{
       montantMax: precomvtInput.montantMax,
       montantMin: precomvtInput.montantMin,
       id:"",
-      fournisseur: precomvtInput.fournisseur
+      //fournisseur: precomvtInput.fournisseur,
+      distributeur: precomvtInput.distributeur
     };
     let precomvtTemp : IPrecoMvt={
       id: uuidv4(),
@@ -302,7 +314,8 @@ reset():void{
       montantMax: 0,
       montantMin: 0,
       id:"",
-      fournisseur: "DCD"
+      //fournisseur: "DCD",
+      distributeur: precomvtInput.distributeur
     };
     let precomvtTemp : IPrecoMvt={
       id: uuidv4(),

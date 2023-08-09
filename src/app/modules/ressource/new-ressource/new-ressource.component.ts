@@ -80,7 +80,7 @@ export class NewRessourceComponent implements OnInit {
             unite: this.ressource.unite,
             prix: this.ressource?.prix,
             famille: this.ressource.famille,
-            caracteristique:this.ressource.caracteristique
+            caracteristique:this.ressource.caracteristique,
           })
       });
     }
@@ -109,7 +109,7 @@ export class NewRessourceComponent implements OnInit {
       unite: ressourceInput.unite,
       prix: ressourceInput.prix,
       famille:ressourceInput.famille,
-      caracteristique:ressourceInput.caracteristique
+      caracteristique:ressourceInput.caracteristique,
     }
 
     if(this.ressource != undefined){
