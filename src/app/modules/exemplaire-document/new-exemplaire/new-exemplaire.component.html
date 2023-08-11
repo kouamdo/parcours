@@ -16,9 +16,9 @@
                     <div class="block"> 
                         <div class="inputBlock" *ngFor="let attribut of attributParCategorie.listAttributs; let i=index; "  [ngClass]="{'inputSpecial':(attribut.type == TypeRadio) || (attribut.type == TypeBoolean)}"> 
                             <label [for]="attribut.id" class="form-label">{{attribut.titre}}</label>
-                            <input *ngIf="(attribut.type != 'textarea') && (attribut.type != TypeRadio) && (attribut.type != TypeBoolean)" [type]="attribut.type" class="form-control"  formArrayName="_exemplaireDocument" name="'id '+{{attribut.id}}" id="{{attribut.id}} + 'id'" placeholder="entrer la valeur ici" >
-                            <textarea *ngIf="attribut.type == 'textarea'" class="form-control"  formArrayName="_exemplaireDocument" [name]="attribut.id" [id]="attribut.id" placeholder="entrer la valeur ici" ></textarea>
-                            <select  class="form-control" *ngIf="(attribut.type == TypeRadio) || (attribut.type == TypeBoolean)"  formArrayName="_exemplaireDocument" [name]="attribut.id" [id]="attribut.id">
+                            <input *ngIf="(attribut.type != 'textarea') && (attribut.type != TypeRadio) && (attribut.type != TypeBoolean)" [type]="attribut.type" class="form-control"  formArrayName="_exemplaireDocument" [name]="attribut.id" [id]="attribut.id" placeholder="entrer la valeur ici" [value]="">
+                            <textarea *ngIf="attribut.type == 'textarea'" class="form-control"  formArrayName="_exemplaireDocument" [name]="attribut.id" [id]="attribut.id" placeholder="entrer la valeur ici"  [value]=""></textarea>
+                            <select  class="form-control" *ngIf="(attribut.type == TypeRadio) || (attribut.type == TypeBoolean)"  formArrayName="_exemplaireDocument" [name]="attribut.id" [id]="attribut.id" [value]="">
                                 <option value="oui" >{{attribut.valeursParDefaut}}</option>
                             </select>
                         </div>
@@ -27,8 +27,10 @@
             </div>
         </div>
         <div class="actionButton">
-            <button class="btn" type="reset"><i class="fa fa-reply mr-1" aria-hidden="true"></i>{{'lists.button2' | translate}}</button>
+            <button class="btn" type="reset" routerLink="../../../list-exemplaire"><i class="fa fa-reply mr-1" aria-hidden="true"></i>{{'lists.button2' | translate}}</button>
             <button type="submit" class="btn btnValidation" (click)="enregistrerObjet()">{{btnLibelle}}</button>
+            <!--  -->
         </div>
     </form>
 </div>
+<p>{{formeExemplaire.value | json}}</p>
