@@ -5,7 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import {MatSelectModule} from '@angular/material/select';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {v4 as uuidv4} from 'uuid';
-import { EMPTY, Observable, single } from 'rxjs';
+import { EMPTY, map, Observable, single } from 'rxjs';
 
 import { PrecoMvtsService } from 'src/app/services/precomvts/precomvts.service';
 import { IPrecoMvt } from 'src/app/modele/precomvt';
@@ -56,7 +56,9 @@ export class NewPrecomvtComponent implements OnInit {
  };
 
  //submitted=false;
-  @ViewChild(FormGroupDirective)
+ tabError : Map<String,String> = new Map();
+
+ @ViewChild(FormGroupDirective)
 
   formDirective!: FormGroupDirective;
   //settings: { idField: string; textField: string; allowSearchFilter: boolean; } | undefined;
@@ -64,17 +66,17 @@ export class NewPrecomvtComponent implements OnInit {
 
   constructor(private formBuilder:FormBuilder,private serviceFamille:FamillesService,private serviceDistributeur:DistributeursService,private ressourceService:RessourcesService ,private precoMvtService:PrecoMvtsService,private serviceRessource:RessourcesService,private router:Router, private infosPath:ActivatedRoute, private datePipe: DatePipe) {
     this.forme = this.formBuilder.group({
-      libelle: new FormControl('',[Validators.required,Validators.minLength(1), Validators.maxLength(50)]),
+      libelle: new FormControl(),
       etat: new FormControl(),
-      type: new FormControl('',[Validators.required,Validators.minLength(1), Validators.maxLength(50)]),
-      ressource: new FormControl<string | IRessource>('',Validators.required),
-      quantiteMin:new FormControl('',Validators.required),
-      quantiteMax:new FormControl('',Validators.required),
-      montantMin:new FormControl('',Validators.required),
-      montantMax:new FormControl('',Validators.required),
-      famille :  new FormControl<string | IFamille[]>('',Validators.required),
+      type: new FormControl(),
+      ressource: new FormControl<string | IRessource>(''),
+      quantiteMin:new FormControl(),
+      quantiteMax:new FormControl(),
+      montantMin:new FormControl(),
+      montantMax:new FormControl(),
+      famille :  new FormControl<string | IFamille[]>(''),
       //fournisseur:new FormControl(),
-      distributeur:new FormControl<string | IDistributeur[]>('',Validators.required),
+      distributeur:new FormControl<string | IDistributeur[]>(''),
     });
  }
 
@@ -147,6 +149,84 @@ precomvtTemp.precomvtqte = this.premvtqte
 get etat():FormControl{return this.forme.get('etat')as FormControl}
 get type():FormControl{return this.forme.get('type')as FormControl}*/
  //fonction onSubmit fin
+ validerControleStep(etape:number, valeurs:any){
+
+  let controleVerif = true;
+  //controle sur l'étape courante
+  if(this.steps == 1){
+    let valLibelle : string = this.forme.controls["libelle"].value;
+    let valLibel = valLibelle.trimStart().trimEnd();
+    if((valLibel == '' || valLibel.length < 0)){
+      controleVerif = false;
+      this.tabError.set("libelle","Taille doit etre supérieure à 2");
+    }
+    let valType : string = this.forme.controls["type"].value;
+    //let valType = valType.trimStart().trimEnd();
+    if((valType == '' || valType.length < 0)){
+      controleVerif = false;
+      this.tabError.set("type", "Field required");
+    }
+
+  }else{
+    if(this.steps == 2){
+      let valFamille : string = this.forme.controls["famille"].value;
+
+      if((valFamille == '' || valFamille.length < 0)){
+        controleVerif = false;
+        this.tabError.set("famille","Field required");
+      }
+    }
+    else{
+      if(this.steps == 3){
+        let valRessource : string = this.forme.controls["ressource"].value;
+
+        if((valRessource == '' || valRessource.length < 0)){
+          controleVerif = false;
+          this.tabError.set("ressource","Field required");
+        }
+      }
+    }
+    //controle commun ie montantMin et MontantMax
+    if(this.steps == 2 && this.steps == 3){
+      let valMontantMin : number = this.forme.controls["montantMin"].value;
+
+      if((valMontantMin == 0 &&  valMontantMin < 0)){
+        controleVerif = false;
+        this.tabError.set("montantMin","Field required");
+      }
+      let valMontantMax : number = this.forme.controls["montantMax"].value;
+
+      if((valMontantMax == 0 && valMontantMax< 0 )){
+        controleVerif = false;
+        this.tabError.set("MontantMax","Field required");
+      }
+      let valQuantiteMax : number = this.forme.controls["quantiteMax"].value;
+
+      if((valQuantiteMax == 0 && valQuantiteMax < 0)){
+        controleVerif = false;
+        this.tabError.set("QuantiteMax","Field required");
+      }
+      let valQuantiteMin : number = this.forme.controls["quantiteMin"].value;
+
+      if((valQuantiteMin == 0 &&  valQuantiteMin < 0)){
+        controleVerif = false;
+        this.tabError.set("QuantiteMin","Field required");
+      }
+      let valDistributeur : string = this.forme.controls["distributeur"].value;
+
+      if((valDistributeur == '' || valDistributeur.length < 0)){
+        controleVerif = false;
+        this.tabError.set("Distributeur","Field required");
+      }
+    }
+  }
+
+
+  if(controleVerif){
+    this.steps = etape;
+    this.enregistrerValeurPrecomvtqte(valeurs);
+  }
+}
 
 
 displayFn(ressource: IRessource): string {
@@ -169,6 +249,10 @@ reset():void{
   //console.log (this.submitted=true);
   //this.submitted=true;
   //if(this.forme.invalid) return;
+  //alert("ok");
+  //this.submitted=true;
+  //if(this.forme.invalid) return;
+  //alert("ko")
   console.log("enregistrerValeurPrecomvtqte indexModification : " + this.indexModification)
   //sauvegarde des valeurs de precoMvt <=> premier ecran
   if(precomvtInput.libelle != null && precomvtInput.libelle!=""){

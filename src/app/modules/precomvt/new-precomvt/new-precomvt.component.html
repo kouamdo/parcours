@@ -15,10 +15,12 @@
                       <label for="libelle" class="label" class="libe">
                         Libelle
                       </label>
-                      <input type="text" formControlName="libelle" name="libelle" id="libelle"  placeholder="libelle"  class="form-control" required>
+                      <input type="text" formControlName="libelle" name="libelle" id="libelle"  placeholder="libelle"  class="form-control"
+                      (ngModelChange)="tabError.delete('libelle')">
                     </div>
-                    <mat-error *ngIf="steps.controls?.['libelle']?.status==='INVALID'" >E
-                    </mat-error>
+                    <div  *ngIf="tabError.get('libelle')"  class="alert alert-danger" >
+                      <div *ngIf="tabError.get('libelle')">{{ tabError.get('libelle') }}</div>
+                      </div>
                   </div>
               </div>
 
@@ -40,11 +42,13 @@
                       Type
                     </label>
                     <select class="form-control" formControlName="type">
-                      <option class="label" *ngFor="let typeM of typeMvt" value="{{ typeM }}" >
+                      <option class="label" *ngFor="let typeM of typeMvt" value="{{ typeM }}"  (ngModelChange)="tabError.delete('type')">
                         {{ typeM }}
                       </option>
                     </select>
-
+                    <div  *ngIf="tabError.get('type')"  class="alert alert-danger" >
+                      <div *ngIf="tabError.get('type')">{{ tabError.get('type') }}</div>
+                      </div>
                   </div>
                 </div>
             </div>
@@ -59,10 +63,11 @@
             <mat-form-field class="example-full-width" appearance="fill" >
               <mat-label>Famille</mat-label>
               <mat-select formControlName="famille" multiple [compareWith]="compareItem">
-                <mat-option *ngFor="let membre of familles$ |async" [value]="membre">{{membre.libelle}}</mat-option>
+                <mat-option *ngFor="let membre of familles$ |async" [value]="membre"  (ngModelChange)="tabError.delete('famille')">{{membre.libelle}}</mat-option>
               </mat-select>
-              <mat-error *ngIf="forme.controls?.['famille']?.status==='INVALID'" >E
-              </mat-error>
+              <div  *ngIf="tabError.get('famille')"  class="alert alert-danger" >
+                <div *ngIf="tabError.get('famille')">{{ tabError.get('famille') }}</div>
+              </div>
             </mat-form-field>
 
           </div>
@@ -75,12 +80,13 @@
               <mat-form-field class="example-full-width" appearance="fill">
                   <input  type="text" matInput [matAutocomplete]="auto" aria-label="ressource" formControlName="ressource"  ng-reflect-name="ressource">
                   <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn" >
-                  <mat-option *ngFor="let option of filteredOptions" [value]="option">
+                  <mat-option *ngFor="let option of filteredOptions" [value]="option"  (ngModelChange)="tabError.delete('ressource')">
                       {{option.libelle}}
                   </mat-option>
                   </mat-autocomplete>
-                  <mat-error *ngIf="forme.controls?.['famille']?.status==='INVALID'" >E
-                  </mat-error>
+                  <div  *ngIf="tabError.get('ressource')"  class="alert alert-danger" >
+                  <div *ngIf="tabError.get('ressource')">{{ tabError.get('ressource') }}</div>
+                  </div>
               </mat-form-field>
           </div>
         </div>
@@ -91,10 +97,12 @@
                 <label  for="quantiteMin"  class="label" >
                   Quantité Min
                 </label>
-                <input  type="number" formControlName="quantiteMin" name="quantiteMin" class="form-control" id="quantiteMin" placeholder="Entrer la quantite minimale" >
+                <input  type="number" formControlName="quantiteMin" name="quantiteMin" class="form-control" id="quantiteMin" placeholder="Entrer la quantite minimale"
+                (ngModelChange)="tabError.delete('quantiteMin')">
             </div>
-            <mat-error *ngIf="forme.controls?.['famille']?.status==='INVALID'" >E
-            </mat-error>
+            <div  *ngIf="tabError.get('quantiteMin')"  class="alert alert-danger" >
+              <div *ngIf="tabError.get('quantiteMin')">{{ tabError.get('quantiteMin') }}</div>
+             </div>
           </div>
 
           <div class="form-group">
@@ -102,7 +110,11 @@
                   <label  for="quantiteMax"  class="label" >
                     Quantité Max
                   </label>
-                  <input type="number"   formControlName="quantiteMax" name="quantiteMax" class="form-control" id="quantiteMax" placeholder="Entrer la quantite miximale" >
+                  <input type="number"   formControlName="quantiteMax" name="quantiteMax" class="form-control" id="quantiteMax" placeholder="Entrer la quantite miximale"
+                  (ngModelChange)="tabError.delete('quantiteMax')" >
+              </div>
+               <div  *ngIf="tabError.get('quantiteMax')"  class="alert alert-danger" >
+               <div *ngIf="tabError.get('quantiteMax')">{{ tabError.get('quantiteMax') }}</div>
               </div>
           </div>
 
@@ -111,8 +123,12 @@
               <label  for="montantMax"  class="label" >
                 Montant Min
               </label>
-              <input  type="number"  formControlName="montantMax" name="montantMax" id="montantMax" placeholder="Entrer le montant minimal" class="form-control" >
+              <input  type="number"  formControlName="montantMax" name="montantMax" id="montantMax" placeholder="Entrer le montant minimal" class="form-control"
+               (ngModelChange)="tabError.delete('montantMax')">
             </div>
+             <div  *ngIf="tabError.get('montantMax')"  class="alert alert-danger" >
+              <div *ngIf="tabError.get('montantMax')">{{ tabError.get('montantMax') }}</div>
+          </div>
           </div>
 
           <div class="form-group">
@@ -120,19 +136,25 @@
                 <label  for="montantMin"  class="label" >
                   Montant Max
                 </label>
-                <input type="number" formControlName="montantMin" name="montantMin" class="form-control" id="montantMin" placeholder="Entrer le montant miximal" >
+                <input type="number" formControlName="montantMin" name="montantMin" class="form-control" id="montantMin" placeholder="Entrer le montant miximal"
+                 (ngModelChange)="tabError.delete('montantMin')">
             </div>
+             <div  *ngIf="tabError.get('montantMin')"  class="alert alert-danger" >
+            <div *ngIf="tabError.get('montantMin')">{{ tabError.get('montantMin') }}</div>
+           </div>
           </div>
 
           <div class="form-group">
             <div class="champs">
               <label  for="distributeur"  class="label" >
                 Fournisseurs
-
               </label>
               <select  formControlName="distributeur"  name="distributeur" id=" distributeur" class="form-control">
-                <option *ngFor="let membre of distributeurs$ |async" [value]="membre">{{membre.raisonSocial}}</option>
+                <option *ngFor="let membre of distributeurs$ |async" [value]="membre"  (ngModelChange)="tabError.delete('distributeur')">{{membre.raisonSocial}}</option>
               </select>
+            </div>
+             <div  *ngIf="tabError.get('distributeur')"  class="alert alert-danger" >
+             <div *ngIf="tabError.get('distributeur')">{{ tabError.get('distributeur') }}</div>
             </div>
         </div>
         </div>
@@ -140,8 +162,8 @@
         <div class="actionButton">
           <button class="btn" *ngIf="steps == 0">Back</button>
           <button type="btn" class="btn" routerLink="../list-precomvts">Annuler</button>
-          <button type="submit" class="btn" (click)="steps = 3; enregistrerValeurPrecomvtqte(forme.value)">Ressource</button>
-          <button type="submit" class="btn" (click)="steps = 2; enregistrerValeurPrecomvtqte(forme.value)">Famille</button>
+          <button type="submit" class="btn" (click)="validerControleStep(2,forme.value); ">Famille</button>
+          <button type="button" class="btn" (click)="validerControleStep(3,forme.value); ">Ressource</button>
 
 
         </div>
@@ -154,9 +176,9 @@
       <h2>Etape</h2>
     </div>
     <div class="contentBlock">
-      <div *ngFor="let elt of eltsPreco let i=index"  class="color">
+      <div *ngFor="let elt of eltsPreco let i=index"  class="color" [ngStyle]="{'background-color': (steps == 2) ? '#7ea97e82' : ((steps == 3) ? '#11aca1': null)}">
       <div>
-        <label class="info"><input type="button" id="{{i}}" value="{{elt.libelle}}" (click)="chargerValeurPrecoMvt(i)"><br/></label>
+        <label class="info"><input type="button" id="{{i}}" value="{{elt.libelle}}" (click)="chargerValeurPrecoMvt(i)"  ><br/></label>
                             <input type="button" id="{{i}}" value="{{elt.type}}" (click)="chargerValeurPrecoMvt(i)"><br/>
         <div class="suppression">
           <button class="" title=""  id="left" >
@@ -168,13 +190,6 @@
         </div>
       </div>
       </div>
-
-
-
-
-
-
-
 
       <div class="actionButtons">
         <button type="submit" class="btn" routerLink="../list-precomvts" *ngIf="steps != 4" (click)="steps = 4">Enregistrer</button>
