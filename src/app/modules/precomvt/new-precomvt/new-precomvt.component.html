@@ -20,7 +20,7 @@
                     </div>
                     <div  *ngIf="tabError.get('libelle')"  class="alert alert-danger" >
                       <div *ngIf="tabError.get('libelle')">{{ tabError.get('libelle') }}</div>
-                      </div>
+                    </div>
                   </div>
               </div>
 
@@ -41,8 +41,8 @@
                     <label  for="type"  class="label" >
                       Type
                     </label>
-                    <select class="form-control" formControlName="type">
-                      <option class="label" *ngFor="let typeM of typeMvt" value="{{ typeM }}"  (ngModelChange)="tabError.delete('type')">
+                    <select class="form-control" formControlName="type" (ngModelChange)="tabError.delete('type')">
+                      <option class="label" *ngFor="let typeM of typeMvt" value="{{ typeM }}" >
                         {{ typeM }}
                       </option>
                     </select>

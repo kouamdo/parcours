@@ -155,70 +155,81 @@ get type():FormControl{return this.forme.get('type')as FormControl}*/
   //controle sur l'étape courante
   if(this.steps == 1){
     let valLibelle : string = this.forme.controls["libelle"].value;
-    let valLibel = valLibelle.trimStart().trimEnd();
-    if((valLibel == '' || valLibel.length < 0)){
+    let valLibel = valLibelle
+    if(valLibelle!=null && valLibelle.length>0)
+       valLibel = valLibelle.trimStart().trimEnd();
+    if((valLibel==null || valLibel == '' || valLibel.length < 2)){
       controleVerif = false;
       this.tabError.set("libelle","Taille doit etre supérieure à 2");
     }
     let valType : string = this.forme.controls["type"].value;
     //let valType = valType.trimStart().trimEnd();
-    if((valType == '' || valType.length < 0)){
+    if((valType == null || valType == '')){
       controleVerif = false;
-      this.tabError.set("type", "Field required");
+      this.tabError.set("type", "Le type doit avoir une valeur");
     }
 
-  }else{
-    if(this.steps == 2){
-      let valFamille : string = this.forme.controls["famille"].value;
+  }else{ 
+      if(this.steps == 2){
+        let valFamille : string[] = this.forme.controls["famille"].value;
 
-      if((valFamille == '' || valFamille.length < 0)){
-        controleVerif = false;
-        this.tabError.set("famille","Field required");
-      }
-    }
-    else{
-      if(this.steps == 3){
-        let valRessource : string = this.forme.controls["ressource"].value;
-
-        if((valRessource == '' || valRessource.length < 0)){
+        if((valFamille == null || valFamille.length == 0)){
           controleVerif = false;
-          this.tabError.set("ressource","Field required");
+          this.tabError.set("famille","Une famille au moins doit être selectionnée");
         }
       }
-    }
+      else if(this.steps == 3){
+          let valRessource : string = this.forme.controls["ressource"].value;
+
+          if((valRessource == '' || valRessource.length < 0)){
+            controleVerif = false;
+            this.tabError.set("ressource","Une ressource est obligatoire");
+          }
+      }
     //controle commun ie montantMin et MontantMax
-    if(this.steps == 2 && this.steps == 3){
+      if(this.steps == 2 || this.steps == 3){
       let valMontantMin : number = this.forme.controls["montantMin"].value;
 
-      if((valMontantMin == 0 &&  valMontantMin < 0)){
+      if(valMontantMin== null || valMontantMin < 0){
         controleVerif = false;
-        this.tabError.set("montantMin","Field required");
+        this.tabError.set("montantMin","montantMin est obligatoire");
       }
       let valMontantMax : number = this.forme.controls["montantMax"].value;
 
-      if((valMontantMax == 0 && valMontantMax< 0 )){
+      if(valMontantMax==null || valMontantMax< 0){
         controleVerif = false;
-        this.tabError.set("MontantMax","Field required");
+        this.tabError.set("montantMax","montantMax est  obligatoire");
       }
+      if(valMontantMin > valMontantMax){
+        controleVerif = false;
+        this.tabError.set("montantMax","montantMax doit être supérieur au montantMin");
+      }
+
       let valQuantiteMax : number = this.forme.controls["quantiteMax"].value;
 
-      if((valQuantiteMax == 0 && valQuantiteMax < 0)){
+      if(valQuantiteMax == null || valQuantiteMax < 0){
         controleVerif = false;
-        this.tabError.set("QuantiteMax","Field required");
+        this.tabError.set("quantiteMax","QuantiteMax est obligatoire");
       }
       let valQuantiteMin : number = this.forme.controls["quantiteMin"].value;
 
-      if((valQuantiteMin == 0 &&  valQuantiteMin < 0)){
+      if(valQuantiteMin == null || valQuantiteMin < 0){
         controleVerif = false;
-        this.tabError.set("QuantiteMin","Field required");
+        this.tabError.set("quantiteMin","QuantiteMin est obligatoire");
       }
-      let valDistributeur : string = this.forme.controls["distributeur"].value;
 
-      if((valDistributeur == '' || valDistributeur.length < 0)){
+      if(valQuantiteMin > valQuantiteMax){
+        controleVerif = false;
+        this.tabError.set("quantiteMin","QuantiteMin doit être inférieur à QuantiteMax");
+      }
+
+      //let valDistributeur : string = this.forme.controls["distributeur"].value;
+
+      /*if((valDistributeur == '' || valDistributeur.length < 0)){
         controleVerif = false;
         this.tabError.set("Distributeur","Field required");
+      }*/
       }
-    }
   }
 
 
