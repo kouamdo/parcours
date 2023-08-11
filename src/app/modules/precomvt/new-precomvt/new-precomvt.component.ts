@@ -181,7 +181,7 @@ get type():FormControl{return this.forme.get('type')as FormControl}*/
       else if(this.steps == 3){
           let valRessource : string = this.forme.controls["ressource"].value;
 
-          if((valRessource == '' || valRessource.length < 0)){
+          if((valRessource==null || valRessource == '' || valRessource.length < 0)){
             controleVerif = false;
             this.tabError.set("ressource","Une ressource est obligatoire");
           }
