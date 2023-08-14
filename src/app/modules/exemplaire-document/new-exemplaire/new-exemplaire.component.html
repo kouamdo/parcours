@@ -14,11 +14,11 @@
                 <div class="block" *ngIf="attributParCategorie.nom">
                     <h3>{{attributParCategorie.nom}}</h3>
                     <div class="block"> 
-                        <div class="inputBlock" *ngFor="let attribut of attributParCategorie.listAttributs; let i=index; "  [ngClass]="{'inputSpecial':(attribut.type == TypeRadio) || (attribut.type == TypeBoolean)}"> 
+                        <div formArrayName="_exemplaireDocument" class="inputBlock" *ngFor="let attribut of attributParCategorie.listAttributs; let i=index; " [ngClass]="{'inputSpecial':(attribut.type == TypeRadio) || (attribut.type == TypeBoolean)}"> 
                             <label [for]="attribut.id" class="form-label">{{attribut.titre}}</label>
-                            <input *ngIf="(attribut.type != 'textarea') && (attribut.type != TypeRadio) && (attribut.type != TypeBoolean)" [type]="attribut.type" class="form-control"  formArrayName="_exemplaireDocument" [name]="attribut.id" [id]="attribut.id" placeholder="entrer la valeur ici" [value]="">
-                            <textarea *ngIf="attribut.type == 'textarea'" class="form-control"  formArrayName="_exemplaireDocument" [name]="attribut.id" [id]="attribut.id" placeholder="entrer la valeur ici"  [value]=""></textarea>
-                            <select  class="form-control" *ngIf="(attribut.type == TypeRadio) || (attribut.type == TypeBoolean)"  formArrayName="_exemplaireDocument" [name]="attribut.id" [id]="attribut.id" [value]="">
+                            <input *ngIf="(attribut.type != 'textarea') && (attribut.type != TypeRadio) && (attribut.type != TypeBoolean)" [formControlName]="incrementeCompteur()" [type]="attribut.type" class="form-control" placeholder="entrer la valeur ici">
+                            <textarea *ngIf="attribut.type == 'textarea'" class="form-control"  [formControlName]="incrementeCompteur()" placeholder="entrer la valeur ici"></textarea>
+                            <select  class="form-control" *ngIf="(attribut.type == TypeRadio) || (attribut.type == TypeBoolean)"  [formControlName]="incrementeCompteur()">
                                 <option value="oui" >{{attribut.valeursParDefaut}}</option>
                             </select>
                         </div>

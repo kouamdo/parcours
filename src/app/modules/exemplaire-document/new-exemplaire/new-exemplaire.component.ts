@@ -60,6 +60,9 @@ export class NewExemplaireComponent implements OnInit {
   TypeBoolean = TypeTicket.Boolean
   TypeRadio = TypeTicket.Radio
 
+  compteur : number = -1
+  tableauIndex : number[] = []
+
   constructor(private router:Router, private formBuilder: FormBuilder, private infosPath:ActivatedRoute, private serviceDocument:DocumentService, private serviceExemplaire : ExemplaireDocumentService, private serviceMission:MissionsService, private serviceAttribut:AttributService) { 
     this.formeExemplaire = this.formBuilder.group({
       _exemplaireDocument: new FormArray([])
@@ -68,7 +71,8 @@ export class NewExemplaireComponent implements OnInit {
 
   ngOnInit(): void {
     this.nomPatientCourant = sessionStorage.getItem("nomPatientCourant");
-
+    this.compteur = -1
+    this.tableauIndex = []
     // recuperation de l'id de l'exemplaire
     this.idExemplaire = this.infosPath.snapshot.paramMap.get('idExemplaire'); console.log("id de l'exemplaire ", this.idExemplaire);
 
@@ -79,9 +83,8 @@ export class NewExemplaireComponent implements OnInit {
   }
 
   addAttributs() {
-    // this._exemplaireDocument.push(new FormControl());event.target.value
    this._exemplaireDocument.push(this.formBuilder.control(''));
-   console.log("this._exemplaireDocument : ", this._exemplaireDocument.value)
+   //this.tableauIndex.push(this.incrementeCompteur()) 
   }
   initialiseFormExemplaire(){
 
@@ -193,6 +196,9 @@ export class NewExemplaireComponent implements OnInit {
    */
   couperLaChaine(chaine : string){
     chaine.slice
+  }
+  incrementeCompteur() : number{
+    return this.compteur++
   }
   onSubmit(exemplaireInput:any){
     const exemplaireDocument = this._exemplaireDocument;
