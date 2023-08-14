@@ -1506,7 +1506,7 @@ export class InMemDBService implements InMemoryDbService {
                 etat: true,
                 dateCreation: new Date('07/03/2000'),
                 dateModification: new Date('07/03/1990'),
-                type: TypeTicket.Double,
+                type: TypeTicket.String,
                 ordre: 1,
                 obligatoire: false,
                 valeursParDefaut: '',

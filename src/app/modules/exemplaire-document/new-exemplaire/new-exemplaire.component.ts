@@ -198,7 +198,8 @@ export class NewExemplaireComponent implements OnInit {
     chaine.slice
   }
   incrementeCompteur() : number{
-    return this.compteur++
+    this.compteur = this.compteur + 1
+    return this.compteur
   }
   onSubmit(exemplaireInput:any){
     const exemplaireDocument = this._exemplaireDocument;
