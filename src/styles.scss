@@ -1,16 +1,44 @@
 /* You can add global styles to this file, and also import other style files */
+@font-face {
+    font-family: AbrilFatface;
+    src: url(assets/fonts/Abril_Fatface/AbrilFatface-Regular.ttf);
+}
+@font-face {
+    font-family: FrankRuhlLibre;
+    src: url(assets/fonts/Frank_Ruhl_Libre/FrankRuhlLibre-VariableFont_wght.ttf);
+}
+@font-face {
+    font-family: lato;
+    src: url(assets/fonts/Lora/Lora-VariableFont_wght.ttf);
+}
+@font-face {
+    font-family: PlayfairDisplay;
+    src: url(assets/fonts/Playfair_Display/PlayfairDisplay-VariableFont_wght.ttf);
+}
+h1, h2, h3, h4, h5, h6{
+    font-family: FrankRuhlLibre !important;
+}
 html, body {
     height: 100%;
 }
 body {
     margin: 0;
-    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+body, table, .mat-table {
+    font-family: FrankRuhlLibre !important;
+}
+#menuVerticalGauche #logo, #menuVerticalGauche #userActions .user{
+    font-family: AbrilFatface !important;
 }
 .cdk-overlay-container, .cdk-overlay-pane {
     z-index: 9999 !important;
     display: flex;
     // overflow: auto;
     // pointer-events: auto; 
+}
+.modalCategorie .cdk-overlay-pane {
+    padding: 0;
+    border-top: none;
 }
 .modalCategorie .mat-form-field-infix {
     padding: 0;
