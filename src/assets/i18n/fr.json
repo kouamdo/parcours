@@ -156,7 +156,8 @@
         },
         "execution":{
             "text1":"QUEL EST VOTRE CHOIX ?",
-            "text2":"Choix Du Document Pour La Mission"
+            "text2":"Choix Du Document Pour La Mission",
+            "text3":"Aucun Document Disponible Pour La Mission"
         }
     },
     "document":{
@@ -182,7 +183,7 @@
             "title14":"Ordre categorie",
             "title15":"Categories",
             "title16":"libelle attribut",
-            "title17":""
+            "title17":"categories"
         },
         "form":{
             "text1":"Le Titre est obligatoire.",

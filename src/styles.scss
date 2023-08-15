@@ -9,6 +9,20 @@ body {
 .cdk-overlay-container, .cdk-overlay-pane {
     z-index: 9999 !important;
     display: flex;
-    overflow: auto;
-    pointer-events: auto; 
+    // overflow: auto;
+    // pointer-events: auto; 
+}
+.modalCategorie .mat-form-field-infix {
+    padding: 0;
+    border-top: none;
+}
+.modalCategorie .mat-form-field-wrapper {
+    padding-bottom: 15px !important;
+}
+.mat-select-value {
+    overflow: visible;
+    text-overflow: ellipsis;
+    white-space: wrap;
+    position: relative;
+    bottom: 12px;
 }
