@@ -13,11 +13,11 @@
                 <div class="pb-3" *ngIf="attributParCategorie.nom">
                     <h3>{{attributParCategorie.nom}}</h3>
                     <div class="contentBlock">
-                        <div formArrayName="_exemplaireDocument" class="inputBlock" *ngFor="let attribut of attributParCategorie.listAttributs; let i=index; " [ngClass]="{'inputSpecial':(attribut.type == TypeRadio) || (attribut.type == TypeBoolean)}"> 
+                        <div formArrayName="_exemplaireDocument" class="inputBlock" *ngFor="let attribut of attributParCategorie.listAttributs; " [ngClass]="{'inputSpecial':(attribut.type == TypeRadio) || (attribut.type == TypeBoolean)}"> 
                             <label [for]="attribut.id" class="form-label">{{attribut.titre}}</label>
-                            <input *ngIf="(attribut.type != 'textarea') && (attribut.type != TypeRadio) && (attribut.type != TypeBoolean)" [formControlName]="incrementeCompteur()" [type]="attribut.type" class="form-control" placeholder="entrer la valeur ici">
-                            <textarea *ngIf="attribut.type == 'textarea'" class="form-control"  [formControlName]="incrementeCompteur()" placeholder="entrer la valeur ici"></textarea>
-                            <select  class="form-control" *ngIf="(attribut.type == TypeRadio) || (attribut.type == TypeBoolean)"  [formControlName]="incrementeCompteur()">
+                            <input *ngIf="(attribut.type != 'textarea') && (attribut.type != TypeRadio) && (attribut.type != TypeBoolean)" [formControlName]="incrementeCompteur(compteur)" [type]="attribut.type" class="form-control" placeholder="entrer la valeur ici">
+                            <textarea *ngIf="attribut.type == 'textarea'" class="form-control"  [formControlName]="incrementeCompteur(compteur)" placeholder="entrer la valeur ici"></textarea>
+                            <select  class="form-control" *ngIf="(attribut.type == TypeRadio) || (attribut.type == TypeBoolean)"  [formControlName]="incrementeCompteur(compteur)">
                                 <option value="oui">{{attribut.valeursParDefaut}}</option>
                             </select>
                             {{compteur}}

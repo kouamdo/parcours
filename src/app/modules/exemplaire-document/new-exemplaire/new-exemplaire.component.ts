@@ -61,6 +61,7 @@ export class NewExemplaireComponent implements OnInit {
   TypeRadio = TypeTicket.Radio
 
   compteur : number = -1
+  totalAttribut: number = -1
   tableauIndex : number[] = []
 
   constructor(private router:Router, private formBuilder: FormBuilder, private infosPath:ActivatedRoute, private serviceDocument:DocumentService, private serviceExemplaire : ExemplaireDocumentService, private serviceMission:MissionsService, private serviceAttribut:AttributService) { 
@@ -85,6 +86,7 @@ export class NewExemplaireComponent implements OnInit {
   addAttributs() {
    this._exemplaireDocument.push(this.formBuilder.control(''));
   }
+
   initialiseFormExemplaire(){
 
     this.tmpIndexValeursControls = new Map()
@@ -124,6 +126,7 @@ export class NewExemplaireComponent implements OnInit {
           this.document = document
           document.attributs.forEach(
             x => {
+              this.totalAttribut+=1
               this.addAttributs()
               // const objetCleValeur : ObjetCleValeur={
               //   key: "",
@@ -196,7 +199,9 @@ export class NewExemplaireComponent implements OnInit {
   couperLaChaine(chaine : string){
     chaine.slice
   }
-  incrementeCompteur() : number{
+  incrementeCompteur(cpt : number) : number{
+      if(this.totalAttribut>-1 && this.compteur>=this.totalAttribut)
+        return cpt;
       this.compteur = this.compteur + 1
       console.log('le compteur est : ', this.compteur)
       return this.compteur
