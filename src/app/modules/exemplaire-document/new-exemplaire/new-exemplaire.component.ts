@@ -84,7 +84,6 @@ export class NewExemplaireComponent implements OnInit {
 
   addAttributs() {
    this._exemplaireDocument.push(this.formBuilder.control(''));
-   //this.tableauIndex.push(this.incrementeCompteur()) 
   }
   initialiseFormExemplaire(){
 
@@ -126,12 +125,12 @@ export class NewExemplaireComponent implements OnInit {
           document.attributs.forEach(
             x => {
               this.addAttributs()
-              const objetCleValeur : ObjetCleValeur={
-                key: "",
-                value: ""
-              }
-              objetCleValeur.key = x.id
-              this.exemplaire.objetEnregistre.push(objetCleValeur)
+              // const objetCleValeur : ObjetCleValeur={
+              //   key: "",
+              //   value: ""
+              // }
+              // objetCleValeur.key = x.id
+              // this.exemplaire.objetEnregistre.push(objetCleValeur)
             }
           )
         }
@@ -198,10 +197,11 @@ export class NewExemplaireComponent implements OnInit {
     chaine.slice
   }
   incrementeCompteur() : number{
-    this.compteur = this.compteur + 1
-    return this.compteur
+      this.compteur = this.compteur + 1
+      console.log('le compteur est : ', this.compteur)
+      return this.compteur
   }
-  onSubmit(exemplaireInput:any){
+  onSubmit(){
     const exemplaireDocument = this._exemplaireDocument;
     console.log('Exemplaire ', exemplaireDocument.value);
     console.log('Exemplaire keys ', this.exemplaire.objetEnregistre);
@@ -222,6 +222,11 @@ export class NewExemplaireComponent implements OnInit {
     
     console.log("les objets cles-valeur : " + exemplaireTemp.objetEnregistre)
     console.log("this._exemplaireDocument : ", this._exemplaireDocument.value)
+
+    if(this.exemplaire.id != ""){
+      exemplaireTemp.id = this.exemplaire.id
+    }
+
     this.serviceExemplaire.ajouterExemplaireDocument(exemplaireTemp).subscribe(
       object => {
         this.router.navigate(['/list-exemplaire']);

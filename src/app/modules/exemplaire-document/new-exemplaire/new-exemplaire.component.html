@@ -1,5 +1,5 @@
 <div class="mainBlock">
-     <form [formGroup]="formeExemplaire" (ngSubmit)="onSubmit(formeExemplaire.value)" *ngIf="formeExemplaire" >
+     <form [formGroup]="formeExemplaire" (ngSubmit)="onSubmit()" *ngIf="formeExemplaire" >
                 
         <h1>
             {{this.document.titre}}
@@ -20,7 +20,7 @@
                             <select  class="form-control" *ngIf="(attribut.type == TypeRadio) || (attribut.type == TypeBoolean)"  [formControlName]="incrementeCompteur()">
                                 <option value="oui">{{attribut.valeursParDefaut}}</option>
                             </select>
-                            <!-- {{compteur}} -->
+                            {{compteur}}
                         </div>
                     </div>
                 </div>
