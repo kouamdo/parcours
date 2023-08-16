@@ -5,7 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import {MatSelectModule} from '@angular/material/select';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {v4 as uuidv4} from 'uuid';
-import { EMPTY, map, Observable, single } from 'rxjs';
+import { elementAt, EMPTY, map, Observable, single } from 'rxjs';
 
 import { PrecoMvtsService } from 'src/app/services/precomvts/precomvts.service';
 import { IPrecoMvt } from 'src/app/modele/precomvt';
@@ -62,7 +62,14 @@ export class NewPrecomvtComponent implements OnInit {
 
   formDirective!: FormGroupDirective;
   //settings: { idField: string; textField: string; allowSearchFilter: boolean; } | undefined;
-
+  precoMvtTmp=  this.eltsPreco[0]
+  PrecoMvt:IPrecoMvt={
+    id: '',
+    libelle:'',
+    type: '',
+    etat:false,
+    precomvtqte:[],
+  }
 
   constructor(private formBuilder:FormBuilder,private serviceFamille:FamillesService,private serviceDistributeur:DistributeursService,private ressourceService:RessourcesService ,private precoMvtService:PrecoMvtsService,private serviceRessource:RessourcesService,private router:Router, private infosPath:ActivatedRoute, private datePipe: DatePipe) {
     this.forme = this.formBuilder.group({
@@ -123,34 +130,36 @@ private getAllDistributeurs(){
       return this.serviceDistributeur.getAllDistributeurs();
     }
  //fonction onSubmit debut
-onSubmit(precomvtInput:any){
-console.log(this.forme.value)
-  if(this.forme.status==="VALID"){
-}
-}
-/*onSubmit(precomvtInput:any){
- console.log (this.forme.value)
+onSubmit(){
 this.submitted=true;
 if(this.forme.invalid)
   return;
- if(this.PrecoMvt= undefined){
-  precomvtTemp.id = this.precomvt.id
+  let  precomvtTemp : IPrecoMvt={
+    id: String(9),
+    libelle:this.eltsPreco[0].libelle,
+    etat:this.eltsPreco[0].etat,
+    type:this.eltsPreco[0].type,
+    precomvtqte:[],
+  }
+ if(this.PrecoMvt.id != ''){
+  precomvtTemp.id = this.PrecoMvt.id
 }
-precomvtTemp.precomvtqte = this.premvtqte
- console.log('voici une precomvt : ',  precomvtTemp.precomvtqte)
-    this.precoMvtService.ajouterPrecomvt(precomvtTemp).subscribe(
-      object => {
-        this.router.navigate(['list-precomvts']);
-      },
-    )
-  }*/
+this.eltsPreco.forEach
+     (valeur =>{
+      precomvtTemp.precomvtqte.push(valeur.precomvtqte[0])
 
-/*get libelle():FormControl{return this.forme.get('libelle')as FormControl}
-get etat():FormControl{return this.forme.get('etat')as FormControl}
-get type():FormControl{return this.forme.get('type')as FormControl}*/
+});
+console.log (precomvtTemp)
+this.precoMvtService.ajouterPrecomvt(precomvtTemp).subscribe(
+  object => {
+    this.router.navigate(['list-precomvts']);
+}
+)
+  }
  //fonction onSubmit fin
- validerControleStep(etape:number, valeurs:any){
 
+ //début fonction afficher message d'erreur
+ validerControleStep(etape:number, valeurs:any){
   let controleVerif = true;
   //controle sur l'étape courante
   if(this.steps == 1){
@@ -169,7 +178,7 @@ get type():FormControl{return this.forme.get('type')as FormControl}*/
       this.tabError.set("type", "Le type doit avoir une valeur");
     }
 
-  }else{ 
+  }else{
       if(this.steps == 2){
         let valFamille : string[] = this.forme.controls["famille"].value;
 
@@ -222,23 +231,29 @@ get type():FormControl{return this.forme.get('type')as FormControl}*/
         controleVerif = false;
         this.tabError.set("quantiteMin","QuantiteMin doit être inférieur à QuantiteMax");
       }
+      let valDistributeur : string[] = this.forme.controls["distributeur"].value;
 
-      //let valDistributeur : string = this.forme.controls["distributeur"].value;
-
-      /*if((valDistributeur == '' || valDistributeur.length < 0)){
+      if((valDistributeur == null || valDistributeur.length == 0)){
         controleVerif = false;
-        this.tabError.set("Distributeur","Field required");
-      }*/
+        this.tabError.set("distributeur","selectionner un distributeur");
+      }
       }
   }
-
-
   if(controleVerif){
     this.steps = etape;
     this.enregistrerValeurPrecomvtqte(valeurs);
   }
 }
+ //début fonction afficher message d'erreur
 
+//Suppression d'un element dans le boitier début
+supprimerElt(element: IPrecoMvt){
+this.eltsPreco.forEach((value, index) =>{
+  if(value == element)
+  this.eltsPreco.splice(index,1)
+});
+}
+//Suppression d'un element dans le boitier fin
 
 displayFn(ressource: IRessource): string {
  return ressource && ressource.libelle ? ressource.libelle : '';

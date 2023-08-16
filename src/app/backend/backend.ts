@@ -419,9 +419,9 @@ export class InMemDBService implements InMemoryDbService{
                 {id:"3",libelle:"vente",etat: true,type:'reduire',/*type:this.TypeMvtReduire*/
                 precomvtqte:[{id:"1",quantiteMin:30,  quantiteMax:40,  montantMin:100, montantMax:7000,/*fournisseur:'gc',*/
                        distributeur:[
-                                   {id:"1", raisonSocial:"cgb", adresse:"Dla", telephone:"655554488", mail: "ngong@yad.fr"},
-                                   {id:"2", raisonSocial:"bgb",adresse:"Ydé", telephone: "655554481", mail: "ngong@yad.fr"},
-                                   {id:"3", raisonSocial:"cvc", adresse:"Buéa", telephone:"655554486", mail:"ngong@yad.fr"}
+                                   {id:"1", raisonSocial:"brasserie", adresse:"Dla", telephone:"655554488", mail: "ngong@yad.fr"},
+                                   {id:"2", raisonSocial:"guinness",adresse:"Ydé", telephone: "655554481", mail: "ngong@yad.fr"},
+                                   {id:"3", raisonSocial:"papeterie yvan", adresse:"Buéa", telephone:"655554486", mail:"ngong@yad.fr"}
                                   ]
                         }]},
             ];
