@@ -1997,7 +1997,7 @@ export class InMemDBService implements InMemoryDbService {
             type: TypeTicket.Boolean,
             ordre: 0,
             obligatoire: false,
-            valeursParDefaut: 'A, A+, A-, B, B+, B-, AB, AB+, AB-, O, O+, O-',
+            valeursParDefaut: 'A,A+,A-,B,B+,B-,AB,AB+,AB-,O,O+,O-',
           },
           {
             id: '8',
@@ -2009,7 +2009,7 @@ export class InMemDBService implements InMemoryDbService {
             type: TypeTicket.Boolean,
             ordre: 0,
             obligatoire: false,
-            valeursParDefaut: 'oui, non',
+            valeursParDefaut: 'oui,non',
           },
           {
             id: '9',
@@ -2057,7 +2057,7 @@ export class InMemDBService implements InMemoryDbService {
             type: TypeTicket.Boolean,
             ordre: 0,
             obligatoire: false,
-            valeursParDefaut: 'oui, non',
+            valeursParDefaut: 'oui,non',
           },
           {
             id: '13',
