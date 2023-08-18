@@ -42,10 +42,11 @@
       background: none;
     }
   }
-/*.info, input{
- font-size: 12px;
+.info, input{
+ font-size: 14px;
  background-color: none;
-}*/
+
+}
  .color{
   //box-shadow: 0 0 6px #00FF00;
    border-radius: 5px;
@@ -506,4 +507,3 @@ mat-form-field:focus{
        justify-content:space-around;
      }
 }
-

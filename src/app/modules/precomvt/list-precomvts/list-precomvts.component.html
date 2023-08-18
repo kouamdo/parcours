@@ -50,30 +50,6 @@
                       <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header>type</th>
                       <td class="text-dark text-center containCell" mat-cell *matCellDef="let element"> {{element.type}} </td>
                   </ng-container>
-                   
-                 <!-- etat Column
-                 <ng-container matColumnDef="quantiteMin">
-                  <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header>quantiteMin</th>
-                  <td class="text-dark text-center containCell" mat-cell *matCellDef="let element"> {{element.quantiteMin}} </td>
-              </ng-container> -->
-
-                <!-- quantité Column
-                <ng-container matColumnDef="quantiteMax">
-                  <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header>quantiteMax</th>
-                  <td class="text-dark text-center containCell" mat-cell *matCellDef="let element"> {{element.quantiteMax}} </td>
-              </ng-container> -->
-
-               <!-- unité Column
-               <ng-container matColumnDef="montantMin">
-                <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header>montantMin</th>
-                <td class="text-dark text-center containCell" mat-cell *matCellDef="let element"> {{element.montantMin}} </td>
-            </ng-container> -->
-
-                <!-- prix Column
-                <ng-container matColumnDef="montantMax">
-                  <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header>montantMax</th>
-                  <td class="text-dark text-center containCell" mat-cell *matCellDef="let element"> {{element.montantMax}} </td>
-              </ng-container> -->
 
                   <ng-container matColumnDef="actions">
                       <th class="text-dark containHead" mat-header-cell *matHeaderCellDef>Actions</th>
@@ -88,7 +64,7 @@
                                       <i class="fa fa-map-pin" aria-hidden="true"></i>
                                       <span>{{'patient.table.actions.link1' | translate}}</span>
                                   </button>
-                                  <button class="dropdown-item nav-link" [routerLink]="['/ressource-nouvelle',element.id]" title="{{'patient.table.actions.link3' | translate}}">
+                                  <button class="dropdown-item nav-link" [routerLink]="['/view-precomvt',element.id]" title="{{'patient.table.actions.link3' | translate}}">
                                       <i class="fa fa-eye text-secondary" aria-hidden="true"></i>
                                       <span>{{'patient.table.actions.link3' | translate}}</span>
                                   </button>
@@ -116,5 +92,3 @@
       </div>
   </div>
 </div>
-
-

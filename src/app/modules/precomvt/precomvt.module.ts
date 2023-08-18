@@ -20,11 +20,13 @@ import { MatTableModule } from '@angular/material/table';
 import { ListPrecomvtsComponent } from './list-precomvts/list-precomvts.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSelectModule } from '@angular/material/select';
+import { ViewPrecomvtComponent } from './view-precomvt/view-precomvt.component';
 
 @NgModule({
   declarations: [
     NewPrecomvtComponent,
-    ListPrecomvtsComponent
+    ListPrecomvtsComponent,
+    ViewPrecomvtComponent
   ],
   imports: [
     CommonModule,

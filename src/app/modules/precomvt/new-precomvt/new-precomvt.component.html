@@ -1,7 +1,7 @@
 <div id="mainSection">
   <div class="card block">
     <div class="card-body p-0 m-0">
-      <form [formGroup]="forme" (ngSubmit)="onSubmit()" *ngIf="forme"  >
+      <form [formGroup]="forme" *ngIf="forme"  >
         <div *ngIf="steps != 2 && steps != 3" class="w-100 pt-4 pb-4 entete">Nouvelle Préconisation</div>
           <div *ngIf="steps==2" class="w-100 pt-4 pb-4 entete1" >Assigner aux Familles</div>
           <div *ngIf="steps==3" class="w-100 pt-4 pb-4 entete2">Assigner Une Ressource</div>
@@ -183,6 +183,7 @@
       <div>
         <label class="info"><input type="button" id="{{i}}" value="{{elt.libelle}}" (click)="chargerValeurPrecoMvt(i)" ><br/></label>
                             <input type="button" id="{{i}}" value="{{elt.type}}" (click)="chargerValeurPrecoMvt(i)"><br/>
+                            <input type="button" id="{{i}}" value="{{elt.precomvtqte[i].distributeur}}" (click)="chargerValeurPrecoMvt(i)"><br/>
         <div class="suppression">
           <button class="" title=""  id="left" >
             <i class="fa fa-pen text-info" aria-hidden="true" (click)="chargerValeurPrecoMvt(i)"></i>
@@ -194,7 +195,7 @@
       </div>
       </div>
       <div class="actionButtons">
-        <button type="submit" class="btn">Enregistrer</button>
+        <button type="button" (click)="enregistrerPreco()" class="btn">Enregistrer</button>
       </div>
     </div>
   </div>

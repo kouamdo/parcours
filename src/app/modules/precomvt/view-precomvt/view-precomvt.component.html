@@ -1,0 +1,27 @@
+<p>view-precomvt works!</p>
+
+
+
+
+
+
+
+
+<div >
+  <div>{{PrecoMvt.libelle}}</div>
+  <div>{{PrecoMvt.etat}}</div>
+  <div>{{PrecoMvt.type}}</div>
+</div>
+
+
+<div *ngFor="let precomvtqte of PrecoMvt.precomvtqte" >
+<div>{{precomvtqte.famille}}</div>
+<div>{{precomvtqte.ressource!.libelle}}</div>
+<div>{{precomvtqte.distributeur}}</div>
+<div>{{precomvtqte.quantiteMax}}</div>
+<div>{{precomvtqte.quantiteMin}}</div>
+<div>{{precomvtqte.montantMax}}</div>
+<div>{{precomvtqte.montantMin}}</div>
+
+
+</div>
