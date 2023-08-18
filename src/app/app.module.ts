@@ -23,18 +23,27 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { FamilleModule } from './modules/famille/famille.module';
+import { RessourceModule } from './modules/ressource/ressource.module';
+import { PrecomvtModule } from './modules/precomvt/precomvt.module';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+//import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { CommonModule } from '@angular/common';
+
+import { DistributeurModule } from './modules/distributeur/distributeur.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     NotFoundComponent,
-    MenuComponent
+    MenuComponent,
+
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
     FormsModule,
+    MatCheckboxModule,
     HttpClientInMemoryWebApiModule.forRoot(InMemDBService, {dataEncapsulation: false, passThruUnknownUrl: true}),
     PatientsModule,
     ServicesModule,
@@ -43,7 +52,10 @@ import { FamilleModule } from './modules/famille/famille.module';
     MissionsModule,
     DocumentsModule,
     FamilleModule,
-
+    RessourceModule,
+    PrecomvtModule,
+    //NgMultiSelectDropDownModule.forRoot(),
+    CommonModule,    DistributeurModule,
     // ngx-translate and the loader module
     HttpClientModule,
     TranslateModule.forRoot({

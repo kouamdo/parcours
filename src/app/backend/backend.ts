@@ -12,8 +12,18 @@ import { ITicket } from '../modele/ticket';
 import { TypeTicket } from '../modele/type-ticket';
 import { IExemplaireDocument } from '../modele/exemplaire-document';
 import { IFamille } from '../modele/famille';
+import { IRessource } from "../modele/ressource";
+import { IPrecoMvtQte } from "../modele/precomvtqte";
+//import { TypeMvt } from "../modele/type-mvt";
+import { IPrecoMvt } from "../modele/precomvt";
+import { Unites } from "../modele/unites";
+import { IDistributeur } from "../modele/distributeur";
 
 export class InMemDBService implements InMemoryDbService {
+
+    UnitesLitre = Unites.litre
+  UnitesKg = Unites.kg
+  UnitesTonne = Unites.tonne
 
   createDb() {
     let patients: IPatient[] = [
@@ -306,6 +316,9 @@ export class InMemDBService implements InMemoryDbService {
               { nom: 'Rechercher', lien: './list-familles', bouton: 'false' },
             ],
           },
+          {"fonction":"Ressource", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"Créer", "lien":"ressource-nouvelle", "bouton":"false"},{"nom":"Rechercher", "lien":"./list-ressources", "bouton":"false"}]},
+          {"fonction":"Préconisations","icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"Créer", "lien":"precomvt-nouvelle", "bouton":"false"},{"nom":"Rechercher", "lien":"./list-precomvts", "bouton":"false"}]},
+          {"fonction":"Distributeur", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"Créer", "lien":"distributeur-nouveau", "bouton":"false"},{"nom":"Rechercher", "lien":"./list-distributeurs", "bouton":"false"}]},
         ],
       },
       {
@@ -390,6 +403,9 @@ export class InMemDBService implements InMemoryDbService {
               { nom: 'Search', lien: './list-familles', bouton: 'false' },
             ],
           },
+          {"fonction":"Ressource", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"Créer", "lien":"ressource-nouvelle", "bouton":"false"},{"nom":"Search", "lien":"./list-ressources", "bouton":"false"}]},
+          {"fonction":"Préconisations","icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"Créer", "lien":"precomvt-nouvelle", "bouton":"false"}, {"nom":"Search", "lien":"./list-precomvts", "bouton":"false"}]},
+          {"fonction":"Distributeur", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"Créer", "lien":"distributeur-nouveau", "bouton":"false"},{"nom":"search", "lien":"./list-distributeurs", "bouton":"false"}]},
         ],
       },
     ];
@@ -2475,28 +2491,63 @@ export class InMemDBService implements InMemoryDbService {
         ],
       },
     ];
-    let famille: IFamille[] = [
-      { id: '1', libelle: 'transfusion', description: 'sang', etat: 'gl' },
-      { id: '2', libelle: 'néonat', description: 'nouveau-né', etat: 'malade' },
-      {
-        id: '3',
-        libelle: 'pediatrie',
-        description: 'enfant',
-        etat: 'souffrant',
-      },
-      { id: '4', libelle: 'néonat', description: 'nouveau-né', etat: 'malade' },
-      { id: '5', libelle: 'transfusion', description: 'sang', etat: 'gl' },
+    let ressource:IRessource[]=[
+      {id:"1", libelle:"transfusion",etat:true, /*dateCreation:new Date("07/03/2000"),dateModification:new Date("07/03/1990"),*/quantite:10,unite:this.UnitesLitre,prix:1000,caracteristique:"souple",
+        famille:{id:"1", libelle:"trans", description:"sang", etat:"gl"}},
+      {id:"2", libelle:"néonat",etat: true,/* dateCreation:new Date("07/03/2000"),dateModification:new Date("07/03/1990"),*/quantite:20,unite:this.UnitesLitre,prix:2000,caracteristique:"souple",
+        famille: {id:"2", libelle:"néonat", description:"nouveau-né", etat:"malade"}},
+      {id:"2", libelle:"néonat",etat: true,/* dateCreation:new Date("07/03/2000"),dateModification:new Date("07/03/1990"),*/quantite:20,unite:this.UnitesLitre,prix:2000,caracteristique:"souple",
+        famille:{id:"3", libelle:"pediatrie", description:"enfant", etat:"souffrant"}},
+      {id:"3", libelle:"pediatrie",etat: true, /*dateCreation:new Date("07/03/2000"),dateModification:new Date("07/03/1990"),*/quantite:30,unite:this.UnitesLitre,prix:3000,caracteristique:"souple",
+        famille:{id:"4", libelle:"néonat", description:"nouveau-né", etat:"malade"}},
+      {id:"4", libelle:"néonat",etat: true,/*dateCreation:new Date("07/03/2000"),dateModification:new Date("07/03/1990"),*/quantite:40,unite:this.UnitesLitre,prix:4000,caracteristique:"souple",
+        famille:{id:"5", libelle:"transfusion", description:"sang", etat:"gl"}},
     ];
-    return {
-      patients,
-      services,
-      menus,
-      tickets,
-      missions,
-      attributs,
-      documents,
-      exemplaires,
-      famille,
-    };
+    let famille:IFamille[]=[
+      {id:"1", libelle:"trans", description:"sang", etat:"gl"},
+      {id:"2", libelle:"néonat", description:"nouveau-né", etat:"malade"},
+      {id:"3", libelle:"pediatrie", description:"enfant", etat:"souffrant"},
+      {id:"4", libelle:"néonat", description:"nouveau-né", etat:"malade"},
+      {id:"5", libelle:"transfusion", description:"sang", etat:"gl"},
+  ];
+
+
+    let precomvt:IPrecoMvt[]=[
+      {id:"1",libelle:"rachat",etat: true,type:'neutre',/*type:this.TypeMvtNeutre*/
+      precomvtqte:[{id:"1",quantiteMin:10,  quantiteMax:20,  montantMin:1000, montantMax:7000,/*fournisseur:'gc',*/
+                  ressource:{id:"1", libelle:"transfusion",etat:true,quantite:10,unite:this.UnitesLitre,prix:1000,caracteristique:"souple", famille:{id:"4", libelle:"néonat", description:"nouveau-né", etat:"malade"}}
+              },
+              {id:"2",quantiteMin:30,  quantiteMax:40,  montantMin:100, montantMax:7000,/*fournisseur:'gc',*/
+                  famille:[
+                     {id:"1", libelle:"trans", description:"sang", etat:"gl"},
+                     {id:"2", libelle:"néonat", description:"nouveau-né", etat:"malade"},
+                     {id:"3", libelle:"pediatrie", description:"enfant", etat:"souffrant"}
+                 ]
+
+          },
+        ]},
+    {id:"2",libelle:"vente",etat: true,type:'reduire',/*type:this.TypeMvtReduire*/
+    precomvtqte:[{id:"1",quantiteMin:30,  quantiteMax:40,  montantMin:100, montantMax:7000,/*fournisseur:'gc',*/
+                famille:[
+                        {id:"1", libelle:"trans", description:"sang", etat:"gl"},
+                        {id:"2", libelle:"néonat", description:"nouveau-né", etat:"malade"},
+                        {id:"3", libelle:"pediatrie", description:"enfant", etat:"souffrant"}
+                      ]
+            }]},
+            {id:"3",libelle:"vente",etat: true,type:'reduire',/*type:this.TypeMvtReduire*/
+            precomvtqte:[{id:"1",quantiteMin:30,  quantiteMax:40,  montantMin:100, montantMax:7000,/*fournisseur:'gc',*/
+                   distributeur:[
+                               {id:"1", raisonSocial:"brasserie1", adresse:"Dla", telephone:"655554488", mail: "ngong@yad.fr"},
+                               {id:"2", raisonSocial:"guinness",adresse:"Ydé", telephone: "655554481", mail: "ngong@yad.fr"},
+                               {id:"3", raisonSocial:"papeterie yvan", adresse:"Buéa", telephone:"655554486", mail:"ngong@yad.fr"}
+                              ]
+                    }]}
+          ];
+    let distributeur:IDistributeur[]=[
+      {id:"1", raisonSocial:"cgb", adresse:"Dla", telephone:"655554488", mail: "ngong@yad.fr"},
+      {id:"2", raisonSocial:"bgb",adresse:"Ydé", telephone: "655554481", mail: "ngong@yad.fr"},
+      {id:"3", raisonSocial:"cvc", adresse:"Buéa", telephone:"655554486", mail:"ngong@yad.fr"},
+    ];
+    return{patients, services, menus, tickets, missions, attributs, documents,exemplaires,famille,ressource,precomvt,distributeur};
   }
 }
