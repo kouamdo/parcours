@@ -47,8 +47,8 @@ export class NewExemplaireComponent implements OnInit {
   idPatientCourant: string | null= "";
   nomPatientCourant: string | null = "";
   
-  // tableau de type map pour enregistrer les index 
-  // et valeurs des controls du formulaire
+  // tableau de type map pour enregistrer les index (en valeur)
+  // et idAttributs (en clé) des controls du formulaire
   tmpIndexValeursControls : Map<string, number> = new Map();
   
   typeInt = TypeTicket.Int;
@@ -83,8 +83,11 @@ export class NewExemplaireComponent implements OnInit {
     this.initialiseFormExemplaire()
   }
 
-  addAttributs() {
-   this._exemplaireDocument.push(this.formBuilder.control(''));
+  addAttributs(valParDefaut : string) {
+    if(valParDefaut !='' && valParDefaut!='PARCOURS_NOT_FOUND_404')
+      this._exemplaireDocument.push(this.formBuilder.control(valParDefaut));
+    else
+     this._exemplaireDocument.push(this.formBuilder.control(''));  
   }
 
   initialiseFormExemplaire(){
@@ -96,71 +99,36 @@ export class NewExemplaireComponent implements OnInit {
       this.titre="Document à Modifier";
       this.serviceExemplaire.getExemplaireDocumentById(this.idExemplaire).subscribe(
         x => {
-          this.exemplaire = x; console.log(this.exemplaire);
-          const exemplaireDocument = this._exemplaireDocument;
-
-          this.serviceDocument.getDocumentById(this.exemplaire.idDocument).subscribe(
-            document =>{
-              this.document = document
-              document.attributs.forEach(
-                x => {
-                  this.totalAttribut+=1
-                  this.addAttributs()
-
-                  const indice = exemplaireDocument.length;
-                  console.log("le resultat est : ", exemplaireDocument.controls[0].value)
-
-                  //creer la map avec id et indice
-                  this.tmpIndexValeursControls.set(x.id, indice - 1);
-                }
-              )
-            }
-          )
-          this.remplissageFormulaire()
-          console.log("le tablesu : " , this.tmpIndexValeursControls)
+          this.exemplaire = x;    
+          this.document = x;   
+          if(x.attributs.length > x.objetEnregistre.length)
+            this.totalAttribut = x.attributs.length;
+          else
+          this.totalAttribut =  x.objetEnregistre.length;               
       });
     }
     if(this.idDocument){
       this.serviceDocument.getDocumentById(this.idDocument).subscribe(
         document =>{
           this.document = document
-          document.attributs.forEach(
-            x => {
-              this.totalAttribut+=1
-              this.addAttributs()
-              // const objetCleValeur : ObjetCleValeur={
-              //   key: "",
-              //   value: ""
-              // }
-              // objetCleValeur.key = x.id
-              // this.exemplaire.objetEnregistre.push(objetCleValeur)
-            }
-          )
+          this.totalAttribut = document.attributs.length;
         }
       )
     }
   }
 
   /**
-   * methode permettant de preremplir le formulaire pour la modification
+   * methode permettant de renvoyer la valeur de l'attribut
    */
-  remplissageFormulaire(){// parcourir les indices de la map forme a ce niveau, listIndice
-
-    console.log("la fonction de remplissage ")
-
-    const exemplaireDocument = this._exemplaireDocument;
-    console.log("le tablesu partie remplissage: " , this.tmpIndexValeursControls)
+  rechercherValeurParIdAttribut(idAttribut : string) : string{
 
     for (let index = 0; index < this.exemplaire.objetEnregistre.length; index++) {
       const element = this.exemplaire.objetEnregistre[index];
-      const indiceCourant : number | undefined = this.tmpIndexValeursControls.get(element.key)
-      console.log("le get est : ", indiceCourant)
-      if(this.tmpIndexValeursControls.get(element.key)){
-        exemplaireDocument.controls[indiceCourant!].setValue(element.value)
-        console.log("le resultat est : ", exemplaireDocument.controls[indiceCourant!].value)
-        break;
+      if(element.key == idAttribut){
+        return element.value;
       }
     }
+    return 'PARCOURS_NOT_FOUND_404';
   }
   enregistrerObjet(){ 
     const exemplaireDocument = this._exemplaireDocument;
@@ -198,13 +166,25 @@ export class NewExemplaireComponent implements OnInit {
   couperLaChaine(chaine : string){
     chaine.slice
   }
-  incrementeCompteur(cpt : number) : number{
-      if(this.totalAttribut>-1 && this.compteur>=this.totalAttribut)
-        return cpt;
-      this.compteur = this.compteur + 1
-      console.log('le compteur est : ', this.compteur)
+
+  /**
+   * Permet d'incrémenter les index des différents inputs contenus dans les formControl
+   * ainsi que de les initialiser à une valeur par défaut
+   * @param cpt valeur courante du compteur
+   * @param idAttribut id attribut à afficher
+   * @returns valeur courante + 1
+   */
+  incrementeCompteur(cpt : number, idAttribut : string) : number{
+    if(this.totalAttribut>-1 && this.compteur>=this.totalAttribut)
+      return cpt;
+    
+    let valAttribut = this.rechercherValeurParIdAttribut(idAttribut);
+    this.addAttributs(valAttribut);
+    this.compteur = this.compteur + 1
+     // console.log('le compteur est : ', this.compteur)
       return this.compteur
   }
+
   onSubmit(){
     const exemplaireDocument = this._exemplaireDocument;
     console.log('Exemplaire ', exemplaireDocument.value);
