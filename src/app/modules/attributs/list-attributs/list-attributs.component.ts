@@ -20,12 +20,12 @@ export class ListAttributsComponent implements OnInit {
   attrubuts$:Observable<IAttributs>=EMPTY;
 
   myControl = new FormControl<string | IAttributs>('');
- 
+
   ELEMENTS_TABLE: IAttributs[] = [];
   filteredOptions: IAttributs[] | undefined;
 
-  displayedColumns: string[] = ['id', 'titre', 'description', 'etat', 'ordre', 'obligatoire', 'valeursParDefaut', 'type', 'actions'];
-  
+  displayedColumns: string[] = ['id', 'titre', 'description', 'etat', 'dateCreation', 'dateModification', 'type', 'actions'];
+
   dataSource = new MatTableDataSource<IAttributs>(this.ELEMENTS_TABLE);
 
   @ViewChild(MatPaginator)
@@ -45,7 +45,7 @@ export class ListAttributsComponent implements OnInit {
         const titre = typeof value === 'string' ? value : value?.titre;
         if(titre != undefined && titre?.length >0){
           this.serviceAttribut.getAttributsByTitre(titre.toLowerCase() as string).subscribe(
-            reponse => { 
+            reponse => {
               this.filteredOptions = reponse;
             }
           )
@@ -74,7 +74,7 @@ export class ListAttributsComponent implements OnInit {
         valeurs => {this.dataSource.data = valeurs;}
     )
   }
-  
+
   announceSortChange(sortState: Sort) {
     if (sortState.direction) {
       this._liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);

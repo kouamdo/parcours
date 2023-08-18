@@ -1,0 +1,202 @@
+<div id="mainSection">
+  <div class="card block">
+    <div class="card-body p-0 m-0">
+      <form [formGroup]="forme" *ngIf="forme"  >
+        <div *ngIf="steps != 2 && steps != 3" class="w-100 pt-4 pb-4 entete">Nouvelle Préconisation</div>
+          <div *ngIf="steps==2" class="w-100 pt-4 pb-4 entete1" >Assigner aux Familles</div>
+          <div *ngIf="steps==3" class="w-100 pt-4 pb-4 entete2">Assigner Une Ressource</div>
+
+          <div class="w-100 mt-4 pt-0 pl-2 pr-2 pb-0" >
+            <div class="w-100">
+              <div  *ngIf="steps==1" class="w-100">
+                <div class="form-group">
+                  <div>
+                    <div class="champs">
+                      <label for="libelle" class="label" class="libe">
+                        Libelle
+                      </label>
+                      <input type="text" formControlName="libelle" name="libelle" id="libelle"  placeholder="libelle"  class="form-control"
+                      (ngModelChange)="tabError.delete('libelle')">
+                    </div>
+                    <div  *ngIf="tabError.get('libelle')"  class="alert alert-danger" >
+                      <div *ngIf="tabError.get('libelle')">{{ tabError.get('libelle') }}</div>
+                    </div>
+                  </div>
+              </div>
+
+                <div class="form-group" id="eta">
+                  <div>
+                      <div class="champs">
+                        <label for="etat" class="label" >
+                          Etat
+                        </label>
+                        <input  type="checkbox" formControlName="etat" name="etat" class="form-control" id="etat" placeholder="" required checked>
+
+                      </div>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <div class="champs">
+                    <label  for="type"  class="label" >
+                      Type
+                    </label>
+                    <select class="form-control" formControlName="type" (ngModelChange)="tabError.delete('type')">
+                      <option class="label" *ngFor="let typeM of typeMvt" value="{{ typeM }}" >
+                        {{ typeM }}
+                      </option>
+                    </select>
+                    <div  *ngIf="tabError.get('type')"  class="alert alert-danger" >
+                      <div *ngIf="tabError.get('type')">{{ tabError.get('type') }}</div>
+                      </div>
+                  </div>
+                </div>
+            </div>
+            </div>
+          </div>
+
+        <div *ngIf="steps == 2" class="form-group pt-0 pl-2 pr-2 pb-0">
+          <div class="champs">
+            <label for="famille" class="label">
+              Famille
+            </label>
+            <mat-form-field class="example-full-width" appearance="fill" >
+              <mat-label>Famille</mat-label>
+              <mat-select formControlName="famille" multiple [compareWith]="compareItem" (ngModelChange)="tabError.delete('famille')">
+                <mat-option *ngFor="let membre of familles$ |async" [value]="membre"  >{{membre.libelle}}</mat-option>
+              </mat-select>
+              <div  *ngIf="tabError.get('famille')"  class="alert alert-danger" >
+                <div *ngIf="tabError.get('famille')">{{ tabError.get('famille') }}</div>
+              </div>
+            </mat-form-field>
+
+          </div>
+        </div>
+        <div  *ngIf="steps==3" class="form-group pt-0 pl-2 pr-2 pb-0">
+          <div class="champs"  id="ressource">
+              <label  for="ressource"  class="label" id="label3">
+                Ressource
+              </label>
+              <mat-form-field class="example-full-width" appearance="fill">
+                  <input  type="text" matInput [matAutocomplete]="auto" aria-label="ressource" formControlName="ressource"  ng-reflect-name="ressource" (ngModelChange)="tabError.delete('ressource')">
+                  <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn" >
+                  <mat-option *ngFor="let option of filteredOptions" [value]="option" >
+                      {{option.libelle}}
+                  </mat-option>
+                  </mat-autocomplete>
+                  <div  *ngIf="tabError.get('ressource')"  class="alert alert-danger" >
+                  <div *ngIf="tabError.get('ressource')">{{ tabError.get('ressource') }}</div>
+                  </div>
+              </mat-form-field>
+          </div>
+        </div>
+
+        <div *ngIf="steps == 2 || steps == 3" class="pt-0 pl-2 pr-2 pb-0">
+
+          <div class="form-group">
+            <div class="champs">
+                <label  for="quantiteMax"  class="label" >
+                  Quantité Max
+                </label>
+                <input type="number"  formControlName="quantiteMax" name="quantiteMax" class="form-control" id="quantiteMax" placeholder="Entrer la quantite maximale"
+                (ngModelChange)="tabError.delete('quantiteMax')" >
+            </div>
+             <div  *ngIf="tabError.get('quantiteMax')"  class="alert alert-danger" >
+             <div *ngIf="tabError.get('quantiteMax')">{{ tabError.get('quantiteMax') }}</div>
+            </div>
+        </div>
+
+          <div class="form-group">
+            <div class="champs">
+                <label  for="quantiteMin"  class="label" >
+                  Quantité Min
+                </label>
+                <input  type="number" formControlName="quantiteMin" name="quantiteMin" class="form-control" id="quantiteMin" placeholder="Entrer la quantite minimale"
+                (ngModelChange)="tabError.delete('quantiteMin')">
+            </div>
+            <div  *ngIf="tabError.get('quantiteMin')"  class="alert alert-danger" >
+              <div *ngIf="tabError.get('quantiteMin')">{{ tabError.get('quantiteMin') }}</div>
+             </div>
+          </div>
+
+
+          <div class="form-group">
+            <div class="champs">
+              <label  for="montantMax"  class="label" >
+                Montant Max
+              </label>
+              <input  type="number"  formControlName="montantMax" name="montantMax" id="montantMax" placeholder="Entrer le montant minimal" class="form-control"
+               (ngModelChange)="tabError.delete('montantMax')">
+            </div>
+             <div  *ngIf="tabError.get('montantMax')"  class="alert alert-danger" >
+              <div *ngIf="tabError.get('montantMax')">{{ tabError.get('montantMax') }}</div>
+          </div>
+          </div>
+
+
+          <div class="form-group">
+            <div class="champs">
+                <label  for="montantMin"  class="label" >
+                  Montant Min
+                </label>
+                <input type="number" formControlName="montantMin" name="montantMin" class="form-control" id="montantMin" placeholder="Entrer le montant maximal"
+                 (ngModelChange)="tabError.delete('montantMin')">
+            </div>
+             <div  *ngIf="tabError.get('montantMin')"  class="alert alert-danger" >
+            <div *ngIf="tabError.get('montantMin')">{{ tabError.get('montantMin') }}</div>
+           </div>
+          </div>
+
+          <div class="form-group">
+            <div class="champs">
+              <label  for="distributeur"  class="label" >
+                Fournisseurs
+              </label>
+              <select  formControlName="distributeur"  name="distributeur" id=" distributeur" class="form-control" (ngModelChange)="tabError.delete('distributeur')">
+                <option *ngFor="let membre of distributeurs$ |async" [value]="membre" >{{membre.raisonSocial}}</option>
+              </select>
+            </div>
+             <div  *ngIf="tabError.get('distributeur')"  class="alert alert-danger" >
+             <div *ngIf="tabError.get('distributeur')">{{ tabError.get('distributeur') }}</div>
+            </div>
+        </div>
+        </div>
+
+        <div class="actionButton">
+          <button class="btn" *ngIf="steps == 0">Back</button>
+          <button type="button" class="btn" routerLink="../list-precomvts">Annuler</button>
+          <button type="button" class="btn" (click)="validerControleStep(2,forme.value); ">Famille</button>
+          <button type="button" class="btn" (click)="validerControleStep(3,forme.value); ">Ressource</button>
+
+
+        </div>
+      </form>
+    </div>
+  </div>
+
+    <div id="rigthSection" class="card" >
+    <div class="titleBlock" id="titleBlock" class="w-200 pt-4 pb-4 entete0">
+      <h2 class="rigth">Etape</h2>
+    </div>
+    <div class="contentBlock">
+      <div *ngFor="let elt of eltsPreco let i=index"  class="color" >
+      <div>
+        <label class="info"><input type="button" id="{{i}}" value="{{elt.libelle}}" (click)="chargerValeurPrecoMvt(i)" ><br/></label>
+                            <input type="button" id="{{i}}" value="{{elt.type}}" (click)="chargerValeurPrecoMvt(i)"><br/>
+                            <input type="button" id="{{i}}" value="{{elt.precomvtqte[i].distributeur}}" (click)="chargerValeurPrecoMvt(i)"><br/>
+        <div class="suppression">
+          <button class="" title=""  id="left" >
+            <i class="fa fa-pen text-info" aria-hidden="true" (click)="chargerValeurPrecoMvt(i)"></i>
+          </button>
+          <button class="" title="" id="right">
+            <i class="fa fa-times-circle text-danger" aria-hidden="true" (click)="supprimerElt(elt)" ></i>
+          </button>
+        </div>
+      </div>
+      </div>
+      <div class="actionButtons">
+        <button type="button" (click)="enregistrerPreco()" class="btn">Enregistrer</button>
+      </div>
+    </div>
+  </div>
+</div>

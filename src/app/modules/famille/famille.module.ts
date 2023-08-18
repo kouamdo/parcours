@@ -19,12 +19,6 @@ import { MatTableModule } from '@angular/material/table';
 import { ListFamillesComponent } from './list-familles/list-familles.component';
 
 
-
-
-
-
-
-
 @NgModule({
   declarations: [
     NewFamilleComponent,

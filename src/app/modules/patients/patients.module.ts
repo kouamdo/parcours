@@ -33,6 +33,7 @@ import { MatTableModule } from '@angular/material/table';
     MatTableModule,
     MatSortModule,
     TicketsModule,
+    
     TranslateModule.forChild({
         loader: {
             provide: TranslateLoader,
@@ -41,7 +42,7 @@ import { MatTableModule } from '@angular/material/table';
         },
         extend:true
     }),
-    BrowserModule 
+    BrowserModule
   ],
   providers: [DatePipe],
 })

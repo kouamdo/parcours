@@ -29,17 +29,14 @@ export class NewAttributComponent implements OnInit {
   initialDateCreation = new FormControl(new Date());
   initialDateModification = new FormControl(new Date());
 
-  constructor(private formBuilder:FormBuilder, private attributService:AttributService,private router:Router, private infosPath:ActivatedRoute, private datePipe: DatePipe) { 
+  constructor(private formBuilder:FormBuilder, private attributService:AttributService,private router:Router, private infosPath:ActivatedRoute, private datePipe: DatePipe) {
     this.forme = this.formBuilder.group({
       titre: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
       description: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
       etat: ['False', [Validators.required, Validators.minLength(1), Validators.maxLength(50)]],
-      dateCreation: [new Date()],
-      dateModification: [new Date() ],
-      ordre: [0],
-      obligatoire: [false],
-      valeursParDefaut: [''],
-      type: ['']
+      dateCreation: ['', [Validators.required]],
+      dateModification: ['//'],
+      unite: ['']
     })
   }
 
@@ -58,9 +55,6 @@ export class NewAttributComponent implements OnInit {
             etat: this.attribut.etat,
             dateCreation: this.datePipe.transform(this.attribut.dateCreation,'yyyy-MM-dd'),
             dateModification: this.datePipe.transform(this.attribut.dateModification,'yyyy-MM-dd'),
-            ordre: this.attribut.ordre,
-            obligatoire: this.attribut.obligatoire,
-            valeursParDefaut: this.attribut.valeursParDefaut,
             type: this.attribut.type
           })
       });
@@ -90,9 +84,9 @@ export class NewAttributComponent implements OnInit {
     }
     attributTemp.dateCreation = this.initialDateCreation.value!
     attributTemp.dateModification = this.initialDateModification.value!
-    
+
     if(this.attribut != undefined){
-      attributTemp.id = this.attribut.id  
+      attributTemp.id = this.attribut.id
     }
 
     this.attributService.ajouterAttribut(attributTemp).subscribe(
