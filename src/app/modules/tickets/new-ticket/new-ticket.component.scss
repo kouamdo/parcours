@@ -9,7 +9,7 @@
     width: 100%;
 }
 .entete{
-    background-color: #7ea97e;
+    background-color: #28a745;
     color: white;
     text-align: center;
     font-size: 22px;
@@ -21,7 +21,7 @@
     justify-content: space-between;
     width: 100%;
     button{
-        background-color: #7ea97e;
+        background-color: #28a745;
         color: white;
         width: fit-content;
         //white-space: nowrap;
@@ -34,14 +34,14 @@
     justify-content: space-between;
     label{
         padding: 10px 5px;
-        color: #7ea97e;
+        color: #28a745;
         font-weight: normal;
         input{
             margin-right: 5px;
-            color: #7ea97e;
+            color: #28a745;
         }
         input:checked{
-            background-color: #7ea97e;
+            background-color: #28a745;
         }
     }
 }
@@ -72,7 +72,7 @@
             position: absolute;
             bottom: 0;
             right: 0;
-            color: #7ea97e;
+            color: #28a745;
             font-size: 8px;
         }
     }

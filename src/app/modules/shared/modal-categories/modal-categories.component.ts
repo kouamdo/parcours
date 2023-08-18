@@ -15,6 +15,7 @@ import { DocumentService } from 'src/app/services/documents/document.service';
 import { TypeTicket } from "src/app/modele/type-ticket";
 import {v4 as uuidv4} from 'uuid';
 import { map } from 'rxjs';
+import { DonneesEchangeService } from 'src/app/services/donnees-echange/donnees-echange.service';
 
 @Component({
   selector: 'app-modal-categories',
@@ -28,14 +29,17 @@ export class ModalCategoriesComponent implements OnInit {
   titre: string="Ajouter une categorie";
   submitted: boolean=false;
   validation: boolean=false;
-  displayedCategoriesAttributsColumns: string[] = ['actions','nomCategorie', 'ordreCat', 'libelleAttribut', 'ordreAtrParCat']; // structure du tableau presentant les categories creees avec leurs attributs
-  displayedCategoriesColumns: string[] = ['actions','titre', 'description', 'type', 'ordreAtrParCat'];  // structure du tableau presentant les choix des attributs lors de la creation des categories
-  ordreAttributExiste : boolean = false
-  ordreCategorieExiste : boolean = false
+
+  // structure du tableau presentant les categories creees avec leurs attributs
+  displayedCategoriesAttributsColumns: string[] = ['actions','nomCategorie', 'ordreCat', 'libelleAttribut', 'ordreAtrParCat']; 
+  // structure du tableau presentant les choix des attributs lors de la creation des categories
+  displayedCategoriesColumns: string[] = ['actions','titre', 'description', 'type', 'ordreAtrParCat'];  
+  
   nomValide : boolean = false
   
-  // variables pour la gestion des categories
-  dataSourceAttributTemp = new MatTableDataSource<IAttributs>(); //tableau de listing des attributs a affecter a chaque categorie
+  //tableau de listing des attributs a affecter a chaque categorie
+  dataSourceAttributTemp = new MatTableDataSource<IAttributs>(); 
+  
   categorieAttributs : ICategoriesAttributs = {
     id: '',
     nom: '',
@@ -55,17 +59,24 @@ export class ModalCategoriesComponent implements OnInit {
     type: TypeTicket.Int
   }
 
-  TABLE_CATEGORIE_AFFICHAGE_TEMP: ICategorieAffichage[] = []; // tableau contenant les categories creees a partir du premier tableau de la modal
+// tableau contenant les categories creees a partir du premier tableau de la modal
+  TABLE_CATEGORIE_AFFICHAGE_TEMP: ICategorieAffichage[] = []; 
   tableResultatsCategoriesAffichage  = new MatTableDataSource<ICategorieAffichage>(this.TABLE_CATEGORIE_AFFICHAGE_TEMP);
 
   tableauAttributsTemp : IAttributs[] = []
   tableauIndexSelectionner = new Map(); 
   
+// structure du tableau presentant les objets categoriesAttributs finaux formes en regroupant les categories
+// du meme nom avec ces attributs, a partir du deuuxieme tableau de la modal
+  TABLE_FINAL_CATEGORIES_ATTRIBUTS: ICategoriesAttributs[] = [];
+
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor( private router:Router, private formBuilder: FormBuilder, private infosPath:ActivatedRoute, private serviceDocument:DocumentService, private serviceCategorieAttribut:CategorieAttributService, private serviceAttribut:AttributService,  private _liveAnnouncer: LiveAnnouncer,
+  constructor( private router:Router, private formBuilder: FormBuilder, private infosPath:ActivatedRoute, private serviceDocument:DocumentService,
+     private serviceCategorieAttribut:CategorieAttributService, private serviceAttribut:AttributService,  
+     private donneeDocCatService:DonneesEchangeService, private _liveAnnouncer: LiveAnnouncer,
     @Inject(MAT_DIALOG_DATA) public data: any) {
 
       this.formeCategorieAttribut = this.formBuilder.group({
@@ -75,41 +86,118 @@ export class ModalCategoriesComponent implements OnInit {
     }
     
   ngOnInit(): void {
-    console.log(this.data.dataICategorieAffiche)
-    this.tableauAttributsTemp = this.data.dataSourceAttributDocument.data
-    this.dataSourceAttributTemp.data = this.tableauAttributsTemp;
+    console.log(this.donneeDocCatService.dataDocumentCategorie)
 
-    if (this.data.dataICategorieAffiche != null) {
-      this.TABLE_CATEGORIE_AFFICHAGE_TEMP = this.data.dataICategorieAffiche
+      this.TABLE_CATEGORIE_AFFICHAGE_TEMP = this.donneeDocCatService.dataDocumentCategorie
       this.tableResultatsCategoriesAffichage.data = this.TABLE_CATEGORIE_AFFICHAGE_TEMP;
+    if (this.donneeDocCatService.dataDocumentCategorie != null && this.donneeDocCatService.dataDocumentCategorie.length >0) {
+      //Création du premier tableau si le deuxième n'est pas vide
+      let listAtt : String[] = [];
+      let listCatAtt :ICategorieAffichage[] = this.tableResultatsCategoriesAffichage.data;
+      //recuperation des id des attributs dans le deuxieme tableau de la modal
+      listCatAtt.forEach(valeur=>{
+        listAtt.push(valeur.attribut.id);
+      });
+      //comparaison avec les ids du tableau initial pour exclure ce présent dans le second
+      this.tableauAttributsTemp = [];
+      let tmpTab =  this.data.dataSourceAttributDocument.data;
+      tmpTab.forEach(
+        (att : IAttributs) =>{
+          if(!listAtt.includes(att.id)){
+            this.tableauAttributsTemp.push(att);
+          }
+      });
+      this.dataSourceAttributTemp = new MatTableDataSource<IAttributs>(this.tableauAttributsTemp);
+
+      //suppression des valeurs dans le second tableau si les attributs ont été supprimé dans le tableau initial des attributs
+      let TABLE_CATEGORIE_AFFICHAGE_TEMP : ICategorieAffichage[] = [];
+      listCatAtt.forEach(attCat =>{
+        for (let index = 0; index < tmpTab.length; index++) {
+          const element = tmpTab[index];
+           if(element.id ==attCat.attribut.id ){
+            TABLE_CATEGORIE_AFFICHAGE_TEMP.push(attCat);
+            break;
+          }
+        }    
+      });
+      this.tableResultatsCategoriesAffichage = new MatTableDataSource<ICategorieAffichage>(TABLE_CATEGORIE_AFFICHAGE_TEMP);
+      this.tableauIndexSelectionner = new Map;
+      //sauvegarde de la nouvelle valeur du 2ème tableau
+      this.donneeDocCatService.dataDocumentCategorie =  TABLE_CATEGORIE_AFFICHAGE_TEMP;
+    }else{
+      //Création du premier tableau si le deuxième est vide
+      this.tableauAttributsTemp = this.data.dataSourceAttributDocument.data
     }
+    this.dataSourceAttributTemp.data = this.tableauAttributsTemp;
   }
 
-  validerCategorie(categorieAttributInput:any,value : any, index : number, event: any){
+  /**
+   * fonction qui permet d'ajouter des categories au check dans un tableau temporaire
+   * avant des les enregistrer dans le deuxieme tableau de la modale
+   * @param categorieAttributInput 
+   * @param attribut 
+   * @param index 
+   * @param event 
+   * @returns 
+   */
+  selectionnerCategorieCheck(categorieAttributInput:any,attribut : any, index : number, event: any){
     console.log(this.dataSourceAttributTemp.data);
-    console.log(value);
+    console.log(attribut);
     console.log(index);
 
     this.validation = true
     if(this.formeCategorieAttribut.invalid) return;
-    
-    if (event.target.checked && !this.verifierSiExiste(value.ordre)) {
+
+    //controle des doublons dans le premier tableau
+    if (event.target.checked == true) {
+      let ordreExist : boolean = this.verifierSiOrdreExistePremierTableau(attribut.ordre);
+      if(ordreExist){
+        alert("interdit doublon d'ordre d'attribut");
+        event.target.checked=false;
+        return;
+      }
+
+      //controle des doublons dans le second tableau au check
+      let ordreAttributExiste : number =  this.verifierSiExisteCategorieAttributOrdre(attribut.ordre, categorieAttributInput.nomCategorie, categorieAttributInput.ordreCategorie);
+      if(ordreAttributExiste==1){
+        alert("doublon d'ordre d'attribut interdit");
+        event.target.checked=false;
+        return;
+      }
+      else if(ordreAttributExiste==2){
+        alert("Catégorie avec deux ordres différents interdit");
+        event.target.checked=false;
+        return;
+      }
+      else if(ordreAttributExiste==3){
+        alert("Catégorie différente avec un ordre existant interdit");
+        event.target.checked=false;
+        return;
+      }else{
+        
         const categorieAttributsTemp : ICategorieAffichage ={
           id: uuidv4(),
           nom: categorieAttributInput.nomCategorie,
           ordre: categorieAttributInput.ordreCategorie,
-          attribut: value
+          attribut: attribut
         }
       
       this.tableauIndexSelectionner.set(index,categorieAttributsTemp);
-
-    } else if(!event.target.checked && this.verifierSiExiste(value.ordre)) {
+      }
+    } else if(event.target.checked == false) { //si pas de doublon, on sauvegarde l'information cochée
       this.tableauIndexSelectionner.delete(index);
     }
+    console.log("tableau temp index : " ,this.tableauIndexSelectionner);
  }
-  verifierSiExiste(ordre : any): boolean{
+
+ /**
+  * vérifie que l'ordre de l'attribut nouvelle selectionnée n'existe pas dans le meme tableau
+  * @param ordre 
+  * @returns 
+  */
+  verifierSiOrdreExistePremierTableau(ordre : number): boolean{
     
-    let tmpTab =  this.tableResultatsCategoriesAffichage.data;
+    let tmpTab =  this.tableauIndexSelectionner;
     let ordreAttributExiste = false
     tmpTab.forEach(
       (cat : ICategorieAffichage) =>{
@@ -117,6 +205,42 @@ export class ModalCategoriesComponent implements OnInit {
           ordreAttributExiste = true
         }
     });
+    return ordreAttributExiste
+  }
+
+  /**
+   * Methode qui permet de vérifier dans le second tableau si chaque catégorie a un ordre distinct
+   * et si tous les attributs d'une même catégorie ont des ordres distincts
+   * @param ordreAttribut 
+   * @param nomCategorie 
+   * @param ordreCategorie 
+   * @returns 
+   */
+  verifierSiExisteCategorieAttributOrdre(ordreAttribut : number, nomCategorie : string, ordreCategorie : number) : number{
+    let tmpTab =  this.tableResultatsCategoriesAffichage.data;
+    let ordreAttributExiste :number = 0;
+
+    for (let index = 0; index < tmpTab.length; index++) {
+      const element = tmpTab[index];
+      if(element.nom.localeCompare(nomCategorie)==0){
+        //si deux attributs de la meme catégorie ont un meme ordre
+         if (element.attribut.ordre == ordreAttribut) {
+           ordreAttributExiste = 1;
+           break;
+         }
+         //si la même catégorie a un ordre différent
+         if(element.ordre != ordreCategorie){
+           ordreAttributExiste = 2;
+           break;
+         }
+       }
+       else{ //si c'est une nouvelle catégorie dans le tableau  
+         if(element.ordre == ordreCategorie){ //si la même catégorie a un ordre différent
+           ordreAttributExiste = 3;
+           break;
+         }
+       }
+    }
     return ordreAttributExiste
   }
 
@@ -128,11 +252,10 @@ export class ModalCategoriesComponent implements OnInit {
 
     this.TABLE_CATEGORIE_AFFICHAGE_TEMP=this.tableResultatsCategoriesAffichage.data;
     this.tableauIndexSelectionner.forEach((valeur, cle)=>{
-      this.verifierSiExiste(valeur.ordre)
-      if(this.verifierSiExiste(valeur.ordre)) return;
       this.TABLE_CATEGORIE_AFFICHAGE_TEMP.push(valeur);
     });
-    this.tableResultatsCategoriesAffichage.data =  this.TABLE_CATEGORIE_AFFICHAGE_TEMP;
+    this.tableResultatsCategoriesAffichage.data = this.TABLE_CATEGORIE_AFFICHAGE_TEMP;
+    this.donneeDocCatService.dataDocumentCategorie = this.TABLE_CATEGORIE_AFFICHAGE_TEMP;
     
     //récupération des id attributs selectionnés 
 
@@ -148,44 +271,42 @@ export class ModalCategoriesComponent implements OnInit {
     this.tableauAttributsTemp = [];
     let tmpTab =  this.dataSourceAttributTemp.data;
     tmpTab.forEach(
-      (att : IAttributs) =>{
-        if(!listAtt.includes(att.id) && !this.verifierSiExiste(att.ordre)){
+      (att : IAttributs) =>{ 
+        if(!listAtt.includes(att.id) ){
           this.tableauAttributsTemp.push(att);
         }
     });
     this.dataSourceAttributTemp = new MatTableDataSource<IAttributs>(this.tableauAttributsTemp);
     this.tableauIndexSelectionner = new Map;
   }
-  
-  validerCategorieAttribut(){
-    this.categorieAttributs  = {
-      id: '',
-      nom: '',
-      ordre: 0,
-      listAttributs: []
-    }
 
-    this.tableResultatsCategoriesAffichage.data.forEach(
-      categorieAttributsTemp => {
-        
-        if (categorieAttributsTemp.nom != this.categorieAttributs.nom) {
+  /**
+   * methode de suppression des categories deja enregistrees dans le deuxieme tableau
+   * @param categorieAffichage 
+   * @param index 
+   */
+  supprimerCategorieAffiche(categorieAffichage : ICategorieAffichage, index : number){
 
-          this.categorieAttributs  = {
-            id: '',
-            nom: '',
-            ordre: 0,
-            listAttributs: []
-          }
-          this.categorieAttributs.nom = categorieAttributsTemp.nom,
-          this.categorieAttributs.ordre = categorieAttributsTemp.ordre,
-          this.categorieAttributs.listAttributs.push(categorieAttributsTemp.attribut)
-          this.categorieAttributs.id = categorieAttributsTemp.id 
-        }
- 
-      }
-    );
+    //suppression des valeurs dans le second tableau 
+
+    this.TABLE_CATEGORIE_AFFICHAGE_TEMP=this.tableResultatsCategoriesAffichage.data;
+    this.TABLE_CATEGORIE_AFFICHAGE_TEMP.splice(index, 1);
+    this.tableResultatsCategoriesAffichage.data = this.TABLE_CATEGORIE_AFFICHAGE_TEMP;
+    this.donneeDocCatService.dataDocumentCategorie = this.TABLE_CATEGORIE_AFFICHAGE_TEMP;
+
+    //construction du premier tableau
+    this.tableauAttributsTemp.push(categorieAffichage.attribut);
+    this.dataSourceAttributTemp = new MatTableDataSource<IAttributs>(this.tableauAttributsTemp);
+    //suppression dans les index selectionnés
+    let indexASupprimer : number  = -1;
+    this.tableauIndexSelectionner.forEach((valeur, cle)=>{
+      if(valeur.attribut.id==categorieAffichage.attribut.id)
+        indexASupprimer = cle;
+    });
+    if(indexASupprimer>=0)
+      this.tableauIndexSelectionner.delete(indexASupprimer);
   }
-
+  
   retirerSelectionCategorieAttribut(index: number){
     this.TABLE_CATEGORIE_AFFICHAGE_TEMP.splice(index, 1)
   }

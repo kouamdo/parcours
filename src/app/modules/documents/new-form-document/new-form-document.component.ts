@@ -6,7 +6,6 @@ import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Observable, EMPTY } from 'rxjs';
-import { IAfficheDocument } from 'src/app/modele/affiche-document';
 import { IAttributs } from 'src/app/modele/attributs';
 import { ICategoriesAttributs } from 'src/app/modele/categories-attributs';
 import { IDocument } from 'src/app/modele/document';
@@ -19,6 +18,8 @@ import {MatDialog} from '@angular/material/dialog';
 import { ModalCategoriesComponent } from '../../shared/modal-categories/modal-categories.component';
 import {v4 as uuidv4} from 'uuid';
 import { ICategorieAffichage } from 'src/app/modele/categorie-affichage';
+import { TypeTicket } from 'src/app/modele/type-ticket';
+import { DonneesEchangeService } from 'src/app/services/donnees-echange/donnees-echange.service';
 
 
 @Component({
@@ -28,27 +29,23 @@ import { ICategorieAffichage } from 'src/app/modele/categorie-affichage';
 })
 export class NewFormDocumentComponent implements OnInit {
   
-  document : IDocument|undefined;
+  document : IDocument = {
+    id: '',
+    titre: '',
+    description: '',
+    missions: [],
+    attributs: [],
+    categories: []
+  };
   mission$:Observable<IMission[]>=EMPTY;
   forme: FormGroup;
   btnLibelle: string="Ajouter";
   titre: string="Ajouter un nouveau document";
   submitted: boolean=false;
   validation: boolean=false;
-  idMission : string = "";
+  //idMission : string = "";
   idAttribut : string = "";
   serviceDeMission!: IService;
-
-  afficheDocument : IAfficheDocument = {
-    id: '',
-    titre: '',
-    description: '',
-    missions: [],
-    attributs: [],
-    listeMissions: '',
-    listAttributs: '',
-    categories: []
-  }
 
   // variables attributs, pour afficher le tableau d'attributs sur l'IHM
   myControl = new FormControl<string | IAttributs>('');
@@ -61,11 +58,7 @@ export class NewFormDocumentComponent implements OnInit {
   dataSourceAttributResultat = new MatTableDataSource<IAttributs>();
   _attributs :  FormArray | undefined;
 
-  // variables pour la gestion des missions
-  dataMission : IMission[] = [];
-  dataSourceMissionResultat = new MatTableDataSource<IMission>();
-  _missions : FormArray | undefined;
-  ELEMENTS_TABLE_CATEGORIES: IAttributs[] = []; //tableau de listing des attributs a affecter a chaque categorie
+   ELEMENTS_TABLE_CATEGORIES: IAttributs[] = []; //tableau de listing des attributs a affecter a chaque categorie
 
   // variables pour la gestion des categories
   dataSourceAttributDocument = new MatTableDataSource<IAttributs>(this.ELEMENTS_TABLE_CATEGORIES);
@@ -75,25 +68,25 @@ export class NewFormDocumentComponent implements OnInit {
     ordre: 0,
     listAttributs: []
   }
- // ELEMENTS_TABLE_CATEGORIE_ATTRIBUTS: ICategoriesAttributs[] = []; 
   TABLE_CATEGORIE_AFFICHAGE_TEMP: ICategorieAffichage[] = []; 
- // tableResultatsCategoriesAttributs  = new MatTableDataSource<ICategoriesAttributs>(this.ELEMENTS_TABLE_CATEGORIE_ATTRIBUTS);
-  tableFinaleCategoriesAttributs: ICategoriesAttributs[] = []; // tableau contenant les categories creees
+ // ELEMENTS_TABLE_CATEGORIE_ATTRIBUTS: ICategoriesAttributs[] = []; 
+  TABLE_CATEGORIE_AFFICHAGE_TEMPO: ICategorieAffichage[] = []; 
+
+  // tableau contenant les categories creees
+  tableFinaleCategoriesAttributs: ICategoriesAttributs[] = []; 
   
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private router:Router, private formBuilder: FormBuilder, private infosPath:ActivatedRoute, private serviceDocument:DocumentService, private serviceMission:MissionsService, private serviceAttribut:AttributService,  private _liveAnnouncer: LiveAnnouncer, private dialogDef : MatDialog) {
+  constructor(private router:Router, private formBuilder: FormBuilder, private infosPath:ActivatedRoute,
+     private serviceDocument:DocumentService, private serviceMission:MissionsService, private serviceAttribut:AttributService, 
+      private _liveAnnouncer: LiveAnnouncer, private donneeDocCatService:DonneesEchangeService, private dialogDef : MatDialog) {
     this.forme = this.formBuilder.group({
-      _missions :  new FormArray([]),
+      _missions :  new FormControl<string | IMission[]>(''),
       _attributs :  new FormArray([]),
-      _ordreAttribut: this.formBuilder.array([
-      ]),
       titre: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
-      description: [''],
-      missions: [],
-      attributs: [],
+      description: ['']
     });
   }
   ngOnInit(): void {
@@ -102,6 +95,7 @@ export class NewFormDocumentComponent implements OnInit {
       this.dataSourceAttribut.data = valeurs;
     });
 
+    // chargement de la page a partir d'un Id pour la modification d'un document
     let idDocument = this.infosPath.snapshot.paramMap.get('idDocument');
     if((idDocument != null) && idDocument!==''){
       this.btnLibelle="Modifier";
@@ -112,10 +106,57 @@ export class NewFormDocumentComponent implements OnInit {
         this.forme.setValue({
           titre: this.document.titre,
           description: this.document.description,
-          missions: this.document.missions,
-          attributs: this.document.attributs
-        })   
+          _missions: this.document.missions,
+          _attributs: []
+          // missions: this.document.missions,
+          // attributs: this.document.attributs
+          })
+          this.forme.controls["_missions"].setValue(this.document.missions);
+
+        // Initialisation du tableau d'attributs du document
+        this.document?.attributs.forEach(
+          objet => {
+            this.ELEMENTS_TABLE_ATTRIBUTS.push(objet)
+            this.dataSourceAttributResultat.data = this.ELEMENTS_TABLE_ATTRIBUTS;
+          }
+        )
+        // Initialisation du tableau de categories temp du document qui reconstitue
+        // le deuxieme tableau de la modal
+        let categorieAfficheFinal : ICategorieAffichage[] = [];
+        this.document.categories.forEach(
+          catAttribut => {
+            catAttribut.listAttributs.forEach(
+              att => {
+                let categorieAfficheTemp : ICategorieAffichage = {
+                  id: '',
+                  nom: '',
+                  ordre: 0,
+                  attribut: {
+                    id: '',
+                    titre: '',
+                    description: '',
+                    etat: false,
+                    dateCreation: new Date(),
+                    dateModification: new Date(),
+                    ordre: 0,
+                    obligatoire: false,
+                    valeursParDefaut: '',
+                    type: TypeTicket.Int
+                  }
+                }
+                categorieAfficheTemp.id = catAttribut.id
+                categorieAfficheTemp.nom = catAttribut.nom
+                categorieAfficheTemp.ordre = catAttribut.ordre
+                categorieAfficheTemp.attribut = att
+                categorieAfficheFinal.push(categorieAfficheTemp)
+              }
+            )
+          }
+        )
+        //sauvegarde dans le service pour le communiquer à la modale
+        this.donneeDocCatService.dataDocumentCategorie = categorieAfficheFinal
       });
+
     }
     this.getAllAttributs()
     this.myControl.valueChanges.subscribe(
@@ -136,6 +177,9 @@ export class NewFormDocumentComponent implements OnInit {
   }
 
   openCategorieDialog(){
+    //envoi des données à la fenetre enfant
+   // this.donneeDocCatService.dataDocumentCategorie =  this.TABLE_CATEGORIE_AFFICHAGE_TEMP;
+
     this.dialogDef.open(ModalCategoriesComponent, 
     {
       width:'100%',
@@ -143,37 +187,12 @@ export class NewFormDocumentComponent implements OnInit {
       exitAnimationDuration:'1000ms',
       data:{
         dataSourceAttributDocument : this.dataSourceAttributDocument,
-        dataICategorieAffiche : this.TABLE_CATEGORIE_AFFICHAGE_TEMP,
         name : 'adeline'
       }
     }
     )
   }
-  onCheckMissionChange(event: any) {
-    const _missions = (this.forme.controls['_missions'] as FormArray);
-    if (event.target.checked) {
-      _missions.push(new FormControl(event.target.value));
-      this.ajoutSelectionMission(event.target.value);
-      
-    } else {
-      const index = _missions.controls
-      .findIndex(x => x.value === event.target.value);
-      //this.retirerSelectionMission(index)
-      
-      _missions.removeAt(index);
-      this.dataMission.splice(index,1);
-    }
-    this._missions = _missions;
-    console.log(this._missions.value);
-  }
-  //TODO mise en cache
-  ajoutSelectionMission(value: any) {
-    this.serviceMission.getMissionById(value).subscribe(
-      object => {
-        this.dataMission.push(object);
-      }
-    )
-  }
+  
   onCheckAttributChange(event: any) {
     const _attributs = (this.forme.controls['_attributs'] as FormArray);
     if (event.target.checked) {
@@ -190,9 +209,6 @@ export class NewFormDocumentComponent implements OnInit {
 
   getAttributId(idAttribut: string) {
     this.idAttribut = idAttribut
-  }
-  getMissionId(idMission: string) {
-    this.idMission = idMission
   }
 
   ajoutSelectionAttribut(idAttribut: string) {
@@ -218,32 +234,75 @@ export class NewFormDocumentComponent implements OnInit {
   creerCategorie(){
     this.dataSourceAttributDocument.data = this.ELEMENTS_TABLE_ATTRIBUTS
   }
+
+  /**
+   * methode quiu permet de fusionner les categories en fontion du meme nom tout en regroupant leurs attributs
+   * ceci permet de former le tableau d'objets ICategoriesAttriut qui sera rattache au document lors de l'enregistrement
+   */
+  validerCategorieAttribut(){
+    let tmpCatAtt = new Map(); 
+    let categorieAttributsFinal : ICategoriesAttributs[] = [];
+
+    //récupération des données du service
+    this.TABLE_CATEGORIE_AFFICHAGE_TEMPO = this.donneeDocCatService.dataDocumentCategorie;
+    this.TABLE_CATEGORIE_AFFICHAGE_TEMPO.forEach(
+      objet => {
+        let categorieAttributTemp : ICategoriesAttributs = {
+          id: '',
+          nom: '',
+          ordre: 0,
+          listAttributs: []
+        }
+          //si la map ne contient pas la catégorie courante 
+          if(tmpCatAtt.get(objet.nom)== null){
+            categorieAttributTemp.id = objet.id;
+            categorieAttributTemp.nom = objet.nom;
+            categorieAttributTemp.ordre = objet.ordre;
+            categorieAttributTemp.listAttributs.push(objet.attribut);
+
+            // sauvegarde de l'indice de l'élément enregistré
+            let index : number  = categorieAttributsFinal.push(categorieAttributTemp);
+            tmpCatAtt.set(objet.nom, index-1);
+          }
+          else{
+            //si la valeur est trouvée dans la map
+            let index : number = tmpCatAtt.get(objet.nom); // récuperation de l'indice de l'élément enregistré
+            categorieAttributTemp = categorieAttributsFinal[index];
+            categorieAttributTemp.listAttributs.push(objet.attribut);
+            categorieAttributsFinal[index] = categorieAttributTemp;
+          }
+        } 
+    );
+      this.tableFinaleCategoriesAttributs = categorieAttributsFinal;
+    console.log("voici le tebleau d'attributs final a enregistrer : ", this.tableFinaleCategoriesAttributs)
+  }
   onSubmit(documentInput:any){
-    //    const _missionsSelected = (this.forme.get('_missions') as FormArray);
     this.submitted=true;
     if(this.forme.invalid) return;
     let documentTemp : IDocument={
       id: uuidv4(),
       titre: documentInput.titre,
       description: documentInput.description,
-      missions: [],
+      missions: documentInput._missions,
       attributs: [],
       categories: []
     }
-    //Faire un appel synchrone
-    /*_missionsSelected.value.forEach((element: any) => {
-      console.log("_missionsSelected est : " ,element);
-      this.serviceMission.getMissionById(element).subscribe(
-        object => {
-          documentTemp.missions.push(object);
-        }
-      )
-    });*/
-    documentTemp.missions = this.dataMission;
+    
+    console.log("voici les missions pour ce document : ", documentTemp.missions)
+
+    if(this.document.id != ""){
+      documentTemp.id = this.document.id  
+    }
     
     this.dataSourceAttributResultat.data.forEach(
       a => documentTemp.attributs.push(a)
     )
+
+    this.tableFinaleCategoriesAttributs.forEach(
+      cat => documentTemp.categories.push(cat)
+    )
+    console.log("voici le tebleau d'attributs final a enregistrer pour ce document : ", documentTemp.categories)
+
     this.serviceDocument.ajouterDocument(documentTemp).subscribe(
       object => {
         this.router.navigate(['/list-documents']);
@@ -281,5 +340,8 @@ export class NewFormDocumentComponent implements OnInit {
       this._liveAnnouncer.announce('Sorting cleared');
     }
   }
+  compareItem(mission1: IMission, mission2: IMission) {
+    return mission2 && mission1 ? mission2.id === mission1.id : mission2 === mission1;
+}
 }
 

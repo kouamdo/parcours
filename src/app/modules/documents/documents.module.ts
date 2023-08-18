@@ -18,6 +18,7 @@ import { HttpLoaderFactory } from 'src/app/app.module';
 import { ListFormDocumentComponent } from './list-form-document/list-form-document.component';
 import { ViewFormDocumentComponent } from './view-form-document/view-form-document.component';
 import { SharedModule } from '../shared/shared.module';
+import { MatSelectModule } from '@angular/material/select';
 
 
 @NgModule({
@@ -38,6 +39,7 @@ import { SharedModule } from '../shared/shared.module';
     MatPaginatorModule,
     MatTableModule,
     MatSortModule,
+    MatSelectModule,
     SharedModule,
     TranslateModule.forChild({
         loader: {

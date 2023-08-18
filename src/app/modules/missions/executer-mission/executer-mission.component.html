@@ -8,14 +8,19 @@
             <div class="block" >
                 <div class="inputBlock"  *ngFor="let mission of (missions$ | async); let i=index;">
                     <input type="button" class="button-control" 
-                            [ngStyle]="{'background-color': (i%2 == 0) ? '#' + i + i+'a' + 'a' + i+ 'c'  : ((i%2 != 0) ? '#11aca1': null)}"  [name]="mission.id" [id]="mission.id" 
-                            [title]="mission.description" [value]="mission.libelle" (click)="choisirMission(mission.id, mission.libelle)">
+                            [ngStyle]="{'background-color': (i%2 == 0) ? '#FFD700'  : ((i%2 != 0) ? '#28a745': null)}"  [name]="mission.id" [id]="mission.id" 
+                            [title]="mission.description" [value]="mission.libelle" (click)="choisirMission(mission.id, mission.libelle); estClique = true">
                 </div>
             </div>
         </div>
+        <div class="infos" *ngIf="!aDesDocumentsDispo && estClique">  
+            <h3>
+                {{'missions.execution.text3' | translate}} {{missionChoisieLibelle}}
+            </h3>
+        </div>
         <div class="infos" *ngIf="aDesDocumentsDispo">  
             <h3>
-                {{'missions.execution.text2' | translate}} {{missionChoisieLibelle}} ?
+                {{'missions.execution.text2' | translate}} {{missionChoisieLibelle}}
             </h3>
             <div class="block">
                 <div class="inputBlock"  *ngFor="let document of documents; let i=index;">
