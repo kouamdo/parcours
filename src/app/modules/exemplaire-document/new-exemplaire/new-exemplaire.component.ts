@@ -104,12 +104,12 @@ export class NewExemplaireComponent implements OnInit {
               this.document = document
               document.attributs.forEach(
                 x => {
+                  this.totalAttribut+=1
                   this.addAttributs()
 
                   const indice = exemplaireDocument.length;
-                  
-                  exemplaireDocument.controls[0].setValue("ok")
                   console.log("le resultat est : ", exemplaireDocument.controls[0].value)
+
                   //creer la map avec id et indice
                   this.tmpIndexValeursControls.set(x.id, indice - 1);
                 }
@@ -153,10 +153,9 @@ export class NewExemplaireComponent implements OnInit {
 
     for (let index = 0; index < this.exemplaire.objetEnregistre.length; index++) {
       const element = this.exemplaire.objetEnregistre[index];
-      let indiceCourant : number | undefined = this.tmpIndexValeursControls.get(element.key)
+      const indiceCourant : number | undefined = this.tmpIndexValeursControls.get(element.key)
       console.log("le get est : ", indiceCourant)
       if(this.tmpIndexValeursControls.get(element.key)){
-        let indiceCourant : number | undefined = this.tmpIndexValeursControls.get(element.key)
         exemplaireDocument.controls[indiceCourant!].setValue(element.value)
         console.log("le resultat est : ", exemplaireDocument.controls[indiceCourant!].value)
         break;
