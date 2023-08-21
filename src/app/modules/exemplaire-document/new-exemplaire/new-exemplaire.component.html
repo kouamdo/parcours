@@ -20,7 +20,6 @@
                             <select  class="form-control" *ngIf="(attribut.type == TypeRadio) || (attribut.type == TypeBoolean)" [formControlName]="incrementeCompteur(compteur,attribut.id)">
                                 <option value="{{val}}" *ngFor="let val of attribut.valeursParDefaut.split(',')" >{{val}}</option>
                             </select>
-                            {{compteur}}
                         </div>
                     </div>
                 </div>
