@@ -1,6 +1,8 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
+import { IAttributs } from 'src/app/modele/attributs';
 import { IDocument } from 'src/app/modele/document';
 import { IExemplaireDocument } from 'src/app/modele/exemplaire-document';
 import { ObjetCleValeur } from 'src/app/modele/objet-cle-valeur';
@@ -35,6 +37,20 @@ export class NewExemplaireComponent implements OnInit {
     attributs: [],
     categories: []
   }
+  
+  attribut : IAttributs = {
+    id: '',
+    titre: '',
+    description: '',
+    etat: false,
+    dateCreation: new Date,
+    dateModification: new Date,
+    ordre: 0,
+    obligatoire: false,
+    valeursParDefaut: '',
+    type: TypeTicket.Int
+  }
+
   formeExemplaire: FormGroup;
   btnLibelle: string="Ajouter";
   titre: string="Ajouter un nouvel exemplaire de document";
@@ -64,7 +80,10 @@ export class NewExemplaireComponent implements OnInit {
   totalAttribut: number = -1
   tableauIndex : number[] = []
 
-  constructor(private router:Router, private formBuilder: FormBuilder, private infosPath:ActivatedRoute, private serviceDocument:DocumentService, private serviceExemplaire : ExemplaireDocumentService, private serviceMission:MissionsService, private serviceAttribut:AttributService) { 
+  constructor(private router:Router, private formBuilder: FormBuilder, private infosPath:ActivatedRoute,
+     private serviceDocument:DocumentService, private serviceExemplaire : ExemplaireDocumentService,
+      private datePipe : DatePipe, private serviceAttribut:AttributService) { 
+
     this.formeExemplaire = this.formBuilder.group({
       _exemplaireDocument: new FormArray([])
     });
@@ -83,7 +102,7 @@ export class NewExemplaireComponent implements OnInit {
     this.initialiseFormExemplaire()
   }
 
-  addAttributs(valParDefaut : string) {
+  addAttributs(valParDefaut : any) {
     if(valParDefaut !='' && valParDefaut!='PARCOURS_NOT_FOUND_404')
       this._exemplaireDocument.push(this.formBuilder.control(valParDefaut));
     else
@@ -120,7 +139,7 @@ export class NewExemplaireComponent implements OnInit {
   /**
    * methode permettant de renvoyer la valeur de l'attribut
    */
-  rechercherValeurParIdAttribut(idAttribut : string) : string{
+  rechercherValeurParIdAttribut(idAttribut : string) : string | null{
 
     for (let index = 0; index < this.exemplaire.objetEnregistre.length; index++) {
       const element = this.exemplaire.objetEnregistre[index];
@@ -129,6 +148,19 @@ export class NewExemplaireComponent implements OnInit {
       }
     }
     return 'PARCOURS_NOT_FOUND_404';
+  }
+
+  /**
+   * methode qui permet de rechercher un attribut a parti de son id et de retourner son type
+   * @param idAttribut id de l'attribut
+   */
+  recupereTypeAttribut(idAttribut : string):IAttributs{
+    this.serviceAttribut.getAttributById(idAttribut).subscribe(
+      a =>{
+        this.attribut = a
+      }
+    )
+    return this.attribut
   }
   enregistrerObjet(){ 
     const exemplaireDocument = this._exemplaireDocument;
@@ -144,10 +176,6 @@ export class NewExemplaireComponent implements OnInit {
           console.log('exemplaireDocument.controls[index].value ', exemplaireDocument.controls[index].value);
           console.log('id de atr ', a.id);
           this.exemplaire.objetEnregistre.push(objetCleValeur)
-
-        // sauvegarde de l'indice et de la valeur du control
-        //let indice : number = this.exemplaire.objetEnregistre.push(objetCleValeur)
-        //this.tmpIndexValeursControls.set(exemplaireDocument.controls[index].value, indice-1);
         }
       )
   }
@@ -179,7 +207,14 @@ export class NewExemplaireComponent implements OnInit {
       return cpt;
     
     let valAttribut = this.rechercherValeurParIdAttribut(idAttribut);
-    this.addAttributs(valAttribut);
+    const atr = this.recupereTypeAttribut(idAttribut)
+    if (atr.type == TypeTicket.Date) {
+      let date = new Date(valAttribut!)
+      let dateReduite = this.datePipe.transform(date,'yyyy-MM-dd') // je change le format de la date de naissance pour pouvoir l'afficher dans mon input type date
+      this.addAttributs(date);
+    }else{
+      this.addAttributs(valAttribut!);
+    }
     this.compteur = this.compteur + 1
      // console.log('le compteur est : ', this.compteur)
       return this.compteur
