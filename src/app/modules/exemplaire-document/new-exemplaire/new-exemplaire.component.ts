@@ -121,16 +121,16 @@ export class NewExemplaireComponent implements OnInit {
           this.exemplaire = x;    
           this.document = x;   
           if(x.attributs.length > x.objetEnregistre.length)
-            this.totalAttribut = x.attributs.length;
+            this.totalAttribut = x.attributs.length-1;
           else
-          this.totalAttribut =  x.objetEnregistre.length;               
+          this.totalAttribut =  x.objetEnregistre.length-1;               
       });
     }
     if(this.idDocument){
       this.serviceDocument.getDocumentById(this.idDocument).subscribe(
         document =>{
           this.document = document
-          this.totalAttribut = document.attributs.length;
+          this.totalAttribut = document.attributs.length-1;
         }
       )
     }
@@ -139,7 +139,7 @@ export class NewExemplaireComponent implements OnInit {
   /**
    * methode permettant de renvoyer la valeur de l'attribut
    */
-  rechercherValeurParIdAttribut(idAttribut : string) : string | null{
+  rechercherValeurParIdAttribut(idAttribut : string) : string{
 
     for (let index = 0; index < this.exemplaire.objetEnregistre.length; index++) {
       const element = this.exemplaire.objetEnregistre[index];
@@ -149,21 +149,13 @@ export class NewExemplaireComponent implements OnInit {
     }
     return 'PARCOURS_NOT_FOUND_404';
   }
-
-  /**
-   * methode qui permet de rechercher un attribut a parti de son id et de retourner son type
-   * @param idAttribut id de l'attribut
-   */
-  recupereTypeAttribut(idAttribut : string):IAttributs{
-    this.serviceAttribut.getAttributById(idAttribut).subscribe(
-      a =>{
-        this.attribut = a
-      }
-    )
-    return this.attribut
-  }
+/**
+ * Methode qui permet d'enregistrer les valeurs du formulaire dans un objet de type ObjetCleValeur
+ * C'est set objet qui nous permettra de preremplir le formulaire lors de la modification
+ */
   enregistrerObjet(){ 
     const exemplaireDocument = this._exemplaireDocument;
+    this.exemplaire.objetEnregistre = []
       this.document.attributs.forEach(
         a => {
           const objetCleValeur : ObjetCleValeur={
@@ -173,19 +165,17 @@ export class NewExemplaireComponent implements OnInit {
           const index = this.document.attributs.indexOf(a)
           objetCleValeur.key = a.id
           objetCleValeur.value = exemplaireDocument.controls[index].value
-          console.log('exemplaireDocument.controls[index].value ', exemplaireDocument.controls[index].value);
-          console.log('id de atr ', a.id);
           this.exemplaire.objetEnregistre.push(objetCleValeur)
         }
       )
   }
+  /**
+   * recuperation du formArray qui servira pour l'enregistrement des donnees
+   */
   get _exemplaireDocument(): FormArray {
     return this.formeExemplaire.get('_exemplaireDocument') as FormArray;
   }
-  get f(){
-    return this.formeExemplaire.controls;
-  }
-
+  
   /**
    * methode qui permet d'extraire le premier element d'une chaine de caractere
    * Elle permettra d'afficher les valeurs par defaut des attributs un a un
@@ -202,24 +192,25 @@ export class NewExemplaireComponent implements OnInit {
    * @param idAttribut id attribut à afficher
    * @returns valeur courante + 1
    */
-  incrementeCompteur(cpt : number, idAttribut : string) : number{
+  incrementeCompteur(cpt : number, attribut : IAttributs) : number{
     if(this.totalAttribut>-1 && this.compteur>=this.totalAttribut)
       return cpt;
     
-    let valAttribut = this.rechercherValeurParIdAttribut(idAttribut);
-    const atr = this.recupereTypeAttribut(idAttribut)
-    if (atr.type == TypeTicket.Date) {
-      let date = new Date(valAttribut!)
-      let dateReduite = this.datePipe.transform(date,'yyyy-MM-dd') // je change le format de la date de naissance pour pouvoir l'afficher dans mon input type date
-      this.addAttributs(date);
+    let valAttribut = this.rechercherValeurParIdAttribut(attribut.id);
+    if (attribut.type == TypeTicket.Date &&  valAttribut != null) { // si le type de l'attribut est Date et que la valeur de valAttribut n'est pas vide
+      let date = new Date(valAttribut) // creatoion d'une nouvelle date avec la valeur de valAttribut 
+      let dateReduite = this.datePipe.transform(date,'yyyy-MM-dd') // changer le format de la date de naissance pour pouvoir l'afficher dans mon input type date
+      this.addAttributs(dateReduite);
     }else{
-      this.addAttributs(valAttribut!);
+      this.addAttributs(valAttribut);
     }
     this.compteur = this.compteur + 1
-     // console.log('le compteur est : ', this.compteur)
       return this.compteur
   }
 
+  /**
+   * methode de validation du formulaire (enregistrement des donnees du formulaire)
+   */
   onSubmit(){
     const exemplaireDocument = this._exemplaireDocument;
     console.log('Exemplaire ', exemplaireDocument.value);
@@ -238,9 +229,6 @@ export class NewExemplaireComponent implements OnInit {
       categories: this.document.categories
     }
     exemplaireTemp.objetEnregistre = this.exemplaire.objetEnregistre
-    
-    console.log("les objets cles-valeur : " + exemplaireTemp.objetEnregistre)
-    console.log("this._exemplaireDocument : ", this._exemplaireDocument.value)
 
     if(this.exemplaire.id != ""){
       exemplaireTemp.id = this.exemplaire.id

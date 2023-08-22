@@ -15,9 +15,9 @@
                     <div class="contentBlock">
                         <div formArrayName="_exemplaireDocument" class="inputBlock" *ngFor="let attribut of attributParCategorie.listAttributs; " [ngClass]="{'inputSpecial':(attribut.type == TypeRadio) || (attribut.type == TypeBoolean)}"> 
                             <label [for]="attribut.id" class="form-label">{{attribut.titre}}</label>
-                            <input *ngIf="(attribut.type != 'textarea') && (attribut.type != TypeRadio) && (attribut.type != TypeBoolean)" [formControlName]="incrementeCompteur(compteur,attribut.id)" [type]="attribut.type" class="form-control" placeholder="entrer la valeur ici">
-                            <textarea *ngIf="attribut.type == 'textarea'" class="form-control"  [formControlName]="incrementeCompteur(compteur,attribut.id)" placeholder="entrer la valeur ici"></textarea>
-                            <select  class="form-control" *ngIf="(attribut.type == TypeRadio) || (attribut.type == TypeBoolean)" [formControlName]="incrementeCompteur(compteur,attribut.id)">
+                            <input *ngIf="(attribut.type != 'textarea') && (attribut.type != TypeRadio) && (attribut.type != TypeBoolean)" [formControlName]="incrementeCompteur(compteur,attribut)" [type]="attribut.type" class="form-control" placeholder="entrer la valeur ici">
+                            <textarea *ngIf="attribut.type == 'textarea'" class="form-control"  [formControlName]="incrementeCompteur(compteur,attribut)" placeholder="entrer la valeur ici"></textarea>
+                            <select  class="form-control" *ngIf="(attribut.type == TypeRadio) || (attribut.type == TypeBoolean)" [formControlName]="incrementeCompteur(compteur,attribut)">
                                 <option value="{{val}}" *ngFor="let val of attribut.valeursParDefaut.split(',')" >{{val}}</option>
                             </select>
                         </div>
