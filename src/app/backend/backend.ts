@@ -2254,6 +2254,9 @@ export class InMemDBService implements InMemoryDbService {
           { key: '11', value: new Date('17/06/2023')},
           { key: '12', value: 'oui'},
           { key: '13', value: 'Fin traitement'},
+          { key: '2', value: '54'},
+          { key: '3', value: 'Homme'},
+          { key: '6', value: 'Noir'},
         ],
       },
       {
