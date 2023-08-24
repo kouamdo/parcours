@@ -74,9 +74,9 @@ export class NewExemplaireComponent implements OnInit {
   compteur : number = -1
   totalAttribut: number = -1
   numerateur : number = -1
-  totalAttributsupprime: number = -1
-  tableauIdAttributs : string[] = []
+  totalAttributSupprime: number = -1
   objetCleValeurSupprime : ObjetCleValeur[] = []
+  tableauAttributsSupprime : IAttributs[] = []
 
   constructor(private router:Router, private formBuilder: FormBuilder, private infosPath:ActivatedRoute,
      private serviceDocument:DocumentService, private serviceExemplaire : ExemplaireDocumentService,
@@ -99,7 +99,6 @@ export class NewExemplaireComponent implements OnInit {
     this.idDocument = this.infosPath.snapshot.paramMap.get('idDocument');
     
     this.initialiseFormExemplaire()
-    this.rechercherAttributsAbsants()
   }
 
   /**
@@ -120,7 +119,7 @@ export class NewExemplaireComponent implements OnInit {
   ajouterDisabledAttributs(valParDefaut : any) {
     if(valParDefaut !='' && valParDefaut!='PARCOURS_NOT_FOUND_404'){ 
       this._controlsSupprime.push(this.formBuilder.control(valParDefaut));
-      this._controlsSupprime.controls[this.numerateur].disable();
+      // this._controlsSupprime.controls[this.numerateur].disable();
     }else
      this._controlsSupprime.push(this.formBuilder.control(''));  
   }
@@ -130,15 +129,27 @@ export class NewExemplaireComponent implements OnInit {
    * et les placer dans un tableau
    */
   rechercherAttributsAbsants(){
-    this.tableauIdAttributs = []
-    this.exemplaire.attributs.forEach(
-      (objet : IAttributs) =>{
-        this.tableauIdAttributs.push(objet.id)
-    })
-    for (let index = 0; index < this.exemplaire.attributs.length; index++) {
-      const val = this.exemplaire.objetEnregistre[index];
-      if(!this.tableauIdAttributs.includes(val.key)){
-        this.objetCleValeurSupprime.push(val)
+    this.objetCleValeurSupprime = []
+    
+    for (let index = 0; index < this.exemplaire.objetEnregistre.length; index++) {
+      const keyVal = this.exemplaire.objetEnregistre[index];
+      let flag : boolean = false
+
+      for (let index = 0; index < this.exemplaire.attributs.length; index++) {
+        const attribut = this.exemplaire.attributs[index];
+        if (keyVal.key == attribut.id) {
+          flag = true
+          break
+        }
+      }
+      if(flag == false){
+        this.objetCleValeurSupprime.push(keyVal)
+        this.serviceAttribut.getAttributById(keyVal.key).subscribe(
+          a =>{
+            this.tableauAttributsSupprime.push(a)
+            this.totalAttributSupprime = this.tableauAttributsSupprime.length
+          }
+        )
       }
     }
   }
@@ -153,9 +164,8 @@ export class NewExemplaireComponent implements OnInit {
           this.exemplaire = x;
           this.document = x;  
           this.totalAttribut = x.attributs.length-1;
-          this.totalAttributsupprime = this.exemplaire.objetEnregistre.length-1
+          this.rechercherAttributsAbsants()
       });
-      this.rechercherAttributsAbsants()
     }
     if(this.idDocument){
       this.serviceDocument.getDocumentById(this.idDocument).subscribe(
@@ -180,10 +190,11 @@ export class NewExemplaireComponent implements OnInit {
     }
     return 'PARCOURS_NOT_FOUND_404';
   }
-/**
- * Methode qui permet d'enregistrer les valeurs du formulaire dans un objet de type ObjetCleValeur
- * C'est set objet qui nous permettra de preremplir le formulaire lors de la modification
- */
+
+  /**
+   * Methode qui permet d'enregistrer les valeurs du formulaire dans un objet de type ObjetCleValeur
+   * C'est set objet qui nous permettra de preremplir le formulaire lors de la modification
+   */
   enregistrerObjet(){ 
     const exemplaireDocument = this._exemplaireDocument;
     this.exemplaire.objetEnregistre = []
@@ -238,7 +249,7 @@ export class NewExemplaireComponent implements OnInit {
       return this.compteur
   }
   incrementeNumerateur(cpt : number, attribut : IAttributs) : number{
-    if(this.totalAttributsupprime>-1 && this.numerateur>=this.totalAttributsupprime)
+    if(this.totalAttributSupprime>-1 && this.numerateur>=this.totalAttributSupprime)
       return cpt;
     
     let valAttribut = this.rechercherValeurParIdAttribut(attribut.id);

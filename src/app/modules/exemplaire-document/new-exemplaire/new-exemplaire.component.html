@@ -24,20 +24,17 @@
                     </div>
                 </div>
             </div>
-            <div class="block" *ngFor="let attributParCategorie of document.categories">
-                <div class="pb-3" *ngIf="attributParCategorie.nom">
-                    <!-- <h3>{{attributParCategorie.nom}}</h3> -->
-                    <div class="contentBlock">
-                        <div formArrayName="_controlsSupprime" class="inputBlock" *ngFor="let attribut of attributParCategorie.listAttributs; " [ngClass]="{'inputSpecial':(attribut.type == TypeRadio) || (attribut.type == TypeBoolean)}"> 
-                            <label [for]="attribut.id" class="form-label">{{attribut.titre}}</label>
-                            <input  *ngIf="(attribut.type != 'textarea') && (attribut.type != TypeRadio) && (attribut.type != TypeBoolean)" [formControlName]="incrementeNumerateur(numerateur,attribut)" [type]="attribut.type" class="form-control" placeholder="entrer la valeur ici">
-                            <textarea *ngIf="attribut.type == 'textarea'" class="form-control"  [formControlName]="incrementeNumerateur(numerateur,attribut)" placeholder="entrer la valeur ici"></textarea>
-                            <select class="form-control" *ngIf="(attribut.type == TypeRadio) || (attribut.type == TypeBoolean)" [formControlName]="incrementeNumerateur(numerateur,attribut)">
-                                <option value="{{val.trim()}}" *ngFor="let val of attribut.valeursParDefaut.trim().split(',')" >{{val}}</option>
+            <div class="block" *ngFor="let attributSupprime of tableauAttributsSupprime">
+                    <div class="contentBlock d-flex">
+                        <div formArrayName="_controlsSupprime" class="" [ngClass]="{'inputSpecial':(attributSupprime.type == TypeRadio) || (attributSupprime.type == TypeBoolean)}"> 
+                            <label class="form-label">{{attributSupprime.titre}}</label>
+                            <input  *ngIf="(attributSupprime.type != 'textarea') && (attributSupprime.type != TypeRadio) && (attributSupprime.type != TypeBoolean)" [formControlName]="incrementeNumerateur(numerateur,attributSupprime)" [type]="attributSupprime.type" class="form-control" placeholder="entrer la valeur ici">
+                            <textarea *ngIf="attributSupprime.type == 'textarea'" class="form-control"  [formControlName]="incrementeNumerateur(numerateur,attributSupprime)" placeholder="entrer la valeur ici"></textarea>
+                            <select class="form-control" *ngIf="(attributSupprime.type == TypeRadio) || (attributSupprime.type == TypeBoolean)" [formControlName]="incrementeNumerateur(numerateur,attributSupprime)">
+                                <option value="{{val.trim()}}" *ngFor="let val of attributSupprime.valeursParDefaut.trim().split(',')" >{{val}}</option>
                             </select>
-                        </div>{{numerateur}}
-                    </div>
-                </div>
+                        </div>
+                    </div>{{totalAttributSupprime}}
             </div>
         </div>
         <div class="actionButton">
