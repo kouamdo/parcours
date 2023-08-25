@@ -12,18 +12,17 @@ import { ITicket } from '../modele/ticket';
 import { TypeTicket } from '../modele/type-ticket';
 import { IExemplaireDocument } from '../modele/exemplaire-document';
 import { IFamille } from '../modele/famille';
-import { IRessource } from "../modele/ressource";
-import { IPrecoMvtQte } from "../modele/precomvtqte";
+import { IRessource } from '../modele/ressource';
+import { IPrecoMvtQte } from '../modele/precomvtqte';
 //import { TypeMvt } from "../modele/type-mvt";
-import { IPrecoMvt } from "../modele/precomvt";
-import { Unites } from "../modele/unites";
-import { IDistributeur } from "../modele/distributeur";
+import { IPrecoMvt } from '../modele/precomvt';
+import { Unites } from '../modele/unites';
+import { IDistributeur } from '../modele/distributeur';
 
 export class InMemDBService implements InMemoryDbService {
-
-    UnitesLitre = Unites.litre
-  UnitesKg = Unites.kg
-  UnitesTonne = Unites.tonne
+  UnitesLitre = Unites.litre;
+  UnitesKg = Unites.kg;
+  UnitesTonne = Unites.tonne;
 
   createDb() {
     let patients: IPatient[] = [
@@ -316,9 +315,37 @@ export class InMemDBService implements InMemoryDbService {
               { nom: 'Rechercher', lien: './list-familles', bouton: 'false' },
             ],
           },
-          {"fonction":"Ressource", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"Créer", "lien":"ressource-nouvelle", "bouton":"false"},{"nom":"Rechercher", "lien":"./list-ressources", "bouton":"false"}]},
-          {"fonction":"Préconisations","icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"Créer", "lien":"precomvt-nouvelle", "bouton":"false"},{"nom":"Rechercher", "lien":"./list-precomvts", "bouton":"false"}]},
-          {"fonction":"Distributeur", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"Créer", "lien":"distributeur-nouveau", "bouton":"false"},{"nom":"Rechercher", "lien":"./list-distributeurs", "bouton":"false"}]},
+          {
+            fonction: 'Ressource',
+            icone: 'fas fa-user-cog',
+            actif: '',
+            elements: [
+              { nom: 'Créer', lien: 'ressource-nouvelle', bouton: 'false' },
+              { nom: 'Rechercher', lien: './list-ressources', bouton: 'false' },
+            ],
+          },
+          {
+            fonction: 'Préconisations',
+            icone: 'fas fa-user-cog',
+            actif: '',
+            elements: [
+              { nom: 'Créer', lien: 'precomvt-nouvelle', bouton: 'false' },
+              { nom: 'Rechercher', lien: './list-precomvts', bouton: 'false' },
+            ],
+          },
+          {
+            fonction: 'Distributeur',
+            icone: 'fas fa-user-cog',
+            actif: '',
+            elements: [
+              { nom: 'Créer', lien: 'distributeur-nouveau', bouton: 'false' },
+              {
+                nom: 'Rechercher',
+                lien: './list-distributeurs',
+                bouton: 'false',
+              },
+            ],
+          },
         ],
       },
       {
@@ -403,9 +430,33 @@ export class InMemDBService implements InMemoryDbService {
               { nom: 'Search', lien: './list-familles', bouton: 'false' },
             ],
           },
-          {"fonction":"Ressource", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"Créer", "lien":"ressource-nouvelle", "bouton":"false"},{"nom":"Search", "lien":"./list-ressources", "bouton":"false"}]},
-          {"fonction":"Préconisations","icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"Créer", "lien":"precomvt-nouvelle", "bouton":"false"}, {"nom":"Search", "lien":"./list-precomvts", "bouton":"false"}]},
-          {"fonction":"Distributeur", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"Créer", "lien":"distributeur-nouveau", "bouton":"false"},{"nom":"search", "lien":"./list-distributeurs", "bouton":"false"}]},
+          {
+            fonction: 'Ressource',
+            icone: 'fas fa-user-cog',
+            actif: '',
+            elements: [
+              { nom: 'Créer', lien: 'ressource-nouvelle', bouton: 'false' },
+              { nom: 'Search', lien: './list-ressources', bouton: 'false' },
+            ],
+          },
+          {
+            fonction: 'Préconisations',
+            icone: 'fas fa-user-cog',
+            actif: '',
+            elements: [
+              { nom: 'Créer', lien: 'precomvt-nouvelle', bouton: 'false' },
+              { nom: 'Search', lien: './list-precomvts', bouton: 'false' },
+            ],
+          },
+          {
+            fonction: 'Distributeur',
+            icone: 'fas fa-user-cog',
+            actif: '',
+            elements: [
+              { nom: 'Créer', lien: 'distributeur-nouveau', bouton: 'false' },
+              { nom: 'search', lien: './list-distributeurs', bouton: 'false' },
+            ],
+          },
         ],
       },
     ];
@@ -896,7 +947,8 @@ export class InMemDBService implements InMemoryDbService {
                 type: TypeTicket.Boolean,
                 ordre: 2,
                 obligatoire: false,
-                valeursParDefaut: 'A, A+, A-, B, B+, B-, AB, AB+, AB-, O, O+, O-',
+                valeursParDefaut:
+                  'A, A+, A-, B, B+, B-, AB, AB+, AB-, O, O+, O-',
               },
               {
                 id: '8',
@@ -1120,7 +1172,8 @@ export class InMemDBService implements InMemoryDbService {
                 type: TypeTicket.Boolean,
                 ordre: 1,
                 obligatoire: false,
-                valeursParDefaut: 'A, A+, A-, B, B+, B-, AB, AB+, AB-, O, O+, O-',
+                valeursParDefaut:
+                  'A, A+, A-, B, B+, B-, AB, AB+, AB-, O, O+, O-',
               },
               {
                 id: '8',
@@ -1580,7 +1633,8 @@ export class InMemDBService implements InMemoryDbService {
                 type: TypeTicket.Boolean,
                 ordre: 1,
                 obligatoire: false,
-                valeursParDefaut: 'A, A+, A-, B, B+, B-, AB, AB+, AB-, O, O+, O-',
+                valeursParDefaut:
+                  'A, A+, A-, B, B+, B-, AB, AB+, AB-, O, O+, O-',
               },
               {
                 id: '8',
@@ -2159,7 +2213,8 @@ export class InMemDBService implements InMemoryDbService {
                 type: TypeTicket.Boolean,
                 ordre: 0,
                 obligatoire: false,
-                valeursParDefaut: 'A, A+, A-, B, B+, B-, AB, AB+, AB-, O, O+, O-',
+                valeursParDefaut:
+                  'A, A+, A-, B, B+, B-, AB, AB+, AB-, O, O+, O-',
               },
               {
                 id: '8',
@@ -2244,19 +2299,202 @@ export class InMemDBService implements InMemoryDbService {
           },
         ],
         objetEnregistre: [
-          { key: '4', value: '23'},
-          { key: '5', value: 'oignon, lait, mangue'},
-          { key: '1', value: '1.78'},
-          { key: '7', value: 'A+'},
-          { key: '8', value: 'non'},
-          { key: '9', value: new Date('07/03/2023')},
-          { key: '10', value: new Date('17/03/2023')},
-          { key: '11', value: new Date('17/06/2023')},
-          { key: '12', value: 'oui'},
-          { key: '13', value: 'Fin traitement'},
-          { key: '2', value: '54'},
-          { key: '3', value: 'Homme'},
-          { key: '6', value: 'Noir'},
+          {
+            key:
+            {
+              id: '4',
+              titre: 'age',
+              description: "age de l'individu",
+              etat: true,
+              dateCreation: new Date('07/03/2000'),
+              dateModification: new Date('07/03/1990'),
+              type: TypeTicket.Double,
+              ordre: 0,
+              obligatoire: false,
+              valeursParDefaut: '',
+            },
+            value: '23',
+          },
+          {
+            key: {
+              id: '5',
+              titre: 'allergies',
+              description: "allergies de l'individu",
+              etat: true,
+              dateCreation: new Date('07/03/2000'),
+              dateModification: new Date('07/03/1990'),
+              type: TypeTicket.String,
+              ordre: 0,
+              obligatoire: false,
+              valeursParDefaut: '',
+            },
+            value: 'oignon, lait, mangue',
+          },
+          {
+            key: {
+              id: '1',
+              titre: 'taille',
+              description: "taille de l'individu",
+              etat: true,
+              dateCreation: new Date('07/03/2000'),
+              dateModification: new Date('07/03/1990'),
+              type: TypeTicket.String,
+              ordre: 0,
+              obligatoire: false,
+              valeursParDefaut: '',
+            },
+            value: '1.78',
+          },
+          {
+            key: {
+              id: '7',
+              titre: 'Groupe sangin',
+              description: "Groupe sangin de l'individu",
+              etat: true,
+              dateCreation: new Date('07/03/2000'),
+              dateModification: new Date('07/03/1990'),
+              type: TypeTicket.Boolean,
+              ordre: 0,
+              obligatoire: false,
+              valeursParDefaut: 'A, A+, A-, B, B+, B-, AB, AB+, AB-, O, O+, O-',
+            },
+            value: 'A+',
+          },
+          {
+            key: {
+              id: '8',
+              titre: 'cicatrice',
+              description: "cicatrice de l'individu",
+              etat: true,
+              dateCreation: new Date('07/03/2000'),
+              dateModification: new Date('07/03/1990'),
+              type: TypeTicket.Boolean,
+              ordre: 0,
+              obligatoire: false,
+              valeursParDefaut: 'oui, non',
+            },
+            value: 'non',
+          },
+          {
+            key: {
+              id: '9',
+              titre: 'date admission',
+              description: "date admission de l'individu",
+              etat: true,
+              dateCreation: new Date('07/03/2000'),
+              dateModification: new Date('07/03/1990'),
+              type: TypeTicket.Date,
+              ordre: 0,
+              obligatoire: false,
+              valeursParDefaut: '',
+            },
+            value: new Date('07/03/2023'),
+          },
+          {
+            key: {
+              id: '10',
+              titre: 'date decharge',
+              description: 'date decharge',
+              etat: true,
+              dateCreation: new Date('07/03/2000'),
+              dateModification: new Date('07/03/1990'),
+              type: TypeTicket.Date,
+              ordre: 0,
+              obligatoire: false,
+              valeursParDefaut: '',
+            },
+            value: new Date('17/03/2023'),
+          },
+          {
+            key: {
+              id: '11',
+              titre: 'date prochain rendez-vous',
+              description: "date prochain rendez-vous de l'individu",
+              etat: true,
+              dateCreation: new Date('07/03/2000'),
+              dateModification: new Date('07/03/1990'),
+              type: TypeTicket.Date,
+              ordre: 0,
+              obligatoire: false,
+              valeursParDefaut: '',
+            },
+            value: new Date('17/06/2023'),
+          },
+          {
+            key: {
+              id: '12',
+              titre: 'aprobation du medecin',
+              description: 'aprobation du medecin',
+              etat: true,
+              dateCreation: new Date('07/03/2000'),
+              dateModification: new Date('07/03/1990'),
+              type: TypeTicket.Boolean,
+              ordre: 0,
+              obligatoire: false,
+              valeursParDefaut: 'oui, non',
+            },
+            value: 'oui',
+          },
+          {
+            key: {
+              id: '13',
+              titre: 'motif de la decharge',
+              description: 'motif de la decharge ',
+              etat: true,
+              dateCreation: new Date('07/03/2000'),
+              dateModification: new Date('07/03/1990'),
+              type: TypeTicket.Textarea,
+              ordre: 0,
+              obligatoire: false,
+              valeursParDefaut: '',
+            },
+            value: 'Fin traitement',
+          },
+          {
+            key: {
+              id: '2',
+              titre: 'poids',
+              description: "poids de l'individu",
+              etat: true,
+              dateCreation: new Date('07/03/2000'),
+              dateModification: new Date('07/03/1990'),
+              type: TypeTicket.Double,
+              ordre: 0,
+              obligatoire: false,
+              valeursParDefaut: '',
+            },
+            value: '54',
+          },
+          {
+            key: {
+              id: '3',
+              titre: 'sexe',
+              description: "sexe de l'individu",
+              etat: true,
+              dateCreation: new Date('07/03/2000'),
+              dateModification: new Date('07/03/1990'),
+              type: TypeTicket.Boolean,
+              ordre: 0,
+              obligatoire: false,
+              valeursParDefaut: 'Homme, Femme, Autre',
+            },
+            value: 'Homme',
+          },
+          {
+            key: {
+              id: '6',
+              titre: 'teint',
+              description: "teint de l'individu",
+              etat: true,
+              dateCreation: new Date('07/03/2000'),
+              dateModification: new Date('07/03/1990'),
+              type: TypeTicket.String,
+              ordre: 0,
+              obligatoire: false,
+              valeursParDefaut: '',
+            },
+            value: 'Noir',
+          },
         ],
       },
       {
@@ -2485,72 +2723,336 @@ export class InMemDBService implements InMemoryDbService {
           },
         ],
         objetEnregistre: [
-          { key: '1', value: '1.70'},
-          { key: '6', value: 'noir'},
-          { key: '8', value: 'oui'},
-          { key: '4', value: '23'},
-          { key: '7', value: 'A+'},
-          { key: '5', value: 'oignon, lait, mangue'},
+          { key: 
+            {
+              id: '1',
+              titre: 'taille',
+              description: "taille de l'individu",
+              etat: true,
+              dateCreation: new Date('07/03/2000'),
+              dateModification: new Date('07/03/1990'),
+              type: TypeTicket.String,
+              ordre: 0,
+              obligatoire: false,
+              valeursParDefaut: '',
+            }, 
+            value: '1.70' },
+          { key: 
+            {
+              id: '6',
+              titre: 'teint',
+              description: "teint de l'individu",
+              etat: true,
+              dateCreation: new Date('07/03/2000'),
+              dateModification: new Date('07/03/1990'),
+              type: TypeTicket.String,
+              ordre: 0,
+              obligatoire: false,
+              valeursParDefaut: '',
+            }, 
+            value: 'noir' },
+          { key: 
+            {
+              id: '8',
+              titre: 'cicatrice',
+              description: "cicatrice de l'individu",
+              etat: true,
+              dateCreation: new Date('07/03/2000'),
+              dateModification: new Date('07/03/1990'),
+              type: TypeTicket.Boolean,
+              ordre: 0,
+              obligatoire: false,
+              valeursParDefaut: 'oui, non',
+            }, 
+            value: 'oui' },
+          { key: 
+            {
+              id: '4',
+              titre: 'age',
+              description: "age de l'individu",
+              etat: true,
+              dateCreation: new Date('07/03/2000'),
+              dateModification: new Date('07/03/1990'),
+              type: TypeTicket.Double,
+              ordre: 0,
+              obligatoire: false,
+              valeursParDefaut: '',
+            }, 
+            value: '23' },
+          { key: 
+            {
+              id: '7',
+              titre: 'Groupe sangin',
+              description: "Groupe sangin de l'individu",
+              etat: true,
+              dateCreation: new Date('07/03/2000'),
+              dateModification: new Date('07/03/1990'),
+              type: TypeTicket.Boolean,
+              ordre: 0,
+              obligatoire: false,
+              valeursParDefaut: 'A, A+, A-, B, B+, B-, AB, AB+, AB-, O, O+, O-',
+            }, 
+            value: 'A+' },
+          { key: 
+            {
+              id: '5',
+              titre: 'allergies',
+              description: "allergies de l'individu",
+              etat: true,
+              dateCreation: new Date('07/03/2000'),
+              dateModification: new Date('07/03/1990'),
+              type: TypeTicket.String,
+              ordre: 0,
+              obligatoire: false,
+              valeursParDefaut: '',
+            }, 
+            value: 'oignon, lait, mangue' },
         ],
       },
     ];
-    let ressource:IRessource[]=[
-      {id:"1", libelle:"transfusion",etat:true, /*dateCreation:new Date("07/03/2000"),dateModification:new Date("07/03/1990"),*/quantite:10,unite:this.UnitesLitre,prix:1000,caracteristique:"souple",
-        famille:{id:"1", libelle:"trans", description:"sang", etat:"gl"}},
-      {id:"2", libelle:"néonat",etat: true,/* dateCreation:new Date("07/03/2000"),dateModification:new Date("07/03/1990"),*/quantite:20,unite:this.UnitesLitre,prix:2000,caracteristique:"souple",
-        famille: {id:"2", libelle:"néonat", description:"nouveau-né", etat:"malade"}},
-      {id:"2", libelle:"néonat",etat: true,/* dateCreation:new Date("07/03/2000"),dateModification:new Date("07/03/1990"),*/quantite:20,unite:this.UnitesLitre,prix:2000,caracteristique:"souple",
-        famille:{id:"3", libelle:"pediatrie", description:"enfant", etat:"souffrant"}},
-      {id:"3", libelle:"pediatrie",etat: true, /*dateCreation:new Date("07/03/2000"),dateModification:new Date("07/03/1990"),*/quantite:30,unite:this.UnitesLitre,prix:3000,caracteristique:"souple",
-        famille:{id:"4", libelle:"néonat", description:"nouveau-né", etat:"malade"}},
-      {id:"4", libelle:"néonat",etat: true,/*dateCreation:new Date("07/03/2000"),dateModification:new Date("07/03/1990"),*/quantite:40,unite:this.UnitesLitre,prix:4000,caracteristique:"souple",
-        famille:{id:"5", libelle:"transfusion", description:"sang", etat:"gl"}},
+    let ressource: IRessource[] = [
+      {
+        id: '1',
+        libelle: 'transfusion',
+        etat: true,
+        /*dateCreation:new Date("07/03/2000"),dateModification:new Date("07/03/1990"),*/ quantite: 10,
+        unite: this.UnitesLitre,
+        prix: 1000,
+        caracteristique: 'souple',
+        famille: { id: '1', libelle: 'trans', description: 'sang', etat: 'gl' },
+      },
+      {
+        id: '2',
+        libelle: 'néonat',
+        etat: true,
+        /* dateCreation:new Date("07/03/2000"),dateModification:new Date("07/03/1990"),*/ quantite: 20,
+        unite: this.UnitesLitre,
+        prix: 2000,
+        caracteristique: 'souple',
+        famille: {
+          id: '2',
+          libelle: 'néonat',
+          description: 'nouveau-né',
+          etat: 'malade',
+        },
+      },
+      {
+        id: '2',
+        libelle: 'néonat',
+        etat: true,
+        /* dateCreation:new Date("07/03/2000"),dateModification:new Date("07/03/1990"),*/ quantite: 20,
+        unite: this.UnitesLitre,
+        prix: 2000,
+        caracteristique: 'souple',
+        famille: {
+          id: '3',
+          libelle: 'pediatrie',
+          description: 'enfant',
+          etat: 'souffrant',
+        },
+      },
+      {
+        id: '3',
+        libelle: 'pediatrie',
+        etat: true,
+        /*dateCreation:new Date("07/03/2000"),dateModification:new Date("07/03/1990"),*/ quantite: 30,
+        unite: this.UnitesLitre,
+        prix: 3000,
+        caracteristique: 'souple',
+        famille: {
+          id: '4',
+          libelle: 'néonat',
+          description: 'nouveau-né',
+          etat: 'malade',
+        },
+      },
+      {
+        id: '4',
+        libelle: 'néonat',
+        etat: true,
+        /*dateCreation:new Date("07/03/2000"),dateModification:new Date("07/03/1990"),*/ quantite: 40,
+        unite: this.UnitesLitre,
+        prix: 4000,
+        caracteristique: 'souple',
+        famille: {
+          id: '5',
+          libelle: 'transfusion',
+          description: 'sang',
+          etat: 'gl',
+        },
+      },
     ];
-    let famille:IFamille[]=[
-      {id:"1", libelle:"trans", description:"sang", etat:"gl"},
-      {id:"2", libelle:"néonat", description:"nouveau-né", etat:"malade"},
-      {id:"3", libelle:"pediatrie", description:"enfant", etat:"souffrant"},
-      {id:"4", libelle:"néonat", description:"nouveau-né", etat:"malade"},
-      {id:"5", libelle:"transfusion", description:"sang", etat:"gl"},
-  ];
+    let famille: IFamille[] = [
+      { id: '1', libelle: 'trans', description: 'sang', etat: 'gl' },
+      { id: '2', libelle: 'néonat', description: 'nouveau-né', etat: 'malade' },
+      {
+        id: '3',
+        libelle: 'pediatrie',
+        description: 'enfant',
+        etat: 'souffrant',
+      },
+      { id: '4', libelle: 'néonat', description: 'nouveau-né', etat: 'malade' },
+      { id: '5', libelle: 'transfusion', description: 'sang', etat: 'gl' },
+    ];
 
-
-    let precomvt:IPrecoMvt[]=[
-      {id:"1",libelle:"rachat",etat: true,type:'neutre',/*type:this.TypeMvtNeutre*/
-      precomvtqte:[{id:"1",quantiteMin:10,  quantiteMax:20,  montantMin:1000, montantMax:7000,/*fournisseur:'gc',*/
-                  ressource:{id:"1", libelle:"transfusion",etat:true,quantite:10,unite:this.UnitesLitre,prix:1000,caracteristique:"souple", famille:{id:"4", libelle:"néonat", description:"nouveau-né", etat:"malade"}}
+    let precomvt: IPrecoMvt[] = [
+      {
+        id: '1',
+        libelle: 'rachat',
+        etat: true,
+        type: 'neutre' /*type:this.TypeMvtNeutre*/,
+        precomvtqte: [
+          {
+            id: '1',
+            quantiteMin: 10,
+            quantiteMax: 20,
+            montantMin: 1000,
+            montantMax: 7000 /*fournisseur:'gc',*/,
+            ressource: {
+              id: '1',
+              libelle: 'transfusion',
+              etat: true,
+              quantite: 10,
+              unite: this.UnitesLitre,
+              prix: 1000,
+              caracteristique: 'souple',
+              famille: {
+                id: '4',
+                libelle: 'néonat',
+                description: 'nouveau-né',
+                etat: 'malade',
               },
-              {id:"2",quantiteMin:30,  quantiteMax:40,  montantMin:100, montantMax:7000,/*fournisseur:'gc',*/
-                  famille:[
-                     {id:"1", libelle:"trans", description:"sang", etat:"gl"},
-                     {id:"2", libelle:"néonat", description:"nouveau-né", etat:"malade"},
-                     {id:"3", libelle:"pediatrie", description:"enfant", etat:"souffrant"}
-                 ]
-
+            },
           },
-        ]},
-    {id:"2",libelle:"vente",etat: true,type:'reduire',/*type:this.TypeMvtReduire*/
-    precomvtqte:[{id:"1",quantiteMin:30,  quantiteMax:40,  montantMin:100, montantMax:7000,/*fournisseur:'gc',*/
-                famille:[
-                        {id:"1", libelle:"trans", description:"sang", etat:"gl"},
-                        {id:"2", libelle:"néonat", description:"nouveau-né", etat:"malade"},
-                        {id:"3", libelle:"pediatrie", description:"enfant", etat:"souffrant"}
-                      ]
-            }]},
-            {id:"3",libelle:"vente",etat: true,type:'reduire',/*type:this.TypeMvtReduire*/
-            precomvtqte:[{id:"1",quantiteMin:30,  quantiteMax:40,  montantMin:100, montantMax:7000,/*fournisseur:'gc',*/
-                   distributeur:[
-                               {id:"1", raisonSocial:"brasserie1", adresse:"Dla", telephone:"655554488", mail: "ngong@yad.fr"},
-                               {id:"2", raisonSocial:"guinness",adresse:"Ydé", telephone: "655554481", mail: "ngong@yad.fr"},
-                               {id:"3", raisonSocial:"papeterie yvan", adresse:"Buéa", telephone:"655554486", mail:"ngong@yad.fr"}
-                              ]
-                    }]}
-          ];
-    let distributeur:IDistributeur[]=[
-      {id:"1", raisonSocial:"cgb", adresse:"Dla", telephone:"655554488", mail: "ngong@yad.fr"},
-      {id:"2", raisonSocial:"bgb",adresse:"Ydé", telephone: "655554481", mail: "ngong@yad.fr"},
-      {id:"3", raisonSocial:"cvc", adresse:"Buéa", telephone:"655554486", mail:"ngong@yad.fr"},
+          {
+            id: '2',
+            quantiteMin: 30,
+            quantiteMax: 40,
+            montantMin: 100,
+            montantMax: 7000 /*fournisseur:'gc',*/,
+            famille: [
+              { id: '1', libelle: 'trans', description: 'sang', etat: 'gl' },
+              {
+                id: '2',
+                libelle: 'néonat',
+                description: 'nouveau-né',
+                etat: 'malade',
+              },
+              {
+                id: '3',
+                libelle: 'pediatrie',
+                description: 'enfant',
+                etat: 'souffrant',
+              },
+            ],
+          },
+        ],
+      },
+      {
+        id: '2',
+        libelle: 'vente',
+        etat: true,
+        type: 'reduire' /*type:this.TypeMvtReduire*/,
+        precomvtqte: [
+          {
+            id: '1',
+            quantiteMin: 30,
+            quantiteMax: 40,
+            montantMin: 100,
+            montantMax: 7000 /*fournisseur:'gc',*/,
+            famille: [
+              { id: '1', libelle: 'trans', description: 'sang', etat: 'gl' },
+              {
+                id: '2',
+                libelle: 'néonat',
+                description: 'nouveau-né',
+                etat: 'malade',
+              },
+              {
+                id: '3',
+                libelle: 'pediatrie',
+                description: 'enfant',
+                etat: 'souffrant',
+              },
+            ],
+          },
+        ],
+      },
+      {
+        id: '3',
+        libelle: 'vente',
+        etat: true,
+        type: 'reduire' /*type:this.TypeMvtReduire*/,
+        precomvtqte: [
+          {
+            id: '1',
+            quantiteMin: 30,
+            quantiteMax: 40,
+            montantMin: 100,
+            montantMax: 7000 /*fournisseur:'gc',*/,
+            distributeur: [
+              {
+                id: '1',
+                raisonSocial: 'brasserie1',
+                adresse: 'Dla',
+                telephone: '655554488',
+                mail: 'ngong@yad.fr',
+              },
+              {
+                id: '2',
+                raisonSocial: 'guinness',
+                adresse: 'Ydé',
+                telephone: '655554481',
+                mail: 'ngong@yad.fr',
+              },
+              {
+                id: '3',
+                raisonSocial: 'papeterie yvan',
+                adresse: 'Buéa',
+                telephone: '655554486',
+                mail: 'ngong@yad.fr',
+              },
+            ],
+          },
+        ],
+      },
     ];
-    return{patients, services, menus, tickets, missions, attributs, documents,exemplaires,famille,ressource,precomvt,distributeur};
+    let distributeur: IDistributeur[] = [
+      {
+        id: '1',
+        raisonSocial: 'cgb',
+        adresse: 'Dla',
+        telephone: '655554488',
+        mail: 'ngong@yad.fr',
+      },
+      {
+        id: '2',
+        raisonSocial: 'bgb',
+        adresse: 'Ydé',
+        telephone: '655554481',
+        mail: 'ngong@yad.fr',
+      },
+      {
+        id: '3',
+        raisonSocial: 'cvc',
+        adresse: 'Buéa',
+        telephone: '655554486',
+        mail: 'ngong@yad.fr',
+      },
+    ];
+    return {
+      patients,
+      services,
+      menus,
+      tickets,
+      missions,
+      attributs,
+      documents,
+      exemplaires,
+      famille,
+      ressource,
+      precomvt,
+      distributeur,
+    };
   }
 }

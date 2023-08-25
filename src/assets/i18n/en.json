@@ -199,6 +199,7 @@
         },
         "exemplaire":{
             "title":"Document's instance ",
+            "title2":"Old datas",
             "text1":"composition of this instance"
         }      
     },

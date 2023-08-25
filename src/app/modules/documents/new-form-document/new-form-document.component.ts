@@ -108,8 +108,6 @@ export class NewFormDocumentComponent implements OnInit {
           description: this.document.description,
           _missions: this.document.missions,
           _attributs: []
-          // missions: this.document.missions,
-          // attributs: this.document.attributs
           })
           this.forme.controls["_missions"].setValue(this.document.missions);
 
@@ -178,7 +176,6 @@ export class NewFormDocumentComponent implements OnInit {
 
   openCategorieDialog(){
     //envoi des données à la fenetre enfant
-   // this.donneeDocCatService.dataDocumentCategorie =  this.TABLE_CATEGORIE_AFFICHAGE_TEMP;
 
     this.dialogDef.open(ModalCategoriesComponent, 
     {

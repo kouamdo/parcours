@@ -68,6 +68,20 @@ h3{
     margin: 2px 5px;
     padding: 5px;
 }
+#controlsSupprimeBlock{
+    border-radius: 0% !important;
+    border: none;
+    h3{
+        font-size: 15px;
+        color: red;
+        opacity: 0.5;
+        margin: 10px 0;
+        i{
+            font-size: 12px;
+            margin-left: 5px;
+        }
+    }
+}
 .block .inputBlock label{
     text-transform: capitalize;
     font-weight: 400;
