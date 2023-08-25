@@ -1,4 +1,3 @@
-
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import {  FormBuilder, FormControl, FormGroup, FormGroupDirective, FormsModule, NgForm, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -48,13 +47,14 @@ export class NewPrecomvtComponent implements OnInit {
  //précise l'index de eltPreco qu'on souhaite modifier
  indexModification = -1;
 
- precoMvtFinal : IPrecoMvt ={
+  precoMvtInit : IPrecoMvt ={
   id: "uuidv4()",
   libelle: "",
   etat: true,
     type: TypeMvt.Ajout,
   precomvtqte:[]
  };
+ idPrecoMvt: string = '';
 
  //submitted=false;
  tabError : Map<String,String> = new Map();
@@ -107,13 +107,35 @@ export class NewPrecomvtComponent implements OnInit {
         else{
           this.filteredOptions = [];
         }
-
       }
     );
-
+    let idPrecoMvt = this.infosPath.snapshot.paramMap.get('idPrecoMvt');
+    if (idPrecoMvt != null && idPrecoMvt !== '') {
+      this.precoMvtService.getPrecomvtById(idPrecoMvt).subscribe(
+        PrecoMvtCourant =>{
+          this.precoMvtInit = PrecoMvtCourant
+          this.eltsPreco = []
+          this.eltsPreco[0].libelle = this.precoMvtInit.libelle
+          this.eltsPreco[0].etat = this.precoMvtInit.etat
+          this.eltsPreco[0].type = this.precoMvtInit.type
+          this.eltsPreco[0].precomvtqte = []
+          this.precoMvtInit.precomvtqte.forEach(
+            element => {
+              let precoMvtTemp : IPrecoMvt ={
+                id: "",
+                libelle: "",
+                etat: true,
+                  type: TypeMvt.Ajout,
+                precomvtqte:[]
+               };
+               precoMvtTemp.precomvtqte[0]= element
+               this.eltsPreco.push(precoMvtTemp)
+          });
+        }
+      )
+    }
 
   }
-
 
 get formeControls():any{
   return this.forme['controls'];

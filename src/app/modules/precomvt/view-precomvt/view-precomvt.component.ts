@@ -18,9 +18,10 @@ export class ViewPrecomvtComponent implements OnInit {
     etat:false,
     precomvtqte:[],
   }
+  eltsPreco : IPrecoMvt[] = [];
+  precomvtqte:IPrecoMvtQte[] = [];
 
-
-  constructor(private router:Router, private infosPath:ActivatedRoute, private precoMvtService:PrecoMvtsService) { }
+  constructor(private router:Router, private infosPath:ActivatedRoute, private precoMvtService:PrecoMvtsService) {}
 
   ngOnInit(): void {
     let idPrecoMvt = this.infosPath.snapshot.paramMap.get('idPrecoMvt');
@@ -33,5 +34,10 @@ export class ViewPrecomvtComponent implements OnInit {
         });
     }
   }
-
+  supprimerElt(element:IPrecoMvtQte){
+    this.PrecoMvt.precomvtqte.forEach((value, index) =>{
+      if(value == element)
+      this.PrecoMvt.precomvtqte.splice(index,1)
+    });
+  }
 }
