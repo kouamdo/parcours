@@ -114,25 +114,25 @@ export class NewPrecomvtComponent implements OnInit {
       this.precoMvtService.getPrecomvtById(idPrecoMvt).subscribe(
         PrecoMvtCourant =>{
           this.precoMvtInit = PrecoMvtCourant
-          this.eltsPreco = []
-          this.eltsPreco[0].libelle = this.precoMvtInit.libelle
-          this.eltsPreco[0].etat = this.precoMvtInit.etat
-          this.eltsPreco[0].type = this.precoMvtInit.type
-          this.eltsPreco[0].precomvtqte = []
-          this.precoMvtInit.precomvtqte.forEach(
-            element => {
-              let precoMvtTemp : IPrecoMvt ={
-                id: "",
-                libelle: "",
-                etat: true,
-                  type: TypeMvt.Ajout,
-                precomvtqte:[]
-               };
-               precoMvtTemp.precomvtqte[0]= element
-               this.eltsPreco.push(precoMvtTemp)
-          });
         }
       )
+     // this.eltsPreco = []
+      this.eltsPreco[0]!.libelle = this.precoMvtInit.libelle
+      this.eltsPreco[0].etat = this.precoMvtInit.etat
+      this.eltsPreco[0].type = this.precoMvtInit.type
+      this.eltsPreco[0].precomvtqte = []
+      this.precoMvtInit.precomvtqte.forEach(
+        element => {
+          let precoMvtTemp : IPrecoMvt ={
+            id: "",
+            libelle: "",
+            etat: true,
+              type: TypeMvt.Ajout,
+            precomvtqte:[]
+           };
+           precoMvtTemp.precomvtqte[0]= element
+           this.eltsPreco.push(precoMvtTemp)
+      });
     }
 
   }
@@ -237,7 +237,6 @@ this.precoMvtService.ajouterPrecomvt(precomvtTemp).subscribe(
         this.tabError.set("montantMax","montant Max doit être supérieur au montant Min");
       }
 
-     //ICI
      let valQuantiteMin : number = this.forme.controls["quantiteMin"].value;
 
      if(valQuantiteMin == null || valQuantiteMin< 0){
@@ -254,7 +253,7 @@ this.precoMvtService.ajouterPrecomvt(precomvtTemp).subscribe(
       controleVerif = false;
       this.tabError.set("quantiteMin","Quantite Max doit être supérieur à Quantite Min");
     }
-   if(valQuantiteMin > valQuantiteMax){
+   if(valQuantiteMin < valQuantiteMax){
       controleVerif = false;
       this.tabError.set( "quantiteMin","Quantite Min doit être inférieure à Quantite Max");
     }
