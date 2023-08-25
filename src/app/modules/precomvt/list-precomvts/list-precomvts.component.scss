@@ -1,7 +1,8 @@
+
 .title{
   height: 100px;
   h2{
-      color: #7ea97e;
+      color: #28a745;
   }
 }
 .searchBlock{
@@ -12,32 +13,27 @@
   margin-right: 8px;
   button{
       width: 7%;
-      background-color: #7ea97e;
+      background-color: #28a745;
       color: white;
   }
   .inputSection{
       width: 91%;
       input{
           border: none;
-          border: 1px solid #7ea97e21;
+          border: 1px solid #28a74521;
       }
   }
 }
 .tableTools{
   padding-bottom: 15px;
   #addUserBotton{
-      background-color: #7ea97e;
+      background-color: #FFD700;
       color: white;
       font-size: 20px;
       padding: 10px;
       border-radius: 5px;
-      span{
-          padding: 6px;
-          border: none;
-          border-radius: 3px;
-      }
       span:hover{
-          box-shadow: 0 0 2px #7ea97e;
+          box-shadow: 0 0 2px #28a745;
           transition: ease 0.23s;
       }
   }
@@ -53,7 +49,7 @@
           .dropdown-toggle{
               padding: 0;
               margin-left: 10px;
-              color: #7ea97e;
+              color: #28a745;
               span{
                   position: relative;
                   bottom: 6px;
@@ -63,7 +59,7 @@
           }
           div{
               button{
-                  color: #7ea97e;
+                  color: #28a745;
                   display: flex;
                   align-items: center;
                   justify-content: space-between;
@@ -79,7 +75,7 @@
 mat-form-field{
   padding: 0;
   margin: 0;
-  color: #7ea97e;
+  color: #28a745;
   line-height: normal;
   box-sizing: initial;
   input{
@@ -94,14 +90,14 @@ mat-form-field:focus{
   margin: 0;
   input{
       padding: 0;
-      color: #7ea97e;
+      color: #28a745;
       border: none;
       margin: 0;
   }
 }
 .example-full-width {
   height: 42px !important;
-  border: 2px solid #7ea97e;
+  border: 2px solid #28a745;
   border-radius: 5px;
   background-color: transparent;
   padding: 0;
@@ -112,7 +108,15 @@ mat-form-field:focus{
   top: -2px;
   padding: 0;
   margin: 0;
-  color: #7ea97e96;
+  color: #28a74596;
+  border: none;
+}
+.searchBar {
+  position: relative;
+  top: -2px;
+  padding: 0;
+  margin: 0;
+  color: #28a74596;
   border: none;
   font-size: small;
 }
@@ -121,7 +125,7 @@ mat-form-field:focus{
   top: -2px;
   padding: 0;
   margin: 0;
-  color: #7ea97e96;
+  color: #28a74596;
   border: none;
 }
 .containHead{
@@ -137,17 +141,16 @@ td{
   font-size: 13px;
 }
 th{
-  background-color: rgba(126, 169, 126, 0.2);
-  color: #7ea97e !important;
+  background-color: rgba(40, 167, 69, 0.2);
+  color: #28a745 !important;
 }
-
 @media screen and (max-width: 1200px) {
   .title h2{
       font-size: 15px;
   }
   .example-full-width {
       height: 42px !important;
-      border: 2px solid #7ea97e;
+      border: 2px solid #28a745;
   }
 }
 @media screen and (max-width: 1100px) {
@@ -160,3 +163,9 @@ th{
       font-size: 12px;
   }
 }
+
+
+
+
+
+

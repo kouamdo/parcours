@@ -1,3 +1,4 @@
+
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import {  FormBuilder, FormControl, FormGroup, FormGroupDirective, FormsModule, NgForm, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -135,7 +136,7 @@ private getAllDistributeurs(){
   */
  enregistrerPreco(){
   let  precomvtTemp : IPrecoMvt={
-    id: String(9),
+    id: uuidv4(),
     libelle:this.eltsPreco[0].libelle,
     etat:this.eltsPreco[0].etat,
     type:this.eltsPreco[0].type,
@@ -211,32 +212,31 @@ this.precoMvtService.ajouterPrecomvt(precomvtTemp).subscribe(
       }
       if(valMontantMin > valMontantMax){
         controleVerif = false;
-        this.tabError.set("montantMax","montant Max doit être supérieur au montantMin");
+        this.tabError.set("montantMax","montant Max doit être supérieur au montant Min");
       }
 
-      let valQuantiteMax : number = this.forme.controls["quantiteMax"].value;
+     //ICI
+     let valQuantiteMin : number = this.forme.controls["quantiteMin"].value;
 
-      if(valQuantiteMax == null || valQuantiteMax < 0){
-        controleVerif = false;
-        this.tabError.set("quantiteMax","Quantite Max est obligatoire");
-      }
-      let valQuantiteMin : number = this.forme.controls["quantiteMin"].value;
+     if(valQuantiteMin == null || valQuantiteMin< 0){
+       controleVerif = false;
+       this.tabError.set("quantiteMin","quantite Min est obligatoire");
+     }
+     let valQuantiteMax : number = this.forme.controls["quantiteMax"].value;
 
-      if(valQuantiteMin == null || valQuantiteMin < 0){
-        controleVerif = false;
-        this.tabError.set("quantiteMin","Quantite Min est obligatoire");
-      }
+     if(valQuantiteMax==null || valQuantiteMax< 0){
+       controleVerif = false;
+       this.tabError.set("quantiteMax","quantite Max est  obligatoire");
+     }
+     if(valQuantiteMin > valQuantiteMax ){
+      controleVerif = false;
+      this.tabError.set("quantiteMin","Quantite Max doit être supérieur à Quantite Min");
+    }
+   if(valQuantiteMin > valQuantiteMax){
+      controleVerif = false;
+      this.tabError.set( "quantiteMin","Quantite Min doit être inférieure à Quantite Max");
+    }
 
-      if(valQuantiteMin > valQuantiteMax){
-        controleVerif = false;
-        this.tabError.set("quantiteMin","Quantite Min doit être inférieur à QuantiteMax");
-      }
-      let valDistributeur : string[] = this.forme.controls["distributeur"].value;
-
-      if((valDistributeur == null || valDistributeur.length == 0)){
-        controleVerif = false;
-        this.tabError.set("distributeur","selectionner un distributeur");
-      }
       }
   }
   if(controleVerif){
@@ -431,7 +431,7 @@ reset():void{
       id: uuidv4(),
       libelle:"Libelle : "+ precomvtInput.libelle,
       etat: precomvtInput.etat,
-      type: "Type : "+ precomvtInput.type,
+      type:"Type : " + precomvtInput.type,
       precomvtqte:[]
     }
     precomvtTemp.precomvtqte.push(premvtqte);

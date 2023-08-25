@@ -60,19 +60,11 @@
                                   <span>...</span>
                               </button>
                               <div class="dropdown-menu" aria-labelledby="triggerId">
-                                  <button class="dropdown-item nav-link" [routerLink]="['/ressource-nouvelle']" title="{{'patient.table.actions.link1' | translate}}">
-                                      <i class="fa fa-map-pin" aria-hidden="true"></i>
-                                      <span>{{'patient.table.actions.link1' | translate}}</span>
-                                  </button>
-                                  <button class="dropdown-item nav-link" [routerLink]="['/view-precomvt',element.id]" title="{{'patient.table.actions.link3' | translate}}">
-                                      <i class="fa fa-eye text-secondary" aria-hidden="true"></i>
-                                      <span>{{'patient.table.actions.link3' | translate}}</span>
-                                  </button>
-                                   <button class="dropdown-item nav-link" [routerLink]="['/ressource-nouvelle',element.id]" title="{{'patient.table.actions.link2' | translate}}">
+                                   <button class="dropdown-item nav-link" [routerLink]="['/precomvt-nouvelle',element.id]" title="{{'patient.table.actions.link2' | translate}}">
                                       <i class="fa fa-pen text-info" aria-hidden="true"></i>
                                       <span>{{'patient.table.actions.link2' | translate}}</span>
                                   </button>
-                                  <button class="dropdown-item nav-link" [routerLink]="['/ressource-nouvelle',element.id]" title="{{'patient.table.actions.link4' | translate}}">
+                                  <button class="dropdown-item nav-link" [routerLink]="['/precomvt-nouvelle',element.id]" title="{{'patient.table.actions.link4' | translate}}">
                                     <i class="fa fa-times-circle text-danger" aria-hidden="true"></i>
                                     <span>{{'patient.table.actions.link4' | translate}}</span>
                                 </button>
@@ -84,7 +76,7 @@
                   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
               </table>
-              <mat-paginator style="background-color: rgba(126, 169, 126, 0.79);" [pageSizeOptions]="[5, 10, 20]"
+              <mat-paginator style="background-color: rgba(40, 167, 69, 0.79);" [pageSizeOptions]="[5, 10, 20]"
                              showFirstLastButtons
                              aria-label="Select page of periodic elements">
               </mat-paginator>
@@ -92,3 +84,6 @@
       </div>
   </div>
 </div>
+
+
+
