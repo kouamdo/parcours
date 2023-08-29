@@ -47,7 +47,7 @@ export class NewPrecomvtComponent implements OnInit {
  //précise l'index de eltPreco qu'on souhaite modifier
  indexModification = -1;
 
-  precoMvtInit : IPrecoMvt ={
+  precoMvt : IPrecoMvt ={
   id: "uuidv4()",
   libelle: "",
   etat: true,
@@ -113,15 +113,19 @@ export class NewPrecomvtComponent implements OnInit {
     if (idPrecoMvt != null && idPrecoMvt !== '') {
       this.precoMvtService.getPrecomvtById(idPrecoMvt).subscribe(
         PrecoMvtCourant =>{
-          this.precoMvtInit = PrecoMvtCourant
-        }
-      )
-     // this.eltsPreco = []
-      this.eltsPreco[0]!.libelle = this.precoMvtInit.libelle
-      this.eltsPreco[0].etat = this.precoMvtInit.etat
-      this.eltsPreco[0].type = this.precoMvtInit.type
-      this.eltsPreco[0].precomvtqte = []
-      this.precoMvtInit.precomvtqte.forEach(
+          let precoMvt = PrecoMvtCourant; console.log(this.precoMvt);
+          this.eltsPreco= []
+          let precoMvtTemp : IPrecoMvt ={
+            id:this.precoMvt.id,
+            libelle:this.precoMvt.libelle,
+            etat: this.precoMvt.etat,
+              type: this.precoMvt.type,
+            precomvtqte:[]
+           };
+           this.eltsPreco.push(precoMvtTemp)
+         // this.eltsPreco.push(this.PrecoMvt)
+          this.precoMvt.precomvtqte.forEach(
+
         element => {
           let precoMvtTemp : IPrecoMvt ={
             id: "",
@@ -130,11 +134,33 @@ export class NewPrecomvtComponent implements OnInit {
               type: TypeMvt.Ajout,
             precomvtqte:[]
            };
-           precoMvtTemp.precomvtqte[0]= element
+           precoMvtTemp.precomvtqte.push(element)
+
+           if (this.precoMvt.libelle != null && this.precoMvt.libelle != "" ){
+
+          }
+         else if (this.precoMvt.precomvtqte[0].ressource != undefined && this.precoMvt.precomvtqte[0].ressource != null ){
+            let rsrce  = "Ressource :";{
+              const ressource = this.PrecoMvt.precomvtqte[0].ressource!.libelle;
+              rsrce += ressource
+            }
+
+          }
+         else if (this.precoMvt.precomvtqte[0].famille != null && this.precoMvt.precomvtqte[0].famille.length>0 ){
+          this.PrecoMvt.precomvtqte.forEach(element => {
+            let libel = "Familles : ";
+            for (let index = 0; index < this.PrecoMvt.precomvtqte[0].famille!.length; index++) {
+              const element = this.PrecoMvt.precomvtqte[0].famille![index];
+              libel += element.libelle + ", "
+            }
+          });
+
+        }
            this.eltsPreco.push(precoMvtTemp)
       });
+        }
+      )
     }
-
   }
 
 get formeControls():any{
@@ -243,20 +269,21 @@ this.precoMvtService.ajouterPrecomvt(precomvtTemp).subscribe(
        controleVerif = false;
        this.tabError.set("quantiteMin","quantite Min est obligatoire");
      }
+
      let valQuantiteMax : number = this.forme.controls["quantiteMax"].value;
 
      if(valQuantiteMax==null || valQuantiteMax< 0){
        controleVerif = false;
        this.tabError.set("quantiteMax","quantite Max est  obligatoire");
      }
-     if(valQuantiteMin > valQuantiteMax ){
+     if(valQuantiteMin > valQuantiteMax || valQuantiteMax < valQuantiteMin){
+      controleVerif = false;
+      this.tabError.set("quantiteMax","Quantite Max doit être supérieur à Quantite Min");
+    }
+   /* if(valQuantiteMax < valQuantiteMin ){
       controleVerif = false;
       this.tabError.set("quantiteMin","Quantite Max doit être supérieur à Quantite Min");
-    }
-   if(valQuantiteMin < valQuantiteMax){
-      controleVerif = false;
-      this.tabError.set( "quantiteMin","Quantite Min doit être inférieure à Quantite Max");
-    }
+    }*/
 
       }
   }
@@ -452,7 +479,7 @@ reset():void{
       id: uuidv4(),
       libelle:"Libelle : "+ precomvtInput.libelle,
       etat: precomvtInput.etat,
-      type:"Type : " + precomvtInput.type,
+      type: precomvtInput.type,
       precomvtqte:[]
     }
     precomvtTemp.precomvtqte.push(premvtqte);

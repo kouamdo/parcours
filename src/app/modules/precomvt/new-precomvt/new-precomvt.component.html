@@ -192,8 +192,8 @@
       <div *ngFor="let elt of eltsPreco let i=index "  class="color" >
         <div class="infosBoitier" (click)="chargerValeurPrecoMvt(i)" >
           <div class="boitier" id="boitierLibelle">
-            <P>{{elt.libelle}}</P>
-            <P>{{elt.type}}</P>
+            <P><span>Libellé: </span>{{elt.libelle}}</P>
+            <P><span>Type: </span>{{elt.type}}</P>
           </div>
           <div class="boitier">
             <div  class="blockQuantite">
