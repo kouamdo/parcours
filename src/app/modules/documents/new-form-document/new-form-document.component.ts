@@ -61,7 +61,7 @@ export class NewFormDocumentComponent implements OnInit {
     ordre: 0,
     listAttributs: []
   }
-  TABLE_CATEGORIE_AFFICHAGE_TEMP: ICategorieAffichage[] = []; 
+  TABLE_CATEGORIE_AFFICHAGE_TEMP: ICategoriesAttributs[] = []; 
   TABLE_CATEGORIE_AFFICHAGE_TEMPO: ICategorieAffichage[] = []; 
 
   // tableau contenant les categories creees
@@ -149,7 +149,7 @@ export class NewFormDocumentComponent implements OnInit {
   openCategorieDialog(){
     //envoi des données à la fenetre enfant
 
-    this.dialogDef.open(ModalCategoriesComponent, 
+    const dialogRef = this.dialogDef.open(ModalCategoriesComponent, 
     {
       width:'100%',
       enterAnimationDuration:'1000ms',
@@ -159,6 +159,44 @@ export class NewFormDocumentComponent implements OnInit {
       }
     }
     )
+
+    dialogRef.afterClosed().subscribe(result => {
+      // this.TABLE_CATEGORIE_AFFICHAGE_TEMPO = result;
+      let tmpCatAtt = new Map(); 
+      let categorieAttributsFinal : ICategoriesAttributs[] = [];
+  
+      //récupération des données du service
+      this.TABLE_CATEGORIE_AFFICHAGE_TEMPO = result;
+      this.TABLE_CATEGORIE_AFFICHAGE_TEMPO.forEach(
+        objet => {
+          let categorieAttributTemp : ICategoriesAttributs = {
+            id: '',
+            nom: '',
+            ordre: 0,
+            listAttributs: []
+          }
+            //si la map ne contient pas la catégorie courante 
+            if(tmpCatAtt.get(objet.nom)== null){
+              categorieAttributTemp.id = objet.id;
+              categorieAttributTemp.nom = objet.nom;
+              categorieAttributTemp.ordre = objet.ordre;
+              categorieAttributTemp.listAttributs.push(objet.attribut);
+  
+              // sauvegarde de l'indice de l'élément enregistré
+              let index : number  = categorieAttributsFinal.push(categorieAttributTemp);
+              tmpCatAtt.set(objet.nom, index-1);
+            }
+            else{
+              //si la valeur est trouvée dans la map
+              let index : number = tmpCatAtt.get(objet.nom); // récuperation de l'indice de l'élément enregistré
+              categorieAttributTemp = categorieAttributsFinal[index];
+              categorieAttributTemp.listAttributs.push(objet.attribut);
+              categorieAttributsFinal[index] = categorieAttributTemp;
+            }
+          } 
+      );
+        this.TABLE_CATEGORIE_AFFICHAGE_TEMP = categorieAttributsFinal;
+    });
   }
 
   openAttributDialog(){
@@ -222,7 +260,6 @@ export class NewFormDocumentComponent implements OnInit {
         } 
     );
       this.tableFinaleCategoriesAttributs = categorieAttributsFinal;
-    console.log("voici le tebleau d'attributs final a enregistrer : ", this.tableFinaleCategoriesAttributs)
   }
   onSubmit(documentInput:any){
     this.submitted=true;
@@ -236,8 +273,6 @@ export class NewFormDocumentComponent implements OnInit {
       categories: []
     }
     
-    console.log("voici les missions pour ce document : ", documentTemp.missions)
-
     if(this.document.id != ""){
       documentTemp.id = this.document.id  
     }

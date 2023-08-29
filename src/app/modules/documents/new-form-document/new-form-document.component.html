@@ -81,6 +81,9 @@
                                         <button type="button" class="btn p-0" title="{{'lists.button7' | translate}}" (click)="openCategorieDialog(); creerCategorie()">
                                             <i class="fas fa-pen-square"></i>
                                         </button>
+                                        <span *ngFor="let listeCategories of TABLE_CATEGORIE_AFFICHAGE_TEMP">
+                                            {{listeCategories.nom | lowercase}}<span>, </span>
+                                        </span>
                                     </div>
                                 </div>
                             </div>

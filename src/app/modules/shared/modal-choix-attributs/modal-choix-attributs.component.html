@@ -130,7 +130,9 @@
                                                aria-label="Select page of periodic elements">
                                 </mat-paginator>
                             </div>
-                            <button mat-button [mat-dialog-close]="dataSourceAttributResultat.data" cdkFocusInitial>Ok</button>
+                            <div class="actionButton mt-2">
+                                <button mat-button [mat-dialog-close]="dataSourceAttributResultat.data" cdkFocusInitial class="btn btnValidation">{{'lists.button6' | translate}}</button>
+                            </div>
                         </div>
                     </div>
                 </div>
