@@ -83,11 +83,12 @@
                             </button>
                             <div class="dropdown-menu" aria-labelledby="triggerId">
                                 
-                                <button class="dropdown-item nav-link" title="{{'patient.table.actions.link1' | translate}}"
-                                  type="button" data-toggle="modal" data-target="#modelTicket" (click) = "setIdPersonne(element.id, element.nom)">
-                                  <i class="fa fa-map-pin" aria-hidden="true"></i>
-                                  <span>{{'patient.table.actions.link1' | translate}}</span>
-                                </button>
+                              <button class="dropdown-item nav-link" title="{{'patient.table.actions.link1' | translate}}"
+                                (click) = "setIdPersonne(element.id, element.nom); openNewTicketDialog()">
+                                <i class="fa fa-map-pin" aria-hidden="true"></i>
+                                <span>{{'patient.table.actions.link1' | translate}}</span>
+                              </button>
+
                                 <button class="dropdown-item nav-link" [routerLink]="['new-patient']" title="{{'patient.table.actions.link3' | translate}}">
                                     <i class="fa fa-eye text-secondary" aria-hidden="true"></i>
                                     <span>{{'patient.table.actions.link3' | translate}}</span>

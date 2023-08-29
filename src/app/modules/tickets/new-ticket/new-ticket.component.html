@@ -46,7 +46,7 @@
         </div>
         <div class="modal-footer w-100">
             <div class="actionButton">
-                <button class="btn" data-dismiss="modal" routerLink="../list-patients" *ngIf="step == 1" (click)="removeData()">{{'lists.button3' | translate}}</button>
+                <button [mat-dialog-close] class="btn" *ngIf="step == 1" (click)="removeData()">{{'lists.button3' | translate}}</button>
                 <button class="btn" *ngIf="step == 2" (click)="previousStep()">{{'lists.button4' | translate}}</button>
                 <button class="btn" routerLink="../list-patients" data-dismiss="modal" *ngIf="step == 2"
                      [useExistingCss]="true"

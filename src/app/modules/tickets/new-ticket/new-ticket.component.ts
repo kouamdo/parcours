@@ -43,10 +43,9 @@ export class NewTicketComponent implements OnInit {
     statut: ''
   };
 
-  constructor(private formBuilder:FormBuilder, private ticketsService:TicketsService,private router:Router, private infosPath:ActivatedRoute, private serviceService:ServicesService, private datePipe: DatePipe) { 
-    this.forme = this.formBuilder.group({ 
-      
-    })
+  constructor(private formBuilder:FormBuilder, private ticketsService:TicketsService,private router:Router, private infosPath:ActivatedRoute,
+    private serviceService:ServicesService, private datePipe: DatePipe) { 
+    this.forme = this.formBuilder.group({})
   }
 
   ngOnInit(): void {
