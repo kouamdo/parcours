@@ -86,8 +86,6 @@ export class ModalCategoriesComponent implements OnInit {
     }
     
   ngOnInit(): void {
-    console.log(this.donneeDocCatService.dataDocumentCategorie)
-
       this.TABLE_CATEGORIE_AFFICHAGE_TEMP = this.donneeDocCatService.dataDocumentCategorie
       this.tableResultatsCategoriesAffichage.data = this.TABLE_CATEGORIE_AFFICHAGE_TEMP;
     if (this.donneeDocCatService.dataDocumentCategorie != null && this.donneeDocCatService.dataDocumentCategorie.length >0) {

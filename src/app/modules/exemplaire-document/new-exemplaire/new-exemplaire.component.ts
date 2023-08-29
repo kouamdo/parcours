@@ -133,7 +133,6 @@ export class NewExemplaireComponent implements OnInit {
   ajouterDisabledAttributs(valParDefaut: any) {
     if (valParDefaut != '' && valParDefaut != 'PARCOURS_NOT_FOUND_404') {
       this._controlsSupprime.push(this.formBuilder.control(valParDefaut));
-      // this._controlsSupprime.controls[0].disable();
     } else this._controlsSupprime.push(this.formBuilder.control(''));
   }
 

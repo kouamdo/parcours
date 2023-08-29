@@ -20,6 +20,7 @@ import {v4 as uuidv4} from 'uuid';
 import { ICategorieAffichage } from 'src/app/modele/categorie-affichage';
 import { TypeTicket } from 'src/app/modele/type-ticket';
 import { DonneesEchangeService } from 'src/app/services/donnees-echange/donnees-echange.service';
+import { ModalChoixAttributsComponent } from '../../shared/modal-choix-attributs/modal-choix-attributs.component';
 
 
 @Component({
@@ -43,20 +44,12 @@ export class NewFormDocumentComponent implements OnInit {
   titre: string="Ajouter un nouveau document";
   submitted: boolean=false;
   validation: boolean=false;
-  //idMission : string = "";
-  idAttribut : string = "";
   serviceDeMission!: IService;
 
   // variables attributs, pour afficher le tableau d'attributs sur l'IHM
-  myControl = new FormControl<string | IAttributs>('');
   ELEMENTS_TABLE_ATTRIBUTS: IAttributs[] = [];
-  filteredOptions: IAttributs[] | undefined;
-  displayedAttributsColumns: string[] = ['actions','titre', 'description', 'type'];  // structure du tableau presentant les attributs
-  displayedCategoriesAttributsColumns: string[] = ['actions','titre', 'description', 'type', 'ordreAtrParCat', 'ordreCat']; // structure du tableau presentant les categories creees avec leurs attributs
-  displayedCategoriesColumns: string[] = ['actions','titre', 'description', 'type', 'ordreAtrParCat'];  // structure du tableau presentant les choix des attributs lors de la creation des categories
   dataSourceAttribut = new MatTableDataSource<IAttributs>(this.ELEMENTS_TABLE_ATTRIBUTS);
   dataSourceAttributResultat = new MatTableDataSource<IAttributs>();
-  _attributs :  FormArray | undefined;
 
    ELEMENTS_TABLE_CATEGORIES: IAttributs[] = []; //tableau de listing des attributs a affecter a chaque categorie
 
@@ -69,7 +62,6 @@ export class NewFormDocumentComponent implements OnInit {
     listAttributs: []
   }
   TABLE_CATEGORIE_AFFICHAGE_TEMP: ICategorieAffichage[] = []; 
- // ELEMENTS_TABLE_CATEGORIE_ATTRIBUTS: ICategoriesAttributs[] = []; 
   TABLE_CATEGORIE_AFFICHAGE_TEMPO: ICategorieAffichage[] = []; 
 
   // tableau contenant les categories creees
@@ -91,9 +83,6 @@ export class NewFormDocumentComponent implements OnInit {
   }
   ngOnInit(): void {
     this.mission$ = this.getAllMissions();
-    this.getAllAttributs().subscribe(valeurs => {
-      this.dataSourceAttribut.data = valeurs;
-    });
 
     // chargement de la page a partir d'un Id pour la modification d'un document
     let idDocument = this.infosPath.snapshot.paramMap.get('idDocument');
@@ -154,24 +143,7 @@ export class NewFormDocumentComponent implements OnInit {
         //sauvegarde dans le service pour le communiquer à la modale
         this.donneeDocCatService.dataDocumentCategorie = categorieAfficheFinal
       });
-
     }
-    this.getAllAttributs()
-    this.myControl.valueChanges.subscribe(
-      value => {
-        const titre = typeof value === 'string' ? value : value?.titre;
-        if(titre != undefined && titre?.length >0){
-          this.serviceAttribut.getAttributsByTitre(titre.toLowerCase() as string).subscribe(
-            reponse => { 
-              this.filteredOptions = reponse;
-            }
-          )
-        }
-        else{
-          this.filteredOptions = [];
-        }
-      }
-    );
   }
 
   openCategorieDialog(){
@@ -184,52 +156,31 @@ export class NewFormDocumentComponent implements OnInit {
       exitAnimationDuration:'1000ms',
       data:{
         dataSourceAttributDocument : this.dataSourceAttributDocument,
-        name : 'adeline'
       }
     }
     )
   }
-  
-  onCheckAttributChange(event: any) {
-    const _attributs = (this.forme.controls['_attributs'] as FormArray);
-    if (event.target.checked) {
-      _attributs.push(new FormControl(event.target.value));
-      this.ajoutSelectionAttribut(this.idAttribut);
-    } else {
-      const index = _attributs.controls
-      .findIndex(x => x.value === event.target.value);
-      this.retirerSelectionAttribut(index)
-      _attributs.removeAt(index);
-    }
-    this._attributs = _attributs
-  }
 
-  getAttributId(idAttribut: string) {
-    this.idAttribut = idAttribut
-  }
-
-  ajoutSelectionAttribut(idAttribut: string) {
-    this.serviceAttribut.getAttributById(idAttribut).subscribe(
-      val => {
-        console.log('IdAttribut :' + val.id);
-        this.ELEMENTS_TABLE_ATTRIBUTS = this.dataSourceAttributResultat.data;
-        this.dataSourceAttributResultat.data = this.dataSourceAttributDocument.data
-        this.ELEMENTS_TABLE_ATTRIBUTS.push(val);
-        this.dataSourceAttributResultat.data = this.ELEMENTS_TABLE_ATTRIBUTS;
+  openAttributDialog(){
+    const dialogRef = this.dialogDef.open(ModalChoixAttributsComponent, 
+    {
+      width:'100%',
+      enterAnimationDuration:'1000ms',
+      exitAnimationDuration:'1000ms',
+      data:{
+        tableauAttributsDocumentResultat : this.ELEMENTS_TABLE_ATTRIBUTS
       }
-    )    
-  }
+    }
+    )
 
-  retirerSelectionAttribut(index: number) {
-    const _attributs = (this.forme.controls['_attributs'] as FormArray);
-    this.ELEMENTS_TABLE_ATTRIBUTS = this.dataSourceAttributResultat.data;
-    this.ELEMENTS_TABLE_ATTRIBUTS.splice(index, 1); // je supprime un seul element du tableau a la position 'index'
-    _attributs.removeAt(index);
-    this.dataSourceAttributResultat.data = this.ELEMENTS_TABLE_ATTRIBUTS;
+    dialogRef.afterClosed().subscribe(result => {
+      this.dataSourceAttributResultat.data = result;
+      this.ELEMENTS_TABLE_ATTRIBUTS = this.dataSourceAttributResultat.data
+      this.dataSourceAttributDocument.data = this.ELEMENTS_TABLE_ATTRIBUTS
+    });
   }
-
   creerCategorie(){
-    this.dataSourceAttributDocument.data = this.ELEMENTS_TABLE_ATTRIBUTS
+    this.dataSourceAttribut.data = this.ELEMENTS_TABLE_ATTRIBUTS
   }
 
   /**
@@ -312,33 +263,8 @@ export class NewFormDocumentComponent implements OnInit {
   private getAllMissions(){
     return this.serviceMission.getAllMissions();
   }
-  private getAllAttributs(){
-    return this.serviceAttribut.getAllAttributs();
-  }
-  displayFn(attribue: IAttributs): string {
-    return attribue && attribue.titre ? attribue.titre : '';
-  }
-
-  ngAfterViewInit() {
-    this.dataSourceAttribut.paginator = this.paginator;
-    this.dataSourceAttribut.sort = this.sort;
-  }
-
-  public rechercherListingAttribut(option: IAttributs){
-    this.serviceAttribut.getAttributsByTitre(option.titre.toLowerCase()).subscribe(
-        valeurs => {this.dataSourceAttribut.data = valeurs;}
-    )
-  }
-  
-  announceSortChange(sortState: Sort) {
-    if (sortState.direction) {
-      this._liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);
-    } else {
-      this._liveAnnouncer.announce('Sorting cleared');
-    }
-  }
   compareItem(mission1: IMission, mission2: IMission) {
     return mission2 && mission1 ? mission2.id === mission1.id : mission2 === mission1;
-}
+  }
 }
 
