@@ -53,11 +53,8 @@
                                 <div class="dropdown w-100">
                                     <!-- affichage list attributs selectiones -->
                                     <div class="listAttr">
-                                        <!-- <button type="button" class="btn p-0 bg-danger" data-toggle="modal" data-target="#modalAttributs" title="{{'lists.button7' | translate}}">
-                                            <i class="fas fa-pen-square"></i>
-                                        </button> -->
-                                        <button type="button" class="btn p-0" title="{{'lists.button7' | translate}}" (click)="openAttributDialog()">
-                                            <i class="fas fa-pen-square"></i>
+                                        <button type="button" class="btn p-0" title="{{'lists.button9' | translate}} / {{'lists.button8' | translate}}" (click)="openAttributDialog()">
+                                            <i class="fas fa-plus-square"></i>
                                         </button>
                                         <span *ngFor="let listeAttributs of dataSourceAttributResultat.data">
                                             {{listeAttributs.titre | lowercase}}<span>, </span>
@@ -78,12 +75,34 @@
 
                                     <!-- Ouvrir le formulair de creation des categories -->
                                     <div class="listAttr">
-                                        <button type="button" class="btn p-0" title="{{'lists.button7' | translate}}" (click)="openCategorieDialog(); creerCategorie()">
-                                            <i class="fas fa-pen-square"></i>
+                                        <button type="button" class="btn p-0" title="{{'lists.button9' | translate}} / {{'lists.button8' | translate}}" (click)="openCategorieDialog(); creerCategorie()">
+                                            <i class="fas fa-plus-square"></i>
                                         </button>
                                         <span *ngFor="let listeCategories of TABLE_CATEGORIE_AFFICHAGE_TEMP">
                                             {{listeCategories.nom | lowercase}}<span>, </span>
                                         </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- preconisations------------------------------------------------- -->
+
+                        <div class="form-group">
+                            <div class="champs">
+                                <label  for="" class="label">
+                                    {{"document.table.title17" | translate}}
+                                </label>
+                                <div class="w-100">
+
+                                    <!-- Ouvrir le formulair de creation des precoMvt -->
+                                    <div class="listAttr">
+                                        <button type="button" class="btn p-0" title="{{'lists.button9' | translate}} / {{'lists.button8' | translate}}" (click)="openPrecoMvtDialog(); creerPrecoMvts()">
+                                            <i class="fas fa-plus-square"></i>
+                                        </button>
+                                        <!-- <span *ngFor="let listeCategories of TABLE_CATEGORIE_AFFICHAGE_TEMP">
+                                            {{listeCategories.nom | lowercase}}<span>, </span>
+                                        </span> -->
                                     </div>
                                 </div>
                             </div>

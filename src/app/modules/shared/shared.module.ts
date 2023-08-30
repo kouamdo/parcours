@@ -16,12 +16,14 @@ import { HttpLoaderFactory } from 'src/app/app.module';
 import { ModalCategoriesComponent } from './modal-categories/modal-categories.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import { ModalChoixAttributsComponent } from './modal-choix-attributs/modal-choix-attributs.component';
+import { ModalChoixPreconisationsComponent } from './modal-choix-preconisations/modal-choix-preconisations.component';
 
 
 @NgModule({
   declarations: [
     ModalCategoriesComponent,
-    ModalChoixAttributsComponent
+    ModalChoixAttributsComponent,
+    ModalChoixPreconisationsComponent
   ],
   exports: [
     ModalCategoriesComponent,

@@ -21,6 +21,7 @@ import { ICategorieAffichage } from 'src/app/modele/categorie-affichage';
 import { TypeTicket } from 'src/app/modele/type-ticket';
 import { DonneesEchangeService } from 'src/app/services/donnees-echange/donnees-echange.service';
 import { ModalChoixAttributsComponent } from '../../shared/modal-choix-attributs/modal-choix-attributs.component';
+import { ModalChoixPreconisationsComponent } from '../../shared/modal-choix-preconisations/modal-choix-preconisations.component';
 
 
 @Component({
@@ -152,6 +153,7 @@ export class NewFormDocumentComponent implements OnInit {
     const dialogRef = this.dialogDef.open(ModalCategoriesComponent, 
     {
       width:'100%',
+      height:'100%',
       enterAnimationDuration:'1000ms',
       exitAnimationDuration:'1000ms',
       data:{
@@ -161,7 +163,6 @@ export class NewFormDocumentComponent implements OnInit {
     )
 
     dialogRef.afterClosed().subscribe(result => {
-      // this.TABLE_CATEGORIE_AFFICHAGE_TEMPO = result;
       let tmpCatAtt = new Map(); 
       let categorieAttributsFinal : ICategoriesAttributs[] = [];
   
@@ -203,6 +204,7 @@ export class NewFormDocumentComponent implements OnInit {
     const dialogRef = this.dialogDef.open(ModalChoixAttributsComponent, 
     {
       width:'100%',
+      height:'100%',
       enterAnimationDuration:'1000ms',
       exitAnimationDuration:'1000ms',
       data:{
@@ -217,7 +219,60 @@ export class NewFormDocumentComponent implements OnInit {
       this.dataSourceAttributDocument.data = this.ELEMENTS_TABLE_ATTRIBUTS
     });
   }
+  openPrecoMvtDialog(){
+
+    const dialogRef = this.dialogDef.open(ModalChoixPreconisationsComponent, 
+    {
+      width:'100%',
+      enterAnimationDuration:'1000ms',
+      exitAnimationDuration:'1000ms',
+      data:{
+        dataSourceAttributDocument : this.dataSourceAttributDocument,
+      }
+    }
+    )
+
+    dialogRef.afterClosed().subscribe(result => {
+      let tmpCatAtt = new Map(); 
+      let categorieAttributsFinal : ICategoriesAttributs[] = [];
+  
+      //récupération des données du service
+      this.TABLE_CATEGORIE_AFFICHAGE_TEMPO = result;
+      this.TABLE_CATEGORIE_AFFICHAGE_TEMPO.forEach(
+        objet => {
+          let categorieAttributTemp : ICategoriesAttributs = {
+            id: '',
+            nom: '',
+            ordre: 0,
+            listAttributs: []
+          }
+            //si la map ne contient pas la catégorie courante 
+            if(tmpCatAtt.get(objet.nom)== null){
+              categorieAttributTemp.id = objet.id;
+              categorieAttributTemp.nom = objet.nom;
+              categorieAttributTemp.ordre = objet.ordre;
+              categorieAttributTemp.listAttributs.push(objet.attribut);
+  
+              // sauvegarde de l'indice de l'élément enregistré
+              let index : number  = categorieAttributsFinal.push(categorieAttributTemp);
+              tmpCatAtt.set(objet.nom, index-1);
+            }
+            else{
+              //si la valeur est trouvée dans la map
+              let index : number = tmpCatAtt.get(objet.nom); // récuperation de l'indice de l'élément enregistré
+              categorieAttributTemp = categorieAttributsFinal[index];
+              categorieAttributTemp.listAttributs.push(objet.attribut);
+              categorieAttributsFinal[index] = categorieAttributTemp;
+            }
+          } 
+      );
+        this.TABLE_CATEGORIE_AFFICHAGE_TEMP = categorieAttributsFinal;
+    });
+  }
   creerCategorie(){
+    this.dataSourceAttribut.data = this.ELEMENTS_TABLE_ATTRIBUTS
+  }
+  creerPrecoMvts(){
     this.dataSourceAttribut.data = this.ELEMENTS_TABLE_ATTRIBUTS
   }
 

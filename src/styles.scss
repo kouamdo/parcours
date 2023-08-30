@@ -33,8 +33,6 @@ body, table, .mat-table {
 .cdk-overlay-container, .cdk-overlay-pane {
     z-index: 9999 !important;
     display: flex;
-    // overflow: auto;
-    // pointer-events: auto;
 }
 .modalCategorie .cdk-overlay-pane {
     padding: 0;
@@ -53,4 +51,12 @@ body, table, .mat-table {
     white-space: wrap;
     position: relative;
     bottom: 12px;
+}
+mat-dialog-container {
+    background-color: transparent !important;
+    border: none;
+}
+.mat-dialog-container{
+    border-radius: none;
+    box-shadow: none;
 }
