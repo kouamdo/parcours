@@ -114,6 +114,7 @@ export class NewPrecomvtComponent implements OnInit {
       this.precoMvtService.getPrecomvtById(idPrecoMvt).subscribe(
         PrecoMvtCourant =>{
           let precoMvt = PrecoMvtCourant; console.log(this.precoMvt);
+          //premier elt du tableau
           this.eltsPreco= []
           let precoMvtTemp : IPrecoMvt ={
             id:this.precoMvt.id,
@@ -123,7 +124,7 @@ export class NewPrecomvtComponent implements OnInit {
             precomvtqte:[]
            };
            this.eltsPreco.push(precoMvtTemp)
-         // this.eltsPreco.push(this.PrecoMvt)
+        // this.eltsPreco.push(this.PrecoMvt)
           this.precoMvt.precomvtqte.forEach(
 
         element => {
@@ -136,27 +137,26 @@ export class NewPrecomvtComponent implements OnInit {
            };
            precoMvtTemp.precomvtqte.push(element)
 
-           if (this.precoMvt.libelle != null && this.precoMvt.libelle != "" ){
 
-          }
-         else if (this.precoMvt.precomvtqte[0].ressource != undefined && this.precoMvt.precomvtqte[0].ressource != null ){
+          if (element.ressource != undefined && element.ressource != null ){
             let rsrce  = "Ressource :";{
-              const ressource = this.PrecoMvt.precomvtqte[0].ressource!.libelle;
+              const ressource = element.ressource!.libelle;
               rsrce += ressource
             }
+            precoMvtTemp.libelle = rsrce
 
           }
-         else if (this.precoMvt.precomvtqte[0].famille != null && this.precoMvt.precomvtqte[0].famille.length>0 ){
-          this.PrecoMvt.precomvtqte.forEach(element => {
+         else if (element.famille != null && element.famille.length>0 ){
             let libel = "Familles : ";
-            for (let index = 0; index < this.PrecoMvt.precomvtqte[0].famille!.length; index++) {
-              const element = this.PrecoMvt.precomvtqte[0].famille![index];
-              libel += element.libelle + ", "
+            for (let index = 0; index < element.famille!.length; index++) {
+              libel += element.famille![index].libelle;
+
             }
-          });
+            precoMvtTemp.libelle = libel
 
         }
            this.eltsPreco.push(precoMvtTemp)
+
       });
         }
       )
@@ -250,41 +250,36 @@ this.precoMvtService.ajouterPrecomvt(precomvtTemp).subscribe(
 
       if(valMontantMin== null || valMontantMin < 0){
         controleVerif = false;
-        this.tabError.set("montantMin","montant Min est obligatoire");
+        this.tabError.set("montantMin","Montant Min est obligatoire");
       }
       let valMontantMax : number = this.forme.controls["montantMax"].value;
 
       if(valMontantMax==null || valMontantMax< 0){
         controleVerif = false;
-        this.tabError.set("montantMax","montant Max est  obligatoire");
+        this.tabError.set("montantMax","Montant Max est  obligatoire");
       }
       if(valMontantMin > valMontantMax){
         controleVerif = false;
-        this.tabError.set("montantMax","montant Max doit être supérieur au montant Min");
+        this.tabError.set("montantMinMax","Montant Max doit être supérieur au montant Min");
       }
 
      let valQuantiteMin : number = this.forme.controls["quantiteMin"].value;
 
      if(valQuantiteMin == null || valQuantiteMin< 0){
        controleVerif = false;
-       this.tabError.set("quantiteMin","quantite Min est obligatoire");
+       this.tabError.set("quantiteMin","Quantite Min est obligatoire");
      }
 
      let valQuantiteMax : number = this.forme.controls["quantiteMax"].value;
 
      if(valQuantiteMax==null || valQuantiteMax< 0){
        controleVerif = false;
-       this.tabError.set("quantiteMax","quantite Max est  obligatoire");
+       this.tabError.set("quantiteMax","Quantite Max est obligatoire");
      }
-     if(valQuantiteMin > valQuantiteMax || valQuantiteMax < valQuantiteMin){
+     if(valQuantiteMin > valQuantiteMax ){
       controleVerif = false;
-      this.tabError.set("quantiteMax","Quantite Max doit être supérieur à Quantite Min");
+      this.tabError.set("quantiteMinMax","Quantite Max doit être supérieur à Quantite Min");
     }
-   /* if(valQuantiteMax < valQuantiteMin ){
-      controleVerif = false;
-      this.tabError.set("quantiteMin","Quantite Max doit être supérieur à Quantite Min");
-    }*/
-
       }
   }
   if(controleVerif){
@@ -397,6 +392,7 @@ reset():void{
       //this.forme.controls["fournisseur"].setValue(precoTmp.precomvtqte[0].fournisseur);
       this.forme.controls["distributeur"].setValue(precoTmp.precomvtqte[0].distributeur);
     }
+
   }
 
   /**
@@ -430,6 +426,7 @@ reset():void{
     precomvtTemp.precomvtqte.push(premvtqte);
     return precomvtTemp;
   }
+
   /**
    * a partir des inputs html on crée un occurrence de PrecoMvt
    * uniquement pour le cas des ressources
@@ -488,5 +485,7 @@ reset():void{
   compareItem(famille1: IFamille, famille2: IFamille) {
     return famille2 && famille1 ? famille2.id === famille1.id : famille2 === famille1;
 }
-
+  compareItem1(distributeur1: IDistributeur, distributeur2: IDistributeur) {
+  return distributeur2 && distributeur1 ? distributeur2.id === distributeur1.id : distributeur2 === distributeur1;
+}
 }

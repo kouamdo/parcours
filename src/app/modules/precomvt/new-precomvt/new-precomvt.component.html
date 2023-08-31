@@ -106,10 +106,14 @@
                 </label>
                 <div class="w-100">
                   <input type="number"  formControlName="quantiteMax" name="quantiteMax" class="form-control" id="quantiteMax" placeholder="Entrer la quantite maximale"
-                  (ngModelChange)="tabError.delete('quantiteMax')" >
-                  <p  *ngIf="tabError.get('quantiteMax')"  class="error" >
-                    <span *ngIf="tabError.get('quantiteMax')">{{ tabError.get('quantiteMax') }}</span>
-                   </p>
+                  (ngModelChange)="tabError.delete('quantiteMinMax')"  (ngModelChange)="tabError.delete('quantiteMax')">
+                    <p *ngIf="tabError.get('quantiteMax')"  class="error" >
+                     <span *ngIf="tabError.get('quantiteMax')">{{ tabError.get('quantiteMax') }}</span>
+                    </p>
+                    <span  *ngIf="tabError.get('quantiteMinMax')"  class="error" >
+                     <span *ngIf="tabError.get('quantiteMinMax')">{{ tabError.get('quantiteMinMax') }}</span>
+                    </span>
+
                 </div>
             </div>
         </div>
@@ -121,10 +125,14 @@
                 </label>
                 <div class="w-100">
                   <input  type="number" formControlName="quantiteMin" name="quantiteMin" class="form-control" id="quantiteMin" placeholder="Entrer la quantite minimale"
-                  (ngModelChange)="tabError.delete('quantiteMin')">
-                  <p  *ngIf="tabError.get('quantiteMin')"  class="error" >
-                    <span *ngIf="tabError.get('quantiteMin')">{{ tabError.get('quantiteMin') }}</span>
-                  </p>
+                   (ngModelChange)="tabError.delete('quantiteMinMax')" (ngModelChange)="tabError.delete('quantiteMin')">
+                  <p *ngIf="tabError.get('quantiteMin')"  class="error" >
+                    <span *ngIf="tabError.get('quantiteMin')">{{ tabError.get('quantiteMin') }}</span> </p>
+                    <span  *ngIf="tabError.get('quantiteMinMax')"  class="error" >
+
+                     <span *ngIf="tabError.get('quantiteMinMax')">{{ tabError.get('quantiteMinMax') }}</span>
+                    </span>
+
                 </div>
             </div>
           </div>
@@ -136,10 +144,13 @@
                 Montant Max
               </label>
               <div class="w-100"><input  type="number"  formControlName="montantMax" name="montantMax" id="montantMax" placeholder="Entrer le montant minimal" class="form-control"
-                (ngModelChange)="tabError.delete('montantMax')">
+                (ngModelChange)="tabError.delete('montantMinMax')" (ngModelChange)="tabError.delete('montantMax')">
                 <p  *ngIf="tabError.get('montantMax')"  class="error" >
                   <span *ngIf="tabError.get('montantMax')">{{ tabError.get('montantMax') }}</span>
-                 </p>
+                </p>
+                <span  *ngIf="tabError.get('montantMinMax')"  class="error" >
+                  <span *ngIf="tabError.get('montantMinMax')">{{ tabError.get('montantMinMax') }}</span>
+                </span>
               </div>
             </div>
           </div>
@@ -152,22 +163,27 @@
                 </label>
                 <div class="w-100">
                   <input type="number" formControlName="montantMin" name="montantMin" class="form-control" id="montantMin" placeholder="Entrer le montant maximal"
-                  (ngModelChange)="tabError.delete('montantMin')">
+                  (ngModelChange)="tabError.delete('montantMinMax')" (ngModelChange)="tabError.delete('montantMin')">
                   <p  *ngIf="tabError.get('montantMin')"  class="error" >
                     <span *ngIf="tabError.get('montantMin')">{{ tabError.get('montantMin') }}</span>
-                     </p>
+                  </p>
+                  <span  *ngIf="tabError.get('montantMinMax')"  class="error" >
+                    <span *ngIf="tabError.get('montantMinMax')">{{ tabError.get('montantMinMax') }}</span>
+                  </span>
                 </div>
             </div>
           </div>
 
           <div class="form-group">
             <div class="champs">
-              <label  for="distributeur"  class="label" >
+              <label for="distributeur" class="label">
                 Fournisseurs
               </label>
-              <select  formControlName="distributeur"  name="distributeur" id=" distributeur" class="form-control" (ngModelChange)="tabError.delete('distributeur')">
-                <option *ngFor="let membre of distributeurs$ |async" [value]="membre" >{{membre.raisonSocial}}</option>
-              </select>
+                <mat-form-field  style="background-color:#28a745;" class="example-full-width" appearance="fill" >
+                  <mat-select formControlName="distributeur" multiple [compareWith]="compareItem1">
+                    <mat-option  *ngFor="let membre of distributeurs$ |async" [value]="membre">{{membre.raisonSocial}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
             </div>
         </div>
         </div>
@@ -192,7 +208,7 @@
       <div *ngFor="let elt of eltsPreco let i=index "  class="color" >
         <div class="infosBoitier" (click)="chargerValeurPrecoMvt(i)" >
           <div class="boitier" id="boitierLibelle">
-            <P><span>Libellé: </span>{{elt.libelle}}</P>
+            <P>{{elt.libelle}}</P>
             <P><span>Type: </span>{{elt.type}}</P>
           </div>
           <div class="boitier">
