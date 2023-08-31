@@ -60,6 +60,10 @@
                                   <span>...</span>
                               </button>
                               <div class="dropdown-menu" aria-labelledby="triggerId">
+                                   <button class="dropdown-item nav-link" [routerLink]="['/view-precomvt',element.id]" title="{{'patient.table.actions.link3' | translate}}">
+                                    <i class="fa fa-eye text-secondary" aria-hidden="true"></i>
+                                    <span>{{'patient.table.actions.link3' | translate}}</span>
+                                   </button>
                                    <button class="dropdown-item nav-link" [routerLink]="['/precomvt-nouvelle',element.id]" title="{{'patient.table.actions.link2' | translate}}">
                                       <i class="fa fa-pen text-info" aria-hidden="true"></i>
                                       <span>{{'patient.table.actions.link2' | translate}}</span>

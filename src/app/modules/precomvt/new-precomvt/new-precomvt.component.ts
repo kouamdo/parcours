@@ -113,19 +113,18 @@ export class NewPrecomvtComponent implements OnInit {
     if (idPrecoMvt != null && idPrecoMvt !== '') {
       this.precoMvtService.getPrecomvtById(idPrecoMvt).subscribe(
         PrecoMvtCourant =>{
-          let precoMvt = PrecoMvtCourant; console.log(this.precoMvt);
           //premier elt du tableau
           this.eltsPreco= []
           let precoMvtTemp : IPrecoMvt ={
-            id:this.precoMvt.id,
-            libelle:this.precoMvt.libelle,
-            etat: this.precoMvt.etat,
-              type: this.precoMvt.type,
+            id: PrecoMvtCourant.id,
+            libelle:"Libelle : " + PrecoMvtCourant.libelle,
+            etat: PrecoMvtCourant.etat,
+            type: PrecoMvtCourant.type,
             precomvtqte:[]
            };
            this.eltsPreco.push(precoMvtTemp)
-        // this.eltsPreco.push(this.PrecoMvt)
-          this.precoMvt.precomvtqte.forEach(
+
+           PrecoMvtCourant.precomvtqte.forEach(
 
         element => {
           let precoMvtTemp : IPrecoMvt ={
@@ -136,15 +135,13 @@ export class NewPrecomvtComponent implements OnInit {
             precomvtqte:[]
            };
            precoMvtTemp.precomvtqte.push(element)
-
-
           if (element.ressource != undefined && element.ressource != null ){
-            let rsrce  = "Ressource :";{
+            let rsrce  = " Ressource :  ";
               const ressource = element.ressource!.libelle;
-              rsrce += ressource
-            }
-            precoMvtTemp.libelle = rsrce
+              rsrce = rsrce + ressource
 
+            precoMvtTemp.libelle = rsrce
+            this.eltsPreco.push(precoMvtTemp)
           }
          else if (element.famille != null && element.famille.length>0 ){
             let libel = "Familles : ";
@@ -153,9 +150,10 @@ export class NewPrecomvtComponent implements OnInit {
 
             }
             precoMvtTemp.libelle = libel
-
+            this.eltsPreco.push(precoMvtTemp)
         }
-           this.eltsPreco.push(precoMvtTemp)
+
+
 
       });
         }
