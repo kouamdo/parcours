@@ -114,7 +114,23 @@ export class NewPrecomvtComponent implements OnInit {
         PrecoMvtCourant =>{
           //premier elt du tableau
           this.eltsPreco= []
-          let premvtqte : IPrecoMvtQte={
+          /*let premvtqte : IPrecoMvtQte={
+            ressource: undefined,
+            quantiteMax: 0,
+            quantiteMin: 0,
+            montantMax: 0,
+            montantMin: 0,
+            id:"",
+            distributeur: []
+          };*/
+          let precoMvtTemp : IPrecoMvt ={
+            id: PrecoMvtCourant.id,
+            libelle: PrecoMvtCourant.libelle,
+            etat: PrecoMvtCourant.etat,
+            type: PrecoMvtCourant.type,
+            precomvtqte:[]
+           };
+           let premvtqte : IPrecoMvtQte={
             ressource: undefined,
             quantiteMax: 0,
             quantiteMin: 0,
@@ -123,19 +139,11 @@ export class NewPrecomvtComponent implements OnInit {
             id:"",
             distributeur: []
           };
-          let precoMvtTemp : IPrecoMvt ={
-            id: PrecoMvtCourant.id,
-            libelle:"Libelle : " + PrecoMvtCourant.libelle,
-            etat: PrecoMvtCourant.etat,
-            type: PrecoMvtCourant.type,
-            precomvtqte:[]
-           };
            precoMvtTemp.precomvtqte.push(premvtqte);
            this.eltsPreco.push(precoMvtTemp)
 
            PrecoMvtCourant.precomvtqte.forEach(
-
-        element => {
+   element => {
           let precoMvtTemp : IPrecoMvt ={
             id: "",
             libelle: "",
@@ -156,15 +164,12 @@ export class NewPrecomvtComponent implements OnInit {
             let libel = "Familles : ";
             for (let index = 0; index < element.famille!.length; index++) {
               libel += element.famille![index].libelle;
-
             }
             precoMvtTemp.libelle = libel
             this.eltsPreco.push(precoMvtTemp)
         }
-
-
-
-      });
+      }
+     );
         }
       )
     }
@@ -481,7 +486,7 @@ reset():void{
     };
     let precomvtTemp : IPrecoMvt={
       id: uuidv4(),
-      libelle:"Libelle : "+ precomvtInput.libelle,
+      libelle: "Libelle : " +precomvtInput.libelle,
       etat: precomvtInput.etat,
       type: precomvtInput.type,
       precomvtqte:[]
