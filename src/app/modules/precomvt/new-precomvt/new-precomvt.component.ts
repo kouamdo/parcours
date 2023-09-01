@@ -63,7 +63,6 @@ export class NewPrecomvtComponent implements OnInit {
 
   formDirective!: FormGroupDirective;
   //settings: { idField: string; textField: string; allowSearchFilter: boolean; } | undefined;
-  precoMvtTmp=  this.eltsPreco[0]
   PrecoMvt:IPrecoMvt={
     id: '',
     libelle:'',
@@ -115,6 +114,15 @@ export class NewPrecomvtComponent implements OnInit {
         PrecoMvtCourant =>{
           //premier elt du tableau
           this.eltsPreco= []
+          let premvtqte : IPrecoMvtQte={
+            ressource: undefined,
+            quantiteMax: 0,
+            quantiteMin: 0,
+            montantMax: 0,
+            montantMin: 0,
+            id:"",
+            distributeur: []
+          };
           let precoMvtTemp : IPrecoMvt ={
             id: PrecoMvtCourant.id,
             libelle:"Libelle : " + PrecoMvtCourant.libelle,
@@ -122,6 +130,7 @@ export class NewPrecomvtComponent implements OnInit {
             type: PrecoMvtCourant.type,
             precomvtqte:[]
            };
+           precoMvtTemp.precomvtqte.push(premvtqte);
            this.eltsPreco.push(precoMvtTemp)
 
            PrecoMvtCourant.precomvtqte.forEach(
