@@ -271,8 +271,11 @@ export class NewExemplaireComponent implements OnInit {
     let valAttribut = this.rechercherValeurParIdAttribut(attribut.id);
     if (attribut.type == TypeTicket.Date && valAttribut != null) {
       // si le type de l'attribut est Date et que la valeur de valAttribut n'est pas vide
-      let date = new Date(valAttribut); // creatoion d'une nouvelle date avec la valeur de valAttribut
-      let dateReduite = this.datePipe.transform(date, 'yyyy-MM-dd'); // changer le format de la date de naissance pour pouvoir l'afficher dans mon input type date
+      let dateAtt = new Date();
+      if(valAttribut != "PARCOURS_NOT_FOUND_404")
+         dateAtt = new Date(valAttribut); // creatoion d'une nouvelle date avec la valeur de valAttribut
+      
+      let dateReduite = this.datePipe.transform(dateAtt, 'yyyy-MM-dd'); // changer le format de la date de naissance pour pouvoir l'afficher dans mon input type date
       this.addAttributs(dateReduite);
     } else {
       this.addAttributs(valAttribut);
