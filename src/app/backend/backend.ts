@@ -965,6 +965,204 @@ export class InMemDBService implements InMemoryDbService {
             ],
           },
         ],
+        preconisations:[
+          {
+            id: '1',
+            libelle: 'rachat',
+            etat: true,
+            type: 'neutre',
+            precomvtqte: [
+              {
+                id: '1',
+                quantiteMin: 10,
+                quantiteMax: 20,
+                montantMin: 1000,
+                montantMax: 7000,
+                ressource: {
+                  id: '1',
+                  libelle: 'transfusion',
+                  etat: true,
+                  quantite: 10,
+                  unite: this.UnitesLitre,
+                  prix: 1000,
+                  caracteristique: 'souple',
+                  famille: {
+                    id: '4',
+                    libelle: 'néonat',
+                    description: 'nouveau-né',
+                    etat: 'malade',
+                  },
+                },
+              },
+              {
+                id: '2',
+                quantiteMin: 30,
+                quantiteMax: 40,
+                montantMin: 100,
+                montantMax: 7000,
+                famille: [
+                  { id: '1', libelle: 'trans', description: 'sang', etat: 'gl' },
+                  {
+                    id: '2',
+                    libelle: 'néonat',
+                    description: 'nouveau-né',
+                    etat: 'malade',
+                  },
+                  {
+                    id: '3',
+                    libelle: 'pediatrie',
+                    description: 'enfant',
+                    etat: 'souffrant',
+                  },
+                ],
+              },
+              {
+                id: '3',
+                quantiteMin: 30,
+                quantiteMax: 40,
+                montantMin: 100,
+                montantMax: 7000,
+                ressource: 
+                {
+                  id: '3',
+                  libelle: 'pediatrie',
+                  etat: true,
+                  /*dateCreation:new Date("07/03/2000"),dateModification:new Date("07/03/1990"),*/ quantite: 30,
+                  unite: this.UnitesLitre,
+                  prix: 3000,
+                  caracteristique: 'souple',
+                  famille: {
+                    id: '4',
+                    libelle: 'néonat',
+                    description: 'nouveau-né',
+                    etat: 'malade',
+                  },
+                }
+              },
+              {
+                id: '4',
+                quantiteMin: 30,
+                quantiteMax: 40,
+                montantMin: 100,
+                montantMax: 7000,
+                ressource:
+                {
+                    id: '2',
+                    libelle: 'néonat',
+                    etat: true,
+                    /* dateCreation:new Date("07/03/2000"),dateModification:new Date("07/03/1990"),*/ quantite: 20,
+                    unite: this.UnitesLitre,
+                    prix: 2000,
+                    caracteristique: 'souple',
+                    famille: {
+                      id: '3',
+                      libelle: 'pediatrie',
+                      description: 'enfant',
+                      etat: 'souffrant',
+                    },
+                  },
+              },
+            ],
+          },
+          {
+            id: '2',
+            libelle: 'vente',
+            etat: true,
+            type: 'reduire' /*type:this.TypeMvtReduire*/,
+            precomvtqte: [
+              {
+                id: '1',
+                quantiteMin: 30,
+                quantiteMax: 40,
+                montantMin: 100,
+                montantMax: 7000,
+                famille: [
+                  { id: '1', libelle: 'trans', description: 'sang', etat: 'gl' },
+                  {
+                    id: '2',
+                    libelle: 'néonat',
+                    description: 'nouveau-né',
+                    etat: 'malade',
+                  },
+                  {
+                    id: '3',
+                    libelle: 'pediatrie',
+                    description: 'enfant',
+                    etat: 'souffrant',
+                  },
+                ],
+              },
+            ],
+          },
+          {
+            id: '3',
+            libelle: 'vente',
+            etat: true,
+            type: 'reduire' /*type:this.TypeMvtReduire*/,
+            precomvtqte: [
+              {
+                id: '1',
+                quantiteMin: 30,
+                quantiteMax: 40,
+                montantMin: 100,
+                montantMax: 7000,
+                famille: [
+                  { id: '1', libelle: 'trans', description: 'sang', etat: 'gl' },
+                  {
+                    id: '2',
+                    libelle: 'néonat',
+                    description: 'nouveau-né',
+                    etat: 'malade',
+                  },
+                  {
+                    id: '3',
+                    libelle: 'pediatrie',
+                    description: 'enfant',
+                    etat: 'souffrant',
+                  },
+                ],
+                ressource: {
+                  id: '1',
+                  libelle: 'transfusion',
+                  etat: true,
+                  quantite: 10,
+                  unite: this.UnitesLitre,
+                  prix: 1000,
+                  caracteristique: 'souple',
+                  famille: {
+                    id: '4',
+                    libelle: 'néonat',
+                    description: 'nouveau-né',
+                    etat: 'malade',
+                  },
+                },
+                distributeur: [
+                  {
+                    id: '1',
+                    raisonSocial: 'brasserie1',
+                    adresse: 'Dla',
+                    telephone: '655554488',
+                    mail: 'ngong@yad.fr',
+                  },
+                  {
+                    id: '2',
+                    raisonSocial: 'guinness',
+                    adresse: 'Ydé',
+                    telephone: '655554481',
+                    mail: 'ngong@yad.fr',
+                  },
+                  {
+                    id: '3',
+                    raisonSocial: 'papeterie yvan',
+                    adresse: 'Buéa',
+                    telephone: '655554486',
+                    mail: 'ngong@yad.fr',
+                  },
+                ],
+              },
+            ],
+          }
+        ]
       },
       {
         id: '2',
@@ -1190,6 +1388,204 @@ export class InMemDBService implements InMemoryDbService {
             ],
           },
         ],
+        preconisations:[
+          {
+            id: '1',
+            libelle: 'rachat',
+            etat: true,
+            type: 'neutre',
+            precomvtqte: [
+              {
+                id: '1',
+                quantiteMin: 10,
+                quantiteMax: 20,
+                montantMin: 1000,
+                montantMax: 7000,
+                ressource: {
+                  id: '1',
+                  libelle: 'transfusion',
+                  etat: true,
+                  quantite: 10,
+                  unite: this.UnitesLitre,
+                  prix: 1000,
+                  caracteristique: 'souple',
+                  famille: {
+                    id: '4',
+                    libelle: 'néonat',
+                    description: 'nouveau-né',
+                    etat: 'malade',
+                  },
+                },
+              },
+              {
+                id: '2',
+                quantiteMin: 30,
+                quantiteMax: 40,
+                montantMin: 100,
+                montantMax: 7000,
+                famille: [
+                  { id: '1', libelle: 'trans', description: 'sang', etat: 'gl' },
+                  {
+                    id: '2',
+                    libelle: 'néonat',
+                    description: 'nouveau-né',
+                    etat: 'malade',
+                  },
+                  {
+                    id: '3',
+                    libelle: 'pediatrie',
+                    description: 'enfant',
+                    etat: 'souffrant',
+                  },
+                ],
+              },
+              {
+                id: '3',
+                quantiteMin: 30,
+                quantiteMax: 40,
+                montantMin: 100,
+                montantMax: 7000,
+                ressource: 
+                {
+                  id: '3',
+                  libelle: 'pediatrie',
+                  etat: true,
+                  /*dateCreation:new Date("07/03/2000"),dateModification:new Date("07/03/1990"),*/ quantite: 30,
+                  unite: this.UnitesLitre,
+                  prix: 3000,
+                  caracteristique: 'souple',
+                  famille: {
+                    id: '4',
+                    libelle: 'néonat',
+                    description: 'nouveau-né',
+                    etat: 'malade',
+                  },
+                }
+              },
+              {
+                id: '4',
+                quantiteMin: 30,
+                quantiteMax: 40,
+                montantMin: 100,
+                montantMax: 7000,
+                ressource:
+                {
+                    id: '2',
+                    libelle: 'néonat',
+                    etat: true,
+                    /* dateCreation:new Date("07/03/2000"),dateModification:new Date("07/03/1990"),*/ quantite: 20,
+                    unite: this.UnitesLitre,
+                    prix: 2000,
+                    caracteristique: 'souple',
+                    famille: {
+                      id: '3',
+                      libelle: 'pediatrie',
+                      description: 'enfant',
+                      etat: 'souffrant',
+                    },
+                  },
+              },
+            ],
+          },
+          {
+            id: '2',
+            libelle: 'vente',
+            etat: true,
+            type: 'reduire' /*type:this.TypeMvtReduire*/,
+            precomvtqte: [
+              {
+                id: '1',
+                quantiteMin: 30,
+                quantiteMax: 40,
+                montantMin: 100,
+                montantMax: 7000,
+                famille: [
+                  { id: '1', libelle: 'trans', description: 'sang', etat: 'gl' },
+                  {
+                    id: '2',
+                    libelle: 'néonat',
+                    description: 'nouveau-né',
+                    etat: 'malade',
+                  },
+                  {
+                    id: '3',
+                    libelle: 'pediatrie',
+                    description: 'enfant',
+                    etat: 'souffrant',
+                  },
+                ],
+              },
+            ],
+          },
+          {
+            id: '3',
+            libelle: 'vente',
+            etat: true,
+            type: 'reduire' /*type:this.TypeMvtReduire*/,
+            precomvtqte: [
+              {
+                id: '1',
+                quantiteMin: 30,
+                quantiteMax: 40,
+                montantMin: 100,
+                montantMax: 7000,
+                famille: [
+                  { id: '1', libelle: 'trans', description: 'sang', etat: 'gl' },
+                  {
+                    id: '2',
+                    libelle: 'néonat',
+                    description: 'nouveau-né',
+                    etat: 'malade',
+                  },
+                  {
+                    id: '3',
+                    libelle: 'pediatrie',
+                    description: 'enfant',
+                    etat: 'souffrant',
+                  },
+                ],
+                ressource: {
+                  id: '1',
+                  libelle: 'transfusion',
+                  etat: true,
+                  quantite: 10,
+                  unite: this.UnitesLitre,
+                  prix: 1000,
+                  caracteristique: 'souple',
+                  famille: {
+                    id: '4',
+                    libelle: 'néonat',
+                    description: 'nouveau-né',
+                    etat: 'malade',
+                  },
+                },
+                distributeur: [
+                  {
+                    id: '1',
+                    raisonSocial: 'brasserie1',
+                    adresse: 'Dla',
+                    telephone: '655554488',
+                    mail: 'ngong@yad.fr',
+                  },
+                  {
+                    id: '2',
+                    raisonSocial: 'guinness',
+                    adresse: 'Ydé',
+                    telephone: '655554481',
+                    mail: 'ngong@yad.fr',
+                  },
+                  {
+                    id: '3',
+                    raisonSocial: 'papeterie yvan',
+                    adresse: 'Buéa',
+                    telephone: '655554486',
+                    mail: 'ngong@yad.fr',
+                  },
+                ],
+              },
+            ],
+          }
+        ]
       },
       {
         id: '3',
@@ -1366,6 +1762,204 @@ export class InMemDBService implements InMemoryDbService {
             ],
           },
         ],
+        preconisations:[
+          {
+            id: '1',
+            libelle: 'rachat',
+            etat: true,
+            type: 'neutre',
+            precomvtqte: [
+              {
+                id: '1',
+                quantiteMin: 10,
+                quantiteMax: 20,
+                montantMin: 1000,
+                montantMax: 7000,
+                ressource: {
+                  id: '1',
+                  libelle: 'transfusion',
+                  etat: true,
+                  quantite: 10,
+                  unite: this.UnitesLitre,
+                  prix: 1000,
+                  caracteristique: 'souple',
+                  famille: {
+                    id: '4',
+                    libelle: 'néonat',
+                    description: 'nouveau-né',
+                    etat: 'malade',
+                  },
+                },
+              },
+              {
+                id: '2',
+                quantiteMin: 30,
+                quantiteMax: 40,
+                montantMin: 100,
+                montantMax: 7000,
+                famille: [
+                  { id: '1', libelle: 'trans', description: 'sang', etat: 'gl' },
+                  {
+                    id: '2',
+                    libelle: 'néonat',
+                    description: 'nouveau-né',
+                    etat: 'malade',
+                  },
+                  {
+                    id: '3',
+                    libelle: 'pediatrie',
+                    description: 'enfant',
+                    etat: 'souffrant',
+                  },
+                ],
+              },
+              {
+                id: '3',
+                quantiteMin: 30,
+                quantiteMax: 40,
+                montantMin: 100,
+                montantMax: 7000,
+                ressource: 
+                {
+                  id: '3',
+                  libelle: 'pediatrie',
+                  etat: true,
+                  /*dateCreation:new Date("07/03/2000"),dateModification:new Date("07/03/1990"),*/ quantite: 30,
+                  unite: this.UnitesLitre,
+                  prix: 3000,
+                  caracteristique: 'souple',
+                  famille: {
+                    id: '4',
+                    libelle: 'néonat',
+                    description: 'nouveau-né',
+                    etat: 'malade',
+                  },
+                }
+              },
+              {
+                id: '4',
+                quantiteMin: 30,
+                quantiteMax: 40,
+                montantMin: 100,
+                montantMax: 7000,
+                ressource:
+                {
+                    id: '2',
+                    libelle: 'néonat',
+                    etat: true,
+                    /* dateCreation:new Date("07/03/2000"),dateModification:new Date("07/03/1990"),*/ quantite: 20,
+                    unite: this.UnitesLitre,
+                    prix: 2000,
+                    caracteristique: 'souple',
+                    famille: {
+                      id: '3',
+                      libelle: 'pediatrie',
+                      description: 'enfant',
+                      etat: 'souffrant',
+                    },
+                  },
+              },
+            ],
+          },
+          {
+            id: '2',
+            libelle: 'vente',
+            etat: true,
+            type: 'reduire' /*type:this.TypeMvtReduire*/,
+            precomvtqte: [
+              {
+                id: '1',
+                quantiteMin: 30,
+                quantiteMax: 40,
+                montantMin: 100,
+                montantMax: 7000,
+                famille: [
+                  { id: '1', libelle: 'trans', description: 'sang', etat: 'gl' },
+                  {
+                    id: '2',
+                    libelle: 'néonat',
+                    description: 'nouveau-né',
+                    etat: 'malade',
+                  },
+                  {
+                    id: '3',
+                    libelle: 'pediatrie',
+                    description: 'enfant',
+                    etat: 'souffrant',
+                  },
+                ],
+              },
+            ],
+          },
+          {
+            id: '3',
+            libelle: 'vente',
+            etat: true,
+            type: 'reduire' /*type:this.TypeMvtReduire*/,
+            precomvtqte: [
+              {
+                id: '1',
+                quantiteMin: 30,
+                quantiteMax: 40,
+                montantMin: 100,
+                montantMax: 7000,
+                famille: [
+                  { id: '1', libelle: 'trans', description: 'sang', etat: 'gl' },
+                  {
+                    id: '2',
+                    libelle: 'néonat',
+                    description: 'nouveau-né',
+                    etat: 'malade',
+                  },
+                  {
+                    id: '3',
+                    libelle: 'pediatrie',
+                    description: 'enfant',
+                    etat: 'souffrant',
+                  },
+                ],
+                ressource: {
+                  id: '1',
+                  libelle: 'transfusion',
+                  etat: true,
+                  quantite: 10,
+                  unite: this.UnitesLitre,
+                  prix: 1000,
+                  caracteristique: 'souple',
+                  famille: {
+                    id: '4',
+                    libelle: 'néonat',
+                    description: 'nouveau-né',
+                    etat: 'malade',
+                  },
+                },
+                distributeur: [
+                  {
+                    id: '1',
+                    raisonSocial: 'brasserie1',
+                    adresse: 'Dla',
+                    telephone: '655554488',
+                    mail: 'ngong@yad.fr',
+                  },
+                  {
+                    id: '2',
+                    raisonSocial: 'guinness',
+                    adresse: 'Ydé',
+                    telephone: '655554481',
+                    mail: 'ngong@yad.fr',
+                  },
+                  {
+                    id: '3',
+                    raisonSocial: 'papeterie yvan',
+                    adresse: 'Buéa',
+                    telephone: '655554486',
+                    mail: 'ngong@yad.fr',
+                  },
+                ],
+              },
+            ],
+          }
+        ]
       },
       {
         id: '4',
@@ -1718,6 +2312,204 @@ export class InMemDBService implements InMemoryDbService {
             ],
           },
         ],
+        preconisations:[
+          {
+            id: '1',
+            libelle: 'rachat',
+            etat: true,
+            type: 'neutre',
+            precomvtqte: [
+              {
+                id: '1',
+                quantiteMin: 10,
+                quantiteMax: 20,
+                montantMin: 1000,
+                montantMax: 7000,
+                ressource: {
+                  id: '1',
+                  libelle: 'transfusion',
+                  etat: true,
+                  quantite: 10,
+                  unite: this.UnitesLitre,
+                  prix: 1000,
+                  caracteristique: 'souple',
+                  famille: {
+                    id: '4',
+                    libelle: 'néonat',
+                    description: 'nouveau-né',
+                    etat: 'malade',
+                  },
+                },
+              },
+              {
+                id: '2',
+                quantiteMin: 30,
+                quantiteMax: 40,
+                montantMin: 100,
+                montantMax: 7000,
+                famille: [
+                  { id: '1', libelle: 'trans', description: 'sang', etat: 'gl' },
+                  {
+                    id: '2',
+                    libelle: 'néonat',
+                    description: 'nouveau-né',
+                    etat: 'malade',
+                  },
+                  {
+                    id: '3',
+                    libelle: 'pediatrie',
+                    description: 'enfant',
+                    etat: 'souffrant',
+                  },
+                ],
+              },
+              {
+                id: '3',
+                quantiteMin: 30,
+                quantiteMax: 40,
+                montantMin: 100,
+                montantMax: 7000,
+                ressource: 
+                {
+                  id: '3',
+                  libelle: 'pediatrie',
+                  etat: true,
+                  /*dateCreation:new Date("07/03/2000"),dateModification:new Date("07/03/1990"),*/ quantite: 30,
+                  unite: this.UnitesLitre,
+                  prix: 3000,
+                  caracteristique: 'souple',
+                  famille: {
+                    id: '4',
+                    libelle: 'néonat',
+                    description: 'nouveau-né',
+                    etat: 'malade',
+                  },
+                }
+              },
+              {
+                id: '4',
+                quantiteMin: 30,
+                quantiteMax: 40,
+                montantMin: 100,
+                montantMax: 7000,
+                ressource:
+                {
+                    id: '2',
+                    libelle: 'néonat',
+                    etat: true,
+                    /* dateCreation:new Date("07/03/2000"),dateModification:new Date("07/03/1990"),*/ quantite: 20,
+                    unite: this.UnitesLitre,
+                    prix: 2000,
+                    caracteristique: 'souple',
+                    famille: {
+                      id: '3',
+                      libelle: 'pediatrie',
+                      description: 'enfant',
+                      etat: 'souffrant',
+                    },
+                  },
+              },
+            ],
+          },
+          {
+            id: '2',
+            libelle: 'vente',
+            etat: true,
+            type: 'reduire' /*type:this.TypeMvtReduire*/,
+            precomvtqte: [
+              {
+                id: '1',
+                quantiteMin: 30,
+                quantiteMax: 40,
+                montantMin: 100,
+                montantMax: 7000,
+                famille: [
+                  { id: '1', libelle: 'trans', description: 'sang', etat: 'gl' },
+                  {
+                    id: '2',
+                    libelle: 'néonat',
+                    description: 'nouveau-né',
+                    etat: 'malade',
+                  },
+                  {
+                    id: '3',
+                    libelle: 'pediatrie',
+                    description: 'enfant',
+                    etat: 'souffrant',
+                  },
+                ],
+              },
+            ],
+          },
+          {
+            id: '3',
+            libelle: 'vente',
+            etat: true,
+            type: 'reduire' /*type:this.TypeMvtReduire*/,
+            precomvtqte: [
+              {
+                id: '1',
+                quantiteMin: 30,
+                quantiteMax: 40,
+                montantMin: 100,
+                montantMax: 7000,
+                famille: [
+                  { id: '1', libelle: 'trans', description: 'sang', etat: 'gl' },
+                  {
+                    id: '2',
+                    libelle: 'néonat',
+                    description: 'nouveau-né',
+                    etat: 'malade',
+                  },
+                  {
+                    id: '3',
+                    libelle: 'pediatrie',
+                    description: 'enfant',
+                    etat: 'souffrant',
+                  },
+                ],
+                ressource: {
+                  id: '1',
+                  libelle: 'transfusion',
+                  etat: true,
+                  quantite: 10,
+                  unite: this.UnitesLitre,
+                  prix: 1000,
+                  caracteristique: 'souple',
+                  famille: {
+                    id: '4',
+                    libelle: 'néonat',
+                    description: 'nouveau-né',
+                    etat: 'malade',
+                  },
+                },
+                distributeur: [
+                  {
+                    id: '1',
+                    raisonSocial: 'brasserie1',
+                    adresse: 'Dla',
+                    telephone: '655554488',
+                    mail: 'ngong@yad.fr',
+                  },
+                  {
+                    id: '2',
+                    raisonSocial: 'guinness',
+                    adresse: 'Ydé',
+                    telephone: '655554481',
+                    mail: 'ngong@yad.fr',
+                  },
+                  {
+                    id: '3',
+                    raisonSocial: 'papeterie yvan',
+                    adresse: 'Buéa',
+                    telephone: '655554486',
+                    mail: 'ngong@yad.fr',
+                  },
+                ],
+              },
+            ],
+          }
+        ]
       },
       {
         id: '5',
@@ -1943,6 +2735,204 @@ export class InMemDBService implements InMemoryDbService {
             ],
           },
         ],
+        preconisations:[
+          {
+            id: '1',
+            libelle: 'rachat',
+            etat: true,
+            type: 'neutre',
+            precomvtqte: [
+              {
+                id: '1',
+                quantiteMin: 10,
+                quantiteMax: 20,
+                montantMin: 1000,
+                montantMax: 7000,
+                ressource: {
+                  id: '1',
+                  libelle: 'transfusion',
+                  etat: true,
+                  quantite: 10,
+                  unite: this.UnitesLitre,
+                  prix: 1000,
+                  caracteristique: 'souple',
+                  famille: {
+                    id: '4',
+                    libelle: 'néonat',
+                    description: 'nouveau-né',
+                    etat: 'malade',
+                  },
+                },
+              },
+              {
+                id: '2',
+                quantiteMin: 30,
+                quantiteMax: 40,
+                montantMin: 100,
+                montantMax: 7000,
+                famille: [
+                  { id: '1', libelle: 'trans', description: 'sang', etat: 'gl' },
+                  {
+                    id: '2',
+                    libelle: 'néonat',
+                    description: 'nouveau-né',
+                    etat: 'malade',
+                  },
+                  {
+                    id: '3',
+                    libelle: 'pediatrie',
+                    description: 'enfant',
+                    etat: 'souffrant',
+                  },
+                ],
+              },
+              {
+                id: '3',
+                quantiteMin: 30,
+                quantiteMax: 40,
+                montantMin: 100,
+                montantMax: 7000,
+                ressource: 
+                {
+                  id: '3',
+                  libelle: 'pediatrie',
+                  etat: true,
+                  /*dateCreation:new Date("07/03/2000"),dateModification:new Date("07/03/1990"),*/ quantite: 30,
+                  unite: this.UnitesLitre,
+                  prix: 3000,
+                  caracteristique: 'souple',
+                  famille: {
+                    id: '4',
+                    libelle: 'néonat',
+                    description: 'nouveau-né',
+                    etat: 'malade',
+                  },
+                }
+              },
+              {
+                id: '4',
+                quantiteMin: 30,
+                quantiteMax: 40,
+                montantMin: 100,
+                montantMax: 7000,
+                ressource:
+                {
+                    id: '2',
+                    libelle: 'néonat',
+                    etat: true,
+                    /* dateCreation:new Date("07/03/2000"),dateModification:new Date("07/03/1990"),*/ quantite: 20,
+                    unite: this.UnitesLitre,
+                    prix: 2000,
+                    caracteristique: 'souple',
+                    famille: {
+                      id: '3',
+                      libelle: 'pediatrie',
+                      description: 'enfant',
+                      etat: 'souffrant',
+                    },
+                  },
+              },
+            ],
+          },
+          {
+            id: '2',
+            libelle: 'vente',
+            etat: true,
+            type: 'reduire' /*type:this.TypeMvtReduire*/,
+            precomvtqte: [
+              {
+                id: '1',
+                quantiteMin: 30,
+                quantiteMax: 40,
+                montantMin: 100,
+                montantMax: 7000,
+                famille: [
+                  { id: '1', libelle: 'trans', description: 'sang', etat: 'gl' },
+                  {
+                    id: '2',
+                    libelle: 'néonat',
+                    description: 'nouveau-né',
+                    etat: 'malade',
+                  },
+                  {
+                    id: '3',
+                    libelle: 'pediatrie',
+                    description: 'enfant',
+                    etat: 'souffrant',
+                  },
+                ],
+              },
+            ],
+          },
+          {
+            id: '3',
+            libelle: 'vente',
+            etat: true,
+            type: 'reduire' /*type:this.TypeMvtReduire*/,
+            precomvtqte: [
+              {
+                id: '1',
+                quantiteMin: 30,
+                quantiteMax: 40,
+                montantMin: 100,
+                montantMax: 7000,
+                famille: [
+                  { id: '1', libelle: 'trans', description: 'sang', etat: 'gl' },
+                  {
+                    id: '2',
+                    libelle: 'néonat',
+                    description: 'nouveau-né',
+                    etat: 'malade',
+                  },
+                  {
+                    id: '3',
+                    libelle: 'pediatrie',
+                    description: 'enfant',
+                    etat: 'souffrant',
+                  },
+                ],
+                ressource: {
+                  id: '1',
+                  libelle: 'transfusion',
+                  etat: true,
+                  quantite: 10,
+                  unite: this.UnitesLitre,
+                  prix: 1000,
+                  caracteristique: 'souple',
+                  famille: {
+                    id: '4',
+                    libelle: 'néonat',
+                    description: 'nouveau-né',
+                    etat: 'malade',
+                  },
+                },
+                distributeur: [
+                  {
+                    id: '1',
+                    raisonSocial: 'brasserie1',
+                    adresse: 'Dla',
+                    telephone: '655554488',
+                    mail: 'ngong@yad.fr',
+                  },
+                  {
+                    id: '2',
+                    raisonSocial: 'guinness',
+                    adresse: 'Ydé',
+                    telephone: '655554481',
+                    mail: 'ngong@yad.fr',
+                  },
+                  {
+                    id: '3',
+                    raisonSocial: 'papeterie yvan',
+                    adresse: 'Buéa',
+                    telephone: '655554486',
+                    mail: 'ngong@yad.fr',
+                  },
+                ],
+              },
+            ],
+          }
+        ]
       },
     ];
     let exemplaires: IExemplaireDocument[] = [
@@ -2298,6 +3288,204 @@ export class InMemDBService implements InMemoryDbService {
             ],
           },
         ],
+        preconisations:[
+          {
+            id: '1',
+            libelle: 'rachat',
+            etat: true,
+            type: 'neutre',
+            precomvtqte: [
+              {
+                id: '1',
+                quantiteMin: 10,
+                quantiteMax: 20,
+                montantMin: 1000,
+                montantMax: 7000,
+                ressource: {
+                  id: '1',
+                  libelle: 'transfusion',
+                  etat: true,
+                  quantite: 10,
+                  unite: this.UnitesLitre,
+                  prix: 1000,
+                  caracteristique: 'souple',
+                  famille: {
+                    id: '4',
+                    libelle: 'néonat',
+                    description: 'nouveau-né',
+                    etat: 'malade',
+                  },
+                },
+              },
+              {
+                id: '2',
+                quantiteMin: 30,
+                quantiteMax: 40,
+                montantMin: 100,
+                montantMax: 7000,
+                famille: [
+                  { id: '1', libelle: 'trans', description: 'sang', etat: 'gl' },
+                  {
+                    id: '2',
+                    libelle: 'néonat',
+                    description: 'nouveau-né',
+                    etat: 'malade',
+                  },
+                  {
+                    id: '3',
+                    libelle: 'pediatrie',
+                    description: 'enfant',
+                    etat: 'souffrant',
+                  },
+                ],
+              },
+              {
+                id: '3',
+                quantiteMin: 30,
+                quantiteMax: 40,
+                montantMin: 100,
+                montantMax: 7000,
+                ressource: 
+                {
+                  id: '3',
+                  libelle: 'pediatrie',
+                  etat: true,
+                  /*dateCreation:new Date("07/03/2000"),dateModification:new Date("07/03/1990"),*/ quantite: 30,
+                  unite: this.UnitesLitre,
+                  prix: 3000,
+                  caracteristique: 'souple',
+                  famille: {
+                    id: '4',
+                    libelle: 'néonat',
+                    description: 'nouveau-né',
+                    etat: 'malade',
+                  },
+                }
+              },
+              {
+                id: '4',
+                quantiteMin: 30,
+                quantiteMax: 40,
+                montantMin: 100,
+                montantMax: 7000,
+                ressource:
+                {
+                    id: '2',
+                    libelle: 'néonat',
+                    etat: true,
+                    /* dateCreation:new Date("07/03/2000"),dateModification:new Date("07/03/1990"),*/ quantite: 20,
+                    unite: this.UnitesLitre,
+                    prix: 2000,
+                    caracteristique: 'souple',
+                    famille: {
+                      id: '3',
+                      libelle: 'pediatrie',
+                      description: 'enfant',
+                      etat: 'souffrant',
+                    },
+                  },
+              },
+            ],
+          },
+          {
+            id: '2',
+            libelle: 'vente',
+            etat: true,
+            type: 'reduire' /*type:this.TypeMvtReduire*/,
+            precomvtqte: [
+              {
+                id: '1',
+                quantiteMin: 30,
+                quantiteMax: 40,
+                montantMin: 100,
+                montantMax: 7000,
+                famille: [
+                  { id: '1', libelle: 'trans', description: 'sang', etat: 'gl' },
+                  {
+                    id: '2',
+                    libelle: 'néonat',
+                    description: 'nouveau-né',
+                    etat: 'malade',
+                  },
+                  {
+                    id: '3',
+                    libelle: 'pediatrie',
+                    description: 'enfant',
+                    etat: 'souffrant',
+                  },
+                ],
+              },
+            ],
+          },
+          {
+            id: '3',
+            libelle: 'vente',
+            etat: true,
+            type: 'reduire' /*type:this.TypeMvtReduire*/,
+            precomvtqte: [
+              {
+                id: '1',
+                quantiteMin: 30,
+                quantiteMax: 40,
+                montantMin: 100,
+                montantMax: 7000,
+                famille: [
+                  { id: '1', libelle: 'trans', description: 'sang', etat: 'gl' },
+                  {
+                    id: '2',
+                    libelle: 'néonat',
+                    description: 'nouveau-né',
+                    etat: 'malade',
+                  },
+                  {
+                    id: '3',
+                    libelle: 'pediatrie',
+                    description: 'enfant',
+                    etat: 'souffrant',
+                  },
+                ],
+                ressource: {
+                  id: '1',
+                  libelle: 'transfusion',
+                  etat: true,
+                  quantite: 10,
+                  unite: this.UnitesLitre,
+                  prix: 1000,
+                  caracteristique: 'souple',
+                  famille: {
+                    id: '4',
+                    libelle: 'néonat',
+                    description: 'nouveau-né',
+                    etat: 'malade',
+                  },
+                },
+                distributeur: [
+                  {
+                    id: '1',
+                    raisonSocial: 'brasserie1',
+                    adresse: 'Dla',
+                    telephone: '655554488',
+                    mail: 'ngong@yad.fr',
+                  },
+                  {
+                    id: '2',
+                    raisonSocial: 'guinness',
+                    adresse: 'Ydé',
+                    telephone: '655554481',
+                    mail: 'ngong@yad.fr',
+                  },
+                  {
+                    id: '3',
+                    raisonSocial: 'papeterie yvan',
+                    adresse: 'Buéa',
+                    telephone: '655554486',
+                    mail: 'ngong@yad.fr',
+                  },
+                ],
+              },
+            ],
+          }
+        ],
         objetEnregistre: [
           {
             key:
@@ -2495,7 +3683,7 @@ export class InMemDBService implements InMemoryDbService {
             },
             value: 'Noir',
           },
-        ],
+        ]
       },
       {
         id: '2',
@@ -2722,6 +3910,204 @@ export class InMemDBService implements InMemoryDbService {
             ],
           },
         ],
+        preconisations:[
+          {
+            id: '1',
+            libelle: 'rachat',
+            etat: true,
+            type: 'neutre',
+            precomvtqte: [
+              {
+                id: '1',
+                quantiteMin: 10,
+                quantiteMax: 20,
+                montantMin: 1000,
+                montantMax: 7000,
+                ressource: {
+                  id: '1',
+                  libelle: 'transfusion',
+                  etat: true,
+                  quantite: 10,
+                  unite: this.UnitesLitre,
+                  prix: 1000,
+                  caracteristique: 'souple',
+                  famille: {
+                    id: '4',
+                    libelle: 'néonat',
+                    description: 'nouveau-né',
+                    etat: 'malade',
+                  },
+                },
+              },
+              {
+                id: '2',
+                quantiteMin: 30,
+                quantiteMax: 40,
+                montantMin: 100,
+                montantMax: 7000,
+                famille: [
+                  { id: '1', libelle: 'trans', description: 'sang', etat: 'gl' },
+                  {
+                    id: '2',
+                    libelle: 'néonat',
+                    description: 'nouveau-né',
+                    etat: 'malade',
+                  },
+                  {
+                    id: '3',
+                    libelle: 'pediatrie',
+                    description: 'enfant',
+                    etat: 'souffrant',
+                  },
+                ],
+              },
+              {
+                id: '3',
+                quantiteMin: 30,
+                quantiteMax: 40,
+                montantMin: 100,
+                montantMax: 7000,
+                ressource: 
+                {
+                  id: '3',
+                  libelle: 'pediatrie',
+                  etat: true,
+                  /*dateCreation:new Date("07/03/2000"),dateModification:new Date("07/03/1990"),*/ quantite: 30,
+                  unite: this.UnitesLitre,
+                  prix: 3000,
+                  caracteristique: 'souple',
+                  famille: {
+                    id: '4',
+                    libelle: 'néonat',
+                    description: 'nouveau-né',
+                    etat: 'malade',
+                  },
+                }
+              },
+              {
+                id: '4',
+                quantiteMin: 30,
+                quantiteMax: 40,
+                montantMin: 100,
+                montantMax: 7000,
+                ressource:
+                {
+                    id: '2',
+                    libelle: 'néonat',
+                    etat: true,
+                    /* dateCreation:new Date("07/03/2000"),dateModification:new Date("07/03/1990"),*/ quantite: 20,
+                    unite: this.UnitesLitre,
+                    prix: 2000,
+                    caracteristique: 'souple',
+                    famille: {
+                      id: '3',
+                      libelle: 'pediatrie',
+                      description: 'enfant',
+                      etat: 'souffrant',
+                    },
+                  },
+              },
+            ],
+          },
+          {
+            id: '2',
+            libelle: 'vente',
+            etat: true,
+            type: 'reduire' /*type:this.TypeMvtReduire*/,
+            precomvtqte: [
+              {
+                id: '1',
+                quantiteMin: 30,
+                quantiteMax: 40,
+                montantMin: 100,
+                montantMax: 7000,
+                famille: [
+                  { id: '1', libelle: 'trans', description: 'sang', etat: 'gl' },
+                  {
+                    id: '2',
+                    libelle: 'néonat',
+                    description: 'nouveau-né',
+                    etat: 'malade',
+                  },
+                  {
+                    id: '3',
+                    libelle: 'pediatrie',
+                    description: 'enfant',
+                    etat: 'souffrant',
+                  },
+                ],
+              },
+            ],
+          },
+          {
+            id: '3',
+            libelle: 'vente',
+            etat: true,
+            type: 'reduire' /*type:this.TypeMvtReduire*/,
+            precomvtqte: [
+              {
+                id: '1',
+                quantiteMin: 30,
+                quantiteMax: 40,
+                montantMin: 100,
+                montantMax: 7000,
+                famille: [
+                  { id: '1', libelle: 'trans', description: 'sang', etat: 'gl' },
+                  {
+                    id: '2',
+                    libelle: 'néonat',
+                    description: 'nouveau-né',
+                    etat: 'malade',
+                  },
+                  {
+                    id: '3',
+                    libelle: 'pediatrie',
+                    description: 'enfant',
+                    etat: 'souffrant',
+                  },
+                ],
+                ressource: {
+                  id: '1',
+                  libelle: 'transfusion',
+                  etat: true,
+                  quantite: 10,
+                  unite: this.UnitesLitre,
+                  prix: 1000,
+                  caracteristique: 'souple',
+                  famille: {
+                    id: '4',
+                    libelle: 'néonat',
+                    description: 'nouveau-né',
+                    etat: 'malade',
+                  },
+                },
+                distributeur: [
+                  {
+                    id: '1',
+                    raisonSocial: 'brasserie1',
+                    adresse: 'Dla',
+                    telephone: '655554488',
+                    mail: 'ngong@yad.fr',
+                  },
+                  {
+                    id: '2',
+                    raisonSocial: 'guinness',
+                    adresse: 'Ydé',
+                    telephone: '655554481',
+                    mail: 'ngong@yad.fr',
+                  },
+                  {
+                    id: '3',
+                    raisonSocial: 'papeterie yvan',
+                    adresse: 'Buéa',
+                    telephone: '655554486',
+                    mail: 'ngong@yad.fr',
+                  },
+                ],
+              },
+            ],
+          }
+        ],
         objetEnregistre: [
           { key: 
             {
@@ -2900,14 +4286,14 @@ export class InMemDBService implements InMemoryDbService {
         id: '1',
         libelle: 'rachat',
         etat: true,
-        type: 'neutre' /*type:this.TypeMvtNeutre*/,
+        type: 'neutre',
         precomvtqte: [
           {
             id: '1',
             quantiteMin: 10,
             quantiteMax: 20,
             montantMin: 1000,
-            montantMax: 7000 /*fournisseur:'gc',*/,
+            montantMax: 7000,
             ressource: {
               id: '1',
               libelle: 'transfusion',
@@ -2929,7 +4315,7 @@ export class InMemDBService implements InMemoryDbService {
             quantiteMin: 30,
             quantiteMax: 40,
             montantMin: 100,
-            montantMax: 7000 /*fournisseur:'gc',*/,
+            montantMax: 7000,
             famille: [
               { id: '1', libelle: 'trans', description: 'sang', etat: 'gl' },
               {
@@ -2946,6 +4332,52 @@ export class InMemDBService implements InMemoryDbService {
               },
             ],
           },
+          {
+            id: '3',
+            quantiteMin: 30,
+            quantiteMax: 40,
+            montantMin: 100,
+            montantMax: 7000,
+            ressource: 
+            {
+              id: '3',
+              libelle: 'pediatrie',
+              etat: true,
+              /*dateCreation:new Date("07/03/2000"),dateModification:new Date("07/03/1990"),*/ quantite: 30,
+              unite: this.UnitesLitre,
+              prix: 3000,
+              caracteristique: 'souple',
+              famille: {
+                id: '4',
+                libelle: 'néonat',
+                description: 'nouveau-né',
+                etat: 'malade',
+              },
+            }
+          },
+          {
+            id: '4',
+            quantiteMin: 30,
+            quantiteMax: 40,
+            montantMin: 100,
+            montantMax: 7000,
+            ressource:
+            {
+                id: '2',
+                libelle: 'néonat',
+                etat: true,
+                /* dateCreation:new Date("07/03/2000"),dateModification:new Date("07/03/1990"),*/ quantite: 20,
+                unite: this.UnitesLitre,
+                prix: 2000,
+                caracteristique: 'souple',
+                famille: {
+                  id: '3',
+                  libelle: 'pediatrie',
+                  description: 'enfant',
+                  etat: 'souffrant',
+                },
+              },
+          },
         ],
       },
       {
@@ -2959,7 +4391,7 @@ export class InMemDBService implements InMemoryDbService {
             quantiteMin: 30,
             quantiteMax: 40,
             montantMin: 100,
-            montantMax: 7000 /*fournisseur:'gc',*/,
+            montantMax: 7000,
             famille: [
               { id: '1', libelle: 'trans', description: 'sang', etat: 'gl' },
               {
@@ -2989,7 +4421,37 @@ export class InMemDBService implements InMemoryDbService {
             quantiteMin: 30,
             quantiteMax: 40,
             montantMin: 100,
-            montantMax: 7000 /*fournisseur:'gc',*/,
+            montantMax: 7000,
+            famille: [
+              { id: '1', libelle: 'trans', description: 'sang', etat: 'gl' },
+              {
+                id: '2',
+                libelle: 'néonat',
+                description: 'nouveau-né',
+                etat: 'malade',
+              },
+              {
+                id: '3',
+                libelle: 'pediatrie',
+                description: 'enfant',
+                etat: 'souffrant',
+              },
+            ],
+            ressource: {
+              id: '1',
+              libelle: 'transfusion',
+              etat: true,
+              quantite: 10,
+              unite: this.UnitesLitre,
+              prix: 1000,
+              caracteristique: 'souple',
+              famille: {
+                id: '4',
+                libelle: 'néonat',
+                description: 'nouveau-né',
+                etat: 'malade',
+              },
+            },
             distributeur: [
               {
                 id: '1',

@@ -20,7 +20,8 @@ export class ViewExemplaireComponent implements OnInit {
     attributs: [],
     idDocument: '',
     objetEnregistre: [],
-    categories: []
+    categories: [],
+    preconisations: []
   }; 
   document : IDocument = {
     id: '',
@@ -28,7 +29,8 @@ export class ViewExemplaireComponent implements OnInit {
     description: '',
     missions: [],
     attributs: [],
-    categories: []
+    categories: [],
+    preconisations: []
   };
 
 

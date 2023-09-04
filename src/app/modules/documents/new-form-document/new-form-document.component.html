@@ -97,12 +97,12 @@
 
                                     <!-- Ouvrir le formulair de creation des precoMvt -->
                                     <div class="listAttr">
-                                        <button type="button" class="btn p-0" title="{{'lists.button9' | translate}} / {{'lists.button8' | translate}}" (click)="openPrecoMvtDialog(); creerPrecoMvts()">
+                                        <button type="button" class="btn p-0" title="{{'lists.button9' | translate}} / {{'lists.button8' | translate}}" (click)="openPrecoMvtDialog()">
                                             <i class="fas fa-plus-square"></i>
                                         </button>
-                                        <!-- <span *ngFor="let listeCategories of TABLE_CATEGORIE_AFFICHAGE_TEMP">
-                                            {{listeCategories.nom | lowercase}}<span>, </span>
-                                        </span> -->
+                                        <span *ngFor="let listePreconisations of dataSourcePrecoResultat.data">
+                                            {{listePreconisations.libelle | lowercase}}<span>, </span>
+                                        </span>
                                     </div>
                                 </div>
                             </div>

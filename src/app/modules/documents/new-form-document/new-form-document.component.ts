@@ -22,6 +22,7 @@ import { TypeTicket } from 'src/app/modele/type-ticket';
 import { DonneesEchangeService } from 'src/app/services/donnees-echange/donnees-echange.service';
 import { ModalChoixAttributsComponent } from '../../shared/modal-choix-attributs/modal-choix-attributs.component';
 import { ModalChoixPreconisationsComponent } from '../../shared/modal-choix-preconisations/modal-choix-preconisations.component';
+import { IPrecoMvt } from 'src/app/modele/precomvt';
 
 
 @Component({
@@ -37,7 +38,8 @@ export class NewFormDocumentComponent implements OnInit {
     description: '',
     missions: [],
     attributs: [],
-    categories: []
+    categories: [],
+    preconisations: []
   };
   mission$:Observable<IMission[]>=EMPTY;
   forme: FormGroup;
@@ -66,7 +68,13 @@ export class NewFormDocumentComponent implements OnInit {
   TABLE_CATEGORIE_AFFICHAGE_TEMPO: ICategorieAffichage[] = []; 
 
   // tableau contenant les categories creees
-  tableFinaleCategoriesAttributs: ICategoriesAttributs[] = []; 
+  tableFinaleCategoriesAttributs: ICategoriesAttributs[] = [];
+
+  //tableau contenent les preconisations
+  ELEMENTS_TABLE_PRECONISATIONS: IPrecoMvt[] = [];
+  dataSourcePrecoResultat = new MatTableDataSource<IPrecoMvt>();
+  dataSourcePreco = new MatTableDataSource<IPrecoMvt>(this.ELEMENTS_TABLE_PRECONISATIONS);
+
   
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
@@ -224,57 +232,27 @@ export class NewFormDocumentComponent implements OnInit {
     const dialogRef = this.dialogDef.open(ModalChoixPreconisationsComponent, 
     {
       width:'100%',
+      height:'100%',
       enterAnimationDuration:'1000ms',
       exitAnimationDuration:'1000ms',
       data:{
-        dataSourceAttributDocument : this.dataSourceAttributDocument,
+        dataSourcePreco : this.dataSourcePreco
       }
     }
     )
 
     dialogRef.afterClosed().subscribe(result => {
-      let tmpCatAtt = new Map(); 
-      let categorieAttributsFinal : ICategoriesAttributs[] = [];
-  
-      //récupération des données du service
-      this.TABLE_CATEGORIE_AFFICHAGE_TEMPO = result;
-      this.TABLE_CATEGORIE_AFFICHAGE_TEMPO.forEach(
-        objet => {
-          let categorieAttributTemp : ICategoriesAttributs = {
-            id: '',
-            nom: '',
-            ordre: 0,
-            listAttributs: []
-          }
-            //si la map ne contient pas la catégorie courante 
-            if(tmpCatAtt.get(objet.nom)== null){
-              categorieAttributTemp.id = objet.id;
-              categorieAttributTemp.nom = objet.nom;
-              categorieAttributTemp.ordre = objet.ordre;
-              categorieAttributTemp.listAttributs.push(objet.attribut);
-  
-              // sauvegarde de l'indice de l'élément enregistré
-              let index : number  = categorieAttributsFinal.push(categorieAttributTemp);
-              tmpCatAtt.set(objet.nom, index-1);
-            }
-            else{
-              //si la valeur est trouvée dans la map
-              let index : number = tmpCatAtt.get(objet.nom); // récuperation de l'indice de l'élément enregistré
-              categorieAttributTemp = categorieAttributsFinal[index];
-              categorieAttributTemp.listAttributs.push(objet.attribut);
-              categorieAttributsFinal[index] = categorieAttributTemp;
-            }
-          } 
-      );
-        this.TABLE_CATEGORIE_AFFICHAGE_TEMP = categorieAttributsFinal;
+      this.dataSourcePrecoResultat.data = result;
+      this.ELEMENTS_TABLE_PRECONISATIONS = this.dataSourcePrecoResultat.data
+      this.dataSourcePreco.data = this.ELEMENTS_TABLE_PRECONISATIONS
     });
   }
   creerCategorie(){
     this.dataSourceAttribut.data = this.ELEMENTS_TABLE_ATTRIBUTS
   }
-  creerPrecoMvts(){
-    this.dataSourceAttribut.data = this.ELEMENTS_TABLE_ATTRIBUTS
-  }
+//creerPrecoMvts(){
+ //   this.dataSourceAttribut.data = this.ELEMENTS_TABLE_PRECONISATIONS
+  //}
 
   /**
    * methode quiu permet de fusionner les categories en fontion du meme nom tout en regroupant leurs attributs
@@ -325,7 +303,8 @@ export class NewFormDocumentComponent implements OnInit {
       description: documentInput.description,
       missions: documentInput._missions,
       attributs: [],
-      categories: []
+      categories: [],
+      preconisations: []
     }
     
     if(this.document.id != ""){

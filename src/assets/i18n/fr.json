@@ -278,5 +278,18 @@
       "title8": "Catégorie",
       "title9": "Actions "
     }
+  },
+  "preconisation":{
+      "form":{
+          "title1":"Sélectionnez des preconisations"
+      },
+      "table":{
+          "title1":"Libellé",
+          "title2":"Etat",
+          "title3":"Type"
+      },
+      "view":{
+          "text1":"Les préconisations du document"
+      }
   }
 }

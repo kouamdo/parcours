@@ -38,6 +38,7 @@ export class NewExemplaireComponent implements OnInit {
     attributs: [],
     objetEnregistre: [],
     categories: [],
+    preconisations: []
   };
   document: IDocument = {
     id: '',
@@ -46,6 +47,7 @@ export class NewExemplaireComponent implements OnInit {
     missions: [],
     attributs: [],
     categories: [],
+    preconisations: []
   };
 
   attribut: IAttributs = {
@@ -206,6 +208,23 @@ export class NewExemplaireComponent implements OnInit {
   }
 
   /**
+   * methode permettant de renvoyer la valeur de l'attribut
+   */
+  rechercherValeurParIdAttributSupprime(idAttribut: string): string {
+    for (
+      let index = 0;
+      index < this.objetCleValeurSupprime.length;
+      index++
+    ) {
+      const element = this.objetCleValeurSupprime[index];
+      if (element.key.id == idAttribut) {
+        return element.value;
+      }
+    }
+    return 'PARCOURS_NOT_FOUND_404';
+  }
+
+  /**
    * Methode qui permet d'enregistrer les valeurs du formulaire dans un objet de type ObjetCleValeur
    * C'est set objet qui nous permettra de preremplir le formulaire lors de la modification
    */
@@ -261,12 +280,12 @@ export class NewExemplaireComponent implements OnInit {
     this.compteur = this.compteur + 1;
     return this.compteur;
   }
-  incrementeNumerateur(cpt: number, attribut: IAttributs): number {
+  incrementeNumerateur(num: number, attribut: IAttributs): number {
     if (
       this.totalAttributSupprime > -1 &&
       this.numerateur >= this.totalAttributSupprime
     )
-      return cpt;
+      return num;
 
     let valAttribut = this.rechercherValeurParIdAttribut(attribut.id);
     if (attribut.type == TypeTicket.Date && valAttribut != null) {
@@ -298,6 +317,7 @@ export class NewExemplaireComponent implements OnInit {
       attributs: [],
       objetEnregistre: [],
       categories: this.document.categories,
+      preconisations: []
     };
     exemplaireTemp.objetEnregistre = this.exemplaire.objetEnregistre;
 
