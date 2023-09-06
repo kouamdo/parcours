@@ -8,6 +8,7 @@ import { AttributService } from 'src/app/services/attributs/attribut.service';
 import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
+import { DonneesEchangeService } from 'src/app/services/donnees-echange/donnees-echange.service';
 
 @Component({
   selector: 'app-modal-choix-attributs',
@@ -51,6 +52,7 @@ export class ModalChoixAttributsComponent implements OnInit {
     private infosPath: ActivatedRoute,
     private serviceAttribut: AttributService,
     private _liveAnnouncer: LiveAnnouncer,
+    private donneeDocCatService:DonneesEchangeService,
     private dialogDef: MatDialog,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
@@ -63,7 +65,7 @@ export class ModalChoixAttributsComponent implements OnInit {
     this.getAllAttributs().subscribe((valeurs) => {
       this.dataSourceAttribut.data = valeurs;
     });
-    this.dataSourceAttributResultat.data = this.data.tableauAttributsDocumentResultat
+    this.dataSourceAttributResultat.data = this.donneeDocCatService.dataDocumentAttributs
     this.myControl.valueChanges.subscribe((value) => {
       const titre = typeof value === 'string' ? value : value?.titre;
       if (titre != undefined && titre?.length > 0) {
@@ -104,6 +106,7 @@ export class ModalChoixAttributsComponent implements OnInit {
       // this.dataSourceAttributResultat.data = this.dataSourceAttributDocument.data
       this.ELEMENTS_TABLE_ATTRIBUTS.push(val);
       this.dataSourceAttributResultat.data = this.ELEMENTS_TABLE_ATTRIBUTS;
+      this.donneeDocCatService.dataDocumentAttributs = this.ELEMENTS_TABLE_ATTRIBUTS;
     });
   }
 
@@ -113,6 +116,7 @@ export class ModalChoixAttributsComponent implements OnInit {
     this.ELEMENTS_TABLE_ATTRIBUTS.splice(index, 1); // je supprime un seul element du tableau a la position 'index'
     _attributs.removeAt(index);
     this.dataSourceAttributResultat.data = this.ELEMENTS_TABLE_ATTRIBUTS;
+    this.donneeDocCatService.dataDocumentAttributs = this.ELEMENTS_TABLE_ATTRIBUTS;
   }
   private getAllAttributs() {
     return this.serviceAttribut.getAllAttributs();

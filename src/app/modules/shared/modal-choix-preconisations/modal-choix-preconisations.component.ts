@@ -7,6 +7,7 @@ import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router, ActivatedRoute } from '@angular/router';
 import { IPrecoMvt } from 'src/app/modele/precomvt';
+import { DonneesEchangeService } from 'src/app/services/donnees-echange/donnees-echange.service';
 import { PrecoMvtsService } from 'src/app/services/precomvts/precomvts.service';
 
 @Component({
@@ -43,6 +44,7 @@ export class ModalChoixPreconisationsComponent implements OnInit {
     private infosPath: ActivatedRoute,
     private serviceprecoMvt: PrecoMvtsService,
     private _liveAnnouncer: LiveAnnouncer,
+    private donneeDocCatService:DonneesEchangeService,
     private dialogDef: MatDialog,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
@@ -55,7 +57,7 @@ export class ModalChoixPreconisationsComponent implements OnInit {
     this.getAllPrecoMvt().subscribe((valeurs) => {
       this.dataSourcePreco.data = valeurs;
     });
-    this.dataSourcePrecoResultat.data = this.data.dataSourcePreco.data
+    this.dataSourcePrecoResultat.data = this.donneeDocCatService.dataDocumentPrecoMvts
     this.myControl.valueChanges.subscribe((value) => {
       const libelle = typeof value === 'string' ? value : value?.libelle;
       if (libelle != undefined && libelle?.length > 0) {
@@ -92,6 +94,7 @@ export class ModalChoixPreconisationsComponent implements OnInit {
       this.ELEMENTS_TABLE_PRECONISATIONS = this.dataSourcePrecoResultat.data;
       this.ELEMENTS_TABLE_PRECONISATIONS.push(val);
       this.dataSourcePrecoResultat.data = this.ELEMENTS_TABLE_PRECONISATIONS;
+      this.donneeDocCatService.dataDocumentPrecoMvts = this.ELEMENTS_TABLE_PRECONISATIONS
     });
   }
 
@@ -101,6 +104,7 @@ export class ModalChoixPreconisationsComponent implements OnInit {
     this.ELEMENTS_TABLE_PRECONISATIONS.splice(index, 1); // je supprime un seul element du tableau a la position 'index'
     _precoMvt.removeAt(index);
     this.dataSourcePrecoResultat.data = this.ELEMENTS_TABLE_PRECONISATIONS;
+    this.donneeDocCatService.dataDocumentPrecoMvts = this.ELEMENTS_TABLE_PRECONISATIONS
   }
   private getAllPrecoMvt() {
     return this.serviceprecoMvt.getAllPrecomvts();

@@ -116,6 +116,15 @@ export class NewFormDocumentComponent implements OnInit {
             this.dataSourceAttributResultat.data = this.ELEMENTS_TABLE_ATTRIBUTS;
           }
         )
+
+        // Initialisation du tableau de preconisations du document
+        this.document?.preconisations.forEach(
+          objet => {
+            this.ELEMENTS_TABLE_PRECONISATIONS.push(objet)
+            this.dataSourcePrecoResultat.data = this.ELEMENTS_TABLE_PRECONISATIONS;
+          }
+        )
+
         // Initialisation du tableau de categories temp du document qui reconstitue
         // le deuxieme tableau de la modal
         let categorieAfficheFinal : ICategorieAffichage[] = [];
@@ -151,6 +160,8 @@ export class NewFormDocumentComponent implements OnInit {
         )
         //sauvegarde dans le service pour le communiquer à la modale
         this.donneeDocCatService.dataDocumentCategorie = categorieAfficheFinal
+        // this.donneeDocCatService.dataDocumentPrecoMvts = this.document.preconisations
+        // this.donneeDocCatService.dataDocumentAttributs = this.document.attributs
       });
     }
   }
@@ -175,7 +186,7 @@ export class NewFormDocumentComponent implements OnInit {
       let categorieAttributsFinal : ICategoriesAttributs[] = [];
   
       //récupération des données du service
-      this.TABLE_CATEGORIE_AFFICHAGE_TEMPO = result;
+      this.TABLE_CATEGORIE_AFFICHAGE_TEMPO = this.donneeDocCatService.dataDocumentCategorie;
       this.TABLE_CATEGORIE_AFFICHAGE_TEMPO.forEach(
         objet => {
           let categorieAttributTemp : ICategoriesAttributs = {
@@ -222,8 +233,8 @@ export class NewFormDocumentComponent implements OnInit {
     )
 
     dialogRef.afterClosed().subscribe(result => {
-      this.dataSourceAttributResultat.data = result;
-      this.ELEMENTS_TABLE_ATTRIBUTS = this.dataSourceAttributResultat.data
+      this.dataSourceAttributResultat.data =  this.donneeDocCatService.dataDocumentAttributs
+      this.ELEMENTS_TABLE_ATTRIBUTS =  this.donneeDocCatService.dataDocumentAttributs
       this.dataSourceAttributDocument.data = this.ELEMENTS_TABLE_ATTRIBUTS
     });
   }
@@ -242,7 +253,7 @@ export class NewFormDocumentComponent implements OnInit {
     )
 
     dialogRef.afterClosed().subscribe(result => {
-      this.dataSourcePrecoResultat.data = result;
+      this.dataSourcePrecoResultat.data =  this.donneeDocCatService.dataDocumentPrecoMvts;
       this.ELEMENTS_TABLE_PRECONISATIONS = this.dataSourcePrecoResultat.data
       this.dataSourcePreco.data = this.ELEMENTS_TABLE_PRECONISATIONS
     });
@@ -313,6 +324,10 @@ export class NewFormDocumentComponent implements OnInit {
     
     this.dataSourceAttributResultat.data.forEach(
       a => documentTemp.attributs.push(a)
+    )
+
+    this.dataSourcePrecoResultat.data .forEach(
+      preco => documentTemp.preconisations.push(preco)
     )
 
     this.tableFinaleCategoriesAttributs.forEach(
