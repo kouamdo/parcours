@@ -83,9 +83,9 @@ export class NewExemplaireComponent implements OnInit {
   TypeBoolean = TypeTicket.Boolean;
   TypeRadio = TypeTicket.Radio;
 
-  compteur: number = -1;
-  totalAttribut: number = -1;
-  numerateur: number = -1;
+  compteur: number = 0;
+  totalAttribut: number = 0;
+  numerateur: number = 0;
   totalAttributSupprime: number = -1;
   objetCleValeurSupprime: ObjetCleValeur[] = [];
   tableauAttributsSupprime: IAttributs[] = [];
@@ -238,7 +238,7 @@ export class NewExemplaireComponent implements OnInit {
         key: '',
         value: '',
       };
-      const index = this.document.attributs.indexOf(a);
+      let index = this.tempAttributsCpt.get(a.id);
       objetCleValeur.key = a;
       objetCleValeur.value = exemplaireDocument.controls[index].value;
       this.exemplaire.objetEnregistre.push(objetCleValeur);
@@ -267,7 +267,7 @@ export class NewExemplaireComponent implements OnInit {
    * @returns valeur courante + 1
    */
   incrementeCompteur(cpt: number, attribut: IAttributs): number {
-    if (this.compteur >= -1 && this.compteur >= this.totalAttribut)
+    if (this.compteur > 0 && this.compteur >= this.totalAttribut)
       return cpt;
 
     this.tempAttributsCpt.set(attribut.id, cpt)
@@ -288,7 +288,7 @@ export class NewExemplaireComponent implements OnInit {
   }
   incrementeNumerateur(num: number, attribut: IAttributs): number {
     if (
-      this.numerateur > -1 &&
+      this.numerateur > 0 &&
       this.numerateur >= this.totalAttributSupprime
     )
       return num;
