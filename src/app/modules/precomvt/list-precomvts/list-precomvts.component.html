@@ -30,9 +30,9 @@
               <table class='table table-sm table-centered table-striped table-bordered w-100' mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)">
 
                   <!-- id Column -->
-                  <ng-container matColumnDef="id">
-                      <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header>id</th>
-                      <td class="text-dark text-center containCell" mat-cell *matCellDef="let element"> {{element.id}} </td>
+                  <ng-container matColumnDef="id" >
+                      <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header >id</th>
+                      <td class="text-dark text-center containCell" mat-cell *matCellDef="let element" style="visibility:hidden" > {{element.id}} </td>
                   </ng-container>
 
                   <!-- libellé Column -->

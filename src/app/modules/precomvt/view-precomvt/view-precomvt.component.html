@@ -90,7 +90,7 @@
             </thead>
             <tbody>
                 <tr *ngFor="let precomvtqte of PrecoMvt.precomvtqte">
-                    <td>{{precomvtqte.famille}}</td>
+                    <td>{{precomvtqte.famille![0].libelle}}</td>
                     <td>{{precomvtqte.quantiteMax}}</td>
                     <td>{{precomvtqte.quantiteMin}}</td>
                     <td>{{precomvtqte.montantMax}}</td>

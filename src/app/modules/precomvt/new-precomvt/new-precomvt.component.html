@@ -65,8 +65,12 @@
               Famille
             </label>
             <div class="w-100">
+
               <mat-form-field  style="background-color:#28a745;" class="example-full-width" appearance="fill" >
-                <mat-select formControlName="famille" multiple [compareWith]="compareItem" (ngModelChange)="tabError.delete('famille')">
+
+                <mat-select formControlName="famille"  #familles multiple [compareWith]="compareItem" (ngModelChange)="tabError.delete('famille')">
+                  <mat-select-trigger>{{familles.value ? familles.value[0]: ''}}</mat-select-trigger>
+                  <span *ngIf="(familles.value?.length || 0 ) > 1" class="additional-selection">(+{{(familles.value.length || 0) -1}} {{familles.value?.length ===2? 'other' : 'others'}})</span>
                   <mat-option *ngFor="let membre of familles$ |async" [value]="membre" >{{membre.libelle}}</mat-option>
                 </mat-select>
               </mat-form-field>
@@ -233,6 +237,7 @@
       </div>
       <div class="actionButtons">
         <button type="button" (click)="enregistrerPreco()" class="btn">Enregistrer</button>
+
       </div>
     </div>
   </div>

@@ -70,7 +70,7 @@ export class NewPrecomvtComponent implements OnInit {
     etat:false,
     precomvtqte:[],
   }
-
+  btnLibelle: string="Ajouter";
   constructor(private formBuilder:FormBuilder,private serviceFamille:FamillesService,private serviceDistributeur:DistributeursService,private ressourceService:RessourcesService ,private precoMvtService:PrecoMvtsService,private serviceRessource:RessourcesService,private router:Router, private infosPath:ActivatedRoute, private datePipe: DatePipe) {
     this.forme = this.formBuilder.group({
       libelle: new FormControl(),
@@ -109,11 +109,13 @@ export class NewPrecomvtComponent implements OnInit {
       }
     );
     let idPrecoMvt = this.infosPath.snapshot.paramMap.get('idPrecoMvt');
-    if (idPrecoMvt != null && idPrecoMvt !== '') {
+    if ((idPrecoMvt != null) && idPrecoMvt !== '') {
+
       this.precoMvtService.getPrecomvtById(idPrecoMvt).subscribe(
         PrecoMvtCourant =>{
           //premier elt du tableau
           this.eltsPreco= []
+          
           /*let premvtqte : IPrecoMvtQte={
             ressource: undefined,
             quantiteMax: 0,
@@ -148,10 +150,11 @@ export class NewPrecomvtComponent implements OnInit {
             id: "",
             libelle: "",
             etat: true,
-              type: TypeMvt.Ajout,
+              type: '',
             precomvtqte:[]
            };
-           precoMvtTemp.precomvtqte.push(element)
+
+          precoMvtTemp.precomvtqte.push(element)
           if (element.ressource != undefined && element.ressource != null ){
             let rsrce  = " Ressource :  ";
               const ressource = element.ressource!.libelle;
@@ -429,7 +432,8 @@ reset():void{
       libel += element.libelle + ", "
     }
     let precomvtTemp : IPrecoMvt={
-      id: uuidv4(),
+      //id: uuidv4(),
+      id:'',
       libelle: libel,
       etat: false,
       type: precomvtInput.TypeMvt,
@@ -457,7 +461,8 @@ reset():void{
       distributeur: precomvtInput.distributeur
     };
     let precomvtTemp : IPrecoMvt={
-      id: uuidv4(),
+      //id: uuidv4(),
+      id:' ',
       libelle: "Ressource : " + precomvtInput.ressource.libelle,
       etat: false,
       type: precomvtInput.TypeMvt,
@@ -485,8 +490,9 @@ reset():void{
       distributeur: precomvtInput.distributeur
     };
     let precomvtTemp : IPrecoMvt={
-      id: uuidv4(),
-      libelle: "Libelle : " +precomvtInput.libelle,
+      //id: uuidv4(),
+      id:'',
+      libelle:precomvtInput.libelle,
       etat: precomvtInput.etat,
       type: precomvtInput.type,
       precomvtqte:[]
