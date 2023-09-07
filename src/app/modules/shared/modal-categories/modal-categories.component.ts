@@ -88,7 +88,10 @@ export class ModalCategoriesComponent implements OnInit {
   ngOnInit(): void {
       this.TABLE_CATEGORIE_AFFICHAGE_TEMP = this.donneeDocCatService.dataDocumentCategorie
       this.tableResultatsCategoriesAffichage.data = this.TABLE_CATEGORIE_AFFICHAGE_TEMP;
-    if (this.donneeDocCatService.dataDocumentCategorie != null && this.donneeDocCatService.dataDocumentCategorie.length >0) {
+      if (this.data.idDocument != "") {
+        this.tableResultatsCategoriesAffichage.data = this.donneeDocCatService.dataDocumentCategorie
+        this.tableauAttributsTemp = [];
+      } else if (this.donneeDocCatService.dataDocumentCategorie != null && this.donneeDocCatService.dataDocumentCategorie.length >0) {
       //Création du premier tableau si le deuxième n'est pas vide
       let listAtt : String[] = [];
       let listCatAtt :ICategorieAffichage[] = this.tableResultatsCategoriesAffichage.data;
@@ -96,7 +99,7 @@ export class ModalCategoriesComponent implements OnInit {
       listCatAtt.forEach(valeur=>{
         listAtt.push(valeur.attribut.id);
       });
-      //comparaison avec les ids du tableau initial pour exclure ce présent dans le second
+      //comparaison avec les ids du tableau initial pour exclure ceux présents dans le second
       this.tableauAttributsTemp = [];
       let tmpTab =  this.data.dataSourceAttributDocument.data;
       tmpTab.forEach(

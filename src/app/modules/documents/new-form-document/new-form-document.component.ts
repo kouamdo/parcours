@@ -160,8 +160,8 @@ export class NewFormDocumentComponent implements OnInit {
         )
         //sauvegarde dans le service pour le communiquer à la modale
         this.donneeDocCatService.dataDocumentCategorie = categorieAfficheFinal
-        // this.donneeDocCatService.dataDocumentPrecoMvts = this.document.preconisations
-        // this.donneeDocCatService.dataDocumentAttributs = this.document.attributs
+        this.donneeDocCatService.dataDocumentPrecoMvts = this.document.preconisations
+        this.donneeDocCatService.dataDocumentAttributs = this.document.attributs
       });
     }
   }
@@ -177,6 +177,7 @@ export class NewFormDocumentComponent implements OnInit {
       exitAnimationDuration:'1000ms',
       data:{
         dataSourceAttributDocument : this.dataSourceAttributDocument,
+        idDocument : this.document.id
       }
     }
     )
@@ -340,6 +341,9 @@ export class NewFormDocumentComponent implements OnInit {
         this.router.navigate(['/list-documents']);
       }
     )
+    this.donneeDocCatService.dataDocumentAttributs = []
+    this.donneeDocCatService.dataDocumentCategorie = []
+    this.donneeDocCatService.dataDocumentPrecoMvts = []
   }
   get f(){
     return this.forme.controls;
