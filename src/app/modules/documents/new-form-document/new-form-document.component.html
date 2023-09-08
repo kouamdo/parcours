@@ -56,7 +56,7 @@
                                         <button type="button" class="btn p-0" title="{{'lists.button9' | translate}} / {{'lists.button8' | translate}}" (click)="openAttributDialog()">
                                             <i class="fas fa-plus-square"></i>
                                         </button>
-                                        <span *ngFor="let listeAttributs of dataSourceAttributResultat.data">
+                                        <span *ngFor="let listeAttributs of ELEMENTS_TABLE_ATTRIBUTS">
                                             {{listeAttributs.titre | lowercase}}<span>, </span>
                                         </span>
                                     </div>
@@ -75,7 +75,7 @@
 
                                     <!-- Ouvrir le formulair de creation des categories -->
                                     <div class="listAttr">
-                                        <button type="button" class="btn p-0" title="{{'lists.button9' | translate}} / {{'lists.button8' | translate}}" (click)="openCategorieDialog(); creerCategorie()">
+                                        <button type="button" class="btn p-0" title="{{'lists.button9' | translate}} / {{'lists.button8' | translate}}" (click)="openCategorieDialog();">
                                             <i class="fas fa-plus-square"></i>
                                         </button>
                                         <span *ngFor="let listeCategories of TABLE_CATEGORIE_AFFICHAGE_TEMP">
@@ -100,7 +100,7 @@
                                         <button type="button" class="btn p-0" title="{{'lists.button9' | translate}} / {{'lists.button8' | translate}}" (click)="openPrecoMvtDialog()">
                                             <i class="fas fa-plus-square"></i>
                                         </button>
-                                        <span *ngFor="let listePreconisations of dataSourcePrecoResultat.data">
+                                        <span *ngFor="let listePreconisations of ELEMENTS_TABLE_PRECONISATIONS">
                                             {{listePreconisations.libelle | lowercase}}<span>, </span>
                                         </span>
                                     </div>
@@ -111,7 +111,7 @@
                 </div>
                 <div class="actionButton">
                     <button class="btn" routerLink="../../list-documents"><i class="fa fa-reply mr-1" aria-hidden="true"></i>{{'lists.button2' | translate}}</button>
-                    <button type="submit" class="btn btnValidation" (click)="validerCategorieAttribut()">{{btnLibelle}}</button>
+                    <button type="submit" class="btn btnValidation">{{btnLibelle}}</button>
                 </div>
             </form>
         </div>

@@ -57,23 +57,17 @@ export class NewFormDocumentComponent implements OnInit {
    ELEMENTS_TABLE_CATEGORIES: IAttributs[] = []; //tableau de listing des attributs a affecter a chaque categorie
 
   // variables pour la gestion des categories
-  dataSourceAttributDocument = new MatTableDataSource<IAttributs>(this.ELEMENTS_TABLE_CATEGORIES);
   categorieAttributs : ICategoriesAttributs = {
     id: '',
     nom: '',
     ordre: 0,
     listAttributs: []
   }
-  TABLE_CATEGORIE_AFFICHAGE_TEMP: ICategoriesAttributs[] = []; 
-  TABLE_CATEGORIE_AFFICHAGE_TEMPO: ICategorieAffichage[] = []; 
-
-  // tableau contenant les categories creees
-  tableFinaleCategoriesAttributs: ICategoriesAttributs[] = [];
+  TABLE_CATEGORIE_AFFICHAGE_TEMP: ICategoriesAttributs[] = []; // tableau qui doit contenir la synthese des categories du doc
+  TABLE_CATEGORIE_AFFICHAGE_TEMPO: ICategorieAffichage[] = []; // tableau contenant les categories creees dans la modale
 
   //tableau contenent les preconisations
   ELEMENTS_TABLE_PRECONISATIONS: IPrecoMvt[] = [];
-  dataSourcePrecoResultat = new MatTableDataSource<IPrecoMvt>();
-  dataSourcePreco = new MatTableDataSource<IPrecoMvt>(this.ELEMENTS_TABLE_PRECONISATIONS);
 
   
   @ViewChild(MatPaginator)
@@ -110,20 +104,10 @@ export class NewFormDocumentComponent implements OnInit {
           this.forme.controls["_missions"].setValue(this.document.missions);
 
         // Initialisation du tableau d'attributs du document
-        this.document?.attributs.forEach(
-          objet => {
-            this.ELEMENTS_TABLE_ATTRIBUTS.push(objet)
-            this.dataSourceAttributResultat.data = this.ELEMENTS_TABLE_ATTRIBUTS;
-          }
-        )
+        this.ELEMENTS_TABLE_ATTRIBUTS = this.document.attributs
 
         // Initialisation du tableau de preconisations du document
-        this.document?.preconisations.forEach(
-          objet => {
-            this.ELEMENTS_TABLE_PRECONISATIONS.push(objet)
-            this.dataSourcePrecoResultat.data = this.ELEMENTS_TABLE_PRECONISATIONS;
-          }
-        )
+        this.ELEMENTS_TABLE_PRECONISATIONS = this.document.preconisations
 
         // Initialisation du tableau de categories temp du document qui reconstitue
         // le deuxieme tableau de la modal
@@ -162,7 +146,14 @@ export class NewFormDocumentComponent implements OnInit {
         this.donneeDocCatService.dataDocumentCategorie = categorieAfficheFinal
         this.donneeDocCatService.dataDocumentPrecoMvts = this.document.preconisations
         this.donneeDocCatService.dataDocumentAttributs = this.document.attributs
+
+        // synthese du tableau de categories du document pour afficher les differentes categories dans l'espace dedie
+        this.syntheseCategorieAttribut()
       });
+    }else{
+      this.donneeDocCatService.dataDocumentAttributs = []
+      this.donneeDocCatService.dataDocumentCategorie = []
+      this.donneeDocCatService.dataDocumentPrecoMvts = []
     }
   }
 
@@ -175,48 +166,12 @@ export class NewFormDocumentComponent implements OnInit {
       height:'100%',
       enterAnimationDuration:'1000ms',
       exitAnimationDuration:'1000ms',
-      data:{
-        dataSourceAttributDocument : this.dataSourceAttributDocument,
-        idDocument : this.document.id
-      }
+      data:{}
     }
     )
 
     dialogRef.afterClosed().subscribe(result => {
-      let tmpCatAtt = new Map(); 
-      let categorieAttributsFinal : ICategoriesAttributs[] = [];
-  
-      //récupération des données du service
-      this.TABLE_CATEGORIE_AFFICHAGE_TEMPO = this.donneeDocCatService.dataDocumentCategorie;
-      this.TABLE_CATEGORIE_AFFICHAGE_TEMPO.forEach(
-        objet => {
-          let categorieAttributTemp : ICategoriesAttributs = {
-            id: '',
-            nom: '',
-            ordre: 0,
-            listAttributs: []
-          }
-            //si la map ne contient pas la catégorie courante 
-            if(tmpCatAtt.get(objet.nom)== null){
-              categorieAttributTemp.id = objet.id;
-              categorieAttributTemp.nom = objet.nom;
-              categorieAttributTemp.ordre = objet.ordre;
-              categorieAttributTemp.listAttributs.push(objet.attribut);
-  
-              // sauvegarde de l'indice de l'élément enregistré
-              let index : number  = categorieAttributsFinal.push(categorieAttributTemp);
-              tmpCatAtt.set(objet.nom, index-1);
-            }
-            else{
-              //si la valeur est trouvée dans la map
-              let index : number = tmpCatAtt.get(objet.nom); // récuperation de l'indice de l'élément enregistré
-              categorieAttributTemp = categorieAttributsFinal[index];
-              categorieAttributTemp.listAttributs.push(objet.attribut);
-              categorieAttributsFinal[index] = categorieAttributTemp;
-            }
-          } 
-      );
-        this.TABLE_CATEGORIE_AFFICHAGE_TEMP = categorieAttributsFinal;
+      this.syntheseCategorieAttribut()
     });
   }
 
@@ -228,15 +183,13 @@ export class NewFormDocumentComponent implements OnInit {
       enterAnimationDuration:'1000ms',
       exitAnimationDuration:'1000ms',
       data:{
-        tableauAttributsDocumentResultat : this.ELEMENTS_TABLE_ATTRIBUTS
+        // tableauAttributsDocumentResultat : this.ELEMENTS_TABLE_ATTRIBUTS
       }
     }
     )
 
     dialogRef.afterClosed().subscribe(result => {
-      this.dataSourceAttributResultat.data =  this.donneeDocCatService.dataDocumentAttributs
       this.ELEMENTS_TABLE_ATTRIBUTS =  this.donneeDocCatService.dataDocumentAttributs
-      this.dataSourceAttributDocument.data = this.ELEMENTS_TABLE_ATTRIBUTS
     });
   }
   openPrecoMvtDialog(){
@@ -248,29 +201,21 @@ export class NewFormDocumentComponent implements OnInit {
       enterAnimationDuration:'1000ms',
       exitAnimationDuration:'1000ms',
       data:{
-        dataSourcePreco : this.dataSourcePreco
+        // dataSourcePreco : this.dataSourcePreco
       }
     }
     )
 
     dialogRef.afterClosed().subscribe(result => {
-      this.dataSourcePrecoResultat.data =  this.donneeDocCatService.dataDocumentPrecoMvts;
-      this.ELEMENTS_TABLE_PRECONISATIONS = this.dataSourcePrecoResultat.data
-      this.dataSourcePreco.data = this.ELEMENTS_TABLE_PRECONISATIONS
+      this.ELEMENTS_TABLE_PRECONISATIONS = this.donneeDocCatService.dataDocumentPrecoMvts
     });
   }
-  creerCategorie(){
-    this.dataSourceAttribut.data = this.ELEMENTS_TABLE_ATTRIBUTS
-  }
-//creerPrecoMvts(){
- //   this.dataSourceAttribut.data = this.ELEMENTS_TABLE_PRECONISATIONS
-  //}
 
   /**
    * methode quiu permet de fusionner les categories en fontion du meme nom tout en regroupant leurs attributs
    * ceci permet de former le tableau d'objets ICategoriesAttriut qui sera rattache au document lors de l'enregistrement
    */
-  validerCategorieAttribut(){
+  syntheseCategorieAttribut(){
     let tmpCatAtt = new Map(); 
     let categorieAttributsFinal : ICategoriesAttributs[] = [];
 
@@ -304,7 +249,7 @@ export class NewFormDocumentComponent implements OnInit {
           }
         } 
     );
-      this.tableFinaleCategoriesAttributs = categorieAttributsFinal;
+      this.TABLE_CATEGORIE_AFFICHAGE_TEMP = categorieAttributsFinal;
   }
   onSubmit(documentInput:any){
     this.submitted=true;
@@ -323,18 +268,17 @@ export class NewFormDocumentComponent implements OnInit {
       documentTemp.id = this.document.id  
     }
     
-    this.dataSourceAttributResultat.data.forEach(
+    this.ELEMENTS_TABLE_ATTRIBUTS.forEach(
       a => documentTemp.attributs.push(a)
     )
 
-    this.dataSourcePrecoResultat.data .forEach(
+    this.ELEMENTS_TABLE_PRECONISATIONS.forEach(
       preco => documentTemp.preconisations.push(preco)
     )
 
-    this.tableFinaleCategoriesAttributs.forEach(
+    this.TABLE_CATEGORIE_AFFICHAGE_TEMP.forEach(
       cat => documentTemp.categories.push(cat)
     )
-    console.log("voici le tebleau d'attributs final a enregistrer pour ce document : ", documentTemp.categories)
 
     this.serviceDocument.ajouterDocument(documentTemp).subscribe(
       object => {
