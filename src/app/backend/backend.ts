@@ -2519,8 +2519,8 @@ export class InMemDBService implements InMemoryDbService {
               },
               {id:"2",quantiteMin:30,  quantiteMax:40,  montantMin:100, montantMax:7000,/*fournisseur:'gc',*/
                   famille:[
-                     {id:"1", libelle:"trans, " , description:"sang", etat:"gl"},
-                     {id:"2", libelle:"néonat, " , description:"nouveau-né", etat:"malade"},
+                     {id:"1", libelle:"trans " , description:"sang", etat:"gl"},
+                     {id:"2", libelle:"néonat " , description:"nouveau-né", etat:"malade"},
                      {id:"3", libelle:"pediatrie " , description:"enfant", etat:"souffrant"}
                  ]
 
@@ -2529,8 +2529,8 @@ export class InMemDBService implements InMemoryDbService {
     {id:"2",libelle:"vente",etat: true,type:'reduire',/*type:this.TypeMvtReduire*/
     precomvtqte:[{id:"1",quantiteMin:30,  quantiteMax:40,  montantMin:100, montantMax:7000,/*fournisseur:'gc',*/
                 famille:[
-                        {id:"1", libelle:"trans, ", description:"sang", etat:"gl"},
-                        {id:"2", libelle:"néonat, ", description:"nouveau-né", etat:"malade"},
+                        {id:"1", libelle:"trans ", description:"sang", etat:"gl"},
+                        {id:"2", libelle:"néonat ", description:"nouveau-né", etat:"malade"},
                         {id:"3", libelle:"pediatrie ", description:"enfant", etat:"souffrant"}
                       ]
             }]},

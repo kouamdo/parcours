@@ -47,13 +47,6 @@ export class NewPrecomvtComponent implements OnInit {
  //précise l'index de eltPreco qu'on souhaite modifier
  indexModification = -1;
 
-  precoMvt : IPrecoMvt ={
-  id: "uuidv4()",
-  libelle: "",
-  etat: true,
-    type: TypeMvt.Ajout,
-  precomvtqte:[]
- };
  idPrecoMvt: string = '';
 
  //submitted=false;
@@ -63,13 +56,7 @@ export class NewPrecomvtComponent implements OnInit {
 
   formDirective!: FormGroupDirective;
   //settings: { idField: string; textField: string; allowSearchFilter: boolean; } | undefined;
-  PrecoMvt:IPrecoMvt={
-    id: '',
-    libelle:'',
-    type: '',
-    etat:false,
-    precomvtqte:[],
-  }
+
   btnLibelle: string="Ajouter";
   constructor(private formBuilder:FormBuilder,private serviceFamille:FamillesService,private serviceDistributeur:DistributeursService,private ressourceService:RessourcesService ,private precoMvtService:PrecoMvtsService,private serviceRessource:RessourcesService,private router:Router, private infosPath:ActivatedRoute, private datePipe: DatePipe) {
     this.forme = this.formBuilder.group({
@@ -144,37 +131,32 @@ export class NewPrecomvtComponent implements OnInit {
            precoMvtTemp.precomvtqte.push(premvtqte);
            this.eltsPreco.push(precoMvtTemp)
 
-           PrecoMvtCourant.precomvtqte.forEach(
-   element => {
-          let precoMvtTemp : IPrecoMvt ={
-            id: "",
-            libelle: "",
-            etat: true,
-              type: '',
-            precomvtqte:[]
-           };
+           PrecoMvtCourant.precomvtqte.forEach(element => 
+            {
+              let precoMvtTemp : IPrecoMvt ={
+                id: "",
+                libelle: "",
+                etat: true,
+                  type: '',
+                precomvtqte:[]
+              };
 
-          precoMvtTemp.precomvtqte.push(element)
-          if (element.ressource != undefined && element.ressource != null ){
-            let rsrce  = " Ressource :  ";
-              const ressource = element.ressource!.libelle;
-              rsrce = rsrce + ressource
+              precoMvtTemp.precomvtqte.push(element)
+              if (element.ressource != undefined && element.ressource != null ){
+                let rsrce  = " Ressource :  ";
+                  const ressource = element.ressource!.libelle;
+                  rsrce = rsrce + ressource
 
-            precoMvtTemp.libelle = rsrce
-            this.eltsPreco.push(precoMvtTemp)
-          }
-         else if (element.famille != null && element.famille.length>0 ){
-            let libel = "Familles : ";
-            for (let index = 0; index < element.famille!.length; index++) {
-              libel += element.famille![index].libelle;
-            }
-            precoMvtTemp.libelle = libel
-            this.eltsPreco.push(precoMvtTemp)
+                precoMvtTemp.libelle = rsrce
+                this.eltsPreco.push(precoMvtTemp)
+              }
+            else if (element.famille != null && element.famille.length>0 ){
+                precoMvtTemp.libelle = this.mettre3PointsdeSuspension(element.famille);
+                this.eltsPreco.push(precoMvtTemp)
         }
       }
      );
-        }
-      )
+        })
     }
   }
 
@@ -198,16 +180,17 @@ private getAllDistributeurs(){
   *
   */
  enregistrerPreco(){
+  let idModif =  uuidv4();
+  if(this.eltsPreco[0].id!=null && this.eltsPreco[0].id!='')
+    idModif = this.eltsPreco[0].id;
   let  precomvtTemp : IPrecoMvt={
-    id: uuidv4(),
+    id: idModif,
     libelle:this.eltsPreco[0].libelle,
     etat:this.eltsPreco[0].etat,
     type:this.eltsPreco[0].type,
     precomvtqte:[],
   }
- if(this.PrecoMvt.id != ''){
-  precomvtTemp.id = this.PrecoMvt.id
-}
+
 this.eltsPreco.forEach
      (valeur =>{
       precomvtTemp.precomvtqte.push(valeur.precomvtqte[0])
@@ -426,11 +409,11 @@ reset():void{
       //fournisseur: precomvtInput.fournisseur,
       distributeur: precomvtInput.distributeur
     }
-    let libel = "Familles : ";
-    for (let index = 0; index < precomvtInput.famille.length; index++) {
+    let libel = this.mettre3PointsdeSuspension(precomvtInput.famille);
+   /* for (let index = 0; index < precomvtInput.famille.length; index++) {
       const element = precomvtInput.famille[index];
       libel += element.libelle + ", "
-    }
+    }*/
     let precomvtTemp : IPrecoMvt={
       //id: uuidv4(),
       id:'',
@@ -441,6 +424,22 @@ reset():void{
     }
     precomvtTemp.precomvtqte.push(premvtqte);
     return precomvtTemp;
+  }
+
+  /**
+   * pour le libelle de la famille, sil est trop long mettre 3 point de suspension
+   */
+  mettre3PointsdeSuspension(tableauFamille : any) : string{
+    let libel = "Familles : ";
+    for (let index = 0; index < tableauFamille!.length; index++) {
+      libel += tableauFamille![index].libelle + ', ';
+    }
+    libel = libel.substring(0, libel.length -2);
+    if(libel.length>30){
+      libel = libel.substring(0, 30);
+      libel = libel + '...';
+    }
+    return libel;
   }
 
   /**
@@ -491,7 +490,7 @@ reset():void{
     };
     let precomvtTemp : IPrecoMvt={
       //id: uuidv4(),
-      id:'',
+      id:'', //precomvtInput.id,
       libelle:precomvtInput.libelle,
       etat: precomvtInput.etat,
       type: precomvtInput.type,
