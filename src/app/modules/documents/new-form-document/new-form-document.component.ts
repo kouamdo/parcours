@@ -94,7 +94,7 @@ export class NewFormDocumentComponent implements OnInit {
       this.titre="Document à Modifier";
       this.serviceDocument.getDocumentById(idDocument).subscribe(x =>
       {
-        this.document = x; console.log(this.document);
+        this.document = x;
         this.forme.setValue({
           titre: this.document.titre,
           description: this.document.description,

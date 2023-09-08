@@ -37,7 +37,6 @@ export class NewFamilleComponent implements OnInit {
 
   ngOnInit() {
     let idFamille = this.infosPath.snapshot.paramMap.get('idFamille');
-    console.log("idFamille :" + idFamille);
     if((idFamille != null) && idFamille!==''){
 
       this.btnLibelle="Envoyer";
@@ -46,7 +45,7 @@ export class NewFamilleComponent implements OnInit {
       //trouver un autre moyen d'initialiser avec des valeurs
       this.familleService.getFamilleById(idFamille).subscribe(x =>
         {
-          this.famille = x; console.log(this.famille);
+          this.famille = x;
           this.forme.setValue({
             libelle: this.famille.libelle,
             description: this.famille.description,

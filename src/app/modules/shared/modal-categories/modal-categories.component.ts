@@ -139,9 +139,6 @@ export class ModalCategoriesComponent implements OnInit {
    * @returns 
    */
   selectionnerCategorieCheck(categorieAttributInput:any,attribut : any, index : number, event: any){
-    console.log(this.dataSourceAttributTemp.data);
-    console.log(attribut);
-    console.log(index);
 
     this.validation = true
     if(this.formeCategorieAttribut.invalid) return;
@@ -185,7 +182,6 @@ export class ModalCategoriesComponent implements OnInit {
     } else if(event.target.checked == false) { //si pas de doublon, on sauvegarde l'information cochée
       this.tableauIndexSelectionner.delete(index);
     }
-    console.log("tableau temp index : " ,this.tableauIndexSelectionner);
  }
 
  /**
@@ -327,11 +323,6 @@ export class ModalCategoriesComponent implements OnInit {
     } else {
       this._liveAnnouncer.announce('Sorting cleared');
     }
-  }
-  
-
-  onSubmit(categorieAttributInput:any){
-
   }
 }
 

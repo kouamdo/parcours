@@ -47,7 +47,7 @@ export class NewAttributComponent implements OnInit {
       this.titre="service à Modifier";
       this.attributService.getAttributById(idAttribut).subscribe(x =>
         {
-          this.attribut = x; console.log(this.attribut);
+          this.attribut = x;
           this.attribut.id = idAttribut!,
           this.forme.setValue({
             titre: this.attribut.titre,
@@ -92,9 +92,6 @@ export class NewAttributComponent implements OnInit {
     this.attributService.ajouterAttribut(attributTemp).subscribe(
       object => {
         this.router.navigate(['/list-attributs']);
-      },
-      error =>{
-        console.log(error)
       }
     )
   }

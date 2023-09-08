@@ -52,13 +52,12 @@ export class NewTicketComponent implements OnInit {
     this.services$ = this.getAllServices();
 
     let idTicket = this.infosPath.snapshot.paramMap.get('idTicket');
-    console.log("idTicket :" + idTicket);
     if((idTicket != null) && idTicket!==''){
       this.btnLibelle="Modifier";
       this.titre="Ticket à Modifier";
       this.ticketsService.getTicketById(idTicket).subscribe(x =>
         {
-          this.ticket = x; console.log(this.ticket);
+          this.ticket = x;
           this.forme.setValue({
             idUnique: this.ticket.idUnique,
             date_heure: this.ticket.date_heure,

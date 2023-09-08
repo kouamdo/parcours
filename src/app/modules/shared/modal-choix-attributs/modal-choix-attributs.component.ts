@@ -101,7 +101,6 @@ export class ModalChoixAttributsComponent implements OnInit {
 
   ajoutSelectionAttribut(idAttribut: string) {
     this.serviceAttribut.getAttributById(idAttribut).subscribe((val) => {
-      console.log('IdAttribut :' + val.id);
       this.ELEMENTS_TABLE_ATTRIBUTS = this.dataSourceAttributResultat.data;
       // this.dataSourceAttributResultat.data = this.dataSourceAttributDocument.data
       this.ELEMENTS_TABLE_ATTRIBUTS.push(val);
