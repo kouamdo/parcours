@@ -58,7 +58,8 @@ export class NewPrecomvtComponent implements OnInit {
 
  //submitted=false;
  tabError : Map<String,String> = new Map();
-
+ passStep2:boolean=false;
+ passStep3:boolean=false;
  @ViewChild(FormGroupDirective)
 
   formDirective!: FormGroupDirective;
@@ -73,6 +74,7 @@ export class NewPrecomvtComponent implements OnInit {
   btnLibelle: string="Ajouter";
   constructor(private formBuilder:FormBuilder,private serviceFamille:FamillesService,private serviceDistributeur:DistributeursService,private ressourceService:RessourcesService ,private precoMvtService:PrecoMvtsService,private serviceRessource:RessourcesService,private router:Router, private infosPath:ActivatedRoute, private datePipe: DatePipe) {
     this.forme = this.formBuilder.group({
+      id: new FormControl(),
       libelle: new FormControl(),
       etat: new FormControl(),
       type: new FormControl(),
@@ -115,24 +117,8 @@ export class NewPrecomvtComponent implements OnInit {
         PrecoMvtCourant =>{
           //premier elt du tableau
           this.eltsPreco= []
-          
-          /*let premvtqte : IPrecoMvtQte={
-            ressource: undefined,
-            quantiteMax: 0,
-            quantiteMin: 0,
-            montantMax: 0,
-            montantMin: 0,
-            id:"",
-            distributeur: []
-          };*/
-          let precoMvtTemp : IPrecoMvt ={
-            id: PrecoMvtCourant.id,
-            libelle: PrecoMvtCourant.libelle,
-            etat: PrecoMvtCourant.etat,
-            type: PrecoMvtCourant.type,
-            precomvtqte:[]
-           };
-           let premvtqte : IPrecoMvtQte={
+
+          let premvtqte : IPrecoMvtQte={
             ressource: undefined,
             quantiteMax: 0,
             quantiteMin: 0,
@@ -141,6 +127,14 @@ export class NewPrecomvtComponent implements OnInit {
             id:"",
             distributeur: []
           };
+          let precoMvtTemp : IPrecoMvt ={
+            id: PrecoMvtCourant.id,
+            libelle: PrecoMvtCourant.libelle,
+            etat: PrecoMvtCourant.etat,
+            type: PrecoMvtCourant.type,
+            precomvtqte:[]
+           };
+
            precoMvtTemp.precomvtqte.push(premvtqte);
            this.eltsPreco.push(precoMvtTemp)
 
@@ -199,7 +193,8 @@ private getAllDistributeurs(){
   */
  enregistrerPreco(){
   let  precomvtTemp : IPrecoMvt={
-    id: uuidv4(),
+    //id: uuidv4(),
+    id:this.eltsPreco[0].id,
     libelle:this.eltsPreco[0].libelle,
     etat:this.eltsPreco[0].etat,
     type:this.eltsPreco[0].type,
@@ -243,13 +238,13 @@ this.precoMvtService.ajouterPrecomvt(precomvtTemp).subscribe(
     }
 
   }else{
-      if(this.steps == 2){
+      if(this.steps == 2 ){
         let valFamille : string[] = this.forme.controls["famille"].value;
-
         if((valFamille == null || valFamille.length == 0)){
           controleVerif = false;
           this.tabError.set("famille","Une famille au moins doit être selectionnée");
         }
+
       }
       else if(this.steps == 3){
           let valRessource : string = this.forme.controls["ressource"].value;
@@ -260,7 +255,7 @@ this.precoMvtService.ajouterPrecomvt(precomvtTemp).subscribe(
           }
       }
     //controle commun ie montantMin et MontantMax
-      if(this.steps == 2 || this.steps == 3){
+      if(this.steps == 2 || this.steps == 3 ){
       let valMontantMin : number = this.forme.controls["montantMin"].value;
 
       if(valMontantMin== null || valMontantMin < 0){
@@ -313,6 +308,39 @@ this.eltsPreco.forEach((value, index) =>{
 }
 //Suppression d'un element dans le boitier fin
 
+//aller vers le boitier debut
+versBoitier(valeurs:any){
+  let versBoitier = true;
+if(this.steps == 1){
+  let valLibelle : string = this.forme.controls["libelle"].value;
+  let valLibel = valLibelle
+  if(valLibelle!=null && valLibelle.length>0)
+     valLibel = valLibelle.trimStart().trimEnd();
+  if((valLibel==null || valLibel == '' || valLibel.length < 2)){
+    versBoitier = false;
+    this.tabError.set("libtypeo","Cette interface est obligatoire");
+  }
+  let valType : string = this.forme.controls["type"].value;
+  //let valType = valType.trimStart().trimEnd();
+  if((valType == null || valType == '')){
+    versBoitier = false;
+    this.tabError.set("libtypeo", "Cette interface est obligatoire");
+  }
+ else
+
+ if (this.steps == 2){
+  let valFamille : string[] = this.forme.controls["famille"].value;
+}
+ if ( !this.tabError.get('famille')  &&  !this.tabError.get('montantMin') &&  !this.tabError.get('montantMax')  &&  !this.tabError.get('quantiteMin')  &&  !this.tabError.get('quantiteMax') ) {
+          this.passStep2 = true
+        }
+}
+  if(versBoitier){
+    this.enregistrerValeurPrecomvtqte(valeurs);
+  }
+}
+
+//aller vers le boitier fin
 displayFn(ressource: IRessource): string {
  return ressource && ressource.libelle ? ressource.libelle : '';
   }
@@ -379,26 +407,26 @@ reset():void{
       this.forme.controls["etat"].setValue(precoTmp.etat);
       this.forme.controls["type"].setValue(precoTmp.type);
       //ajouter un unique champ caché id pour conserver l'id en cas modification
-      //this.forme.controls["id"].setValue(precoTmp.id);
+      this.forme.controls["id"].setValue(precoTmp.id);
     }
     //si ressource absente de précoMvtQt alors par élimitation c'est une famille
     else if(precoTmp.precomvtqte[0].ressource!= undefined && precoTmp.precomvtqte[0].ressource!=null){
       this.steps = 3;
       this.forme.controls["ressource"].setValue(precoTmp.precomvtqte[0].ressource);
-      //this.forme.controls["id"].setValue(precoTmp.precomvtqte[0].id);
+      this.forme.controls["id"].setValue(precoTmp.precomvtqte[0].id);
       this.forme.controls["montantMax"].setValue(precoTmp.precomvtqte[0].montantMax);
       this.forme.controls["montantMin"].setValue(precoTmp.precomvtqte[0].montantMin);
       this.forme.controls["quantiteMax"].setValue(precoTmp.precomvtqte[0].quantiteMax);
       this.forme.controls["quantiteMin"].setValue(precoTmp.precomvtqte[0].quantiteMin);
       //TODO bug de l'affichage au premier clic. C'est le second qui affiche la bonne valeur
-      //this.forme.controls["fournisseur"].setValue(precoTmp.precomvtqte[0].fournisseur);
+      ///this.forme.controls["fournisseur"].setValue(precoTmp.precomvtqte[0].fournisseur);
       this.forme.controls["distributeur"].setValue(precoTmp.precomvtqte[0].distributeur);
     }
     else if(precoTmp.precomvtqte[0].famille!= undefined && precoTmp.precomvtqte[0].famille!=null && precoTmp.precomvtqte[0].famille.length>0){
       this.steps = 2;
       this.forme.controls["famille"].setValue(precoTmp.precomvtqte[0].famille);
       //this.famille.setValue(precoTmp.precomvtqte[0].famille);
-      //this.forme.controls["id"].setValue(precoTmp.precomvtqte[0].id);
+      this.forme.controls["id"].setValue(precoTmp.precomvtqte[0].id);
       this.forme.controls["montantMax"].setValue(precoTmp.precomvtqte[0].montantMax);
       this.forme.controls["montantMin"].setValue(precoTmp.precomvtqte[0].montantMin);
       this.forme.controls["quantiteMax"].setValue(precoTmp.precomvtqte[0].quantiteMax);
@@ -422,7 +450,8 @@ reset():void{
       quantiteMin: precomvtInput.quantiteMin,
       montantMax: precomvtInput.montantMax,
       montantMin: precomvtInput.montantMin,
-      id:"",
+      //id:"",
+      id: precomvtInput.id,
       //fournisseur: precomvtInput.fournisseur,
       distributeur: precomvtInput.distributeur
     }
@@ -432,8 +461,8 @@ reset():void{
       libel += element.libelle + ", "
     }
     let precomvtTemp : IPrecoMvt={
-      //id: uuidv4(),
-      id:'',
+      id: uuidv4(),
+      //id:"",
       libelle: libel,
       etat: false,
       type: precomvtInput.TypeMvt,
@@ -456,13 +485,15 @@ reset():void{
       quantiteMin: precomvtInput.quantiteMin,
       montantMax: precomvtInput.montantMax,
       montantMin: precomvtInput.montantMin,
-      id:"",
+      //id:"",
+      id: precomvtInput.id,
       //fournisseur: precomvtInput.fournisseur,
       distributeur: precomvtInput.distributeur
     };
     let precomvtTemp : IPrecoMvt={
       //id: uuidv4(),
-      id:' ',
+      //id:' ',
+      id: precomvtInput.id,
       libelle: "Ressource : " + precomvtInput.ressource.libelle,
       etat: false,
       type: precomvtInput.TypeMvt,
@@ -485,14 +516,16 @@ reset():void{
       quantiteMin: 0,
       montantMax: 0,
       montantMin: 0,
-      id:"",
+      //id:"",
+      id: precomvtInput.id,
      // fournisseur: "DCD",
       distributeur: precomvtInput.distributeur
     };
     let precomvtTemp : IPrecoMvt={
       //id: uuidv4(),
-      id:'',
-      libelle:precomvtInput.libelle,
+      //id:"",
+      id: precomvtInput.id,
+      libelle: "Libelle : " + precomvtInput.libelle,
       etat: precomvtInput.etat,
       type: precomvtInput.type,
       precomvtqte:[]

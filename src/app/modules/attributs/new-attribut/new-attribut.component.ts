@@ -36,7 +36,12 @@ export class NewAttributComponent implements OnInit {
       etat: ['False', [Validators.required, Validators.minLength(1), Validators.maxLength(50)]],
       dateCreation: ['', [Validators.required]],
       dateModification: ['//'],
-      unite: ['']
+      //unite: [''],
+      //rajout
+      type: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
+      ordre: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
+      obligatoire:[''],
+      valeursParDefaut:['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
     })
   }
 
@@ -55,7 +60,10 @@ export class NewAttributComponent implements OnInit {
             etat: this.attribut.etat,
             dateCreation: this.datePipe.transform(this.attribut.dateCreation,'yyyy-MM-dd'),
             dateModification: this.datePipe.transform(this.attribut.dateModification,'yyyy-MM-dd'),
-            type: this.attribut.type
+            type: this.attribut.type,
+            ordre: this.attribut.ordre,
+            obligatoire: this.attribut.obligatoire,
+            valeursParDefaut:this.attribut.valeursParDefaut
           })
       });
     }

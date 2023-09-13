@@ -23,14 +23,14 @@ export class AttributService {
         })
     );
   }
-  
+
   getAttributsByTitre(titre:string): Observable<IAttributs[]> {
    return this.http.get<IAttributs[]>('api/attributs').pipe(
      map(x=>
        {
          return x.filter(a=> a.titre.toLowerCase().startsWith(titre))
        })
-   );        
+   );
  }
 
   ajouterAttribut(attribut:IAttributs)

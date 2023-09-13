@@ -28,13 +28,6 @@
       <div class="card-body p-0" id="tableBlock">
           <div class='table-responsive w-100'>
               <table class='table table-sm table-centered table-striped table-bordered w-100' mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)">
-
-                  <!-- id Column -->
-                  <ng-container matColumnDef="id" >
-                      <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header >id</th>
-                      <td class="text-dark text-center containCell" mat-cell *matCellDef="let element" style="visibility:hidden" > {{element.id}} </td>
-                  </ng-container>
-
                   <!-- libellé Column -->
                   <ng-container matColumnDef="libelle">
                       <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header>libelle</th>

@@ -8,7 +8,7 @@
 
           <div class="w-100 mt-4 pt-0 pl-2 pr-2 pb-0" >
             <div class="w-100">
-              <div  *ngIf="steps==1" class="w-100">
+              <div  *ngIf="steps==1" class="w-100" (ngModelChange)="tabError.delete('libtypeo')">
                 <div class="form-group">
                   <div>
                     <div class="champs">
@@ -17,10 +17,11 @@
                       </label>
                       <div class="w-100">
                         <input type="text" formControlName="libelle" name="libelle" id="libelle"  placeholder="libelle"  class="form-control"
-                        (ngModelChange)="tabError.delete('libelle')">
+                        (ngModelChange)="tabError.delete('libelle')" >
                         <p  *ngIf="tabError.get('libelle')"  class="error" >
                           <span *ngIf="tabError.get('libelle')">{{ tabError.get('libelle') }}</span>
                         </p>
+
                       </div>
                     </div>
                   </div>
@@ -33,7 +34,6 @@
                           Etat
                         </label>
                         <input  type="checkbox" formControlName="etat" name="etat" class="form-control" id="etat" placeholder="" required checked>
-
                       </div>
                   </div>
                 </div>
@@ -44,7 +44,7 @@
                       Type
                     </label>
                     <div class="errorPls w-100">
-                      <select class="form-control" formControlName="type" (ngModelChange)="tabError.delete('type')">
+                      <select class="form-control" formControlName="type" (ngModelChange)="tabError.delete('type')" (ngModelChange)="tabError.delete('typeo')">
                         <option class="label" *ngFor="let typeM of typeMvt" value="{{ typeM }}" >
                           {{ typeM }}
                         </option>
@@ -52,9 +52,13 @@
                       <p  *ngIf="tabError.get('type')"  class="error" >
                         <span *ngIf="tabError.get('type')">{{ tabError.get('type') }}</span>
                       </p>
+
                     </div>
                 </div>
               </div>
+              <p  *ngIf="tabError.get('libtypeo')"  class="error" >
+                <span *ngIf="tabError.get('libtypeo')">{{ tabError.get('libtypeo') }}</span>
+              </p>
             </div>
             </div>
           </div>
@@ -65,12 +69,8 @@
               Famille
             </label>
             <div class="w-100">
-
               <mat-form-field  style="background-color:#28a745;" class="example-full-width" appearance="fill" >
-
                 <mat-select formControlName="famille"  #familles multiple [compareWith]="compareItem" (ngModelChange)="tabError.delete('famille')">
-                  <mat-select-trigger>{{familles.value ? familles.value[0]: ''}}</mat-select-trigger>
-                  <span *ngIf="(familles.value?.length || 0 ) > 1" class="additional-selection">(+{{(familles.value.length || 0) -1}} {{familles.value?.length ===2? 'other' : 'others'}})</span>
                   <mat-option *ngFor="let membre of familles$ |async" [value]="membre" >{{membre.libelle}}</mat-option>
                 </mat-select>
               </mat-form-field>
@@ -133,7 +133,6 @@
                   <p *ngIf="tabError.get('quantiteMin')"  class="error" >
                     <span *ngIf="tabError.get('quantiteMin')">{{ tabError.get('quantiteMin') }}</span> </p>
                     <span  *ngIf="tabError.get('quantiteMinMax')"  class="error" >
-
                      <span *ngIf="tabError.get('quantiteMinMax')">{{ tabError.get('quantiteMinMax') }}</span>
                     </span>
 
@@ -197,7 +196,7 @@
           <button type="button" class="btn" routerLink="../list-precomvts">Annuler</button>
           <button type="button" class="btn" (click)="validerControleStep(2,forme.value); ">Famille</button>
           <button type="button" class="btn" (click)="validerControleStep(3,forme.value); ">Ressource</button>
-
+          <button type="button" class="btn"  (click)="versBoitier(forme.value);"><i class="fa fa-arrow-right mr-1" aria-hidden="true"></i></button>
 
         </div>
       </form>

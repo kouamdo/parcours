@@ -28,43 +28,36 @@
         <div class="card-body p-0" id="tableBlock">
             <div class='table-responsive w-100'>
                 <table class='table table-sm table-centered table-striped table-bordered w-100' mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)">
-                 
-                    <!-- id Column -->
-                    <ng-container matColumnDef="id">
-                        <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'tickets.table.title1' | translate}} </th>
-                        <td class="text-dark text-center containCell" mat-cell *matCellDef="let element"> {{element.id}} </td>
-                    </ng-container>
-                 
                     <!-- titre Column -->
                     <ng-container matColumnDef="titre">
                         <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'attributs.table.title1' | translate}} </th>
                         <td class="text-dark text-center containCell" mat-cell *matCellDef="let element"> {{element.titre}} </td>
                     </ng-container>
-                    
+
                     <!-- description Column -->
                     <ng-container matColumnDef="description">
                         <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'attributs.table.title2' | translate}} </th>
                         <td class="text-dark text-center containCell" mat-cell *matCellDef="let element"> {{element.description}} </td>
                     </ng-container>
-                    
+
                     <!-- etat Column -->
                     <ng-container matColumnDef="etat">
                         <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'attributs.table.title3' | translate}} </th>
                         <td class="text-dark text-center containCell" mat-cell *matCellDef="let element"> {{element.etat}} </td>
                     </ng-container>
-                    
+
                     <!-- ordre Column -->
                     <ng-container matColumnDef="ordre">
                         <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'attributs.table.title7' | translate}} </th>
                         <td class="text-dark text-center containCell" mat-cell *matCellDef="let element"> {{element.ordre}} </td>
                     </ng-container>
-                    
+
                     <!-- obligatoire Column -->
                     <ng-container matColumnDef="obligatoire">
                         <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'attributs.table.title8' | translate}} </th>
                         <td class="text-dark text-center containCell" mat-cell *matCellDef="let element"> {{element.obligatoire}} </td>
                     </ng-container>
-                    
+
                     <!-- valeursParDefaut Column -->
                     <ng-container matColumnDef="valeursParDefaut">
                         <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'attributs.table.title9' | translate}} </th>

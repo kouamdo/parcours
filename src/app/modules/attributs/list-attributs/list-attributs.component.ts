@@ -24,7 +24,7 @@ export class ListAttributsComponent implements OnInit {
   ELEMENTS_TABLE: IAttributs[] = [];
   filteredOptions: IAttributs[] | undefined;
 
-  displayedColumns: string[] = ['id', 'titre', 'description', 'etat', 'dateCreation', 'dateModification', 'type', 'actions'];
+  displayedColumns: string[] = ['titre', 'description', 'etat','type','ordre','obligatoire','valeursParDefaut','actions'];
 
   dataSource = new MatTableDataSource<IAttributs>(this.ELEMENTS_TABLE);
 

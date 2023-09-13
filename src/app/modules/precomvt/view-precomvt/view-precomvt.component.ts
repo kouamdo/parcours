@@ -1,5 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { MatTableDataSource } from '@angular/material/table';
 import { Router, ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs/internal/Observable';
+import { EMPTY } from 'rxjs/internal/observable/empty';
+import { IDistributeur } from 'src/app/modele/distributeur';
+import { IFamille } from 'src/app/modele/famille';
 import { IPrecoMvt } from 'src/app/modele/precomvt';
 import { IPrecoMvtQte } from 'src/app/modele/precomvtqte';
 import { TypeMvt } from 'src/app/modele/type-mvt';
@@ -12,19 +18,19 @@ import { PrecoMvtsService } from 'src/app/services/precomvts/precomvts.service';
 })
 export class ViewPrecomvtComponent implements OnInit {
 
-  PrecoMvt:IPrecoMvt={
+  precoMvt:IPrecoMvt={
     id: '',
     libelle:'',
-   // type: '',
      type: TypeMvt.Ajout,
     etat:false,
     precomvtqte: [],
-
   }
 
   eltsPreco : IPrecoMvt[] = [];
   precomvtqte:IPrecoMvtQte[] = [];
- // idPrecoMvt: string = '';
+ //element qui stocke les données contenant ressource et famille
+  eltRessource:IPrecoMvtQte[]=[];
+  eltFamille:IPrecoMvtQte[]=[];
 
   constructor(private router:Router, private infosPath:ActivatedRoute, private precoMvtService:PrecoMvtsService) {}
 
@@ -34,33 +40,15 @@ export class ViewPrecomvtComponent implements OnInit {
     if((idPrecoMvt != null) && idPrecoMvt!==''){
       this.precoMvtService.getPrecomvtById(idPrecoMvt).subscribe(
         x =>{
-          this.PrecoMvt = x; console.log("Voici le precomvt", this.PrecoMvt);
-          
-          x.precomvtqte.forEach(
+          this.precoMvt = x; console.log("Voici le precomvt", this.precoMvt);
+          this.precoMvt.precomvtqte.forEach(
             element => {
-                   let precoMvtTemp : IPrecoMvt ={
-                     id: "",
-                     libelle: "",
-                     etat: true,
-                       type: TypeMvt.Ajout,
-                     precomvtqte:[]
-                    };
-                    precoMvtTemp.precomvtqte.push(element)
                    if (element.ressource != undefined && element.ressource != null ){
-                     let rsrce  = " Ressource :  ";
-                       const ressource = element.ressource!.libelle;
-                       rsrce = rsrce + ressource
 
-                     precoMvtTemp.libelle = rsrce
-                     this.eltsPreco.push(precoMvtTemp)
+                     this.eltRessource.push(element)
                    }
                   else if (element.famille != null && element.famille.length>0 ){
-                     let libel = "Familles : ";
-                     for (let index = 0; index < element.famille!.length; index++) {
-                       libel += element.famille![index].libelle;
-                     }
-                     precoMvtTemp.libelle = libel
-                     this.eltsPreco.push(precoMvtTemp)
+                     this.eltFamille.push(element)
                  }
                }
               );
@@ -68,11 +56,33 @@ export class ViewPrecomvtComponent implements OnInit {
       }
 
 }
-
-  supprimerElt(element:IPrecoMvtQte){
-    this.PrecoMvt.precomvtqte.forEach((value, index) =>{
-      if(value == element)
-      this.PrecoMvt.precomvtqte.splice(index,1)
+/**
+ *
+ * @param familles
+ * @returns
+ * fonction qui permet de concaténer le libelle de famille pour pouvoir l'afficher
+ */
+libelleCat(familles:IFamille[]):string{
+    let listLibelleFamille:string=''
+    familles.forEach(
+      element => {
+        listLibelleFamille += element.libelle
     });
-  }
+    return listLibelleFamille
+}
+/**
+ *
+ * @param distributeurs
+ * @returns
+ * fonction qui permet de concaténer le libelle de distributeur pour pouvoir l'afficher
+ */
+distCat(distributeurs:IDistributeur[]):string{
+  let listLibelleDistributeur:string=''
+  if (distributeurs!= undefined)
+  distributeurs.forEach(
+    element => {
+      listLibelleDistributeur += element.raisonSocial
+  });
+  return listLibelleDistributeur
+}
 }
