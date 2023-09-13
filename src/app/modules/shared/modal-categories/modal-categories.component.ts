@@ -89,7 +89,7 @@ export class ModalCategoriesComponent implements OnInit {
       this.TABLE_CATEGORIE_AFFICHAGE_TEMP = this.donneeDocCatService.dataDocumentCategorie
       this.TABLE_CATEGORIE_AFFICHAGE_TEMP.forEach(
         categorieAffiche => {
-          if (categorieAffiche.ordre != -1) {
+          if (categorieAffiche.ordre != 100) {
             this.tableResultatsCategoriesAffichage.data.push(categorieAffiche)
           }
       });
@@ -316,12 +316,14 @@ export class ModalCategoriesComponent implements OnInit {
       element => {
        let categorieAttributs : ICategorieAffichage = {
           id: '',
-          nom: "categorie par defaut",
-          ordre: -1,
+          nom: "Autres",
+          ordre: 100,
           attribut: element
         }
         this.TABLE_CATEGORIE_AFFICHAGE_TEMP.push(categorieAttributs)
-        this.tableResultatsCategoriesAffichage.data = this.TABLE_CATEGORIE_AFFICHAGE_TEMP;
+        
+        // ajout d'une categorie par defaut à la fermeture de la modale
+        this.donneeDocCatService.dataDocumentCategorie = this.TABLE_CATEGORIE_AFFICHAGE_TEMP;
     });
   }
 

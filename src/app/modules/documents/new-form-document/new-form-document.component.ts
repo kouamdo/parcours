@@ -275,10 +275,24 @@ export class NewFormDocumentComponent implements OnInit {
     this.ELEMENTS_TABLE_PRECONISATIONS.forEach(
       preco => documentTemp.preconisations.push(preco)
     )
-
-    this.TABLE_CATEGORIE_AFFICHAGE_TEMP.forEach(
-      cat => documentTemp.categories.push(cat)
-    )
+    if (this.TABLE_CATEGORIE_AFFICHAGE_TEMP.length<1) {
+      let categorieAttributs : ICategoriesAttributs = {
+        id: '',
+        nom: "Autres",
+        ordre: 100,
+        listAttributs: []
+      }
+      this.ELEMENTS_TABLE_ATTRIBUTS.forEach(
+        element => {
+          categorieAttributs.listAttributs.push(element)
+      });
+      // ajout d'une categorie par defaut dans le document
+      documentTemp.categories.push(categorieAttributs)
+    }else{
+      this.TABLE_CATEGORIE_AFFICHAGE_TEMP.forEach(
+        cat => documentTemp.categories.push(cat)
+      )
+    }
 
     this.serviceDocument.ajouterDocument(documentTemp).subscribe(
       object => {
