@@ -40,6 +40,8 @@
     },
     "lists":{
         "title":"listing",
+        "text1": "Field Required",
+        "text2": "Field not Required",
         "button1":"Print",
         "button2":"Close",
         "button3":"Cancel",

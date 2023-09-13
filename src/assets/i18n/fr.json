@@ -38,6 +38,8 @@
   },
   "lists": {
     "title": "listing des",
+    "text1": "Champs obligatoires",
+    "text2": "Champs non obligatoires",
     "button1": "Imprimer",
     "button2": "Retour",
     "button3": "Annuler",
