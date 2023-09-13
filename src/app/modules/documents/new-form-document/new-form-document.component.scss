@@ -72,6 +72,17 @@
         background-color: #1473e6;
     }
 }
+.note, sup{
+    color: red;
+}
+sup{
+    font-style: italic;
+}
+.note{
+    font-size: 10px;
+    padding-top: 8px;
+    opacity: 0.7;
+}
 .tableBlock{
     width: 100%;
     div{

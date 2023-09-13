@@ -253,7 +253,7 @@ export class NewFormDocumentComponent implements OnInit {
   }
   onSubmit(documentInput:any){
     this.submitted=true;
-    if(this.forme.invalid) return;
+    if(this.forme.invalid || documentInput._missions.length<1 || this.ELEMENTS_TABLE_ATTRIBUTS.length<1) return;
     let documentTemp : IDocument={
       id: uuidv4(),
       titre: documentInput.titre,

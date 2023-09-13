@@ -87,7 +87,13 @@ export class ModalCategoriesComponent implements OnInit {
     
   ngOnInit(): void {
       this.TABLE_CATEGORIE_AFFICHAGE_TEMP = this.donneeDocCatService.dataDocumentCategorie
-      this.tableResultatsCategoriesAffichage.data = this.TABLE_CATEGORIE_AFFICHAGE_TEMP;
+      this.TABLE_CATEGORIE_AFFICHAGE_TEMP.forEach(
+        categorieAffiche => {
+          if (categorieAffiche.ordre != -1) {
+            this.tableResultatsCategoriesAffichage.data.push(categorieAffiche)
+          }
+      });
+      // this.tableResultatsCategoriesAffichage.data = this.TABLE_CATEGORIE_AFFICHAGE_TEMP;
       if (this.donneeDocCatService.dataDocumentCategorie != null && this.donneeDocCatService.dataDocumentCategorie.length >0) {
       //Création du premier tableau si le deuxième n'est pas vide
       let listAtt : String[] = [];
@@ -303,6 +309,20 @@ export class ModalCategoriesComponent implements OnInit {
   
   retirerSelectionCategorieAttribut(index: number){
     this.TABLE_CATEGORIE_AFFICHAGE_TEMP.splice(index, 1)
+  }
+
+  ajouterCategorieParDefaut(){
+    this.dataSourceAttributTemp.data.forEach(
+      element => {
+       let categorieAttributs : ICategorieAffichage = {
+          id: '',
+          nom: "categorie par defaut",
+          ordre: -1,
+          attribut: element
+        }
+        this.TABLE_CATEGORIE_AFFICHAGE_TEMP.push(categorieAttributs)
+        this.tableResultatsCategoriesAffichage.data = this.TABLE_CATEGORIE_AFFICHAGE_TEMP;
+    });
   }
 
   get f(){

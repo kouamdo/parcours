@@ -141,7 +141,7 @@
             </div>
         </div>
         <div class="actionButton">
-            <button mat-button [mat-dialog-close]="tableResultatsCategoriesAffichage.data" cdkFocusInitial class="btn btnValidation">{{'lists.button6' | translate}}</button>
+            <button mat-button [mat-dialog-close]="tableResultatsCategoriesAffichage.data" cdkFocusInitial class="btn btnValidation" (click)="ajouterCategorieParDefaut()">{{'lists.button6' | translate}}</button>
         </div>       
     </div>
 </div>
