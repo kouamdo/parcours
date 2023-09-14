@@ -86,11 +86,15 @@ export class ModalCategoriesComponent implements OnInit {
     }
     
   ngOnInit(): void {
-    console.log(this.donneeDocCatService.dataDocumentCategorie)
-
       this.TABLE_CATEGORIE_AFFICHAGE_TEMP = this.donneeDocCatService.dataDocumentCategorie
-      this.tableResultatsCategoriesAffichage.data = this.TABLE_CATEGORIE_AFFICHAGE_TEMP;
-    if (this.donneeDocCatService.dataDocumentCategorie != null && this.donneeDocCatService.dataDocumentCategorie.length >0) {
+      this.TABLE_CATEGORIE_AFFICHAGE_TEMP.forEach(
+        categorieAffiche => {
+          if (categorieAffiche.ordre != 100) {
+            this.tableResultatsCategoriesAffichage.data.push(categorieAffiche)
+          }
+      });
+      // this.tableResultatsCategoriesAffichage.data = this.TABLE_CATEGORIE_AFFICHAGE_TEMP;
+      if (this.donneeDocCatService.dataDocumentCategorie != null && this.donneeDocCatService.dataDocumentCategorie.length >0) {
       //Création du premier tableau si le deuxième n'est pas vide
       let listAtt : String[] = [];
       let listCatAtt :ICategorieAffichage[] = this.tableResultatsCategoriesAffichage.data;
@@ -98,9 +102,9 @@ export class ModalCategoriesComponent implements OnInit {
       listCatAtt.forEach(valeur=>{
         listAtt.push(valeur.attribut.id);
       });
-      //comparaison avec les ids du tableau initial pour exclure ce présent dans le second
+      //comparaison avec les ids du tableau initial pour exclure ceux présents dans le second
       this.tableauAttributsTemp = [];
-      let tmpTab =  this.data.dataSourceAttributDocument.data;
+      let tmpTab =  this.donneeDocCatService.dataDocumentAttributs;
       tmpTab.forEach(
         (att : IAttributs) =>{
           if(!listAtt.includes(att.id)){
@@ -126,7 +130,7 @@ export class ModalCategoriesComponent implements OnInit {
       this.donneeDocCatService.dataDocumentCategorie =  TABLE_CATEGORIE_AFFICHAGE_TEMP;
     }else{
       //Création du premier tableau si le deuxième est vide
-      this.tableauAttributsTemp = this.data.dataSourceAttributDocument.data
+      this.tableauAttributsTemp = this.donneeDocCatService.dataDocumentAttributs
     }
     this.dataSourceAttributTemp.data = this.tableauAttributsTemp;
   }
@@ -141,9 +145,6 @@ export class ModalCategoriesComponent implements OnInit {
    * @returns 
    */
   selectionnerCategorieCheck(categorieAttributInput:any,attribut : any, index : number, event: any){
-    console.log(this.dataSourceAttributTemp.data);
-    console.log(attribut);
-    console.log(index);
 
     this.validation = true
     if(this.formeCategorieAttribut.invalid) return;
@@ -187,7 +188,6 @@ export class ModalCategoriesComponent implements OnInit {
     } else if(event.target.checked == false) { //si pas de doublon, on sauvegarde l'information cochée
       this.tableauIndexSelectionner.delete(index);
     }
-    console.log("tableau temp index : " ,this.tableauIndexSelectionner);
  }
 
  /**
@@ -311,6 +311,22 @@ export class ModalCategoriesComponent implements OnInit {
     this.TABLE_CATEGORIE_AFFICHAGE_TEMP.splice(index, 1)
   }
 
+  ajouterCategorieParDefaut(){
+    this.dataSourceAttributTemp.data.forEach(
+      element => {
+       let categorieAttributs : ICategorieAffichage = {
+          id: '',
+          nom: "Autres",
+          ordre: 100,
+          attribut: element
+        }
+        this.TABLE_CATEGORIE_AFFICHAGE_TEMP.push(categorieAttributs)
+        
+        // ajout d'une categorie par defaut à la fermeture de la modale
+        this.donneeDocCatService.dataDocumentCategorie = this.TABLE_CATEGORIE_AFFICHAGE_TEMP;
+    });
+  }
+
   get f(){
     return this.formeCategorieAttribut.controls;
   }
@@ -329,11 +345,6 @@ export class ModalCategoriesComponent implements OnInit {
     } else {
       this._liveAnnouncer.announce('Sorting cleared');
     }
-  }
-  
-
-  onSubmit(categorieAttributInput:any){
-
   }
 }
 

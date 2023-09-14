@@ -1,5 +1,5 @@
 <div id="mainSection" class="bg-light card modalCategorie">
-    <form [formGroup]="formeCategorieAttribut" (ngSubmit)="onSubmit(formeCategorieAttribut.value)" *ngIf="formeCategorieAttribut" class="w-100">
+    <form [formGroup]="formeCategorieAttribut" *ngIf="formeCategorieAttribut" class="w-100">
 
         <div class="form-group mt-5">
             <div class="newCatSection">
@@ -141,8 +141,7 @@
             </div>
         </div>
         <div class="actionButton">
-            <!-- <button class="btn" routerLink="../../list-documents">{{btnLibelle}}</button> -->
-            <button type="submit" class="btn btnValidation">{{'lists.button6' | translate}}</button>
+            <button mat-button [mat-dialog-close]="tableResultatsCategoriesAffichage.data" cdkFocusInitial class="btn btnValidation" (click)="ajouterCategorieParDefaut()">{{'lists.button6' | translate}}</button>
         </div>       
     </div>
 </div>

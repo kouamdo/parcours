@@ -20,6 +20,9 @@ import {v4 as uuidv4} from 'uuid';
 import { ICategorieAffichage } from 'src/app/modele/categorie-affichage';
 import { TypeTicket } from 'src/app/modele/type-ticket';
 import { DonneesEchangeService } from 'src/app/services/donnees-echange/donnees-echange.service';
+import { ModalChoixAttributsComponent } from '../../shared/modal-choix-attributs/modal-choix-attributs.component';
+import { ModalChoixPreconisationsComponent } from '../../shared/modal-choix-preconisations/modal-choix-preconisations.component';
+import { IPrecoMvt } from 'src/app/modele/precomvt';
 
 
 @Component({
@@ -35,7 +38,8 @@ export class NewFormDocumentComponent implements OnInit {
     description: '',
     missions: [],
     attributs: [],
-    categories: []
+    categories: [],
+    preconisations: []
   };
   mission$:Observable<IMission[]>=EMPTY;
   forme: FormGroup;
@@ -43,37 +47,28 @@ export class NewFormDocumentComponent implements OnInit {
   titre: string="Ajouter un nouveau document";
   submitted: boolean=false;
   validation: boolean=false;
-  //idMission : string = "";
-  idAttribut : string = "";
   serviceDeMission!: IService;
 
   // variables attributs, pour afficher le tableau d'attributs sur l'IHM
-  myControl = new FormControl<string | IAttributs>('');
   ELEMENTS_TABLE_ATTRIBUTS: IAttributs[] = [];
-  filteredOptions: IAttributs[] | undefined;
-  displayedAttributsColumns: string[] = ['actions','titre', 'description', 'type'];  // structure du tableau presentant les attributs
-  displayedCategoriesAttributsColumns: string[] = ['actions','titre', 'description', 'type', 'ordreAtrParCat', 'ordreCat']; // structure du tableau presentant les categories creees avec leurs attributs
-  displayedCategoriesColumns: string[] = ['actions','titre', 'description', 'type', 'ordreAtrParCat'];  // structure du tableau presentant les choix des attributs lors de la creation des categories
   dataSourceAttribut = new MatTableDataSource<IAttributs>(this.ELEMENTS_TABLE_ATTRIBUTS);
   dataSourceAttributResultat = new MatTableDataSource<IAttributs>();
-  _attributs :  FormArray | undefined;
 
    ELEMENTS_TABLE_CATEGORIES: IAttributs[] = []; //tableau de listing des attributs a affecter a chaque categorie
 
   // variables pour la gestion des categories
-  dataSourceAttributDocument = new MatTableDataSource<IAttributs>(this.ELEMENTS_TABLE_CATEGORIES);
   categorieAttributs : ICategoriesAttributs = {
     id: '',
     nom: '',
     ordre: 0,
     listAttributs: []
   }
-  TABLE_CATEGORIE_AFFICHAGE_TEMP: ICategorieAffichage[] = []; 
- // ELEMENTS_TABLE_CATEGORIE_ATTRIBUTS: ICategoriesAttributs[] = []; 
-  TABLE_CATEGORIE_AFFICHAGE_TEMPO: ICategorieAffichage[] = []; 
+  TABLE_CATEGORIE_AFFICHAGE_TEMP: ICategoriesAttributs[] = []; // tableau qui doit contenir la synthese des categories du doc
+  TABLE_CATEGORIE_AFFICHAGE_TEMPO: ICategorieAffichage[] = []; // tableau contenant les categories creees dans la modale
 
-  // tableau contenant les categories creees
-  tableFinaleCategoriesAttributs: ICategoriesAttributs[] = []; 
+  //tableau contenent les preconisations
+  ELEMENTS_TABLE_PRECONISATIONS: IPrecoMvt[] = [];
+
   
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
@@ -91,9 +86,6 @@ export class NewFormDocumentComponent implements OnInit {
   }
   ngOnInit(): void {
     this.mission$ = this.getAllMissions();
-    this.getAllAttributs().subscribe(valeurs => {
-      this.dataSourceAttribut.data = valeurs;
-    });
 
     // chargement de la page a partir d'un Id pour la modification d'un document
     let idDocument = this.infosPath.snapshot.paramMap.get('idDocument');
@@ -102,24 +94,21 @@ export class NewFormDocumentComponent implements OnInit {
       this.titre="Document à Modifier";
       this.serviceDocument.getDocumentById(idDocument).subscribe(x =>
       {
-        this.document = x; console.log(this.document);
+        this.document = x;
         this.forme.setValue({
           titre: this.document.titre,
           description: this.document.description,
           _missions: this.document.missions,
           _attributs: []
-          // missions: this.document.missions,
-          // attributs: this.document.attributs
           })
           this.forme.controls["_missions"].setValue(this.document.missions);
 
         // Initialisation du tableau d'attributs du document
-        this.document?.attributs.forEach(
-          objet => {
-            this.ELEMENTS_TABLE_ATTRIBUTS.push(objet)
-            this.dataSourceAttributResultat.data = this.ELEMENTS_TABLE_ATTRIBUTS;
-          }
-        )
+        this.ELEMENTS_TABLE_ATTRIBUTS = this.document.attributs
+
+        // Initialisation du tableau de preconisations du document
+        this.ELEMENTS_TABLE_PRECONISATIONS = this.document.preconisations
+
         // Initialisation du tableau de categories temp du document qui reconstitue
         // le deuxieme tableau de la modal
         let categorieAfficheFinal : ICategorieAffichage[] = [];
@@ -155,91 +144,78 @@ export class NewFormDocumentComponent implements OnInit {
         )
         //sauvegarde dans le service pour le communiquer à la modale
         this.donneeDocCatService.dataDocumentCategorie = categorieAfficheFinal
-      });
+        this.donneeDocCatService.dataDocumentPrecoMvts = this.document.preconisations
+        this.donneeDocCatService.dataDocumentAttributs = this.document.attributs
 
+        // synthese du tableau de categories du document pour afficher les differentes categories dans l'espace dedie
+        this.syntheseCategorieAttribut()
+      });
+    }else{
+      this.donneeDocCatService.dataDocumentAttributs = []
+      this.donneeDocCatService.dataDocumentCategorie = []
+      this.donneeDocCatService.dataDocumentPrecoMvts = []
     }
-    this.getAllAttributs()
-    this.myControl.valueChanges.subscribe(
-      value => {
-        const titre = typeof value === 'string' ? value : value?.titre;
-        if(titre != undefined && titre?.length >0){
-          this.serviceAttribut.getAttributsByTitre(titre.toLowerCase() as string).subscribe(
-            reponse => { 
-              this.filteredOptions = reponse;
-            }
-          )
-        }
-        else{
-          this.filteredOptions = [];
-        }
-      }
-    );
   }
 
   openCategorieDialog(){
     //envoi des données à la fenetre enfant
-   // this.donneeDocCatService.dataDocumentCategorie =  this.TABLE_CATEGORIE_AFFICHAGE_TEMP;
 
-    this.dialogDef.open(ModalCategoriesComponent, 
+    const dialogRef = this.dialogDef.open(ModalCategoriesComponent, 
     {
       width:'100%',
+      height:'100%',
+      enterAnimationDuration:'1000ms',
+      exitAnimationDuration:'1000ms',
+      data:{}
+    }
+    )
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.syntheseCategorieAttribut()
+    });
+  }
+
+  openAttributDialog(){
+    const dialogRef = this.dialogDef.open(ModalChoixAttributsComponent, 
+    {
+      width:'100%',
+      height:'100%',
       enterAnimationDuration:'1000ms',
       exitAnimationDuration:'1000ms',
       data:{
-        dataSourceAttributDocument : this.dataSourceAttributDocument,
-        name : 'adeline'
+        // tableauAttributsDocumentResultat : this.ELEMENTS_TABLE_ATTRIBUTS
       }
     }
     )
-  }
-  
-  onCheckAttributChange(event: any) {
-    const _attributs = (this.forme.controls['_attributs'] as FormArray);
-    if (event.target.checked) {
-      _attributs.push(new FormControl(event.target.value));
-      this.ajoutSelectionAttribut(this.idAttribut);
-    } else {
-      const index = _attributs.controls
-      .findIndex(x => x.value === event.target.value);
-      this.retirerSelectionAttribut(index)
-      _attributs.removeAt(index);
-    }
-    this._attributs = _attributs
-  }
 
-  getAttributId(idAttribut: string) {
-    this.idAttribut = idAttribut
+    dialogRef.afterClosed().subscribe(result => {
+      this.ELEMENTS_TABLE_ATTRIBUTS =  this.donneeDocCatService.dataDocumentAttributs
+    });
   }
+  openPrecoMvtDialog(){
 
-  ajoutSelectionAttribut(idAttribut: string) {
-    this.serviceAttribut.getAttributById(idAttribut).subscribe(
-      val => {
-        console.log('IdAttribut :' + val.id);
-        this.ELEMENTS_TABLE_ATTRIBUTS = this.dataSourceAttributResultat.data;
-        this.dataSourceAttributResultat.data = this.dataSourceAttributDocument.data
-        this.ELEMENTS_TABLE_ATTRIBUTS.push(val);
-        this.dataSourceAttributResultat.data = this.ELEMENTS_TABLE_ATTRIBUTS;
+    const dialogRef = this.dialogDef.open(ModalChoixPreconisationsComponent, 
+    {
+      width:'100%',
+      height:'100%',
+      enterAnimationDuration:'1000ms',
+      exitAnimationDuration:'1000ms',
+      data:{
+        // dataSourcePreco : this.dataSourcePreco
       }
-    )    
-  }
+    }
+    )
 
-  retirerSelectionAttribut(index: number) {
-    const _attributs = (this.forme.controls['_attributs'] as FormArray);
-    this.ELEMENTS_TABLE_ATTRIBUTS = this.dataSourceAttributResultat.data;
-    this.ELEMENTS_TABLE_ATTRIBUTS.splice(index, 1); // je supprime un seul element du tableau a la position 'index'
-    _attributs.removeAt(index);
-    this.dataSourceAttributResultat.data = this.ELEMENTS_TABLE_ATTRIBUTS;
-  }
-
-  creerCategorie(){
-    this.dataSourceAttributDocument.data = this.ELEMENTS_TABLE_ATTRIBUTS
+    dialogRef.afterClosed().subscribe(result => {
+      this.ELEMENTS_TABLE_PRECONISATIONS = this.donneeDocCatService.dataDocumentPrecoMvts
+    });
   }
 
   /**
    * methode quiu permet de fusionner les categories en fontion du meme nom tout en regroupant leurs attributs
    * ceci permet de former le tableau d'objets ICategoriesAttriut qui sera rattache au document lors de l'enregistrement
    */
-  validerCategorieAttribut(){
+  syntheseCategorieAttribut(){
     let tmpCatAtt = new Map(); 
     let categorieAttributsFinal : ICategoriesAttributs[] = [];
 
@@ -273,41 +249,59 @@ export class NewFormDocumentComponent implements OnInit {
           }
         } 
     );
-      this.tableFinaleCategoriesAttributs = categorieAttributsFinal;
-    console.log("voici le tebleau d'attributs final a enregistrer : ", this.tableFinaleCategoriesAttributs)
+      this.TABLE_CATEGORIE_AFFICHAGE_TEMP = categorieAttributsFinal;
   }
   onSubmit(documentInput:any){
     this.submitted=true;
-    if(this.forme.invalid) return;
+    if(this.forme.invalid || documentInput._missions.length<1 || this.ELEMENTS_TABLE_ATTRIBUTS.length<1) return;
     let documentTemp : IDocument={
       id: uuidv4(),
       titre: documentInput.titre,
       description: documentInput.description,
       missions: documentInput._missions,
       attributs: [],
-      categories: []
+      categories: [],
+      preconisations: []
     }
     
-    console.log("voici les missions pour ce document : ", documentTemp.missions)
-
     if(this.document.id != ""){
       documentTemp.id = this.document.id  
     }
     
-    this.dataSourceAttributResultat.data.forEach(
+    this.ELEMENTS_TABLE_ATTRIBUTS.forEach(
       a => documentTemp.attributs.push(a)
     )
 
-    this.tableFinaleCategoriesAttributs.forEach(
-      cat => documentTemp.categories.push(cat)
+    this.ELEMENTS_TABLE_PRECONISATIONS.forEach(
+      preco => documentTemp.preconisations.push(preco)
     )
-    console.log("voici le tebleau d'attributs final a enregistrer pour ce document : ", documentTemp.categories)
+    if (this.TABLE_CATEGORIE_AFFICHAGE_TEMP.length<1) {
+      let categorieAttributs : ICategoriesAttributs = {
+        id: '',
+        nom: "Autres",
+        ordre: 100,
+        listAttributs: []
+      }
+      this.ELEMENTS_TABLE_ATTRIBUTS.forEach(
+        element => {
+          categorieAttributs.listAttributs.push(element)
+      });
+      // ajout d'une categorie par defaut dans le document
+      documentTemp.categories.push(categorieAttributs)
+    }else{
+      this.TABLE_CATEGORIE_AFFICHAGE_TEMP.forEach(
+        cat => documentTemp.categories.push(cat)
+      )
+    }
 
     this.serviceDocument.ajouterDocument(documentTemp).subscribe(
       object => {
         this.router.navigate(['/list-documents']);
       }
     )
+    this.donneeDocCatService.dataDocumentAttributs = []
+    this.donneeDocCatService.dataDocumentCategorie = []
+    this.donneeDocCatService.dataDocumentPrecoMvts = []
   }
   get f(){
     return this.forme.controls;
@@ -315,33 +309,8 @@ export class NewFormDocumentComponent implements OnInit {
   private getAllMissions(){
     return this.serviceMission.getAllMissions();
   }
-  private getAllAttributs(){
-    return this.serviceAttribut.getAllAttributs();
-  }
-  displayFn(attribue: IAttributs): string {
-    return attribue && attribue.titre ? attribue.titre : '';
-  }
-
-  ngAfterViewInit() {
-    this.dataSourceAttribut.paginator = this.paginator;
-    this.dataSourceAttribut.sort = this.sort;
-  }
-
-  public rechercherListingAttribut(option: IAttributs){
-    this.serviceAttribut.getAttributsByTitre(option.titre.toLowerCase()).subscribe(
-        valeurs => {this.dataSourceAttribut.data = valeurs;}
-    )
-  }
-  
-  announceSortChange(sortState: Sort) {
-    if (sortState.direction) {
-      this._liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);
-    } else {
-      this._liveAnnouncer.announce('Sorting cleared');
-    }
-  }
   compareItem(mission1: IMission, mission2: IMission) {
     return mission2 && mission1 ? mission2.id === mission1.id : mission2 === mission1;
-}
+  }
 }
 

@@ -1,5 +1,5 @@
 <div class="mainBlock">
-     <form [formGroup]="formeExemplaire" (ngSubmit)="onSubmit(formeExemplaire.value)" *ngIf="formeExemplaire" >
+     <form [formGroup]="formeExemplaire" (ngSubmit)="onSubmit()" *ngIf="formeExemplaire" >
                 
         <h1>
             {{this.document.titre}}
@@ -9,27 +9,38 @@
                 {{'tickets.table.title5' | translate}} :
                 <span class="title">  {{this.nomPatientCourant}}</span>
             </p>
-            <div *ngFor="let attributParCategorie of document.categories">
-                <div class="block" *ngIf="attributParCategorie.nom">
+            <div class="block" *ngFor="let attributParCategorie of document.categories">
+                <div class="pb-3" *ngIf="attributParCategorie.nom">
                     <h3>{{attributParCategorie.nom}}</h3>
                     <div class="contentBlock">
-                        <div formArrayName="_exemplaireDocument" class="inputBlock" *ngFor="let attribut of attributParCategorie.listAttributs; let i=index; " [ngClass]="{'inputSpecial':(attribut.type == TypeRadio) || (attribut.type == TypeBoolean)}"> 
+                        <div formArrayName="_exemplaireDocument" class="inputBlock" *ngFor="let attribut of attributParCategorie.listAttributs; " [ngClass]="{'inputSpecial':(attribut.type == TypeRadio) || (attribut.type == TypeBoolean)}"> 
                             <label [for]="attribut.id" class="form-label">{{attribut.titre}}</label>
-                            <input *ngIf="(attribut.type != 'textarea') && (attribut.type != TypeRadio) && (attribut.type != TypeBoolean)" [formControlName]="incrementeCompteur()" [type]="attribut.type" class="form-control" placeholder="entrer la valeur ici">
-                            <textarea *ngIf="attribut.type == 'textarea'" class="form-control"  [formControlName]="incrementeCompteur()" placeholder="entrer la valeur ici"></textarea>
-                            <select  class="form-control" *ngIf="(attribut.type == TypeRadio) || (attribut.type == TypeBoolean)"  [formControlName]="incrementeCompteur()">
-                                <option value="oui" >{{attribut.valeursParDefaut}}</option>
+                            <input  *ngIf="(attribut.type != 'textarea') && (attribut.type != TypeRadio) && (attribut.type != TypeBoolean)" [formControlName]="incrementeCompteur(compteur,attribut)" [type]="attribut.type" class="form-control" placeholder="entrer la valeur ici">
+                            <textarea *ngIf="attribut.type == 'textarea'" class="form-control"  [formControlName]="incrementeCompteur(compteur,attribut)" placeholder="entrer la valeur ici"></textarea>
+                            <select class="form-control" *ngIf="(attribut.type == TypeRadio) || (attribut.type == TypeBoolean)" [formControlName]="incrementeCompteur(compteur,attribut)">
+                                <option value="{{val.trim()}}" *ngFor="let val of attribut.valeursParDefaut.trim().split(',')" >{{val}}</option>
                             </select>
-                            <!-- {{compteur}} -->
-                        </div>
+                        </div>{{compteur}}
+                    </div>
+                </div>
+            </div>
+            <div class="block card" id="controlsSupprimeBlock" *ngIf="objetCleValeurSupprime.length != 0">
+                <h3>{{'document.exemplaire.title2' | translate}} <i class="fa fa-exclamation-triangle"></i></h3>
+                <div class="d-flex" id="controlsSupprime">
+                    <div formArrayName="_controlsSupprime" *ngFor="let attributSupprime of objetCleValeurSupprime" class="inputBlock" [ngClass]="{'inputSpecial':(attributSupprime.key.type == TypeRadio) || (attributSupprime.key.type == TypeBoolean)}"> 
+                        <label class="form-label">{{attributSupprime.key.titre}}</label>
+                        <input  *ngIf="(attributSupprime.key.type != 'textarea') && (attributSupprime.key.type != TypeRadio) && (attributSupprime.key.type != TypeBoolean)" [formControlName]="incrementeNumerateur(numerateur,attributSupprime.key)" [type]="attributSupprime.key.type" class="form-control" placeholder="entrer la valeur ici">
+                        <textarea *ngIf="attributSupprime.key.type == 'textarea'" class="form-control"  [formControlName]="incrementeNumerateur(numerateur,attributSupprime.key)" placeholder="entrer la valeur ici"></textarea>
+                        <select class="form-control" *ngIf="(attributSupprime.key.type == TypeRadio) || (attributSupprime.key.type == TypeBoolean)" [formControlName]="incrementeNumerateur(numerateur,attributSupprime.key)">
+                            <option value="{{val.trim()}}" *ngFor="let val of attributSupprime.key.valeursParDefaut.trim().split(',')" >{{val}}</option>
+                        </select>
                     </div>
                 </div>
             </div>
         </div>
         <div class="actionButton">
-            <button class="btn" type="reset" routerLink="../../../list-exemplaire"><i class="fa fa-reply mr-1" aria-hidden="true"></i>{{'lists.button2' | translate}}</button>
+            <button class="btn" type="reset" routerLink="../../executer-missions"><i class="fa fa-reply mr-1"></i>{{'lists.button2' | translate}}</button>
             <button type="submit" class="btn btnValidation" (click)="enregistrerObjet()">{{btnLibelle}}</button>
-            <!--  -->
         </div>
     </form>
 </div>

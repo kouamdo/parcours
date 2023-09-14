@@ -12,5 +12,6 @@ export interface IAfficheDocument extends IDocument {
     categories : ICategoriesAttributs[],
     listeMissions : string,
     listAttributs : string,
-    listCategories : string
+    listCategories : string,
+    listPreconisations : string
 }

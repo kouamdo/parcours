@@ -15,14 +15,19 @@ import { AppRoutingModule } from 'src/app/app-routing.module';
 import { HttpLoaderFactory } from 'src/app/app.module';
 import { ModalCategoriesComponent } from './modal-categories/modal-categories.component';
 import {MatDialogModule} from '@angular/material/dialog';
+import { ModalChoixAttributsComponent } from './modal-choix-attributs/modal-choix-attributs.component';
+import { ModalChoixPreconisationsComponent } from './modal-choix-preconisations/modal-choix-preconisations.component';
 
 
 @NgModule({
   declarations: [
-    ModalCategoriesComponent
+    ModalCategoriesComponent,
+    ModalChoixAttributsComponent,
+    ModalChoixPreconisationsComponent
   ],
   exports: [
-    ModalCategoriesComponent
+    ModalCategoriesComponent,
+    ModalChoixAttributsComponent
   ],
   imports: [
     CommonModule,
@@ -46,8 +51,6 @@ import {MatDialogModule} from '@angular/material/dialog';
         extend:true
     }),
   ],
-  providers: [
-    //{provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}}
-  ]
+  providers: []
 })
 export class SharedModule { }
