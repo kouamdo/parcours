@@ -63,8 +63,8 @@ export class NewPrecomvtComponent implements OnInit {
     this.forme = this.formBuilder.group({
       id: new FormControl(),
       libelle: new FormControl(),
-      etat: new FormControl(),
-      type: new FormControl(),
+      etat: new FormControl(['//']),
+      type: new FormControl (),
       ressource: new FormControl<string | IRessource>(''),
       quantiteMin:new FormControl(),
       quantiteMax:new FormControl(),
@@ -174,7 +174,7 @@ private getAllDistributeurs(){
   *
   */
  enregistrerPreco(){
-  let idModif =  uuidv4();
+ let idModif =  uuidv4();
   if(this.eltsPreco[0].id!=null && this.eltsPreco[0].id!='')
     idModif = this.eltsPreco[0].id;
   let  precomvtTemp : IPrecoMvt={
@@ -284,46 +284,15 @@ this.precoMvtService.ajouterPrecomvt(precomvtTemp).subscribe(
 
 //Suppression d'un element dans le boitier début
 supprimerElt(element: IPrecoMvt){
-this.eltsPreco.forEach((value, index) =>{
+  this.eltsPreco.forEach((value, index) =>{
   if(value == element)
   this.eltsPreco.splice(index,1)
+
 });
 }
 //Suppression d'un element dans le boitier fin
 
-//aller vers le boitier debut
-versBoitier(valeurs:any){
-  let versBoitier = true;
-if(this.steps == 1){
-  let valLibelle : string = this.forme.controls["libelle"].value;
-  let valLibel = valLibelle
-  if(valLibelle!=null && valLibelle.length>0)
-     valLibel = valLibelle.trimStart().trimEnd();
-  if((valLibel==null || valLibel == '' || valLibel.length < 2)){
-    versBoitier = false;
-    this.tabError.set("libtypeo","Cette interface est obligatoire");
-  }
-  let valType : string = this.forme.controls["type"].value;
-  //let valType = valType.trimStart().trimEnd();
-  if((valType == null || valType == '')){
-    versBoitier = false;
-    this.tabError.set("libtypeo", "Cette interface est obligatoire");
-  }
- else
 
- if (this.steps == 2){
-  let valFamille : string[] = this.forme.controls["famille"].value;
-}
- if ( !this.tabError.get('famille')  &&  !this.tabError.get('montantMin') &&  !this.tabError.get('montantMax')  &&  !this.tabError.get('quantiteMin')  &&  !this.tabError.get('quantiteMax') ) {
-          this.passStep2 = true
-        }
-}
-  if(versBoitier){
-    this.enregistrerValeurPrecomvtqte(valeurs);
-  }
-}
-
-//aller vers le boitier fin
 displayFn(ressource: IRessource): string {
  return ressource && ressource.libelle ? ressource.libelle : '';
   }
@@ -470,6 +439,8 @@ reset():void{
     }
     return libel;
   }
+
+
 
   /**
    * a partir des inputs html on crée un occurrence de PrecoMvt
