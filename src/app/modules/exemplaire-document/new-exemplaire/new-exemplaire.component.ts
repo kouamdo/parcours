@@ -86,7 +86,7 @@ export class NewExemplaireComponent implements OnInit {
   compteur: number = 0;
   totalAttribut: number = 0;
   numerateur: number = 0;
-  totalAttributSupprime: number = -1;
+  totalAttributSupprime: number = 0.;
   objetCleValeurSupprime: ObjetCleValeur[] = [];
   tableauAttributsSupprime: IAttributs[] = [];
 
@@ -267,11 +267,12 @@ export class NewExemplaireComponent implements OnInit {
    * @returns valeur courante + 1
    */
   incrementeCompteur(cpt: number, attribut: IAttributs): number {
-    if (this.compteur > 0 && this.compteur >= this.totalAttribut)
+    if (this.compteur > -1 && this.compteur >= this.totalAttribut){
       return cpt;
+    }
 
-    this.tempAttributsCpt.set(attribut.id, cpt)
     let valAttribut = this.rechercherValeurParIdAttribut(attribut.id);
+    this.tempAttributsCpt.set(attribut.id, cpt+1)
     if (attribut.type == TypeTicket.Date && valAttribut != null) {
       // si le type de l'attribut est Date et que la valeur de valAttribut n'est pas vide
       let dateAtt = new Date();
@@ -288,7 +289,7 @@ export class NewExemplaireComponent implements OnInit {
   }
   incrementeNumerateur(num: number, attribut: IAttributs): number {
     if (
-      this.numerateur > 0 &&
+      this.numerateur >= -1 &&
       this.numerateur >= this.totalAttributSupprime
     )
       return num;
