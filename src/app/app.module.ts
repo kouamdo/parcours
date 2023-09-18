@@ -55,7 +55,8 @@ import { DistributeurModule } from './modules/distributeur/distributeur.module';
     RessourceModule,
     PrecomvtModule,
     //NgMultiSelectDropDownModule.forRoot(),
-    CommonModule,    DistributeurModule,
+    CommonModule,
+    DistributeurModule,
     // ngx-translate and the loader module
     HttpClientModule,
     TranslateModule.forRoot({

@@ -66,7 +66,7 @@ libelleCat(familles:IFamille[]):string{
     let listLibelleFamille:string=''
     familles.forEach(
       element => {
-        listLibelleFamille += element.libelle
+        listLibelleFamille += element.libelle + ', '
     });
     return listLibelleFamille
 }
@@ -81,7 +81,7 @@ distCat(distributeurs:IDistributeur[]):string{
   if (distributeurs!= undefined)
   distributeurs.forEach(
     element => {
-      listLibelleDistributeur += element.raisonSocial
+      listLibelleDistributeur += element.raisonSocial + ', '
   });
   return listLibelleDistributeur
 }

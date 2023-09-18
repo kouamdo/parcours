@@ -61,9 +61,9 @@ export class NewPrecomvtComponent implements OnInit {
   btnLibelle: string="Ajouter";
   constructor(private formBuilder:FormBuilder,private serviceFamille:FamillesService,private serviceDistributeur:DistributeursService,private ressourceService:RessourcesService ,private precoMvtService:PrecoMvtsService,private serviceRessource:RessourcesService,private router:Router, private infosPath:ActivatedRoute, private datePipe: DatePipe) {
     this.forme = this.formBuilder.group({
-      id: new FormControl(),
+      id: new FormControl('a'),
       libelle: new FormControl(),
-      etat: new FormControl(['//']),
+      etat: new FormControl('false'),
       type: new FormControl (),
       ressource: new FormControl<string | IRessource>(''),
       quantiteMin:new FormControl(),
@@ -116,7 +116,7 @@ export class NewPrecomvtComponent implements OnInit {
           };
           let precoMvtTemp : IPrecoMvt ={
             id: PrecoMvtCourant.id,
-            libelle: PrecoMvtCourant.libelle,
+            libelle:"Libelle : " + PrecoMvtCourant.libelle,
             etat: PrecoMvtCourant.etat,
             type: PrecoMvtCourant.type,
             precomvtqte:[]
@@ -169,34 +169,48 @@ private getAllFamilles(){
 private getAllDistributeurs(){
       return this.serviceDistributeur.getAllDistributeurs();
     }
-
+/**
+ *methode qui nous retient sur l'interface 1 si elle n'est pas enregistrée dans
+ le tableau de droite
+ * @param numbre valeur qui va etre affecté à la variable steps
+ * pour pouvoir basculé sur l'interface 2 ou 3
+ *
+ */
+  blocklibelle(numbre:number){
+  if (this.steps != 1) {
+    this.steps=numbre
+  }
+  }
  /**
   *
   */
  enregistrerPreco(){
- let idModif =  uuidv4();
-  if(this.eltsPreco[0].id!=null && this.eltsPreco[0].id!='')
-    idModif = this.eltsPreco[0].id;
+ //let idModif =  uuidv4();
+
   let  precomvtTemp : IPrecoMvt={
-    //id: uuidv4(),
-    id:this.eltsPreco[0].id,
-    libelle:this.eltsPreco[0].libelle,
+     //id:this.eltsPreco[0].id,
+    id:'',
+    libelle:this.eltsPreco[0].libelle.replace('Libelle : ',''),
     etat:this.eltsPreco[0].etat,
     type:this.eltsPreco[0].type,
     precomvtqte:[],
   }
-
+  if(this.eltsPreco[0].id!=null && this.eltsPreco[0].id!='')
+  precomvtTemp.id = this.eltsPreco[0].id;
 this.eltsPreco.forEach
      (valeur =>{
       precomvtTemp.precomvtqte.push(valeur.precomvtqte[0])
 
 });
-console.log (precomvtTemp)
-this.precoMvtService.ajouterPrecomvt(precomvtTemp).subscribe(
-  object => {
-    this.router.navigate(['list-precomvts']);
-}
-)
+//console.log (precomvtTemp)
+if (precomvtTemp.precomvtqte.length>1) {
+  this.precoMvtService.ajouterPrecomvt(precomvtTemp).subscribe(
+    object => {
+      this.router.navigate(['list-precomvts']);
+  }
+  )
+}else alert ('vous devez enregistrer au moins une ressource ou une famille dans la precomvtqté')
+
   }
  //fonction onSubmit fin
 
@@ -402,8 +416,8 @@ reset():void{
       quantiteMin: precomvtInput.quantiteMin,
       montantMax: precomvtInput.montantMax,
       montantMin: precomvtInput.montantMin,
-      //id:"",
-      id: precomvtInput.id,
+      id:"",
+      //id: precomvtInput.id,
       //fournisseur: precomvtInput.fournisseur,
       distributeur: precomvtInput.distributeur
     }
@@ -455,14 +469,14 @@ reset():void{
       quantiteMin: precomvtInput.quantiteMin,
       montantMax: precomvtInput.montantMax,
       montantMin: precomvtInput.montantMin,
-      //id:"",
+       //id:"",
       id: precomvtInput.id,
       //fournisseur: precomvtInput.fournisseur,
       distributeur: precomvtInput.distributeur
     };
     let precomvtTemp : IPrecoMvt={
       //id: uuidv4(),
-      //id:' ',
+       //id:' ',
       id: precomvtInput.id,
       libelle: "Ressource : " + precomvtInput.ressource.libelle,
       etat: false,

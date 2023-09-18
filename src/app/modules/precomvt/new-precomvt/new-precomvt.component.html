@@ -33,7 +33,7 @@
                         <label for="etat" class="label" >
                           Etat
                         </label>
-                        <input  type="checkbox" checked  formControlName="etat" name="etat" class="form-control" id="etat" placeholder="" required >
+                        <input  type="checkbox" checked value="true" formControlName="etat" name="etat" class="form-control" id="etat" placeholder="" required >
                       </div>
                   </div>
                 </div>
@@ -191,10 +191,9 @@
         <div class="actionButton">
           <button class="btn" *ngIf="steps == 0">Back</button>
           <button type="button" class="btn" routerLink="../list-precomvts">Annuler</button>
-          <button type="button" class="btn">Famille</button>
-          <button type="button" class="btn">Ressource</button>
+          <button type="button" class="btn" (click)="blocklibelle(2)">Famille</button>
+          <button type="button" class="btn" (click)="blocklibelle(3)">Ressource</button>
           <button type="button" class="btn" (click)="validerControleStep(2,forme.value); "><i class="fa fa-arrow-right mr-1" aria-hidden="true"></i></button>
-
         </div>
       </form>
     </div>
@@ -226,7 +225,7 @@
           <button class="" title=""  id="left" >
             <i class="fa fa-pen text-light" aria-hidden="true" (click)="chargerValeurPrecoMvt(i)"></i>
           </button>
-          <button class="" title="" id="right" [disabled] = "elt">
+          <button class="" title="" id="right" *ngIf="i!=0"  [ngStyle]=""  >
             <i class="fa fa-trash text-danger" aria-hidden="true" (click)="supprimerElt(elt)"  ></i>
           </button>
         </div>

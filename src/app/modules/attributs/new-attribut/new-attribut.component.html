@@ -37,21 +37,13 @@
                                     <label for="etat" class="label" >
                                         {{'attributs.table.title3' | translate}}
                                     </label>
-                                    <input  type="checkbox"   formControlName="etat"  name="etat" id="etat" placeholder="{{'attributs.table.title3' | translate}}" value="" class="form-control">
+                                    <input  type="checkbox"   formControlName="etat"  name="etat" id="etat" placeholder="{{'attributs.table.title3' | translate}}" value="true" class="form-control">
                                 </div>
                                 <div  *ngIf="submitted && f['etat'].errors"  class="alert alert-danger" >
                                     <div *ngIf="f['etat'].errors['required']">{{'attributs.form.text3' | translate}}</div>
                                 </div>
                             </div>
                         </div>
-                        <!--<div class="form-group">
-                            <div class="champs">
-                                <label  for="ordre"  class="label" >
-                                    {{'attributs.table.title7' | translate}}
-                                </label>
-                                <input type="number" formControlName="ordre" name="ordre" id="ordre" placeholder="{{'attributs.table.title4' | translate}}" class="form-control" value="0">
-                            </div>
-                        </div>-->
                         <div class="form-group">
                             <div class="champs">
                                 <label  for="type" class="label">

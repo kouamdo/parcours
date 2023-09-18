@@ -33,13 +33,10 @@ export class NewAttributComponent implements OnInit {
     this.forme = this.formBuilder.group({
       titre: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
       description: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
-      etat: ['//'],
+      etat: ['false'],
       dateCreation: ['', [Validators.required]],
       dateModification: ['//'],
-      //unite: [''],
-      //rajout
       type: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
-      ordre: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
       obligatoire:[''],
       valeursParDefaut:['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
     })
@@ -60,7 +57,6 @@ export class NewAttributComponent implements OnInit {
             etat: this.attribut.etat,
             dateCreation: this.datePipe.transform(this.attribut.dateCreation,'yyyy-MM-dd'),
             dateModification: this.datePipe.transform(this.attribut.dateModification,'yyyy-MM-dd'),
-            ordre: this.attribut.ordre,
             type: this.attribut.type,
             obligatoire: this.attribut.obligatoire,
             valeursParDefaut:this.attribut.valeursParDefaut

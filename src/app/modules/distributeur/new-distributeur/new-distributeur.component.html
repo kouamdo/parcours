@@ -18,6 +18,16 @@
                               </div>
                           </div>
                       </div>
+                      <div class="form-group" id="eta">
+                        <div>
+                            <div class="champs">
+                              <label for="etat" class="label" >
+                                Etat
+                              </label>
+                              <input  type="checkbox" checked value="true" formControlName="etat" name="etat" class="form-control" id="etat" placeholder="" required >
+                            </div>
+                        </div>
+                      </div>
                       <div class="form-group">
                         <div>
                             <div class="champs">
@@ -53,7 +63,7 @@
                   </div>
               </div>
               <div class="actionButton">
-                <button class="btn" routerLink="../list-distributeurs">Envoyer</button>
+                <button class="btn" routerLink="../list-distributeurs">Annuler</button>
                   <button type="submit" class="btn">{{btnLibelle}}</button>
               </div>
           </form>
