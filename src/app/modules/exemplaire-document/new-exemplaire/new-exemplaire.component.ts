@@ -83,9 +83,9 @@ export class NewExemplaireComponent implements OnInit {
   TypeBoolean = TypeTicket.Boolean;
   TypeRadio = TypeTicket.Radio;
 
-  compteur: number = 0;
+  compteur: number = -1;
   totalAttribut: number = 0;
-  numerateur: number = 0;
+  numerateur: number = -1;
   totalAttributSupprime: number = 0.;
   objetCleValeurSupprime: ObjetCleValeur[] = [];
   tableauAttributsSupprime: IAttributs[] = [];
@@ -320,11 +320,11 @@ export class NewExemplaireComponent implements OnInit {
       idDocument: this.document.id,
       titre: this.document.titre,
       description: this.document.description,
-      missions: [],
-      attributs: [],
+      missions: this.document.missions,
+      attributs: this.document.attributs,
       objetEnregistre: [],
       categories: this.document.categories,
-      preconisations: []
+      preconisations: this.document.preconisations
     };
     exemplaireTemp.objetEnregistre = this.exemplaire.objetEnregistre;
 
