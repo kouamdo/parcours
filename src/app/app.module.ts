@@ -30,6 +30,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { CommonModule } from '@angular/common';
 
 import { DistributeurModule } from './modules/distributeur/distributeur.module';
+import { PersonnelsModule } from './modules/personnels/personnels.module';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { DistributeurModule } from './modules/distributeur/distributeur.module';
     MatCheckboxModule,
     HttpClientInMemoryWebApiModule.forRoot(InMemDBService, {dataEncapsulation: false, passThruUnknownUrl: true}),
     PatientsModule,
+    PersonnelsModule,
     ServicesModule,
     TicketsModule,
     AttributsModule,
