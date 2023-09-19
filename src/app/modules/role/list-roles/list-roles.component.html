@@ -1,6 +1,6 @@
 <div id="mainSection" class="d-flex flex-column justify-content-around">
   <div class="title">
-      <h2>listing Distributeur</h2>
+      <h2>listing Role</h2>
 
   </div>
   <div class="card container-fluid" >
@@ -19,8 +19,8 @@
                       </mat-form-field>
                   </form>
               </div>
-              <div role="button" id="addUserBotton" routerLink="../patient-nouveau">
-                  <span title="Ajouter un patient">
+              <div role="button" id="addUserBotton" routerLink="../role-nouveau">
+                  <span title="Ajouter un role">
                       <i class="fa fa-user-plus" aria-hidden="true"></i>
                   </span>
               </div>
@@ -74,9 +74,9 @@
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                 <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
               </table>
-              <mat-paginator style="background-color: rgba(126, 169, 126, 0.79);" [pageSizeOptions]="[5, 10, 20]"
-                             showFirstLastButtons
-                             aria-label="Select page of periodic elements">
+              <mat-paginator style="background-color:  rgba(40, 167, 69, 0.79);" [pageSizeOptions]="[5, 10, 20]"
+              showFirstLastButtons
+              aria-label="Select page of periodic elements">
               </mat-paginator>
             </div>
 

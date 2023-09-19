@@ -24,7 +24,7 @@ export class NewRoleComponent implements OnInit {
     this.forme = this.formBuilder.group({
     titre: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
     description: [''],
-    etat: [''],
+    etat: [true],
     dateCreation:['', [Validators.required]],
   })
   }

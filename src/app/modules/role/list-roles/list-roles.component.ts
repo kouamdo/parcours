@@ -18,7 +18,7 @@ import { RolesService } from 'src/app/services/roles/roles.service';
 @Component({
   selector: 'app-list-roles',
   templateUrl: './list-roles.component.html',
-  styleUrls: ['./list-roles.component.css']
+  styleUrls: ['./list-roles.component.scss']
 })
 export class ListRolesComponent implements OnInit {
 

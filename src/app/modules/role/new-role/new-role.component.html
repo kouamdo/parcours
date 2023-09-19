@@ -1,6 +1,6 @@
 <div id="mainSection">
   <div class="card block">
-      <div class="card-header pt-4 pb-4 entete">Ajouter un nouveau Distributeur</div>
+      <div class="card-header pt-4 pb-4 entete">Ajouter un nouveau Role</div>
       <div class="card-body">
           <form [formGroup]="forme" (ngSubmit)="onSubmit(forme.value)" *ngIf="forme" >
               <div class="">
@@ -28,14 +28,16 @@
                             </div>
                         </div>
                     </div>
-                      <div class="form-group">
+                    <div class="form-group" id="eta">
+                      <div>
                           <div class="champs">
-                              <label  for="etat"  class="label" >
-                                Etat
-                              </label>
-                              <input type="checkbox" checked formControlName="etat" name="etat" id="etat" placeholder="etat" class="form-control" >
+                            <label for="etat" class="label" >
+                              Etat
+                            </label>
+                            <input  type="checkbox" checked value="true" formControlName="etat" name="etat" class="form-control" id="etat" placeholder="" >
                           </div>
                       </div>
+                    </div>
                   </div>
               </div>
               <div class="actionButton">
