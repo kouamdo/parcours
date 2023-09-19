@@ -19,7 +19,7 @@ export class NewRoleComponent implements OnInit {
   btnLibelle: string="Ajouter";
   submitted: boolean=false;
   initialDateCreation = new FormControl(new Date());
-  //TODO validation du formulaire. particulièrment les mail
+
   constructor(private formBuilder:FormBuilder, private roleService:RolesService,private router:Router, private infosPath:ActivatedRoute, private datePipe: DatePipe){
     this.forme = this.formBuilder.group({
     titre: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
@@ -59,7 +59,6 @@ export class NewRoleComponent implements OnInit {
 
   onSubmit(roleInput:any){
     this.submitted=true;
-    //Todo la validation d'element non conforme passe
     if(this.forme.invalid) return;
 
     let roleTemp : IRole={
@@ -77,7 +76,7 @@ export class NewRoleComponent implements OnInit {
     }
     this.roleService.ajouterRole(roleTemp).subscribe(
       object => {
-        this.router.navigate(['/list-Roles']);
+        this.router.navigate(['/list-roles']);
       }
     )
   }
