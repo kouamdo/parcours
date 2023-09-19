@@ -18,6 +18,7 @@ import { IPrecoMvtQte } from "../modele/precomvtqte";
 import { IPrecoMvt } from "../modele/precomvt";
 import { Unites } from "../modele/unites";
 import { IDistributeur } from "../modele/distributeur";
+import { IRole } from '../modele/role';
 
 export class InMemDBService implements InMemoryDbService {
 
@@ -319,6 +320,7 @@ export class InMemDBService implements InMemoryDbService {
           {"fonction":"Ressource", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"Créer", "lien":"ressource-nouvelle", "bouton":"false"},{"nom":"Rechercher", "lien":"./list-ressources", "bouton":"false"}]},
           {"fonction":"Préconisations","icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"Créer", "lien":"precomvt-nouvelle", "bouton":"false"},{"nom":"Rechercher", "lien":"./list-precomvts", "bouton":"false"}]},
           {"fonction":"Distributeur", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"Créer", "lien":"distributeur-nouveau", "bouton":"false"},{"nom":"Rechercher", "lien":"./list-distributeurs", "bouton":"false"}]},
+          {"fonction":"Role", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"Créer", "lien":"role-nouveau", "bouton":"false"},{"nom":"Rechercher", "lien":"./list-roles", "bouton":"false"}]},
         ],
       },
       {
@@ -406,6 +408,7 @@ export class InMemDBService implements InMemoryDbService {
           {"fonction":"Ressource", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"Créer", "lien":"ressource-nouvelle", "bouton":"false"},{"nom":"Search", "lien":"./list-ressources", "bouton":"false"}]},
           {"fonction":"Préconisations","icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"Créer", "lien":"precomvt-nouvelle", "bouton":"false"}, {"nom":"Search", "lien":"./list-precomvts", "bouton":"false"}]},
           {"fonction":"Distributeur", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"Créer", "lien":"distributeur-nouveau", "bouton":"false"},{"nom":"search", "lien":"./list-distributeurs", "bouton":"false"}]},
+          {"fonction":"Role", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"Créer", "lien":"role-nouveau", "bouton":"false"},{"nom":"search", "lien":"./list-roles", "bouton":"false"}]},
         ],
       },
     ];
@@ -2548,6 +2551,11 @@ export class InMemDBService implements InMemoryDbService {
       {id:"2", raisonSocial:"bgb",adresse:"Ydé", telephone: "655554481", mail: "ngong@yad.fr"},
       {id:"3", raisonSocial:"cvc", adresse:"Buéa", telephone:"655554486", mail:"ngong@yad.fr"},
     ];
-    return{patients, services, menus, tickets, missions, attributs, documents,exemplaires,famille,ressource,precomvt,distributeur};
+    let role:IRole[]=[
+      {id:"1", titre:"vendeur", description: "cicatrice de la personne",etat:true, dateCreation:new Date("07/03/2000")},
+      {id:"2", titre:"traiteur", description: "cicatrice de l'individu",etat:true, dateCreation:new Date("07/03/2000")},
+      {id:"3", titre:"marcheur", description: "cicatrice du vieu",etat:true,dateCreation:new Date("07/03/2000")},
+    ];
+    return{patients, services, menus, tickets, missions, attributs, documents,exemplaires,famille,ressource,precomvt,distributeur,role};
   }
 }

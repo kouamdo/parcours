@@ -1,0 +1,50 @@
+<div id="mainSection">
+  <div class="card block">
+      <div class="card-header pt-4 pb-4 entete">Ajouter un nouveau Distributeur</div>
+      <div class="card-body">
+          <form [formGroup]="forme" (ngSubmit)="onSubmit(forme.value)" *ngIf="forme" >
+              <div class="">
+                  <div class="">
+                      <div class="form-group">
+                          <div>
+                              <div class="champs">
+                                  <label for="titre" class="label">
+                                    Titre
+                                  </label>
+                                  <input type="text" formControlName="titre" name="titre" id="titre"  placeholder="titre"  class="form-control" required>
+                              </div>
+                              <div  *ngIf="submitted && f['titre'].errors"  class="alert alert-danger" >
+                                  <div *ngIf="f['titre'].errors['required']">Champ Obligatoire</div>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="form-group">
+                        <div>
+                            <div class="champs">
+                                <label for="description" class="label" >
+                                  Description
+                                </label>
+                                <input type="text" formControlName="description"  name="description"  id="description" placeholder="description" class="form-control" >
+                            </div>
+                        </div>
+                    </div>
+                      <div class="form-group">
+                          <div class="champs">
+                              <label  for="etat"  class="label" >
+                                Etat
+                              </label>
+                              <input type="checkbox" checked formControlName="etat" name="etat" id="etat" placeholder="etat" class="form-control" >
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <div class="actionButton">
+                <button class="btn" routerLink="../list-roles">Envoyer</button>
+                  <button type="submit" class="btn">{{btnLibelle}}</button>
+              </div>
+          </form>
+      </div>
+  </div>
+</div>
+
+
