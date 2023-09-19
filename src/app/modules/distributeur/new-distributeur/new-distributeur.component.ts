@@ -23,7 +23,7 @@ export class NewDistributeurComponent implements OnInit {
   constructor(private formBuilder:FormBuilder, private distributeurService:DistributeursService,private router:Router, private infosPath:ActivatedRoute, private datePipe: DatePipe){
     this.forme = this.formBuilder.group({
     raisonSocial: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
-    etat: ['false'],
+    etat: [true],
     adresse: [''],
     telephone: [''],
     mail: ['', [Validators.required, Validators.email, Validators.pattern(".+@.+\.{1}[a-z]{2,3}")]],
