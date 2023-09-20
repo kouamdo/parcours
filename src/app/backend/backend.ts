@@ -986,6 +986,7 @@ export class InMemDBService implements InMemoryDbService {
                   {
                     id: '1',
                     raisonSocial: 'brasserie1',
+                    etat: true,
                     adresse: 'Dla',
                     telephone: '655554488',
                     mail: 'ngong@yad.fr',
@@ -993,6 +994,7 @@ export class InMemDBService implements InMemoryDbService {
                   {
                     id: '2',
                     raisonSocial: 'guinness',
+                    etat: true,
                     adresse: 'Ydé',
                     telephone: '655554481',
                     mail: 'ngong@yad.fr',
@@ -1000,6 +1002,7 @@ export class InMemDBService implements InMemoryDbService {
                   {
                     id: '3',
                     raisonSocial: 'papeterie yvan',
+                    etat: true,
                     adresse: 'Buéa',
                     telephone: '655554486',
                     mail: 'ngong@yad.fr',
@@ -1409,6 +1412,7 @@ export class InMemDBService implements InMemoryDbService {
                   {
                     id: '1',
                     raisonSocial: 'brasserie1',
+                    etat: true,
                     adresse: 'Dla',
                     telephone: '655554488',
                     mail: 'ngong@yad.fr',
@@ -1416,6 +1420,7 @@ export class InMemDBService implements InMemoryDbService {
                   {
                     id: '2',
                     raisonSocial: 'guinness',
+                    etat: true,
                     adresse: 'Ydé',
                     telephone: '655554481',
                     mail: 'ngong@yad.fr',
@@ -1423,6 +1428,7 @@ export class InMemDBService implements InMemoryDbService {
                   {
                     id: '3',
                     raisonSocial: 'papeterie yvan',
+                    etat: true,
                     adresse: 'Buéa',
                     telephone: '655554486',
                     mail: 'ngong@yad.fr',
@@ -1783,6 +1789,7 @@ export class InMemDBService implements InMemoryDbService {
                   {
                     id: '1',
                     raisonSocial: 'brasserie1',
+                    etat: true,
                     adresse: 'Dla',
                     telephone: '655554488',
                     mail: 'ngong@yad.fr',
@@ -1790,6 +1797,7 @@ export class InMemDBService implements InMemoryDbService {
                   {
                     id: '2',
                     raisonSocial: 'guinness',
+                    etat: true,
                     adresse: 'Ydé',
                     telephone: '655554481',
                     mail: 'ngong@yad.fr',
@@ -1797,6 +1805,7 @@ export class InMemDBService implements InMemoryDbService {
                   {
                     id: '3',
                     raisonSocial: 'papeterie yvan',
+                    etat: true,
                     adresse: 'Buéa',
                     telephone: '655554486',
                     mail: 'ngong@yad.fr',
@@ -2333,6 +2342,7 @@ export class InMemDBService implements InMemoryDbService {
                   {
                     id: '1',
                     raisonSocial: 'brasserie1',
+                    etat: true,
                     adresse: 'Dla',
                     telephone: '655554488',
                     mail: 'ngong@yad.fr',
@@ -2340,6 +2350,7 @@ export class InMemDBService implements InMemoryDbService {
                   {
                     id: '2',
                     raisonSocial: 'guinness',
+                    etat: true,
                     adresse: 'Ydé',
                     telephone: '655554481',
                     mail: 'ngong@yad.fr',
@@ -2347,6 +2358,7 @@ export class InMemDBService implements InMemoryDbService {
                   {
                     id: '3',
                     raisonSocial: 'papeterie yvan',
+                    etat: true,
                     adresse: 'Buéa',
                     telephone: '655554486',
                     mail: 'ngong@yad.fr',
@@ -2756,6 +2768,7 @@ export class InMemDBService implements InMemoryDbService {
                   {
                     id: '1',
                     raisonSocial: 'brasserie1',
+                    etat: true,
                     adresse: 'Dla',
                     telephone: '655554488',
                     mail: 'ngong@yad.fr',
@@ -2763,6 +2776,7 @@ export class InMemDBService implements InMemoryDbService {
                   {
                     id: '2',
                     raisonSocial: 'guinness',
+                    etat: true,
                     adresse: 'Ydé',
                     telephone: '655554481',
                     mail: 'ngong@yad.fr',
@@ -2770,6 +2784,7 @@ export class InMemDBService implements InMemoryDbService {
                   {
                     id: '3',
                     raisonSocial: 'papeterie yvan',
+                    etat: true,
                     adresse: 'Buéa',
                     telephone: '655554486',
                     mail: 'ngong@yad.fr',
@@ -3309,6 +3324,7 @@ export class InMemDBService implements InMemoryDbService {
                   {
                     id: '1',
                     raisonSocial: 'brasserie1',
+                    etat: true,
                     adresse: 'Dla',
                     telephone: '655554488',
                     mail: 'ngong@yad.fr',
@@ -3316,6 +3332,7 @@ export class InMemDBService implements InMemoryDbService {
                   {
                     id: '2',
                     raisonSocial: 'guinness',
+                    etat: true,
                     adresse: 'Ydé',
                     telephone: '655554481',
                     mail: 'ngong@yad.fr',
@@ -3323,6 +3340,7 @@ export class InMemDBService implements InMemoryDbService {
                   {
                     id: '3',
                     raisonSocial: 'papeterie yvan',
+                    etat: true,
                     adresse: 'Buéa',
                     telephone: '655554486',
                     mail: 'ngong@yad.fr',
@@ -3931,6 +3949,7 @@ export class InMemDBService implements InMemoryDbService {
                   {
                     id: '1',
                     raisonSocial: 'brasserie1',
+                    etat: true,
                     adresse: 'Dla',
                     telephone: '655554488',
                     mail: 'ngong@yad.fr',
@@ -3938,6 +3957,7 @@ export class InMemDBService implements InMemoryDbService {
                   {
                     id: '2',
                     raisonSocial: 'guinness',
+                    etat: true,
                     adresse: 'Ydé',
                     telephone: '655554481',
                     mail: 'ngong@yad.fr',
@@ -3945,6 +3965,7 @@ export class InMemDBService implements InMemoryDbService {
                   {
                     id: '3',
                     raisonSocial: 'papeterie yvan',
+                    etat: true,
                     adresse: 'Buéa',
                     telephone: '655554486',
                     mail: 'ngong@yad.fr',
