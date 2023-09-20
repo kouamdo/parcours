@@ -13,21 +13,11 @@
                                   </label>
                                   <input type="text" formControlName="titre" name="titre" id="titre"  placeholder="titre"  class="form-control" required>
                               </div>
-                              <div  *ngIf="submitted && f['raisonSocial'].errors"  class="alert alert-danger" >
-                                  <div *ngIf="f['raisonSocial'].errors['required']">Champ Obligatoire</div>
+                              <div  *ngIf="submitted && f['titre'].errors"  class="alert alert-danger" >
+                                  <div *ngIf="f['titre'].errors['required']">Champ Obligatoire</div>
                               </div>
                           </div>
                       </div>
-                       <div class="form-group">
-                        <div>
-                            <div class="champs">
-                                <label for="description" class="label" >
-                                  Description
-                                </label>
-                                <input type="text" formControlName="description"  name="description"  id="description" placeholder="description" class="form-control" >
-                            </div>
-                        </div>
-                    </div>
                       <div class="form-group" id="eta">
                         <div>
                             <div class="champs">
@@ -38,9 +28,16 @@
                             </div>
                         </div>
                       </div>
-
-
-
+                      <div class="form-group">
+                        <div>
+                            <div class="champs">
+                                <label for="description" class="label" >
+                                  Description
+                                </label>
+                                <input type="text" formControlName="description"  name="description"  id="description" placeholder="description" class="form-control" >
+                            </div>
+                        </div>
+                    </div>
                   </div>
               </div>
               <div class="actionButton">
