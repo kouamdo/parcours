@@ -520,174 +520,20 @@ export class InMemDBService implements InMemoryDbService {
       },
     ];
     let attributs: IAttributs[] = [
-      {
-        id: '1',
-        titre: 'taille',
-        description: "taille de l'individu",
-        etat: true,
-        dateCreation: new Date('07/03/2000'),
-        dateModification: new Date('07/03/1990'),
-        type: TypeTicket.String,
-        ordre: 0,
-        obligatoire: false,
-        valeursParDefaut: '',
-      },
-      {
-        id: '2',
-        titre: 'poids',
-        description: "poids de l'individu",
-        etat: true,
-        dateCreation: new Date('07/03/2000'),
-        dateModification: new Date('07/03/1990'),
-        type: TypeTicket.Double,
-        ordre: 0,
-        obligatoire: false,
-        valeursParDefaut: '',
-      },
-      {
-        id: '3',
-        titre: 'sexe',
-        description: "sexe de l'individu",
-        etat: true,
-        dateCreation: new Date('07/03/2000'),
-        dateModification: new Date('07/03/1990'),
-        type: TypeTicket.Boolean,
-        ordre: 0,
-        obligatoire: false,
-        valeursParDefaut: 'Homme, Femme, Autre',
-      },
-      {
-        id: '4',
-        titre: 'age',
-        description: "age de l'individu",
-        etat: true,
-        dateCreation: new Date('07/03/2000'),
-        dateModification: new Date('07/03/1990'),
-        type: TypeTicket.Double,
-        ordre: 0,
-        obligatoire: false,
-        valeursParDefaut: '',
-      },
-      {
-        id: '5',
-        titre: 'allergies',
-        description: "allergies de l'individu",
-        etat: true,
-        dateCreation: new Date('07/03/2000'),
-        dateModification: new Date('07/03/1990'),
-        type: TypeTicket.String,
-        ordre: 0,
-        obligatoire: false,
-        valeursParDefaut: '',
-      },
-      {
-        id: '6',
-        titre: 'teint',
-        description: "teint de l'individu",
-        etat: true,
-        dateCreation: new Date('07/03/2000'),
-        dateModification: new Date('07/03/1990'),
-        type: TypeTicket.String,
-        ordre: 0,
-        obligatoire: false,
-        valeursParDefaut: '',
-      },
-      {
-        id: '7',
-        titre: 'Groupe sangin',
-        description: "Groupe sangin de l'individu",
-        etat: true,
-        dateCreation: new Date('07/03/2000'),
-        dateModification: new Date('07/03/1990'),
-        type: TypeTicket.Boolean,
-        ordre: 0,
-        obligatoire: false,
-        valeursParDefaut: 'A, A+, A-, B, B+, B-, AB, AB+, AB-, O, O+, O-',
-      },
-      {
-        id: '8',
-        titre: 'cicatrice',
-        description: "cicatrice de l'individu",
-        etat: true,
-        dateCreation: new Date('07/03/2000'),
-        dateModification: new Date('07/03/1990'),
-        type: TypeTicket.Boolean,
-        ordre: 0,
-        obligatoire: false,
-        valeursParDefaut: 'oui, non',
-      },
-      {
-        id: '9',
-        titre: 'date admission',
-        description: "date admission de l'individu",
-        etat: true,
-        dateCreation: new Date('07/03/2000'),
-        dateModification: new Date('07/03/1990'),
-        type: TypeTicket.Date,
-        ordre: 0,
-        obligatoire: false,
-        valeursParDefaut: '',
-      },
-      {
-        id: '10',
-        titre: 'date decharge',
-        description: 'date decharge',
-        etat: true,
-        dateCreation: new Date('07/03/2000'),
-        dateModification: new Date('07/03/1990'),
-        type: TypeTicket.Date,
-        ordre: 0,
-        obligatoire: false,
-        valeursParDefaut: '',
-      },
-      {
-        id: '11',
-        titre: 'date prochain rendez-vous',
-        description: "date prochain rendez-vous de l'individu",
-        etat: true,
-        dateCreation: new Date('07/03/2000'),
-        dateModification: new Date('07/03/1990'),
-        type: TypeTicket.Date,
-        ordre: 0,
-        obligatoire: false,
-        valeursParDefaut: '',
-      },
-      {
-        id: '12',
-        titre: 'aprobation du medecin',
-        description: 'aprobation du medecin',
-        etat: true,
-        dateCreation: new Date('07/03/2000'),
-        dateModification: new Date('07/03/1990'),
-        type: TypeTicket.Boolean,
-        ordre: 0,
-        obligatoire: false,
-        valeursParDefaut: 'oui, non',
-      },
-      {
-        id: '13',
-        titre: 'motif de la decharge',
-        description: 'motif de la decharge ',
-        etat: true,
-        dateCreation: new Date('07/03/2000'),
-        dateModification: new Date('07/03/1990'),
-        type: TypeTicket.Textarea,
-        ordre: 0,
-        obligatoire: false,
-        valeursParDefaut: '',
-      },
-      {
-        id: '14',
-        titre: 'nom',
-        description: "nom de l'individu",
-        etat: true,
-        dateCreation: new Date('07/03/2000'),
-        dateModification: new Date('07/03/1990'),
-        type: TypeTicket.String,
-        ordre: 0,
-        obligatoire: false,
-        valeursParDefaut: '',
-      },
+      { id: '1', titre: 'taille',description: "taille de l'individu",etat: true,dateCreation: new Date('07/03/2000'),dateModification: new Date('07/03/1990'),type: TypeTicket.String,ordre: 0,obligatoire: false, valeursParDefaut: '',},
+      {id: '2',titre: 'poids',description: "poids de l'individu",etat: true,dateCreation: new Date('07/03/2000'),dateModification: new Date('07/03/1990'),type: TypeTicket.Double,ordre: 0,obligatoire: false, valeursParDefaut: '',},
+      {id: '3', titre: 'sexe',description: "sexe de l'individu", etat: true, dateCreation: new Date('07/03/2000'), dateModification: new Date('07/03/1990'),type: TypeTicket.Boolean,ordre: 0,obligatoire: false,valeursParDefaut: 'Homme, Femme, Autre',},
+      {id: '4',titre: 'age',description: "age de l'individu",etat: true,dateCreation: new Date('07/03/2000'),dateModification: new Date('07/03/1990'),type: TypeTicket.Double,ordre: 0,obligatoire: false, valeursParDefaut: '',},
+      { id: '5', titre: 'allergies',description: "allergies de l'individu",etat: true,dateCreation: new Date('07/03/2000'),dateModification: new Date('07/03/1990'),type: TypeTicket.String,ordre: 0,obligatoire: false,valeursParDefaut: '',},
+      { id: '6', titre: 'teint',description: "teint de l'individu",etat: true,dateCreation: new Date('07/03/2000'), dateModification: new Date('07/03/1990'),type: TypeTicket.String,ordre: 0,obligatoire: false, valeursParDefaut: '',},
+      {id: '7', titre: 'Groupe sangin', description: "Groupe sangin de l'individu",etat: true,dateCreation: new Date('07/03/2000'), dateModification: new Date('07/03/1990'),type: TypeTicket.Boolean,ordre: 0,obligatoire: false,valeursParDefaut: 'A, A+, A-, B, B+, B-, AB, AB+, AB-, O, O+, O-',},
+      { id: '8',titre: 'cicatrice',description: "cicatrice de l'individu",etat: true,dateCreation: new Date('07/03/2000'),dateModification: new Date('07/03/1990'),type: TypeTicket.Boolean,ordre: 0,obligatoire: false, valeursParDefaut: 'oui, non',},
+      {id: '9', titre: 'date admission', description: "date admission de l'individu",etat: true,dateCreation: new Date('07/03/2000'),dateModification: new Date('07/03/1990'),type: TypeTicket.Date,ordre: 0,obligatoire: false,valeursParDefaut: '',},
+      {id: '10', titre: 'date decharge', description: 'date decharge',etat: true,dateCreation: new Date('07/03/2000'), dateModification: new Date('07/03/1990'),type: TypeTicket.Date,ordre: 0,obligatoire: false,valeursParDefaut: '',},
+      {id: '11', titre: 'date prochain rendez-vous',description: "date prochain rendez-vous de l'individu",etat: true,dateCreation: new Date('07/03/2000'),dateModification: new Date('07/03/1990'),type: TypeTicket.Date,ordre: 0,obligatoire: false, valeursParDefaut: '',},
+      { id: '12', titre: 'aprobation du medecin', description: 'aprobation du medecin', etat: true,dateCreation: new Date('07/03/2000'), dateModification: new Date('07/03/1990'),type: TypeTicket.Boolean,ordre: 0,obligatoire: false, valeursParDefaut: 'oui, non',},
+      {id: '13',titre: 'motif de la decharge',description: 'motif de la decharge ',etat: true,dateCreation: new Date('07/03/2000'),dateModification: new Date('07/03/1990'),type: TypeTicket.Textarea,ordre: 0,obligatoire: false,valeursParDefaut: '',},
+      {id: '14',titre: 'nom',description: "nom de l'individu", etat: true,dateCreation: new Date('07/03/2000'),dateModification: new Date('07/03/1990'),type: TypeTicket.String,ordre: 0, obligatoire: false, valeursParDefaut: '',},
     ];
     let documents: IDocument[] = [
       {
@@ -2519,9 +2365,9 @@ export class InMemDBService implements InMemoryDbService {
               },
               {id:"2",quantiteMin:30,  quantiteMax:40,  montantMin:100, montantMax:7000,/*fournisseur:'gc',*/
                   famille:[
-                     {id:"1", libelle:"trans", description:"sang", etat:"gl"},
-                     {id:"2", libelle:"néonat", description:"nouveau-né", etat:"malade"},
-                     {id:"3", libelle:"pediatrie", description:"enfant", etat:"souffrant"}
+                     {id:"1", libelle:"trans" , description:"sang", etat:"gl"},
+                     {id:"2", libelle:"néonat" , description:"nouveau-né", etat:"malade"},
+                     {id:"3", libelle:"pediatrie" , description:"enfant", etat:"souffrant"}
                  ]
 
           },
@@ -2534,19 +2380,22 @@ export class InMemDBService implements InMemoryDbService {
                         {id:"3", libelle:"pediatrie", description:"enfant", etat:"souffrant"}
                       ]
             }]},
-            {id:"3",libelle:"vente",etat: true,type:'reduire',/*type:this.TypeMvtReduire*/
-            precomvtqte:[{id:"1",quantiteMin:30,  quantiteMax:40,  montantMin:100, montantMax:7000,/*fournisseur:'gc',*/
-                   distributeur:[
-                               {id:"1", raisonSocial:"brasserie1", adresse:"Dla", telephone:"655554488", mail: "ngong@yad.fr"},
-                               {id:"2", raisonSocial:"guinness",adresse:"Ydé", telephone: "655554481", mail: "ngong@yad.fr"},
-                               {id:"3", raisonSocial:"papeterie yvan", adresse:"Buéa", telephone:"655554486", mail:"ngong@yad.fr"}
+    {id:"3",libelle:"vente",etat: true,type:'reduire',/*type:this.TypeMvtReduire*/
+    precomvtqte:[{id:"1",quantiteMin:30,  quantiteMax:40,  montantMin:100, montantMax:7000,/*fournisseur:'gc',*/
+                famille:[
+                            {id:"1", libelle:"trans", description:"sang", etat:"gl"},
+                          ],
+                distributeur:[
+                               {id:"1", raisonSocial:"brasserie1",etat: true, adresse:"Dla", telephone:"655554488", mail: "ngong@yad.fr"},
+                               {id:"2", raisonSocial:"guinness", etat: true,adresse:"Ydé", telephone: "655554481", mail: "ngong@yad.fr"},
+                               {id:"3", raisonSocial:"papeterie yvan", etat: true,adresse:"Buéa", telephone:"655554486", mail:"ngong@yad.fr"}
                               ]
                     }]}
           ];
     let distributeur:IDistributeur[]=[
-      {id:"1", raisonSocial:"cgb", adresse:"Dla", telephone:"655554488", mail: "ngong@yad.fr"},
-      {id:"2", raisonSocial:"bgb",adresse:"Ydé", telephone: "655554481", mail: "ngong@yad.fr"},
-      {id:"3", raisonSocial:"cvc", adresse:"Buéa", telephone:"655554486", mail:"ngong@yad.fr"},
+      {id:"1", raisonSocial:"brasserie1" ,etat: true, adresse:"Dla", telephone:"655554488", mail: "ngong@yad.fr"},
+      {id:"2", raisonSocial:"guinness" , etat: true,adresse:"Ydé", telephone: "655554481", mail: "ngong@yad.fr"},
+      {id:"3", raisonSocial:"papeterie yvan" ,etat: true, adresse:"Buéa", telephone:"655554486", mail:"ngong@yad.fr"},
     ];
     return{patients, services, menus, tickets, missions, attributs, documents,exemplaires,famille,ressource,precomvt,distributeur};
   }

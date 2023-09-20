@@ -28,7 +28,7 @@ import { DonneesEchangeService } from 'src/app/services/donnees-echange/donnees-
   styleUrls: ['./new-form-document.component.scss']
 })
 export class NewFormDocumentComponent implements OnInit {
-  
+
   document : IDocument = {
     id: '',
     titre: '',
@@ -68,19 +68,19 @@ export class NewFormDocumentComponent implements OnInit {
     ordre: 0,
     listAttributs: []
   }
-  TABLE_CATEGORIE_AFFICHAGE_TEMP: ICategorieAffichage[] = []; 
- // ELEMENTS_TABLE_CATEGORIE_ATTRIBUTS: ICategoriesAttributs[] = []; 
-  TABLE_CATEGORIE_AFFICHAGE_TEMPO: ICategorieAffichage[] = []; 
+  TABLE_CATEGORIE_AFFICHAGE_TEMP: ICategorieAffichage[] = [];
+ // ELEMENTS_TABLE_CATEGORIE_ATTRIBUTS: ICategoriesAttributs[] = [];
+  TABLE_CATEGORIE_AFFICHAGE_TEMPO: ICategorieAffichage[] = [];
 
   // tableau contenant les categories creees
-  tableFinaleCategoriesAttributs: ICategoriesAttributs[] = []; 
-  
+  tableFinaleCategoriesAttributs: ICategoriesAttributs[] = [];
+
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
   constructor(private router:Router, private formBuilder: FormBuilder, private infosPath:ActivatedRoute,
-     private serviceDocument:DocumentService, private serviceMission:MissionsService, private serviceAttribut:AttributService, 
+     private serviceDocument:DocumentService, private serviceMission:MissionsService, private serviceAttribut:AttributService,
       private _liveAnnouncer: LiveAnnouncer, private donneeDocCatService:DonneesEchangeService, private dialogDef : MatDialog) {
     this.forme = this.formBuilder.group({
       _missions :  new FormControl<string | IMission[]>(''),
@@ -164,7 +164,7 @@ export class NewFormDocumentComponent implements OnInit {
         const titre = typeof value === 'string' ? value : value?.titre;
         if(titre != undefined && titre?.length >0){
           this.serviceAttribut.getAttributsByTitre(titre.toLowerCase() as string).subscribe(
-            reponse => { 
+            reponse => {
               this.filteredOptions = reponse;
             }
           )
@@ -180,7 +180,7 @@ export class NewFormDocumentComponent implements OnInit {
     //envoi des données à la fenetre enfant
    // this.donneeDocCatService.dataDocumentCategorie =  this.TABLE_CATEGORIE_AFFICHAGE_TEMP;
 
-    this.dialogDef.open(ModalCategoriesComponent, 
+    this.dialogDef.open(ModalCategoriesComponent,
     {
       width:'100%',
       enterAnimationDuration:'1000ms',
@@ -192,7 +192,7 @@ export class NewFormDocumentComponent implements OnInit {
     }
     )
   }
-  
+
   onCheckAttributChange(event: any) {
     const _attributs = (this.forme.controls['_attributs'] as FormArray);
     if (event.target.checked) {
@@ -220,7 +220,7 @@ export class NewFormDocumentComponent implements OnInit {
         this.ELEMENTS_TABLE_ATTRIBUTS.push(val);
         this.dataSourceAttributResultat.data = this.ELEMENTS_TABLE_ATTRIBUTS;
       }
-    )    
+    )
   }
 
   retirerSelectionAttribut(index: number) {
@@ -240,7 +240,7 @@ export class NewFormDocumentComponent implements OnInit {
    * ceci permet de former le tableau d'objets ICategoriesAttriut qui sera rattache au document lors de l'enregistrement
    */
   validerCategorieAttribut(){
-    let tmpCatAtt = new Map(); 
+    let tmpCatAtt = new Map();
     let categorieAttributsFinal : ICategoriesAttributs[] = [];
 
     //récupération des données du service
@@ -253,7 +253,7 @@ export class NewFormDocumentComponent implements OnInit {
           ordre: 0,
           listAttributs: []
         }
-          //si la map ne contient pas la catégorie courante 
+          //si la map ne contient pas la catégorie courante
           if(tmpCatAtt.get(objet.nom)== null){
             categorieAttributTemp.id = objet.id;
             categorieAttributTemp.nom = objet.nom;
@@ -271,7 +271,7 @@ export class NewFormDocumentComponent implements OnInit {
             categorieAttributTemp.listAttributs.push(objet.attribut);
             categorieAttributsFinal[index] = categorieAttributTemp;
           }
-        } 
+        }
     );
       this.tableFinaleCategoriesAttributs = categorieAttributsFinal;
     console.log("voici le tebleau d'attributs final a enregistrer : ", this.tableFinaleCategoriesAttributs)
@@ -287,13 +287,13 @@ export class NewFormDocumentComponent implements OnInit {
       attributs: [],
       categories: []
     }
-    
+
     console.log("voici les missions pour ce document : ", documentTemp.missions)
 
     if(this.document.id != ""){
-      documentTemp.id = this.document.id  
+      documentTemp.id = this.document.id
     }
-    
+
     this.dataSourceAttributResultat.data.forEach(
       a => documentTemp.attributs.push(a)
     )
@@ -332,7 +332,7 @@ export class NewFormDocumentComponent implements OnInit {
         valeurs => {this.dataSourceAttribut.data = valeurs;}
     )
   }
-  
+
   announceSortChange(sortState: Sort) {
     if (sortState.direction) {
       this._liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);

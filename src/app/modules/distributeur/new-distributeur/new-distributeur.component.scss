@@ -7,8 +7,18 @@
 .block{
   width: 60%;
 }
+input[ type=checkbox ]{
+  border: none;
+  color: red;
+  margin-right: 265px;
+  height: 17px;
+  }
+  input, #etat{
+    border: none;
+    box-shadow: none;
+  }
 .entete{
-  background-color: #7ea97e;
+  background-color: #28a745;
   color: white;
   text-align: center;
   font-size: 22px;
@@ -45,10 +55,119 @@ select{
   align-items: center;
   justify-content: space-between;
   button{
-      background-color: #7ea97e;
+      background-color: #28a745;
       color: white;
       height: 30px;
       padding: 0 10px;
       font-size: 15px;
   }
 }
+
+@media screen and (max-width: 1200px) {
+  input[ type=checkbox ]{
+    margin-right: 185px;
+   }
+
+}
+@media screen and (max-width: 1100px) {
+  input[ type=checkbox ]{
+    margin-right: 180px;
+    }
+
+}
+@media screen and (max-width: 1060px) {
+  input[ type=checkbox ]{
+    margin-right: 150px;
+    }
+
+}
+@media screen and (max-width: 900px) {
+  input[ type=checkbox ]{
+    margin-right: 200px;
+    }
+
+}
+@media screen and (max-width: 990px) {
+  input[ type=checkbox ]{
+    margin-right:100px;
+    }
+
+}
+@media screen and (max-width: 866px) {
+  input[ type=checkbox ]{
+    margin-right:175px;
+    }
+
+}
+@media screen and (max-width: 751px) {
+  input[ type=checkbox ]{
+    margin-right:140px;
+    }
+
+}
+@media screen and (max-width: 699px) {
+  input[ type=checkbox ]{
+    margin-right:120px;
+    }
+
+}
+@media screen and (max-width: 594px) {
+  input[ type=checkbox ]{
+    margin-right:80px;
+    }
+
+}
+@media screen and (max-width: 522px) {
+  input[ type=checkbox ]{
+    margin-right:60px;
+    }
+}
+@media screen and (max-width: 428px) {
+  input[ type=checkbox ]{
+    margin-right:30px;
+    }
+
+}
+
+@media screen and (max-width: 500px) {
+
+  .example-full-width{
+       width:80px;
+       display:flex;
+       justify-content:space-around;
+     }
+}
+
+@media screen and (max-width: 990px) {
+  input[ type=checkbox ]{
+    margin-right:200px;
+    }
+
+}
+@media screen and (max-width: 866px) {
+  input[ type=checkbox ]{
+    margin-right:180px;
+    }
+
+}
+@media screen and (max-width: 751px) {
+  input[ type=checkbox ]{
+    margin-right:140px;
+    }
+
+}
+@media screen and (max-width: 699px) {
+  input[ type=checkbox ]{
+    margin-right:10px;
+    }
+
+}
+@media screen and (max-width: 500px) {
+
+  .example-full-width{
+       width:100px;
+       display:flex;
+       justify-content:space-around;
+     }
+}
+
