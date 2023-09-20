@@ -85,6 +85,7 @@
             "title3":"Date Naissance",
             "title4":"Sexe",
             "title5":"Email",
+            "title6":"Date d'entrée",
             "title7":"Téléphone",
             "actions":{
                 "link2":"Modifier",

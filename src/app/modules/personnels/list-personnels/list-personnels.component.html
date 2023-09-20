@@ -43,7 +43,7 @@
                   </ng-container>
               
                   <!-- birthday Column -->
-                  <ng-container matColumnDef="anniversaire">
+                  <ng-container matColumnDef="dateNaissance">
                     <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{"personnel.table.title3" | translate}} </th>
                     <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.dateNaissance | date: 'dd/MM/yyyy'}} </td>
                   </ng-container>
@@ -55,7 +55,7 @@
                   </ng-container>
 
                   <!-- mail Column -->
-                  <ng-container matColumnDef="mail">
+                  <ng-container matColumnDef="email">
                     <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{"personnel.table.title5" | translate}} </th>
                     <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.email}} </td>
                   </ng-container>
@@ -64,6 +64,12 @@
                   <ng-container matColumnDef="telephone">
                     <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{"personnel.table.title7" | translate}} </th>
                     <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.telephone}} </td>
+                  </ng-container>
+
+                   <!-- dateEntree Column -->
+                   <ng-container matColumnDef="dateEntree">
+                    <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{"personnel.table.title6" | translate}} </th>
+                    <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.dateEntree}} </td>
                   </ng-container>
                   
                   <!-- action Column -->

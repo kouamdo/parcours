@@ -85,6 +85,7 @@
             "title3":"Birthday",
             "title4":"Sex",
             "title5":"Email",
+            "title6":"Date d'entrée",
             "title7":"Phone",
             "actions":{
                 "link2":"Update",

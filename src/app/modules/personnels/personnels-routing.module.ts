@@ -11,7 +11,7 @@ const routes= [
     component: NewPersonnelComponent
   },
   {
-    path: 'update-personnel/:IPersonnel',
+    path: 'update-personnel/:idPersonnel',
     title: 'Modifier un personnel',
     component: NewPersonnelComponent
   },

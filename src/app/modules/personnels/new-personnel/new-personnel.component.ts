@@ -21,7 +21,6 @@ export class NewPersonnelComponent implements OnInit {
    titre: string="Ajouter un nouveau Personnel";
    submitted: boolean=false;
    initialDate = new FormControl(new Date());
-   //TODO validation du formulaire. particulièrment les mail; les dates
    
    constructor(private formBuilder:FormBuilder, private personnelService:PersonnelsService,private router:Router, private infosPath:ActivatedRoute, private datePipe: DatePipe) { 
      this.forme =  this.formBuilder.group({
@@ -43,7 +42,7 @@ export class NewPersonnelComponent implements OnInit {
        this.btnLibelle="Modifier";
        this.titre="Personnel à Modifier";
        
-       //trouver un autre moyen d'initialiser avec des valeurs
+       
        this.personnelService.getPersonnelById(idPersonnel).subscribe(x =>
        {
          this.personnel = x; console.log(this.personnel);
@@ -52,7 +51,7 @@ export class NewPersonnelComponent implements OnInit {
            prenom: this.personnel?.prenom,
            sexe: this.personnel?.sexe,
            email: this.personnel?.email,
-           dateNaissance: this.datePipe.transform(this.personnel?.dateNaissance,'yyyy-MM-dd'), // je change le format de la date de naissance pour pouvoir l'afficher dans mon input type date
+           dateNaissance: this.datePipe.transform(this.personnel?.dateNaissance,'yyyy-MM-dd'),
            telephone: this.personnel?.telephone
          })
        });
@@ -73,9 +72,10 @@ export class NewPersonnelComponent implements OnInit {
        nom:personnelInput.nom,
        prenom:personnelInput.prenom,
        sexe:personnelInput.sexe,
-       email:personnelInput.mail,
+       email:personnelInput.email,
        telephone:personnelInput.telephone,
-       dateNaissance:personnelInput.dateNaissance
+       dateNaissance:personnelInput.dateNaissance,
+       dateEntree: new Date()
      }
      personnelTemp.dateNaissance = this.initialDate.value!
      console.log("personnelTemp.dateNaissance est  :" + personnelTemp.dateNaissance);
@@ -86,9 +86,9 @@ export class NewPersonnelComponent implements OnInit {
      this.personnelService.ajouterPersonnel(personnelTemp).subscribe(
        object => {
         if (object) {
-          console.log("error");
-        } else {
          this.router.navigate(['/list-personnels']);
+        } else {
+          console.log("error");
         }
        }
      )
