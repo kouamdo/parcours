@@ -185,7 +185,7 @@ private getAllDistributeurs(){
   *
   */
  enregistrerPreco(){
- 
+
  if(this.eltsPreco.length===0){
   alert ('vous devez enregistrer au moins une ressource ou une famille');
   return
