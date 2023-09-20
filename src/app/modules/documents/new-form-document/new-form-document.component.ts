@@ -31,7 +31,7 @@ import { IPrecoMvt } from 'src/app/modele/precomvt';
   styleUrls: ['./new-form-document.component.scss']
 })
 export class NewFormDocumentComponent implements OnInit {
-  
+
   document : IDocument = {
     id: '',
     titre: '',
@@ -75,7 +75,7 @@ export class NewFormDocumentComponent implements OnInit {
   @ViewChild(MatSort) sort!: MatSort;
 
   constructor(private router:Router, private formBuilder: FormBuilder, private infosPath:ActivatedRoute,
-     private serviceDocument:DocumentService, private serviceMission:MissionsService, private serviceAttribut:AttributService, 
+     private serviceDocument:DocumentService, private serviceMission:MissionsService, private serviceAttribut:AttributService,
       private _liveAnnouncer: LiveAnnouncer, private donneeDocCatService:DonneesEchangeService, private dialogDef : MatDialog) {
     this.forme = this.formBuilder.group({
       _missions :  new FormControl<string | IMission[]>(''),
@@ -229,7 +229,7 @@ export class NewFormDocumentComponent implements OnInit {
           ordre: 0,
           listAttributs: []
         }
-          //si la map ne contient pas la catégorie courante 
+          //si la map ne contient pas la catégorie courante
           if(tmpCatAtt.get(objet.nom)== null){
             categorieAttributTemp.id = objet.id;
             categorieAttributTemp.nom = objet.nom;
@@ -247,7 +247,7 @@ export class NewFormDocumentComponent implements OnInit {
             categorieAttributTemp.listAttributs.push(objet.attribut);
             categorieAttributsFinal[index] = categorieAttributTemp;
           }
-        } 
+        }
     );
       this.TABLE_CATEGORIE_AFFICHAGE_TEMP = categorieAttributsFinal;
   }
@@ -265,7 +265,7 @@ export class NewFormDocumentComponent implements OnInit {
     }
     
     if(this.document.id != ""){
-      documentTemp.id = this.document.id  
+      documentTemp.id = this.document.id
     }
     
     this.ELEMENTS_TABLE_ATTRIBUTS.forEach(

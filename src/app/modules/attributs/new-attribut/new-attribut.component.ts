@@ -33,10 +33,12 @@ export class NewAttributComponent implements OnInit {
     this.forme = this.formBuilder.group({
       titre: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
       description: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
-      etat: ['False', [Validators.required, Validators.minLength(1), Validators.maxLength(50)]],
+      etat: ['false'],
       dateCreation: ['', [Validators.required]],
       dateModification: ['//'],
-      unite: ['']
+      type: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
+      obligatoire:[''],
+      valeursParDefaut:['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
     })
   }
 
@@ -55,7 +57,9 @@ export class NewAttributComponent implements OnInit {
             etat: this.attribut.etat,
             dateCreation: this.datePipe.transform(this.attribut.dateCreation,'yyyy-MM-dd'),
             dateModification: this.datePipe.transform(this.attribut.dateModification,'yyyy-MM-dd'),
-            type: this.attribut.type
+            type: this.attribut.type,
+            obligatoire: this.attribut.obligatoire,
+            valeursParDefaut:this.attribut.valeursParDefaut
           })
       });
     }
@@ -77,8 +81,8 @@ export class NewAttributComponent implements OnInit {
       etat: attributInput.etat,
       dateCreation: attributInput.dateCreation,
       dateModification: attributInput.dateModification,
-      type: attributInput.type,
       ordre: 0,
+      type: attributInput.type,
       obligatoire:  attributInput.obligatoire,
       valeursParDefaut:  attributInput.valeursParDefaut
     }
@@ -92,6 +96,9 @@ export class NewAttributComponent implements OnInit {
     this.attributService.ajouterAttribut(attributTemp).subscribe(
       object => {
         this.router.navigate(['/list-attributs']);
+      },
+     error =>{
+        console.log(error)
       }
     )
   }

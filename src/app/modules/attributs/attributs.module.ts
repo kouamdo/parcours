@@ -15,6 +15,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { HttpLoaderFactory } from 'src/app/app.module';
 import { NewAttributComponent } from './new-attribut/new-attribut.component';
+import { AppRoutingModule } from 'src/app/app-routing.module';
 
 
 @NgModule({
@@ -26,6 +27,7 @@ import { NewAttributComponent } from './new-attribut/new-attribut.component';
     CommonModule,
     AttributsRoutingModule,
     FormsModule,
+    AppRoutingModule,
     ReactiveFormsModule,
     MatAutocompleteModule,
     MatInputModule,
