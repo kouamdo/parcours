@@ -1,283 +1,297 @@
 {
-    "accueil":{
-        "header":{
-            "nav-top":{
-                "nav-link1":"Accueil",
-                "nav-link2":"Contact"
-            },
-            "nav-left":{
-                "nav-search-bar":"Recherche",
-                "nav-link1":"Patients",
-                "nav-link1-item1":"Recherche",
-                "nav-link1-item2":"Créer",
-                "nav-link1-item3":"Modifier",
-
-                "nav-link2":"Tickets",
-                "nav-link2-item1":"Donner un ticket",
-                "nav-link2-item2":"Creer une file",
-                "nav-link2-item3":"Reinitialiser la file"
-            }
-        },
-        "central-panel":{
-            "title":"Bande d'annonce",
-            "list-item1-link1":"Accueil",
-            "list-item2":"Tableau de bord"
-        },
-        "main-area":{
-            "encart":{
-                "title":"Rapport recapitulatif mensuel",
-                "dropdown-list":{
-                    "link1":"Action",
-                    "link2":"Another action",
-                    "link3":"Something else here",
-                    "link4":"Separated link"
-                }
-            }
-        },
-        "footer":{
-
-        }
-    },
-    "lists":{
-        "title":"listing des",
-        "button1":"Imprimer",
-        "button2":"Retour",
-        "button3":"Annuler",
-        "button4":"Précédent",
-        "button5":"Aucune action",
-        "button6":"valider",
-        "button7":"Modifier",
-        "button8":"Supprimer",
-        "button9":"Ajouter"
-    },
-    "patient":{
-        "text":"Patients retrouvé(e)s",
-        "search-bar":"Rechercher",
-        "table":{
-            "title1":"Nom",
-            "title2":"Prénom",
-            "title3":"Date Naissance",
-            "title4":"Sexe",
-            "title5":"EMail",
-            "title6":"Adresse",
-            "title7":"Téléphone",
-            "title8":"Actions",
-            "actions":{
-                "link1":"Orienter",
-                "link2":"Modifier",
-                "link3":"Détails",
-                "link4":"Supprimer"
-            }
-        },
-        "form":{
-            "text1":"Le nom est obligatoire.",
-            "text2":"Le prénom est obligatoire.",
-            "text3":"La date de naissance est obligatoire.",
-            "text4":"L'addresse mail est obligatoire."
-        }
-    },
-    "services":{
-        "table":{
-            "title1":"Libelle",
-            "title2":"Etat",
-            "title3":"date de derniere modification",
-            "title4":"date d'attribution",
-            "title5":"date de fin"
-        },
-        "form":{
-            "label1":"libelle",
-            "label2":"etat",
-            "label3":"date derniere modification",
-            "text1":"Le libelle est obligatoire.",
-            "text2":"L'etat est obligatoire.",
-            "text3":"La date de derniere modification est obligatoire."
-        }
-    },
-    "tickets":{
-        "table":{
-            "title1":"Id",
-            "title2":"Id unique",
-            "title3":"Date derniere modification",
-            "title4":"Id dans la File d'attente",
-            "title5":"Id personne",
-            "title6":"Statut"
-        },
-        "form":{
-            "label1":"Intitule du service  : ",
-            "label2":"id unique du ticket  : ",
-            "label3":"Date  : ",
-            "label4":"Nom du beneficiaire  : ",
-            "label5":"ticket : ",
-            "label6":"Nom : ",
-            "text1":"logiciel de gestion client"
-        },
-        "panel":{
-            "text1":"voici les infos voici les infos voici les infos voici les infos voici les infos voici les infos"
-        }
-    },
-    "attributs":{
-        "table":{
-            "title1":"titre",
-            "title2":"Description",
-            "title3":"Etat",
-            "title4":"Date Creation",
-            "title5":"Date Modification",
-            "title6":"Type",
-            "title7":"Ordre",
-            "title8":"Attribut obligatoire ?",
-            "title9":"Valeurs par defaut",
-            "title10":"Separer les valeurs par une virgule"
-        },
-        "form":{
-            "text1":"Le titre est obligatoire.",
-            "text2":"La description est obligatoire.",
-            "text3":"L'etat est obligatoire.",
-            "text4":"Le type est obligatoire.",
-            "text5":"Ce champs est obligatoire."
-        }
-    },
-    "missions":{
-        "table":{
-            "title1":"Libelle",
-            "title2":"Description",
-            "title3":"Etat",
-            "title4":"Date Creation",
-            "title5":"Date Modification",
-            "title6":"Service"
-        },
-        "form":{
-            "text1":"Le libelle est obligatoire.",
-            "text2":"La description est obligatoire.",
-            "text3":"L'etat est obligatoire.",
-            "text4":"La date de creation est obligatoire.",
-            "text5":"Le type est obligatoire.",
-            "text6":"Le service est obligatoire",
-            "text7":"Selectionner un service"
-        },
-        "execution":{
-            "text1":"QUEL EST VOTRE CHOIX ?",
-            "text2":"Choix Du Document Pour La Mission",
-            "text3":"Aucun Document Disponible Pour La Mission"
-        }
-    },
-    "document":{
-        "text":"documents retrouvé(e)s",
-        "search-bar":"Rechercher",
-        "title1":"Affichage des resultats",
-        "title2":"Selectionner les attributs de la categories",
-        "table":{
-            "title0":"Id",
-            "title1":"Titre",
-            "title2":"Description",
-            "title3":"Missions",
-            "title4":"Attributs",
-            "title5":"Selectionner les missions",
-            "title6":"Selectionner les attributs",
-            "title7":"Valeurs",
-            "title8":"Nom de la categorie",
-            "title9":"Entrez le nom de la categories",
-            "title10":"Ordre",
-            "title11":"Entrez l'ordre de la categories",
-            "title12":"Creer des categories",
-            "title13":"Ordre attribut",
-            "title14":"Ordre categorie",
-            "title15":"Categories",
-            "title16":"libelle attribut",
-            "title17":"categories"
-        },
-        "form":{
-            "text1":"Le Titre est obligatoire.",
-            "text2":"La Description est obligatoire.",
-            "text3":"Les Missions sont obligatoires.",
-            "text4":"Les attributs sont obligatoires."
-        },
-        "view":{
-            "title":"Modele du document",
-            "text1":"liste des missions du document",
-            "text2":"liste des attributs du document",
-            "text3":"liste des attributs par categorie du document"
-        },
-        "exemplaire":{
-            "title":"Exemplaire du document",
-            "text1":"Composition de l'exemplaire"
-        }      
-    },
-    "theme":{
-        "libelle":"theme"
-    },
-    "langue":{
-        "libelle":"langues"
-    },
-    "famille":{
-      "header":"Ajouter Une Nouvelle Categorie de Ressource",
-      "table":{
-        "title1":"Libellé",
-        "title2":"Description",
-        "title3":"Etat"
+  "accueil": {
+    "header": {
+      "nav-top": {
+        "nav-link1": "Accueil",
+        "nav-link2": "Contact"
       },
-      "form":{
-        "text1":"Champ obligatoire",
-        "text2":"Champ obligatoire"
+      "nav-left": {
+        "nav-search-bar": "Recherche",
+        "nav-link1": "Patients",
+        "nav-link1-item1": "Recherche",
+        "nav-link1-item2": "Créer",
+        "nav-link1-item3": "Modifier",
+
+        "nav-link2": "Tickets",
+        "nav-link2-item1": "Donner un ticket",
+        "nav-link2-item2": "Creer une file",
+        "nav-link2-item3": "Reinitialiser la file"
+      }
     },
-    "lists":{
-      "button1":"Retour"
+    "central-panel": {
+      "title": "Bande d'annonce",
+      "list-item1-link1": "Accueil",
+      "list-item2": "Tableau de bord"
     },
-    "title":"Listing Categorie de Ressource",
-    "search-bar":"Rechercher",
-    "table1":{
-        "title1":"Libellé",
-        "title2":"Description",
-        "title3":"Etat",
-        "title4":"Actions",
-        "actions":{
-            "link1":"Orienter",
-            "link2":"Modifier",
-            "link3":"Détails",
-            "link4":"Supprimer"
+    "main-area": {
+      "encart": {
+        "title": "Rapport recapitulatif mensuel",
+        "dropdown-list": {
+          "link1": "Action",
+          "link2": "Another action",
+          "link3": "Something else here",
+          "link4": "Separated link"
         }
+      }
+    },
+    "footer": {}
+  },
+  "lists": {
+    "title": "listing des",
+    "text1": "Champs obligatoires",
+    "text2": "Champs non obligatoires",
+    "button1": "Imprimer",
+    "button2": "Retour",
+    "button3": "Annuler",
+    "button4": "Précédent",
+    "button5": "Aucune action",
+    "button6": "valider",
+    "button7": "Modifier",
+    "button8": "Supprimer",
+    "button9": "Ajouter"
+  },
+  "patient": {
+    "text": "Patients retrouvé(e)s",
+    "search-bar": "Rechercher",
+    "table": {
+      "title1": "Nom",
+      "title2": "Prénom",
+      "title3": "Date Naissance",
+      "title4": "Sexe",
+      "title5": "EMail",
+      "title6": "Adresse",
+      "title7": "Téléphone",
+      "title8": "Actions",
+      "actions": {
+        "link1": "Orienter",
+        "link2": "Modifier",
+        "link3": "Détails",
+        "link4": "Supprimer"
+      }
+    },
+    "form": {
+      "text1": "Le nom est obligatoire.",
+      "text2": "Le prénom est obligatoire.",
+      "text3": "La date de naissance est obligatoire.",
+      "text4": "L'addresse mail est obligatoire."
     }
   },
-  "ressource":{
-    "table":{
-        "title":"Ajouter une nouvelle ressource",
-        "title1":" Libellé",
-        "title2":"Etat",
-        "title3":"Quantité",
-        "title4":"Unité",
-        "title5":"Prix",
-        "title6":"Catégorie",
-        "title7":"Caractéristiques"
+  "services": {
+    "table": {
+      "title1": "Libelle",
+      "title2": "Etat",
+      "title3": "date de derniere modification",
+      "title4": "date d'attribution",
+      "title5": "date de fin"
     },
-    "form":{
-        "text1":"Champ Obligatoire",
-        "text2":"Champ Obligatoire",
-        "text4":"litre",
-        "text5":"kg",
-        "text6":"m²",
-        "text7":"quintaux",
-        "text8":"Champ Obligatoire",
-        "text9":"Champ Obligatoire",
-        "text11":"Selectionnez une Unité",
-        "text12":"souple",
-        "text13":"dure",
-        "text14":"léger",
-        "text15":"Selectionnez vos Caractéristiques"
-    },
-    "lists":{
-      "button2":"Retour"
-    },
-    "title":"Listing Ressource",
-    "search-bar":"Rechercher",
-    "table2":{
-        "title1":"Ajouter une ressource",
-        "title2":"id",
-        "title3":"libelle",
-        "title4":"Etat",
-        "title5":" Quantité ",
-        "title6":" Unité",
-        "title7":"Prix",
-        "title8":"Catégorie",
-        "title9":"Actions "
+    "form": {
+      "label1": "libelle",
+      "label2": "etat",
+      "label3": "date derniere modification",
+      "text1": "Le libelle est obligatoire.",
+      "text2": "L'etat est obligatoire.",
+      "text3": "La date de derniere modification est obligatoire."
     }
+  },
+  "tickets": {
+    "table": {
+      "title1": "Id",
+      "title2": "Id unique",
+      "title3": "Date derniere modification",
+      "title4": "Id dans la File d'attente",
+      "title5": "Id personne",
+      "title6": "Statut"
+    },
+    "form": {
+      "label1": "Intitule du service  : ",
+      "label2": "id unique du ticket  : ",
+      "label3": "Date  : ",
+      "label4": "Nom du beneficiaire  : ",
+      "label5": "ticket : ",
+      "label6": "Nom : ",
+      "text1": "logiciel de gestion client"
+    },
+    "panel": {
+      "text1": "voici les infos voici les infos voici les infos voici les infos voici les infos voici les infos"
     }
+  },
+  "attributs": {
+    "table": {
+      "title1": "titre",
+      "title2": "Description",
+      "title3": "Etat",
+      "title4": "Date Creation",
+      "title5": "Date Modification",
+      "title6": "Type",
+      "title7": "Ordre",
+      "title8": "Attribut obligatoire ?",
+      "title9": "Valeurs par defaut",
+      "title10": "Separer les valeurs par une virgule"
+    },
+    "form": {
+      "text1": "Le titre est obligatoire.",
+      "text2": "La description est obligatoire.",
+      "text3": "L'etat est obligatoire.",
+      "text4": "Le type est obligatoire.",
+      "text5": "Ce champs est obligatoire."
+    }
+  },
+  "missions": {
+    "table": {
+      "title1": "Libelle",
+      "title2": "Description",
+      "title3": "Etat",
+      "title4": "Date Creation",
+      "title5": "Date Modification",
+      "title6": "Service"
+    },
+    "form": {
+      "text1": "Le libelle est obligatoire.",
+      "text2": "La description est obligatoire.",
+      "text3": "L'etat est obligatoire.",
+      "text4": "La date de creation est obligatoire.",
+      "text5": "Le type est obligatoire.",
+      "text6": "Le service est obligatoire",
+      "text7": "Selectionner un service"
+    },
+    "execution": {
+      "text1": "QUEL EST VOTRE CHOIX ?",
+      "text2": "Choix Du Document Pour La Mission",
+      "text3": "Aucun Document Disponible Pour La Mission"
+    }
+  },
+  "document": {
+    "text": "documents retrouvé(e)s",
+    "search-bar": "Rechercher",
+    "title1": "Affichage des resultats",
+    "title2": "Selectionner les attributs de la categories",
+    "table": {
+      "title0": "Id",
+      "title1": "Titre",
+      "title2": "Description",
+      "title3": "Missions",
+      "title4": "Attributs",
+      "title5": "Selectionner les missions",
+      "title6": "Selectionner les attributs",
+      "title7": "Valeurs",
+      "title8": "Nom de la categorie",
+      "title9": "Entrez le nom de la categories",
+      "title10": "Ordre",
+      "title11": "Entrez l'ordre de la categories",
+      "title12": "Creer des categories",
+      "title13": "Ordre attribut",
+      "title14": "Ordre de la categorie",
+      "title15": "Categories",
+      "title16": "libelle attribut",
+      "title17": "Preconisations"
+    },
+    "form": {
+      "text1": "Le Titre est obligatoire.",
+      "text2": "La Description est obligatoire.",
+      "text3": "Les Missions sont obligatoires.",
+      "text4": "Les attributs sont obligatoires."
+    },
+    "view": {
+      "title": "Modele du document",
+      "text1": "liste des missions du document",
+      "text2": "liste des attributs du document",
+      "text3": "liste des attributs par categorie du document"
+    },
+    "exemplaire": {
+      "title": "Exemplaire du document",
+      "title2": "Donnees obsoletes",
+      "text1": "Composition de l'exemplaire"
+    }
+  },
+  "theme": {
+    "libelle": "theme"
+  },
+  "langue": {
+    "libelle": "langues"
+  },
+  "famille": {
+    "header": "Ajouter Une Nouvelle Categorie de Ressource",
+    "table": {
+      "title1": "Libellé",
+      "title2": "Description",
+      "title3": "Etat"
+    },
+    "form": {
+      "text1": "Champ obligatoire",
+      "text2": "Champ obligatoire"
+    },
+    "lists": {
+      "button1": "Retour"
+    },
+    "title": "Listing Categorie de Ressource",
+    "search-bar": "Rechercher",
+    "table1": {
+      "title1": "Libellé",
+      "title2": "Description",
+      "title3": "Etat",
+      "title4": "Actions",
+      "actions": {
+        "link1": "Orienter",
+        "link2": "Modifier",
+        "link3": "Détails",
+        "link4": "Supprimer"
+      }
+    }
+  },
+  "ressource": {
+    "table": {
+      "title": "Ajouter une nouvelle ressource",
+      "title1": " Libellé",
+      "title2": "Etat",
+      "title3": "Quantité",
+      "title4": "Unité",
+      "title5": "Prix",
+      "title6": "Catégorie",
+      "title7": "Caractéristiques"
+    },
+    "form": {
+      "text1": "Champ Obligatoire",
+      "text2": "Champ Obligatoire",
+      "text4": "litre",
+      "text5": "kg",
+      "text6": "m²",
+      "text7": "quintaux",
+      "text8": "Champ Obligatoire",
+      "text9": "Champ Obligatoire",
+      "text11": "Selectionnez une Unité",
+      "text12": "souple",
+      "text13": "dure",
+      "text14": "léger",
+      "text15": "Selectionnez vos Caractéristiques"
+    },
+    "lists": {
+      "button2": "Retour"
+    },
+    "title": "Listing Ressource",
+    "search-bar": "Rechercher",
+    "table2": {
+      "title1": "Ajouter une ressource",
+      "title2": "id",
+      "title3": "libelle",
+      "title4": "Etat",
+      "title5": " Quantité ",
+      "title6": " Unité",
+      "title7": "Prix",
+      "title8": "Catégorie",
+      "title9": "Actions "
+    }
+  },
+  "preconisation":{
+      "form":{
+          "title1":"Sélectionnez des preconisations"
+      },
+      "table":{
+          "title1":"Libellé",
+          "title2":"Etat",
+          "title3":"Type"
+      },
+      "view":{
+          "text1":"Les préconisations du document"
+      }
+  }
 }

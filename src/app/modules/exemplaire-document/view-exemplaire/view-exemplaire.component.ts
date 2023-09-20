@@ -20,7 +20,8 @@ export class ViewExemplaireComponent implements OnInit {
     attributs: [],
     idDocument: '',
     objetEnregistre: [],
-    categories: []
+    categories: [],
+    preconisations: []
   }; 
   document : IDocument = {
     id: '',
@@ -28,7 +29,8 @@ export class ViewExemplaireComponent implements OnInit {
     description: '',
     missions: [],
     attributs: [],
-    categories: []
+    categories: [],
+    preconisations: []
   };
 
 
@@ -40,7 +42,6 @@ export class ViewExemplaireComponent implements OnInit {
       this.serviceExemplaire.getExemplaireDocumentById(idExemplaire).subscribe(
         x =>{
           this.exemplaire = x;
-          console.log("Voici le document", this.exemplaire.titre);
         });
     }
 

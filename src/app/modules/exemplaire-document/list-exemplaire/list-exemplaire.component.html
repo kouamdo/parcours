@@ -18,11 +18,6 @@
                         </mat-form-field>
                     </form>
                 </div>
-                <!-- <div role="button" id="addUserBotton" routerLink="../exemplaire-nouveau/modify">
-                    <span title="Ajouter une mission">
-                        <i class="fa fa-user-plus" aria-hidden="true"></i>
-                    </span>
-                </div> -->
             </div>
         </div>
         <div class="card-body p-0" id="tableBlock">
@@ -47,18 +42,6 @@
                         <td class="text-dark text-center containCell" mat-cell *matCellDef="let element"> {{element.description}} </td>
                     </ng-container>
                     
-                    <!-- attributs Column
-                    <ng-container matColumnDef="attributs">
-                        <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'document.table.title4' | translate}} </th>
-                        <td class="text-dark text-center containCell" mat-cell *matCellDef="let element let i = index"> {{element.objetEnregistre[i].key}} </td>
-                    </ng-container>
-
-                    <!- valeur Column ->
-                    <ng-container matColumnDef="valeur">
-                        <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'document.table.title7' | translate}} </th>
-                        <td class="text-dark text-center containCell" mat-cell *matCellDef="let element let i = index"> {{element.objetEnregistre[i].value}} </td>
-                    </ng-container> -->
-
                     <ng-container matColumnDef="actions">
                         <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{"patient.table.title8" | translate}} </th>
                         <td class="text-dark text-center containCell" mat-cell *matCellDef="let element">

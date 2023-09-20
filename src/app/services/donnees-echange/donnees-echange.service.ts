@@ -5,5 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class DonneesEchangeService {
   dataDocumentCategorie : any;
+  dataDocumentPrecoMvts : any;
+  dataDocumentAttributs : any;
   constructor() { }
 }
