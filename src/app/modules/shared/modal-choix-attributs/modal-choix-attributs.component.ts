@@ -26,20 +26,12 @@ export class ModalChoixAttributsComponent implements OnInit {
     'titre',
     'description',
     'type',
+    'obligatoire',
   ]; // structure du tableau presentant les attributs
-  displayedCategoriesAttributsColumns: string[] = [
-    'actions',
-    'titre',
-    'description',
-    'type',
-    'ordreAtrParCat',
-    'ordreCat',
-  ]; // structure du tableau presentant les categories creees avec leurs attributs
   dataSourceAttribut = new MatTableDataSource<IAttributs>(
     this.ELEMENTS_TABLE_ATTRIBUTS
   );
   dataSourceAttributResultat = new MatTableDataSource<IAttributs>();
-  _attributs: FormArray | undefined;
   idAttribut: string = '';
 
   @ViewChild(MatPaginator)
@@ -57,7 +49,6 @@ export class ModalChoixAttributsComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     this.formeAttribut = this.formBuilder.group({
-      _attributs: new FormArray([]),
     });
   }
 
@@ -81,18 +72,22 @@ export class ModalChoixAttributsComponent implements OnInit {
   }
 
   onCheckAttributChange(event: any) {
-    const _attributs = this.formeAttribut.controls['_attributs'] as FormArray;
+    let listIdAttTemp : string[] = []
+    let positionsAttr = new Map()
+    let indexAttrCourant : number = 0
+    this.donneeDocCatService.dataDocumentAttributs.forEach(
+      (element: IAttributs) => {
+        listIdAttTemp.push(element.id)
+        positionsAttr.set(element.id, indexAttrCourant++)
+    });
     if (event.target.checked) {
-      _attributs.push(new FormControl(event.target.value));
-      this.ajoutSelectionAttribut(this.idAttribut);
+      if (!listIdAttTemp.includes(this.idAttribut)) {
+        this.ajoutSelectionAttribut(this.idAttribut);
+      }
     } else {
-      const index = _attributs.controls.findIndex(
-        (x) => x.value === event.target.value
-      );
+      const index = positionsAttr.get(this.idAttribut)
       this.retirerSelectionAttribut(index);
-      _attributs.removeAt(index);
     }
-    this._attributs = _attributs;
   }
 
   getAttributId(idAttribut: string) {
@@ -102,7 +97,6 @@ export class ModalChoixAttributsComponent implements OnInit {
   ajoutSelectionAttribut(idAttribut: string) {
     this.serviceAttribut.getAttributById(idAttribut).subscribe((val) => {
       this.ELEMENTS_TABLE_ATTRIBUTS = this.dataSourceAttributResultat.data;
-      // this.dataSourceAttributResultat.data = this.dataSourceAttributDocument.data
       this.ELEMENTS_TABLE_ATTRIBUTS.push(val);
       this.dataSourceAttributResultat.data = this.ELEMENTS_TABLE_ATTRIBUTS;
       this.donneeDocCatService.dataDocumentAttributs = this.ELEMENTS_TABLE_ATTRIBUTS;
@@ -110,10 +104,8 @@ export class ModalChoixAttributsComponent implements OnInit {
   }
 
   retirerSelectionAttribut(index: number) {
-    const _attributs = this.formeAttribut.controls['_attributs'] as FormArray;
     this.ELEMENTS_TABLE_ATTRIBUTS = this.dataSourceAttributResultat.data;
     this.ELEMENTS_TABLE_ATTRIBUTS.splice(index, 1); // je supprime un seul element du tableau a la position 'index'
-    _attributs.removeAt(index);
     this.dataSourceAttributResultat.data = this.ELEMENTS_TABLE_ATTRIBUTS;
     this.donneeDocCatService.dataDocumentAttributs = this.ELEMENTS_TABLE_ATTRIBUTS;
   }

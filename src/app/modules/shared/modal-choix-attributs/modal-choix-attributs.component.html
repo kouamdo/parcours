@@ -49,23 +49,22 @@
                                 <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.etat}} </td>
                             </ng-container>
 
-                            <!-- dateCreation Column -->
-                            <ng-container matColumnDef="dateCreation">
-                                <th class="text-dark containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'attributs.table.title4' | translate}} </th>
-                                <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.dateCreation | date: 'dd/MM/yyyy'}} </td>
+                            <!-- type Column -->
+                            <ng-container matColumnDef="type">
+                                <th class="text-dark containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'attributs.table.title6' | translate}} </th>
+                                <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.type}} </td>
                             </ng-container>
 
-                            <!-- dateModification Column -->
-                            <ng-container matColumnDef="dateModification">
-                                <th class="text-dark containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'attributs.table.title5' | translate}} </th>
-                                <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.dateModification | date: 'dd/MM/yyyy'}} </td>
+                            <!-- obligatoire Column -->
+                            <ng-container matColumnDef="obligatoire">
+                                <th class="text-dark containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'attributs.table.title8' | translate}} </th>
+                                <td class="text-dark containCell" mat-cell *matCellDef="let element">
+                                    <!-- <mat-form-field class="blockOrdreAttribut p-0" appearance="fill">
+                                        <mat-label>ordre</mat-label>
+                                        <input type="checkbox" ma [(ngModel)]="element.obligatoire">
+                                    </mat-form-field> -->
+                                </td>
                             </ng-container>
-
-                          <!-- type Column -->
-                          <ng-container matColumnDef="type">
-                              <th class="text-dark containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'attributs.table.title6' | translate}} </th>
-                              <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.type}} </td>
-                          </ng-container>
 
                             <!-- Actions column -->
                             <ng-container matColumnDef="actions">
@@ -73,7 +72,7 @@
                                 <td class="text-dark containCell" mat-cell *matCellDef="let element">
                                     <div class="actions" class="">
                                         <label style="width: 2px;" for="attributs">
-                                            <input type="checkbox" required formArrayName="_attributs" [value]="element.titre" name="attributs" id="attributs" (click)="getAttributId(element.id)" (change)="onCheckAttributChange($event)">
+                                            <input type="checkbox" [value]="element.titre" name="attributs" id="attributs" (click)="getAttributId(element.id)" (change)="onCheckAttributChange($event)">
                                         </label>
                                     </div>
                                 </td>
@@ -101,16 +100,25 @@
                                         <th class="text-dark containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'attributs.table.title1' | translate}} </th>
                                         <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.titre}} </td>
                                     </ng-container>
+
                                     <!-- description Column -->
                                     <ng-container matColumnDef="description">
                                         <th class="text-dark containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'attributs.table.title2' | translate}} </th>
                                         <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.description}} </td>
                                     </ng-container>
+
                                     <!-- type Column -->
                                     <ng-container matColumnDef="type">
                                         <th class="text-dark containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'attributs.table.title6' | translate}} </th>
                                         <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.type}} </td>
                                     </ng-container>
+
+                                    <!-- obligatoire Column -->
+                                    <ng-container matColumnDef="obligatoire">
+                                        <th class="text-dark containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'attributs.table.title8' | translate}} </th>
+                                        <td class="text-dark containCell" mat-cell *matCellDef="let element">{{element.obligatoire}}</td>
+                                    </ng-container>
+
                                     <!-- actions Column -->
                                     <ng-container matColumnDef="actions">
                                         <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{"patient.table.title8" | translate}} </th>
@@ -131,7 +139,7 @@
                                 </mat-paginator>
                             </div>
                             <div class="actionButton mt-2">
-                                <button mat-button [mat-dialog-close]="dataSourceAttributResultat.data" cdkFocusInitial class="btn btnValidation">{{'lists.button6' | translate}}</button>
+                                <button mat-button [mat-dialog-close] cdkFocusInitial class="btn btnValidation">{{'lists.button6' | translate}}</button>
                             </div>
                         </div>
                     </div>

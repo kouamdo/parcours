@@ -49,7 +49,7 @@
                                 <td class="text-dark containCell" mat-cell *matCellDef="let element">
                                     <div class="actions" class="">
                                         <label style="width: 2px;" for="PrecoMvts">
-                                            <input type="checkbox" required formArrayName="_precoMvt" [value]="element.libelle" name="PrecoMvts" id="PrecoMvts" (click)="getPrecoMvtId(element.id)" (change)="onCheckPrecoMvtChange($event)">
+                                            <input type="checkbox" [value]="element.libelle" name="PrecoMvts" id="PrecoMvts" (click)="getPrecoMvtId(element.id)" (change)="onCheckPrecoMvtChange($event)">
                                         </label>
                                     </div>
                                 </td>
