@@ -97,7 +97,8 @@
             "text1":"Name is requied",
             "text2":"Surname is requied",
             "text3":"Birthday is requied",
-            "text4":"email address is requied is requied"
+            "text4":"email address is requied is requied",
+            "text5":"Day of entry is required."       
         }
     },
     "services":{

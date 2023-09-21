@@ -97,7 +97,8 @@
             "text1":"Le nom est obligatoire.",
             "text2":"Le prénom est obligatoire.",
             "text3":"La date de naissance est obligatoire.",
-            "text4":"email address is requied is requied"
+            "text4":"email address is requied is requied",
+            "text5":"La date d'entrée est aubligatoire."       
         }
     },
     "services":{

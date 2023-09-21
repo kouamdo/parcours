@@ -58,6 +58,19 @@
                         <div class="form-group">
                             <div>
                                 <div class="champs">
+                                    <label for="dateEntree" class="label" >
+                                        {{"personnel.table.title6" | translate}}
+                                    </label>
+                                    <input  type="date" formControlName="dateEntree"  name="dateEntree" id="dateEntree" placeholder="{{'personnel.table.title3' | translate}}" value="" required class="form-control">
+                                </div>
+                                <div  *ngIf="submitted && f['dateEntree'].errors"  class="alert alert-danger" >
+                                    <div *ngIf="f['dateEntree'].errors['required']">{{'personnel.form.text5' | translate}}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div>
+                                <div class="champs">
                                     <label for="email" class="label" >
                                         {{"personnel.table.title5" | translate}}
                                     </label>

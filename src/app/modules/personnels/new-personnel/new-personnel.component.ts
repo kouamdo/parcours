@@ -12,7 +12,6 @@ import {v4 as uuidv4} from 'uuid';
   styleUrls: ['./new-personnel.component.css']
 })
 export class NewPersonnelComponent implements OnInit {
-   [x: string]: any;
 
    //personnel$:Observable<personnel>=EMPTY;
    personnel : IPersonnel|undefined;
@@ -20,7 +19,6 @@ export class NewPersonnelComponent implements OnInit {
    btnLibelle: string="Ajouter";
    titre: string="Ajouter un nouveau Personnel";
    submitted: boolean=false;
-   initialDate = new FormControl(new Date());
    
    constructor(private formBuilder:FormBuilder, private personnelService:PersonnelsService,private router:Router, private infosPath:ActivatedRoute, private datePipe: DatePipe) { 
      this.forme =  this.formBuilder.group({
@@ -30,6 +28,7 @@ export class NewPersonnelComponent implements OnInit {
        email: ['', [Validators.required, Validators.email, Validators.pattern(".+@.+\.{1}[a-z]{2,3}")]],
        //todo initialisation du composant à une date 
        dateNaissance: ['1980-01-01', Validators.required],
+       dateEntree: ['2023-01-01', Validators.required],
        telephone: ['']
      })    
    }
@@ -52,6 +51,7 @@ export class NewPersonnelComponent implements OnInit {
            sexe: this.personnel?.sexe,
            email: this.personnel?.email,
            dateNaissance: this.datePipe.transform(this.personnel?.dateNaissance,'yyyy-MM-dd'),
+           dateEntree: this.datePipe.transform(this.personnel?.dateEntree,'yyyy-MM-dd'),
            telephone: this.personnel?.telephone
          })
        });
@@ -75,10 +75,8 @@ export class NewPersonnelComponent implements OnInit {
        email:personnelInput.email,
        telephone:personnelInput.telephone,
        dateNaissance:personnelInput.dateNaissance,
-       dateEntree: new Date()
+       dateEntree: personnelInput.dateEntree
      }
-     personnelTemp.dateNaissance = this.initialDate.value!
-     console.log("personnelTemp.dateNaissance est  :" + personnelTemp.dateNaissance);
  
      if(this.personnel != undefined){
        personnelTemp.id = this.personnel.id  
