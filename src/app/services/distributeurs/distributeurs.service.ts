@@ -37,6 +37,6 @@ export class DistributeursService {
 
   ajouterDistributeur(distributeur:IDistributeur)
   {
-    return this.http.post("api/Distributeur",distributeur);
+    return this.http.post("api/distributeur",distributeur);
   }
 }

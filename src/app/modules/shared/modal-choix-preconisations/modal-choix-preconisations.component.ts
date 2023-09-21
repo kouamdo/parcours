@@ -31,7 +31,6 @@ export class ModalChoixPreconisationsComponent implements OnInit {
     this.ELEMENTS_TABLE_PRECONISATIONS
   );
   dataSourcePrecoResultat = new MatTableDataSource<IPrecoMvt>();
-  _precoMvt: FormArray | undefined;
   idPrecoMvt: string = '';
 
   @ViewChild(MatPaginator)
@@ -49,7 +48,6 @@ export class ModalChoixPreconisationsComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     this.formePrecoMvt = this.formBuilder.group({
-      _precoMvt: new FormArray([]),
     });
   }
 
@@ -72,18 +70,23 @@ export class ModalChoixPreconisationsComponent implements OnInit {
     });
   }
   onCheckPrecoMvtChange(event: any) {
-    const _precoMvt = this.formePrecoMvt.controls['_precoMvt'] as FormArray;
+    let listIdPrecoTemp : string[] = []
+    let positionsPreco = new Map()
+    let indexPrecoCourant : number = 0
+    this.donneeDocCatService.dataDocumentPrecoMvts.forEach(
+      (element: IPrecoMvt) => {
+        listIdPrecoTemp.push(element.id)
+        positionsPreco.set(element.id, indexPrecoCourant++)
+    });
     if (event.target.checked) {
-      _precoMvt.push(new FormControl(event.target.value));
-      this.ajoutSelectionPrecoMvt(this.idPrecoMvt);
+      if (!listIdPrecoTemp.includes(this.idPrecoMvt)) {
+        this.ajoutSelectionPrecoMvt(this.idPrecoMvt);
+      }
+      
     } else {
-      const index = _precoMvt.controls.findIndex(
-        (x) => x.value === event.target.value
-      );
+      const index = positionsPreco.get(this.idPrecoMvt)
       this.retirerSelectionPrecoMvt(index);
-      _precoMvt.removeAt(index);
     }
-    this._precoMvt = _precoMvt;
   }
   getPrecoMvtId(idPrecoMvt: string) {
     this.idPrecoMvt = idPrecoMvt;
@@ -99,10 +102,8 @@ export class ModalChoixPreconisationsComponent implements OnInit {
   }
 
   retirerSelectionPrecoMvt(index: number) {
-    const _precoMvt = this.formePrecoMvt.controls['_precoMvt'] as FormArray;
     this.ELEMENTS_TABLE_PRECONISATIONS = this.dataSourcePrecoResultat.data;
     this.ELEMENTS_TABLE_PRECONISATIONS.splice(index, 1); // je supprime un seul element du tableau a la position 'index'
-    _precoMvt.removeAt(index);
     this.dataSourcePrecoResultat.data = this.ELEMENTS_TABLE_PRECONISATIONS;
     this.donneeDocCatService.dataDocumentPrecoMvts = this.ELEMENTS_TABLE_PRECONISATIONS
   }

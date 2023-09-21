@@ -36,14 +36,14 @@ export class ListDistributeursComponent implements OnInit {
   id_service : number = 0;
   raisonSocial_distributeur : string = "";
   raisonSocial_service : string = "";
-  
+
 
   myControl = new FormControl<string | IDistributeur>('');
 
   ELEMENTS_TABLE: IDistributeur[] = [];
   filteredOptions: IDistributeur[] | undefined;
 
-  displayedColumns: string[] = ['raisonSocial', 'adresse', 'telephone', 'mail', 'actions'];
+  displayedColumns: string[] = ['raisonSocial', 'etat','adresse', 'telephone', 'mail', 'actions'];
 
   dataSource = new MatTableDataSource<IDistributeur>(this.ELEMENTS_TABLE);
 
