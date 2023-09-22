@@ -57,6 +57,7 @@ import { RoleModule } from './modules/role/role.module';
     PrecomvtModule,
     //NgMultiSelectDropDownModule.forRoot(),
     CommonModule,
+
     DistributeurModule,
     RoleModule,
     // ngx-translate and the loader module

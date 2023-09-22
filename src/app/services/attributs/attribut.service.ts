@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, map } from 'rxjs';
+import { Observable } from 'rxjs';
+import {  map } from 'rxjs/operators';
 import { IAttributs } from 'src/app/modele/attributs';
 
 @Injectable({
@@ -9,7 +10,6 @@ import { IAttributs } from 'src/app/modele/attributs';
 export class AttributService {
 
   constructor(private http:HttpClient) { }
-
   getAllAttributs():Observable<IAttributs[]>
   {
     return this.http.get<IAttributs[]>('api/attributs').pipe(map(x=>x));
@@ -23,18 +23,19 @@ export class AttributService {
         })
     );
   }
-  
+
   getAttributsByTitre(titre:string): Observable<IAttributs[]> {
    return this.http.get<IAttributs[]>('api/attributs').pipe(
      map(x=>
        {
-         return x.filter(a=> a.titre.toLowerCase().startsWith(titre))
+         return x.filter(p=> p.titre.toLowerCase().startsWith(titre))
        })
-   );        
- }
+   );
+  }
 
   ajouterAttribut(attribut:IAttributs)
   {
     return this.http.post("api/attributs",attribut);
   }
+
 }

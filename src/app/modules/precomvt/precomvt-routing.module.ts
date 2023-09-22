@@ -13,7 +13,7 @@ const routes: Routes = [
   },
   {
     path: 'precomvt-nouvelle/:idPrecoMvt',
-    title: 'Modifier une famille',
+    title: 'Modifier une préconisation',
     component: NewPrecomvtComponent
   },
   {
