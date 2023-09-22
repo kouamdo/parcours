@@ -26,7 +26,6 @@ export class NewRoleComponent implements OnInit {
     titre: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
     etat: [true],
     description: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
-    dateCreation: ['', [Validators.required]],
   })
   }
 
@@ -44,7 +43,6 @@ export class NewRoleComponent implements OnInit {
           titre: this.role.titre,
           etat:this.role. etat,
           description: this.role.description,
-          dateCreation: this.datePipe.transform(this.role.dateCreation,'yyyy-MM-dd'),
 
         })
       });
@@ -66,9 +64,8 @@ export class NewRoleComponent implements OnInit {
       titre:roleInput.titre,
       description:roleInput.description,
       etat:roleInput.etat,
-      dateCreation:roleInput.dateCreation,
     }
-    roleTemp.dateCreation = this.initialDateCreation.value!
+
 
     if(this.role != undefined){
       roleTemp.id = this.role.id

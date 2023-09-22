@@ -3,5 +3,5 @@ export interface IRole {
   titre:string,
   description:string,
   etat:boolean,
-  dateCreation:Date,
+  dateCreation?:Date,
 }
