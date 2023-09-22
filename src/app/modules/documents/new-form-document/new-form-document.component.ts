@@ -162,8 +162,10 @@ export class NewFormDocumentComponent implements OnInit {
 
     const dialogRef = this.dialogDef.open(ModalCategoriesComponent, 
     {
-      width:'100%',
-      height:'100%',
+      maxWidth: '100vw',
+      maxHeight: '100vh',
+      height: '100%',
+      width: '100%',
       enterAnimationDuration:'1000ms',
       exitAnimationDuration:'1000ms',
       data:{}
@@ -178,6 +180,8 @@ export class NewFormDocumentComponent implements OnInit {
   openAttributDialog(){
     const dialogRef = this.dialogDef.open(ModalChoixAttributsComponent, 
     {
+      maxWidth: '100vw',
+      maxHeight: '100vh',
       width:'100%',
       height:'100%',
       enterAnimationDuration:'1000ms',
@@ -194,6 +198,8 @@ export class NewFormDocumentComponent implements OnInit {
 
     const dialogRef = this.dialogDef.open(ModalChoixPreconisationsComponent, 
     {
+      maxWidth: '100vw',
+      maxHeight: '100vh',
       width:'100%',
       height:'100%',
       enterAnimationDuration:'1000ms',

@@ -127,7 +127,8 @@
       "title7": "Ordre",
       "title8": "Attribut obligatoire ?",
       "title9": "Valeurs par defaut",
-      "title10": "Separer les valeurs par une virgule"
+      "title10": "Separer les valeurs par une virgule",
+      "title11": "Obligatoire ?"
     },
     "form": {
       "text1": "Le titre est obligatoire.",

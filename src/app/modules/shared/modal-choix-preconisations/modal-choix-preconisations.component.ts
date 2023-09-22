@@ -130,6 +130,8 @@ export class ModalChoixPreconisationsComponent implements OnInit {
   openViewPrecoDialog(){
     this.dialogDef.open(ViewPrecomvtComponent, 
     {
+      maxWidth: '100vw',
+      maxHeight: '100vh',
       width:'100%',
       height:'100%',
       enterAnimationDuration:'1000ms',
