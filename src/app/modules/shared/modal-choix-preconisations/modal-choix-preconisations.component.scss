@@ -42,10 +42,17 @@
     table{
         .actions{
             font-size: 12px;
+            width: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
         }
     }
 }
 .actions button{
+    font-size: 10px;
+}
+.actions span{
     font-size: 10px;
 }
 .result{

@@ -1,5 +1,5 @@
 <div id="mainSection" class="bg-light card modalCategorie">
-    <form [formGroup]="formeAttribut" *ngIf="formeAttribut" class="w-100">
+    <form class="w-100">
         <div class="form-group mt-5">
             <div class='card-hearder'>
                 <h2 class="modal-title">{{'document.table.title6' | translate}}</h2>
@@ -59,10 +59,10 @@
                             <ng-container matColumnDef="obligatoire">
                                 <th class="text-dark containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'attributs.table.title8' | translate}} </th>
                                 <td class="text-dark containCell" mat-cell *matCellDef="let element">
-                                    <!-- <mat-form-field class="blockOrdreAttribut p-0" appearance="fill">
-                                        <mat-label>ordre</mat-label>
-                                        <input type="checkbox" ma [(ngModel)]="element.obligatoire">
-                                    </mat-form-field> -->
+                                    <label class="custom-control custom-checkbox controlObligatoire" for="element.obligatoire">
+                                        <input class="" type="checkbox" [(ngModel)]="element.obligatoire" [ngModelOptions]="{standalone: true}" value="true">
+                                        {{element.obligatoire}}
+                                    </label>
                                 </td>
                             </ng-container>
 

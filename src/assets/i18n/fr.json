@@ -48,7 +48,8 @@
     "button6": "valider",
     "button7": "Modifier",
     "button8": "Supprimer",
-    "button9": "Ajouter"
+    "button9": "Ajouter",
+    "button10":"Fermer"
   },
   "patient": {
     "text": "Patients retrouvé(e)s",
@@ -288,7 +289,8 @@
       "table":{
           "title1":"Libellé",
           "title2":"Etat",
-          "title3":"Type"
+          "title3":"Type",
+          "title4":"Voir le detail"
       },
       "view":{
           "text1":"Les préconisations du document"

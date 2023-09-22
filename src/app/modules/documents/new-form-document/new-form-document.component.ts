@@ -182,9 +182,7 @@ export class NewFormDocumentComponent implements OnInit {
       height:'100%',
       enterAnimationDuration:'1000ms',
       exitAnimationDuration:'1000ms',
-      data:{
-        // tableauAttributsDocumentResultat : this.ELEMENTS_TABLE_ATTRIBUTS
-      }
+      data:{}
     }
     )
 
@@ -200,9 +198,7 @@ export class NewFormDocumentComponent implements OnInit {
       height:'100%',
       enterAnimationDuration:'1000ms',
       exitAnimationDuration:'1000ms',
-      data:{
-        // dataSourcePreco : this.dataSourcePreco
-      }
+      data:{}
     }
     )
 

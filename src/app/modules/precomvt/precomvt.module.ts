@@ -21,11 +21,15 @@ import { ListPrecomvtsComponent } from './list-precomvts/list-precomvts.componen
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSelectModule } from '@angular/material/select';
 import { ViewPrecomvtComponent } from './view-precomvt/view-precomvt.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
     NewPrecomvtComponent,
     ListPrecomvtsComponent,
+    ViewPrecomvtComponent
+  ],
+  exports: [
     ViewPrecomvtComponent
   ],
   imports: [
@@ -43,6 +47,7 @@ import { ViewPrecomvtComponent } from './view-precomvt/view-precomvt.component';
     MatSelectModule,
     MatCheckboxModule,
     TicketsModule,
+    MatDialogModule,
     TranslateModule.forChild({
         loader: {
             provide: TranslateLoader,

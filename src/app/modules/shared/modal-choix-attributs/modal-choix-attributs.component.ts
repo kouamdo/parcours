@@ -48,8 +48,7 @@ export class ModalChoixAttributsComponent implements OnInit {
     private dialogDef: MatDialog,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
-    this.formeAttribut = this.formBuilder.group({
-    });
+    this.formeAttribut = this.formBuilder.group({});
   }
 
   ngOnInit(): void {

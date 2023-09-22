@@ -136,6 +136,15 @@ th{
         width: 50px;
     }
 }
+.controlObligatoire{
+    input{
+      background-color: #1473e6;
+    }
+    label{
+        font-weight: normal;
+    }
+    
+}
 @media screen and (max-width: 1200px) {
     .title h2{
         font-size: 15px;
