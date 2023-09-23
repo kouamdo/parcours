@@ -9,7 +9,7 @@ import {v4 as uuidv4} from 'uuid';
 @Component({
   selector: 'app-new-personnel',
   templateUrl: './new-personnel.component.html',
-  styleUrls: ['./new-personnel.component.css']
+  styleUrls: ['./new-personnel.component.scss']
 })
 export class NewPersonnelComponent implements OnInit {
 
@@ -20,7 +20,7 @@ export class NewPersonnelComponent implements OnInit {
    titre: string="Ajouter un nouveau Personnel";
    submitted: boolean=false;
    
-   constructor(private formBuilder:FormBuilder, private personnelService:PersonnelsService,private router:Router, private infosPath:ActivatedRoute, private datePipe: DatePipe) { 
+   constructor(private formBuilder:FormBuilder, private personnelService:PersonnelsService, private router:Router, private infosPath:ActivatedRoute, private datePipe: DatePipe) { 
      this.forme =  this.formBuilder.group({
        nom: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
        prenom: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
@@ -29,6 +29,7 @@ export class NewPersonnelComponent implements OnInit {
        //todo initialisation du composant à une date 
        dateNaissance: ['1980-01-01', Validators.required],
        dateEntree: ['2023-01-01', Validators.required],
+       dateSortie: ['0000-00-00'],
        telephone: ['']
      })    
    }
@@ -52,6 +53,7 @@ export class NewPersonnelComponent implements OnInit {
            email: this.personnel?.email,
            dateNaissance: this.datePipe.transform(this.personnel?.dateNaissance,'yyyy-MM-dd'),
            dateEntree: this.datePipe.transform(this.personnel?.dateEntree,'yyyy-MM-dd'),
+           dateSortie: this.datePipe.transform(this.personnel?.dateSortie,'yyyy-MM-dd'),
            telephone: this.personnel?.telephone
          })
        });
@@ -75,7 +77,8 @@ export class NewPersonnelComponent implements OnInit {
        email:personnelInput.email,
        telephone:personnelInput.telephone,
        dateNaissance:personnelInput.dateNaissance,
-       dateEntree: personnelInput.dateEntree
+       dateEntree: personnelInput.dateEntree,
+       dateSortie: personnelInput.dateSortie
      }
  
      if(this.personnel != undefined){
@@ -83,11 +86,7 @@ export class NewPersonnelComponent implements OnInit {
      }
      this.personnelService.ajouterPersonnel(personnelTemp).subscribe(
        object => {
-        if (object) {
          this.router.navigate(['/list-personnels']);
-        } else {
-          console.log("error");
-        }
        }
      )
    }

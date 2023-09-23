@@ -87,6 +87,8 @@
             "title5":"Email",
             "title6":"Date d'entrée",
             "title7":"Téléphone",
+            "title8":"Date De Sortie",
+            "title9":"Actions",
             "actions":{
                 "link2":"Modifier",
                 "link3":"Détails",

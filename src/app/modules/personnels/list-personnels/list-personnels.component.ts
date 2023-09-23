@@ -16,7 +16,7 @@ export interface User {
 @Component({
   selector: 'app-list-personnels',
   templateUrl: './list-personnels.component.html',
-  styleUrls: ['./list-personnels.component.css']
+  styleUrls: ['./list-personnels.component.scss']
 })
 export class ListPersonnelsComponent implements OnInit, AfterViewInit {
 
@@ -25,7 +25,7 @@ export class ListPersonnelsComponent implements OnInit, AfterViewInit {
   ELEMENTS_TABLE: IPersonnel[] = [];
   filteredOptions: IPersonnel[] | undefined;
 
-  displayedColumns: string[] = ['nom', 'prenom', 'dateNaissance', 'sexe', 'email', 'telephone', 'dateEntree'];
+  displayedColumns: string[] = ['nom', 'prenom', 'dateNaissance', 'sexe', 'email', 'telephone', 'dateEntree', 'dateSortie', 'actions'];
   
   dataSource = new MatTableDataSource<IPersonnel>(this.ELEMENTS_TABLE);
 
