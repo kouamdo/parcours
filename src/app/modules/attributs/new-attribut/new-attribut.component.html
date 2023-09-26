@@ -37,7 +37,7 @@
                                     <label for="etat" class="label" >
                                         {{'attributs.table.title3' | translate}}
                                     </label>
-                                    <input  type="checkbox"   formControlName="etat"  name="etat" id="etat" placeholder="{{'attributs.table.title3' | translate}}" value="true" class="form-control">
+                                    <input  type="checkbox" value="true" checked  formControlName="etat"  name="etat" id="etat" placeholder="{{'attributs.table.title3' | translate}}"  class="form-control">
                                 </div>
                                 <div  *ngIf="submitted && f['etat'].errors"  class="alert alert-danger" >
                                     <div *ngIf="f['etat'].errors['required']">{{'attributs.form.text3' | translate}}</div>
@@ -65,7 +65,7 @@
                                     {{'attributs.table.title8' | translate}}
                                 </label>
                                 <p class="w-100 d-flex align-items-center choix" >
-                                    <input type="checkbox" value="true" formControlName="obligatoire" name="obligatoire" id="obligatoire" placeholder="{{'attributs.table.title5' | translate}}" class="ml-2" > oui
+                                    <input type="checkbox" value="true" checked  formControlName="obligatoire" name="obligatoire" id="obligatoire" placeholder="{{'attributs.table.title5' | translate}}" class="ml-2" > oui
                                 </p>
                             </div>
                         </div>

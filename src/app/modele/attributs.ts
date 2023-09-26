@@ -5,9 +5,9 @@ export interface IAttributs {
     titre:string,
     description:string,
     etat:boolean,
-    dateCreation:Date,
-    dateModification:Date,
-    ordre: number,
+    dateCreation?:Date,
+    dateModification?:Date,
+    ordre?: number,
     obligatoire: boolean,
     valeursParDefaut: string,
     type:TypeTicket
