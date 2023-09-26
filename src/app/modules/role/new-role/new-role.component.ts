@@ -19,7 +19,6 @@ export class NewRoleComponent implements OnInit {
   forme: FormGroup;
   btnLibelle: string="Ajouter";
   submitted: boolean=false;
-  initialDateCreation = new FormControl(new Date());
   //TODO validation du formulaire. particulièrment les mail
   constructor(private formBuilder:FormBuilder, private roleService:RolesService,private router:Router, private infosPath:ActivatedRoute, private datePipe: DatePipe){
     this.forme = this.formBuilder.group({
@@ -43,6 +42,7 @@ export class NewRoleComponent implements OnInit {
           titre: this.role.titre,
           etat:this.role. etat,
           description: this.role.description,
+          //dateCreation: this.datePipe.transform(this.role.dateCreation,'yyyy-MM-dd'),
 
         })
       });
@@ -65,7 +65,6 @@ export class NewRoleComponent implements OnInit {
       description:roleInput.description,
       etat:roleInput.etat,
     }
-
 
     if(this.role != undefined){
       roleTemp.id = this.role.id
