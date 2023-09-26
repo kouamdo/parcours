@@ -2038,7 +2038,7 @@ export class InMemDBService implements InMemoryDbService {
                 dateModification: new Date('07/03/1990'),
                 type: TypeTicket.Double,
                 ordre: 2,
-                obligatoire: false,
+                obligatoire: true,
                 valeursParDefaut: '',
               },
               {
@@ -2050,7 +2050,7 @@ export class InMemDBService implements InMemoryDbService {
                 dateModification: new Date('07/03/1990'),
                 type: TypeTicket.Double,
                 ordre: 3,
-                obligatoire: false,
+                obligatoire: true,
                 valeursParDefaut: '',
               },
             ],
@@ -2881,7 +2881,7 @@ export class InMemDBService implements InMemoryDbService {
             dateModification: new Date('07/03/1990'),
             type: TypeTicket.Double,
             ordre: 0,
-            obligatoire: false,
+            obligatoire: true,
             valeursParDefaut: '',
           },
           {
@@ -2905,7 +2905,7 @@ export class InMemDBService implements InMemoryDbService {
             dateModification: new Date('07/03/1990'),
             type: TypeTicket.Double,
             ordre: 0,
-            obligatoire: false,
+            obligatoire: true,
             valeursParDefaut: '',
           },
           {
@@ -3020,7 +3020,7 @@ export class InMemDBService implements InMemoryDbService {
                 dateModification: new Date('07/03/1990'),
                 type: TypeTicket.Double,
                 ordre: 2,
-                obligatoire: false,
+                obligatoire: true,
                 valeursParDefaut: '',
               },
               {
@@ -3032,7 +3032,7 @@ export class InMemDBService implements InMemoryDbService {
                 dateModification: new Date('07/03/1990'),
                 type: TypeTicket.Double,
                 ordre: 3,
-                obligatoire: false,
+                obligatoire: true,
                 valeursParDefaut: '',
               },
             ],

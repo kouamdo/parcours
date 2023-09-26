@@ -25,8 +25,7 @@ export class ModalChoixAttributsComponent implements OnInit {
     'actions',
     'titre',
     'description',
-    'type',
-    'obligatoire',
+    'type'
   ]; // structure du tableau presentant les attributs
   dataSourceAttribut = new MatTableDataSource<IAttributs>(
     this.ELEMENTS_TABLE_ATTRIBUTS

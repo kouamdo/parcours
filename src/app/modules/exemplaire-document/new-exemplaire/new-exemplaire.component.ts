@@ -91,6 +91,7 @@ export class NewExemplaireComponent implements OnInit {
   tableauAttributsSupprime: IAttributs[] = [];
 
   tempAttributsCpt = new Map()
+  tabError : Map<String,String> = new Map();
 
   constructor(
     private router: Router,
@@ -124,10 +125,21 @@ export class NewExemplaireComponent implements OnInit {
    * Methode pour l'initialisation d'un control avec une valeur
    * @param valParDefaut valeur recuperer dans objetEnregistre et qui servira de valeur du control cree
    */
-  addAttributs(valParDefaut: any) {
-    if (valParDefaut != '' && valParDefaut != 'PARCOURS_NOT_FOUND_404')
-      this._exemplaireDocument.push(this.formBuilder.control(valParDefaut));
-    else this._exemplaireDocument.push(this.formBuilder.control(''));
+  addAttributs(valParDefaut: any, obligatoire : Boolean) {
+    if (valParDefaut != '' && valParDefaut != 'PARCOURS_NOT_FOUND_404'){
+      if (obligatoire == true) {
+        this._exemplaireDocument.push(this.formBuilder.control(valParDefaut, Validators.required));
+      } else {
+        this._exemplaireDocument.push(this.formBuilder.control(valParDefaut));
+      }
+    }
+    else{
+      if (obligatoire == true) {
+        this._exemplaireDocument.push(this.formBuilder.control('', Validators.required));
+      } else {
+        this._exemplaireDocument.push(this.formBuilder.control(''));
+      }
+    } 
   }
 
   /**
@@ -280,9 +292,9 @@ export class NewExemplaireComponent implements OnInit {
          dateAtt = new Date(valAttribut); // creatoion d'une nouvelle date avec la valeur de valAttribut
       
       let dateReduite = this.datePipe.transform(dateAtt, 'yyyy-MM-dd'); // changer le format de la date de naissance pour pouvoir l'afficher dans mon input type date
-      this.addAttributs(dateReduite);
+      this.addAttributs(dateReduite, attribut.obligatoire);
     } else {
-      this.addAttributs(valAttribut);
+      this.addAttributs(valAttribut, attribut.obligatoire);
     }
     this.compteur = this.compteur + 1;
     return this.compteur;
@@ -305,6 +317,10 @@ export class NewExemplaireComponent implements OnInit {
     this.numerateur = this.numerateur + 1;
     this._controlsSupprime.disable();
     return this.numerateur;
+  }
+
+  get f(){
+    return this.formeExemplaire.controls;
   }
 
   /**

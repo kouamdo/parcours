@@ -65,6 +65,18 @@
                                     </mat-form-field>
                                 </td>
                             </ng-container>
+
+                            <!-- obligatoire Column -->
+                            <ng-container matColumnDef="obligatoire">
+                                <th class="text-dark containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'attributs.table.title8' | translate}} </th>
+                                <td class="text-dark containCell" mat-cell *matCellDef="let element">
+                                    <label class="custom-control custom-checkbox controlObligatoire" for="element.obligatoire">
+                                        <input class="" type="checkbox" [(ngModel)]="element.obligatoire" [ngModelOptions]="{standalone: true}" value="true">
+                                        {{element.obligatoire}}
+                                    </label>
+                                </td>
+                            </ng-container>
+
                             <!-- actions Column -->
                             <ng-container matColumnDef="actions">
                                 <th class="text-dark text-left containHead" mat-header-cell *matHeaderCellDef> {{"patient.table.title8" | translate}} </th>
@@ -120,6 +132,11 @@
                             <ng-container matColumnDef="ordreCat">
                                 <th class="text-dark containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'document.table.title14' | translate}} </th>
                                 <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.ordre}} </td>
+                            </ng-container>
+                            <!-- obligatoire Column -->
+                            <ng-container matColumnDef="obligatoire">
+                                <th class="text-dark containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'attributs.table.title11' | translate}} </th>
+                                <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.attribut.obligatoire}} </td>
                             </ng-container>
                             <!-- actions Column -->
                             <ng-container matColumnDef="actions">

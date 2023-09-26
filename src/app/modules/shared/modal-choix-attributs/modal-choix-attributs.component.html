@@ -55,17 +55,6 @@
                                 <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.type}} </td>
                             </ng-container>
 
-                            <!-- obligatoire Column -->
-                            <ng-container matColumnDef="obligatoire">
-                                <th class="text-dark containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'attributs.table.title8' | translate}} </th>
-                                <td class="text-dark containCell" mat-cell *matCellDef="let element">
-                                    <label class="custom-control custom-checkbox controlObligatoire" for="element.obligatoire">
-                                        <input class="" type="checkbox" [(ngModel)]="element.obligatoire" [ngModelOptions]="{standalone: true}" value="true">
-                                        {{element.obligatoire}}
-                                    </label>
-                                </td>
-                            </ng-container>
-
                             <!-- Actions column -->
                             <ng-container matColumnDef="actions">
                                 <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{"patient.table.title8" | translate}} </th>
@@ -111,12 +100,6 @@
                                     <ng-container matColumnDef="type">
                                         <th class="text-dark containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'attributs.table.title6' | translate}} </th>
                                         <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.type}} </td>
-                                    </ng-container>
-
-                                    <!-- obligatoire Column -->
-                                    <ng-container matColumnDef="obligatoire">
-                                        <th class="text-dark containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'attributs.table.title8' | translate}} </th>
-                                        <td class="text-dark containCell" mat-cell *matCellDef="let element">{{element.obligatoire}}</td>
                                     </ng-container>
 
                                     <!-- actions Column -->

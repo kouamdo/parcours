@@ -31,9 +31,9 @@ export class ModalCategoriesComponent implements OnInit {
   validation: boolean=false;
 
   // structure du tableau presentant les categories creees avec leurs attributs
-  displayedCategoriesAttributsColumns: string[] = ['actions','nomCategorie', 'ordreCat', 'libelleAttribut', 'ordreAtrParCat']; 
+  displayedCategoriesAttributsColumns: string[] = ['actions','nomCategorie', 'ordreCat', 'libelleAttribut', 'ordreAtrParCat', 'obligatoire']; 
   // structure du tableau presentant les choix des attributs lors de la creation des categories
-  displayedCategoriesColumns: string[] = ['actions','titre', 'description', 'type', 'ordreAtrParCat'];  
+  displayedCategoriesColumns: string[] = ['actions','titre', 'description', 'type', 'ordreAtrParCat', 'obligatoire'];  
   
   nomValide : boolean = false
   
