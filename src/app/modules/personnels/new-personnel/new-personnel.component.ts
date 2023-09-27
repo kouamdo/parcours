@@ -24,13 +24,13 @@ export class NewPersonnelComponent implements OnInit {
      this.forme =  this.formBuilder.group({
        nom: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
        prenom: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
-       sexe: [''],
+       sexe: ['', Validators.required],
        email: ['', [Validators.required, Validators.email, Validators.pattern(".+@.+\.{1}[a-z]{2,3}")]],
        //todo initialisation du composant à une date 
        dateNaissance: ['1980-01-01', Validators.required],
        dateEntree: ['2023-01-01', Validators.required],
        dateSortie: ['0000-00-00'],
-       telephone: ['']
+       telephone: ['', Validators.required]
      })    
    }
  
