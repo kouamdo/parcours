@@ -19,6 +19,7 @@ import { IPrecoMvt } from "../modele/precomvt";
 import { Unites } from "../modele/unites";
 import { IDistributeur } from "../modele/distributeur";
 import { IRole } from '../modele/role';
+import { IPersonnel } from '../modele/personnel';
 
 export class InMemDBService implements InMemoryDbService {
   UnitesLitre = Unites.litre;
@@ -241,6 +242,15 @@ export class InMemDBService implements InMemoryDbService {
             elements: [
               { nom: 'Créer', lien: 'patient-nouveau', bouton: 'false' },
               { nom: 'Rechercher', lien: 'list-patients', bouton: 'false' },
+            ],
+          },
+          {
+            fonction: 'Personnel',
+            icone: 'fas fa-user-cog',
+            actif: '',
+            elements: [
+              { nom: 'Créer', lien: './nouveau-personnel', bouton: 'false' },
+              { nom: 'Rechercher', lien: './list-personnels', bouton: 'false' },
             ],
           },
           {
@@ -4383,6 +4393,9 @@ export class InMemDBService implements InMemoryDbService {
       {id:"2", titre:"traiteur", description: "cicatrice de l'individu",etat:true, dateCreation:new Date("07/03/2000")},
       {id:"3", titre:"marcheur", description: "cicatrice du vieu",etat:true,dateCreation:new Date("07/03/2000")},
     ];
-    return{patients, services, menus, tickets, missions, attributs, documents,exemplaires,famille,ressource,precomvt,distributeur,role};
+    let personnels: IPersonnel[] = [
+      {id:"1", nom:"Tagne", prenom:"Willy", email:"tagnewillie@gmail.com", telephone:"655455487", sexe:"M", dateNaissance: new Date('10/04/2000'), dateEntree: new Date(), dateSortie: undefined}
+    ];
+    return{patients, services, menus, tickets, missions, attributs, documents,exemplaires,famille,ressource,precomvt,distributeur,role, personnels};
   }
 }

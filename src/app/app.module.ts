@@ -33,6 +33,7 @@ import { CommonModule } from '@angular/common';
 
 import { DistributeurModule } from './modules/distributeur/distributeur.module';
 import { RoleModule } from './modules/role/role.module';
+import { PersonnelsModule } from './modules/personnels/personnels.module';
 
 @NgModule({
   declarations: [AppComponent, NotFoundComponent, MenuComponent],
@@ -47,6 +48,7 @@ import { RoleModule } from './modules/role/role.module';
       passThruUnknownUrl: true,
     }),
     PatientsModule,
+    PersonnelsModule,
     ServicesModule,
     TicketsModule,
     AttributsModule,
