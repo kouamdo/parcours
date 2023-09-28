@@ -1,3 +1,5 @@
+import { IRole } from "./role"
+
 export interface IPersonnel
 {
     id:string,
@@ -8,5 +10,11 @@ export interface IPersonnel
     email:string,
     telephone:string,
     dateEntree?:Date,
-    dateSortie?:Date
+    dateSortie?:Date,
+    roles?: [{
+        role:IRole,
+        status: boolean,
+        dateDebut:Date,
+        dateFin?:Date
+    }]
 }
