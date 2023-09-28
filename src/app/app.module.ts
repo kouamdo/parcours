@@ -32,6 +32,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { CommonModule } from '@angular/common';
 
 import { DistributeurModule } from './modules/distributeur/distributeur.module';
+import { RoleModule } from './modules/role/role.module';
 
 @NgModule({
   declarations: [AppComponent, NotFoundComponent, MenuComponent],
@@ -55,7 +56,9 @@ import { DistributeurModule } from './modules/distributeur/distributeur.module';
     RessourceModule,
     PrecomvtModule,
     CommonModule,
+
     DistributeurModule,
+    RoleModule,
     // ngx-translate and the loader module
     HttpClientModule,
     TranslateModule.forRoot({

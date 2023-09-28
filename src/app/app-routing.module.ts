@@ -12,6 +12,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { RessourceRoutingModule } from './modules/ressource/ressource-routing.module';
 import { PrecoMvtRoutingModule } from './modules/precomvt/precomvt-routing.module';
 import { DistributeurRoutingModule } from './modules/distributeur/distributeur-routing.module';
+import { RoleRoutingModule } from './modules/role/role-routing.module';
 
 const routes: Routes = [
   {
@@ -34,7 +35,8 @@ const routes: Routes = [
     PrecoMvtRoutingModule,
     ExemplaireDocumentRoutingModule,
     FamilleRoutingModule,
-    DistributeurRoutingModule
+    DistributeurRoutingModule,
+    RoleRoutingModule
   ],
   exports: [RouterModule]
 })
