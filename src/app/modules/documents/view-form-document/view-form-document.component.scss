@@ -98,3 +98,37 @@ th{
     background-color: #28a7452f;
     color: #28a745;
 }
+#blockCat{
+    .infosCat{
+        display: flex;
+        justify-content: space-between;
+        p{
+            margin: 10px 0;
+            padding: 0;
+            width: 50%;
+            font-weight: bold;
+            text-transform: capitalize;
+            span{
+                font-weight: normal;
+                font-style: italic;
+                text-transform: none;
+                margin-right: 4px;
+            }
+        }
+    }
+    .titre{
+        width: 15%;
+    }
+    .description{
+        width: fit-content;
+    }
+    .etat{
+        width: 10%;
+    }
+    .ordre{
+        width: 8%;
+    }
+    .type{
+        width: 10%;
+    }
+}

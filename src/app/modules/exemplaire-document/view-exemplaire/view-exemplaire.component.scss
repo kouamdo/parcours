@@ -2,41 +2,39 @@
     padding-top: 5px;
 }
 .entete{
-    text-align: center;
     background-color: #28a745;
     border-radius: 5px;
     box-shadow: 0 0 2px #28a745;
     margin: 0 5px;
-    padding: 10px 0;
+    padding: 10px 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     h1{
         margin: auto;
         text-transform: uppercase;
         color: rgba(255, 255, 255, 0.7);
-        position: relative;
-        width: 100%;
+        width: fit-content;
     }
 }
-.entete .lien{
-    position: absolute;
-    left: 5px;
+.lien{
+    color: rgba(255, 255, 255, 0.7);
     transition: ease 0.2s;
+    font-size: 18px;
+    margin-top: 10px;
 }
-.entete .lien:hover{
-    border: solid 1px #ffffff9a;
-    padding: 0 10px;
+.lien:hover{
+    color: rgba(255, 255, 255, 0.8);
     transition: ease-in-out 0.2s;
+    transform: scale(1.1);
 }
 #titre{
     margin: 20px 0;
 }
-.entete{
-    display: flex;
-    align-items: center;
-}
 .hoverBlock{
     display: flex;
-    position: absolute;
-    right: 40px;
+    position: relative;
+    transition: ease-in-out 0.2s;
 }
 .hoverBlock:hover{
     #description{
@@ -46,7 +44,7 @@
         width: 400px;
         position: absolute;
         right: 0px;
-        top: 50px;
+        top: 60px;
         font-size: 12px;
         background-color: #28a7450e;
         padding: 10px;
@@ -68,9 +66,14 @@
     height: fit-content;
     border-radius: 50%;
     background-color: #ffffff;
+    margin-top: 8px;
 }
 .hoverBlock .infoBuble i{
     font-size: 20px;
+}
+.hoverBlock:hover{
+    transition: ease-in-out 0.2s;
+    transform: scale(1.1);
 }
 #description{
     display: none;

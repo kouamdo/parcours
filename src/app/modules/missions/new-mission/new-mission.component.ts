@@ -43,7 +43,7 @@ export class NewMissionComponent implements OnInit {
       this.titre="service à Modifier";
       this.missionService.getMissionById(idMission).subscribe(x =>
         {
-          this.mission = x; console.log(this.mission);
+          this.mission = x;
           this.forme.setValue({
             libelle: this.mission.libelle,
             description: this.mission.description,
@@ -59,13 +59,11 @@ export class NewMissionComponent implements OnInit {
 
   associerService(event: any){
     const _serviceSelected = (this.forme.get('service'))!.value;
-    console.log('le service est : ', _serviceSelected)
     if (event.target.checked) {
       this.idService = _serviceSelected
       this.serviceService.getServiceById(this.idService).subscribe(
         value => {
           this.service = value
-          console.log('value est : ', this.service)
         }
       )
     }
@@ -77,9 +75,6 @@ export class NewMissionComponent implements OnInit {
   onSubmit(missionInput:any){
 
     this.submitted=true;
-    // const _serviceSelected = (this.forme.get('service'))!.value;
-    // this.idService = _serviceSelected
-    // console.log('le service est : ', _serviceSelected)
     if(this.forme.invalid) return;
 
     let missionTemp : IMission={
@@ -92,24 +87,14 @@ export class NewMissionComponent implements OnInit {
       service: missionInput.service
     }
 
-    // this.serviceService.getServiceById(this.idService).subscribe(
-    //   value => {
-    //     missionTemp.service = value
-    //     console.log('value est : ', missionTemp.service)
-    //   }
-    // )
     missionTemp.service = this.service!
 
     if(this.mission != undefined){
       missionTemp.id = this.mission.id  
     }
-    console.log('le resultat est : ', missionTemp.service.libelle)
     this.missionService.ajouterMission(missionTemp).subscribe(
       object => {
         this.router.navigate(['/list-missions']);
-      },
-      error =>{
-        console.log(error)
       }
     )
   }

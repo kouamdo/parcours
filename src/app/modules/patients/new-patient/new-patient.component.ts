@@ -37,7 +37,6 @@ export class NewPatientComponent implements OnInit {
 
   ngOnInit() {
     let idPatient = this.infosPath.snapshot.paramMap.get('idPatient');
-    console.log("idPatient :" + idPatient);
     if((idPatient != null) && idPatient!==''){
 
       this.btnLibelle="Modifier";
@@ -46,7 +45,7 @@ export class NewPatientComponent implements OnInit {
       //trouver un autre moyen d'initialiser avec des valeurs
       this.patientService.getPatientById(idPatient).subscribe(x =>
       {
-        this.patient = x; console.log(this.patient);
+        this.patient = x;
         this.forme.setValue({
           nom: this.patient.nom,
           prenom: this.patient.prenom,
@@ -80,7 +79,6 @@ export class NewPatientComponent implements OnInit {
       dateNaissance:patientInput.dateNaissance
     }
     patientTemp.dateNaissance = this.initialDate.value!
-    console.log("patientTemp.dateNaissance est  :" + patientTemp.dateNaissance);
 
     if(this.patient != undefined){
       patientTemp.id = this.patient.id  

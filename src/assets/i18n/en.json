@@ -40,6 +40,8 @@
     },
     "lists":{
         "title":"listing",
+        "text1": "Field Required",
+        "text2": "Field not Required",
         "button1":"Print",
         "button2":"Close",
         "button3":"Cancel",
@@ -210,7 +212,7 @@
             "title14":"Category's range",
             "title15":"Categories",
             "title16":"libelle attribut",
-            "title17":"categories"
+            "title17":"Preconisations"
         },
         "form":{
             "text1":"Title is required.",
@@ -226,6 +228,7 @@
         },
         "exemplaire":{
             "title":"Document's instance ",
+            "title2":"Old datas",
             "text1":"composition of this instance"
         }      
     },
@@ -264,7 +267,7 @@
         }
     }
   },
-  "ressource":{
+    "ressource":{
     "table":{
         "title":"Add a New Resource",
         "title1":" Libel",
@@ -292,7 +295,7 @@
         "text15":"Select your Characteristics"
     },
     "lists":{
-      "button2":"Retour"
+        "button2":"Retour"
     },
     "title":" Resource Listing",
     "search-bar":"Research",
@@ -307,5 +310,18 @@
         "title8":"Category",
         "title9":"Actions "
     }
-}
+    },
+    "preconisation":{
+        "form":{
+            "title1":"Select preconisations"
+        },
+        "table":{
+            "title1":"Label",
+            "title2":"Status",
+            "title3":"Type"
+        },
+        "view":{
+            "text1":"Preconisations of this document"
+        }
+    }
 }

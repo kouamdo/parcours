@@ -26,17 +26,17 @@ export class NewAttributComponent implements OnInit {
   typeBoolean = TypeTicket.Boolean;
   typeDate = TypeTicket.Date;
 
-  initialDateCreation = new FormControl(new Date());
-  initialDateModification = new FormControl(new Date());
+  /*initialDateCreation = new FormControl(new Date());
+  initialDateModification = new FormControl(new Date());*/
 
   constructor(private formBuilder:FormBuilder, private attributService:AttributService,private router:Router, private infosPath:ActivatedRoute, private datePipe: DatePipe) {
     this.forme = this.formBuilder.group({
       titre: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
       description: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
-      etat: ['False', [Validators.required, Validators.minLength(1), Validators.maxLength(50)]],
-      dateCreation: ['', [Validators.required]],
-      dateModification: ['//'],
-      unite: ['']
+      etat: [true],
+      type: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
+      obligatoire:[true],
+      valeursParDefaut:['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
     })
   }
 
@@ -47,15 +47,15 @@ export class NewAttributComponent implements OnInit {
       this.titre="service à Modifier";
       this.attributService.getAttributById(idAttribut).subscribe(x =>
         {
-          this.attribut = x; console.log(this.attribut);
+          this.attribut = x;
           this.attribut.id = idAttribut!,
           this.forme.setValue({
             titre: this.attribut.titre,
             description: this.attribut.description,
             etat: this.attribut.etat,
-            dateCreation: this.datePipe.transform(this.attribut.dateCreation,'yyyy-MM-dd'),
-            dateModification: this.datePipe.transform(this.attribut.dateModification,'yyyy-MM-dd'),
-            type: this.attribut.type
+            type: this.attribut.type,
+            obligatoire: this.attribut.obligatoire,
+            valeursParDefaut:this.attribut.valeursParDefaut
           })
       });
     }
@@ -75,16 +75,11 @@ export class NewAttributComponent implements OnInit {
       titre: attributInput.titre,
       description: attributInput.description,
       etat: attributInput.etat,
-      dateCreation: attributInput.dateCreation,
-      dateModification: attributInput.dateModification,
       type: attributInput.type,
-      ordre: 0,
-      obligatoire:  attributInput.obligatoire,
-      valeursParDefaut:  attributInput.valeursParDefaut
+      obligatoire: attributInput.obligatoire,
+      valeursParDefaut: attributInput.valeursParDefaut
     }
-    attributTemp.dateCreation = this.initialDateCreation.value!
-    attributTemp.dateModification = this.initialDateModification.value!
-
+   
     if(this.attribut != undefined){
       attributTemp.id = this.attribut.id
     }
@@ -93,7 +88,7 @@ export class NewAttributComponent implements OnInit {
       object => {
         this.router.navigate(['/list-attributs']);
       },
-      error =>{
+     error =>{
         console.log(error)
       }
     )

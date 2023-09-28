@@ -23,6 +23,7 @@ export class NewDistributeurComponent implements OnInit {
   constructor(private formBuilder:FormBuilder, private distributeurService:DistributeursService,private router:Router, private infosPath:ActivatedRoute, private datePipe: DatePipe){
     this.forme = this.formBuilder.group({
     raisonSocial: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
+    etat: [true],
     adresse: [''],
     telephone: [''],
     mail: ['', [Validators.required, Validators.email, Validators.pattern(".+@.+\.{1}[a-z]{2,3}")]],
@@ -31,7 +32,6 @@ export class NewDistributeurComponent implements OnInit {
 
   ngOnInit() {
     let idDistributeur = this.infosPath.snapshot.paramMap.get('idDistributeur');
-    console.log("idDistributeur :" + idDistributeur);
     if((idDistributeur != null) && idDistributeur!==''){
 
       this.btnLibelle="Modifier";
@@ -40,9 +40,10 @@ export class NewDistributeurComponent implements OnInit {
       //trouver un autre moyen d'initialiser avec des valeurs
       this.distributeurService.getDistributeurById(idDistributeur).subscribe(x =>
       {
-        this.distributeur = x; console.log(this.distributeur);
+        this.distributeur = x;
         this.forme.setValue({
           raisonSocial: this.distributeur.raisonSocial,
+          etat:this.distributeur. etat,
           adresse: this.distributeur.adresse,
           telephone: this.distributeur.telephone,
           mail: this.distributeur.mail,
@@ -65,6 +66,7 @@ export class NewDistributeurComponent implements OnInit {
     let distributeurTemp : IDistributeur={
       id: uuidv4(),
       raisonSocial:distributeurInput.raisonSocial,
+      etat:distributeurInput.etat,
       adresse:distributeurInput.adresse,
       telephone:distributeurInput.telephone,
       mail:distributeurInput.mail,

@@ -32,9 +32,7 @@ export class MenuComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log('ok');
     if(changes['langueParent'] && changes['langueParent'].currentValue){
-      console.log('lanuge parent ', changes);
       this.menuUser$ = this.getMenus();
       this.menuUser$.subscribe(x=>{
         if(x!=null  && x.fonctionnalites!=null){
