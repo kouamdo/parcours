@@ -13,6 +13,8 @@ import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatSort, Sort} from '@angular/material/sort';
 import {LiveAnnouncer} from '@angular/cdk/a11y';
+import { NewTicketComponent } from '../../tickets/new-ticket/new-ticket.component';
+import {MatDialog} from '@angular/material/dialog';
 
 export interface User {
   nom: string;
@@ -49,7 +51,7 @@ export class ListPatientsComponent implements OnInit, AfterViewInit {
 
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private translate: TranslateService,private router:Router, private servicePatient:PatientsService, private _liveAnnouncer: LiveAnnouncer, private serviceService:ServicesService, private serviceTicket:TicketsService) { 
+  constructor(private translate: TranslateService,private router:Router, private servicePatient:PatientsService, private _liveAnnouncer: LiveAnnouncer, private serviceService:ServicesService, private serviceTicket:TicketsService, private dialogDef : MatDialog) { 
 
   }
 
@@ -95,6 +97,17 @@ export class ListPatientsComponent implements OnInit, AfterViewInit {
 
   private getAllPatients(){
     return this.servicePatient.getAllPatients();
+  }
+
+  openNewTicketDialog(){
+    this.dialogDef.open(NewTicketComponent, 
+    {
+      height: '500px',
+      width: '400px',
+      enterAnimationDuration:'1000ms',
+      exitAnimationDuration:'1000ms',
+    }
+    )
   }
 
   displayFn(user: IPatient): string {

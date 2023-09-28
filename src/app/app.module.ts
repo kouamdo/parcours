@@ -11,7 +11,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatSlideToggle, MatSlideToggleModule } from "@angular/material/slide-toggle";
+import {
+  MatSlideToggle,
+  MatSlideToggleModule,
+} from '@angular/material/slide-toggle';
 import { ServicesModule } from './modules/services/services.module';
 import { MenuComponent } from './menu/menu.component';
 import { TicketsModule } from './modules/tickets/tickets.module';
@@ -26,26 +29,23 @@ import { FamilleModule } from './modules/famille/famille.module';
 import { RessourceModule } from './modules/ressource/ressource.module';
 import { PrecomvtModule } from './modules/precomvt/precomvt.module';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-//import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { CommonModule } from '@angular/common';
 
 import { DistributeurModule } from './modules/distributeur/distributeur.module';
 import { RoleModule } from './modules/role/role.module';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    NotFoundComponent,
-    MenuComponent,
-
-  ],
+  declarations: [AppComponent, NotFoundComponent, MenuComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
     FormsModule,
     MatCheckboxModule,
-    HttpClientInMemoryWebApiModule.forRoot(InMemDBService, {dataEncapsulation: false, passThruUnknownUrl: true}),
+    HttpClientInMemoryWebApiModule.forRoot(InMemDBService, {
+      dataEncapsulation: false,
+      passThruUnknownUrl: true,
+    }),
     PatientsModule,
     ServicesModule,
     TicketsModule,
@@ -55,7 +55,6 @@ import { RoleModule } from './modules/role/role.module';
     FamilleModule,
     RessourceModule,
     PrecomvtModule,
-    //NgMultiSelectDropDownModule.forRoot(),
     CommonModule,
 
     DistributeurModule,
@@ -63,24 +62,24 @@ import { RoleModule } from './modules/role/role.module';
     // ngx-translate and the loader module
     HttpClientModule,
     TranslateModule.forRoot({
-        loader: {
-            provide: TranslateLoader,
-            useFactory: HttpLoaderFactory,
-            deps: [HttpClient]
-        },
-        extend:true
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient],
+      },
+      extend: true,
     }),
     BrowserAnimationsModule,
     MatSliderModule,
     MatIconModule,
     MatToolbarModule,
     MatSlideToggleModule,
-    ExemplaireDocumentModule
+    ExemplaireDocumentModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
 
 // required for AOT compilation
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {

@@ -16,19 +16,18 @@ export class ViewFormDocumentComponent implements OnInit {
     description: '',
     missions: [],
     attributs: [],
-    categories: []
+    categories: [],
+    preconisations: []
   };
 
   constructor(private router:Router, private infosPath:ActivatedRoute, private serviceDocument:DocumentService) {}
 
   ngOnInit(): void {
     let idDocument = this.infosPath.snapshot.paramMap.get('idDocument');
-    console.log("idDocument :" + idDocument);
     if((idDocument != null) && idDocument!==''){
       this.serviceDocument.getDocumentById(idDocument).subscribe(
         x =>{
           this.document = x;
-          console.log("Voici le document", this.document);
         });
     }
   }

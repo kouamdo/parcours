@@ -32,7 +32,6 @@ export class NewDistributeurComponent implements OnInit {
 
   ngOnInit() {
     let idDistributeur = this.infosPath.snapshot.paramMap.get('idDistributeur');
-    console.log("idDistributeur :" + idDistributeur);
     if((idDistributeur != null) && idDistributeur!==''){
 
       this.btnLibelle="Modifier";
@@ -41,7 +40,7 @@ export class NewDistributeurComponent implements OnInit {
       //trouver un autre moyen d'initialiser avec des valeurs
       this.distributeurService.getDistributeurById(idDistributeur).subscribe(x =>
       {
-        this.distributeur = x; console.log(this.distributeur);
+        this.distributeur = x;
         this.forme.setValue({
           raisonSocial: this.distributeur.raisonSocial,
           etat:this.distributeur. etat,
