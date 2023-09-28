@@ -74,6 +74,33 @@
             "text4":"mail address is requied is requied"
         } 
     },
+    "personnel":{
+        "text":"Personnels retrouvé(e)s",
+        "search-bar":"search",
+        "table":{
+            "title1":"Name",
+            "title2":"Surname",
+            "title3":"Birthday",
+            "title4":"Sex",
+            "title5":"Email",
+            "title6":"Date d'entrée",
+            "title7":"Phone",
+            "title8":"Date De Sortie",
+            "title9":"Actions",
+            "actions":{
+                "link2":"Update",
+                "link3":"View",
+                "link4":"Delete"
+            }
+        },
+        "form":{
+            "text1":"Name is requied",
+            "text2":"Surname is requied",
+            "text3":"Birthday is requied",
+            "text4":"email address is requied is requied",
+            "text5":"Day of entry is required."       
+         } 
+    },
     "services":{
         "table":{
             "title1":"Libel",
