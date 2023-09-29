@@ -92,6 +92,7 @@ export class NewExemplaireComponent implements OnInit {
 
   tempAttributsCpt = new Map()
   estValide : boolean = true
+  evalvalide : string = "";
 
   constructor(
     private router: Router,
@@ -326,16 +327,16 @@ export class NewExemplaireComponent implements OnInit {
   evaluation():string{
     
     this.estValide = true
-    let titreAtt : string = ''
+    this.evalvalide = ""
     for (let index = 0; index < this.tempAttributsCpt.size; index++) {
       
       if (this.submitted && this.f.controls[index].errors) {
         this.estValide = false
-        titreAtt = this.tempAttributsCpt.get(index)
+        this.evalvalide = this.tempAttributsCpt.get(index)
         break
       }
     }
-      return titreAtt
+      return this.evalvalide
   }
 
   get f(){
@@ -349,6 +350,7 @@ export class NewExemplaireComponent implements OnInit {
     const exemplaireDocument = this._exemplaireDocument;
     this.submitted = true;
     if (this.formeExemplaire.invalid) return;
+    this.evaluation()
 
     let exemplaireTemp: IExemplaireDocument = {
       id: uuidv4(),

@@ -54,7 +54,7 @@
         "button10":"Close"
     },
     "patient":{
-        "text":"Patients retrouvé(e)s",
+        "title1":"Add a new patient",
         "search-bar":"search",
         "table":{
             "title1":"Name",
@@ -80,7 +80,7 @@
         }
     },
     "personnel":{
-        "text":"Personnels retrouvé(e)s",
+        "title1":"Add a new staff",
         "search-bar":"search",
         "table":{
             "title1":"Name",
@@ -107,6 +107,7 @@
         }
     },
     "services":{
+        "title1":"Add a new service",
         "table":{
             "title1":"Libel",
             "title2":"Status",
@@ -146,6 +147,7 @@
         }
     },
     "attributs":{
+        "title1":"Add a new attribut",
         "table":{
             "title1":"title",
             "title2":"Description",
@@ -168,6 +170,7 @@
         }
     },
     "missions":{
+        "title1":"Add a new mission",
         "table":{
             "title1":"Label",
             "title2":"Description",
@@ -192,7 +195,7 @@
         }
     },
     "document":{
-        "text":"documents retrouvé(e)s",
+        "title3":"Add a new document",
         "search-bar":"Rechercher",
         "title1":"View resuts",
         "title2":"Select attributs of this category",
@@ -314,6 +317,7 @@
     }
     },
     "preconisation":{
+        "title1":"Add a new preconisation",
         "form":{
             "title1":"Select preconisations"
         },

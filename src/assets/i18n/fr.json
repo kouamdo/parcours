@@ -52,7 +52,7 @@
     "button10":"Fermer"
   },
   "patient": {
-    "text": "Patients retrouvé(e)s",
+    "title1":"Ajouter un nouveau patient",
     "search-bar": "Rechercher",
     "table": {
       "title1": "Nom",
@@ -78,7 +78,7 @@
     }
   },
   "personnel":{
-      "text":"Personnels retrouvé(e)s",
+      "title1":"Ajouter un nouveau personnel",
       "search-bar":"Rechercher",
       "table":{
           "title1":"Nom",
@@ -105,6 +105,7 @@
       }
   },
   "services": {
+    "title1":"Ajouter un nouveau service",
     "table": {
       "title1": "Libelle",
       "title2": "Etat",
@@ -144,6 +145,7 @@
     }
   },
   "attributs": {
+    "title1":"Ajouter un nouvel attribut",
     "table": {
       "title1": "titre",
       "title2": "Description",
@@ -166,6 +168,7 @@
     }
   },
   "missions": {
+    "title1":"Ajouter une nouvelle mission",
     "table": {
       "title1": "Libelle",
       "title2": "Description",
@@ -190,7 +193,7 @@
     }
   },
   "document": {
-    "text": "documents retrouvé(e)s",
+    "title3":"Ajouter un nouveau document",
     "search-bar": "Rechercher",
     "title1": "Affichage des resultats",
     "title2": "Selectionner les attributs de la categories",
@@ -311,6 +314,7 @@
     }
   },
   "preconisation":{
+    "title1":"Ajouter une nouvelle préconisation",
       "form":{
           "title1":"Sélectionnez des preconisations"
       },
