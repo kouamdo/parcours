@@ -1,0 +1,89 @@
+<div id="mainSection" class="d-flex flex-column justify-content-around">
+  <div class="title">
+      <h2>listing Role</h2>
+
+  </div>
+  <div class="card container-fluid" >
+      <div class='card-hearder pt-3' >
+          <div class="d-flex align-items-center justify-content-end mr-4 tableTools">
+              <div class="form-inline mr-3">
+                  <form class="example-form">
+                      <mat-form-field class="example-full-width" appearance="fill">
+                        <mat-label class="searchBar">{{'patient.search-bar' | translate}}</mat-label>
+                        <input type="text" matInput aria-label="Rechercher" [formControl]="myControl" [matAutocomplete]="auto">
+                        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+                          <mat-option *ngFor="let option of filteredOptions" [value]="option" (onSelectionChange)="rechercherListingRole(option)">
+                            {{option.titre}}
+                          </mat-option>
+                        </mat-autocomplete>
+                      </mat-form-field>
+                  </form>
+              </div>
+              <div role="button" id="addUserBotton" routerLink="../role-nouveau">
+                  <span title="Ajouter un role">
+                      <i class="fa fa-user-plus" aria-hidden="true"></i>
+                  </span>
+              </div>
+          </div>
+      </div>
+      <div class="card-body p-0" id="tableBlock">
+          <div class="table-responsive w-100">
+              <table class='table table-sm table-centered table-striped table-bordered w-100' mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)">
+
+                <!-- nom Column -->
+                <ng-container matColumnDef="titre">
+                  <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header>titre</th>
+                  <td class="text-dark text-center containCell" mat-cell *matCellDef="let element"> {{element.titre}} </td>
+                </ng-container>
+
+                <!-- adresse Column -->
+                <ng-container matColumnDef="description">
+                  <th class="text-dark containHead" mat-header-cell *matHeaderCellDef>description</th>
+                  <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.description}} </td>
+                </ng-container>
+
+                <!-- telephone Column -->
+                <ng-container matColumnDef="etat">
+                  <th class="text-dark containHead" mat-header-cell *matHeaderCellDef>etat</th>
+                  <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.etat}} </td>
+                </ng-container>
+
+                <!-- action Column -->
+                <ng-container matColumnDef="actions">
+                  <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{"patient.table.title8" | translate}} </th>
+                  <td class="text-dark containCell" mat-cell *matCellDef="let element">
+                      <div id="actions" class="dropdown open">
+                          <button class="btn dropdown-toggle" type="button" id="triggerId" data-toggle="dropdown" aria-haspopup="true"
+                                  aria-expanded="false">
+                              <span>...</span>
+                          </button>
+                          <div class="dropdown-menu" aria-labelledby="triggerId">
+                              <button class="dropdown-item nav-link" [routerLink]="['/role-nouveau',element.id]" title="{{'patient.table.actions.link2' | translate}}">
+                                  <i class="fa fa-pen text-info" aria-hidden="true"></i>
+                                  <span>{{'patient.table.actions.link2' | translate}}</span>
+                              </button>
+                              <button class="dropdown-item nav-link" [routerLink]="['/role-nouveau',element.id]" title="{{'patient.table.actions.link4' | translate}}">
+                                  <i class="fa fa-times-circle text-danger" aria-hidden="true"></i>
+                                  <span>{{'patient.table.actions.link4' | translate}}</span>
+                              </button>
+                          </div>
+                      </div>
+                  </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+              </table>
+              <mat-paginator style="background-color:  rgba(40, 167, 69, 0.79);" [pageSizeOptions]="[5, 10, 20]"
+              showFirstLastButtons
+              aria-label="Select page of periodic elements">
+              </mat-paginator>
+            </div>
+
+      </div>
+
+
+  </div>
+</div>
+
+

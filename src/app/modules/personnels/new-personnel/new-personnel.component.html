@@ -1,0 +1,111 @@
+<div id="mainSection">
+    <div class="card block">
+        <div class="card-header pt-4 pb-4 entete">{{ titre }}</div>
+        <div class="card-body">
+            <form [formGroup]="forme" (ngSubmit)="onSubmit(forme.value)" *ngIf="forme" >
+                <div class="">
+                    <div class="">
+                        <div class="form-group">
+                            <div>
+                                <div class="champs">
+                                    <label for="nom" class="label">
+                                        {{'personnel.table.title1' | translate}}
+                                    </label>
+                                    <input type="text" formControlName="nom" name="nom" id="nom"  placeholder="{{'personnel.table.title1' | translate}}"  class="form-control" required>
+                                </div>
+                                <div  *ngIf="submitted && f['nom'].errors"  class="alert alert-danger" >
+                                    <div *ngIf="f['nom'].errors['required']">{{'personnel.form.text1' | translate}}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div>
+                                <div class="champs">
+                                    <label for="prenom" class="label" >
+                                        {{"personnel.table.title2" | translate}}
+                                    </label>
+                                    <input  type="text" formControlName="prenom" name="prenom" id="prenom" placeholder="{{'personnel.table.title2' | translate}}" class="form-control"  required  >
+                                </div>
+                                <div  *ngIf="submitted && f['prenom'].errors"  class="alert alert-danger" >
+                                    <div *ngIf="f['prenom'].errors['required']">{{'personnel.form.text2' | translate}}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="champs">
+                                <label  for="type" class="label">
+                                    {{"personnel.table.title4" | translate}}
+                                </label>
+                                <select  class="form-control" formControlName="sexe" name="sexe" id="sexe" required>
+                                    <option value="M" >Homme</option>
+                                    <option value="F">Femme</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div>
+                                <div class="champs">
+                                    <label for="dateNaissance" class="label" >
+                                        {{"personnel.table.title3" | translate}}
+                                    </label>
+                                    <input  type="date" formControlName="dateNaissance"  name="dateNaissance" id="dateNaissance" placeholder="{{'personnel.table.title3' | translate}}" value="" required class="form-control">
+                                </div>
+                                <div  *ngIf="submitted && f['dateNaissance'].errors"  class="alert alert-danger" >
+                                    <div *ngIf="f['dateNaissance'].errors['required']">{{'personnel.form.text3' | translate}}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div>
+                                <div class="champs">
+                                    <label for="dateEntree" class="label" >
+                                        {{"personnel.table.title6" | translate}}
+                                    </label>
+                                    <input  type="date" formControlName="dateEntree"  name="dateEntree" id="dateEntree" placeholder="{{'personnel.table.title3' | translate}}" value="" required class="form-control">
+                                </div>
+                                <div  *ngIf="submitted && f['dateEntree'].errors"  class="alert alert-danger" >
+                                    <div *ngIf="f['dateEntree'].errors['required']">{{'personnel.form.text5' | translate}}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div>
+                                <div class="champs">
+                                    <label for="dateSortie" class="label" >
+                                        {{"personnel.table.title8" | translate}}
+                                    </label>
+                                    <input  type="date" formControlName="dateSortie"  name="dateSortie" id="dateSortie" placeholder="{{'personnel.table.title3' | translate}}" value="" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div>
+                                <div class="champs">
+                                    <label for="email" class="label" >
+                                        {{"personnel.table.title5" | translate}}
+                                    </label>
+                                    <input type="email" formControlName="email"  name="email"  id="email" placeholder="{{'personnel.table.title5' | translate}}"   required  class="form-control" >
+                                </div>
+                                <div  *ngIf="submitted && f['email'].errors"  class="alert alert-danger" >
+                                <div *ngIf="f['email'].errors['required']">{{'personnel.form.text4' | translate}}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="champs">
+                                <label  for="telephone"  class="label" >
+                                    {{"personnel.table.title7" | translate}}
+                                </label>
+                                <input type="text" formControlName="telephone" name="telephone" id="telephone" placeholder="{{'personnel.table.title7' | translate}}" class="form-control" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="actionButton">
+                    <button class="btn" routerLink="../list-personnels"><i class="fa fa-reply mr-1" aria-hidden="true"></i>{{'lists.button2' | translate}}</button>
+                    <button type="submit" class="btn btnValidation">{{btnLibelle}}</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

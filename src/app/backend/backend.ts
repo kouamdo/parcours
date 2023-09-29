@@ -15,9 +15,11 @@ import { IFamille } from '../modele/famille';
 import { IRessource } from '../modele/ressource';
 import { IPrecoMvtQte } from '../modele/precomvtqte';
 //import { TypeMvt } from "../modele/type-mvt";
-import { IPrecoMvt } from '../modele/precomvt';
-import { Unites } from '../modele/unites';
-import { IDistributeur } from '../modele/distributeur';
+import { IPrecoMvt } from "../modele/precomvt";
+import { Unites } from "../modele/unites";
+import { IDistributeur } from "../modele/distributeur";
+import { IRole } from '../modele/role';
+import { IPersonnel } from '../modele/personnel';
 
 export class InMemDBService implements InMemoryDbService {
   UnitesLitre = Unites.litre;
@@ -243,6 +245,15 @@ export class InMemDBService implements InMemoryDbService {
             ],
           },
           {
+            fonction: 'Personnel',
+            icone: 'fas fa-user-cog',
+            actif: '',
+            elements: [
+              { nom: 'Créer', lien: './nouveau-personnel', bouton: 'false' },
+              { nom: 'Rechercher', lien: './list-personnels', bouton: 'false' },
+            ],
+          },
+          {
             fonction: 'Service',
             icone: 'fas fa-user-cog',
             actif: '',
@@ -315,6 +326,7 @@ export class InMemDBService implements InMemoryDbService {
               { nom: 'Rechercher', lien: './list-familles', bouton: 'false' },
             ],
           },
+          {"fonction":"Role", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"Créer", "lien":"role-nouveau", "bouton":"false"},{"nom":"Rechercher", "lien":"./list-roles", "bouton":"false"}]},
           {
             fonction: 'Ressource',
             icone: 'fas fa-user-cog',
@@ -345,8 +357,8 @@ export class InMemDBService implements InMemoryDbService {
                 bouton: 'false',
               },
             ],
-          },
-        ],
+          }
+        ]
       },
       {
         idUser: 'phil',
@@ -430,6 +442,7 @@ export class InMemDBService implements InMemoryDbService {
               { nom: 'Search', lien: './list-familles', bouton: 'false' },
             ],
           },
+         {"fonction":"Role", "icone":"fas fa-user-cog", "actif":"", "elements":[{"nom":"Créer", "lien":"role-nouveau", "bouton":"false"},{"nom":"search", "lien":"./list-roles", "bouton":"false"}]},
           {
             fonction: 'Ressource',
             icone: 'fas fa-user-cog',
@@ -456,8 +469,8 @@ export class InMemDBService implements InMemoryDbService {
               { nom: 'Créer', lien: 'distributeur-nouveau', bouton: 'false' },
               { nom: 'search', lien: './list-distributeurs', bouton: 'false' },
             ],
-          },
-        ],
+          }
+        ]
       },
     ];
     let missions: IMission[] = [
@@ -4373,21 +4386,16 @@ export class InMemDBService implements InMemoryDbService {
         adresse: 'Buéa',
         telephone: '655554486',
         mail: 'ngong@yad.fr',
-      },
+      }
     ];
-    return {
-      patients,
-      services,
-      menus,
-      tickets,
-      missions,
-      attributs,
-      documents,
-      exemplaires,
-      famille,
-      ressource,
-      precomvt,
-      distributeur,
-    };
+    let role:IRole[]=[
+      {id:"1", titre:"vendeur", description: "cicatrice de la personne",etat:true, dateCreation:new Date("07/03/2000")},
+      {id:"2", titre:"traiteur", description: "cicatrice de l'individu",etat:true, dateCreation:new Date("07/03/2000")},
+      {id:"3", titre:"marcheur", description: "cicatrice du vieu",etat:true,dateCreation:new Date("07/03/2000")},
+    ];
+    let personnels: IPersonnel[] = [
+      {id:"1", nom:"Tagne", prenom:"Willy", email:"tagnewillie@gmail.com", telephone:"655455487", sexe:"M", dateNaissance: new Date('10/04/2000'), dateEntree: new Date(), dateSortie: undefined}
+    ];
+    return{patients, services, menus, tickets, missions, attributs, documents,exemplaires,famille,ressource,precomvt,distributeur,role, personnels};
   }
 }

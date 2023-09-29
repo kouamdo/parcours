@@ -32,6 +32,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { CommonModule } from '@angular/common';
 
 import { DistributeurModule } from './modules/distributeur/distributeur.module';
+import { RoleModule } from './modules/role/role.module';
+import { PersonnelsModule } from './modules/personnels/personnels.module';
 
 @NgModule({
   declarations: [AppComponent, NotFoundComponent, MenuComponent],
@@ -46,6 +48,7 @@ import { DistributeurModule } from './modules/distributeur/distributeur.module';
       passThruUnknownUrl: true,
     }),
     PatientsModule,
+    PersonnelsModule,
     ServicesModule,
     TicketsModule,
     AttributsModule,
@@ -55,7 +58,9 @@ import { DistributeurModule } from './modules/distributeur/distributeur.module';
     RessourceModule,
     PrecomvtModule,
     CommonModule,
+
     DistributeurModule,
+    RoleModule,
     // ngx-translate and the loader module
     HttpClientModule,
     TranslateModule.forRoot({
