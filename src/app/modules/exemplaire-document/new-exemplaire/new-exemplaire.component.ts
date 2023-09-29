@@ -91,7 +91,7 @@ export class NewExemplaireComponent implements OnInit {
   tableauAttributsSupprime: IAttributs[] = [];
 
   tempAttributsCpt = new Map()
-  tabError : Map<String,String> = new Map();
+  estValide : boolean = true
 
   constructor(
     private router: Router,
@@ -111,6 +111,7 @@ export class NewExemplaireComponent implements OnInit {
   ngOnInit(): void {
     this.nomPatientCourant = sessionStorage.getItem('nomPatientCourant');
     this.compteur = -1;
+    this.estValide = true
 
     // recuperation de l'id de l'exemplaire
     this.idExemplaire = this.infosPath.snapshot.paramMap.get('idExemplaire');
@@ -318,9 +319,27 @@ export class NewExemplaireComponent implements OnInit {
     this._controlsSupprime.disable();
     return this.numerateur;
   }
+  /**
+   * 
+   * @returns 
+   */
+  evaluation():string{
+    
+    this.estValide = true
+    let titreAtt : string = ''
+    for (let index = 0; index < this.tempAttributsCpt.size; index++) {
+      
+      if (this.submitted && this.f.controls[index].errors) {
+        this.estValide = false
+        titreAtt = this.tempAttributsCpt.get(index)
+        break
+      }
+    }
+      return titreAtt
+  }
 
   get f(){
-    return this.formeExemplaire.controls;
+    return this.formeExemplaire.get('_exemplaireDocument') as FormArray;
   }
 
   /**
