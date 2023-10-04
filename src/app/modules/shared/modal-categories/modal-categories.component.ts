@@ -44,7 +44,7 @@ export class ModalCategoriesComponent implements OnInit {
     id: '',
     nom: '',
     ordre: 0,
-    listAttributs: []
+    listAttributsParCategories: []
   }
   attributTemp : IAttributs = {
     id: '',
@@ -53,8 +53,6 @@ export class ModalCategoriesComponent implements OnInit {
     etat: false,
     dateCreation: new Date,
     dateModification: new Date,
-    ordre: 0,
-    obligatoire: false,
     valeursParDefaut: '',
     type: TypeTicket.Int
   }

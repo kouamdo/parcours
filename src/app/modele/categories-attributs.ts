@@ -1,8 +1,8 @@
-import { IAttributs } from "./attributs";
+import { IAssociationCategorieAttributs } from "./association-categorie-attributs";
 
 export interface ICategoriesAttributs {
     id:string,
     nom:string,
     ordre : number,
-    listAttributs : IAttributs[]
+    listAttributsParCategories : IAssociationCategorieAttributs[]
 }
