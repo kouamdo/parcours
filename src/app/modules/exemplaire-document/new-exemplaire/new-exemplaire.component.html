@@ -10,7 +10,7 @@
                 <span class="title">  {{this.nomPatientCourant}}</span>
             </p>
             <div  *ngIf="submitted && estValide == false" class="alert alert-danger">
-                <div >{{evalvalide}} {{'attributs.form.text5' | translate}}</div>
+                <div >{{eValvalide}} {{'lists.text3' | translate}}</div>
             </div>
             <div class="block" *ngFor="let attributParCategorie of document.categories">
                 <div class="pb-3" *ngIf="attributParCategorie.nom">
@@ -44,7 +44,7 @@
         </div>
         <div class="actionButton">
             <button class="btn" type="reset" routerLink="../../executer-missions"><i class="fa fa-reply mr-1"></i>{{'lists.button2' | translate}}</button>
-            <button type="submit" class="btn btnValidation" (click)="enregistrerObjet()">{{btnLibelle}}</button>
+            <button type="submit" class="btn btnValidation">{{btnLibelle}}</button>
         </div>
     </form>
 </div>

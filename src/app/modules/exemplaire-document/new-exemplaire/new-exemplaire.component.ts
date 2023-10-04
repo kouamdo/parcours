@@ -91,8 +91,9 @@ export class NewExemplaireComponent implements OnInit {
   tableauAttributsSupprime: IAttributs[] = [];
 
   tempAttributsCpt = new Map()
+  tempAttributsObbligatoires = new Map()
   estValide : boolean = true
-  evalvalide : string = "";
+  eValvalide : string = "";
 
   constructor(
     private router: Router,
@@ -112,7 +113,6 @@ export class NewExemplaireComponent implements OnInit {
   ngOnInit(): void {
     this.nomPatientCourant = sessionStorage.getItem('nomPatientCourant');
     this.compteur = -1;
-    this.estValide = true
 
     // recuperation de l'id de l'exemplaire
     this.idExemplaire = this.infosPath.snapshot.paramMap.get('idExemplaire');
@@ -287,6 +287,7 @@ export class NewExemplaireComponent implements OnInit {
 
     let valAttribut = this.rechercherValeurParIdAttribut(attribut.id);
     this.tempAttributsCpt.set(attribut.id, cpt+1)
+    this.tempAttributsObbligatoires.set(cpt+1, attribut.titre)
     if (attribut.type == TypeTicket.Date && valAttribut != null) {
       // si le type de l'attribut est Date et que la valeur de valAttribut n'est pas vide
       let dateAtt = new Date();
@@ -327,16 +328,14 @@ export class NewExemplaireComponent implements OnInit {
   evaluation():string{
     
     this.estValide = true
-    this.evalvalide = ""
-    for (let index = 0; index < this.tempAttributsCpt.size; index++) {
-      
-      if (this.submitted && this.f.controls[index].errors) {
+    for (let index = 0; index < this.tempAttributsObbligatoires.size; index++) {
+      if (this.f.controls[index].errors) {
         this.estValide = false
-        this.evalvalide = this.tempAttributsCpt.get(index)
+        this.eValvalide = this.tempAttributsObbligatoires.get(index)
         break
       }
     }
-      return this.evalvalide
+      return this.eValvalide
   }
 
   get f(){
@@ -349,8 +348,9 @@ export class NewExemplaireComponent implements OnInit {
   onSubmit() {
     const exemplaireDocument = this._exemplaireDocument;
     this.submitted = true;
-    if (this.formeExemplaire.invalid) return;
+    this.enregistrerObjet()
     this.evaluation()
+    if (this.formeExemplaire.invalid) return;
 
     let exemplaireTemp: IExemplaireDocument = {
       id: uuidv4(),
