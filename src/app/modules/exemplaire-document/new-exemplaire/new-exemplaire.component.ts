@@ -12,6 +12,7 @@ import {
   ActivatedRoute,
   withDisabledInitialNavigation,
 } from '@angular/router';
+import { IAssociationCategorieAttributs } from 'src/app/modele/association-categorie-attributs';
 import { IAttributs } from 'src/app/modele/attributs';
 import { IDocument } from 'src/app/modele/document';
 import { IExemplaireDocument } from 'src/app/modele/exemplaire-document';
@@ -57,8 +58,6 @@ export class NewExemplaireComponent implements OnInit {
     etat: false,
     dateCreation: new Date(),
     dateModification: new Date(),
-    ordre: 0,
-    obligatoire: false,
     valeursParDefaut: '',
     type: TypeTicket.Int,
   };
@@ -280,24 +279,24 @@ export class NewExemplaireComponent implements OnInit {
    * @param idAttribut id attribut à afficher
    * @returns valeur courante + 1
    */
-  incrementeCompteur(cpt: number, attribut: IAttributs): number {
+  incrementeCompteur(cpt: number, attributCategories: IAssociationCategorieAttributs): number {
     if (this.compteur > -1 && this.compteur >= this.totalAttribut){
       return cpt;
     }
 
-    let valAttribut = this.rechercherValeurParIdAttribut(attribut.id);
-    this.tempAttributsCpt.set(attribut.id, cpt+1)
-    this.tempAttributsObbligatoires.set(cpt+1, attribut.titre)
-    if (attribut.type == TypeTicket.Date && valAttribut != null) {
+    let valAttribut = this.rechercherValeurParIdAttribut(attributCategories.attribut.id);
+    this.tempAttributsCpt.set(attributCategories.attribut.id, cpt+1)
+    this.tempAttributsObbligatoires.set(cpt+1, attributCategories.attribut.titre)
+    if (attributCategories.attribut.type == TypeTicket.Date && valAttribut != null) {
       // si le type de l'attribut est Date et que la valeur de valAttribut n'est pas vide
       let dateAtt = new Date();
       if(valAttribut != "PARCOURS_NOT_FOUND_404")
          dateAtt = new Date(valAttribut); // creatoion d'une nouvelle date avec la valeur de valAttribut
       
       let dateReduite = this.datePipe.transform(dateAtt, 'yyyy-MM-dd'); // changer le format de la date de naissance pour pouvoir l'afficher dans mon input type date
-      this.addAttributs(dateReduite, attribut.obligatoire);
+      this.addAttributs(dateReduite, attributCategories.obligatoire);
     } else {
-      this.addAttributs(valAttribut, attribut.obligatoire);
+      this.addAttributs(valAttribut, attributCategories.obligatoire);
     }
     this.compteur = this.compteur + 1;
     return this.compteur;

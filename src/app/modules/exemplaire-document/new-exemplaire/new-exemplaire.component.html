@@ -16,11 +16,11 @@
                 <div class="pb-3" *ngIf="attributParCategorie.nom">
                     <h3>{{attributParCategorie.nom}}</h3>
                     <div class="contentBlock">
-                        <div formArrayName="_exemplaireDocument" class="inputBlock" *ngFor="let attribut of attributParCategorie.listAttributs; let i = index" [ngClass]="{'inputSpecial':(attribut.type == TypeRadio) || (attribut.type == TypeBoolean)}"> 
-                            <label [for]="attribut.id" class="form-label">{{attribut.titre}}<span *ngIf="attribut.obligatoire == true"> *</span></label>
-                            <input  *ngIf="(attribut.type != 'textarea') && (attribut.type != TypeRadio) && (attribut.type != TypeBoolean)" [formControlName]="incrementeCompteur(compteur,attribut)" [type]="attribut.type" class="form-control" placeholder="entrer la valeur ici">
-                            <textarea *ngIf="attribut.type == 'textarea'" class="form-control"  [formControlName]="incrementeCompteur(compteur,attribut)" placeholder="entrer la valeur ici"></textarea>
-                            <select class="form-control" *ngIf="(attribut.type == TypeRadio) || (attribut.type == TypeBoolean)" [formControlName]="incrementeCompteur(compteur,attribut)">
+                        <div formArrayName="_exemplaireDocument" class="inputBlock" *ngFor="let attributParCategorie of attributParCategorie.listAttributsParCategories; let i = index" [ngClass]="{'inputSpecial':(attribut.type == TypeRadio) || (attribut.type == TypeBoolean)}"> 
+                            <label [for]="attributParCategorie.attribut.id" class="form-label">{{attributParCategorie.attribut.titre}}<span *ngIf="attributParCategorie.obligatoire == true"> *</span></label>
+                            <input  *ngIf="(attribut.type != 'textarea') && (attribut.type != TypeRadio) && (attribut.type != TypeBoolean)" [formControlName]="incrementeCompteur(compteur,attributParCategorie)" [type]="attribut.type" class="form-control" placeholder="entrer la valeur ici">
+                            <textarea *ngIf="attribut.type == 'textarea'" class="form-control"  [formControlName]="incrementeCompteur(compteur,attributParCategorie)" placeholder="entrer la valeur ici"></textarea>
+                            <select class="form-control" *ngIf="(attribut.type == TypeRadio) || (attribut.type == TypeBoolean)" [formControlName]="incrementeCompteur(compteur,attributParCategorie)">
                                 <option value="{{val.trim()}}" *ngFor="let val of attribut.valeursParDefaut.trim().split(',')" >{{val}}</option>
                             </select>
                         </div>

@@ -63,13 +63,13 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let attributs of categorie.listAttributs">
-                            <td class="titre">{{attributs.titre}}</td>
-                            <td class="description">{{attributs.description}}</td>
-                            <td class="etat">{{attributs.etat}}</td>
-                            <td class="ordre">{{attributs.ordre}}</td>
-                            <td class="type">{{attributs.type}}</td>
-                            <td class="obligatoire">{{attributs.obligatoire}}</td>
+                        <tr *ngFor="let attributParCategorie of categorie.listAttributsParCategories">
+                            <td class="titre">{{attributParCategorie.attribut.titre}}</td>
+                            <td class="description">{{attributParCategorie.attribut.description}}</td>
+                            <td class="etat">{{attributParCategorie.attribut.etat}}</td>
+                            <td class="ordre">{{attributParCategorie.ordre}}</td>
+                            <td class="type">{{attributParCategorie.attribut.type}}</td>
+                            <td class="obligatoire">{{attributParCategorie.obligatoire}}</td>
                         </tr>
                     </tbody>
                 </table>
