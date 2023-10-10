@@ -35,7 +35,6 @@ export class NewAttributComponent implements OnInit {
       description: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
       etat: [true],
       type: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
-      obligatoire:[true],
       valeursParDefaut:['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
     })
   }
@@ -54,7 +53,6 @@ export class NewAttributComponent implements OnInit {
             description: this.attribut.description,
             etat: this.attribut.etat,
             type: this.attribut.type,
-            obligatoire: this.attribut.obligatoire,
             valeursParDefaut:this.attribut.valeursParDefaut
           })
       });
@@ -76,7 +74,6 @@ export class NewAttributComponent implements OnInit {
       description: attributInput.description,
       etat: attributInput.etat,
       type: attributInput.type,
-      obligatoire: attributInput.obligatoire,
       valeursParDefaut: attributInput.valeursParDefaut
     }
    

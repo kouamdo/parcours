@@ -12,6 +12,7 @@ import {
   ActivatedRoute,
   withDisabledInitialNavigation,
 } from '@angular/router';
+import { IAssociationCategorieAttributs } from 'src/app/modele/association-categorie-attributs';
 import { IAttributs } from 'src/app/modele/attributs';
 import { IDocument } from 'src/app/modele/document';
 import { IExemplaireDocument } from 'src/app/modele/exemplaire-document';
@@ -57,8 +58,6 @@ export class NewExemplaireComponent implements OnInit {
     etat: false,
     dateCreation: new Date(),
     dateModification: new Date(),
-    ordre: 0,
-    obligatoire: false,
     valeursParDefaut: '',
     type: TypeTicket.Int,
   };
@@ -91,6 +90,9 @@ export class NewExemplaireComponent implements OnInit {
   tableauAttributsSupprime: IAttributs[] = [];
 
   tempAttributsCpt = new Map()
+  tempAttributsObbligatoires = new Map()
+  estValide : boolean = true
+  eValvalide : string = "";
 
   constructor(
     private router: Router,
@@ -124,10 +126,21 @@ export class NewExemplaireComponent implements OnInit {
    * Methode pour l'initialisation d'un control avec une valeur
    * @param valParDefaut valeur recuperer dans objetEnregistre et qui servira de valeur du control cree
    */
-  addAttributs(valParDefaut: any) {
-    if (valParDefaut != '' && valParDefaut != 'PARCOURS_NOT_FOUND_404')
-      this._exemplaireDocument.push(this.formBuilder.control(valParDefaut));
-    else this._exemplaireDocument.push(this.formBuilder.control(''));
+  addAttributs(valParDefaut: any, obligatoire : Boolean) {
+    if (valParDefaut != '' && valParDefaut != 'PARCOURS_NOT_FOUND_404'){
+      if (obligatoire == true) {
+        this._exemplaireDocument.push(this.formBuilder.control(valParDefaut, Validators.required));
+      } else {
+        this._exemplaireDocument.push(this.formBuilder.control(valParDefaut));
+      }
+    }
+    else{
+      if (obligatoire == true) {
+        this._exemplaireDocument.push(this.formBuilder.control('', Validators.required));
+      } else {
+        this._exemplaireDocument.push(this.formBuilder.control(''));
+      }
+    } 
   }
 
   /**
@@ -266,23 +279,24 @@ export class NewExemplaireComponent implements OnInit {
    * @param idAttribut id attribut à afficher
    * @returns valeur courante + 1
    */
-  incrementeCompteur(cpt: number, attribut: IAttributs): number {
+  incrementeCompteur(cpt: number, attributCategories: IAssociationCategorieAttributs): number {
     if (this.compteur > -1 && this.compteur >= this.totalAttribut){
       return cpt;
     }
 
-    let valAttribut = this.rechercherValeurParIdAttribut(attribut.id);
-    this.tempAttributsCpt.set(attribut.id, cpt+1)
-    if (attribut.type == TypeTicket.Date && valAttribut != null) {
+    let valAttribut = this.rechercherValeurParIdAttribut(attributCategories.attribut.id);
+    this.tempAttributsCpt.set(attributCategories.attribut.id, cpt+1)
+    this.tempAttributsObbligatoires.set(cpt+1, attributCategories.attribut.titre)
+    if (attributCategories.attribut.type == TypeTicket.Date && valAttribut != null) {
       // si le type de l'attribut est Date et que la valeur de valAttribut n'est pas vide
       let dateAtt = new Date();
       if(valAttribut != "PARCOURS_NOT_FOUND_404")
          dateAtt = new Date(valAttribut); // creatoion d'une nouvelle date avec la valeur de valAttribut
       
       let dateReduite = this.datePipe.transform(dateAtt, 'yyyy-MM-dd'); // changer le format de la date de naissance pour pouvoir l'afficher dans mon input type date
-      this.addAttributs(dateReduite);
+      this.addAttributs(dateReduite, attributCategories.obligatoire);
     } else {
-      this.addAttributs(valAttribut);
+      this.addAttributs(valAttribut, attributCategories.obligatoire);
     }
     this.compteur = this.compteur + 1;
     return this.compteur;
@@ -306,6 +320,26 @@ export class NewExemplaireComponent implements OnInit {
     this._controlsSupprime.disable();
     return this.numerateur;
   }
+  /**
+   * 
+   * @returns 
+   */
+  evaluation():string{
+    
+    this.estValide = true
+    for (let index = 0; index < this.tempAttributsObbligatoires.size; index++) {
+      if (this.f.controls[index].errors) {
+        this.estValide = false
+        this.eValvalide = this.tempAttributsObbligatoires.get(index)
+        break
+      }
+    }
+      return this.eValvalide
+  }
+
+  get f(){
+    return this.formeExemplaire.get('_exemplaireDocument') as FormArray;
+  }
 
   /**
    * methode de validation du formulaire (enregistrement des donnees du formulaire)
@@ -313,6 +347,8 @@ export class NewExemplaireComponent implements OnInit {
   onSubmit() {
     const exemplaireDocument = this._exemplaireDocument;
     this.submitted = true;
+    this.enregistrerObjet()
+    this.evaluation()
     if (this.formeExemplaire.invalid) return;
 
     let exemplaireTemp: IExemplaireDocument = {

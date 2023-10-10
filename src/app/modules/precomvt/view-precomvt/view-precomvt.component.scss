@@ -1,5 +1,7 @@
 .mainBlock{
-  padding-top: 5px;;
+  padding-top: 5px;
+  width: 50%;
+  margin: auto;
 }
 .entete{
   text-align: center;
@@ -99,4 +101,18 @@
 th{
   background-color: #28a7452f;
   color: #28a745;
+}
+.actionButton{
+    clear: both;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    button{
+        background-color: red;
+        color: white;
+        opacity: 0.7;
+        &:hover{
+          opacity: 0.8;
+        }
+    }
 }

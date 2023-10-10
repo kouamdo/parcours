@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { FormControl } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
@@ -9,6 +9,8 @@ import { TranslateService } from '@ngx-translate/core';
 import { Observable, EMPTY } from 'rxjs';
 import { IPrecoMvt } from 'src/app/modele/precomvt';
 import { PrecoMvtsService } from 'src/app/services/precomvts/precomvts.service';
+import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
+import { ViewPrecomvtComponent } from '../view-precomvt/view-precomvt.component';
 
 @Component({
   selector: 'app-list-precomvts',
@@ -31,8 +33,10 @@ export class ListPrecomvtsComponent implements OnInit {
     paginator!: MatPaginator;
 
     @ViewChild(MatSort) sort!: MatSort;
+    idPrecoMvt: string = '';
 
-    constructor(private translate: TranslateService,private router:Router, private servicePrecoMvt:PrecoMvtsService, private _liveAnnouncer: LiveAnnouncer) { }
+    constructor(private translate: TranslateService,private router:Router, private servicePrecoMvt:PrecoMvtsService, private _liveAnnouncer: LiveAnnouncer,
+      private dialogDef: MatDialog) { }
 
     ngOnInit(): void {
       this.getAllPrecomvts().subscribe((valeurs: IPrecoMvt[]) => {
@@ -71,6 +75,24 @@ export class ListPrecomvtsComponent implements OnInit {
     public rechercherListingPrecomvt(option: IPrecoMvt){
       this.servicePrecoMvt.getPrecomvtsByLibelle(option.libelle.toLowerCase()).subscribe(
         //  valeurs => {this.dataSource.data = valeurs;}
+      )
+    }
+
+    getPrecoMvtId(idPrecoMvt: string) {
+      this.idPrecoMvt = idPrecoMvt;
+    }
+
+    openViewPrecoDialog(){
+      this.dialogDef.open(ViewPrecomvtComponent, 
+      {
+        width:'100%',
+        height:'100%',
+        enterAnimationDuration:'1000ms',
+        exitAnimationDuration:'1000ms',
+        data:{
+          idPrecoMvt : this.idPrecoMvt
+        }
+      }
       )
     }
 

@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/internal/Observable';
@@ -32,10 +33,11 @@ export class ViewPrecomvtComponent implements OnInit {
   eltRessource:IPrecoMvtQte[]=[];
   eltFamille:IPrecoMvtQte[]=[];
 
-  constructor(private router:Router, private infosPath:ActivatedRoute, private precoMvtService:PrecoMvtsService) {}
+  constructor(private router:Router, private infosPath:ActivatedRoute, private precoMvtService:PrecoMvtsService,
+    @Inject(MAT_DIALOG_DATA) public data: any) {}
 
   ngOnInit(): void {
-    let idPrecoMvt = this.infosPath.snapshot.paramMap.get('idPrecoMvt');
+    let idPrecoMvt = this.data.idPrecoMvt
     console.log("idPrecoMvt :" + idPrecoMvt);
     if((idPrecoMvt != null) && idPrecoMvt!==''){
       this.precoMvtService.getPrecomvtById(idPrecoMvt).subscribe(

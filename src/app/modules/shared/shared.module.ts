@@ -14,9 +14,10 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { AppRoutingModule } from 'src/app/app-routing.module';
 import { HttpLoaderFactory } from 'src/app/app.module';
 import { ModalCategoriesComponent } from './modal-categories/modal-categories.component';
-import {MatDialogModule} from '@angular/material/dialog';
+import { MatDialogModule } from '@angular/material/dialog';
 import { ModalChoixAttributsComponent } from './modal-choix-attributs/modal-choix-attributs.component';
 import { ModalChoixPreconisationsComponent } from './modal-choix-preconisations/modal-choix-preconisations.component';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 
 @NgModule({
@@ -42,6 +43,7 @@ import { ModalChoixPreconisationsComponent } from './modal-choix-preconisations/
     MatTableModule,
     MatSortModule,
     MatDialogModule,
+    MatCheckboxModule,
     TranslateModule.forChild({
         loader: {
             provide: TranslateLoader,

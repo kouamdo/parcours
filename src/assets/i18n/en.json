@@ -42,18 +42,20 @@
         "title":"listing",
         "text1": "Field Required",
         "text2": "Field not Required",
+        "text3": "is a required field",
         "button1":"Print",
-        "button2":"Close",
+        "button2":"Back",
         "button3":"Cancel",
         "button4":"Previous",
         "button5":"No action yet",
         "button6":"validate",
         "button7":"Edit",
         "button8":"Delete",
-        "button9":"Add"
+        "button9":"Add",
+        "button10":"Close"
     },
     "patient":{
-        "text":"Patients retrouvé(e)s",
+        "title1":"Add a new patient",
         "search-bar":"search",
         "table":{
             "title1":"Name",
@@ -79,7 +81,7 @@
         }
     },
     "personnel":{
-        "text":"Personnels retrouvé(e)s",
+        "title1":"Add a new staff",
         "search-bar":"search",
         "table":{
             "title1":"Name",
@@ -106,6 +108,7 @@
         }
     },
     "services":{
+        "title1":"Add a new service",
         "table":{
             "title1":"Libel",
             "title2":"Status",
@@ -145,6 +148,7 @@
         }
     },
     "attributs":{
+        "title1":"Add a new attribut",
         "table":{
             "title1":"title",
             "title2":"Description",
@@ -155,7 +159,8 @@
             "title7":"Order",
             "title8":"Is attribut required ?",
             "title9":"Defaut values ",
-            "title10":"Separeted values with a comma"
+            "title10":"Separeted values with a comma",
+            "title11": "Required ?"
         },
         "form":{
             "text1":"Title is required.",
@@ -166,6 +171,7 @@
         }
     },
     "missions":{
+        "title1":"Add a new mission",
         "table":{
             "title1":"Label",
             "title2":"Description",
@@ -190,7 +196,7 @@
         }
     },
     "document":{
-        "text":"documents retrouvé(e)s",
+        "title3":"Add a new document",
         "search-bar":"Rechercher",
         "title1":"View resuts",
         "title2":"Select attributs of this category",
@@ -312,13 +318,15 @@
     }
     },
     "preconisation":{
+        "title1":"Add a new preconisation",
         "form":{
             "title1":"Select preconisations"
         },
         "table":{
             "title1":"Label",
             "title2":"Status",
-            "title3":"Type"
+            "title3":"Type",
+            "title4":"View more infos"
         },
         "view":{
             "text1":"Preconisations of this document"

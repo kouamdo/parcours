@@ -39,18 +39,17 @@
 
                           <!-- type Column -->
                           <ng-container matColumnDef="type">
-                              <th class="text-dark containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'preconisation.table.title3' | translate}} </th>
-                              <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.type}} </td>
+                                <th class="text-dark containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'preconisation.table.title3' | translate}} </th>
+                                <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.type}}</td>
                           </ng-container>
 
                             <!-- Actions column -->
                             <ng-container matColumnDef="actions">
                                 <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{"patient.table.title8" | translate}} </th>
                                 <td class="text-dark containCell" mat-cell *matCellDef="let element">
-                                    <div class="actions" class="">
-                                        <label style="width: 2px;" for="PrecoMvts">
-                                            <input type="checkbox" [value]="element.libelle" name="PrecoMvts" id="PrecoMvts" (click)="getPrecoMvtId(element.id)" (change)="onCheckPrecoMvtChange($event)">
-                                        </label>
+                                    <div class="actions">
+                                        <input type="checkbox" [value]="element.libelle" name="PrecoMvts" id="PrecoMvts" (click)="getPrecoMvtId(element.id)" (change)="onCheckPrecoMvtChange($event)">
+                                        <span role="button" (click)="getPrecoMvtId(element.id); openViewPrecoDialog()"><i class="fa fa-info-circle text-info" aria-hidden="true" title="{{'preconisation.table.title4' | translate}}"></i></span>
                                     </div>
                                 </td>
                             </ng-container>
@@ -95,9 +94,11 @@
                                                 <button class="btn p-0" name="PrecoMvts"  [value]="element.id" id="PrecoMvts" title="clicker pour annuler la selection" (click)="retirerSelectionPrecoMvt(i)">
                                                     <i class="fa fa-trash text-danger" aria-hidden="true"></i>
                                                 </button>
+                                                <span><i class="fa fa-info-circle text-info" aria-hidden="true" title="{{'preconisation.table.title4' | translate}}"></i></span>
                                             </div>
                                         </td>
                                     </ng-container>
+
                                     <tr mat-header-row *matHeaderRowDef="displayedPrecoMvtsColumns"></tr>
                                     <tr mat-row *matRowDef="let row; columns: displayedPrecoMvtsColumns;"></tr>
                                 </table>
@@ -107,7 +108,7 @@
                                 </mat-paginator>
                             </div>
                             <div class="actionButton mt-2">
-                                <button mat-button [mat-dialog-close]="dataSourcePrecoResultat.data" cdkFocusInitial class="btn btnValidation">{{'lists.button6' | translate}}</button>
+                                <button mat-button [mat-dialog-close] cdkFocusInitial class="btn btnValidation">{{'lists.button6' | translate}}</button>
                             </div>
                         </div>
                     </div>

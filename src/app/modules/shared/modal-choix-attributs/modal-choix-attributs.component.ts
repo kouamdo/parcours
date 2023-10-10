@@ -25,8 +25,7 @@ export class ModalChoixAttributsComponent implements OnInit {
     'actions',
     'titre',
     'description',
-    'type',
-    'obligatoire',
+    'type'
   ]; // structure du tableau presentant les attributs
   dataSourceAttribut = new MatTableDataSource<IAttributs>(
     this.ELEMENTS_TABLE_ATTRIBUTS
@@ -48,8 +47,7 @@ export class ModalChoixAttributsComponent implements OnInit {
     private dialogDef: MatDialog,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
-    this.formeAttribut = this.formBuilder.group({
-    });
+    this.formeAttribut = this.formBuilder.group({});
   }
 
   ngOnInit(): void {

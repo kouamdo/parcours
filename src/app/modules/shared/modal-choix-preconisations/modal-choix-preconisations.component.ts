@@ -9,6 +9,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { IPrecoMvt } from 'src/app/modele/precomvt';
 import { DonneesEchangeService } from 'src/app/services/donnees-echange/donnees-echange.service';
 import { PrecoMvtsService } from 'src/app/services/precomvts/precomvts.service';
+import { ViewPrecomvtComponent } from '../../precomvt/view-precomvt/view-precomvt.component';
 
 @Component({
   selector: 'app-modal-choix-preconisations',
@@ -125,6 +126,21 @@ export class ModalChoixPreconisationsComponent implements OnInit {
       .subscribe((valeurs) => {
         this.dataSourcePreco.data = valeurs;
       });
+  }
+  openViewPrecoDialog(){
+    this.dialogDef.open(ViewPrecomvtComponent, 
+    {
+      maxWidth: '100vw',
+      maxHeight: '100vh',
+      width:'100%',
+      height:'100%',
+      enterAnimationDuration:'1000ms',
+      exitAnimationDuration:'1000ms',
+      data:{
+        idPrecoMvt : this.idPrecoMvt
+      }
+    }
+    )
   }
 
   announceSortChange(sortState: Sort) {

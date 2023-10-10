@@ -59,15 +59,17 @@
                             <th class="etat">{{'attributs.table.title3' | translate}}</th>
                             <th class="ordre">{{'attributs.table.title7' | translate}}</th>
                             <th class="type">{{'attributs.table.title6' | translate}}</th>
+                            <th class="type">{{'attributs.table.title11' | translate}}</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let attributs of categorie.listAttributs">
-                            <td class="titre">{{attributs.titre}}</td>
-                            <td class="description">{{attributs.description}}</td>
-                            <td class="etat">{{attributs.etat}}</td>
-                            <td class="ordre">{{attributs.ordre}}</td>
-                            <td class="type">{{attributs.type}}</td>
+                        <tr *ngFor="let attributParCategorie of categorie.listAttributsParCategories">
+                            <td class="titre">{{attributParCategorie.attribut.titre}}</td>
+                            <td class="description">{{attributParCategorie.attribut.description}}</td>
+                            <td class="etat">{{attributParCategorie.attribut.etat}}</td>
+                            <td class="ordre">{{attributParCategorie.ordre}}</td>
+                            <td class="type">{{attributParCategorie.attribut.type}}</td>
+                            <td class="obligatoire">{{attributParCategorie.obligatoire}}</td>
                         </tr>
                     </tbody>
                 </table>
