@@ -203,7 +203,6 @@ export class ModalCategoriesComponent implements OnInit {
           ordre: categorieAttributInput.ordreCategorie,
           attributCategories: attribut
         }
-        categorieAttributsTemp.attributCategories.attribut = attribut
       
       this.tableauIndexSelectionner.set(index,categorieAttributsTemp);
       }

@@ -126,7 +126,7 @@
                             <!-- ordre par categorie Column -->
                             <ng-container matColumnDef="ordreAtrParCat">
                                 <th class="text-dark containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'document.table.title13' | translate}} </th>
-                                <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.attributCategories.attribut.ordre}} </td>
+                                <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.attributCategories.ordre}} </td>
                             </ng-container>
                             <!-- ordre Column -->
                             <ng-container matColumnDef="ordreCat">
@@ -136,7 +136,7 @@
                             <!-- obligatoire Column -->
                             <ng-container matColumnDef="obligatoire">
                                 <th class="text-dark containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'attributs.table.title11' | translate}} </th>
-                                <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.attributCategories.attribut.obligatoire}} </td>
+                                <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.attributCategories.obligatoire}} </td>
                             </ng-container>
                             <!-- actions Column -->
                             <ng-container matColumnDef="actions">
