@@ -16,6 +16,7 @@ import { TypeTicket } from "src/app/modele/type-ticket";
 import {v4 as uuidv4} from 'uuid';
 import { map } from 'rxjs';
 import { DonneesEchangeService } from 'src/app/services/donnees-echange/donnees-echange.service';
+import { IAssociationCategorieAttributs } from 'src/app/modele/association-categorie-attributs';
 
 @Component({
   selector: 'app-modal-categories',
@@ -38,7 +39,7 @@ export class ModalCategoriesComponent implements OnInit {
   nomValide : boolean = false
   
   //tableau de listing des attributs a affecter a chaque categorie
-  dataSourceAttributTemp = new MatTableDataSource<IAttributs>(); 
+  dataSourceAttributTemp = new MatTableDataSource<IAssociationCategorieAttributs>(); 
   
   categorieAttributs : ICategoriesAttributs = {
     id: '',
@@ -61,7 +62,7 @@ export class ModalCategoriesComponent implements OnInit {
   TABLE_CATEGORIE_AFFICHAGE_TEMP: ICategorieAffichage[] = []; 
   tableResultatsCategoriesAffichage  = new MatTableDataSource<ICategorieAffichage>(this.TABLE_CATEGORIE_AFFICHAGE_TEMP);
 
-  tableauAttributsTemp : IAttributs[] = []
+  tableauAttributsTemp : IAssociationCategorieAttributs[] = []
   tableauIndexSelectionner = new Map(); 
   
 // structure du tableau presentant les objets categoriesAttributs finaux formes en regroupant les categories
@@ -106,10 +107,16 @@ export class ModalCategoriesComponent implements OnInit {
       tmpTab.forEach(
         (att : IAttributs) =>{
           if(!listAtt.includes(att.id)){
-            this.tableauAttributsTemp.push(att);
+            let jointureAttCat : IAssociationCategorieAttributs =
+            {
+              ordre: 0,
+              obligatoire: false,
+              attribut: att
+            }
+            this.tableauAttributsTemp.push(jointureAttCat);
           }
       });
-      this.dataSourceAttributTemp = new MatTableDataSource<IAttributs>(this.tableauAttributsTemp);
+      this.dataSourceAttributTemp = new MatTableDataSource<IAssociationCategorieAttributs>(this.tableauAttributsTemp);
 
       //suppression des valeurs dans le second tableau si les attributs ont été supprimé dans le tableau initial des attributs
       let TABLE_CATEGORIE_AFFICHAGE_TEMP : ICategorieAffichage[] = [];
@@ -128,9 +135,25 @@ export class ModalCategoriesComponent implements OnInit {
       this.donneeDocCatService.dataDocumentCategorie =  TABLE_CATEGORIE_AFFICHAGE_TEMP;
     }else{
       //Création du premier tableau si le deuxième est vide
-      this.tableauAttributsTemp = this.donneeDocCatService.dataDocumentAttributs
+      this.tableauAttributsTemp = this.creerTabAssociationCatAtr(this.donneeDocCatService.dataDocumentAttributs)
     }
     this.dataSourceAttributTemp.data = this.tableauAttributsTemp;
+  }
+
+  creerTabAssociationCatAtr(tmpTab:any):IAssociationCategorieAttributs[]{
+    
+    tmpTab.forEach(
+      (att : IAttributs) =>{
+        let jointureAttCat : IAssociationCategorieAttributs =
+        {
+          ordre: 0,
+          obligatoire: false,
+          attribut: att
+        }
+        this.tableauAttributsTemp.push(jointureAttCat);
+        
+    });
+    return this.tableauAttributsTemp
   }
 
   /**
@@ -261,8 +284,8 @@ export class ModalCategoriesComponent implements OnInit {
     let listAtt : String[] = [];
     let listOrdre : number[] = [];
     this.tableauIndexSelectionner.forEach((valeur, cle)=>{
-      listAtt.push(valeur.attribut.id);
-      listOrdre.push(valeur.attribut.ordre);
+      listAtt.push(valeur.attributCategories.attribut.id);
+      listOrdre.push(valeur.attributCategories.attribut.ordre);
     });
 
     //construction du tableau résiduel
@@ -270,12 +293,12 @@ export class ModalCategoriesComponent implements OnInit {
     this.tableauAttributsTemp = [];
     let tmpTab =  this.dataSourceAttributTemp.data;
     tmpTab.forEach(
-      (att : IAttributs) =>{ 
-        if(!listAtt.includes(att.id) ){
+      (att : IAssociationCategorieAttributs) =>{ 
+        if(!listAtt.includes(att.attribut.id) ){
           this.tableauAttributsTemp.push(att);
         }
     });
-    this.dataSourceAttributTemp = new MatTableDataSource<IAttributs>(this.tableauAttributsTemp);
+    this.dataSourceAttributTemp = new MatTableDataSource<IAssociationCategorieAttributs>(this.tableauAttributsTemp);
     this.tableauIndexSelectionner = new Map;
   }
 
@@ -294,8 +317,8 @@ export class ModalCategoriesComponent implements OnInit {
     this.donneeDocCatService.dataDocumentCategorie = this.TABLE_CATEGORIE_AFFICHAGE_TEMP;
 
     //construction du premier tableau
-    this.tableauAttributsTemp.push(categorieAffichage.attributCategories.attribut);
-    this.dataSourceAttributTemp = new MatTableDataSource<IAttributs>(this.tableauAttributsTemp);
+    this.tableauAttributsTemp.push(categorieAffichage.attributCategories);
+    this.dataSourceAttributTemp = new MatTableDataSource<IAssociationCategorieAttributs>(this.tableauAttributsTemp);
     //suppression dans les index selectionnés
     let indexASupprimer : number  = -1;
     this.tableauIndexSelectionner.forEach((valeur, cle)=>{
@@ -330,7 +353,7 @@ export class ModalCategoriesComponent implements OnInit {
            }
          }
        }
-       categorieAttributs.attributCategories.attribut = element
+       categorieAttributs.attributCategories = element
         this.TABLE_CATEGORIE_AFFICHAGE_TEMP.push(categorieAttributs)
         
         // ajout d'une categorie par defaut à la fermeture de la modale

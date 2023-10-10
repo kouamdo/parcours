@@ -43,17 +43,17 @@
                             <!-- titre Column -->
                             <ng-container matColumnDef="titre">
                                 <th class="text-dark containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'attributs.table.title1' | translate}} </th>
-                                <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.titre}} </td>
+                                <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.attribut.titre}} </td>
                             </ng-container>
                             <!-- description Column -->
                             <ng-container matColumnDef="description">
                                 <th class="text-dark containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'attributs.table.title2' | translate}} </th>
-                                <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.description}} </td>
+                                <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.attribut.description}} </td>
                             </ng-container>
                             <!-- type Column -->
                             <ng-container matColumnDef="type">
                                 <th class="text-dark containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'attributs.table.title6' | translate}} </th>
-                                <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.type}} </td>
+                                <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.attribut.type}} </td>
                             </ng-container>
                             <!-- ordre Column -->
                             <ng-container matColumnDef="ordreAtrParCat">
@@ -82,7 +82,7 @@
                                 <th class="text-dark text-left containHead" mat-header-cell *matHeaderCellDef> {{"patient.table.title8" | translate}} </th>
                                 <td class="text-dark containCell"  mat-cell *matCellDef="let element;  let i=index">
                                     <div class="actions">
-                                        <button class="btn p-0" name="attributs"  [value]="element" id="attributs" title="clicker pour ajouter un attributs a la categorie"  (change)="selectionnerCategorieCheck(formeCategorieAttribut.value,this.element, i, $event);">
+                                        <button class="btn p-0" name=""  [value]="element.attribut.id" id="" title="clicker pour ajouter un attributs a la categorie"  (change)="selectionnerCategorieCheck(formeCategorieAttribut.value,this.element, i, $event);">
                                             <span><input type="checkbox" [disabled] = "((formeCategorieAttribut.value.ordreCategorie < 0 ) || (formeCategorieAttribut.value.ordreCategorie == 0 )  || (formeCategorieAttribut.value.nomCategorie == '' ) )" name="" id="" class=""></span>
                                         </button>
                                     </div>
@@ -121,12 +121,12 @@
                             <!-- libelleAttribut Column -->
                             <ng-container matColumnDef="libelleAttribut">
                                 <th class="text-dark containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'document.table.title16' | translate}} </th>
-                                <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.attribut.titre}} </td>
+                                <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.attributCategories.attribut.titre}} </td>
                             </ng-container>
                             <!-- ordre par categorie Column -->
                             <ng-container matColumnDef="ordreAtrParCat">
                                 <th class="text-dark containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'document.table.title13' | translate}} </th>
-                                <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.attribut.ordre}} </td>
+                                <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.attributCategories.attribut.ordre}} </td>
                             </ng-container>
                             <!-- ordre Column -->
                             <ng-container matColumnDef="ordreCat">
@@ -136,14 +136,14 @@
                             <!-- obligatoire Column -->
                             <ng-container matColumnDef="obligatoire">
                                 <th class="text-dark containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'attributs.table.title11' | translate}} </th>
-                                <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.attribut.obligatoire}} </td>
+                                <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.attributCategories.attribut.obligatoire}} </td>
                             </ng-container>
                             <!-- actions Column -->
                             <ng-container matColumnDef="actions">
                                 <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{"patient.table.title8" | translate}} </th>
                                 <td class="text-dark containCell" mat-cell *matCellDef="let element;  let i=index">
                                     <div class="actions">
-                                        <button class="btn p-0" name="attributs"  [value]="element.id" id="attributs" title="clicker pour annuler la selection"
+                                        <button class="btn p-0" name="attributs"  [value]="element" id="attributs" title="clicker pour annuler la selection"
                                                 (click)="supprimerCategorieAffiche(element, i)">
                                             <i class="fa fa-trash text-danger" aria-hidden="true"></i>
                                         </button>
