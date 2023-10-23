@@ -17,4 +17,5 @@ export interface IPersonnel
         dateDebut:Date,
         dateFin?:Date
     }]
+    dateSortie?:Date
 }
