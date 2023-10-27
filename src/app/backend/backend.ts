@@ -236,7 +236,7 @@ export class InMemDBService implements InMemoryDbService {
         langue: 'fr',
         fonctionnalites: [
           {
-            fonction: 'Personne',
+            fonction:'Personne',
             icone: 'fas fa-user-cog',
             actif: 'menu-close',
             elements: [

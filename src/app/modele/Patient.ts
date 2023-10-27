@@ -1,3 +1,4 @@
+
 export interface IPatient
 {
     id:string,
@@ -7,5 +8,6 @@ export interface IPatient
     dateNaissance?:Date,
     adresse:string,
     mail:string,
-    telephone:string
+    telephone:string,
+
 }

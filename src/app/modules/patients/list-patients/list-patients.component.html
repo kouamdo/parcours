@@ -7,7 +7,7 @@
         <div class='card-hearder pt-3' >
             <div class="d-flex align-items-center justify-content-end tableTools">
                 <div class="form-inline mr-3">
-                    <form class="example-form">
+                     <form class="example-form">
                         <mat-form-field class="example-full-width" appearance="fill">
                           <mat-label class="searchBar">{{'patient.search-bar' | translate}}</mat-label>
                           <input type="text" matInput aria-label="Rechercher" [formControl]="myControl" [matAutocomplete]="auto">
@@ -18,6 +18,7 @@
                           </mat-autocomplete>
                         </mat-form-field>
                     </form>
+
                 </div>
                 <div role="button" id="addUserBotton" routerLink="../patient-nouveau">
                     <span title="Ajouter un patient">
@@ -97,10 +98,7 @@
                                     <i class="fa fa-pen text-info" aria-hidden="true"></i>
                                     <span>{{'patient.table.actions.link2' | translate}}</span>
                                 </button>
-                                <button class="dropdown-item nav-link" [routerLink]="['/patient-nouveau',element.id]" title="{{'patient.table.actions.link4' | translate}}">
-                                    <i class="fa fa-times-circle text-danger" aria-hidden="true"></i>
-                                    <span>{{'patient.table.actions.link4' | translate}}</span>
-                                </button>
+
                             </div>
                         </div>
                     </td>

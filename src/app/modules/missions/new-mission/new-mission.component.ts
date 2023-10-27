@@ -18,7 +18,7 @@ export class NewMissionComponent implements OnInit {
   mission : IMission|undefined;
   forme: FormGroup;
   btnLibelle: string="Ajouter";
-  titre: string="Ajouter une nouvelle mission";
+  titre: string="Ajouter mission";
   submitted: boolean=false;
   services$: Observable<IService[]>=EMPTY;
   idService: string = ""

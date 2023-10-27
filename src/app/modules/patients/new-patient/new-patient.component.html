@@ -1,6 +1,6 @@
 <div id="mainSection">
-    <div class="card block">
-        <div class="card-header pt-4 pb-4 entete">{{ titre }}</div>
+    <div class="card block" id="top2">
+        <div class="card-header" class="entete pt-4 pb-4">{{titre}}</div>
         <div class="card-body">
             <form [formGroup]="forme" (ngSubmit)="onSubmit(forme.value)" *ngIf="forme" >
                 <div class="">

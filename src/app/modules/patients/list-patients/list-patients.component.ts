@@ -8,13 +8,14 @@ import { ITicket } from 'src/app/modele/ticket';
 import { PatientsService } from 'src/app/services/patients/patients.service';
 import { ServicesService } from 'src/app/services/services/services.service';
 import { TicketsService } from 'src/app/services/tickets/tickets.service';
-import {FormControl} from '@angular/forms';
+import {FormControl, FormsModule,ReactiveFormsModule} from '@angular/forms';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatSort, Sort} from '@angular/material/sort';
 import {LiveAnnouncer} from '@angular/cdk/a11y';
 import { NewTicketComponent } from '../../tickets/new-ticket/new-ticket.component';
 import {MatDialog} from '@angular/material/dialog';
+
 
 export interface User {
   nom: string;
@@ -23,7 +24,7 @@ export interface User {
 @Component({
   selector: 'app-list-patients',
   templateUrl: './list-patients.component.html',
-  styleUrls: ['./list-patients.component.scss']
+  styleUrls: ['./list-patients.component.scss'],
 })
 export class ListPatientsComponent implements OnInit, AfterViewInit {
 
@@ -38,12 +39,12 @@ export class ListPatientsComponent implements OnInit, AfterViewInit {
   currentDate : Date = new Date()
 
   myControl = new FormControl<string | IPatient>('');
- 
-  ELEMENTS_TABLE: IPatient[] = [];
-  filteredOptions: IPatient[] | undefined;
 
+  ELEMENTS_TABLE: IPatient[] = [];
+  //filteredOptions: IPatient[] | undefined;
+  filteredOptions: IPatient[] | undefined;
   displayedColumns: string[] = ['nom', 'prenom', 'anniversaire', 'sexe', 'mail', 'adresse', 'telephone', 'actions'];
-  
+
   dataSource = new MatTableDataSource<IPatient>(this.ELEMENTS_TABLE);
 
   @ViewChild(MatPaginator)
@@ -51,12 +52,12 @@ export class ListPatientsComponent implements OnInit, AfterViewInit {
 
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private translate: TranslateService,private router:Router, private servicePatient:PatientsService, private _liveAnnouncer: LiveAnnouncer, private serviceService:ServicesService, private serviceTicket:TicketsService, private dialogDef : MatDialog) { 
+  constructor(private translate: TranslateService,private router:Router, private servicePatient:PatientsService, private _liveAnnouncer: LiveAnnouncer, private serviceService:ServicesService, private serviceTicket:TicketsService, private dialogDef : MatDialog) {
 
   }
 
   ngOnInit(): void {
-    this.services$ = this.getAllServices(); 
+    this.services$ = this.getAllServices();
     this.tickets$ = this.getAllTickets();
 
     this.getAllPatients().subscribe(valeurs => {
@@ -68,15 +69,15 @@ export class ListPatientsComponent implements OnInit, AfterViewInit {
         const name = typeof value === 'string' ? value : value?.nom;
         if(name != undefined && name?.length >0){
           this.servicePatient.getPatientsByName(name.toLowerCase() as string).subscribe(
-            reponse => { 
-              this.filteredOptions = reponse;
+            reponse => {
+             this.filteredOptions = reponse;
             }
           )
         }
         else{
-          this.filteredOptions = [];
+         this.filteredOptions = [];
         }
-        
+
       }
     );
   }
@@ -100,7 +101,7 @@ export class ListPatientsComponent implements OnInit, AfterViewInit {
   }
 
   openNewTicketDialog(){
-    this.dialogDef.open(NewTicketComponent, 
+    this.dialogDef.open(NewTicketComponent,
     {
       height: '500px',
       width: '400px',

@@ -1,8 +1,8 @@
-<div id="mainSection" class="d-flex flex-column justify-content-around">
-  <div class="title">
+<div id="" class="d-flex flex-column justify-content-around">
+  <div class="title" id="top1">
       <h2>{{"ressource.title"| translate}}</h2>
   </div>
-  <div class="card container-fluid" >
+  <div class="card container-fluid" id="top">
       <div class='card-hearder pt-3' >
           <div class="d-flex align-items-center justify-content-end mr-4 tableTools">
               <div class="form-inline mr-3">
@@ -92,10 +92,7 @@
                                       <i class="fa fa-pen text-info" aria-hidden="true"></i>
                                       <span>{{'patient.table.actions.link2' | translate}}</span>
                                   </button>
-                                  <button class="dropdown-item nav-link" [routerLink]="['/ressource-nouvelle',element.id]" title="{{'patient.table.actions.link4' | translate}}">
-                                    <i class="fa fa-times-circle text-danger" aria-hidden="true"></i>
-                                    <span>{{'patient.table.actions.link4' | translate}}</span>
-                                </button>
+
                               </div>
                           </div>
                       </td>

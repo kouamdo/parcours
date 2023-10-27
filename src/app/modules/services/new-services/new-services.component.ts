@@ -17,7 +17,7 @@ export class NewServicesComponent implements OnInit {
   service : IService|undefined;
   forme: FormGroup;
   btnLibelle: string="Ajouter";
-  titre: string="Ajouter un nouveau service";
+  titre: string="Ajouter service";
   submitted: boolean=false;
 
   initialDateDerniereModification = new FormControl(new Date());

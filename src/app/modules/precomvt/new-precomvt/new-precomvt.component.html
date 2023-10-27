@@ -1,5 +1,5 @@
 <div id="mainSection">
-  <div class="card block">
+  <div class="card block" id="top2">
     <div class="card-body p-0 m-0">
       <form [formGroup]="forme" *ngIf="forme"  >
         <div *ngIf="steps != 2 && steps != 3" class="w-100 pt-4 pb-4 entete">Nouvelle Préconisation</div>
@@ -33,7 +33,9 @@
                         <label for="etat" class="label" >
                           Etat
                         </label>
-                        <input  type="checkbox" checked value="true" formControlName="etat" name="etat" class="form-control" id="etat" placeholder="" required >
+                        <p class="w-100 d-flex align-items-center choix" >
+                        <input  type="checkbox" checked value="true" formControlName="etat" name="etat" class="form-control" id="etat" placeholder="">
+                      </p>
                       </div>
                   </div>
                 </div>
@@ -199,9 +201,9 @@
     </div>
   </div>
 
-  <div id="rigthSection" class="card">
-    <div class="titleBlock" id="titleBlock" class="w-200 pt-4 pb-4 entete0">
-      <h2 class="rigth">Etape</h2>
+  <div id="rigthSection" class="card" >
+    <div class="titleBlock" id="titleBlock" class="w-200 pt-4 pb-4 entete0" id="top2">
+      <h2 class="rigth">{{'precomvt.table.title19' | translate}}</h2>
     </div>
     <div class="contentBlock">
       <div *ngFor="let elt of eltsPreco let i=index "  class="color" >

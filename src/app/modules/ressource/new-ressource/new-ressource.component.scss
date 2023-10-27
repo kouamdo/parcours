@@ -37,17 +37,7 @@ select{
 #dateCreation,#dateModification{
   visibility: hidden;
 }
-input[ type=checkbox ]{
-  border: none;
-  color: red;
-  margin-right: 250px;
-  height: 17px;
-  }
 
-  input, #etat{
-    border: none;
-    box-shadow: none;
-  }
   input, #famille{
     border:none;
     box-shadow:none;
@@ -119,22 +109,4 @@ mat-form-field:focus{
   margin: 0;
   color: #7ea97e96;
   border: none;
-}
-@media screen and (max-width: 1200px) {
-  input[ type=checkbox ]{
-    margin-right: 150px;
-
-    }
-}
-@media screen and (max-width: 1100px) {
-  input[ type=checkbox ]{
-    margin-right: 150px;
-
-    }
-}
-@media screen and (max-width: 1060px) {
-  input[ type=checkbox ]{
-    margin-right: 150px;
-
-    }
 }

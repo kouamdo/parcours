@@ -16,7 +16,7 @@ export class NewAttributComponent implements OnInit {
   attribut : IAttributs|undefined;
   forme: FormGroup;
   btnLibelle: string="Ajouter";
-  titre: string="Ajouter un nouvel attribut";
+  titre: string="Ajouter attribut";
   submitted: boolean=false;
 
   typeInt = TypeTicket.Int;

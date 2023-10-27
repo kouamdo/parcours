@@ -1,6 +1,6 @@
 <div id="mainSection">
-  <div class="card block">
-      <div class="card-header pt-4 pb-4 entete"> {{'famille.header' | translate}}</div>
+  <div class="card block" id="top2">
+      <div class="card-header" class="entete  pt-4 pb-4"> {{'famille.header' | translate}}</div>
       <div class="card-body">
         <form [formGroup]="forme" (ngSubmit)="onSubmit(forme.value)" *ngIf="forme" >
               <div class="">
@@ -18,6 +18,19 @@
                               </div>
                           </div>
                       </div>
+                      <div class="form-group" >
+                        <div>
+                            <div class="champs">
+                                <label for="etat" class="label" >
+                                  {{'famille.table.title3' | translate}}
+                                </label>
+                                <p class="w-100 d-flex align-items-center choix" >
+                                <input   type="checkbox" checked value="true"  formControlName="etat" class="form-control" name="etat" id="etat" placeholder="" >
+                              </p>
+                            </div>
+
+                        </div>
+                    </div>
                       <div class="form-group">
                           <div>
                               <div class="champs">
