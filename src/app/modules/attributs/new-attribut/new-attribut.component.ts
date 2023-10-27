@@ -75,7 +75,6 @@ export class NewAttributComponent implements OnInit {
       description: attributInput.description,
       etat: attributInput.etat,
       type: attributInput.type,
-      obligatoire: attributInput.obligatoire,
       valeursParDefaut: attributInput.valeursParDefaut
     }
    
