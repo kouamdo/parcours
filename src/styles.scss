@@ -90,6 +90,12 @@ mat-dialog-container {
       width: 300px;
       font-weight: normal !important;
   }
+  sup{
+      font-style: normal;
+  }
+}
+.note, sup{
+    color: orangered;
 }
 .champs, select, input{
   font-size: 15px;

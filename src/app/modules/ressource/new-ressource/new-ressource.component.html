@@ -9,7 +9,7 @@
                           <div>
                               <div class="champs">
                                   <label for="libelle" class="label">
-                                    {{'ressource.table.title1' | translate}}
+                                    {{'ressource.table.title1' | translate}} <sup>*</sup>
                                   </label>
                                   <input type="text" formControlName="libelle" name="libelle" id="libelle"  placeholder="{{'ressource.table.title1' | translate}}"  class="form-control">
                               </div>
@@ -34,7 +34,7 @@
                       <div class="form-group">
                           <div class="champs">
                               <label  for="quantite"  class="label" >
-                                {{'ressource.table.title3' | translate}}
+                                {{'ressource.table.title3' | translate}} <sup>*</sup>
                               </label>
                               <input type="number" list="" formControlName="quantite" name="quantite" id="quantite" placeholder=" {{'ressource.table.title3' | translate}}" class="form-control" >
                           </div>
@@ -67,11 +67,10 @@
                       <div class="form-group">
                     <div class="champs">
                         <label  for="famille"  class="label" >
-                          {{'ressource.table.title6' | translate}}
+                          {{'ressource.table.title6' | translate}} <sup>*</sup>
                         </label>
-                        <mat-form-field class="example-full-width" appearance="fill">
-                            <mat-label class="famill">  </mat-label>
-                            <input  type="text" matInput [matAutocomplete]="auto"  aria-label="famille" [formControl]="myControl" name="famille" id="famille" placeholder="" class="form-control">
+                        <mat-form-field class="example-full-width w-100" appearance="fill">
+                            <input  type="text" matInput [matAutocomplete]="auto"  aria-label="famille" [formControl]="myControl" name="famille" id="famille" placeholder="" class="w-100">
                             <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn" >
                             <mat-option *ngFor="let option of filteredOptions" [value]="option" (click)="getIdFamille(option.id)" (onSelectionChange)="rechercherListingFamille(option)">
                                 {{option.libelle}}

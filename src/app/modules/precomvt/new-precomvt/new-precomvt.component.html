@@ -2,9 +2,9 @@
   <div class="card block" id="top2">
     <div class="card-body p-0 m-0">
       <form [formGroup]="forme" *ngIf="forme"  >
-        <div *ngIf="steps != 2 && steps != 3" class="w-100 pt-4 pb-4 entete">Nouvelle Préconisation</div>
-          <div *ngIf="steps==2" class="w-100 pt-4 pb-4 entete1" >Assigner aux Familles</div>
-          <div *ngIf="steps==3" class="w-100 pt-4 pb-4 entete2">Assigner Une Ressource</div>
+        <div *ngIf="steps != 2 && steps != 3" class="w-100 pt-4 pb-4 entete">{{'precomvt.header' | translate}}</div>
+          <div *ngIf="steps==2" class="w-100 pt-4 pb-4 entete1" >{{'precomvt.header1' | translate}}</div>
+          <div *ngIf="steps==3" class="w-100 pt-4 pb-4 entete2">{{'precomvt.header2' | translate}}</div>
 
           <div class="w-100 mt-4 pt-0 pl-2 pr-2 pb-0" >
             <div class="w-100">
@@ -13,10 +13,10 @@
                   <div>
                     <div class="champs">
                       <label for="libelle" class="label" class="libe">
-                        Libelle
+                        {{'precomvt.table.title1' | translate}} <sup>*</sup>
                       </label>
                       <div class="w-100">
-                        <input type="text" formControlName="libelle" name="libelle" id="libelle"  placeholder="libelle"  class="form-control"
+                        <input type="text" formControlName="libelle" name="libelle" id="libelle"  placeholder="{{'precomvt.table.title1' | translate}}"  class="form-control"
                         (ngModelChange)="tabError.delete('libelle')" >
                         <p  *ngIf="tabError.get('libelle')"  class="error" >
                           <span *ngIf="tabError.get('libelle')">{{ tabError.get('libelle') }}</span>
@@ -31,10 +31,10 @@
                   <div>
                       <div class="champs">
                         <label for="etat" class="label" >
-                          Etat
+                          {{'precomvt.table.title2' | translate}}
                         </label>
-                        <p class="w-100 d-flex align-items-center choix" >
-                        <input  type="checkbox" checked value="true" formControlName="etat" name="etat" class="form-control" id="etat" placeholder="">
+                        <p class="w-100 d-flex align-items-center w-100 choix" >
+                        <input  type="checkbox" checked value="true" formControlName="etat" name="etat" id="etat">
                       </p>
                       </div>
                   </div>
@@ -43,7 +43,7 @@
                 <div class="form-group">
                   <div class="champs">
                     <label  for="type"  class="label" >
-                      Type
+                      {{'precomvt.table.title3' | translate}} <sup>*</sup>
                     </label>
                     <div class="errorPls w-100">
                       <select class="form-control" formControlName="type" (ngModelChange)="tabError.delete('type')" (ngModelChange)="tabError.delete('typeo')">
@@ -65,7 +65,7 @@
         <div *ngIf="steps == 2" class="form-group pt-0 pl-2 pr-2 pb-0">
           <div class="champs">
             <label for="famille" class="label">
-              Famille
+              {{'precomvt.table.title4' | translate}}
             </label>
             <div class="w-100">
               <mat-form-field  style="background-color:#28a745;" class="example-full-width" appearance="fill" >
@@ -82,7 +82,7 @@
         <div  *ngIf="steps==3" class="form-group pt-0 pl-2 pr-2 pb-0">
           <div class="champs"  id="ressource">
               <label  for="ressource"  class="label" id="label3">
-                Ressource
+                {{'precomvt.table.title5' | translate}}
               </label>
               <div class="w-100">
                 <mat-form-field class="example-full-width" appearance="fill">
@@ -105,10 +105,10 @@
           <div class="form-group">
             <div class="champs">
                 <label  for="quantiteMax"  class="label" >
-                  Quantité Max
+                  {{'precomvt.table.title6' | translate}}
                 </label>
                 <div class="w-100">
-                  <input type="number"  formControlName="quantiteMax" name="quantiteMax" class="form-control" id="quantiteMax" placeholder="Entrer la quantite maximale"
+                  <input type="number"  formControlName="quantiteMax" name="quantiteMax" class="form-control" id="quantiteMax" placeholder="{{'precomvt.table.title7' | translate}}"
                   (ngModelChange)="tabError.delete('quantiteMinMax')"  (ngModelChange)="tabError.delete('quantiteMax')">
                     <p *ngIf="tabError.get('quantiteMax')"  class="error" >
                      <span *ngIf="tabError.get('quantiteMax')">{{ tabError.get('quantiteMax') }}</span>
@@ -124,10 +124,10 @@
           <div class="form-group">
             <div class="champs">
                 <label  for="quantiteMin"  class="label" >
-                  Quantité Min
+                  {{'precomvt.table.title8' | translate}}
                 </label>
                 <div class="w-100">
-                  <input  type="number" formControlName="quantiteMin" name="quantiteMin" class="form-control" id="quantiteMin" placeholder="Entrer la quantite minimale"
+                  <input  type="number" formControlName="quantiteMin" name="quantiteMin" class="form-control" id="quantiteMin" placeholder="{{'precomvt.table.title9' | translate}}"
                    (ngModelChange)="tabError.delete('quantiteMinMax')" (ngModelChange)="tabError.delete('quantiteMin')">
                   <p *ngIf="tabError.get('quantiteMin')"  class="error" >
                     <span *ngIf="tabError.get('quantiteMin')">{{ tabError.get('quantiteMin') }}</span> </p>
@@ -143,9 +143,9 @@
           <div class="form-group">
             <div class="champs">
               <label  for="montantMax"  class="label" >
-                Montant Max
+                {{'precomvt.table.title10' | translate}}
               </label>
-              <div class="w-100"><input  type="number"  formControlName="montantMax" name="montantMax" id="montantMax" placeholder="Entrer le montant minimal" class="form-control"
+              <div class="w-100"><input  type="number"  formControlName="montantMax" name="montantMax" id="montantMax" placeholder="{{'precomvt.table.title13' | translate}}" class="form-control"
                 (ngModelChange)="tabError.delete('montantMinMax')" (ngModelChange)="tabError.delete('montantMax')">
                 <p  *ngIf="tabError.get('montantMax')"  class="error" >
                   <span *ngIf="tabError.get('montantMax')">{{ tabError.get('montantMax') }}</span>
@@ -161,10 +161,10 @@
           <div class="form-group">
             <div class="champs">
                 <label  for="montantMin"  class="label" >
-                  Montant Min
+                  {{'precomvt.table.title12' | translate}}
                 </label>
                 <div class="w-100">
-                  <input type="number" formControlName="montantMin" name="montantMin" class="form-control" id="montantMin" placeholder="Entrer le montant maximal"
+                  <input type="number" formControlName="montantMin" name="montantMin" class="form-control" id="montantMin" placeholder="{{'precomvt.table.title13' | translate}}"
                   (ngModelChange)="tabError.delete('montantMinMax')" (ngModelChange)="tabError.delete('montantMin')">
                   <p  *ngIf="tabError.get('montantMin')"  class="error" >
                     <span *ngIf="tabError.get('montantMin')">{{ tabError.get('montantMin') }}</span>
@@ -179,7 +179,7 @@
           <div class="form-group">
             <div class="champs">
               <label for="distributeur" class="label">
-                Fournisseurs
+                {{'precomvt.table.title14' | translate}}
               </label>
                 <mat-form-field  style="background-color:#28a745;" class="example-full-width" appearance="fill" >
                   <mat-select formControlName="distributeur" multiple [compareWith]="compareItem1">
@@ -191,10 +191,10 @@
         </div>
 
         <div class="actionButton">
-          <button class="btn" *ngIf="steps == 0">Back</button>
-          <button type="button" class="btn" routerLink="../list-precomvts">Annuler</button>
-          <button type="button" class="btn" (click)="blocklibelle(2)">Famille</button>
-          <button type="button" class="btn" (click)="blocklibelle(3)">Ressource</button>
+          <button class="btn" *ngIf="steps == 0">{{'lists.button2' | translate}}</button>
+          <button type="button" class="btn" routerLink="../list-precomvts">{{'lists.button3' | translate}}</button>
+          <button type="button" class="btn" (click)="blocklibelle(2)">{{'precomvt.table.title4' | translate}}</button>
+          <button type="button" class="btn" (click)="blocklibelle(3)">{{'precomvt.table.title5' | translate}}</button>
           <button type="button" class="btn" (click)="validerControleStep(2,forme.value); "><i class="fa fa-arrow-right mr-1" aria-hidden="true"></i></button>
         </div>
       </form>
@@ -214,12 +214,12 @@
           </div>
           <div class="boitier">
             <div  class="blockQuantite">
-              <P title="Quantité maximale"><span>Qtité Max : </span>{{elt.precomvtqte[0].quantiteMax}}</P>
-              <P title="Quantité minimale"><span>Qtité Min : </span>{{elt.precomvtqte[0].quantiteMin}}</P>
+              <P title="Quantité maximale"><span>{{'precomvt.table.title21' | translate}} : </span>{{elt.precomvtqte[0].quantiteMax}}</P>
+              <P title="Quantité minimale"><span>{{'precomvt.table.title22' | translate}} : </span>{{elt.precomvtqte[0].quantiteMin}}</P>
             </div>
             <div  class="blockQuantite">
-              <P title="Montant maximal"><span>Mtant Max : </span>{{elt.precomvtqte[0].montantMax}}</P>
-              <P title="Montant minimal"><span>Mtant Min : </span>{{elt.precomvtqte[0].montantMin}}</P>
+              <P title="Montant maximal"><span>{{'precomvt.table.title23' | translate}} : </span>{{elt.precomvtqte[0].montantMax}}</P>
+              <P title="Montant minimal"><span>{{'precomvt.table.title24' | translate}} : </span>{{elt.precomvtqte[0].montantMin}}</P>
             </div>
           </div>
         </div>
@@ -233,7 +233,7 @@
         </div>
       </div>
       <div class="actionButtons">
-        <button type="button" (click)="enregistrerPreco()" class="btn">Enregistrer</button>
+        <button type="button" (click)="enregistrerPreco()" class="btn">{{'precomvt.table.title25' | translate}}</button>
 
       </div>
     </div>

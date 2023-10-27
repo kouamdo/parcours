@@ -192,19 +192,6 @@ h4{
   box-shadow: 0 0 2px rgb(220, 220, 220);
   height: 35px;
 }
-.champs{
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  margin: 10px 0;
-  label{
-      width: 300px;
-      font-weight: normal;
-  }
-}
-.champs, select,input{
-  font-size: 15px;
-}
 select{
   border: none;
   box-shadow: 0 0 2px rgb(220, 220, 220);
@@ -214,14 +201,6 @@ select{
   padding: 0 10px;
   border-radius: 5px;
 }
-/*.select{
-  border: none;
-  box-shadow: 0 0 2px rgb(220, 220, 220);
-  background-color: #7ea97e63;
-  color: rgb(108, 108, 108);
-  border-radius: 5px;
-  width: 100%;
-}*/
 .error{
  // margin-left: 20px;
   display: flex;
