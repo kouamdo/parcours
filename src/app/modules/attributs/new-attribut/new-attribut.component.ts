@@ -25,6 +25,7 @@ export class NewAttributComponent implements OnInit {
   typeFloat = TypeTicket.Float;
   typeBoolean = TypeTicket.Boolean;
   typeDate = TypeTicket.Date;
+  typeRadio = TypeTicket.Radio
 
   /*initialDateCreation = new FormControl(new Date());
   initialDateModification = new FormControl(new Date());*/

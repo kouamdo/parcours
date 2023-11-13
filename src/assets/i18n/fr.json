@@ -235,24 +235,6 @@
             "title":"Exemplaire du document",
             "text1":"Composition de l'exemplaire"
         }
-    },
-    "form": {
-      "text1": "Le Titre est obligatoire.",
-      "text2": "La Description est obligatoire.",
-      "text3": "Les Missions sont obligatoires.",
-      "text4": "Les attributs sont obligatoires."
-    },
-    "view": {
-      "title": "Modele du document",
-      "text1": "liste des missions du document",
-      "text2": "liste des attributs du document",
-      "text3": "liste des attributs par categorie du document"
-    },
-    "exemplaire": {
-      "title": "Exemplaire du document",
-      "title2": "Donnees obsoletes",
-      "text1": "Composition de l'exemplaire"
-    }
   },
   "theme": {
     "libelle": "theme"
