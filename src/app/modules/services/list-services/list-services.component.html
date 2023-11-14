@@ -28,19 +28,29 @@
         <div class="card-body p-0" id="tableBlock">
             <div class='table-responsive w-100'>
                 <table class='table table-sm table-centered table-striped table-bordered w-100' mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)">
-                 
+
                     <!-- Libelle Column -->
                     <ng-container matColumnDef="libelle">
                         <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'services.table.title1' | translate}} </th>
                         <td class="text-dark text-center containCell" mat-cell *matCellDef="let element"> {{element.libelle}} </td>
                     </ng-container>
-                    
+
                     <!-- Etat Column -->
                     <ng-container matColumnDef="etat">
-                        <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'services.table.title2' | translate}} </th>
+                        <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header>{{'services.table.title2' | translate}}</th>
                         <td class="text-dark text-center containCell" mat-cell *matCellDef="let element"> {{element.etat}} </td>
                     </ng-container>
-                    
+                     <!-- Etat Column -->
+                     <ng-container matColumnDef="localisation">
+                      <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header>{{'services.table.title3' | translate}}</th>
+                      <td class="text-dark text-center containCell" mat-cell *matCellDef="let element"> {{element.localisation}} </td>
+                  </ng-container>
+                   <!-- Etat Column -->
+                   <ng-container matColumnDef="description">
+                    <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header>{{'services.table.title4' | translate}}</th>
+                    <td class="text-dark text-center containCell" mat-cell *matCellDef="let element"> {{element.description}} </td>
+                </ng-container>
+
                     <ng-container matColumnDef="actions">
                         <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{"patient.table.title8" | translate}} </th>
                         <td class="text-dark text-center containCell" mat-cell *matCellDef="let element">

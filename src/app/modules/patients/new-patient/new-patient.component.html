@@ -9,7 +9,7 @@
                             <div>
                                 <div class="champs">
                                     <label for="nom" class="label">
-                                        {{'patient.table.title1' | translate}}
+                                        {{'patient.table.title1' | translate}} <span style="color: red;" aria-label="required">*</span>
                                     </label>
                                     <input type="text" formControlName="nom" name="nom" id="nom"  placeholder="{{'patient.table.title1' | translate}}"  class="form-control" required>
                                 </div>
@@ -22,7 +22,7 @@
                             <div>
                                 <div class="champs">
                                     <label for="prenom" class="label" >
-                                        {{"patient.table.title2" | translate}}
+                                        {{"patient.table.title2" | translate}} <span style="color: red;" aria-label="required">*</span>
                                     </label>
                                     <input  type="text" formControlName="prenom" name="prenom" id="prenom" placeholder="{{'patient.table.title2' | translate}}" class="form-control"  required  >
                                 </div>
@@ -46,7 +46,7 @@
                             <div>
                                 <div class="champs">
                                     <label for="dateNaissance" class="label" >
-                                        {{"patient.table.title3" | translate}}
+                                        {{"patient.table.title3" | translate}}<span style="color: red;" aria-label="required">*</span>
                                     </label>
                                     <input  type="date" formControlName="dateNaissance"  name="dateNaissance" id="dateNaissance" placeholder="{{'patient.table.title3' | translate}}" value="" required class="form-control">
                                 </div>
@@ -59,7 +59,7 @@
                             <div>
                                 <div class="champs">
                                     <label for="mail" class="label" >
-                                        {{"patient.table.title5" | translate}}
+                                        {{"patient.table.title5" | translate}}<span style="color: red;" aria-label="required">*</span>
                                     </label>
                                     <input type="email" formControlName="mail"  name="mail"  id="mail" placeholder="{{'patient.table.title5' | translate}}"   required  class="form-control" >
                                 </div>

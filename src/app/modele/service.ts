@@ -1,9 +1,11 @@
 export interface IService {
     id:string,
     libelle:string,
-    etat?:string,
+    etat:boolean,
     dateDerniereModification?: Date,
     dateAttribution?: Date,
-    dateFin: Date,
-    nombreTotalAttributions:number
+    dateFin?: Date,
+    nombreTotalAttributions?:number,
+    localisation:string,
+    description:string,
 }

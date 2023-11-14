@@ -1,9 +1,8 @@
-<div id="mainSection" class="d-flex flex-column justify-content-around">
-    <div class="title">
+<div id="" class="d-flex flex-column justify-content-around">
+    <div class="title" id="top1">
         <h2>{{"lists.title" | translate}} patients</h2>
-        
     </div>
-    <div class="card container-fluid" >
+    <div class="card container-fluid" id="top">
         <div class='card-hearder pt-3' >
             <div class="d-flex align-items-center justify-content-end tableTools">
                 <div class="form-inline mr-3">
@@ -30,25 +29,25 @@
         <div class="card-body p-0" id="tableBlock">
             <div class="table-responsive w-100">
                 <table class='table table-sm table-centered table-striped table-bordered w-100' mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)">
-              
+
                   <!-- nom Column -->
                   <ng-container matColumnDef="nom">
                     <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{"patient.table.title1" | translate}} </th>
                     <td class="text-dark text-center containCell" mat-cell *matCellDef="let element"> {{element.nom}} </td>
                   </ng-container>
-              
+
                   <!-- prenom Column -->
                   <ng-container matColumnDef="prenom">
                     <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{"patient.table.title2" | translate}} </th>
                     <td class="text-dark text-center containCell" mat-cell *matCellDef="let element"> {{element.prenom}} </td>
                   </ng-container>
-              
+
                   <!-- birthday Column -->
                   <ng-container matColumnDef="anniversaire">
                     <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{"patient.table.title3" | translate}} </th>
                     <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.dateNaissance | date: 'dd/MM/yyyy'}} </td>
                   </ng-container>
-              
+
                   <!-- sexe Column -->
                   <ng-container matColumnDef="sexe">
                     <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{"patient.table.title4" | translate}} </th>
@@ -60,7 +59,7 @@
                     <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{"patient.table.title5" | translate}} </th>
                     <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.mail}} </td>
                   </ng-container>
-              
+
                   <!-- adresse Column -->
                   <ng-container matColumnDef="adresse">
                     <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{"patient.table.title6" | translate}} </th>
@@ -72,7 +71,7 @@
                     <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{"patient.table.title7" | translate}} </th>
                     <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.telephone}} </td>
                   </ng-container>
-                  
+
                   <!-- action Column -->
                   <ng-container matColumnDef="actions">
                     <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{"patient.table.title8" | translate}} </th>
@@ -83,7 +82,7 @@
                                 <span>...</span>
                             </button>
                             <div class="dropdown-menu" aria-labelledby="triggerId">
-                                
+
                               <button class="dropdown-item nav-link" title="{{'patient.table.actions.link1' | translate}}"
                                 (click) = "setIdPersonne(element.id, element.nom); openNewTicketDialog()">
                                 <i class="fa fa-map-pin" aria-hidden="true"></i>
@@ -112,14 +111,14 @@
                                aria-label="Select page of periodic elements">
                 </mat-paginator>
               </div>
-              
+
         </div>
-                
+
         <!-- Modal -->
         <div class="modal fade" id="modelTicket" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
             <app-new-ticket></app-new-ticket>
         </div>
-                
+
         <!-- Modal -->
         <div class="modal fade" id="modelTicket" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
             <app-new-ticket></app-new-ticket>

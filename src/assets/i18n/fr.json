@@ -102,7 +102,7 @@
           "text2":"Le prénom est obligatoire.",
           "text3":"La date de naissance est obligatoire.",
           "text4":"email address is requied is requied",
-          "text5":"La date d'entrée est aubligatoire."       
+          "text5":"La date d'entrée est aubligatoire."
       }
   },
   "services": {
@@ -110,14 +110,15 @@
     "table": {
       "title1": "Libelle",
       "title2": "Etat",
-      "title3": "date de derniere modification",
-      "title4": "date d'attribution",
-      "title5": "date de fin"
+      "title3": "localisation",
+      "title4": "description"
+
     },
     "form": {
       "label1": "libelle",
       "label2": "etat",
-      "label3": "date derniere modification",
+      "label3": "localisation",
+      "label4": "description",
       "text1": "Le libelle est obligatoire.",
       "text2": "L'etat est obligatoire.",
       "text3": "La date de derniere modification est obligatoire."
@@ -311,7 +312,8 @@
       "title6": " Unité",
       "title7": "Prix",
       "title8": "Catégorie",
-      "title9": "Actions "
+      "title9": "Caractéristiques",
+      "title10": "Actions "
     }
   },
   "preconisation":{

@@ -28,7 +28,7 @@ export class  ListRessourcesComponent implements OnInit {
   ELEMENTS_TABLE: IRessource[] = [];
   filteredOptions: IRessource[] | undefined;
 
-  displayedColumns: string[] = ['id', 'libelle','etat','quantite','unite','prix','famille','actions'];
+  displayedColumns: string[] = ['libelle','etat','quantite','unite','prix','famille','caracteristique','actions'];
 
   dataSource = new MatTableDataSource<IRessource>(this.ELEMENTS_TABLE);
 

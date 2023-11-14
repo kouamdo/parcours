@@ -104,7 +104,7 @@
             "text2":"Surname is requied",
             "text3":"Birthday is requied",
             "text4":"email address is requied is requied",
-            "text5":"Day of entry is required."       
+            "text5":"Day of entry is required."
         }
     },
     "services":{
@@ -112,14 +112,14 @@
         "table":{
             "title1":"Libel",
             "title2":"Status",
-            "title3":"Last modification's date",
-            "title4":"Allocation's date",
-            "title5":"Date end"
+            "title3": "location",
+            "title4": "description"
         },
         "form":{
             "label1":"Libel",
             "label2":"Status",
-            "label3":"Last modification's date",
+            "label3": "location",
+            "label4": "description",
             "text1":"Libel is requied",
             "text2":"Status is requied",
             "text3":"the Last modification's date is requied"
@@ -236,7 +236,7 @@
             "title":"Document's instance ",
             "title2":"Old datas",
             "text1":"composition of this instance"
-        }      
+        }
     },
     "theme":{
         "libelle":"theme"
@@ -313,8 +313,8 @@
         "title5":" Quantity",
         "title6":" Unit",
         "title7":"price",
-        "title8":"Category",
-        "title9":"Actions "
+        "title9": "Caracteristic",
+        "title10": "Actions "
     }
 },
 

@@ -32,30 +32,30 @@
 
                 <!-- nom Column -->
                 <ng-container matColumnDef="raisonSocial">
-                  <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header>raisonSocial</th>
+                  <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header>{{"distributeur.table2.title1"| translate}}</th>
                   <td class="text-dark text-center containCell" mat-cell *matCellDef="let element"> {{element.raisonSocial}} </td>
                 </ng-container>
 
                 <!-- adresse Column -->
                 <ng-container matColumnDef="adresse">
-                  <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{"patient.table.title6" | translate}} </th>
+                  <th class="text-dark containHead" mat-header-cell *matHeaderCellDef>{{"distributeur.table2.title2"| translate}}</th>
                   <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.adresse}} </td>
                 </ng-container>
                   <!-- libellé Column -->
                   <ng-container matColumnDef="etat">
-                    <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header>etat</th>
+                    <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header>{{"distributeur.table2.title3"| translate}}</th>
                     <td class="text-dark text-center containCell" mat-cell *matCellDef="let element"> {{element.etat}} </td>
                 </ng-container>
 
                 <!-- telephone Column -->
                 <ng-container matColumnDef="telephone">
-                  <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{"patient.table.title7" | translate}} </th>
+                  <th class="text-dark containHead" mat-header-cell *matHeaderCellDef>{{"distributeur.table2.title4"| translate}}</th>
                   <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.telephone}} </td>
                 </ng-container>
 
                 <!-- mail Column -->
                 <ng-container matColumnDef="mail">
-                  <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{"patient.table.title5" | translate}} </th>
+                  <th class="text-dark containHead" mat-header-cell *matHeaderCellDef>{{"distributeur.table2.title5"| translate}}</th>
                   <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.mail}} </td>
                 </ng-container>
 

@@ -7,7 +7,7 @@ import { IService } from 'src/app/modele/service';
 import { ServicesService } from 'src/app/services/services/services.service';
 import { IFamille } from 'src/app/modele/famille';
 import { FamillesService } from 'src/app/services/familles/familles.service';
-
+import {v4 as uuidv4} from 'uuid';
 
 
 
@@ -20,7 +20,7 @@ export class NewFamilleComponent implements OnInit {
 
   famille : IFamille|undefined;
   forme: FormGroup;
-  btnLibelle: string="Envoyer";
+  btnLibelle: string="Ajouter";
   submitted: boolean=false;
 
 
@@ -29,7 +29,7 @@ export class NewFamilleComponent implements OnInit {
     this.forme =  this.formBuilder.group({
       libelle: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
       description: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
-      etat: ['',[Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
+      etat: [true],
 
     })
 
@@ -69,7 +69,7 @@ export class NewFamilleComponent implements OnInit {
 
 
     let familleTemp : IFamille={
-      id: String(9),
+      id: uuidv4(),
       libelle:familleInput.libelle,
       description:familleInput.description,
       etat:familleInput.etat,

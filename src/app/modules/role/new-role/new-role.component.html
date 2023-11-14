@@ -9,12 +9,12 @@
                           <div>
                               <div class="champs">
                                   <label for="titre" class="label">
-                                    Titre
+                                    {{'role.table.title1' | translate}} <span style="color: red;" aria-label="required">*</span>
                                   </label>
-                                  <input type="text" formControlName="titre" name="titre" id="titre"  placeholder="titre"  class="form-control" required>
+                                  <input type="text" formControlName="titre" name="titre" id="titre"  placeholder="{{'role.table.title2' | translate}}"  class="form-control" required>
                               </div>
                               <div  *ngIf="submitted && f['titre'].errors"  class="alert alert-danger" >
-                                  <div *ngIf="f['titre'].errors['required']">Champ Obligatoire</div>
+                                  <div *ngIf="f['titre'].errors['required']">{{'role.form.text1' | translate}}Champ Obligatoire</div>
                               </div>
                           </div>
                       </div>
@@ -22,7 +22,7 @@
                         <div>
                             <div class="champs">
                               <label for="etat" class="label" >
-                                Etat
+                                {{'role.table.title3' | translate}}
                               </label>
                               <p class="w-100 d-flex align-items-center choix" >
                                 <input  type="checkbox" checked value="true" formControlName="etat" name="etat" class="form-control" id="etat" placeholder="" >
@@ -34,16 +34,16 @@
                         <div>
                             <div class="champs">
                                 <label for="description" class="label" >
-                                  Description
+                                  {{'role.table.title4' | translate}}
                                 </label>
-                                <input type="text" formControlName="description"  name="description"  id="description" placeholder="description" class="form-control" >
+                                <input type="text" formControlName="description"  name="description"  id="description" placeholder="{{'role.table.title5' | translate}}" class="form-control" >
                             </div>
                         </div>
                     </div>
                   </div>
               </div>
               <div class="actionButton">
-                <button class="btn" routerLink="../list-roles">Annuler</button>
+                <button class="btn" routerLink="../list-roles">{{'lists.button2' | translate}}Annuler</button>
                 <button type="submit" class="btn">{{btnLibelle}}</button>
               </div>
           </form>

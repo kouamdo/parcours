@@ -9,7 +9,7 @@
                             <div>
                                 <div class="champs">
                                     <label for="libelle" class="label">
-                                        {{'missions.table.title1' | translate}}
+                                        {{'missions.table.title1' | translate}}<span style="color: red;" aria-label="required">*</span>
                                     </label>
                                     <input type="text" formControlName="libelle" name="libelle" id="libelle"  placeholder="{{'missions.table.title1' | translate}}"  class="form-control" required>
                                 </div>
@@ -22,7 +22,7 @@
                             <div>
                                 <div class="champs">
                                     <label for="description" class="label" >
-                                        {{'missions.table.title2' | translate}}
+                                        {{'missions.table.title2' | translate}}<span style="color: red;" aria-label="required">*</span>
                                     </label>
                                     <input  type="text" formControlName="description"  name="description" id="description" placeholder="{{'missions.table.title2' | translate}}" value="" required class="form-control">
                                 </div>
@@ -47,7 +47,7 @@
                             <div>
                                 <div class="champs">
                                     <label for="service" class="label" >
-                                        {{'missions.table.title6' | translate}}
+                                        {{'missions.table.title6' | translate}}<span style="color: red;" aria-label="required">*</span>
                                     </label>
                                     <div class="dropdown w-100">
                                         <button class="btn btn-outline-secondary w-100 dropdown-toggle text-left" type="button" id="triggerId" data-toggle="dropdown" aria-haspopup="true"

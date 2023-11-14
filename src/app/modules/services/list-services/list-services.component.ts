@@ -24,12 +24,12 @@ export class ListServicesComponent implements OnInit, AfterViewInit {
   services$:Observable<IService[]>=EMPTY;
 
   myControl = new FormControl<string | IService>('');
- 
+
   ELEMENTS_TABLE: IService[] = [];
   filteredOptions: IService[] | undefined;
 
-  displayedColumns: string[] = ['libelle', 'etat', 'actions'];
-  
+  displayedColumns: string[] = ['libelle','etat','localisation','description','actions'];
+
   dataSource = new MatTableDataSource<IService>(this.ELEMENTS_TABLE);
 
   @ViewChild(MatPaginator)
@@ -41,7 +41,7 @@ export class ListServicesComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.services$ = this.getAllServices();
-    
+
     this.getAllServices().subscribe(valeurs => {
       this.dataSource.data = valeurs;
     });
@@ -51,7 +51,7 @@ export class ListServicesComponent implements OnInit, AfterViewInit {
         const libelle_service = typeof value === 'string' ? value : value?.libelle;
         if(libelle_service != undefined && libelle_service?.length >0){
           this.serviceService.getServiceByLibelle(libelle_service.toLowerCase() as string).subscribe(
-            reponse => { 
+            reponse => {
               this.filteredOptions = reponse;
             }
           )

@@ -58,17 +58,7 @@
                               <span>...</span>
                           </button>
                           <div class="dropdown-menu" aria-labelledby="triggerId">
-
-                              <button class="dropdown-item nav-link" title="{{'famille.table1.actions.link1' | translate}}"
-                                type="button" data-toggle="modal" data-target="#modelTicket" (click) = "setIdFamille(element.id, element.libelle)">
-                                <i class="fa fa-map-pin" aria-hidden="true"></i>
-                                <span>{{'famille.table1.actions.link1' | translate}}</span>
-                              </button>
-                              <button class="dropdown-item nav-link" [routerLink]="['new-famille']" title="{{'famille.table1.actions.link3' | translate}}">
-                                  <i class="fa fa-eye text-secondary" aria-hidden="true"></i>
-                                  <span>{{'famille.table1.actions.link3' | translate}}</span>
-                              </button>
-                              <button class="dropdown-item nav-link" [routerLink]="['/nouvelle-famille',element.id]" title="{{'famille.table1.actions.link2' | translate}}">
+                              <button class="dropdown-item nav-link" [routerLink]="['/famille-nouvelle',element.id]" title="{{'famille.table1.actions.link2' | translate}}">
                                   <i class="fa fa-pen text-info" aria-hidden="true"></i>
                                   <span> {{'famille.table1.actions.link2' | translate}}</span>
                               </button>

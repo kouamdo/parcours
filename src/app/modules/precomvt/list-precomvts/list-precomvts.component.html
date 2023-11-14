@@ -30,22 +30,22 @@
               <table class='table table-sm table-centered table-striped table-bordered w-100' mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)">
                   <!-- libellé Column -->
                   <ng-container matColumnDef="libelle">
-                      <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header>libelle</th>
+                      <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header>{{"precomvt.table2.title1" | translate}}</th>
                       <td class="text-dark text-center containCell" mat-cell *matCellDef="let element"> {{element.libelle}} </td>
                   </ng-container>
                     <!-- libellé Column -->
                     <ng-container matColumnDef="etat">
-                      <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header>etat</th>
+                      <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header>{{"precomvt.table2.title2" | translate}}</th>
                       <td class="text-dark text-center containCell" mat-cell *matCellDef="let element"> {{element.etat}} </td>
                   </ng-container>
                     <!-- libellé Column -->
                     <ng-container matColumnDef="type">
-                      <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header>type</th>
+                      <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header>{{"precomvt.table2.title3" | translate}}</th>
                       <td class="text-dark text-center containCell" mat-cell *matCellDef="let element"> {{element.type}} </td>
                   </ng-container>
 
                   <ng-container matColumnDef="actions">
-                      <th class="text-dark containHead" mat-header-cell *matHeaderCellDef>Actions</th>
+                      <th class="text-dark containHead" mat-header-cell *matHeaderCellDef>{{"precomvt.table2.title4" | translate}}</th>
                       <td class="text-dark text-center containCell" mat-cell *matCellDef="let element">
                           <div id="actions" class="dropdown open">
                               <button class="btn dropdown-toggle" type="button" id="triggerId" data-toggle="dropdown" aria-haspopup="true"

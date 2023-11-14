@@ -9,7 +9,7 @@
                             <div>
                                 <div class="champs">
                                     <label for="nom" class="label">
-                                        {{'personnel.table.title1' | translate}}
+                                        {{'personnel.table.title1' | translate}}<span style="color: red;" aria-label="required">*</span>
                                     </label>
                                     <input type="text" formControlName="nom" name="nom" id="nom"  placeholder="{{'personnel.table.title1' | translate}}"  class="form-control" required>
                                 </div>
@@ -22,7 +22,7 @@
                             <div>
                                 <div class="champs">
                                     <label for="prenom" class="label" >
-                                        {{"personnel.table.title2" | translate}}
+                                        {{"personnel.table.title2" | translate}}<span style="color: red;" aria-label="required">*</span>
                                     </label>
                                     <input  type="text" formControlName="prenom" name="prenom" id="prenom" placeholder="{{'personnel.table.title2' | translate}}" class="form-control"  required  >
                                 </div>
@@ -46,7 +46,7 @@
                             <div>
                                 <div class="champs">
                                     <label for="dateNaissance" class="label" >
-                                        {{"personnel.table.title3" | translate}}
+                                        {{"personnel.table.title3" | translate}}<span style="color: red;" aria-label="required">*</span>
                                     </label>
                                     <input  type="date" formControlName="dateNaissance"  name="dateNaissance" id="dateNaissance" placeholder="{{'personnel.table.title3' | translate}}" value="" required class="form-control">
                                 </div>

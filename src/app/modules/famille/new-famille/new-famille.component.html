@@ -9,7 +9,7 @@
                           <div>
                               <div class="champs">
                                   <label for="libelle" class="label">
-                                    {{'famille.table.title1' | translate}}
+                                    {{'famille.table.title1' | translate}}<span style="color: red;" aria-label="required">*</span>
                                   </label>
                                   <input type="text" formControlName="libelle" name="libelle" id="libelle"  placeholder="{{'famille.table.title1' | translate}}"  class="form-control" required>
                               </div>
@@ -41,19 +41,6 @@
                               </div>
                           </div>
                       </div>
-                      <div class="form-group">
-                        <div>
-                            <div class="champs">
-                                <label for="etat" class="label" >
-                                  {{'famille.table.title3' | translate}}
-                                </label>
-                                <input  type="text" formControlName="etat" name="etat" id="etat" placeholder="{{'famille.table.title3' | translate}}" class="form-control"  required  >
-                            </div>
-                            <div  *ngIf="submitted && f['etat'].errors"  class="alert alert-danger" >
-                                <div *ngIf="f['etat'].errors['required']">{{'famille.form.text2' | translate}}</div>
-                            </div>
-                        </div>
-                    </div>
                   </div>
               </div>
               <div class="actionButton">

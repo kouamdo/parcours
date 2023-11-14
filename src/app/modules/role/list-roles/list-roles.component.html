@@ -32,25 +32,25 @@
 
                 <!-- nom Column -->
                 <ng-container matColumnDef="titre">
-                  <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header>titre</th>
+                  <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header>{{"role.table1.title1" | translate}}</th>
                   <td class="text-dark text-center containCell" mat-cell *matCellDef="let element"> {{element.titre}} </td>
                 </ng-container>
 
                 <!-- adresse Column -->
                 <ng-container matColumnDef="description">
-                  <th class="text-dark containHead" mat-header-cell *matHeaderCellDef>description</th>
+                  <th class="text-dark containHead" mat-header-cell *matHeaderCellDef>{{"role.table1.title2" | translate}}</th>
                   <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.description}} </td>
                 </ng-container>
 
                 <!-- telephone Column -->
                 <ng-container matColumnDef="etat">
-                  <th class="text-dark containHead" mat-header-cell *matHeaderCellDef>etat</th>
+                  <th class="text-dark containHead" mat-header-cell *matHeaderCellDef>{{"role.table1.title3" | translate}}</th>
                   <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.etat}} </td>
                 </ng-container>
 
                 <!-- action Column -->
                 <ng-container matColumnDef="actions">
-                  <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{"patient.table.title8" | translate}} </th>
+                  <th class="text-dark containHead" mat-header-cell *matHeaderCellDef>{{"role.table1.title4" | translate}}</th>
                   <td class="text-dark containCell" mat-cell *matCellDef="let element">
                       <div id="actions" class="dropdown open">
                           <button class="btn dropdown-toggle" type="button" id="triggerId" data-toggle="dropdown" aria-haspopup="true"
