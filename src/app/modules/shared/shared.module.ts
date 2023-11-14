@@ -20,11 +20,14 @@ import { ModalChoixPreconisationsComponent } from './modal-choix-preconisations/
 import { MatCheckboxModule } from '@angular/material/checkbox';
 
 
+
+
 @NgModule({
   declarations: [
     ModalCategoriesComponent,
     ModalChoixAttributsComponent,
-    ModalChoixPreconisationsComponent
+    ModalChoixPreconisationsComponent,
+
   ],
   exports: [
     ModalCategoriesComponent,

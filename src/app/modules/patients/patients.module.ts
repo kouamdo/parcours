@@ -16,6 +16,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 
+
+
 @NgModule({
   declarations: [
     NewPatientComponent,
@@ -33,7 +35,7 @@ import { MatTableModule } from '@angular/material/table';
     MatTableModule,
     MatSortModule,
     TicketsModule,
-    
+
     TranslateModule.forChild({
         loader: {
             provide: TranslateLoader,

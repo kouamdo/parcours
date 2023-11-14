@@ -1,9 +1,9 @@
-<div id="mainSection" class="d-flex flex-column justify-content-around">
-  <div class="title">
+<div id="" class="d-flex flex-column justify-content-around">
+  <div class="title" id="top1">
       <h2>{{"famille.title" | translate}} </h2>
 
   </div>
-  <div class="card container-fluid" >
+  <div class="card container-fluid" id="top">
       <div class='card-hearder pt-3' >
           <div class="d-flex align-items-center justify-content-end tableTools">
               <div class="form-inline mr-3">
@@ -19,7 +19,7 @@
                       </mat-form-field>
                   </form>
               </div>
-              <div role="button" id="addUserBotton" routerLink="../nouvelle-famille">
+              <div role="button" id="addUserBotton" routerLink="../famille-nouvelle">
                   <span title="Ajouter Une Nouvelle Famille">
                       <i class="fa fa-user-plus" aria-hidden="true"></i>
                   </span>
@@ -58,23 +58,9 @@
                               <span>...</span>
                           </button>
                           <div class="dropdown-menu" aria-labelledby="triggerId">
-
-                              <button class="dropdown-item nav-link" title="{{'famille.table1.actions.link1' | translate}}"
-                                type="button" data-toggle="modal" data-target="#modelTicket" (click) = "setIdFamille(element.id, element.libelle)">
-                                <i class="fa fa-map-pin" aria-hidden="true"></i>
-                                <span>{{'famille.table1.actions.link1' | translate}}</span>
-                              </button>
-                              <button class="dropdown-item nav-link" [routerLink]="['new-famille']" title="{{'famille.table1.actions.link3' | translate}}">
-                                  <i class="fa fa-eye text-secondary" aria-hidden="true"></i>
-                                  <span>{{'famille.table1.actions.link3' | translate}}</span>
-                              </button>
-                              <button class="dropdown-item nav-link" [routerLink]="['/nouvelle-famille',element.id]" title="{{'famille.table1.actions.link2' | translate}}">
+                              <button class="dropdown-item nav-link" [routerLink]="['/famille-nouvelle',element.id]" title="{{'famille.table1.actions.link2' | translate}}">
                                   <i class="fa fa-pen text-info" aria-hidden="true"></i>
                                   <span> {{'famille.table1.actions.link2' | translate}}</span>
-                              </button>
-                              <button class="dropdown-item nav-link" [routerLink]="['/nouvelle-famille',element.id]" title="{{'famille.table1.actions.link4' | translate}}">
-                                  <i class="fa fa-times-circle text-danger" aria-hidden="true"></i>
-                                  <span>{{'famille.table1.actions.link4' | translate}}</span>
                               </button>
                           </div>
                       </div>

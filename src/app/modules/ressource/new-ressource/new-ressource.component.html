@@ -1,6 +1,6 @@
 <div id="mainSection">
-  <div class="card block">
-      <div class="card-header pt-4 pb-4 entete"> {{'ressource.table.title' | translate}}</div>
+  <div class="card block" id="top1">
+      <div class="card-header" class="entete pt-4 pb-4"> {{'ressource.table.title' | translate}}</div>
       <div class="card-body">
           <form [formGroup]="forme" (ngSubmit)="onSubmit(forme.value)" *ngIf="forme" >
               <div class="">
@@ -9,7 +9,7 @@
                           <div>
                               <div class="champs">
                                   <label for="libelle" class="label">
-                                    {{'ressource.table.title1' | translate}}
+                                    {{'ressource.table.title1' | translate}} <sup>*</sup>
                                   </label>
                                   <input type="text" formControlName="libelle" name="libelle" id="libelle"  placeholder="{{'ressource.table.title1' | translate}}"  class="form-control">
                               </div>
@@ -24,15 +24,16 @@
                                   <label for="etat" class="label" >
                                     {{'ressource.table.title2' | translate}}
                                   </label>
-                                  <input  type="checkbox" formControlName="etat"  name="etat" id="etat" placeholder="" class="form-control" checked>
+                                  <p class="w-100 d-flex align-items-center choix" >
+                                    <input  type="checkbox" checked  value="true" formControlName="etat"  name="etat" id="etat" placeholder="" class="form-control" >
+                                  </p>
                               </div>
-
                           </div>
                       </div>
                       <div class="form-group">
                           <div class="champs">
                               <label  for="quantite"  class="label" >
-                                {{'ressource.table.title3' | translate}}
+                                {{'ressource.table.title3' | translate}} <sup>*</sup>
                               </label>
                               <input type="number" list="" formControlName="quantite" name="quantite" id="quantite" placeholder=" {{'ressource.table.title3' | translate}}" class="form-control" >
                           </div>
@@ -65,11 +66,10 @@
                       <div class="form-group">
                     <div class="champs">
                         <label  for="famille"  class="label" >
-                          {{'ressource.table.title6' | translate}}
+                          {{'ressource.table.title6' | translate}} <sup>*</sup>
                         </label>
-                        <mat-form-field class="example-full-width" appearance="fill">
-                            <mat-label class="famill">  </mat-label>
-                            <input  type="text" matInput [matAutocomplete]="auto"  aria-label="famille" [formControl]="myControl" name="famille" id="famille" placeholder="" class="form-control">
+                        <mat-form-field class="example-full-width w-100" appearance="fill">
+                            <input  type="text" matInput [matAutocomplete]="auto"  aria-label="famille" [formControl]="myControl" name="famille" id="famille" placeholder="" class="w-100">
                             <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn" >
                             <mat-option *ngFor="let option of filteredOptions" [value]="option" (click)="getIdFamille(option.id)" (onSelectionChange)="rechercherListingFamille(option)">
                                 {{option.libelle}}

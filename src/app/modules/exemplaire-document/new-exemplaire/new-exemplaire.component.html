@@ -1,4 +1,4 @@
-<div class="mainBlock">
+<div class="mainBlock" id="top2">
      <form [formGroup]="formeExemplaire" (ngSubmit)="onSubmit()" *ngIf="formeExemplaire" >
                 
         <h1>
@@ -12,7 +12,7 @@
             <div  *ngIf="submitted && estValide == false" class="alert alert-danger">
                 <div >{{eValvalide}} {{'lists.text3' | translate}}</div>
             </div>
-            <div class="block" *ngFor="let attributParCategorie of document.categories">
+            <div class="block1" *ngFor="let attributParCategorie of document.categories">
                 <div class="pb-3" *ngIf="attributParCategorie.nom">
                     <h3>{{attributParCategorie.nom}}</h3>
                     <div class="contentBlock">
@@ -27,7 +27,7 @@
                     </div>
                 </div>
             </div>
-            <div class="block card" id="controlsSupprimeBlock" *ngIf="objetCleValeurSupprime.length != 0">
+            <div class="block1 card" id="controlsSupprimeBlock" *ngIf="objetCleValeurSupprime.length != 0">
                 <h3>{{'document.exemplaire.title2' | translate}} <i class="fa fa-exclamation-triangle"></i></h3>
                 <div class="d-flex" id="controlsSupprime">
                     <div formArrayName="_controlsSupprime" *ngFor="let attributSupprime of objetCleValeurSupprime" class="inputBlock" [ngClass]="{'inputSpecial':(attributSupprime.key.type == TypeRadio) || (attributSupprime.key.type == TypeBoolean)}"> 

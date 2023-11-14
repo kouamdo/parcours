@@ -1,6 +1,7 @@
 .mainBlock{
     background-color: #ffffff;
     padding-top: 5px;
+    
 }
 h1{
     text-align: center;
@@ -82,13 +83,13 @@ h3{
     box-shadow: 0 2px #999;
     opacity: 0.8;
     transition: ease 0.2s;
-   
+
 }
 .button-control:hover{
     opacity: 1;
     transition: ease 0.2s;
     transform: scale(1.05);
-   
+
 }
 .boutonAppelEffet, .button-control:focus{
     border-color: #fff;
@@ -124,7 +125,7 @@ h3{
 @media screen and (max-width: 872px) {
     .button-control{
         font-size: 11px;
-    
+
     }
 }
 @media screen and (max-width: 640px) {

@@ -44,7 +44,7 @@ export class NewFormDocumentComponent implements OnInit {
   mission$:Observable<IMission[]>=EMPTY;
   forme: FormGroup;
   btnLibelle: string="Ajouter";
-  titre: string="Ajouter un nouveau document";
+  titre: string="Ajouter document";
   submitted: boolean=false;
   validation: boolean=false;
   serviceDeMission!: IService;

@@ -20,7 +20,7 @@ export class NewTicketComponent implements OnInit {
   ticket : ITicket|undefined;
   forme: FormGroup;
   btnLibelle: string="Enregister";
-  titre: string="Ajouter un nouveau ticket";
+  titre: string="Ajouter ticket";
   submitted: boolean=false;
   currentDate = new Date;
   strIidPersonne: string = "";
@@ -44,7 +44,7 @@ export class NewTicketComponent implements OnInit {
   };
 
   constructor(private formBuilder:FormBuilder, private ticketsService:TicketsService,private router:Router, private infosPath:ActivatedRoute,
-    private serviceService:ServicesService, private datePipe: DatePipe) { 
+    private serviceService:ServicesService, private datePipe: DatePipe) {
     this.forme = this.formBuilder.group({})
   }
 
@@ -71,7 +71,7 @@ export class NewTicketComponent implements OnInit {
   get f(){
     return this.forme.controls;
   }
-  
+
   onSubmit(ticketInput:any){
     this.submitted=true;
 
@@ -79,7 +79,7 @@ export class NewTicketComponent implements OnInit {
     this.libelleService = sessionStorage.getItem("libelle_service");
     //Todo la validation d'element non conforme passe
     if(this.forme.invalid) return;
-        
+
       this.ticketsService.attribuerTicket(sessionStorage.getItem("id_patient"),sessionStorage.getItem("id_service")).subscribe(
         object => {
           this._ticket = object;

@@ -31,13 +31,13 @@ export class NewRessourceComponent implements OnInit {
     id: '',
     libelle: '',
     description: '',
-    etat: ''
+    etat:false
   };
 
   constructor(private formBuilder:FormBuilder,private familleService:FamillesService,private ressourceService:RessourcesService,private serviceRessource:RessourcesService,private serviceFamille:FamillesService,private router:Router, private infosPath:ActivatedRoute, private datePipe: DatePipe) {
     this.forme = this.formBuilder.group({
       libelle: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
-      etat: [ ''],
+      etat: [true],
       quantite: ['', [Validators.required]],
       unite: ['', [Validators.required]],
       prix: ['', [Validators.required]],
@@ -76,9 +76,9 @@ export class NewRessourceComponent implements OnInit {
           this.forme.setValue({
             libelle: this.ressource?.libelle,
             etat: this.ressource.etat,
-            quantite: this.ressource?.quantite,
+            quantite: this.ressource.quantite,
             unite: this.ressource.unite,
-            prix: this.ressource?.prix,
+            prix: this.ressource.prix,
             famille: this.ressource.famille,
             caracteristique:this.ressource.caracteristique,
           })

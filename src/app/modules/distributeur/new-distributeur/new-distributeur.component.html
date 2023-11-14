@@ -1,6 +1,6 @@
 <div id="mainSection">
-  <div class="card block">
-      <div class="card-header pt-4 pb-4 entete">Ajouter un nouveau Distributeur</div>
+  <div class="card block" id="top2">
+      <div class="card-header pt-4 pb-4 entete" class="entete pt-4 pb-4 ">{{'distributeur.table.title' | translate}}</div>
       <div class="card-body">
           <form [formGroup]="forme" (ngSubmit)="onSubmit(forme.value)" *ngIf="forme" >
               <div class="">
@@ -9,22 +9,24 @@
                           <div>
                               <div class="champs">
                                   <label for="raisonSocial" class="label">
-                                    Raison Social
+                                    {{'distributeur.table.title1' | translate}}<span style="color: red;" aria-label="required">*</span>
                                   </label>
-                                  <input type="text" formControlName="raisonSocial" name="raisonSocial" id="raisonSocial"  placeholder="raisonSocial"  class="form-control" required>
+                                  <input type="text" formControlName="raisonSocial" name="raisonSocial" id="raisonSocial"  placeholder="{{'distributeur.table.title1' | translate}}"  class="form-control" required>
                               </div>
                               <div  *ngIf="submitted && f['raisonSocial'].errors"  class="alert alert-danger" >
-                                  <div *ngIf="f['raisonSocial'].errors['required']">Champ Obligatoire</div>
+                                  <div *ngIf="f['raisonSocial'].errors['required']">{{'distributeur.form.text1' | translate}}</div>
                               </div>
                           </div>
                       </div>
-                      <div class="form-group" id="eta">
+                      <div class="form-group" >
                         <div>
                             <div class="champs">
                               <label for="etat" class="label" >
-                                Etat
+                                {{'distributeur.table.title2' | translate}}
                               </label>
+                              <p class="w-100 d-flex align-items-center choix" >
                               <input  type="checkbox" checked value="true" formControlName="etat" name="etat" class="form-control" id="etat" placeholder="" >
+                            </p>
                             </div>
                         </div>
                       </div>
@@ -32,18 +34,18 @@
                         <div>
                             <div class="champs">
                                 <label for="adresse" class="label" >
-                                  Adresse
+                                  {{'distributeur.table.title3' | translate}}
                                 </label>
-                                <input type="text" formControlName="adresse"  name="adresse"  id="adresse" placeholder="adresse" class="form-control" >
+                                <input type="text" formControlName="adresse"  name="adresse"  id="adresse" placeholder="{{'distributeur.table.title3' | translate}}" class="form-control" >
                             </div>
                         </div>
                     </div>
                       <div class="form-group">
                           <div class="champs">
                               <label  for="telephone"  class="label" >
-                                Telephone
+                                {{'distributeur.table.title4' | translate}}
                               </label>
-                              <input type="text" formControlName="telephone" name="telephone" id="telephone" placeholder="telephone" class="form-control" >
+                              <input type="text" formControlName="telephone" name="telephone" id="telephone" placeholder="{{'distributeur.table.title4' | translate}}" class="form-control" >
                           </div>
                       </div>
 
@@ -51,19 +53,19 @@
                         <div>
                             <div class="champs">
                                 <label for="mail" class="label" >
-                                  Mail
+                                  {{'distributeur.table.title5' | translate}}<span style="color: red;" aria-label="required">*</span>
                                 </label>
-                                <input type="email" formControlName="mail"  name="mail"  id="mail" placeholder="mail"   required  class="form-control" >
+                                <input type="email" formControlName="mail"  name="mail"  id="mail" placeholder="{{'distributeur.table.title5' | translate}}"   required  class="form-control" >
                             </div>
                             <div  *ngIf="submitted && f['mail'].errors"  class="alert alert-danger" >
-                            <div *ngIf="f['mail'].errors['required']"></div>
+                            <div *ngIf="f['mail'].errors['required']">{{'distributeur.form.text2' | translate}}</div>
                             </div>
                         </div>
                     </div>
                   </div>
               </div>
               <div class="actionButton">
-                <button class="btn" routerLink="../list-distributeurs">Annuler</button>
+                <button class="btn" routerLink="../list-distributeurs">{{'lists.button2' | translate}}</button>
                 <button type="submit" class="btn">{{btnLibelle}}</button>
               </div>
           </form>

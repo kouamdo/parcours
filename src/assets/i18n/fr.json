@@ -37,7 +37,7 @@
     "footer": {}
   },
   "lists": {
-    "title": "listing des",
+    "title": "listing",
     "text1": "Champs obligatoires",
     "text2": "Champs non obligatoires",
     "text3": "est un champs non obligatoires",
@@ -53,7 +53,7 @@
     "button10":"Fermer"
   },
   "patient": {
-    "title1":"Ajouter un nouveau patient",
+    "title1":"Ajouter patient",
     "search-bar": "Rechercher",
     "table": {
       "title1": "Nom",
@@ -79,7 +79,7 @@
       }
   },
   "personnel":{
-      "title1":"Ajouter un nouveau personnel",
+      "title1":"Ajouter personnel",
       "search-bar":"Rechercher",
       "table":{
           "title1":"Nom",
@@ -102,22 +102,23 @@
           "text2":"Le prénom est obligatoire.",
           "text3":"La date de naissance est obligatoire.",
           "text4":"email address is requied is requied",
-          "text5":"La date d'entrée est aubligatoire."       
+          "text5":"La date d'entrée est aubligatoire."
       }
   },
   "services": {
-    "title1":"Ajouter un nouveau service",
+    "title1":"Ajouter service",
     "table": {
       "title1": "Libelle",
       "title2": "Etat",
-      "title3": "date de derniere modification",
-      "title4": "date d'attribution",
-      "title5": "date de fin"
+      "title3": "localisation",
+      "title4": "description"
+
     },
     "form": {
       "label1": "libelle",
       "label2": "etat",
-      "label3": "date derniere modification",
+      "label3": "localisation",
+      "label4": "description",
       "text1": "Le libelle est obligatoire.",
       "text2": "L'etat est obligatoire.",
       "text3": "La date de derniere modification est obligatoire."
@@ -146,7 +147,7 @@
     }
   },
   "attributs": {
-    "title1":"Ajouter un nouvel attribut",
+    "title1":"Ajouter attribut",
     "table": {
       "title1": "titre",
       "title2": "Description",
@@ -169,7 +170,7 @@
     }
   },
   "missions": {
-    "title1":"Ajouter une nouvelle mission",
+    "title1":"Ajouter mission",
     "table": {
       "title1": "Libelle",
       "title2": "Description",
@@ -194,47 +195,47 @@
     }
   },
   "document": {
-    "title3":"Ajouter un nouveau document",
-    "search-bar": "Rechercher",
-    "title1": "Affichage des resultats",
-    "title2": "Selectionner les attributs de la categories",
-    "table": {
-      "title0": "Id",
-      "title1": "Titre",
-      "title2": "Description",
-      "title3": "Missions",
-      "title4": "Attributs",
-      "title5": "Selectionner les missions",
-      "title6": "Selectionner les attributs",
-      "title7": "Valeurs",
-      "title8": "Nom de la categorie",
-      "title9": "Entrez le nom de la categories",
-      "title10": "Ordre",
-      "title11": "Entrez l'ordre de la categories",
-      "title12": "Creer des categories",
-      "title13": "Ordre attribut",
-      "title14": "Ordre de la categorie",
-      "title15": "Categories",
-      "title16": "libelle attribut",
-      "title17": "Preconisations"
-    },
-    "form": {
-      "text1": "Le Titre est obligatoire.",
-      "text2": "La Description est obligatoire.",
-      "text3": "Les Missions sont obligatoires.",
-      "text4": "Les attributs sont obligatoires."
-    },
-    "view": {
-      "title": "Modele du document",
-      "text1": "liste des missions du document",
-      "text2": "liste des attributs du document",
-      "text3": "liste des attributs par categorie du document"
-    },
-    "exemplaire": {
-      "title": "Exemplaire du document",
-      "title2": "Donnees obsoletes",
-      "text1": "Composition de l'exemplaire"
-    }
+    "title3":"Ajouter document",
+        "text":"documents retrouvé(e)s",
+        "search-bar":"Rechercher",
+        "title1":"Affichage des resultats",
+        "title2":"Selectionner les attributs de la categories",
+        "table":{
+            "title0":"Id",
+            "title1":"Titre",
+            "title2":"Description",
+            "title3":"Missions",
+            "title4":"Attributs",
+            "title5":"Selectionner les missions",
+            "title6":"Selectionner les attributs",
+            "title7":"Valeurs",
+            "title8":"Nom de la categorie",
+            "title9":"Entrez le nom de la categories",
+            "title10":"Ordre",
+            "title11":"Entrez l'ordre de la categories",
+            "title12":"Creer des categories",
+            "title13":"Ordre attribut",
+            "title14":"Ordre categorie",
+            "title15":"Categories",
+            "title16":"libelle attribut",
+            "title17":"categories"
+        },
+        "form":{
+            "text1":"Le Titre est obligatoire.",
+            "text2":"La Description est obligatoire.",
+            "text3":"Les Missions sont obligatoires.",
+            "text4":"Les attributs sont obligatoires."
+        },
+        "view":{
+            "title":"Modele du document",
+            "text1":"liste des missions du document",
+            "text2":"liste des attributs du document",
+            "text3":"liste des attributs par categorie du document"
+        },
+        "exemplaire":{
+            "title":"Exemplaire du document",
+            "text1":"Composition de l'exemplaire"
+        }
   },
   "theme": {
     "libelle": "theme"
@@ -243,7 +244,7 @@
     "libelle": "langues"
   },
   "famille": {
-    "header": "Ajouter Une Nouvelle Categorie de Ressource",
+    "header": "Ajouter Famille",
     "table": {
       "title1": "Libellé",
       "title2": "Description",
@@ -256,7 +257,7 @@
     "lists": {
       "button1": "Retour"
     },
-    "title": "Listing Categorie de Ressource",
+    "title": "Listing Famille",
     "search-bar": "Rechercher",
     "table1": {
       "title1": "Libellé",
@@ -273,7 +274,7 @@
   },
   "ressource": {
     "table": {
-      "title": "Ajouter une nouvelle ressource",
+      "title": "Ajouter ressource",
       "title1": " Libellé",
       "title2": "Etat",
       "title3": "Quantité",
@@ -303,7 +304,7 @@
     "title": "Listing Ressource",
     "search-bar": "Rechercher",
     "table2": {
-      "title1": "Ajouter une ressource",
+      "title1": "Ajouter ressource",
       "title2": "id",
       "title3": "libelle",
       "title4": "Etat",
@@ -311,11 +312,12 @@
       "title6": " Unité",
       "title7": "Prix",
       "title8": "Catégorie",
-      "title9": "Actions "
+      "title9": "Caractéristiques",
+      "title10": "Actions "
     }
   },
   "preconisation":{
-    "title1":"Ajouter une nouvelle préconisation",
+    "title1":"Ajouter préconisation",
       "form":{
           "title1":"Sélectionnez des preconisations"
       },
@@ -328,5 +330,118 @@
       "view":{
           "text1":"Les préconisations du document"
       }
-  }
+  },
+  "distributeur": {
+    "table": {
+      "title": "Ajouter Distributeur",
+      "title1": "Raison Social ",
+      "title2": "Etat",
+      "title3": "Adresse",
+      "title4": "Telephone",
+      "title5": "Mail"
+    },
+    "form": {
+      "text1": "Champ Obligatoire",
+      "text2": "Champ Obligatoire"
+    },
+    "lists": {
+      "button1": "Annuler"
+    },
+    "title": "listing Distributeur",
+    "search-bar": "Rechercher",
+    "table2": {
+      "title1": "raisonSocial",
+      "title2": "adresse",
+      "title3": "etat",
+      "title4": "telephone",
+      "title5": "mail",
+      "title9": "Actions "
+    }
+  },
+  "precomvt": {
+    "header": "Nouvelle Préconisation",
+    "header1": "Assigner Familles",
+    "header2": "Assigner Ressource",
+    "table": {
+      "title1": "Libelle",
+      "title2": "Etat",
+      "title3": "Type",
+      "title4": "Famille",
+      "title5": "Ressource ",
+      "title6": "Quantité Max",
+      "title7": "Entrer la quantite maximale",
+      "title8": "Quantité Min ",
+      "title9": "Entrer la quantite minimale",
+      "title10": "Montant Max",
+      "title11": "Entrer le montant minimal",
+      "title12": "Montant Min ",
+      "title13": "Entrer le montant maximal",
+      "title14": "Fournisseurs ",
+      "title15": "Back",
+      "title16": "Annuler",
+      "title17": "Famille",
+      "title18": "Ressource",
+      "title19": "Etape",
+      "title20": "Type:",
+      "title21": "Qtité Max :",
+      "title22": "Qtité Min : ",
+      "title23": "Mtant Max : ",
+      "title24": "Mtant Min : ",
+      "title25": "Enregistrer"
+    },
+    "title": "Listing PrecoMvt",
+    "search-bar": "Rechercher",
+    "table2": {
+      "title1": "libelle",
+      "title2": "etat",
+      "title3": "type",
+      "title4": "Actions"
+    },
+    "title0": "Tableau Des opérations effectuées",
+    "table3": {
+      "title1": "Libellé",
+      "title2": "Etat",
+      "title3": "Type",
+      "title4": "Ressource",
+      "title5": "Quantité Max",
+      "title6": "Quantité Min",
+      "title7": "Montant Max",
+      "title8": "Montant Min",
+      "title9": "Distributeur",
+      "title10": "familles",
+      "title11": "Quantité Max",
+      "title12": "Quantité Min",
+      "title13": "Montant Max",
+      "title14": "Montant Min",
+      "title15": "Distributeur"
+    }
+},
+"role":{
+  "header":"Ajouter Role",
+  "table":{
+    "title1":"Titre",
+    "title2":"titre",
+    "title3":"Etat",
+    "title4":"Description",
+    "title5":"description"
+  },
+  "form":{
+    "text1":"Champ Obligatoire"
+},
+"lists":{
+  "button1":"Annuler"
+},
+"title":"listing Role",
+"search-bar":"Rechercher",
+"table1":{
+    "title1":"Titre",
+    "title2":"Description",
+    "title3":"Etat",
+    "title4":"Actions",
+    "actions":{
+        "link2":"Modifier",
+        "link4":"Supprimer"
+    }
+}
+}
 }

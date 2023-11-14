@@ -10,7 +10,7 @@ const routes=[
     component: NewFamilleComponent
   },
   {
-    path: 'famille-nouvelle/:idfamille',
+    path: 'famille-nouvelle/:idFamille',
     title: 'Modifier une famille',
     component: NewFamilleComponent
   },

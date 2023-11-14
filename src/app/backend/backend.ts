@@ -123,29 +123,35 @@ export class InMemDBService implements InMemoryDbService {
       {
         id: '1',
         libelle: 'Pharmacie',
-        etat: 'non attribue',
+        etat: true,
         dateDerniereModification: new Date('07/03/2000'),
         dateAttribution: new Date('07/03/1990'),
         dateFin: new Date('07/03/1990'),
         nombreTotalAttributions: 6,
+        localisation:'douala',
+        description:'bien',
       },
       {
         id: '2',
         libelle: 'Laboratoire',
-        etat: 'non attribue',
+        etat: true,
         dateDerniereModification: new Date('06/08/1990'),
         dateAttribution: new Date('07/03/1990'),
         dateFin: new Date('07/03/1990'),
         nombreTotalAttributions: 20,
+        localisation:'douala',
+        description:'bien',
       },
       {
         id: '3',
         libelle: 'Consultation',
-        etat: 'non attribue',
+        etat: true,
         dateDerniereModification: new Date('12/06/1972'),
         dateAttribution: new Date('07/03/1990'),
         dateFin: new Date('07/03/1990'),
         nombreTotalAttributions: 50,
+        localisation:'douala',
+        description:'bien',
       },
     ];
     let tickets: ITicket[] = [
@@ -236,7 +242,7 @@ export class InMemDBService implements InMemoryDbService {
         langue: 'fr',
         fonctionnalites: [
           {
-            fonction: 'Personne',
+            fonction:'Personne',
             icone: 'fas fa-user-cog',
             actif: 'menu-close',
             elements: [
@@ -485,11 +491,13 @@ export class InMemDBService implements InMemoryDbService {
         service: {
           id: '1',
           libelle: 'Pharmacie',
-          etat: 'non attribue',
+          etat: true,
           dateDerniereModification: new Date('07/03/2000'),
           dateAttribution: new Date('07/03/1990'),
           dateFin: new Date('07/03/1990'),
           nombreTotalAttributions: 6,
+          localisation:'douala',
+          description:'bien',
         },
       },
       {
@@ -503,11 +511,13 @@ export class InMemDBService implements InMemoryDbService {
         service: {
           id: '2',
           libelle: 'Laboratoire',
-          etat: 'non attribue',
+          etat: true,
           dateDerniereModification: new Date('06/08/1990'),
           dateAttribution: new Date('07/03/1990'),
           dateFin: new Date('07/03/1990'),
           nombreTotalAttributions: 20,
+          localisation:'douala',
+          description:'bien',
         },
       },
       {
@@ -521,11 +531,13 @@ export class InMemDBService implements InMemoryDbService {
         service: {
           id: '3',
           libelle: 'Consultation',
-          etat: 'non attribue',
+          etat: true,
           dateDerniereModification: new Date('12/06/1972'),
           dateAttribution: new Date('07/03/1990'),
           dateFin: new Date('07/03/1990'),
           nombreTotalAttributions: 50,
+          localisation:'douala',
+          description:'bien',
         },
       },
       {
@@ -539,11 +551,13 @@ export class InMemDBService implements InMemoryDbService {
         service: {
           id: '1',
           libelle: 'Pharmacie',
-          etat: 'non attribue',
+          etat: true,
           dateDerniereModification: new Date('07/03/2000'),
           dateAttribution: new Date('07/03/1990'),
           dateFin: new Date('07/03/1990'),
           nombreTotalAttributions: 6,
+          localisation:'douala',
+          description:'bien',
         },
       },
       {
@@ -557,11 +571,13 @@ export class InMemDBService implements InMemoryDbService {
         service: {
           id: '3',
           libelle: 'Consultation',
-          etat: 'non attribue',
+          etat: true,
           dateDerniereModification: new Date('12/06/1972'),
           dateAttribution: new Date('07/03/1990'),
           dateFin: new Date('07/03/1990'),
           nombreTotalAttributions: 50,
+          localisation:'douala',
+          description:'bien',
         },
       },
       {
@@ -575,11 +591,13 @@ export class InMemDBService implements InMemoryDbService {
         service: {
           id: '1',
           libelle: 'Pharmacie',
-          etat: 'non attribue',
+          etat: true,
           dateDerniereModification: new Date('07/03/2000'),
           dateAttribution: new Date('07/03/1990'),
           dateFin: new Date('07/03/1990'),
           nombreTotalAttributions: 6,
+          localisation:'douala',
+          description:'bien',
         },
       },
     ];
@@ -617,11 +635,13 @@ export class InMemDBService implements InMemoryDbService {
             service: {
               id: '1',
               libelle: 'Pharmacie',
-              etat: 'non attribue',
+              etat: true,
               dateDerniereModification: new Date('07/03/2000'),
               dateAttribution: new Date('07/03/1990'),
               dateFin: new Date('07/03/1990'),
               nombreTotalAttributions: 6,
+              localisation:'douala',
+              description:'bien',
             },
           },
           {
@@ -635,11 +655,13 @@ export class InMemDBService implements InMemoryDbService {
             service: {
               id: '2',
               libelle: 'Laboratoire',
-              etat: 'non attribue',
+              etat: true,
               dateDerniereModification: new Date('06/08/1990'),
               dateAttribution: new Date('07/03/1990'),
               dateFin: new Date('07/03/1990'),
               nombreTotalAttributions: 20,
+              localisation:'douala',
+              description:'bien',
             },
           },
           {
@@ -653,11 +675,13 @@ export class InMemDBService implements InMemoryDbService {
             service: {
               id: '3',
               libelle: 'Consultation',
-              etat: 'non attribue',
+              etat: true,
               dateDerniereModification: new Date('12/06/1972'),
               dateAttribution: new Date('07/03/1990'),
               dateFin: new Date('07/03/1990'),
               nombreTotalAttributions: 50,
+              localisation:'douala',
+              description:'bien',
             },
           },
         ],
@@ -745,7 +769,7 @@ export class InMemDBService implements InMemoryDbService {
                 }
               },
               {
-                
+
                 id: '1',
                 ordre: 12,
                 obligatoire: false,
@@ -846,7 +870,7 @@ export class InMemDBService implements InMemoryDbService {
                     id: '4',
                     libelle: 'néonat',
                     description: 'nouveau-né',
-                    etat: 'malade',
+                    etat: false,
                   },
                 },
               },
@@ -857,18 +881,18 @@ export class InMemDBService implements InMemoryDbService {
                 montantMin: 100,
                 montantMax: 7000,
                 famille: [
-                  { id: '1', libelle: 'trans', description: 'sang', etat: 'gl' },
+                  { id: '1', libelle: 'trans', description: 'sang', etat: true },
                   {
                     id: '2',
                     libelle: 'néonat',
                     description: 'nouveau-né',
-                    etat: 'malade',
+                    etat: false,
                   },
                   {
                     id: '3',
                     libelle: 'pediatrie',
                     description: 'enfant',
-                    etat: 'souffrant',
+                    etat: true,
                   },
                 ],
               },
@@ -878,7 +902,7 @@ export class InMemDBService implements InMemoryDbService {
                 quantiteMax: 40,
                 montantMin: 100,
                 montantMax: 7000,
-                ressource: 
+                ressource:
                 {
                   id: '3',
                   libelle: 'pediatrie',
@@ -891,7 +915,7 @@ export class InMemDBService implements InMemoryDbService {
                     id: '4',
                     libelle: 'néonat',
                     description: 'nouveau-né',
-                    etat: 'malade',
+                    etat: false,
                   },
                 }
               },
@@ -914,7 +938,7 @@ export class InMemDBService implements InMemoryDbService {
                       id: '3',
                       libelle: 'pediatrie',
                       description: 'enfant',
-                      etat: 'souffrant',
+                      etat: true,
                     },
                   },
               },
@@ -933,18 +957,18 @@ export class InMemDBService implements InMemoryDbService {
                 montantMin: 100,
                 montantMax: 7000,
                 famille: [
-                  { id: '1', libelle: 'trans', description: 'sang', etat: 'gl' },
+                  { id: '1', libelle: 'trans', description: 'sang', etat: true },
                   {
                     id: '2',
                     libelle: 'néonat',
                     description: 'nouveau-né',
-                    etat: 'malade',
+                    etat: false,
                   },
                   {
                     id: '3',
                     libelle: 'pediatrie',
                     description: 'enfant',
-                    etat: 'souffrant',
+                    etat: true,
                   },
                 ],
               },
@@ -963,18 +987,18 @@ export class InMemDBService implements InMemoryDbService {
                 montantMin: 100,
                 montantMax: 7000,
                 famille: [
-                  { id: '1', libelle: 'trans', description: 'sang', etat: 'gl' },
+                  { id: '1', libelle: 'trans', description: 'sang', etat: true },
                   {
                     id: '2',
                     libelle: 'néonat',
                     description: 'nouveau-né',
-                    etat: 'malade',
+                    etat: false,
                   },
                   {
                     id: '3',
                     libelle: 'pediatrie',
                     description: 'enfant',
-                    etat: 'souffrant',
+                    etat: true,
                   },
                 ],
                 ressource: {
@@ -989,7 +1013,7 @@ export class InMemDBService implements InMemoryDbService {
                     id: '4',
                     libelle: 'néonat',
                     description: 'nouveau-né',
-                    etat: 'malade',
+                    etat: false,
                   },
                 },
                 distributeur: [
@@ -1040,11 +1064,13 @@ export class InMemDBService implements InMemoryDbService {
             service: {
               id: '1',
               libelle: 'Pharmacie',
-              etat: 'non attribue',
+              etat: true,
               dateDerniereModification: new Date('07/03/2000'),
               dateAttribution: new Date('07/03/1990'),
               dateFin: new Date('07/03/1990'),
               nombreTotalAttributions: 6,
+              localisation:'douala',
+              description:'bien',
             },
           },
           {
@@ -1058,11 +1084,13 @@ export class InMemDBService implements InMemoryDbService {
             service: {
               id: '3',
               libelle: 'Consultation',
-              etat: 'non attribue',
+              etat: true,
               dateDerniereModification: new Date('12/06/1972'),
               dateAttribution: new Date('07/03/1990'),
               dateFin: new Date('07/03/1990'),
               nombreTotalAttributions: 50,
+              localisation:'douala',
+              description:'bien',
             },
           },
           {
@@ -1076,11 +1104,13 @@ export class InMemDBService implements InMemoryDbService {
             service: {
               id: '2',
               libelle: 'Laboratoire',
-              etat: 'non attribue',
+              etat: true,
               dateDerniereModification: new Date('06/08/1990'),
               dateAttribution: new Date('07/03/1990'),
               dateFin: new Date('07/03/1990'),
               nombreTotalAttributions: 20,
+              localisation:'douala',
+              description:'bien',
             },
           },
         ],
@@ -1266,7 +1296,7 @@ export class InMemDBService implements InMemoryDbService {
                     id: '4',
                     libelle: 'néonat',
                     description: 'nouveau-né',
-                    etat: 'malade',
+                    etat: false,
                   },
                 },
               },
@@ -1277,18 +1307,18 @@ export class InMemDBService implements InMemoryDbService {
                 montantMin: 100,
                 montantMax: 7000,
                 famille: [
-                  { id: '1', libelle: 'trans', description: 'sang', etat: 'gl' },
+                  { id: '1', libelle: 'trans', description: 'sang', etat: true },
                   {
                     id: '2',
                     libelle: 'néonat',
                     description: 'nouveau-né',
-                    etat: 'malade',
+                    etat: false,
                   },
                   {
                     id: '3',
                     libelle: 'pediatrie',
                     description: 'enfant',
-                    etat: 'souffrant',
+                    etat: true,
                   },
                 ],
               },
@@ -1298,7 +1328,7 @@ export class InMemDBService implements InMemoryDbService {
                 quantiteMax: 40,
                 montantMin: 100,
                 montantMax: 7000,
-                ressource: 
+                ressource:
                 {
                   id: '3',
                   libelle: 'pediatrie',
@@ -1311,7 +1341,7 @@ export class InMemDBService implements InMemoryDbService {
                     id: '4',
                     libelle: 'néonat',
                     description: 'nouveau-né',
-                    etat: 'malade',
+                    etat: false,
                   },
                 }
               },
@@ -1334,7 +1364,7 @@ export class InMemDBService implements InMemoryDbService {
                       id: '3',
                       libelle: 'pediatrie',
                       description: 'enfant',
-                      etat: 'souffrant',
+                      etat: true,
                     },
                   },
               },
@@ -1353,18 +1383,18 @@ export class InMemDBService implements InMemoryDbService {
                 montantMin: 100,
                 montantMax: 7000,
                 famille: [
-                  { id: '1', libelle: 'trans', description: 'sang', etat: 'gl' },
+                  { id: '1', libelle: 'trans', description: 'sang', etat: true },
                   {
                     id: '2',
                     libelle: 'néonat',
                     description: 'nouveau-né',
-                    etat: 'malade',
+                    etat: false,
                   },
                   {
                     id: '3',
                     libelle: 'pediatrie',
                     description: 'enfant',
-                    etat: 'souffrant',
+                    etat: true,
                   },
                 ],
               },
@@ -1383,18 +1413,18 @@ export class InMemDBService implements InMemoryDbService {
                 montantMin: 100,
                 montantMax: 7000,
                 famille: [
-                  { id: '1', libelle: 'trans', description: 'sang', etat: 'gl' },
+                  { id: '1', libelle: 'trans', description: 'sang', etat: true },
                   {
                     id: '2',
                     libelle: 'néonat',
                     description: 'nouveau-né',
-                    etat: 'malade',
+                    etat: false,
                   },
                   {
                     id: '3',
                     libelle: 'pediatrie',
                     description: 'enfant',
-                    etat: 'souffrant',
+                    etat: true,
                   },
                 ],
                 ressource: {
@@ -1409,7 +1439,7 @@ export class InMemDBService implements InMemoryDbService {
                     id: '4',
                     libelle: 'néonat',
                     description: 'nouveau-né',
-                    etat: 'malade',
+                    etat: false,
                   },
                 },
                 distributeur: [
@@ -1460,11 +1490,13 @@ export class InMemDBService implements InMemoryDbService {
             service: {
               id: '2',
               libelle: 'Laboratoire',
-              etat: 'non attribue',
+              etat: true,
               dateDerniereModification: new Date('06/08/1990'),
               dateAttribution: new Date('07/03/1990'),
               dateFin: new Date('07/03/1990'),
               nombreTotalAttributions: 20,
+              localisation:'douala',
+              description:'bien',
             },
           },
           {
@@ -1478,11 +1510,13 @@ export class InMemDBService implements InMemoryDbService {
             service: {
               id: '3',
               libelle: 'Consultation',
-              etat: 'non attribue',
+              etat: true,
               dateDerniereModification: new Date('12/06/1972'),
               dateAttribution: new Date('07/03/1990'),
               dateFin: new Date('07/03/1990'),
               nombreTotalAttributions: 50,
+              localisation:'douala',
+              description:'bien',
             },
           },
           {
@@ -1496,11 +1530,13 @@ export class InMemDBService implements InMemoryDbService {
             service: {
               id: '1',
               libelle: 'Pharmacie',
-              etat: 'non attribue',
+              etat: true,
               dateDerniereModification: new Date('07/03/2000'),
               dateAttribution: new Date('07/03/1990'),
               dateFin: new Date('07/03/1990'),
               nombreTotalAttributions: 6,
+              localisation:'douala',
+              description:'bien',
             },
           },
         ],
@@ -1639,7 +1675,7 @@ export class InMemDBService implements InMemoryDbService {
                     id: '4',
                     libelle: 'néonat',
                     description: 'nouveau-né',
-                    etat: 'malade',
+                    etat: false,
                   },
                 },
               },
@@ -1650,18 +1686,18 @@ export class InMemDBService implements InMemoryDbService {
                 montantMin: 100,
                 montantMax: 7000,
                 famille: [
-                  { id: '1', libelle: 'trans', description: 'sang', etat: 'gl' },
+                  { id: '1', libelle: 'trans', description: 'sang', etat: true },
                   {
                     id: '2',
                     libelle: 'néonat',
                     description: 'nouveau-né',
-                    etat: 'malade',
+                    etat: false,
                   },
                   {
                     id: '3',
                     libelle: 'pediatrie',
                     description: 'enfant',
-                    etat: 'souffrant',
+                    etat: true,
                   },
                 ],
               },
@@ -1671,7 +1707,7 @@ export class InMemDBService implements InMemoryDbService {
                 quantiteMax: 40,
                 montantMin: 100,
                 montantMax: 7000,
-                ressource: 
+                ressource:
                 {
                   id: '3',
                   libelle: 'pediatrie',
@@ -1684,7 +1720,7 @@ export class InMemDBService implements InMemoryDbService {
                     id: '4',
                     libelle: 'néonat',
                     description: 'nouveau-né',
-                    etat: 'malade',
+                    etat: false,
                   },
                 }
               },
@@ -1707,7 +1743,7 @@ export class InMemDBService implements InMemoryDbService {
                       id: '3',
                       libelle: 'pediatrie',
                       description: 'enfant',
-                      etat: 'souffrant',
+                      etat: true,
                     },
                   },
               },
@@ -1726,18 +1762,18 @@ export class InMemDBService implements InMemoryDbService {
                 montantMin: 100,
                 montantMax: 7000,
                 famille: [
-                  { id: '1', libelle: 'trans', description: 'sang', etat: 'gl' },
+                  { id: '1', libelle: 'trans', description: 'sang', etat: true },
                   {
                     id: '2',
                     libelle: 'néonat',
                     description: 'nouveau-né',
-                    etat: 'malade',
+                    etat: false,
                   },
                   {
                     id: '3',
                     libelle: 'pediatrie',
                     description: 'enfant',
-                    etat: 'souffrant',
+                    etat: true,
                   },
                 ],
               },
@@ -1756,18 +1792,18 @@ export class InMemDBService implements InMemoryDbService {
                 montantMin: 100,
                 montantMax: 7000,
                 famille: [
-                  { id: '1', libelle: 'trans', description: 'sang', etat: 'gl' },
+                  { id: '1', libelle: 'trans', description: 'sang', etat: true },
                   {
                     id: '2',
                     libelle: 'néonat',
                     description: 'nouveau-né',
-                    etat: 'malade',
+                    etat: false,
                   },
                   {
                     id: '3',
                     libelle: 'pediatrie',
                     description: 'enfant',
-                    etat: 'souffrant',
+                    etat: true,
                   },
                 ],
                 ressource: {
@@ -1782,7 +1818,7 @@ export class InMemDBService implements InMemoryDbService {
                     id: '4',
                     libelle: 'néonat',
                     description: 'nouveau-né',
-                    etat: 'malade',
+                    etat: false,
                   },
                 },
                 distributeur: [
@@ -1833,11 +1869,13 @@ export class InMemDBService implements InMemoryDbService {
             service: {
               id: '2',
               libelle: 'Laboratoire',
-              etat: 'non attribue',
+              etat: true,
               dateDerniereModification: new Date('06/08/1990'),
               dateAttribution: new Date('07/03/1990'),
               dateFin: new Date('07/03/1990'),
               nombreTotalAttributions: 20,
+              localisation:'douala',
+              description:'bien',
             },
           },
           {
@@ -1851,11 +1889,13 @@ export class InMemDBService implements InMemoryDbService {
             service: {
               id: '3',
               libelle: 'Consultation',
-              etat: 'non attribue',
+              etat: true,
               dateDerniereModification: new Date('12/06/1972'),
               dateAttribution: new Date('07/03/1990'),
               dateFin: new Date('07/03/1990'),
               nombreTotalAttributions: 50,
+              localisation:'douala',
+              description:'bien',
             },
           },
           {
@@ -1869,11 +1909,13 @@ export class InMemDBService implements InMemoryDbService {
             service: {
               id: '1',
               libelle: 'Pharmacie',
-              etat: 'non attribue',
+              etat: true,
               dateDerniereModification: new Date('07/03/2000'),
               dateAttribution: new Date('07/03/1990'),
               dateFin: new Date('07/03/1990'),
               nombreTotalAttributions: 6,
+              localisation:'douala',
+              description:'bien',
             },
           },
         ],
@@ -2181,7 +2223,7 @@ export class InMemDBService implements InMemoryDbService {
                     id: '4',
                     libelle: 'néonat',
                     description: 'nouveau-né',
-                    etat: 'malade',
+                    etat: false,
                   },
                 },
               },
@@ -2192,18 +2234,18 @@ export class InMemDBService implements InMemoryDbService {
                 montantMin: 100,
                 montantMax: 7000,
                 famille: [
-                  { id: '1', libelle: 'trans', description: 'sang', etat: 'gl' },
+                  { id: '1', libelle: 'trans', description: 'sang', etat: true },
                   {
                     id: '2',
                     libelle: 'néonat',
                     description: 'nouveau-né',
-                    etat: 'malade',
+                    etat: false,
                   },
                   {
                     id: '3',
                     libelle: 'pediatrie',
                     description: 'enfant',
-                    etat: 'souffrant',
+                    etat: true,
                   },
                 ],
               },
@@ -2213,7 +2255,7 @@ export class InMemDBService implements InMemoryDbService {
                 quantiteMax: 40,
                 montantMin: 100,
                 montantMax: 7000,
-                ressource: 
+                ressource:
                 {
                   id: '3',
                   libelle: 'pediatrie',
@@ -2226,7 +2268,7 @@ export class InMemDBService implements InMemoryDbService {
                     id: '4',
                     libelle: 'néonat',
                     description: 'nouveau-né',
-                    etat: 'malade',
+                    etat: false,
                   },
                 }
               },
@@ -2249,7 +2291,7 @@ export class InMemDBService implements InMemoryDbService {
                       id: '3',
                       libelle: 'pediatrie',
                       description: 'enfant',
-                      etat: 'souffrant',
+                      etat: true,
                     },
                   },
               },
@@ -2268,18 +2310,18 @@ export class InMemDBService implements InMemoryDbService {
                 montantMin: 100,
                 montantMax: 7000,
                 famille: [
-                  { id: '1', libelle: 'trans', description: 'sang', etat: 'gl' },
+                  { id: '1', libelle: 'trans', description: 'sang', etat: true },
                   {
                     id: '2',
                     libelle: 'néonat',
                     description: 'nouveau-né',
-                    etat: 'malade',
+                    etat: false,
                   },
                   {
                     id: '3',
                     libelle: 'pediatrie',
                     description: 'enfant',
-                    etat: 'souffrant',
+                    etat: true,
                   },
                 ],
               },
@@ -2298,18 +2340,18 @@ export class InMemDBService implements InMemoryDbService {
                 montantMin: 100,
                 montantMax: 7000,
                 famille: [
-                  { id: '1', libelle: 'trans', description: 'sang', etat: 'gl' },
+                  { id: '1', libelle: 'trans', description: 'sang', etat: true },
                   {
                     id: '2',
                     libelle: 'néonat',
                     description: 'nouveau-né',
-                    etat: 'malade',
+                    etat: false,
                   },
                   {
                     id: '3',
                     libelle: 'pediatrie',
                     description: 'enfant',
-                    etat: 'souffrant',
+                    etat: true,
                   },
                 ],
                 ressource: {
@@ -2324,7 +2366,7 @@ export class InMemDBService implements InMemoryDbService {
                     id: '4',
                     libelle: 'néonat',
                     description: 'nouveau-né',
-                    etat: 'malade',
+                    etat: false,
                   },
                 },
                 distributeur: [
@@ -2375,11 +2417,13 @@ export class InMemDBService implements InMemoryDbService {
             service: {
               id: '1',
               libelle: 'Pharmacie',
-              etat: 'non attribue',
+              etat: true,
               dateDerniereModification: new Date('07/03/2000'),
               dateAttribution: new Date('07/03/1990'),
               dateFin: new Date('07/03/1990'),
               nombreTotalAttributions: 6,
+              localisation:'douala',
+              description:'bien',
             },
           },
           {
@@ -2393,11 +2437,13 @@ export class InMemDBService implements InMemoryDbService {
             service: {
               id: '2',
               libelle: 'Laboratoire',
-              etat: 'non attribue',
+              etat: true,
               dateDerniereModification: new Date('06/08/1990'),
               dateAttribution: new Date('07/03/1990'),
               dateFin: new Date('07/03/1990'),
               nombreTotalAttributions: 20,
+              localisation:'douala',
+              description:'bien',
             },
           },
           {
@@ -2411,11 +2457,13 @@ export class InMemDBService implements InMemoryDbService {
             service: {
               id: '3',
               libelle: 'Consultation',
-              etat: 'non attribue',
+              etat: true,
               dateDerniereModification: new Date('12/06/1972'),
               dateAttribution: new Date('07/03/1990'),
               dateFin: new Date('07/03/1990'),
               nombreTotalAttributions: 50,
+              localisation:'douala',
+              description:'bien',
             },
           },
         ],
@@ -2601,7 +2649,7 @@ export class InMemDBService implements InMemoryDbService {
                     id: '4',
                     libelle: 'néonat',
                     description: 'nouveau-né',
-                    etat: 'malade',
+                    etat: false,
                   },
                 },
               },
@@ -2612,18 +2660,18 @@ export class InMemDBService implements InMemoryDbService {
                 montantMin: 100,
                 montantMax: 7000,
                 famille: [
-                  { id: '1', libelle: 'trans', description: 'sang', etat: 'gl' },
+                  { id: '1', libelle: 'trans', description: 'sang', etat: true },
                   {
                     id: '2',
                     libelle: 'néonat',
                     description: 'nouveau-né',
-                    etat: 'malade',
+                    etat: false,
                   },
                   {
                     id: '3',
                     libelle: 'pediatrie',
                     description: 'enfant',
-                    etat: 'souffrant',
+                    etat: true,
                   },
                 ],
               },
@@ -2633,7 +2681,7 @@ export class InMemDBService implements InMemoryDbService {
                 quantiteMax: 40,
                 montantMin: 100,
                 montantMax: 7000,
-                ressource: 
+                ressource:
                 {
                   id: '3',
                   libelle: 'pediatrie',
@@ -2646,7 +2694,7 @@ export class InMemDBService implements InMemoryDbService {
                     id: '4',
                     libelle: 'néonat',
                     description: 'nouveau-né',
-                    etat: 'malade',
+                    etat: false,
                   },
                 }
               },
@@ -2669,7 +2717,7 @@ export class InMemDBService implements InMemoryDbService {
                       id: '3',
                       libelle: 'pediatrie',
                       description: 'enfant',
-                      etat: 'souffrant',
+                      etat: true,
                     },
                   },
               },
@@ -2688,18 +2736,18 @@ export class InMemDBService implements InMemoryDbService {
                 montantMin: 100,
                 montantMax: 7000,
                 famille: [
-                  { id: '1', libelle: 'trans', description: 'sang', etat: 'gl' },
+                  { id: '1', libelle: 'trans', description: 'sang', etat: true },
                   {
                     id: '2',
                     libelle: 'néonat',
                     description: 'nouveau-né',
-                    etat: 'malade',
+                    etat: false,
                   },
                   {
                     id: '3',
                     libelle: 'pediatrie',
                     description: 'enfant',
-                    etat: 'souffrant',
+                    etat: true,
                   },
                 ],
               },
@@ -2718,18 +2766,18 @@ export class InMemDBService implements InMemoryDbService {
                 montantMin: 100,
                 montantMax: 7000,
                 famille: [
-                  { id: '1', libelle: 'trans', description: 'sang', etat: 'gl' },
+                  { id: '1', libelle: 'trans', description: 'sang', etat: true },
                   {
                     id: '2',
                     libelle: 'néonat',
                     description: 'nouveau-né',
-                    etat: 'malade',
+                    etat: false,
                   },
                   {
                     id: '3',
                     libelle: 'pediatrie',
                     description: 'enfant',
-                    etat: 'souffrant',
+                    etat: true,
                   },
                 ],
                 ressource: {
@@ -2744,7 +2792,7 @@ export class InMemDBService implements InMemoryDbService {
                     id: '4',
                     libelle: 'néonat',
                     description: 'nouveau-né',
-                    etat: 'malade',
+                    etat: false,
                   },
                 },
                 distributeur: [
@@ -2798,11 +2846,13 @@ export class InMemDBService implements InMemoryDbService {
             service: {
               id: '2',
               libelle: 'Laboratoire',
-              etat: 'non attribue',
+              etat: true,
               dateDerniereModification: new Date('06/08/1990'),
               dateAttribution: new Date('07/03/1990'),
               dateFin: new Date('07/03/1990'),
               nombreTotalAttributions: 20,
+              localisation:'douala',
+              description:'bien',
             },
           },
           {
@@ -2816,11 +2866,13 @@ export class InMemDBService implements InMemoryDbService {
             service: {
               id: '3',
               libelle: 'Consultation',
-              etat: 'non attribue',
+              etat: true,
               dateDerniereModification: new Date('12/06/1972'),
               dateAttribution: new Date('07/03/1990'),
               dateFin: new Date('07/03/1990'),
               nombreTotalAttributions: 50,
+              localisation:'douala',
+              description:'bien',
             },
           },
           {
@@ -2834,11 +2886,13 @@ export class InMemDBService implements InMemoryDbService {
             service: {
               id: '1',
               libelle: 'Pharmacie',
-              etat: 'non attribue',
+              etat: true,
               dateDerniereModification: new Date('07/03/2000'),
               dateAttribution: new Date('07/03/1990'),
               dateFin: new Date('07/03/1990'),
               nombreTotalAttributions: 6,
+              localisation:'douala',
+              description:'bien',
             },
           },
         ],
@@ -3146,7 +3200,7 @@ export class InMemDBService implements InMemoryDbService {
                     id: '4',
                     libelle: 'néonat',
                     description: 'nouveau-né',
-                    etat: 'malade',
+                    etat: false,
                   },
                 },
               },
@@ -3157,18 +3211,18 @@ export class InMemDBService implements InMemoryDbService {
                 montantMin: 100,
                 montantMax: 7000,
                 famille: [
-                  { id: '1', libelle: 'trans', description: 'sang', etat: 'gl' },
+                  { id: '1', libelle: 'trans', description: 'sang', etat: true },
                   {
                     id: '2',
                     libelle: 'néonat',
                     description: 'nouveau-né',
-                    etat: 'malade',
+                    etat: false,
                   },
                   {
                     id: '3',
                     libelle: 'pediatrie',
                     description: 'enfant',
-                    etat: 'souffrant',
+                    etat: true,
                   },
                 ],
               },
@@ -3178,7 +3232,7 @@ export class InMemDBService implements InMemoryDbService {
                 quantiteMax: 40,
                 montantMin: 100,
                 montantMax: 7000,
-                ressource: 
+                ressource:
                 {
                   id: '3',
                   libelle: 'pediatrie',
@@ -3191,7 +3245,7 @@ export class InMemDBService implements InMemoryDbService {
                     id: '4',
                     libelle: 'néonat',
                     description: 'nouveau-né',
-                    etat: 'malade',
+                    etat: false,
                   },
                 }
               },
@@ -3214,7 +3268,7 @@ export class InMemDBService implements InMemoryDbService {
                       id: '3',
                       libelle: 'pediatrie',
                       description: 'enfant',
-                      etat: 'souffrant',
+                      etat: true,
                     },
                   },
               },
@@ -3233,18 +3287,18 @@ export class InMemDBService implements InMemoryDbService {
                 montantMin: 100,
                 montantMax: 7000,
                 famille: [
-                  { id: '1', libelle: 'trans', description: 'sang', etat: 'gl' },
+                  { id: '1', libelle: 'trans', description: 'sang', etat: true },
                   {
                     id: '2',
                     libelle: 'néonat',
                     description: 'nouveau-né',
-                    etat: 'malade',
+                    etat: false,
                   },
                   {
                     id: '3',
                     libelle: 'pediatrie',
                     description: 'enfant',
-                    etat: 'souffrant',
+                    etat: true,
                   },
                 ],
               },
@@ -3263,18 +3317,18 @@ export class InMemDBService implements InMemoryDbService {
                 montantMin: 100,
                 montantMax: 7000,
                 famille: [
-                  { id: '1', libelle: 'trans', description: 'sang', etat: 'gl' },
+                  { id: '1', libelle: 'trans', description: 'sang', etat: true },
                   {
                     id: '2',
                     libelle: 'néonat',
                     description: 'nouveau-né',
-                    etat: 'malade',
+                    etat: false,
                   },
                   {
                     id: '3',
                     libelle: 'pediatrie',
                     description: 'enfant',
-                    etat: 'souffrant',
+                    etat: true,
                   },
                 ],
                 ressource: {
@@ -3289,7 +3343,7 @@ export class InMemDBService implements InMemoryDbService {
                     id: '4',
                     libelle: 'néonat',
                     description: 'nouveau-né',
-                    etat: 'malade',
+                    etat: false,
                   },
                 },
                 distributeur: [
@@ -3539,11 +3593,13 @@ export class InMemDBService implements InMemoryDbService {
             service: {
               id: '1',
               libelle: 'Pharmacie',
-              etat: 'non attribue',
+              etat: true,
               dateDerniereModification: new Date('07/03/2000'),
               dateAttribution: new Date('07/03/1990'),
               dateFin: new Date('07/03/1990'),
               nombreTotalAttributions: 6,
+              localisation:'douala',
+              description:'bien',
             },
           },
           {
@@ -3557,11 +3613,13 @@ export class InMemDBService implements InMemoryDbService {
             service: {
               id: '2',
               libelle: 'Laboratoire',
-              etat: 'non attribue',
+              etat: true,
               dateDerniereModification: new Date('06/08/1990'),
               dateAttribution: new Date('07/03/1990'),
               dateFin: new Date('07/03/1990'),
               nombreTotalAttributions: 20,
+              localisation:'douala',
+              description:'bien',
             },
           },
           {
@@ -3575,11 +3633,13 @@ export class InMemDBService implements InMemoryDbService {
             service: {
               id: '3',
               libelle: 'Consultation',
-              etat: 'non attribue',
+              etat: true,
               dateDerniereModification: new Date('12/06/1972'),
               dateAttribution: new Date('07/03/1990'),
               dateFin: new Date('07/03/1990'),
               nombreTotalAttributions: 50,
+              localisation:'douala',
+              description:'bien',
             },
           },
         ],
@@ -3765,7 +3825,7 @@ export class InMemDBService implements InMemoryDbService {
                     id: '4',
                     libelle: 'néonat',
                     description: 'nouveau-né',
-                    etat: 'malade',
+                    etat: false,
                   },
                 },
               },
@@ -3776,18 +3836,18 @@ export class InMemDBService implements InMemoryDbService {
                 montantMin: 100,
                 montantMax: 7000,
                 famille: [
-                  { id: '1', libelle: 'trans', description: 'sang', etat: 'gl' },
+                  { id: '1', libelle: 'trans', description: 'sang', etat: true },
                   {
                     id: '2',
                     libelle: 'néonat',
                     description: 'nouveau-né',
-                    etat: 'malade',
+                    etat: false,
                   },
                   {
                     id: '3',
                     libelle: 'pediatrie',
                     description: 'enfant',
-                    etat: 'souffrant',
+                    etat: true,
                   },
                 ],
               },
@@ -3797,7 +3857,7 @@ export class InMemDBService implements InMemoryDbService {
                 quantiteMax: 40,
                 montantMin: 100,
                 montantMax: 7000,
-                ressource: 
+                ressource:
                 {
                   id: '3',
                   libelle: 'pediatrie',
@@ -3810,7 +3870,7 @@ export class InMemDBService implements InMemoryDbService {
                     id: '4',
                     libelle: 'néonat',
                     description: 'nouveau-né',
-                    etat: 'malade',
+                    etat: false,
                   },
                 }
               },
@@ -3833,7 +3893,7 @@ export class InMemDBService implements InMemoryDbService {
                       id: '3',
                       libelle: 'pediatrie',
                       description: 'enfant',
-                      etat: 'souffrant',
+                      etat: true,
                     },
                   },
               },
@@ -3852,18 +3912,18 @@ export class InMemDBService implements InMemoryDbService {
                 montantMin: 100,
                 montantMax: 7000,
                 famille: [
-                  { id: '1', libelle: 'trans', description: 'sang', etat: 'gl' },
+                  { id: '1', libelle: 'trans', description: 'sang', etat: true },
                   {
                     id: '2',
                     libelle: 'néonat',
                     description: 'nouveau-né',
-                    etat: 'malade',
+                    etat: false,
                   },
                   {
                     id: '3',
                     libelle: 'pediatrie',
                     description: 'enfant',
-                    etat: 'souffrant',
+                    etat: true,
                   },
                 ],
               },
@@ -3882,18 +3942,18 @@ export class InMemDBService implements InMemoryDbService {
                 montantMin: 100,
                 montantMax: 7000,
                 famille: [
-                  { id: '1', libelle: 'trans', description: 'sang', etat: 'gl' },
+                  { id: '1', libelle: 'trans', description: 'sang', etat: true },
                   {
                     id: '2',
                     libelle: 'néonat',
                     description: 'nouveau-né',
-                    etat: 'malade',
+                    etat: false,
                   },
                   {
                     id: '3',
                     libelle: 'pediatrie',
                     description: 'enfant',
-                    etat: 'souffrant',
+                    etat: true,
                   },
                 ],
                 ressource: {
@@ -3908,7 +3968,7 @@ export class InMemDBService implements InMemoryDbService {
                     id: '4',
                     libelle: 'néonat',
                     description: 'nouveau-né',
-                    etat: 'malade',
+                    etat: false,
                   },
                 },
                 distributeur: [
@@ -3942,7 +4002,7 @@ export class InMemDBService implements InMemoryDbService {
           }
         ],
         objetEnregistre: [
-          { key: 
+          { key:
             {
               id: '1',
               titre: 'taille',
@@ -3954,9 +4014,9 @@ export class InMemDBService implements InMemoryDbService {
               ordre: 0,
               obligatoire: false,
               valeursParDefaut: '',
-            }, 
+            },
             value: '1.70' },
-          { key: 
+          { key:
             {
               id: '6',
               titre: 'teint',
@@ -3968,9 +4028,9 @@ export class InMemDBService implements InMemoryDbService {
               ordre: 0,
               obligatoire: false,
               valeursParDefaut: '',
-            }, 
+            },
             value: 'noir' },
-          { key: 
+          { key:
             {
               id: '8',
               titre: 'cicatrice',
@@ -3982,9 +4042,9 @@ export class InMemDBService implements InMemoryDbService {
               ordre: 0,
               obligatoire: false,
               valeursParDefaut: 'oui, non',
-            }, 
+            },
             value: 'oui' },
-          { key: 
+          { key:
             {
               id: '4',
               titre: 'age',
@@ -3996,9 +4056,9 @@ export class InMemDBService implements InMemoryDbService {
               ordre: 0,
               obligatoire: false,
               valeursParDefaut: '',
-            }, 
+            },
             value: '23' },
-          { key: 
+          { key:
             {
               id: '7',
               titre: 'Groupe sangin',
@@ -4010,9 +4070,9 @@ export class InMemDBService implements InMemoryDbService {
               ordre: 0,
               obligatoire: false,
               valeursParDefaut: 'A, A+, A-, B, B+, B-, AB, AB+, AB-, O, O+, O-',
-            }, 
+            },
             value: 'A+' },
-          { key: 
+          { key:
             {
               id: '5',
               titre: 'allergies',
@@ -4024,7 +4084,7 @@ export class InMemDBService implements InMemoryDbService {
               ordre: 0,
               obligatoire: false,
               valeursParDefaut: '',
-            }, 
+            },
             value: 'oignon, lait, mangue' },
         ],
       },
@@ -4038,7 +4098,7 @@ export class InMemDBService implements InMemoryDbService {
         unite: this.UnitesLitre,
         prix: 1000,
         caracteristique: 'souple',
-        famille: { id: '1', libelle: 'trans', description: 'sang', etat: 'gl' },
+        famille: { id: '1', libelle: 'trans', description: 'sang', etat: true },
       },
       {
         id: '2',
@@ -4052,7 +4112,7 @@ export class InMemDBService implements InMemoryDbService {
           id: '2',
           libelle: 'néonat',
           description: 'nouveau-né',
-          etat: 'malade',
+          etat: false,
         },
       },
       {
@@ -4067,7 +4127,7 @@ export class InMemDBService implements InMemoryDbService {
           id: '3',
           libelle: 'pediatrie',
           description: 'enfant',
-          etat: 'souffrant',
+          etat: true,
         },
       },
       {
@@ -4082,7 +4142,7 @@ export class InMemDBService implements InMemoryDbService {
           id: '4',
           libelle: 'néonat',
           description: 'nouveau-né',
-          etat: 'malade',
+          etat: false,
         },
       },
       {
@@ -4097,21 +4157,21 @@ export class InMemDBService implements InMemoryDbService {
           id: '5',
           libelle: 'transfusion',
           description: 'sang',
-          etat: 'gl',
+          etat: true,
         },
       },
     ];
     let famille: IFamille[] = [
-      { id: '1', libelle: 'trans', description: 'sang', etat: 'gl' },
-      { id: '2', libelle: 'néonat', description: 'nouveau-né', etat: 'malade' },
+      { id: '1', libelle: 'trans', description: 'sang', etat: true },
+      { id: '2', libelle: 'néonat', description: 'nouveau-né', etat: false },
       {
         id: '3',
         libelle: 'pediatrie',
         description: 'enfant',
-        etat: 'souffrant',
+        etat: true,
       },
-      { id: '4', libelle: 'néonat', description: 'nouveau-né', etat: 'malade' },
-      { id: '5', libelle: 'transfusion', description: 'sang', etat: 'gl' },
+      { id: '4', libelle: 'néonat', description: 'nouveau-né', etat: false },
+      { id: '5', libelle: 'transfusion', description: 'sang', etat: true },
     ];
 
     let precomvt: IPrecoMvt[] = [
@@ -4139,7 +4199,7 @@ export class InMemDBService implements InMemoryDbService {
                 id: '4',
                 libelle: 'néonat',
                 description: 'nouveau-né',
-                etat: 'malade',
+                etat: false,
               },
             },
           },
@@ -4150,18 +4210,18 @@ export class InMemDBService implements InMemoryDbService {
             montantMin: 100,
             montantMax: 7000,
             famille: [
-              { id: '1', libelle: 'trans', description: 'sang', etat: 'gl' },
+              { id: '1', libelle: 'trans', description: 'sang', etat: true },
               {
                 id: '2',
                 libelle: 'néonat',
                 description: 'nouveau-né',
-                etat: 'malade',
+                etat: false,
               },
               {
                 id: '3',
                 libelle: 'pediatrie',
                 description: 'enfant',
-                etat: 'souffrant',
+                etat: true,
               },
             ],
           },
@@ -4171,7 +4231,7 @@ export class InMemDBService implements InMemoryDbService {
             quantiteMax: 40,
             montantMin: 100,
             montantMax: 7000,
-            ressource: 
+            ressource:
             {
               id: '3',
               libelle: 'pediatrie',
@@ -4184,7 +4244,7 @@ export class InMemDBService implements InMemoryDbService {
                 id: '4',
                 libelle: 'néonat',
                 description: 'nouveau-né',
-                etat: 'malade',
+                etat: false,
               },
             }
           },
@@ -4207,7 +4267,7 @@ export class InMemDBService implements InMemoryDbService {
                   id: '3',
                   libelle: 'pediatrie',
                   description: 'enfant',
-                  etat: 'souffrant',
+                  etat: true,
                 },
               },
           },
@@ -4226,18 +4286,18 @@ export class InMemDBService implements InMemoryDbService {
             montantMin: 100,
             montantMax: 7000,
             famille: [
-              { id: '1', libelle: 'trans', description: 'sang', etat: 'gl' },
+              { id: '1', libelle: 'trans', description: 'sang', etat: true },
               {
                 id: '2',
                 libelle: 'néonat',
                 description: 'nouveau-né',
-                etat: 'malade',
+                etat: false,
               },
               {
                 id: '3',
                 libelle: 'pediatrie',
                 description: 'enfant',
-                etat: 'souffrant',
+                etat: true,
               },
             ],
           },
@@ -4256,18 +4316,18 @@ export class InMemDBService implements InMemoryDbService {
             montantMin: 100,
             montantMax: 7000,
             famille: [
-              { id: '1', libelle: 'trans', description: 'sang', etat: 'gl' },
+              { id: '1', libelle: 'trans', description: 'sang', etat: true },
               {
                 id: '2',
                 libelle: 'néonat',
                 description: 'nouveau-né',
-                etat: 'malade',
+                etat: false,
               },
               {
                 id: '3',
                 libelle: 'pediatrie',
                 description: 'enfant',
-                etat: 'souffrant',
+                etat: true,
               },
             ],
             ressource: {
@@ -4282,7 +4342,7 @@ export class InMemDBService implements InMemoryDbService {
                 id: '4',
                 libelle: 'néonat',
                 description: 'nouveau-né',
-                etat: 'malade',
+                etat: false,
               },
             },
             distributeur: [

@@ -56,10 +56,10 @@ h3{
     flex-wrap: wrap;
     padding: 0 0 10px 10px;
 }
-.block{
+.block1{
     background-color: #28a7452b !important;
 }
-.block .inputBlock{
+.block1 .inputBlock{
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -82,7 +82,7 @@ h3{
         }
     }
 }
-.block .inputBlock label{
+.block1 .inputBlock label{
     text-transform: capitalize;
     font-weight: 400;
     font-size: 12px;
@@ -91,10 +91,10 @@ h3{
     opacity: 0.8;
     width: 30%;
 }
-.block .inputBlock label, .block .inputBlock input, .block .inputBlock textarea{
+.block1 .inputBlock label, .block1 .inputBlock input, .block1 .inputBlock textarea{
     font-size: 13px;
 }
-.block .inputBlock input, .block .inputBlock textarea, .block .inputBlock select{
+.block1 .inputBlock input, .block1 .inputBlock textarea, .block1 .inputBlock select{
     width: 70%;
     height: 35px;
 }
@@ -117,7 +117,7 @@ h3{
         font-size: 15px;
     }
     .btnValidation{
-        background-color: #1473e6;
+        background-color: #28a745;
     }
 }
 .inputSpecial{
@@ -130,7 +130,7 @@ h3{
     }
 }
 @media screen and (max-width: 1040px) {
-    .block .inputBlock{
+    .block1 .inputBlock{
         width: 31% !important;
         label{
             width: 35%;
@@ -146,7 +146,7 @@ h3{
     .contentBlock{
         padding: 8px 10px;
     }
-    .block .inputBlock{
+    .block1 .inputBlock{
         width: 31% !important;
         margin: 2px 4.5px;
         padding: 4px;
@@ -168,7 +168,7 @@ h3{
     .contentBlock{
         padding: 6px 10px;
     }
-    .block .inputBlock{
+    .block1 .inputBlock{
         margin: 2px 4px;
         label{
             width: 35%;
@@ -187,7 +187,7 @@ h3{
     .contentBlock{
         padding: 5px 10px;
     }
-    .block .inputBlock{
+    .block1 .inputBlock{
         margin: 2px 3px;
         padding: 2.8px;
         width: 47% !important;
@@ -215,7 +215,7 @@ h3{
     .contentBlock{
         padding: 3px 10px;
     }
-    .block .inputBlock{
+    .block1 .inputBlock{
         margin-top: 2px;
         margin-top: 2px;
         padding: 2.8px;

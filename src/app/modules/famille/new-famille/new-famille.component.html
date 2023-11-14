@@ -1,6 +1,6 @@
 <div id="mainSection">
-  <div class="card block">
-      <div class="card-header pt-4 pb-4 entete"> {{'famille.header' | translate}}</div>
+  <div class="card block" id="top2">
+      <div class="card-header" class="entete  pt-4 pb-4"> {{'famille.header' | translate}}</div>
       <div class="card-body">
         <form [formGroup]="forme" (ngSubmit)="onSubmit(forme.value)" *ngIf="forme" >
               <div class="">
@@ -9,7 +9,7 @@
                           <div>
                               <div class="champs">
                                   <label for="libelle" class="label">
-                                    {{'famille.table.title1' | translate}}
+                                    {{'famille.table.title1' | translate}}<span style="color: red;" aria-label="required">*</span>
                                   </label>
                                   <input type="text" formControlName="libelle" name="libelle" id="libelle"  placeholder="{{'famille.table.title1' | translate}}"  class="form-control" required>
                               </div>
@@ -18,6 +18,19 @@
                               </div>
                           </div>
                       </div>
+                      <div class="form-group" >
+                        <div>
+                            <div class="champs">
+                                <label for="etat" class="label" >
+                                  {{'famille.table.title3' | translate}}
+                                </label>
+                                <p class="w-100 d-flex align-items-center choix" >
+                                <input   type="checkbox" checked value="true"  formControlName="etat" class="form-control" name="etat" id="etat" placeholder="" >
+                              </p>
+                            </div>
+
+                        </div>
+                    </div>
                       <div class="form-group">
                           <div>
                               <div class="champs">
@@ -28,19 +41,6 @@
                               </div>
                           </div>
                       </div>
-                      <div class="form-group">
-                        <div>
-                            <div class="champs">
-                                <label for="etat" class="label" >
-                                  {{'famille.table.title3' | translate}}
-                                </label>
-                                <input  type="text" formControlName="etat" name="etat" id="etat" placeholder="{{'famille.table.title3' | translate}}" class="form-control"  required  >
-                            </div>
-                            <div  *ngIf="submitted && f['etat'].errors"  class="alert alert-danger" >
-                                <div *ngIf="f['etat'].errors['required']">{{'famille.form.text2' | translate}}</div>
-                            </div>
-                        </div>
-                    </div>
                   </div>
               </div>
               <div class="actionButton">
