@@ -1,0 +1,50 @@
+<div class="mainBlock" id="top2">
+     <form [formGroup]="formeExemplaire" (ngSubmit)="onSubmit()" *ngIf="formeExemplaire" >
+                
+        <h1>
+            {{this.document.titre}}
+        </h1>
+        <div class="infos">
+            <p id="titre">
+                {{'tickets.table.title5' | translate}} :
+                <span class="title">  {{this.nomPatientCourant}}</span>
+            </p>
+            <div  *ngIf="submitted && estValide == false" class="alert alert-danger">
+                <div >{{eValvalide}} {{'lists.text3' | translate}}</div>
+            </div>
+            <div class="block1" *ngFor="let attributParCategorie of document.categories">
+                <div class="pb-3" *ngIf="attributParCategorie.nom">
+                    <h3>{{attributParCategorie.nom}}</h3>
+                    <div class="contentBlock">
+                        <div formArrayName="_exemplaireDocument" class="inputBlock" *ngFor="let attributParCategorie of attributParCategorie.listAttributsParCategories; let i = index" [ngClass]="{'inputSpecial':(attribut.type == TypeRadio) || (attribut.type == TypeBoolean)}"> 
+                            <label [for]="attributParCategorie.attribut.id" class="form-label">{{attributParCategorie.attribut.titre}}<span *ngIf="attributParCategorie.obligatoire == true"> *</span></label>
+                            <input  *ngIf="(attribut.type != 'textarea') && (attribut.type != TypeRadio) && (attribut.type != TypeBoolean)" [formControlName]="incrementeCompteur(compteur,attributParCategorie)" [type]="attribut.type" class="form-control" placeholder="entrer la valeur ici">
+                            <textarea *ngIf="attribut.type == 'textarea'" class="form-control"  [formControlName]="incrementeCompteur(compteur,attributParCategorie)" placeholder="entrer la valeur ici"></textarea>
+                            <select class="form-control" *ngIf="(attribut.type == TypeRadio) || (attribut.type == TypeBoolean)" [formControlName]="incrementeCompteur(compteur,attributParCategorie)">
+                                <option value="{{val.trim()}}" *ngFor="let val of attribut.valeursParDefaut.trim().split(',')" >{{val}}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="block1 card" id="controlsSupprimeBlock" *ngIf="objetCleValeurSupprime.length != 0">
+                <h3>{{'document.exemplaire.title2' | translate}} <i class="fa fa-exclamation-triangle"></i></h3>
+                <div class="d-flex" id="controlsSupprime">
+                    <div formArrayName="_controlsSupprime" *ngFor="let attributSupprime of objetCleValeurSupprime" class="inputBlock" [ngClass]="{'inputSpecial':(attributSupprime.key.type == TypeRadio) || (attributSupprime.key.type == TypeBoolean)}"> 
+                        <label class="form-label">{{attributSupprime.key.titre}}</label>
+                        
+                        <input *ngIf="(attributSupprime.key.type != 'textarea') && (attributSupprime.key.type != TypeRadio) && (attributSupprime.key.type != TypeBoolean)" [formControlName]="incrementeNumerateur(numerateur,attributSupprime.key)" [type]="attributSupprime.key.type" class="form-control" placeholder="entrer la valeur ici" [required]="true">
+                        <textarea *ngIf="attributSupprime.key.type == 'textarea'" class="form-control"  [formControlName]="incrementeNumerateur(numerateur,attributSupprime.key)" placeholder="entrer la valeur ici"></textarea>
+                        <select class="form-control" *ngIf="(attributSupprime.key.type == TypeRadio) || (attributSupprime.key.type == TypeBoolean)" [formControlName]="incrementeNumerateur(numerateur,attributSupprime.key)">
+                            <option value="{{val.trim()}}" *ngFor="let val of attributSupprime.key.valeursParDefaut.trim().split(',')" >{{val}}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="actionButton">
+            <button class="btn" type="reset" routerLink="../../executer-missions"><i class="fa fa-reply mr-1"></i>{{'lists.button2' | translate}}</button>
+            <button type="submit" class="btn btnValidation">{{btnLibelle}}</button>
+        </div>
+    </form>
+</div>

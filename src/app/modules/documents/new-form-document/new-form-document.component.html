@@ -1,0 +1,128 @@
+<div id="mainSection">
+    <div class="card block" id="top2">
+        <div class="card-header" class="entete pt-4 pb-4">{{ titre }}</div>
+        <div class="card-body">
+            <form [formGroup]="forme" (ngSubmit)="onSubmit(forme.value)" *ngIf="forme" >
+                <div class="">
+                    <div class="">
+                        <div class="form-group">
+                            <div>
+                                <div class="champs">
+                                    <label for="titre" class="label">
+                                        {{'document.table.title1' | translate}} <sup>*</sup>
+                                    </label>
+                                    <input type="text" formControlName="titre" name="titre" id="titre"  placeholder="{{'document.table.title1' | translate}}" class="form-control" required>
+                                </div>
+                                <div  *ngIf="submitted && f['titre'].errors"  class="alert alert-danger blockErreur" >
+                                    <div *ngIf="f['titre'].errors['required']">{{'document.form.text1' | translate}}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div>
+                                <div class="champs">
+                                    <label for="description" class="label" >
+                                        {{"document.table.title2" | translate}} <sup>*</sup>
+                                    </label>
+                                    <textarea type="textarea" formControlName="description" name="description" id="description" placeholder="{{'document.table.title2' | translate}}" class="form-control"  required></textarea>
+                                </div>
+                                <div  *ngIf="submitted && f['description'].errors"  class="alert alert-danger blockErreur" >
+                                    <div *ngIf="f['description'].errors['required']">{{'document.form.text2' | translate}}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="champs">
+                                <label  for="_missions" class="label">
+                                    {{"document.table.title3" | translate}} <sup>*</sup>
+                                </label>
+                                <mat-form-field class="example-full-width" appearance="fill">
+                                    <!-- <mat-label>{{'document.table.title5' | translate}}</mat-label> -->
+                                    <mat-select formControlName="_missions" multiple [compareWith]="compareItem">
+                                    <mat-option *ngFor="let missionsDocument of mission$ |async" [value]="missionsDocument">{{missionsDocument.libelle}}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <div  *ngIf="submitted && f['_missions'].value.length<1"  class="alert alert-danger blockErreur" >
+                                <div>{{'document.form.text3' | translate}}</div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="champs">
+                                <label for="" class="label">
+                                    {{"document.table.title4" | translate}} <sup>*</sup>
+                                </label>
+                                <div class="dropdown w-100">
+                                    <!-- affichage list attributs selectiones -->
+                                    <div class="listAttr">
+                                        <button type="button" class="btn p-0" title="{{'lists.button9' | translate}} / {{'lists.button8' | translate}}" (click)="openAttributDialog()">
+                                            <i class="fas fa-plus-square"></i>
+                                        </button>
+                                        <span *ngFor="let listeAttributs of ELEMENTS_TABLE_ATTRIBUTS">
+                                            {{listeAttributs.titre | lowercase}}<span>, </span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div  *ngIf="submitted && ELEMENTS_TABLE_ATTRIBUTS.length<1"  class="alert alert-danger blockErreur" >
+                                <div>{{'document.form.text4' | translate}}</div>
+                            </div>
+                        </div>
+
+                        <!-- categories------------------------------------------------- -->
+
+                        <div class="form-group">
+                            <div class="champs">
+                                <label  for="" class="label">
+                                    {{"document.table.title15" | translate}}
+                                </label>
+                                <div class="w-100">
+
+                                    <!-- Ouvrir le formulair de creation des categories -->
+                                    <div class="listAttr">
+                                        <button type="button" class="btn p-0" title="{{'lists.button9' | translate}} / {{'lists.button8' | translate}}" (click)="openCategorieDialog();">
+                                            <i class="fas fa-plus-square"></i>
+                                        </button>
+                                        <span *ngFor="let listeCategories of TABLE_CATEGORIE_AFFICHAGE_TEMP">
+                                            {{listeCategories.nom | lowercase}}<span>, </span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- preconisations------------------------------------------------- -->
+
+                        <div class="form-group">
+                            <div class="champs">
+                                <label  for="" class="label">
+                                    {{"document.table.title17" | translate}}
+                                </label>
+                                <div class="w-100">
+
+                                    <!-- Ouvrir le formulair de creation des precoMvt -->
+                                    <div class="listAttr">
+                                        <button type="button" class="btn p-0" title="{{'lists.button9' | translate}} / {{'lists.button8' | translate}}" (click)="openPrecoMvtDialog()">
+                                            <i class="fas fa-plus-square"></i>
+                                        </button>
+                                        <span *ngFor="let listePreconisations of ELEMENTS_TABLE_PRECONISATIONS">
+                                            {{listePreconisations.libelle | lowercase}}<span>, </span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="actionButton">
+                    <button class="btn" routerLink="../../list-documents"><i class="fa fa-reply mr-1" aria-hidden="true"></i>{{'lists.button2' | translate}}</button>
+                    <button type="submit" class="btn btnValidation">{{btnLibelle}}</button>
+                </div>
+                <div class="mt-2 note">
+                    <p>* : {{"lists.text1" | translate}}</p>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

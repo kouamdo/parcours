@@ -1,67 +1,447 @@
 {
-    "accueil":{
-        "header":{
-            "nav-top":{
-                "nav-link1":"Accueil",
-                "nav-link2":"Contact"
-            },
-            "nav-left":{
-                "nav-search-bar":"Recherche",
-                "nav-link1":"Patients",
-                "nav-link1-item1":"Recherche",
-                "nav-link1-item2":"Créer",
-                "nav-link1-item3":"Modifier",
+  "accueil": {
+    "header": {
+      "nav-top": {
+        "nav-link1": "Accueil",
+        "nav-link2": "Contact"
+      },
+      "nav-left": {
+        "nav-search-bar": "Recherche",
+        "nav-link1": "Patients",
+        "nav-link1-item1": "Recherche",
+        "nav-link1-item2": "Créer",
+        "nav-link1-item3": "Modifier",
 
-                "nav-link2":"Tickets",
-                "nav-link2-item1":"Donner un ticket",
-                "nav-link2-item2":"Creer une file",
-                "nav-link2-item3":"Reinitialiser la file"
-            }
-        },
-        "central-panel":{
-            "title":"Bande d'annonce",
-            "list-item1-link1":"Accueil",
-            "list-item2":"Tableau de bord"
-        },
-        "main-area":{
-            "encart":{
-                "title":"Rapport recapitulatif mensuel",
-                "dropdown-list":{
-                    "link1":"Action",
-                    "link2":"Another action",
-                    "link3":"Something else here",
-                    "link4":"Separated link"
-                }
-            }
-        },
-        "footer":{
+        "nav-link2": "Tickets",
+        "nav-link2-item1": "Donner un ticket",
+        "nav-link2-item2": "Creer une file",
+        "nav-link2-item3": "Reinitialiser la file"
+      }
+    },
+    "central-panel": {
+      "title": "Bande d'annonce",
+      "list-item1-link1": "Accueil",
+      "list-item2": "Tableau de bord"
+    },
+    "main-area": {
+      "encart": {
+        "title": "Rapport recapitulatif mensuel",
+        "dropdown-list": {
+          "link1": "Action",
+          "link2": "Another action",
+          "link3": "Something else here",
+          "link4": "Separated link"
+        }
+      }
+    },
+    "footer": {}
+  },
+  "lists": {
+    "title": "listing",
+    "text1": "Champs obligatoires",
+    "text2": "Champs non obligatoires",
+    "text3": "est un champs non obligatoires",
+    "button1": "Imprimer",
+    "button2": "Retour",
+    "button3": "Annuler",
+    "button4": "Précédent",
+    "button5": "Aucune action",
+    "button6": "valider",
+    "button7": "Modifier",
+    "button8": "Supprimer",
+    "button9": "Ajouter",
+    "button10":"Fermer"
+  },
+  "patient": {
+    "title1":"Ajouter patient",
+    "search-bar": "Rechercher",
+    "table": {
+      "title1": "Nom",
+      "title2": "Prénom",
+      "title3": "Date Naissance",
+      "title4": "Sexe",
+      "title5": "EMail",
+      "title6": "Adresse",
+      "title7": "Téléphone",
+      "title8": "Actions",
+      "actions": {
+        "link1": "Orienter",
+        "link2": "Modifier",
+        "link3": "Détails",
+        "link4": "Supprimer"
+      }
+    },
+      "form": {
+        "text1": "Le nom est obligatoire.",
+        "text2": "Le prénom est obligatoire.",
+        "text3": "La date de naissance est obligatoire.",
+        "text4": "L'addresse mail est obligatoire."
+      }
+  },
+  "personnel":{
+      "title1":"Ajouter personnel",
+      "search-bar":"Rechercher",
+      "table":{
+          "title1":"Nom",
+          "title2":"Prénom",
+          "title3":"Date Naissance",
+          "title4":"Sexe",
+          "title5":"Email",
+          "title6":"Date d'entrée",
+          "title7":"Téléphone",
+          "title8":"Date De Sortie",
+          "title9":"Actions",
+          "actions":{
+              "link2":"Modifier",
+              "link3":"Détails",
+              "link4":"Supprimer"
+          }
+      },
+      "form":{
+          "text1":"Le nom est obligatoire.",
+          "text2":"Le prénom est obligatoire.",
+          "text3":"La date de naissance est obligatoire.",
+          "text4":"email address is requied is requied",
+          "text5":"La date d'entrée est aubligatoire."
+      }
+  },
+  "services": {
+    "title1":"Ajouter service",
+    "table": {
+      "title1": "Libelle",
+      "title2": "Etat",
+      "title3": "localisation",
+      "title4": "description"
 
-        }
     },
-    "patient":{
-        "text":"Patients retrouvé(e)s",
-        "search-bar":"Rechercher",
-        "table":{
-            "title1":"Nom",
-            "title2":"Prénom",
-            "title3":"Date Naissance",
-            "title4":"Sexe",
-            "title5":"EMail",
-            "title6":"Adresse",
-            "title7":"Téléphone",
-            "title8":"Actions",
-            "actions":{
-                "link1":"Orienter",
-                "link2":"Modifier",
-                "link3":"Détails",
-                "link4":"Supprimer"
-            }
-        }
-    },
-    "theme":{
-        "libelle":"theme"
-    },
-    "langue":{
-        "libelle":"langues"
+    "form": {
+      "label1": "libelle",
+      "label2": "etat",
+      "label3": "localisation",
+      "label4": "description",
+      "text1": "Le libelle est obligatoire.",
+      "text2": "L'etat est obligatoire.",
+      "text3": "La date de derniere modification est obligatoire."
     }
+  },
+  "tickets": {
+    "table": {
+      "title1": "Id",
+      "title2": "Id unique",
+      "title3": "Date derniere modification",
+      "title4": "Id dans la File d'attente",
+      "title5": "Id personne",
+      "title6": "Statut"
+    },
+    "form": {
+      "label1": "Intitule du service  : ",
+      "label2": "id unique du ticket  : ",
+      "label3": "Date  : ",
+      "label4": "Nom du beneficiaire  : ",
+      "label5": "ticket : ",
+      "label6": "Nom : ",
+      "text1": "logiciel de gestion client"
+    },
+    "panel": {
+      "text1": "voici les infos voici les infos voici les infos voici les infos voici les infos voici les infos"
+    }
+  },
+  "attributs": {
+    "title1":"Ajouter attribut",
+    "table": {
+      "title1": "titre",
+      "title2": "Description",
+      "title3": "Etat",
+      "title4": "Date Creation",
+      "title5": "Date Modification",
+      "title6": "Type",
+      "title7": "Ordre",
+      "title8": "Attribut obligatoire ?",
+      "title9": "Valeurs par defaut",
+      "title10": "Separer les valeurs par une virgule",
+      "title11": "Obligatoire ?"
+    },
+    "form": {
+      "text1": "Le titre est obligatoire.",
+      "text2": "La description est obligatoire.",
+      "text3": "L'etat est obligatoire.",
+      "text4": "Le type est obligatoire.",
+      "text5": "Ce champs est obligatoire."
+    }
+  },
+  "missions": {
+    "title1":"Ajouter mission",
+    "table": {
+      "title1": "Libelle",
+      "title2": "Description",
+      "title3": "Etat",
+      "title4": "Date Creation",
+      "title5": "Date Modification",
+      "title6": "Service"
+    },
+    "form": {
+      "text1": "Le libelle est obligatoire.",
+      "text2": "La description est obligatoire.",
+      "text3": "L'etat est obligatoire.",
+      "text4": "La date de creation est obligatoire.",
+      "text5": "Le type est obligatoire.",
+      "text6": "Le service est obligatoire",
+      "text7": "Selectionner un service"
+    },
+    "execution": {
+      "text1": "QUEL EST VOTRE CHOIX ?",
+      "text2": "Choix Du Document Pour La Mission",
+      "text3": "Aucun Document Disponible Pour La Mission"
+    }
+  },
+  "document": {
+    "title3":"Ajouter document",
+        "text":"documents retrouvé(e)s",
+        "search-bar":"Rechercher",
+        "title1":"Affichage des resultats",
+        "title2":"Selectionner les attributs de la categories",
+        "table":{
+            "title0":"Id",
+            "title1":"Titre",
+            "title2":"Description",
+            "title3":"Missions",
+            "title4":"Attributs",
+            "title5":"Selectionner les missions",
+            "title6":"Selectionner les attributs",
+            "title7":"Valeurs",
+            "title8":"Nom de la categorie",
+            "title9":"Entrez le nom de la categories",
+            "title10":"Ordre",
+            "title11":"Entrez l'ordre de la categories",
+            "title12":"Creer des categories",
+            "title13":"Ordre attribut",
+            "title14":"Ordre categorie",
+            "title15":"Categories",
+            "title16":"libelle attribut",
+            "title17":"categories"
+        },
+        "form":{
+            "text1":"Le Titre est obligatoire.",
+            "text2":"La Description est obligatoire.",
+            "text3":"Les Missions sont obligatoires.",
+            "text4":"Les attributs sont obligatoires."
+        },
+        "view":{
+            "title":"Modele du document",
+            "text1":"liste des missions du document",
+            "text2":"liste des attributs du document",
+            "text3":"liste des attributs par categorie du document"
+        },
+        "exemplaire":{
+            "title":"Exemplaire du document",
+            "text1":"Composition de l'exemplaire"
+        }
+  },
+  "theme": {
+    "libelle": "theme"
+  },
+  "langue": {
+    "libelle": "langues"
+  },
+  "famille": {
+    "header": "Ajouter Famille",
+    "table": {
+      "title1": "Libellé",
+      "title2": "Description",
+      "title3": "Etat"
+    },
+    "form": {
+      "text1": "Champ obligatoire",
+      "text2": "Champ obligatoire"
+    },
+    "lists": {
+      "button1": "Retour"
+    },
+    "title": "Listing Famille",
+    "search-bar": "Rechercher",
+    "table1": {
+      "title1": "Libellé",
+      "title2": "Description",
+      "title3": "Etat",
+      "title4": "Actions",
+      "actions": {
+        "link1": "Orienter",
+        "link2": "Modifier",
+        "link3": "Détails",
+        "link4": "Supprimer"
+      }
+    }
+  },
+  "ressource": {
+    "table": {
+      "title": "Ajouter ressource",
+      "title1": " Libellé",
+      "title2": "Etat",
+      "title3": "Quantité",
+      "title4": "Unité",
+      "title5": "Prix",
+      "title6": "Catégorie",
+      "title7": "Caractéristiques"
+    },
+    "form": {
+      "text1": "Champ Obligatoire",
+      "text2": "Champ Obligatoire",
+      "text4": "litre",
+      "text5": "kg",
+      "text6": "m²",
+      "text7": "quintaux",
+      "text8": "Champ Obligatoire",
+      "text9": "Champ Obligatoire",
+      "text11": "Selectionnez une Unité",
+      "text12": "souple",
+      "text13": "dure",
+      "text14": "léger",
+      "text15": "Selectionnez vos Caractéristiques"
+    },
+    "lists": {
+      "button2": "Retour"
+    },
+    "title": "Listing Ressource",
+    "search-bar": "Rechercher",
+    "table2": {
+      "title1": "Ajouter ressource",
+      "title2": "id",
+      "title3": "libelle",
+      "title4": "Etat",
+      "title5": " Quantité ",
+      "title6": " Unité",
+      "title7": "Prix",
+      "title8": "Catégorie",
+      "title9": "Caractéristiques",
+      "title10": "Actions "
+    }
+  },
+  "preconisation":{
+    "title1":"Ajouter préconisation",
+      "form":{
+          "title1":"Sélectionnez des preconisations"
+      },
+      "table":{
+          "title1":"Libellé",
+          "title2":"Etat",
+          "title3":"Type",
+          "title4":"Voir le detail"
+      },
+      "view":{
+          "text1":"Les préconisations du document"
+      }
+  },
+  "distributeur": {
+    "table": {
+      "title": "Ajouter Distributeur",
+      "title1": "Raison Social ",
+      "title2": "Etat",
+      "title3": "Adresse",
+      "title4": "Telephone",
+      "title5": "Mail"
+    },
+    "form": {
+      "text1": "Champ Obligatoire",
+      "text2": "Champ Obligatoire"
+    },
+    "lists": {
+      "button1": "Annuler"
+    },
+    "title": "listing Distributeur",
+    "search-bar": "Rechercher",
+    "table2": {
+      "title1": "raisonSocial",
+      "title2": "adresse",
+      "title3": "etat",
+      "title4": "telephone",
+      "title5": "mail",
+      "title9": "Actions "
+    }
+  },
+  "precomvt": {
+    "header": "Nouvelle Préconisation",
+    "header1": "Assigner Familles",
+    "header2": "Assigner Ressource",
+    "table": {
+      "title1": "Libelle",
+      "title2": "Etat",
+      "title3": "Type",
+      "title4": "Famille",
+      "title5": "Ressource ",
+      "title6": "Quantité Max",
+      "title7": "Entrer la quantite maximale",
+      "title8": "Quantité Min ",
+      "title9": "Entrer la quantite minimale",
+      "title10": "Montant Max",
+      "title11": "Entrer le montant minimal",
+      "title12": "Montant Min ",
+      "title13": "Entrer le montant maximal",
+      "title14": "Fournisseurs ",
+      "title15": "Back",
+      "title16": "Annuler",
+      "title17": "Famille",
+      "title18": "Ressource",
+      "title19": "Etape",
+      "title20": "Type:",
+      "title21": "Qtité Max :",
+      "title22": "Qtité Min : ",
+      "title23": "Mtant Max : ",
+      "title24": "Mtant Min : ",
+      "title25": "Enregistrer"
+    },
+    "title": "Listing PrecoMvt",
+    "search-bar": "Rechercher",
+    "table2": {
+      "title1": "libelle",
+      "title2": "etat",
+      "title3": "type",
+      "title4": "Actions"
+    },
+    "title0": "Tableau Des opérations effectuées",
+    "table3": {
+      "title1": "Libellé",
+      "title2": "Etat",
+      "title3": "Type",
+      "title4": "Ressource",
+      "title5": "Quantité Max",
+      "title6": "Quantité Min",
+      "title7": "Montant Max",
+      "title8": "Montant Min",
+      "title9": "Distributeur",
+      "title10": "familles",
+      "title11": "Quantité Max",
+      "title12": "Quantité Min",
+      "title13": "Montant Max",
+      "title14": "Montant Min",
+      "title15": "Distributeur"
+    }
+},
+"role":{
+  "header":"Ajouter Role",
+  "table":{
+    "title1":"Titre",
+    "title2":"titre",
+    "title3":"Etat",
+    "title4":"Description",
+    "title5":"description"
+  },
+  "form":{
+    "text1":"Champ Obligatoire"
+},
+"lists":{
+  "button1":"Annuler"
+},
+"title":"listing Role",
+"search-bar":"Rechercher",
+"table1":{
+    "title1":"Titre",
+    "title2":"Description",
+    "title3":"Etat",
+    "title4":"Actions",
+    "actions":{
+        "link2":"Modifier",
+        "link4":"Supprimer"
+    }
+}
+}
 }

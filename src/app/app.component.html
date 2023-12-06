@@ -1,7 +1,7 @@
 <div [ngClass]="{'light-mode': toggle, 'dark-mode': !toggle}" class="wrapper">
 
   <div class="preloader flex-column justify-content-center align-items-center">
-    <img class="animation__wobble" src="assets/img/logoNotep.png" alt="logoNotep.png" height="60" width="60">
+    <img class="animation__wobble" src="assets/img/logo_camnafaw.jpg" alt="logo_camnafaw.jpg" height="60" width="60">
   </div>
 
   <nav class="main-header navbar navbar-expand navbar-dark"  [ngClass]="{'navbar-light': toggle, 'navbar-dark': !toggle}">
@@ -11,7 +11,7 @@
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="index3.html" class="nav-link">
+        <a class="nav-link">
           {{"accueil.header.nav-top.nav-link1" | translate}}
         </a>
       </li>
@@ -23,13 +23,13 @@
     </ul>
     <!-- recherche sur la barre horizontale du menu -->
     <ul class="navbar-nav ml-auto">
-    
+
       <li class="nav-item">
         <a class="nav-link" data-widget="navbar-search" href="#" role="button">
           <i class="fas fa-search"></i>
         </a>
         <div class="navbar-search-block">
-          <form class="form-inline">
+          <form class="form-inline mr-3">
             <div class="input-group input-group-sm">
               <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
               <div class="input-group-append">
@@ -52,9 +52,9 @@
         </a>
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
         <a href="#" class="dropdown-item">
-        
+
           <div class="media">
-            <img src="assets/img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
+            <img src="assets/img/avatar.png" alt="User Avatar" class="img-size-50 mr-3 img-circle">
             <div class="media-body">
               <h3 class="dropdown-item-title">
               Brad Diesel
@@ -64,13 +64,13 @@
               <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
             </div>
           </div>
-        
+
         </a>
         <div class="dropdown-divider"></div>
         <a href="#" class="dropdown-item">
-        
+
           <div class="media">
-            <img src="assets/img/user8-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
+            <img src="assets/img/avatar.png" alt="User Avatar" class="img-size-50 img-circle mr-3">
             <div class="media-body">
               <h3 class="dropdown-item-title">
                 John Pierce
@@ -80,13 +80,13 @@
               <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
             </div>
           </div>
-        
+
         </a>
         <div class="dropdown-divider"></div>
         <a href="#" class="dropdown-item">
-        
+
           <div class="media">
-            <img src="assets/img/user3-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
+            <img src="assets/img/avatar.png" alt="User Avatar" class="img-size-50 img-circle mr-3">
             <div class="media-body">
               <h3 class="dropdown-item-title">
               Nora Silvester
@@ -96,7 +96,7 @@
               <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
             </div>
           </div>
-        
+
         </a>
         <div class="dropdown-divider"></div>
         <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
@@ -142,17 +142,19 @@
     </ul>
   </nav>
 
-      <!-- menu vertical -->
-  <aside class="main-sidebar sidebar-dark-primary elevation-4">
+      <!-- menu vertical gauche-->
+
+  <aside id="menuVerticalGauche" class="main-sidebar sidebar-dark-primary elevation-4">
   
-    <a href="index3.html" class="brand-link" id="logo">
-      <img src="assets/img/logoNotep.png" width="25px" alt="Notep Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-light">Notep Consulting</span>
+    <a class="brand-link" id="logo">
+      <img src="../assets/img/logo_camnafaw.jpg" width="25px" alt="CAMNAFAW Logo" class="brand-image elevation-3" style="opacity: .8">
+      <span class="brand-text font-weight-light">CAMNAFAW</span>
     </a>
-  
-    <div class="sidebar" id="userActions">
+
+
+    <div class="sidebar" id="userActions" >
       <!-- Identité du user en dessous du logo haut gauche-->
-      <div class="user">
+      <div class="user" >
         <div class="image text-center">
           <img src="assets/img/avatar.png" class="img-circle elevation-2" alt="User Image">
         </div>
@@ -164,7 +166,10 @@
       <!-- Menu gauche-->
       <app-menu [langueParent]=langueChoisi></app-menu>
     </div>
+
   </aside>
+
+
     <!-- panneau central -->
 <div class="content-wrapper">
    <!-- barre en dessous du menu horizontal-->
@@ -172,9 +177,6 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <!--<h1 class="m-0">
-            {{"accueil.central-panel.title" | translate}}
-          </h1>-->
         </div>
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
@@ -191,53 +193,14 @@
       </div>
     </div>
   </div>
-  
+
   <!-- zone d'affichage principale-->
   <section class="content">
-    <div class="container-fluid">      
-      
+    <div class="container-fluid">
+
       <div class="row">
         <div class="col-md-12">
           <!-- premier encart détachable -->
-          <!--<div class="card">
-            <div class="card-header">
-              <h5 class="card-title">
-                {{"accueil.main-area.encart.title" | translate}}
-              </h5>
-              <div class="card-tools">
-                <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                  <i class="fas fa-minus"></i>
-                </button>
-                <div class="btn-group">
-                  <button type="button" class="btn btn-tool dropdown-toggle" data-toggle="dropdown">
-                  <i class="fas fa-wrench"></i>
-                  </button>
-                  <div class="dropdown-menu dropdown-menu-right" role="menu">
-                    <a href="#" class="dropdown-item">
-                      {{"accueil.main-area.encart.dropdown-list.link1" | translate}}
-                    </a>
-                    <a href="#" class="dropdown-item">
-                      {{"accueil.main-area.encart.dropdown-list.link2" | translate}}
-                    </a>
-                    <a href="#" class="dropdown-item">
-                      {{"accueil.main-area.encart.dropdown-list.link3" | translate}}
-                    </a>
-                    <a class="dropdown-divider"></a>
-                    <a href="#" class="dropdown-item">
-                      {{"accueil.main-area.encart.dropdown-list.link4" | translate}}
-                    </a>
-                </div>
-
-                  <button class="btn btn-navbar" type="button" data-widget="navbar-search">
-                    <i class="fas fa-times"></i>
-                  </button>
-                </div>
-                <button type="button" class="btn btn-tool" data-card-widget="remove">
-                  <i class="fas fa-times"></i>
-                </button>
-              </div>
-            </div>
-          </div>-->
           <div class="card-body">
             <router-outlet></router-outlet>
           </div>
@@ -249,7 +212,7 @@
 
 
 <aside class="control-sidebar control-sidebar-dark" [ngClass]="{'control-sidebar-light': toggle, 'control-sidebar-dark': !toggle}">
-  <label class="m-2" for="language">{{"langue.libelle" | translate}} 
+  <label class="m-2" for="language">{{"langue.libelle" | translate}}
     <select name="language" id="language" (change)="valeurChange($event)">
       <option *ngFor="let langue of langues" [value]="langue">{{ langue }}</option>
     </select><br>
@@ -264,6 +227,9 @@
       <mat-icon>bedtime</mat-icon>
     </mat-toolbar>
   </p>
+  <div id="ticketCourant">
+    <app-ticket-courant></app-ticket-courant>
+  </div>
 </aside>
 
 

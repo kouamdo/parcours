@@ -1,52 +1,60 @@
 <div id="mainSection">
-    <div class="card block">
-        <div class="card-header pt-4 pb-4 entete">{{ titre }}</div>
+    <div class="card block" id="top2">
+        <div class="card-header" class="entete pt-4 pb-4 ">{{ titre }}</div>
         <div class="card-body">
             <form [formGroup]="forme" (ngSubmit)="onSubmit(forme.value)" *ngIf="forme" >
                 <div class="">
                     <div class="">
-                        <div class="form-group mt-5 mb-5">
+                        <div class="form-group">
                             <div>
                                 <div class="champs">
                                     <label for="nom" class="label">
-                                        libelle
+                                        {{'services.form.label1' | translate}} <span style="color: red;" aria-label="required">*</span>
                                     </label>
-                                    <input type="text" formControlName="libelle" name="libelle" id="libelle"  placeholder="libelle"  class="form-control" required>
+                                    <input type="text" formControlName="libelle" name="libelle" id="libelle"  placeholder="{{'services.form.label1' | translate}}"  class="form-control" required>
                                 </div>
                                 <div  *ngIf="submitted && f['libelle'].errors"  class="alert alert-danger" >
-                                    <div *ngIf="f['libelle'].errors['required']">Le libelle est obligatoire.</div>
+                                    <div *ngIf="f['libelle'].errors['required']">{{'services.form.text1' | translate}}</div>
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group mt-5 mb-5">
+                        <div class="form-group ">
                             <div>
                                 <div class="champs">
                                     <label for="etat" class="label" >
-                                        etat
+                                        {{'services.form.label2' | translate}}
                                     </label>
-                                    <input  type="text" formControlName="etat"  name="etat" id="etat" placeholder="etat" value="" required class="form-control">
-                                </div>
-                                <div  *ngIf="submitted && f['etat'].errors"  class="alert alert-danger" >
-                                    <div *ngIf="f['etat'].errors['required']">La date de naissance est obligatoire.</div>
+                                    <p class="w-100 d-flex align-items-center choix" >
+                                    <input  type="checkbox" checked value="true" formControlName="etat" class="form-control" name="etat" id="etat" placeholder="" >
+                                  </p>
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group mt-5 mb-5">
+                        <div class="form-group">
+                          <div>
+                              <div class="champs">
+                                  <label for="localisation" class="label">
+                                    {{'services.form.label3' | translate}}
+                                  </label>
+                                  <input type="text" formControlName="localisation" name="localisation" id="localisation"  placeholder="{{'services.form.label3' | translate}}"  class="form-control" required>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="form-group">
+                        <div>
                             <div class="champs">
-                                <label  for="dateDerniereModification"  class="label" >
-                                    date derniere modification
+                                <label for="description" class="label">
+                                  {{'services.form.label4' | translate}}
                                 </label>
-                                <input type="date" formControlName="dateDerniereModification" name="dateDerniereModification" id="dateDerniereModification" placeholder="date derniere modification" class="form-control" >
-                            </div>
-                            <div  *ngIf="submitted && f['dateDerniereModification'].errors"  class="alert alert-danger" >
-                                <div *ngIf="f['dateDerniereModification'].errors['required']">La date de naissance est obligatoire.</div>
+                                <input type="text" formControlName="description" name="description" id="description"  placeholder="{{'services.form.label4' | translate}}"  class="form-control" required>
                             </div>
                         </div>
                     </div>
+                    </div>
                 </div>
                 <div class="actionButton">
-                    <button class="btn" routerLink="../list-services">Retour</button>
-                    <button type="submit" class="btn">{{btnLibelle}}</button>
+                    <button class="btn" routerLink="../list-services"><i class="fa fa-reply mr-1" aria-hidden="true"></i>{{'lists.button2' | translate}}</button>
+                    <button type="submit" class="btn btnValidation">{{btnLibelle}}</button>
                 </div>
             </form>
         </div>

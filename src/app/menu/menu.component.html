@@ -1,17 +1,17 @@
 <nav class="mt-2" >
-    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="true">
         <li *ngFor="let menu of fonctionnalites"  class="nav-item {{ menu.actif }}">
             <a href="#" class="nav-link">
                 <i class="nav-icon {{ menu.icone }}"></i>
                 <p>
-                    {{ menu.fonction }} 
+                    {{ menu.fonction}}
                     <i class="right fas fa-angle-left"></i>
                 </p>
             </a>
-            <ul class="nav nav-treeview">
+            <ul class="nav nav-treeview ml-1">
                 <li class="nav-item" *ngFor="let elt of menu.elements">
                     <a class="nav-link" routerLink="{{ elt.lien }}" routerLinkActive="activeLinkCSS" >
-                        <span><i class="far fa-circle nav-icon"></i></span>
+                        <span><i class="far fa-circle fa-sm"></i></span>
                         <p>
                             {{elt.nom}}
                         </p>

@@ -1,0 +1,177 @@
+*{
+    clear: both;
+}
+#mainSection{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    flex-direction: column;
+    margin: auto;
+    width: 70%;
+}
+.form-control{
+    border: none;
+    box-shadow: 0 0 2px rgb(220, 220, 220);
+    height: 35px;
+}
+.champs{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin: 10px 0;
+    label{
+        width: 300px;
+        font-weight: normal;
+    }
+}
+.actionButton{
+    clear: both;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    button{
+        background-color: #1473e6;
+        color: white;
+    }
+}
+.tableBlock{
+    width: 100%;
+    div{
+        width: 100%;
+    }
+    table{
+        .actions{
+            font-size: 12px;
+        }
+    }
+}
+.actions button{
+    font-size: 10px;
+}
+.result{
+    width: 100%;
+}
+.sarchBlock{
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+}
+.result h2{
+    opacity: 0.6;
+}  
+.example-full-width {
+    // height: 42px !important;
+    border: 2px solid #28a745;
+}
+#tableList{
+    margin: 10px 0 30px 0;
+}
+mat-form-field{
+    padding: 0;
+    margin: 0;
+    color: #28a745;
+    line-height: 0;
+    box-sizing: initial;
+    // width: 50px;
+    mat-label{
+        height: 20px;
+        padding: 0;
+        margin: 0;
+    }
+    input{
+        padding: 0;
+        border: none;
+        margin: 0;
+        // height: 25px;
+    }
+}
+.mat-header-cell {
+    padding-top: 0;
+    width: 20%;
+}
+.mat-cell {
+    height: 0;
+}
+.mat-row, .mat-cell {
+    padding: 2px 0 0 0;
+    margin: 0;
+}
+.mat-form-field-infix {
+    padding: 0;
+    border-top: none;
+}
+.mat-form-field-wrapper {
+    padding-bottom: 0 !important;
+}
+.containHead{
+    padding: 1% 0;
+}
+.containCell{
+    padding-top: 20px;
+}
+td{
+    font-size: 13px;
+}
+th{
+    background-color: rgba(40, 167, 69, 0.2);
+    color: #28a745 !important;
+    width: max-content;
+    text-align: center;
+}
+.newAttSection{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    label{
+        width: fit-content;
+        white-space: nowrap;
+        margin-right: 20px;
+    }
+    input{
+        font-size: 12px;
+    }
+    #ordreCategorie{
+        width: 50px;
+    }
+}
+.controlObligatoire{
+    input{
+      background-color: #1473e6;
+    }
+    label{
+        font-weight: normal;
+    }
+    
+}
+@media screen and (max-width: 1200px) {
+    .title h2{
+        font-size: 15px;
+    }  
+    .example-full-width {
+        border: 2px solid #28a745;
+    }
+}
+@media screen and (max-width: 1100px) {
+    .title h2{
+        font-size: 15px;
+    } 
+}
+@media screen and (max-width: 1060px) {
+    td{
+        font-size: 12px;
+    }
+}
+@media screen and (max-width: 910px) {
+    .listAttr{
+        width: 100%;
+    }
+}
+@media screen and (max-width: 830px) {
+    .listAttr{
+        width: 100%;
+    }
+}

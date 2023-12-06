@@ -1,0 +1,152 @@
+.mainBlock{
+    background-color: #ffffff;
+    padding-top: 5px;
+    
+}
+h1{
+    text-align: center;
+    text-transform: uppercase;
+    background-color: #d3d3d3;
+    color: rgba(49, 149, 139, 0.7);
+    border-radius: 5px 5px 0 0;
+    box-shadow: 0 0 2px #28a745;
+    padding: 10px 0;
+    margin: 0 5px;
+    font-weight: 600;
+    font-size: 20px;
+}
+h3{
+    margin-left: 18px;
+    color: #a29f9f;
+    font-weight: 400;
+    text-transform: capitalize;
+}
+#titre{
+    margin: 20px 0;
+}
+.infos{
+    padding: 0 4px;
+    padding-bottom: 10px;
+}
+.infos p{
+    margin: 40px 0;
+    font-weight: 300;
+}
+.infos .title{
+    font-weight: normal;
+    text-transform: uppercase;
+}
+.block{
+    display: flex;
+    align-items: start;
+    justify-content: start;
+    width: 100%;
+    background-color: #28a7452b;
+    flex-wrap: wrap;
+    padding: 10px;
+}
+.block .inputBlock{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    width: fit-content;
+    margin: 2px 0;
+    padding: 5px;
+}
+.block .inputBlock label{
+    margin-right: 10px;
+    text-transform: capitalize;
+    font-weight: 400;
+    margin-left: 5px;
+    position: relative;
+    top: 8px;
+    opacity: 0.8;
+}
+.block .inputBlock label, .block .inputBlock input, .block .inputBlock textarea{
+    font-size: 13px;
+}
+.titre{
+    font-weight: 400 !important;
+    padding: 20px 0 2px 0 !important;
+}
+.button-control{
+    padding: 5px 15px;
+    font-size: 10px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+    color: #fff;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 2px #999;
+    opacity: 0.8;
+    transition: ease 0.2s;
+
+}
+.button-control:hover{
+    opacity: 1;
+    transition: ease 0.2s;
+    transform: scale(1.05);
+
+}
+.boutonAppelEffet, .button-control:focus{
+    border-color: #fff;
+    box-shadow: 0 0 0 #fff;/*ombre sur le conteneur*/
+    animation: pulse 1.9s infinite;
+    font-weight: normal;
+}
+.button-options{
+    padding: 5px 15px;
+    font-size: 10px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+    color: #ffffff !important;
+    background-color: #c4c4c4;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 2px #d3d3d3;
+    transition: ease 0.2s;
+
+}
+.button-options:hover{
+    transition: ease 0.2s;
+    transform: scale(1.05);
+
+}
+@keyframes pulse {
+    to {
+        box-shadow: 0 0 0 8px rgba(255, 68, 0, 0.01);
+    }
+}
+@media screen and (max-width: 872px) {
+    .button-control{
+        font-size: 11px;
+
+    }
+}
+@media screen and (max-width: 640px) {
+    .button-control{
+        font-size: 10px;
+    }
+    h1{
+        font-size: 18px;
+    }
+    h3{
+        font-size: 13px;
+    }
+}
+@media screen and (max-width: 530px) {
+    .button-control{
+        font-size: 9px;
+    }
+    h1{
+        font-size: 15px;
+    }
+    h3{
+        font-size: 12px;
+    }
+}

@@ -1,0 +1,53 @@
+<div id="mainSection">
+  <div class="card block" id="top2">
+      <div class="card-header" class="entete  pt-4 pb-4"> {{'famille.header' | translate}}</div>
+      <div class="card-body">
+        <form [formGroup]="forme" (ngSubmit)="onSubmit(forme.value)" *ngIf="forme" >
+              <div class="">
+                  <div class="">
+                      <div class="form-group">
+                          <div>
+                              <div class="champs">
+                                  <label for="libelle" class="label">
+                                    {{'famille.table.title1' | translate}}<span style="color: red;" aria-label="required">*</span>
+                                  </label>
+                                  <input type="text" formControlName="libelle" name="libelle" id="libelle"  placeholder="{{'famille.table.title1' | translate}}"  class="form-control" required>
+                              </div>
+                              <div  *ngIf="submitted && f['libelle'].errors"  class="alert alert-danger" >
+                                  <div *ngIf="f['libelle'].errors['required']">{{'famille.form.text1' | translate}}</div>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="form-group" >
+                        <div>
+                            <div class="champs">
+                                <label for="etat" class="label" >
+                                  {{'famille.table.title3' | translate}}
+                                </label>
+                                <p class="w-100 d-flex align-items-center choix" >
+                                <input   type="checkbox" checked value="true"  formControlName="etat" class="form-control" name="etat" id="etat" placeholder="" >
+                              </p>
+                            </div>
+
+                        </div>
+                    </div>
+                      <div class="form-group">
+                          <div>
+                              <div class="champs">
+                                  <label for="description" class="label" >
+                                    {{'famille.table.title2' | translate}}
+                                  </label>
+                                  <input  type="text" formControlName="description" name="description" id="description" placeholder=" {{'famille.table.title2' | translate}}" class="form-control"  required  >
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <div class="actionButton">
+                  <button class="btn" routerLink="../list-familles">{{'famille.lists.button1' | translate}}</button>
+                  <button type="submit" class="btn btnValidation">{{btnLibelle}}</button>
+              </div>
+          </form>
+      </div>
+  </div>
+</div>

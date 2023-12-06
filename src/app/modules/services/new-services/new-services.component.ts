@@ -1,9 +1,11 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, MaxLengthValidator,MinLengthValidator,ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, MaxLengthValidator,MinLengthValidator,ReactiveFormsModule, Validators, FormControl } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { EMPTY, Observable } from 'rxjs';
 import { IService } from 'src/app/modele/service';
 import { ServicesService } from 'src/app/services/services/services.service';
+import {v4 as uuidv4} from 'uuid';
 
 @Component({
   selector: 'app-new-services',
@@ -15,16 +17,19 @@ export class NewServicesComponent implements OnInit {
   service : IService|undefined;
   forme: FormGroup;
   btnLibelle: string="Ajouter";
-  titre: string="Ajouter un nouveau service";
+  titre: string="Ajouter service";
   submitted: boolean=false;
 
-  constructor(private formBuilder:FormBuilder, private serviceService:ServicesService,private router:Router, private infosPath:ActivatedRoute) { 
+  initialDateDerniereModification = new FormControl(new Date());
+  initialDateAttribution = new FormControl(new Date());
+  initialDateFin = new FormControl(new Date());
+
+  constructor(private formBuilder:FormBuilder, private serviceService:ServicesService,private router:Router, private infosPath:ActivatedRoute, private datePipe: DatePipe) {
     this.forme = this.formBuilder.group({
       libelle: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
-      etat: ['Non assigne', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
-      dateDerniereModification: ['/', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
-      dateAttribution: ['/'],
-      dateFin: ['/']
+      etat:[true],
+      localisation:['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
+      description:['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]]
     })
   }
 
@@ -33,15 +38,14 @@ export class NewServicesComponent implements OnInit {
     if((idService != null) && idService!==''){
       this.btnLibelle="Modifier";
       this.titre="service à Modifier";
-      this.serviceService.getServiceById(Number(idService)).subscribe(x =>
+      this.serviceService.getServiceById(idService).subscribe(x =>
         {
-          this.service = x; console.log(this.service);
+          this.service = x;
           this.forme.setValue({
             libelle: this.service.libelle,
             etat: this.service.etat,
-            dateDerniereModification: this.service.dateDerniereModification,
-            dateAttribution: this.service.dateAttribution,
-            dateFin:  this.service.dateFin
+            localisation: this.service.localisation,
+            description: this.service.description
           })
       });
     }
@@ -50,31 +54,31 @@ export class NewServicesComponent implements OnInit {
   get f(){
     return this.forme.controls;
   }
+
   onSubmit(serviceInput:any){
     this.submitted=true;
     //Todo la validation d'element non conforme passe
     if(this.forme.invalid) return;
 
     let serviceTemp : IService={
-      id: Number(9),
+      id: uuidv4(),
       libelle: serviceInput.libelle,
       etat: serviceInput.etat,
       dateDerniereModification: serviceInput.dateDerniereModification,
       dateAttribution: serviceInput.dateAttribution,
       dateFin: serviceInput.dateFin,
-      nombreTotalAttributions: serviceInput.nombreTotalAttributions
+      nombreTotalAttributions: serviceInput.nombreTotalAttributions,
+      localisation: serviceInput.localisation,
+      description: serviceInput.description
     }
-
 
     if(this.service != undefined){
-      serviceTemp.id = this.service.id  
+      serviceTemp.id = this.service.id
     }
+
     this.serviceService.ajouterService(serviceTemp).subscribe(
       object => {
         this.router.navigate(['/list-services']);
-      },
-      error =>{
-        console.log(error)
       }
     )
   }

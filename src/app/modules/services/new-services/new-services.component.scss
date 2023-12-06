@@ -8,7 +8,7 @@
     width: 60%;
 }
 .entete{
-    background-color: #7ea97e;
+    background-color: #28a745;
     color: white;
     text-align: center;
     font-size: 22px;
@@ -35,7 +35,7 @@ select{
     border: none;
     box-shadow: 0 0 2px rgb(220, 220, 220);
     height: 24px;
-    background-color: #7ea97e63;
+    background-color: #28a74563;
     color: rgb(108, 108, 108);
     padding: 0 10px;
     border-radius: 5px;
@@ -45,10 +45,13 @@ select{
     align-items: center;
     justify-content: space-between;
     button{
-        background-color: #7ea97e;
+        background-color: #28a745;
         color: white;
         height: 30px;
         padding: 0 10px;
         font-size: 15px;
+    }
+    .btnValidation{
+        background-color: #28a745;
     }
 }

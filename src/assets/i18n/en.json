@@ -38,8 +38,24 @@
 
         }
     },
+    "lists":{
+        "title":"listing",
+        "text1": "Field Required",
+        "text2": "Field not Required",
+        "text3": "is a required field",
+        "button1":"Print",
+        "button2":"Back",
+        "button3":"Cancel",
+        "button4":"Previous",
+        "button5":"No action yet",
+        "button6":"validate",
+        "button7":"Edit",
+        "button8":"Delete",
+        "button9":"Add",
+        "button10":"Close"
+    },
     "patient":{
-        "text":"Patients retrouvé(e)s",
+        "title1":"Add patient",
         "search-bar":"search",
         "table":{
             "title1":"Name",
@@ -56,6 +72,170 @@
                 "link3":"View",
                 "link4":"Delete"
             }
+        },
+        "form":{
+            "text1":"Name is requied",
+            "text2":"Surname is requied",
+            "text3":"Birthday is requied",
+            "text4":"mail address is requied is requied"
+        }
+    },
+    "personnel":{
+        "title1":"Add staff",
+        "search-bar":"search",
+        "table":{
+            "title1":"Name",
+            "title2":"Surname",
+            "title3":"Birthday",
+            "title4":"Sex",
+            "title5":"Email",
+            "title6":"Date d'entrée",
+            "title7":"Phone",
+            "title8":"Date De Sortie",
+            "title9":"Actions",
+            "actions":{
+                "link2":"Update",
+                "link3":"View",
+                "link4":"Delete"
+            }
+        },
+        "form":{
+            "text1":"Name is requied",
+            "text2":"Surname is requied",
+            "text3":"Birthday is requied",
+            "text4":"email address is requied is requied",
+            "text5":"Day of entry is required."
+        }
+    },
+    "services":{
+      "title1":"Add service",
+        "table":{
+            "title1":"Libel",
+            "title2":"Status",
+            "title3": "location",
+            "title4": "description"
+        },
+        "form":{
+            "label1":"Libel",
+            "label2":"Status",
+            "label3": "location",
+            "label4": "description",
+            "text1":"Libel is requied",
+            "text2":"Status is requied",
+            "text3":"the Last modification's date is requied"
+        }
+    },
+    "tickets":{
+        "table":{
+            "title1":"Id",
+            "title2":"Unique Id",
+            "title3":"last modification's Date ",
+            "title4":"Id in the queue",
+            "title5":"Id person",
+            "title6":"Status"
+        },
+        "form":{
+            "label1":"Service's name : ",
+            "label2":"ticket unique id : ",
+            "label3":"Date : ",
+            "label4":"Recipient's name : ",
+            "label5":"ticket : ",
+            "label6":"Name : ",
+            "text1":"Customers management software"
+        },
+        "panel":{
+            "text1":"Here are all news Here are all news Here are all news Here are all news"
+        }
+    },
+    "attributs":{
+        "title1":"Add attribut",
+        "table":{
+            "title1":"title",
+            "title2":"Description",
+            "title3":"Status",
+            "title4":"Allocation's Date",
+            "title5":"Modification's Date",
+            "title6":"Type",
+            "title7":"Order",
+            "title8":"Is attribut required ?",
+            "title9":"Defaut values ",
+            "title10":"Separeted values with a comma",
+            "title11": "Required ?"
+        },
+        "form":{
+            "text1":"Title is required.",
+            "text2":"Description is required.",
+            "text3":"Status is requied",
+            "text4":"Type is required.",
+            "text5":"This field is required."
+        }
+    },
+    "missions":{
+        "title1":"Add mission",
+        "table":{
+            "title1":"Label",
+            "title2":"Description",
+            "title3":"Statut",
+            "title4":"Allocation's Date",
+            "title5":"Modification's Date",
+            "title6":"Service"
+        },
+        "form":{
+            "text1":"Title is required.",
+            "text2":"Description is required.",
+            "text3":"Statut is required.",
+            "text4":"Last modification's date is required.",
+            "text5":"Type is required.",
+            "text6":"Service is required",
+            "text7":"Selectionner un service"
+        },
+        "execution":{
+            "text1":"WHAT IS YOUR CHOISE ?",
+            "text2":"Document's choise for Mission ",
+            "text3":"No Document Available For Mission"
+        }
+    },
+    "document":{
+        "title3":"Add document",
+        "search-bar":"Rechercher",
+        "title1":"View resuts",
+        "title2":"Select attributs of this category",
+        "table":{
+            "title0":"Id",
+            "title1":"Title",
+            "title2":"Description",
+            "title3":"Missions",
+            "title4":"Attributs",
+            "title5":"Select missions",
+            "title6":"Select attributs",
+            "title7":"Values",
+            "title8":"Category's name",
+            "title9":"Enter category's name",
+            "title10":"Order",
+            "title11":"Enter ordre's category",
+            "title12":"Create categories",
+            "title13":"Attribut's range",
+            "title14":"Category's range",
+            "title15":"Categories",
+            "title16":"libelle attribut",
+            "title17":"Preconisations"
+        },
+        "form":{
+            "text1":"Title is required.",
+            "text2":"Description is required.",
+            "text3":"Missions are required.",
+            "text4":"Attributs are required."
+        },
+        "view":{
+            "title":"Document's Model",
+            "text1":"missions's list of document",
+            "text2":"attributs's list of document",
+            "text3":"attributs's list by categories"
+        },
+        "exemplaire":{
+            "title":"Document's instance ",
+            "title2":"Old datas",
+            "text1":"composition of this instance"
         }
     },
     "theme":{
@@ -63,5 +243,205 @@
     },
     "langue":{
         "libelle":"langages"
+    },
+    "famille":{
+      "header":"Add family",
+      "table":{
+        "title1":"Libel",
+        "title2":"Description",
+        "title3":"State"
+      },
+      "form":{
+        "text1":"Field Required",
+        "text2":"Field Required"
+    },
+    "lists":{
+      "button1":"Feedback"
+    },
+    "title":"Family Listing",
+    "search-bar":"Research",
+    "table1":{
+        "title1":"Libel",
+        "title2":"Description",
+        "title3":"state",
+        "title4":"Actions",
+        "actions":{
+          "link1":"Orienter",
+          "link2":"Update",
+          "link3":"View",
+          "link4":"Delete"
+        }
+    }
+  },
+    "ressource":{
+    "table":{
+        "title":"Add Resource",
+        "title1":" Libel",
+        "title2":"State",
+        "title3":"Quantity",
+        "title4":"Unit",
+        "title5":"Price",
+        "title6":"Category",
+        "title7":"Caracteristic"
+
+    },
+    "form":{
+        "text1":"Field Required",
+        "text2":"Field Required",
+        "text4":"liter",
+        "text5":"kg",
+        "text6":"m²",
+        "text7":"quintals",
+        "text8":"Field Required",
+        "text9":"Field Required",
+        "text11":"Select a Unit",
+        "text12":"soft",
+        "text13":"hard",
+        "text14":"light",
+        "text15":"Select your Characteristics"
+    },
+    "lists":{
+        "button2":"Retour"
+    },
+    "title":" Resource Listing",
+    "search-bar":"Research",
+    "table2":{
+        "title1":"Add a New Resource",
+        "title2":"id",
+        "title3":"libel",
+        "title4":"State",
+        "title5":" Quantity",
+        "title6":" Unit",
+        "title7":"price",
+        "title9": "Caracteristic",
+        "title10": "Actions "
+    }
+},
+
+"role":{
+  "header":"Add Role",
+  "table":{
+    "title1":"Title",
+    "title2":"title",
+    "title3":"State",
+    "title4":"Description",
+    "title5":"description"
+  },
+  "form":{
+    "text1":"Field Required"
+},
+"lists":{
+  "button1":"Cancel",
+  "btnLibelle":"Add"
+},
+"title":"Role listing",
+"search-bar":"Research",
+"table1":{
+    "title1":"Title",
+    "title2":"Description",
+    "title3":"State",
+    "title4":"Actions"
+
+}
+    },
+    "preconisation":{
+        "title1":"Add preconisation",
+        "form":{
+            "title1":"Select preconisations"
+        },
+        "table":{
+            "title1":"Label",
+            "title2":"Status",
+            "title3":"Type",
+            "title4":"View more infos"
+        },
+        "view":{
+            "text1":"Preconisations of this document"
+        }
+    },
+    "distributeur": {
+      "table": {
+        "title": "Add Distributor",
+        "title1": "Social Reason ",
+        "title2": "state",
+        "title3": "Address",
+        "title4": "phone",
+        "title5": "Email"
+      },
+      "form": {
+        "text1": "Field Required",
+        "text2": "Field Required"
+      },
+      "lists": {
+        "button1": "Cancel"
+      },
+      "title": "Distributor listing ",
+      "search-bar": "Research",
+      "table2": {
+        "title1": "Socialreason ",
+        "title2": "address",
+        "title3": "state",
+        "title4": "phone",
+        "title5": "Email",
+        "title9": "Actions "
+      }
+    },
+    "precomvt": {
+      "header": "New Préconisation",
+      "header1": "Assign Families",
+      "header2": "Assign Resource",
+      "table": {
+        "title1": "label",
+        "title2": "State",
+        "title3": "Type",
+        "title4": "Family",
+        "title5": "Resource ",
+        "title6": "Max Quantity",
+        "title7": "Enter maximum quantity",
+        "title8": "Min Quantity",
+        "title9": "Enter minimum quantity",
+        "title10": "Max Amount",
+        "title11": "Enter minimum Amount",
+        "title12": "Min Amount ",
+        "title13": "Enter maximum Amount",
+        "title14": "Fournisseurs ",
+        "title15": "Back",
+        "title16": "Cancel",
+        "title17": "Family",
+        "title18": "Resource",
+        "title19": "Stage",
+        "title20": "Type:",
+        "title21": "Max Qtity :",
+        "title22": "Min Qtity : ",
+        "title23": "Max Amount : ",
+        "title24": "Min Amount : ",
+        "title25": "Save"
+      },
+      "title": "Listing PrecoMvt",
+      "search-bar": "Search",
+      "table2": {
+        "title1": "libel",
+        "title2": "state",
+        "title3": "typ",
+        "title4": "Actions"
+      },
+      "title0": "table of operations carried out",
+      "table3": {
+        "title1": "Libel",
+        "title2": "State",
+        "title3": "Typ",
+        "title4": "Resource",
+        "title5": "Max Quantity",
+        "title6": "Min Quantity",
+        "title7": "Amount Max",
+        "title8": "Min Amount",
+        "title9": "Distributor",
+        "title10": "families",
+        "title11": "Max Quantity",
+        "title12": "Min Quantity",
+        "title13": "Amount Max",
+        "title14": "Min Amount",
+        "title15": "Distributor"
+      }
     }
 }

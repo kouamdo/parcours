@@ -1,0 +1,26 @@
+<div id="mainSection" class="">
+    <div class="w-100">
+        <div class="w-100">
+            <div class="w-100">
+                <div class="block w-100 card">
+                        <div class="blockNom">
+                            <p>
+                                <span>{{'tickets.form.label6' | translate}}</span>
+                                <span id="nom">{{this.patientRecent?.nom}}</span> 
+                            </p>
+                            <p class="numero">
+                                <span>N<sup>o</sup>{{'tickets.form.label5' | translate}}</span>
+                                <span id="numero">{{ticketRecent?.idUnique}} </span>                         
+                            </p> 
+                        </div>
+                        <div class="options pb-2">
+                            <button class="btn" (click)="ticketTraite()">traiter</button>
+                            <button class="btn boutonAppel" [ngClass]="{'boutonAppelEffet':ticketRecent?.statut === statutTicketAttente}" (click)="ticketAttente()">Appel</button>
+                            <button class="btn" (click)="ticketRenvoye()" title="Renvoyer dans la file">Renvoyer</button>
+                        </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

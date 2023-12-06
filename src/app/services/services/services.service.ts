@@ -15,7 +15,7 @@ export class ServicesService {
     return this.http.get<IService []>('api/services').pipe(map(x=>x));
   }
 
-  getServiceById(id:number):Observable<IService >{
+  getServiceById(id:string):Observable<IService >{
     return this.getAllServices().pipe(
       map(x=>
         {
@@ -23,6 +23,14 @@ export class ServicesService {
         })
     );
   }
+  getServiceByLibelle(libelle:string): Observable<IService[]> {
+   return this.http.get<IService[]>('api/services').pipe(
+     map(x=>
+       {
+         return x.filter(s=> s.libelle.toLowerCase().startsWith(libelle))
+       })
+   );        
+ }
 
   ajouterService(service:IService )
   {

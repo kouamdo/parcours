@@ -1,9 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup,MaxLengthValidator,MinLengthValidator,ReactiveFormsModule, Validators  } from '@angular/forms';
+import { DatePipe } from '@angular/common';
+import { Component, OnInit} from '@angular/core';
+import { FormBuilder, FormControl, FormGroup,MaxLengthValidator,MinLengthValidator,ReactiveFormsModule, Validators  } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { EMPTY, Observable } from 'rxjs';
+import { EMPTY, isEmpty, Observable } from 'rxjs';
 import { PatientsService } from 'src/app/services/patients/patients.service';
 import {IPatient} from '../../../modele/Patient';
+import {v4 as uuidv4} from 'uuid';
+
 
 @Component({
   selector: 'app-new-patient',
@@ -17,8 +20,11 @@ export class NewPatientComponent implements OnInit {
   btnLibelle: string="Ajouter";
   titre: string="Ajouter un nouveau Patient";
   submitted: boolean=false;
+  initialDate = new FormControl(new Date());
+
   //TODO validation du formulaire. particulièrment les mail; les dates
-  constructor(private formBuilder:FormBuilder, private patientService:PatientsService,private router:Router, private infosPath:ActivatedRoute) { 
+  
+  constructor(private formBuilder:FormBuilder, private patientService:PatientsService,private router:Router, private infosPath:ActivatedRoute, private datePipe: DatePipe) { 
     this.forme =  this.formBuilder.group({
       nom: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
       prenom: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
@@ -28,34 +34,31 @@ export class NewPatientComponent implements OnInit {
       dateNaissance: ['1980-01-01', Validators.required],
       telephone: [''],
       adresse: ['']
-    })
-    
+    })    
   }
 
   ngOnInit() {
     let idPatient = this.infosPath.snapshot.paramMap.get('idPatient');
-    console.log("idPatient :" + idPatient);
     if((idPatient != null) && idPatient!==''){
-      //formatDate : FormatDatePipe; 
-      //  formatDate.transform("");
+
       this.btnLibelle="Modifier";
       this.titre="Patient à Modifier";
+      
       //trouver un autre moyen d'initialiser avec des valeurs
-      this.patientService.getPatientById(Number(idPatient)).subscribe(x =>
-        {
-          this.patient = x; console.log(this.patient);
-          this.forme.setValue({
-            nom: this.patient.nom,
-            prenom: this.patient.prenom,
-            sexe: this.patient.sexe,
-            mail: this.patient.mail,
-            dateNaissance:  this.patient.dateNaissance,
-            telephone: this.patient.telephone,
-            adresse: this.patient.adresse
-          })   
-        });
-    }
-    
+      this.patientService.getPatientById(idPatient).subscribe(x =>
+      {
+        this.patient = x;
+        this.forme.setValue({
+          nom: this.patient.nom,
+          prenom: this.patient.prenom,
+          sexe: this.patient.sexe,
+          mail: this.patient.mail,
+          dateNaissance: this.datePipe.transform(this.patient.dateNaissance,'yyyy-MM-dd'), // je change le format de la date de naissance pour pouvoir l'afficher dans mon input type date
+          telephone: this.patient.telephone,
+          adresse: this.patient.adresse
+        })
+      });
+    }    
   }
 
   get f(){
@@ -68,7 +71,7 @@ export class NewPatientComponent implements OnInit {
     if(this.forme.invalid) return;
 
     let patientTemp : IPatient={
-      id: Number(9),
+      id: uuidv4(),
       nom:patientInput.nom,
       prenom:patientInput.prenom,
       sexe:patientInput.sexe,
@@ -77,7 +80,7 @@ export class NewPatientComponent implements OnInit {
       telephone:patientInput.telephone,
       dateNaissance:patientInput.dateNaissance
     }
-
+    patientTemp.dateNaissance = this.initialDate.value!
 
     if(this.patient != undefined){
       patientTemp.id = this.patient.id  
@@ -85,11 +88,7 @@ export class NewPatientComponent implements OnInit {
     this.patientService.ajouterPatient(patientTemp).subscribe(
       object => {
         this.router.navigate(['/list-patients']);
-      },
-      error=>{
-        console.log(error)
       }
     )
   }
-
 }

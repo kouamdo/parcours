@@ -1,0 +1,118 @@
+.mainBlock{
+  padding-top: 5px;
+  width: 50%;
+  margin: auto;
+}
+.entete{
+  text-align: center;
+  background-color: #28a745;
+  border-radius: 5px;
+  box-shadow: 0 0 2px #28a745;
+  margin: 0 5px;
+  padding: 10px 0;
+  h1{
+      margin: auto;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.7);
+      position: relative;
+      width: 100%;
+  }
+}
+.entete .lien{
+  position: absolute;
+  left: 5px;
+  transition: ease 0.2s;
+}
+.entete .lien:hover{
+  border: solid 1px #ffffff9a;
+  padding: 0 10px;
+  transition: ease-in-out 0.2s;
+}
+#titre{
+  margin: 20px 0;
+}
+.entete{
+  display: flex;
+  align-items: center;
+}
+.hoverBlock{
+  display: flex;
+  position: absolute;
+  right: 40px;
+}
+.hoverBlock:hover{
+  #description{
+      display: flex;
+      align-items: flex-start;
+      justify-content: flex-start;
+      width: 400px;
+      position: absolute;
+      right: 0px;
+      top: 50px;
+      font-size: 12px;
+      background-color: #28a7450e;
+      padding: 10px;
+      padding-top: 0;
+      p{
+          margin: 0;
+          margin-left: 5px;
+          border-radius: 5px;
+      }
+      .title{
+          font-weight: normal;
+          text-transform: uppercase;
+          white-space: nowrap;
+      }
+  }
+}
+.hoverBlock .infoBuble{
+  width: fit-content;
+  height: fit-content;
+  border-radius: 50%;
+  background-color: #ffffff;
+}
+.hoverBlock .infoBuble i{
+  font-size: 20px;
+}
+#description{
+  display: none;
+}
+.infos{
+  padding: 0 20px;
+  padding-bottom: 10px;
+}
+.options {
+  padding: 0 10px;
+  padding-bottom: 10px;
+ 
+}
+.options button {
+ margin-left: 10px;
+
+}
+.infos p{
+  margin: 40px 0;
+  font-weight: 300;
+}
+.infos .title{
+  font-weight: normal;
+  text-transform: uppercase;
+}
+th{
+  background-color: #28a7452f;
+  color: #28a745;
+}
+.actionButton{
+    clear: both;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    button{
+        background-color: red;
+        color: white;
+        opacity: 0.7;
+        &:hover{
+          opacity: 0.8;
+        }
+    }
+}
