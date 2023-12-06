@@ -18,10 +18,10 @@
                     <div class="contentBlock">
                         <div formArrayName="_exemplaireDocument" class="inputBlock" *ngFor="let attributParCategorie of attributParCategorie.listAttributsParCategories; let i = index" [ngClass]="{'inputSpecial':(attribut.type == TypeRadio) || (attribut.type == TypeBoolean)}"> 
                             <label [for]="attributParCategorie.attribut.id" class="form-label">{{attributParCategorie.attribut.titre}}<span *ngIf="attributParCategorie.obligatoire == true"> *</span></label>
-                            <input  *ngIf="(attribut.type != 'textarea') && (attribut.type != TypeRadio) && (attribut.type != TypeBoolean)" [formControlName]="incrementeCompteur(compteur,attributParCategorie)" [type]="attribut.type" class="form-control" placeholder="entrer la valeur ici">
-                            <textarea *ngIf="attribut.type == 'textarea'" class="form-control"  [formControlName]="incrementeCompteur(compteur,attributParCategorie)" placeholder="entrer la valeur ici"></textarea>
-                            <select class="form-control" *ngIf="(attribut.type == TypeRadio) || (attribut.type == TypeBoolean)" [formControlName]="incrementeCompteur(compteur,attributParCategorie)">
-                                <option value="{{val.trim()}}" *ngFor="let val of attribut.valeursParDefaut.trim().split(',')" >{{val}}</option>
+                            <input  *ngIf="(attributParCategorie.attribut.type != 'textarea') && (attributParCategorie.attribut.type != TypeRadio) && (attributParCategorie.attribut.type != TypeBoolean)" [formControlName]="incrementeCompteur(compteur,attributParCategorie)" [type]="attributParCategorie.attribut.type" class="form-control" placeholder="{{'lists.text4' | translate}}">
+                            <textarea *ngIf="attributParCategorie.attribut.type == 'textarea'" class="form-control"  [formControlName]="incrementeCompteur(compteur,attributParCategorie)" placeholder="{{'lists.text4' | translate}}"></textarea>
+                            <select class="form-control" *ngIf="(attributParCategorie.attribut.type == TypeRadio) || (attributParCategorie.attribut.type == TypeBoolean)" [formControlName]="incrementeCompteur(compteur,attributParCategorie)">
+                                <option value="{{val.trim()}}" *ngFor="let val of attributParCategorie.attribut.valeursParDefaut.trim().split(',')" >{{val}}</option>
                             </select>
                         </div>
                     </div>
@@ -33,11 +33,137 @@
                     <div formArrayName="_controlsSupprime" *ngFor="let attributSupprime of objetCleValeurSupprime" class="inputBlock" [ngClass]="{'inputSpecial':(attributSupprime.key.type == TypeRadio) || (attributSupprime.key.type == TypeBoolean)}"> 
                         <label class="form-label">{{attributSupprime.key.titre}}</label>
                         
-                        <input *ngIf="(attributSupprime.key.type != 'textarea') && (attributSupprime.key.type != TypeRadio) && (attributSupprime.key.type != TypeBoolean)" [formControlName]="incrementeNumerateur(numerateur,attributSupprime.key)" [type]="attributSupprime.key.type" class="form-control" placeholder="entrer la valeur ici" [required]="true">
-                        <textarea *ngIf="attributSupprime.key.type == 'textarea'" class="form-control"  [formControlName]="incrementeNumerateur(numerateur,attributSupprime.key)" placeholder="entrer la valeur ici"></textarea>
+                        <input *ngIf="(attributSupprime.key.type != 'textarea') && (attributSupprime.key.type != TypeRadio) && (attributSupprime.key.type != TypeBoolean)" [formControlName]="incrementeNumerateur(numerateur,attributSupprime.key)" [type]="attributSupprime.key.type" class="form-control" placeholder="{{'lists.text4' | translate}}" [required]="true">
+                        <textarea *ngIf="attributSupprime.key.type == 'textarea'" class="form-control"  [formControlName]="incrementeNumerateur(numerateur,attributSupprime.key)" placeholder="{{'lists.text4' | translate}}"></textarea>
                         <select class="form-control" *ngIf="(attributSupprime.key.type == TypeRadio) || (attributSupprime.key.type == TypeBoolean)" [formControlName]="incrementeNumerateur(numerateur,attributSupprime.key)">
                             <option value="{{val.trim()}}" *ngFor="let val of attributSupprime.key.valeursParDefaut.trim().split(',')" >{{val}}</option>
                         </select>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="document.contientRessources == true" class="block card mt-2 pt-1" id="sectionAjoutPreco">
+                <div>
+                    <h3>{{'document.exemplaire.title3' | translate}} :</h3>
+                    <div class="searchBlock" [ngClass]="{'searchBlock': document.contientDistributeurs, 'searchBlockUnique': !document.contientDistributeurs}">
+                        <div *ngIf="document.contientDistributeurs == true" class="blockAutoDistributeurs">
+                            <form class="example-form">
+                                <h4>{{'preconisation.table.title6' | translate}}</h4>
+                                <mat-form-field class="example-full-width" appearance="fill">
+                                    <mat-label class="searchBar"></mat-label>
+                                    <input type="text" matInput [formControl]="distributeurControl" [matAutocomplete]="autoDistributeur">
+                                    <mat-autocomplete class="blockAutocomplate" #autoDistributeur="matAutocomplete" [displayWith]="displayDistributeurFn">
+                                        <mat-option class="options" *ngFor="let optionDistributeur of filteredDistributeurOptions" [value]="optionDistributeur" (click)="associerDistributeur(optionDistributeur)">
+                                            {{optionDistributeur.raisonSocial}}
+                                        </mat-option>
+                                    </mat-autocomplete>
+                                </mat-form-field>
+                                <button *ngIf="modificationDistributeurActive == true" class="btn btnModifierDistributeurBlock" type="button" (click)="modifierDistributeur()">{{'lists.button6' | translate}}</button>
+                            </form>
+                        </div>
+                        <div class="blockAutoRessources">
+                            <form class="example-form">
+                                <h4>{{'ressource.form.text16' | translate}}</h4>
+                                <mat-form-field class="example-full-width" appearance="fill">
+                                    <mat-label class="searchBar"></mat-label>
+                                    <input type="text" matInput [formControl]="ressourceControl" [matAutocomplete]="auto">
+                                    <mat-autocomplete class="blockAutocomplate" #auto="matAutocomplete" [displayWith]="displayFn">
+                                        <mat-option class="options" *ngFor="let option of filteredOptionsRessource" [value]="option" (click)="rechercherListingRessources(option); reinitialliseRessourceControl()">
+                                            {{option.libelle}}
+                                        </mat-option>
+                                    </mat-autocomplete>
+                                </mat-form-field>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- tableau listing des mouvements -->
+
+                <div class="card-body p-0 tableBlock" id="tableList">
+                    <div class='table-responsive w-100'>
+                        <table class='table table-sm table-centered table-striped table-bordered w-100' mat-table [dataSource]="dataSourceMouvements">
+
+                            <!-- libelle Column -->
+                            <ng-container matColumnDef="libelle">
+                                <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{'preconisation.table.title1' | translate}} </th>
+                                <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.ressource.libelle}} </td>
+                            </ng-container>
+
+                            <!-- quantite Column -->
+                            <ng-container matColumnDef="quantite">
+                                <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{'ressource.table2.title5' | translate}} </th>
+                                <td class="text-dark containCell" mat-cell *matCellDef="let element">
+                                  <label class="custom-control">
+                                      <input class="form-control" type="number" [(ngModel)]="element.quantite" [ngModelOptions]="{standalone: true}" value="true">
+                                  </label> 
+                                </td>
+                          </ng-container>
+
+                          <!-- unite Column -->
+                          <ng-container matColumnDef="unite">
+                                <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{'ressource.table.title4' | translate}} </th>
+                                <td class="text-dark containCell" mat-cell *matCellDef="let element">
+                                  {{element.ressource.unite}}
+                          </ng-container>
+
+                            <!-- description Column -->
+                            <ng-container matColumnDef="description">
+                                <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{'attributs.table.title2' | translate}} </th>
+                                <td class="text-dark containCell" mat-cell *matCellDef="let element">
+                                    <label class="custom-control">
+                                        <input class="form-control" type="text" [(ngModel)]="element.description" [ngModelOptions]="{standalone: true}" value="true">
+                                    </label> 
+                                </td>
+                            </ng-container>
+
+                            <!-- prix Column -->
+                            <ng-container *ngIf="document.affichagePrix == true" matColumnDef="prix">
+                                <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{'ressource.table2.title7' | translate}} </th>
+                                <td class="text-dark containCell" mat-cell *matCellDef="let element">
+                                    <label class="custom-control">
+                                        <input class="form-control" type="number" [(ngModel)]="element.prix" [ngModelOptions]="{standalone: true}" value="true">
+                                    </label> 
+                                </td>
+                            </ng-container>
+
+                            <!-- montant total Column -->
+                            <ng-container *ngIf="document.affichagePrix == true" matColumnDef="montant total">
+                                  <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{'ressource.table2.title10' | translate}}</th>
+                                  <td class="text-dark containCell" mat-cell *matCellDef="let element"><input type="number" value="{{element.quantite*element.prix}}" disabled> </td>
+                            </ng-container>
+
+                          <!-- distributeur Column -->
+                          <ng-container *ngIf="document.contientDistributeurs == true" matColumnDef="distributeur">
+                                <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{'preconisation.table.title5' | translate}} </th>
+                                <td class="text-dark containCell" mat-cell *matCellDef="let element; let i = index"><div class="modifierDistributeurBlock">{{element.distributeur?.raisonSocial}}<span role="button" title="{{'document.exemplaire.text3' | translate}}" (click)="InitialiseDistributeurControlPourModufication(i)"><i class="fa fa-pen-alt text-warning" aria-hidden="true"></i></span></div></td>
+                        </ng-container>
+
+                            <!-- Actions column -->
+                            <ng-container matColumnDef="actions">
+                                <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{"patient.table.title8" | translate}} </th>
+                                <td class="text-dark containCell" mat-cell *matCellDef="let element; let i = index">
+                                    <div class="actions">
+                                        <button class="btn p-0" [value]="element.id" title="clicker pour annuler la selection" (click)="retirerSelectionRessource(i)">
+                                            <i class="fa fa-trash text-danger" aria-hidden="true"></i>
+                                        </button>
+                                        <span><i class="fa fa-info-circle text-info ml-1" (click)="getRessourceId(element.id)" aria-hidden="true" title="{{'preconisation.table.title4' | translate}}"></i></span>
+                                    </div>
+                                </td>
+                            </ng-container>
+                            <tr mat-header-row *matHeaderRowDef="displayedRessourcesColumns"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayedRessourcesColumns;"></tr>
+                        </table>
+
+                        <!-- montant total -->
+                        <div class="total" *ngIf="document.affichagePrix == true">
+                            <span class="mr-2">{{'ressource.table2.title11' | translate}}</span>
+                            <input type="text" [value]="sommeMontants()" disabled>
+                        </div>
+
+                        <mat-paginator style="background-color: rgba(40, 167, 69, 0.79);" [pageSizeOptions]="[2, 5, 10, 20]"
+                                       showFirstLastButtons
+                                       aria-label="Select page of periodic elements">
+                        </mat-paginator>
                     </div>
                 </div>
             </div>

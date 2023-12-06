@@ -31,17 +31,11 @@
                                 <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.libelle}} </td>
                             </ng-container>
 
-                            <!-- description Column -->
-                            <ng-container matColumnDef="etat">
-                                <th class="text-dark containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'preconisation.table.title2' | translate}} </th>
-                                <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.etat}} </td>
+                            <!-- type Column -->
+                            <ng-container matColumnDef="type">
+                                    <th class="text-dark containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'preconisation.table.title3' | translate}} </th>
+                                    <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.type}}</td>
                             </ng-container>
-
-                          <!-- type Column -->
-                          <ng-container matColumnDef="type">
-                                <th class="text-dark containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'preconisation.table.title3' | translate}} </th>
-                                <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.type}}</td>
-                          </ng-container>
 
                             <!-- Actions column -->
                             <ng-container matColumnDef="actions">

@@ -23,7 +23,6 @@ export class ViewPrecomvtComponent implements OnInit {
     id: '',
     libelle:'',
      type: TypeMvt.Ajout,
-    etat:false,
     precomvtqte: [],
   }
 

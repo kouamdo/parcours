@@ -24,7 +24,6 @@ export class ModalChoixPreconisationsComponent implements OnInit {
   displayedPrecoMvtsColumns: string[] = [
     'actions',
     'libelle',
-    'etat',
     'type'
   ]; // structure du tableau presentant les preconisations
   

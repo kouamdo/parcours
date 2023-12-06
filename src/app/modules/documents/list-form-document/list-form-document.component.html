@@ -47,6 +47,12 @@
                         <td class="text-dark text-center containCell" mat-cell *matCellDef="let element"> {{element.description}} </td>
                     </ng-container>
                     
+                    <!-- etat Column -->
+                    <ng-container matColumnDef="etat">
+                        <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'services.form.label2' | translate}} </th>
+                        <td class="text-dark text-center containCell" mat-cell *matCellDef="let element"> {{element.etat}} </td>
+                    </ng-container>
+                    
                     <!-- missions Column -->
                     <ng-container matColumnDef="missions">
                         <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'document.table.title3' | translate}} </th>

@@ -63,7 +63,6 @@ h3{
     display: flex;
     align-items: center;
     justify-content: space-between;
-    // background-color: #28a7452b;
     width: 24% !important;
     margin: 2px 5px;
     padding: 5px;
@@ -129,6 +128,196 @@ h3{
         margin-left: 0 !important;
     }
 }
+#sectionAjoutPreco{
+    background-color: #ffffff !important;
+}
+.searchBlock{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0 2px;
+}
+.searchBlockUnique{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    padding: 0 2px;
+    .blockAutoRessources{
+        width: 100%;
+    }
+    .blockAutoRessources form{
+        justify-content: start;
+    }
+}
+.searchBlockUnique h4{
+    white-space: noWrap;
+}
+.blockAutoRessources, .blockAutoDistributeurs{
+    width: 48%;
+    display: flex;
+    align-items: center;
+    margin: 2px;
+    h4{
+        width: fit-content;
+        margin: auto 0;
+        margin-right: 2px;
+    }
+}
+.blockAutoRessources form{
+    justify-content: end;
+}
+.example-form{
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    h4{
+        font-size: 13px;
+        margin-right: 2px;
+        width: fit-content;
+    }
+    .example-full-width {
+    height: 42px !important;
+    border: 2px solid #28a745;
+    }
+    .mat-input{
+        position: absolute;
+        bottom: 100px;
+        height: 20px !important;
+    }
+} 
+#tableList{
+    margin: 10px 0 30px 0;
+}
+mat-form-field{
+    padding: 0;
+    margin: 0;
+    color: #28a745;
+    line-height: 0;
+    box-sizing: initial;
+    font-family: inherit;
+    input{
+        padding: 0;
+        border: none;
+        margin: 0;
+    }
+}
+.searchBar {
+    position: relative;
+    top: 0;
+    padding: 0;
+    margin: 0;
+    color: #28a74596;
+    border: none;
+    font-size: small;
+    line-height: normal;
+}
+.mat-header-cell {
+    padding-top: 0;
+    width: max-content;
+    text-align: center;
+}
+.mat-cell {
+    height: 0;
+    text-align: center;
+}
+.mat-row, .mat-cell {
+    padding: 0;
+    margin: 0;
+}
+.mat-form-field-infix {
+    padding: 0;
+    border-top: none;
+}
+.mat-form-field-wrapper {
+    padding-bottom: 0 !important;
+}
+.mat-form-field-appearance-fill .mat-form-field-flex{
+    padding: 0;
+}
+.containCell{
+    label{
+        display: flex;
+        margin: auto;
+        padding: 0;
+        input{
+            margin: auto;
+            border: none;
+            box-shadow: 0 0 3px #80808031;
+            height: 20px;
+            font-size: 12px;
+            width: 80%;
+        }
+    }
+}
+.containHead{
+    padding: 1% 0;
+}
+.containCell{
+    padding-top: 20px;
+}
+td{
+    font-size: 13px;
+}
+th{
+    background-color: rgba(40, 167, 69, 0.2);
+    color: #28a745 !important;
+    text-align: center;
+}
+.tableBlock{
+    width: 100%;
+    div{
+        width: 100%;
+    }
+    table{
+        .actions{
+            margin: 0;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: start;
+        }
+    }
+}
+.actions button{
+    font-size: 10px;
+}
+.actions span{
+    font-size: 10px;
+}
+.total{
+    width: 100%;
+    text-align: right;
+    input{
+        width: 14%;
+        position: relative;
+        bottom: 8px;
+        background-color: #28a7464e;
+        border: none;
+        border-radius: 2px;
+        margin-right: 1px;
+    }
+    span{
+        color: #28a745;
+        position: relative;
+        bottom: 8px;
+    }
+}
+.modifierDistributeurBlock{
+    height: 100%;
+    position: relative;
+    span{
+        position: absolute;
+        right: 2px;
+    }
+}
+.btnModifierDistributeurBlock{
+    border: 1px solid #28a745;
+    height: 46px;
+    font-size: 10px;
+}
 @media screen and (max-width: 1040px) {
     .block1 .inputBlock{
         width: 31% !important;
@@ -162,6 +351,21 @@ h3{
     }
     h3{
         font-size: 15px;
+    }
+    .example-form{
+        width: 50%;
+    }
+    .example-form{
+        flex-wrap: wrap;
+        width: 50%;
+    }
+    .blockAutoRessources form{
+        justify-content: start;
+    }
+}
+@media screen and (max-width: 800px) {
+    .searchBlock h4{
+        white-space: noWrap;
     }
 }
 @media screen and (max-width: 700px) {
@@ -209,6 +413,18 @@ h3{
     }
     p{
         font-size: 12.5px;
+    }
+}
+@media screen and (max-width: 520px) {
+    .searchBlock{
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+        .example-form{
+            width: 100%;
+            justify-content: space-between;
+            margin: 2px 0;
+        }
     }
 }
 @media screen and (max-width: 500px) {

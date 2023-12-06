@@ -9,8 +9,26 @@
                 <i class="fa fa-info-circle text-info" aria-hidden="true"></i>
             </p>
             <div class="hoverElement" id="description">
-                <span class="title"> {{'document.table.title2' | translate}} : </span>
-                <p>{{document.description}}</p>
+                <div>
+                    <span class="title"> {{'document.table.title2' | translate}} : </span>
+                    <p>{{document.description}}</p>
+                </div>
+                <div>
+                    <span class="title"> {{'services.form.label2' | translate}} : </span>
+                    <p>{{document.etat}}</p>
+                </div>
+                <div>
+                    <span> {{"document.table.title18" | translate}} : </span>
+                    <p class="title">{{document.affichagePrix}}</p>
+                </div>
+                <div>
+                    <span> {{"document.table.title19" | translate}} : </span>
+                    <p class="title">{{document.contientRessources}}</p>
+                </div>
+                <div>
+                    <span> {{"document.table.title20" | translate}} : </span>
+                    <p class="title">{{document.contientDistributeurs}}</p>
+                </div>
             </div>
         </div>
     </div>
@@ -84,14 +102,12 @@
                     <tr>
                         <th>{{'preconisation.table.title1' | translate}}</th>
                         <th>{{'preconisation.table.title2' | translate}}</th>
-                        <th>{{'preconisation.table.title3' | translate}}</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr *ngFor="let preconisation of document.preconisations">
                         <td>{{preconisation.libelle}}</td>
                         <td>{{preconisation.type}}</td>
-                        <td>{{preconisation.etat}}</td>
                     </tr>
                 </tbody>
             </table>

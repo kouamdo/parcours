@@ -63,7 +63,6 @@ export class NewPrecomvtComponent implements OnInit {
     this.forme = this.formBuilder.group({
       id: new FormControl(),
       libelle: new FormControl(),
-      etat: new FormControl(true),
       type: new FormControl (),
       ressource: new FormControl<string | IRessource>(''),
       quantiteMin:new FormControl(),
@@ -117,7 +116,6 @@ export class NewPrecomvtComponent implements OnInit {
           let precoMvtTemp : IPrecoMvt ={
             id: PrecoMvtCourant.id,
             libelle: this.LIBELLE_PRECO + PrecoMvtCourant.libelle,
-            etat: PrecoMvtCourant.etat,
             type: PrecoMvtCourant.type,
             precomvtqte:[]
            };
@@ -130,7 +128,6 @@ export class NewPrecomvtComponent implements OnInit {
           let precoMvtTemp : IPrecoMvt ={
             id: "",
             libelle: "",
-            etat: true,
               type: '',
             precomvtqte:[]
            };
@@ -194,7 +191,6 @@ private getAllDistributeurs(){
    let  precomvtTemp : IPrecoMvt={
     id:this.eltsPreco[0].id,
     libelle:this.eltsPreco[0].libelle.replace(this.LIBELLE_PRECO,''),
-    etat:this.eltsPreco[0].etat,
     type:this.eltsPreco[0].type,
     precomvtqte:[],
   }
@@ -367,7 +363,6 @@ reset():void{
     if(i==0){
       this.steps = 1;
       this.forme.controls["libelle"].setValue(precoTmp.libelle.replace(this.LIBELLE_PRECO,''));
-      this.forme.controls["etat"].setValue(precoTmp.etat);
       this.forme.controls["type"].setValue(precoTmp.type);
       //ajouter un unique champ caché id pour conserver l'id en cas modification
       this.forme.controls["id"].setValue(precoTmp.id);
@@ -427,7 +422,6 @@ reset():void{
       id: uuidv4(),
       //id:"",
       libelle: libel,
-      etat: false,
       type: precomvtInput.TypeMvt,
       precomvtqte:[]
     }
@@ -476,7 +470,6 @@ reset():void{
        //id:' ',
       id: precomvtInput.id,
       libelle: "Ressource : " + precomvtInput.ressource.libelle,
-      etat: false,
       type: precomvtInput.TypeMvt,
       precomvtqte:[]
     }
@@ -508,7 +501,6 @@ reset():void{
     let precomvtTemp : IPrecoMvt={
       id: idModif,
       libelle: this.LIBELLE_PRECO + precomvtInput.libelle,
-      etat: precomvtInput.etat,
       type: precomvtInput.type,
       precomvtqte:[]
     }

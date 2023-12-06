@@ -623,6 +623,10 @@ export class InMemDBService implements InMemoryDbService {
         titre: 'Note intervention',
         description:
           "Document delivre par le medecin ou un infirmier de l'etablissement",
+        etat:true,
+        affichagePrix:true,
+        contientRessources:true,
+        contientDistributeurs:true,
         missions: [
           {
             id: '1',
@@ -849,7 +853,6 @@ export class InMemDBService implements InMemoryDbService {
           {
             id: '1',
             libelle: 'rachat',
-            etat: true,
             type: 'neutre',
             precomvtqte: [
               {
@@ -907,7 +910,7 @@ export class InMemDBService implements InMemoryDbService {
                   id: '3',
                   libelle: 'pediatrie',
                   etat: true,
-                  /*dateCreation:new Date("07/03/2000"),dateModification:new Date("07/03/1990"),*/ quantite: 30,
+                  quantite: 30,
                   unite: this.UnitesLitre,
                   prix: 3000,
                   caracteristique: 'souple',
@@ -930,7 +933,7 @@ export class InMemDBService implements InMemoryDbService {
                     id: '2',
                     libelle: 'néonat',
                     etat: true,
-                    /* dateCreation:new Date("07/03/2000"),dateModification:new Date("07/03/1990"),*/ quantite: 20,
+                    quantite: 20,
                     unite: this.UnitesLitre,
                     prix: 2000,
                     caracteristique: 'souple',
@@ -947,8 +950,7 @@ export class InMemDBService implements InMemoryDbService {
           {
             id: '2',
             libelle: 'vente',
-            etat: true,
-            type: 'reduire' /*type:this.TypeMvtReduire*/,
+            type: 'reduire',
             precomvtqte: [
               {
                 id: '1',
@@ -977,8 +979,7 @@ export class InMemDBService implements InMemoryDbService {
           {
             id: '3',
             libelle: 'vente',
-            etat: true,
-            type: 'reduire' /*type:this.TypeMvtReduire*/,
+            type: 'reduire',
             precomvtqte: [
               {
                 id: '1',
@@ -1052,6 +1053,10 @@ export class InMemDBService implements InMemoryDbService {
         titre: 'Fiche de suivi',
         description:
           "Document delivre par le medecin ou un infirmier de l'etablissement",
+        etat:false,
+        affichagePrix:true,
+        contientRessources:false,
+        contientDistributeurs:false,
         missions: [
           {
             id: '1',
@@ -1275,7 +1280,6 @@ export class InMemDBService implements InMemoryDbService {
           {
             id: '1',
             libelle: 'rachat',
-            etat: true,
             type: 'neutre',
             precomvtqte: [
               {
@@ -1333,7 +1337,7 @@ export class InMemDBService implements InMemoryDbService {
                   id: '3',
                   libelle: 'pediatrie',
                   etat: true,
-                  /*dateCreation:new Date("07/03/2000"),dateModification:new Date("07/03/1990"),*/ quantite: 30,
+                  quantite: 30,
                   unite: this.UnitesLitre,
                   prix: 3000,
                   caracteristique: 'souple',
@@ -1356,7 +1360,7 @@ export class InMemDBService implements InMemoryDbService {
                     id: '2',
                     libelle: 'néonat',
                     etat: true,
-                    /* dateCreation:new Date("07/03/2000"),dateModification:new Date("07/03/1990"),*/ quantite: 20,
+                    quantite: 20,
                     unite: this.UnitesLitre,
                     prix: 2000,
                     caracteristique: 'souple',
@@ -1373,8 +1377,7 @@ export class InMemDBService implements InMemoryDbService {
           {
             id: '2',
             libelle: 'vente',
-            etat: true,
-            type: 'reduire' /*type:this.TypeMvtReduire*/,
+            type: 'reduire',
             precomvtqte: [
               {
                 id: '1',
@@ -1403,8 +1406,7 @@ export class InMemDBService implements InMemoryDbService {
           {
             id: '3',
             libelle: 'vente',
-            etat: true,
-            type: 'reduire' /*type:this.TypeMvtReduire*/,
+            type: 'reduire',
             precomvtqte: [
               {
                 id: '1',
@@ -1478,6 +1480,10 @@ export class InMemDBService implements InMemoryDbService {
         titre: 'Fiche de soin',
         description:
           "Document delivre par le medecin ou un infirmier de l'etablissement",
+        etat:true,
+        affichagePrix:false,
+        contientRessources:true,
+        contientDistributeurs:false,
         missions: [
           {
             id: '2',
@@ -1654,7 +1660,6 @@ export class InMemDBService implements InMemoryDbService {
           {
             id: '1',
             libelle: 'rachat',
-            etat: true,
             type: 'neutre',
             precomvtqte: [
               {
@@ -1712,7 +1717,7 @@ export class InMemDBService implements InMemoryDbService {
                   id: '3',
                   libelle: 'pediatrie',
                   etat: true,
-                  /*dateCreation:new Date("07/03/2000"),dateModification:new Date("07/03/1990"),*/ quantite: 30,
+                  quantite: 30,
                   unite: this.UnitesLitre,
                   prix: 3000,
                   caracteristique: 'souple',
@@ -1735,7 +1740,7 @@ export class InMemDBService implements InMemoryDbService {
                     id: '2',
                     libelle: 'néonat',
                     etat: true,
-                    /* dateCreation:new Date("07/03/2000"),dateModification:new Date("07/03/1990"),*/ quantite: 20,
+                    quantite: 20,
                     unite: this.UnitesLitre,
                     prix: 2000,
                     caracteristique: 'souple',
@@ -1752,8 +1757,7 @@ export class InMemDBService implements InMemoryDbService {
           {
             id: '2',
             libelle: 'vente',
-            etat: true,
-            type: 'reduire' /*type:this.TypeMvtReduire*/,
+            type: 'reduire',
             precomvtqte: [
               {
                 id: '1',
@@ -1782,8 +1786,7 @@ export class InMemDBService implements InMemoryDbService {
           {
             id: '3',
             libelle: 'vente',
-            etat: true,
-            type: 'reduire' /*type:this.TypeMvtReduire*/,
+            type: 'reduire',
             precomvtqte: [
               {
                 id: '1',
@@ -1857,6 +1860,10 @@ export class InMemDBService implements InMemoryDbService {
         titre: 'Formulaire de sortie',
         description:
           "Document delivre par le medecin ou un infirmier de l'etablissement",
+        etat:true,
+        affichagePrix:true,
+        contientRessources:true,
+        contientDistributeurs:false,
         missions: [
           {
             id: '2',
@@ -2202,7 +2209,6 @@ export class InMemDBService implements InMemoryDbService {
           {
             id: '1',
             libelle: 'rachat',
-            etat: true,
             type: 'neutre',
             precomvtqte: [
               {
@@ -2260,7 +2266,7 @@ export class InMemDBService implements InMemoryDbService {
                   id: '3',
                   libelle: 'pediatrie',
                   etat: true,
-                  /*dateCreation:new Date("07/03/2000"),dateModification:new Date("07/03/1990"),*/ quantite: 30,
+                  quantite: 30,
                   unite: this.UnitesLitre,
                   prix: 3000,
                   caracteristique: 'souple',
@@ -2283,7 +2289,7 @@ export class InMemDBService implements InMemoryDbService {
                     id: '2',
                     libelle: 'néonat',
                     etat: true,
-                    /* dateCreation:new Date("07/03/2000"),dateModification:new Date("07/03/1990"),*/ quantite: 20,
+                    quantite: 20,
                     unite: this.UnitesLitre,
                     prix: 2000,
                     caracteristique: 'souple',
@@ -2300,8 +2306,7 @@ export class InMemDBService implements InMemoryDbService {
           {
             id: '2',
             libelle: 'vente',
-            etat: true,
-            type: 'reduire' /*type:this.TypeMvtReduire*/,
+            type: 'reduire',
             precomvtqte: [
               {
                 id: '1',
@@ -2330,8 +2335,7 @@ export class InMemDBService implements InMemoryDbService {
           {
             id: '3',
             libelle: 'vente',
-            etat: true,
-            type: 'reduire' /*type:this.TypeMvtReduire*/,
+            type: 'reduire',
             precomvtqte: [
               {
                 id: '1',
@@ -2405,6 +2409,10 @@ export class InMemDBService implements InMemoryDbService {
         titre: 'ordonnance',
         description:
           "Document delivre par le medecin ou un infirmier de l'etablissement",
+        etat:true,
+        affichagePrix:false,
+        contientRessources:true,
+        contientDistributeurs:true,
         missions: [
           {
             id: '1',
@@ -2628,7 +2636,6 @@ export class InMemDBService implements InMemoryDbService {
           {
             id: '1',
             libelle: 'rachat',
-            etat: true,
             type: 'neutre',
             precomvtqte: [
               {
@@ -2686,7 +2693,7 @@ export class InMemDBService implements InMemoryDbService {
                   id: '3',
                   libelle: 'pediatrie',
                   etat: true,
-                  /*dateCreation:new Date("07/03/2000"),dateModification:new Date("07/03/1990"),*/ quantite: 30,
+                  quantite: 30,
                   unite: this.UnitesLitre,
                   prix: 3000,
                   caracteristique: 'souple',
@@ -2709,7 +2716,7 @@ export class InMemDBService implements InMemoryDbService {
                     id: '2',
                     libelle: 'néonat',
                     etat: true,
-                    /* dateCreation:new Date("07/03/2000"),dateModification:new Date("07/03/1990"),*/ quantite: 20,
+                    quantite: 20,
                     unite: this.UnitesLitre,
                     prix: 2000,
                     caracteristique: 'souple',
@@ -2726,8 +2733,7 @@ export class InMemDBService implements InMemoryDbService {
           {
             id: '2',
             libelle: 'vente',
-            etat: true,
-            type: 'reduire' /*type:this.TypeMvtReduire*/,
+            type: 'reduire',
             precomvtqte: [
               {
                 id: '1',
@@ -2756,8 +2762,7 @@ export class InMemDBService implements InMemoryDbService {
           {
             id: '3',
             libelle: 'vente',
-            etat: true,
-            type: 'reduire' /*type:this.TypeMvtReduire*/,
+            type: 'reduire',
             precomvtqte: [
               {
                 id: '1',
@@ -2834,6 +2839,10 @@ export class InMemDBService implements InMemoryDbService {
         titre: 'Formulaire de sortie',
         description:
           "Document delivre par le medecin ou un infirmier de l'etablissement",
+        etat:false,
+        affichagePrix:true,
+        contientRessources:true,
+        contientDistributeurs:false,
         missions: [
           {
             id: '2',
@@ -3179,7 +3188,6 @@ export class InMemDBService implements InMemoryDbService {
           {
             id: '1',
             libelle: 'rachat',
-            etat: true,
             type: 'neutre',
             precomvtqte: [
               {
@@ -3277,7 +3285,6 @@ export class InMemDBService implements InMemoryDbService {
           {
             id: '2',
             libelle: 'vente',
-            etat: true,
             type: 'reduire' /*type:this.TypeMvtReduire*/,
             precomvtqte: [
               {
@@ -3307,7 +3314,6 @@ export class InMemDBService implements InMemoryDbService {
           {
             id: '3',
             libelle: 'vente',
-            etat: true,
             type: 'reduire' /*type:this.TypeMvtReduire*/,
             precomvtqte: [
               {
@@ -3573,6 +3579,125 @@ export class InMemDBService implements InMemoryDbService {
             },
             value: 'Noir',
           },
+        ],
+        mouvements:[
+          {
+            id: '1',
+            description: 'Ici la description de ce mouvement',
+            quantite: 20,
+            prix: 10000,
+            dateCreation: new Date(),
+            datePeremption: new Date(),
+            ressource: {
+              id: '1',
+              libelle: 'transfusion',
+              etat: true,
+              quantite: 10,
+              unite: this.UnitesLitre,
+              prix: 1000,
+              caracteristique: 'souple',
+              famille: {
+                id: '4',
+                libelle: 'néonat',
+                description: 'nouveau-né',
+                etat: true,
+              },
+            },
+            distributeur: 
+            {
+              id: '1',
+              raisonSocial: 'cgb',
+              etat: true,
+              adresse: 'Dla',
+              telephone: '655554488',
+              mail: 'ngong@yad.fr',
+            },
+          },
+          {
+            id: '2',
+            description: 'Ici la description de ce mouvement',
+            quantite: 50,
+            prix: 300,
+            dateCreation: new Date(),
+            datePeremption: new Date(),
+            ressource: {
+              id: '5',
+              libelle: 'eau distillée',
+              etat: true,
+              quantite: 20,
+              unite: this.UnitesLitre,
+              prix: 500,
+              caracteristique: 'désinfictant',
+              famille: {
+                id: '3',
+                libelle: 'pediatrie',
+                description: 'enfant',
+                etat: true,
+              },
+            }
+          },
+          {
+            id: '3',
+            description: 'Ici la description de ce mouvement',
+            quantite: 10,
+            prix: 5000,
+            dateCreation: new Date(),
+            datePeremption: new Date(),
+            ressource: {
+              id: '3',
+              libelle: 'pediatrie',
+              etat: true,
+              quantite: 30,
+              unite: this.UnitesLitre,
+              prix: 3000,
+              caracteristique: 'souple',
+              famille: {
+                id: '4',
+                libelle: 'néonat',
+                description: 'nouveau-né',
+                etat: true,
+              }
+            },
+            distributeur: {
+              id: '3',
+              raisonSocial: 'cvc',
+              etat: true,
+              adresse: 'Buéa',
+              telephone: '655554486',
+              mail: 'ngong@yad.fr',
+            }
+          },
+          {
+            id: '4',
+            description: 'Ici la description de ce mouvement',
+            quantite: 20,
+            prix: 1000,
+            dateCreation: new Date(),
+            datePeremption: new Date(),
+            ressource: {
+              id: '2',
+              libelle: 'néonat',
+              etat: true,
+              quantite: 20,
+              unite: this.UnitesLitre,
+              prix: 2000,
+              caracteristique: 'souple',
+              famille: {
+                id: '2',
+                libelle: 'néonat',
+                description: 'nouveau-né',
+                etat: true,
+              }
+            },
+            distributeur: {
+              id: '2',
+              raisonSocial: 'bgb',
+              etat: true,
+              adresse: 'Ydé',
+              telephone: '655554481',
+              mail: 'ngong@yad.fr',
+            }
+          }
         ]
       },
       {
@@ -3581,6 +3706,10 @@ export class InMemDBService implements InMemoryDbService {
         titre: 'ordonnance',
         description:
           "Document delivre par le medecin ou un infirmier de l'etablissement",
+        etat:false,
+        affichagePrix:true,
+        contientRessources:true,
+        contientDistributeurs:true,
         missions: [
           {
             id: '1',
@@ -3804,7 +3933,6 @@ export class InMemDBService implements InMemoryDbService {
           {
             id: '1',
             libelle: 'rachat',
-            etat: true,
             type: 'neutre',
             precomvtqte: [
               {
@@ -3902,7 +4030,6 @@ export class InMemDBService implements InMemoryDbService {
           {
             id: '2',
             libelle: 'vente',
-            etat: true,
             type: 'reduire' /*type:this.TypeMvtReduire*/,
             precomvtqte: [
               {
@@ -3932,7 +4059,6 @@ export class InMemDBService implements InMemoryDbService {
           {
             id: '3',
             libelle: 'vente',
-            etat: true,
             type: 'reduire' /*type:this.TypeMvtReduire*/,
             precomvtqte: [
               {
@@ -4087,14 +4213,101 @@ export class InMemDBService implements InMemoryDbService {
             },
             value: 'oignon, lait, mangue' },
         ],
-      },
+        mouvements:[
+          {
+            id: '1',
+            description: 'Ici la description de ce mouvement',
+            quantite: 20,
+            prix: 10000,
+            dateCreation: new Date(),
+            datePeremption: new Date(),
+            ressource: {
+              id: '2',
+              libelle: 'néonat',
+              etat: true,
+              quantite: 20,
+              unite: this.UnitesLitre,
+              prix: 2000,
+              caracteristique: 'souple',
+              famille: {
+                id: '2',
+                libelle: 'néonat',
+                description: 'nouveau-né',
+                etat: true,
+              }
+            },
+            distributeur: {
+              id: '2',
+              raisonSocial: 'bgb',
+              etat: true,
+              adresse: 'Ydé',
+              telephone: '655554481',
+              mail: 'ngong@yad.fr',
+            }
+          },
+          {
+            id: '2',
+            description: 'Ici la description de ce mouvement',
+            quantite: 2,
+            prix: 10000,
+            dateCreation: new Date(),
+            datePeremption: new Date(),
+            ressource: {
+              id: '4',
+              libelle: 'paracetamols',
+              etat: true,
+              quantite: 40,
+              unite: this.UnitesKg,
+              prix: 100,
+              caracteristique: 'Appaise les douleurs légères',
+              famille: {
+                id: '5',
+                libelle: 'transfusion',
+                description: 'sang',
+                etat: true,
+              }
+            }
+          },
+          {
+            id: '3',
+            description: 'Ici la description de ce mouvement',
+            quantite: 15,
+            prix: 4500,
+            dateCreation: new Date(),
+            datePeremption: new Date(),
+            ressource: {
+              id: '5',
+              libelle: 'eau distillée',
+              etat: true,
+              quantite: 20,
+              unite: this.UnitesLitre,
+              prix: 500,
+              caracteristique: 'désinfictant',
+              famille: {
+                id: '3',
+                libelle: 'pediatrie',
+                description: 'enfant',
+                etat: true,
+              }
+            },
+            distributeur: {
+              id: '1',
+              raisonSocial: 'cgb',
+              etat: true,
+              adresse: 'Dla',
+              telephone: '655554488',
+              mail: 'ngong@yad.fr',
+            }
+          }
+        ],
+      }
     ];
     let ressource: IRessource[] = [
       {
         id: '1',
         libelle: 'transfusion',
         etat: true,
-        /*dateCreation:new Date("07/03/2000"),dateModification:new Date("07/03/1990"),*/ quantite: 10,
+        quantite: 10,
         unite: this.UnitesLitre,
         prix: 1000,
         caracteristique: 'souple',
@@ -4104,7 +4317,7 @@ export class InMemDBService implements InMemoryDbService {
         id: '2',
         libelle: 'néonat',
         etat: true,
-        /* dateCreation:new Date("07/03/2000"),dateModification:new Date("07/03/1990"),*/ quantite: 20,
+        quantite: 20,
         unite: this.UnitesLitre,
         prix: 2000,
         caracteristique: 'souple',
@@ -4134,7 +4347,7 @@ export class InMemDBService implements InMemoryDbService {
         id: '3',
         libelle: 'pediatrie',
         etat: true,
-        /*dateCreation:new Date("07/03/2000"),dateModification:new Date("07/03/1990"),*/ quantite: 30,
+        quantite: 30,
         unite: this.UnitesLitre,
         prix: 3000,
         caracteristique: 'souple',
@@ -4147,16 +4360,31 @@ export class InMemDBService implements InMemoryDbService {
       },
       {
         id: '4',
-        libelle: 'néonat',
+        libelle: 'paracetamols',
         etat: true,
-        /*dateCreation:new Date("07/03/2000"),dateModification:new Date("07/03/1990"),*/ quantite: 40,
-        unite: this.UnitesLitre,
-        prix: 4000,
-        caracteristique: 'souple',
+        quantite: 40,
+        unite: this.UnitesKg,
+        prix: 100,
+        caracteristique: 'Appaise les douleurs légères',
         famille: {
           id: '5',
           libelle: 'transfusion',
           description: 'sang',
+          etat: true,
+        },
+      },
+      {
+        id: '5',
+        libelle: 'eau distillée',
+        etat: true,
+        quantite: 20,
+        unite: this.UnitesLitre,
+        prix: 500,
+        caracteristique: 'désinfictant',
+        famille: {
+          id: '3',
+          libelle: 'pediatrie',
+          description: 'enfant',
           etat: true,
         },
       },
@@ -4178,7 +4406,6 @@ export class InMemDBService implements InMemoryDbService {
       {
         id: '1',
         libelle: 'rachat',
-        etat: true,
         type: 'neutre',
         precomvtqte: [
           {
@@ -4236,7 +4463,7 @@ export class InMemDBService implements InMemoryDbService {
               id: '3',
               libelle: 'pediatrie',
               etat: true,
-              /*dateCreation:new Date("07/03/2000"),dateModification:new Date("07/03/1990"),*/ quantite: 30,
+              quantite: 30,
               unite: this.UnitesLitre,
               prix: 3000,
               caracteristique: 'souple',
@@ -4259,7 +4486,7 @@ export class InMemDBService implements InMemoryDbService {
                 id: '2',
                 libelle: 'néonat',
                 etat: true,
-                /* dateCreation:new Date("07/03/2000"),dateModification:new Date("07/03/1990"),*/ quantite: 20,
+                quantite: 20,
                 unite: this.UnitesLitre,
                 prix: 2000,
                 caracteristique: 'souple',
@@ -4276,8 +4503,7 @@ export class InMemDBService implements InMemoryDbService {
       {
         id: '2',
         libelle: 'vente',
-        etat: true,
-        type: 'reduire' /*type:this.TypeMvtReduire*/,
+        type: 'reduire',
         precomvtqte: [
           {
             id: '1',
@@ -4306,8 +4532,7 @@ export class InMemDBService implements InMemoryDbService {
       {
         id: '3',
         libelle: 'vente',
-        etat: true,
-        type: 'reduire' /*type:this.TypeMvtReduire*/,
+        type: 'reduire',
         precomvtqte: [
           {
             id: '1',

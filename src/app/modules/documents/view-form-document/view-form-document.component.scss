@@ -35,22 +35,27 @@
 }
 .hoverBlock{
     display: flex;
+    flex-direction: column;
     position: absolute;
     right: 40px;
 }
 .hoverBlock:hover{
     #description{
         display: flex;
-        align-items: flex-start;
-        justify-content: flex-start;
-        width: 400px;
+        flex-direction: column;
         position: absolute;
         right: 0px;
         top: 50px;
-        font-size: 12px;
-        background-color: #28a7450e;
+        width: 400px;
         padding: 10px;
         padding-top: 0;
+        div{
+            display: flex;
+            align-items: flex-start;
+            justify-content: flex-start;
+            font-size: 12px;
+            background-color: #28a7450e;
+        }
         p{
             margin: 0;
             margin-left: 5px;

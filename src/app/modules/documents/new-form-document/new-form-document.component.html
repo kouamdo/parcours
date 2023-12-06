@@ -31,13 +31,65 @@
                                 </div>
                             </div>
                         </div>
+
+                        <div class="form-group">
+                          <div>
+                              <div class="champs">
+                                <label for="etat" class="label" >
+                                    {{"services.form.label2" | translate}}
+                                </label>
+                                <span id="etat" class="form-control">
+                                    <input type="checkbox" checked value="true" formControlName="etat" name="etat">
+                                </span>
+                              </div>
+                          </div>
+                        </div>
+
+                        <div class="form-group" title="{{'document.form.text5' | translate}}">
+                          <div>
+                              <div class="champs">
+                                <label for="affichagePrix" class="label" >
+                                    {{"document.table.title18" | translate}}
+                                </label>
+                                <span id="affichagePrix" class="form-control">
+                                    <input type="checkbox" checked value="true" formControlName="affichagePrix" name="affichagePrix">
+                                </span>
+                              </div>
+                          </div>
+                        </div>
+
+                        <div class="form-group" title="{{'document.form.text6' | translate}}">
+                          <div>
+                              <div class="champs">
+                                <label for="contientRessources" class="contientRessources" >
+                                    {{"document.table.title19" | translate}}
+                                </label>
+                                <span id="contientRessources" class="form-control">
+                                    <input type="checkbox" checked value="true" formControlName="contientRessources" name="contientRessources">
+                                </span>
+                              </div>
+                          </div>
+                        </div>
+
+                        <div class="form-group" title="{{'document.form.text7' | translate}}">
+                          <div>
+                              <div class="champs">
+                                <label for="contientDistributeurs" class="contientDistributeurs" >
+                                    {{"document.table.title20" | translate}}
+                                </label>
+                                <span id="contientDistributeurs" class="form-control">
+                                    <input type="checkbox" checked value="true" formControlName="contientDistributeurs" name="contientDistributeurs">
+                                </span>
+                              </div>
+                          </div>
+                        </div>
+
                         <div class="form-group">
                             <div class="champs">
                                 <label  for="_missions" class="label">
                                     {{"document.table.title3" | translate}} <sup>*</sup>
                                 </label>
                                 <mat-form-field class="example-full-width" appearance="fill">
-                                    <!-- <mat-label>{{'document.table.title5' | translate}}</mat-label> -->
                                     <mat-select formControlName="_missions" multiple [compareWith]="compareItem">
                                     <mat-option *ngFor="let missionsDocument of mission$ |async" [value]="missionsDocument">{{missionsDocument.libelle}}</mat-option>
                                     </mat-select>

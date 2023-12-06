@@ -43,6 +43,7 @@
         "text1": "Field Required",
         "text2": "Field not Required",
         "text3": "is a required field",
+        "text4": "entrer value here",
         "button1":"Print",
         "button2":"Back",
         "button3":"Cancel",
@@ -218,13 +219,19 @@
             "title14":"Category's range",
             "title15":"Categories",
             "title16":"libelle attribut",
-            "title17":"Preconisations"
+            "title17":"Preconisations",
+            "title18": "price visibility ?",
+            "title19": "link resources ?",
+            "title20": "Distributor visibility ?"
         },
         "form":{
             "text1":"Title is required.",
             "text2":"Description is required.",
             "text3":"Missions are required.",
-            "text4":"Attributs are required."
+            "text4":"Attributs are required.",
+            "text5": "If this box is checked, the price column will be visible when creating the movement of a copy of this document",
+            "text6": "If this box is unchecked, there will be no possibility of creating movements when creating a copy of the document",
+            "text7": "If this box is checked, the distributor column will be visible when creating the movement of a copy of this document"
         },
         "view":{
             "title":"Document's Model",
@@ -232,11 +239,15 @@
             "text2":"attributs's list of document",
             "text3":"attributs's list by categories"
         },
-        "exemplaire":{
+        "exemplaire": {
             "title":"Document's instance ",
             "title2":"Old datas",
-            "text1":"composition of this instance"
-        }
+            "title3": "Add ressources",
+            "title4": "list of mouvements",
+            "text1":"composition of this instance",
+            "text2": "Expiration's date",
+            "text3": "Update distributor"
+        }      
     },
     "theme":{
         "libelle":"theme"
@@ -282,7 +293,8 @@
         "title4":"Unit",
         "title5":"Price",
         "title6":"Category",
-        "title7":"Caracteristic"
+        "title7":"Caracteristic",
+        "title8": "Ressources"
 
     },
     "form":{
@@ -298,7 +310,8 @@
         "text12":"soft",
         "text13":"hard",
         "text14":"light",
-        "text15":"Select your Characteristics"
+        "text15":"Select your Characteristics",
+        "text16": "Search a ressource"
     },
     "lists":{
         "button2":"Retour"
@@ -313,8 +326,10 @@
         "title5":" Quantity",
         "title6":" Unit",
         "title7":"price",
-        "title9": "Caracteristic",
-        "title10": "Actions "
+        "title8":"Category",
+        "title9":"Actions ",
+        "title10": "Total",
+        "title11": "Total amont"
     }
 },
 
@@ -353,7 +368,9 @@
             "title1":"Label",
             "title2":"Status",
             "title3":"Type",
-            "title4":"View more infos"
+            "title4":"View more infos",
+            "title5":"Distributor",
+            "title6":"pair a distributor"
         },
         "view":{
             "text1":"Preconisations of this document"

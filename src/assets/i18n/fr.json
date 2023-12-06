@@ -41,6 +41,7 @@
     "text1": "Champs obligatoires",
     "text2": "Champs non obligatoires",
     "text3": "est un champs non obligatoires",
+    "text4": "entrer la valeur ici",
     "button1": "Imprimer",
     "button2": "Retour",
     "button3": "Annuler",
@@ -195,47 +196,57 @@
     }
   },
   "document": {
-    "title3":"Ajouter document",
-        "text":"documents retrouvé(e)s",
-        "search-bar":"Rechercher",
-        "title1":"Affichage des resultats",
-        "title2":"Selectionner les attributs de la categories",
-        "table":{
-            "title0":"Id",
-            "title1":"Titre",
-            "title2":"Description",
-            "title3":"Missions",
-            "title4":"Attributs",
-            "title5":"Selectionner les missions",
-            "title6":"Selectionner les attributs",
-            "title7":"Valeurs",
-            "title8":"Nom de la categorie",
-            "title9":"Entrez le nom de la categories",
-            "title10":"Ordre",
-            "title11":"Entrez l'ordre de la categories",
-            "title12":"Creer des categories",
-            "title13":"Ordre attribut",
-            "title14":"Ordre categorie",
-            "title15":"Categories",
-            "title16":"libelle attribut",
-            "title17":"categories"
-        },
-        "form":{
-            "text1":"Le Titre est obligatoire.",
-            "text2":"La Description est obligatoire.",
-            "text3":"Les Missions sont obligatoires.",
-            "text4":"Les attributs sont obligatoires."
-        },
-        "view":{
-            "title":"Modele du document",
-            "text1":"liste des missions du document",
-            "text2":"liste des attributs du document",
-            "text3":"liste des attributs par categorie du document"
-        },
-        "exemplaire":{
-            "title":"Exemplaire du document",
-            "text1":"Composition de l'exemplaire"
-        }
+    "title3":"Ajouter un nouveau document",
+    "search-bar": "Rechercher",
+    "title1": "Affichage des resultats",
+    "title2": "Selectionner les attributs de la categories",
+    "table": {
+      "title0": "Id",
+      "title1": "Titre",
+      "title2": "Description",
+      "title3": "Missions",
+      "title4": "Attributs",
+      "title5": "Selectionner les missions",
+      "title6": "Selectionner les attributs",
+      "title7": "Valeurs",
+      "title8": "Nom de la categorie",
+      "title9": "Entrez le nom de la categories",
+      "title10": "Ordre",
+      "title11": "Entrez l'ordre de la categories",
+      "title12": "Creer des categories",
+      "title13": "Ordre attribut",
+      "title14": "Ordre de la categorie",
+      "title15": "Categories",
+      "title16": "libelle attribut",
+      "title17": "Preconisations",
+      "title18": "visibilité du prix ?",
+      "title19": "lier des ressources ?",
+      "title20": "visibilité du distributeur ?"
+    },
+    "form": {
+      "text1": "Le Titre est obligatoire.",
+      "text2": "La Description est obligatoire.",
+      "text3": "Les Missions sont obligatoires.",
+      "text4": "Les attributs sont obligatoires.",
+      "text5": "Si cette case est cochée, la colone du prix sera visible lors de la creation des mouvement d'un exemplaire de ce document",
+      "text6": "Si cette case est décochée, il n'y aura pas la possibilité de creer des mouvement lors de la creation d'un exemplaire du document",
+      "text7": "Si cette case est cochée, la colone du distributeur sera visible lors de la creation des mouvement d'un exemplaire de ce document"
+    },
+    "view": {
+      "title": "Modele du document",
+      "text1": "liste des missions du document",
+      "text2": "liste des attributs du document",
+      "text3": "liste des attributs par categorie du document"
+    },
+    "exemplaire": {
+      "title": "Exemplaire du document",
+      "title2": "Donnees obsoletes",
+      "title3": "Ajouter des ressources",
+      "title4": "liste des mouvements",
+      "text1": "Composition de l'exemplaire",
+      "text2": "date de peremption",
+      "text3": "Modifier le distributeur"
+    }
   },
   "theme": {
     "libelle": "theme"
@@ -281,7 +292,8 @@
       "title4": "Unité",
       "title5": "Prix",
       "title6": "Catégorie",
-      "title7": "Caractéristiques"
+      "title7": "Caractéristiques",
+      "title8": "Ressources"
     },
     "form": {
       "text1": "Champ Obligatoire",
@@ -296,7 +308,8 @@
       "text12": "souple",
       "text13": "dure",
       "text14": "léger",
-      "text15": "Selectionnez vos Caractéristiques"
+      "text15": "Selectionnez vos Caractéristiques",
+      "text16": "Rechercher une ressource"
     },
     "lists": {
       "button2": "Retour"
@@ -308,12 +321,13 @@
       "title2": "id",
       "title3": "libelle",
       "title4": "Etat",
-      "title5": " Quantité ",
-      "title6": " Unité",
+      "title5": "Quantité ",
+      "title6": "Unité",
       "title7": "Prix",
       "title8": "Catégorie",
-      "title9": "Caractéristiques",
-      "title10": "Actions "
+      "title9": "Actions",
+      "title10": "Total ",
+      "title11": "Montant total "
     }
   },
   "preconisation":{
@@ -325,7 +339,9 @@
           "title1":"Libellé",
           "title2":"Etat",
           "title3":"Type",
-          "title4":"Voir le detail"
+          "title4":"Voir le detail",
+          "title5":"Distributeur",
+          "title6":"Associer un distributeur"
       },
       "view":{
           "text1":"Les préconisations du document"

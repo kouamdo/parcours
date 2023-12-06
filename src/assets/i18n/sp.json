@@ -40,16 +40,22 @@
     },
     "lists":{
         "title":"listing",
+        "text1": "Field Required",
+        "text2": "Field not Required",
+        "text3": "is a required field",
         "button1":"Print",
-        "button2":"Close",
+        "button2":"Back",
         "button3":"Cancel",
         "button4":"Previous",
         "button5":"No action yet",
         "button6":"validate",
-        "button7":"Edit"
+        "button7":"Edit",
+        "button8":"Delete",
+        "button9":"Add",
+        "button10":"Close"
     },
     "patient":{
-        "text":"Patients retrouvé(e)s",
+        "title1":"Add a new patient",
         "search-bar":"search",
         "table":{
             "title1":"Name",
@@ -72,10 +78,10 @@
             "text2":"Surname is requied",
             "text3":"Birthday is requied",
             "text4":"mail address is requied is requied"
-        } 
+        }
     },
     "personnel":{
-        "text":"Personnels retrouvé(e)s",
+        "title1":"Add a new staff",
         "search-bar":"search",
         "table":{
             "title1":"Name",
@@ -99,9 +105,10 @@
             "text3":"Birthday is requied",
             "text4":"email address is requied is requied",
             "text5":"Day of entry is required."       
-        } 
+        }
     },
     "services":{
+        "title1":"Add a new service",
         "table":{
             "title1":"Libel",
             "title2":"Status",
@@ -141,21 +148,30 @@
         }
     },
     "attributs":{
+        "title1":"Add a new attribut",
         "table":{
             "title1":"title",
             "title2":"Description",
             "title3":"Status",
             "title4":"Allocation's Date",
             "title5":"Modification's Date",
-            "title6":"Type"
+            "title6":"Type",
+            "title7":"Order",
+            "title8":"Is attribut required ?",
+            "title9":"Defaut values ",
+            "title10":"Separeted values with a comma",
+            "title11": "Required ?"
         },
         "form":{
-            "text1":"Label is required.",
-            "text2":"Status is requied",
-            "text3":"the Last modification's date is requied"
+            "text1":"Title is required.",
+            "text2":"Description is required.",
+            "text3":"Status is requied",
+            "text4":"Type is required.",
+            "text5":"This field is required."
         }
     },
     "missions":{
+        "title1":"Add a new mission",
         "table":{
             "title1":"Label",
             "title2":"Description",
@@ -170,13 +186,20 @@
             "text3":"Statut is required.",
             "text4":"Last modification's date is required.",
             "text5":"Type is required.",
-            "title6":"Service is required"
+            "text6":"Service is required",
+            "text7":"Selectionner un service"
+        },
+        "execution":{
+            "text1":"WHAT IS YOUR CHOISE ?",
+            "text2":"Document's choise for Mission ",
+            "text3":"No Document Available For Mission"
         }
     },
     "document":{
-        "text":"documents retrouvé(e)s",
+        "title3":"Add a new document",
         "search-bar":"Rechercher",
-        "title1":"Affichage des resuttats",
+        "title1":"View resuts",
+        "title2":"Select attributs of this category",
         "table":{
             "title0":"Id",
             "title1":"Title",
@@ -184,7 +207,18 @@
             "title3":"Missions",
             "title4":"Attributs",
             "title5":"Select missions",
-            "title6":"Select attributs"
+            "title6":"Select attributs",
+            "title7":"Values",
+            "title8":"Category's name",
+            "title9":"Enter category's name",
+            "title10":"Order",
+            "title11":"Enter ordre's category",
+            "title12":"Create categories",
+            "title13":"Attribut's range",
+            "title14":"Category's range",
+            "title15":"Categories",
+            "title16":"libelle attribut",
+            "title17":"Preconisations"
         },
         "form":{
             "text1":"Title is required.",
@@ -195,7 +229,13 @@
         "view":{
             "title":"Document's Model",
             "text1":"missions's list of document",
-            "text2":"attributs's list of document"
+            "text2":"attributs's list of document",
+            "text3":"attributs's list by categories"
+        },
+        "exemplaire":{
+            "title":"Document's instance ",
+            "title2":"Old datas",
+            "text1":"composition of this instance"
         }      
     },
     "theme":{
@@ -203,5 +243,94 @@
     },
     "langue":{
         "libelle":"langages"
+    },
+    "famille":{
+      "header":"Add a New Category of resource",
+      "table":{
+        "title1":"Libel",
+        "title2":"Description",
+        "title3":"State"
+      },
+      "form":{
+        "text1":"Field Required",
+        "text2":"Field Required"
+    },
+    "lists":{
+      "button1":"Feedback"
+    },
+    "title":"Resource Category Listing",
+    "search-bar":"Research",
+    "table1":{
+        "title1":"Libel",
+        "title2":"Description",
+        "title3":"state",
+        "title4":"Actions",
+        "actions":{
+          "link1":"Orienter",
+          "link2":"Update",
+          "link3":"View",
+          "link4":"Delete"
+        }
+    }
+  },
+    "ressource":{
+    "table":{
+        "title":"Add a New Resource",
+        "title1":" Libel",
+        "title2":"State",
+        "title3":"Quantity",
+        "title4":"Unit",
+        "title5":"Price",
+        "title6":"Category",
+        "title7":"Caracteristic",
+        "title8": "Ressources"
+
+    },
+    "form":{
+        "text1":"Field Required",
+        "text2":"Field Required",
+        "text4":"liter",
+        "text5":"kg",
+        "text6":"m²",
+        "text7":"quintals",
+        "text8":"Field Required",
+        "text9":"Field Required",
+        "text11":"Select a Unit",
+        "text12":"soft",
+        "text13":"hard",
+        "text14":"light",
+        "text15":"Select your Characteristics"
+    },
+    "lists":{
+        "button2":"Retour"
+    },
+    "title":" Resource Listing",
+    "search-bar":"Research",
+    "table2":{
+        "title1":"Add a New Resource",
+        "title2":"id",
+        "title3":"libel",
+        "title4":"State",
+        "title5":" Quantity",
+        "title6":" Unit",
+        "title7":"price",
+        "title8":"Category",
+        "title9":"Actions "
+    }
+    },
+    "preconisation":{
+        "title1":"Add a new preconisation",
+        "form":{
+            "title1":"Select preconisations"
+        },
+        "table":{
+            "title1":"Label",
+            "title2":"Status",
+            "title3":"Type",
+            "title4":"View more infos"
+        },
+        "view":{
+            "text1":"Preconisations of this document"
+        }
     }
 }
