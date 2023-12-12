@@ -123,8 +123,7 @@ export class NewExemplaireComponent implements OnInit {
     'libelle',
     'quantite',
     'unite',
-    'description',
-    'distributeur'
+    'description'
   ]; // structure du tableau presentant les Ressources
   TABLE_PRECONISATION_RESSOURCES: IPrecoMvt[] = [];
   montantTotal : number = 0;
@@ -272,7 +271,9 @@ export class NewExemplaireComponent implements OnInit {
           this.dataSourceMouvements.data = this.ELEMENTS_TABLE_MOUVEMENTS;
           this.totalAttribut = x.attributs.length - 1;
           this.rechercherAttributsAbsants();
-          this.formerEnteteTableauMissions()
+         //Bug du mocker apiMemory qui ne met pas à jour les données du document dans exemplaire
+         //pour avoir la donnée fraiche on refait un appel à document
+         //à supprimer lorsqu'on aura un vrai back connecté
           this.modifierMouvementExemplaire(x.idDocument)
         });
     }
@@ -297,12 +298,7 @@ export class NewExemplaireComponent implements OnInit {
         this.document.affichagePrix = value.affichagePrix
         this.document.contientRessources = value.contientRessources
         this.document.contientDistributeurs = value.contientDistributeurs
-        if (this.document.affichagePrix==false) {
-          this.displayedRessourcesColumns.splice(6,2)
-        }
-        if (this.document.contientDistributeurs==false) {
-          this.displayedRessourcesColumns.splice(5,1)
-        }
+        this.formerEnteteTableauMissions();
       })
   }
 
@@ -310,6 +306,10 @@ export class NewExemplaireComponent implements OnInit {
    * Methode qui permet de rajouter les colones de prix et montants si affichePrix a la valeur true
    */
   formerEnteteTableauMissions(){
+    if (this.document.contientDistributeurs == true) {
+      let distributeur : string = "distributeur"
+      this.displayedRessourcesColumns.push(distributeur)
+    }
     if ((this.document.affichagePrix == true)) {
       let prix : string = "prix"
       let montant : string = "montant total"
@@ -570,8 +570,6 @@ export class NewExemplaireComponent implements OnInit {
     this.indexmodificationDistributeur = index
     let mouvement = this.ELEMENTS_TABLE_MOUVEMENTS[index]
     this.distributeurControl.setValue(mouvement.distributeur!)
-    console.log("flag : ", this.modificationDistributeurActive)
-    console.log("index : ", this.indexmodificationDistributeur)
   }
 
   modifierDistributeur(){
