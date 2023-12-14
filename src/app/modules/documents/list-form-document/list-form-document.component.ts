@@ -24,7 +24,7 @@ export class ListFormDocumentComponent implements OnInit, AfterViewInit {
   ELEMENTS_TABLE: IDocument[] = [];
   filteredOptions: IDocument[] | undefined;
 
-  displayedColumns: string[] = ['id', 'titre', 'description', 'etat', 'missions', 'attributs', 'categories', 'preconisations', 'actions'];
+  displayedColumns: string[] = ['id', 'titre', 'description', 'etat', 'missions', 'attributs', 'categories', 'preconisations', 'sousDocuments', 'actions'];
 
   dataSource = new MatTableDataSource<IDocument>(this.ELEMENTS_TABLE);
 
@@ -48,6 +48,8 @@ export class ListFormDocumentComponent implements OnInit, AfterViewInit {
     listCategories: '',
     listPreconisations: '',
     preconisations: [],
+    sousDocuments: [],
+    listSousDocuments: '',
     etat: false,
     affichagePrix: false,
     contientRessources: false,
@@ -64,28 +66,24 @@ export class ListFormDocumentComponent implements OnInit, AfterViewInit {
       valeurs.forEach(
         x =>{
           this.afficheDocument  = {
-            id: '',
-            titre: '',
-            description: '',
-            etat: false,
-            affichagePrix: false,
-            contientRessources: false,
-            contientDistributeurs: false,
-            missions: [],
-            attributs: [],
-            categories: [],
-            preconisations: [],
+            id: x.id,
+            titre: x.titre,
+            description: x.description,
+            etat: x.etat,
+            affichagePrix: x.affichagePrix,
+            contientRessources: x.contientRessources,
+            contientDistributeurs: x.contientDistributeurs,
+            missions: x.missions,
+            attributs: x.attributs,
+            categories: x.categories,
+            preconisations: x.preconisations,
+            sousDocuments:x.sousDocuments!,
             listeMissions: '',
             listAttributs: '',
             listCategories: '',
-            listPreconisations: ''
+            listPreconisations: '',
+            listSousDocuments:''
           }
-          this.afficheDocument.id = x.id;
-          this.afficheDocument.titre = x.titre;
-          this.afficheDocument.description = x.description;
-          this.afficheDocument.etat = x.etat;
-          this.afficheDocument.missions = x.missions;
-          this.afficheDocument.attributs = x.attributs;
             x.missions.forEach(
               m => {
                 this.afficheDocument.listeMissions += m.libelle + ", ";
@@ -99,7 +97,12 @@ export class ListFormDocumentComponent implements OnInit, AfterViewInit {
             ) 
             x.preconisations.forEach(
               p => this.afficheDocument.listPreconisations += p.libelle + ", "
-            ) 
+            )
+            if (x.sousDocuments != undefined) {
+              x.sousDocuments.forEach(
+                d => this.afficheDocument.listSousDocuments += d.titre + ", "
+              )
+            } 
           tableDocuments.push(this.afficheDocument)
         }
       )

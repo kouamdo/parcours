@@ -7,5 +7,6 @@ export class DonneesEchangeService {
   dataDocumentCategorie : any;
   dataDocumentPrecoMvts : any;
   dataDocumentAttributs : any;
+  dataDocumentSousDocuments : any;
   constructor() { }
 }

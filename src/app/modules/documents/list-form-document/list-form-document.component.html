@@ -84,6 +84,14 @@
                             <span> {{element.listPreconisations}} </span>
                         </td>
                     </ng-container>
+                    
+                    <!-- sousDocuments Column -->
+                    <ng-container matColumnDef="sousDocuments">
+                        <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'document.table.title18' | translate}} </th>
+                        <td class="text-dark text-center containCell" mat-cell *matCellDef="let element">
+                            <span> {{element.listSousDocuments}} </span>
+                        </td>
+                    </ng-container>
 
                     <!-- action column -->
                     <ng-container matColumnDef="actions">

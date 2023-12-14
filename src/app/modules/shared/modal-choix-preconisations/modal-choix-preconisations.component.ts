@@ -41,7 +41,7 @@ export class ModalChoixPreconisationsComponent implements OnInit {
     private router: Router,
     private formBuilder: FormBuilder,
     private infosPath: ActivatedRoute,
-    private serviceprecoMvt: PrecoMvtsService,
+    private servicePrecoMvt: PrecoMvtsService,
     private _liveAnnouncer: LiveAnnouncer,
     private donneeDocCatService:DonneesEchangeService,
     private dialogDef: MatDialog,
@@ -59,7 +59,7 @@ export class ModalChoixPreconisationsComponent implements OnInit {
     this.myControl.valueChanges.subscribe((value) => {
       const libelle = typeof value === 'string' ? value : value?.libelle;
       if (libelle != undefined && libelle?.length > 0) {
-        this.serviceprecoMvt
+        this.servicePrecoMvt
           .getPrecomvtsByLibelle(libelle.toLowerCase() as string)
           .subscribe((reponse) => {
             this.filteredOptions = reponse;
@@ -82,10 +82,11 @@ export class ModalChoixPreconisationsComponent implements OnInit {
       if (!listIdPrecoTemp.includes(this.idPrecoMvt)) {
         this.ajoutSelectionPrecoMvt(this.idPrecoMvt);
       }
-      
     } else {
-      const index = positionsPreco.get(this.idPrecoMvt)
-      this.retirerSelectionPrecoMvt(index);
+      if (listIdPrecoTemp.includes(this.idPrecoMvt)) {
+        const index = positionsPreco.get(this.idPrecoMvt)
+        this.retirerSelectionPrecoMvt(index);
+      }
     }
   }
   getPrecoMvtId(idPrecoMvt: string) {
@@ -93,7 +94,7 @@ export class ModalChoixPreconisationsComponent implements OnInit {
   }
 
   ajoutSelectionPrecoMvt(idPrecoMvt: string) {
-    this.serviceprecoMvt.getPrecomvtById(idPrecoMvt).subscribe((val) => {
+    this.servicePrecoMvt.getPrecomvtById(idPrecoMvt).subscribe((val) => {
       this.ELEMENTS_TABLE_PRECONISATIONS = this.dataSourcePrecoResultat.data;
       this.ELEMENTS_TABLE_PRECONISATIONS.push(val);
       this.dataSourcePrecoResultat.data = this.ELEMENTS_TABLE_PRECONISATIONS;
@@ -108,7 +109,7 @@ export class ModalChoixPreconisationsComponent implements OnInit {
     this.donneeDocCatService.dataDocumentPrecoMvts = this.ELEMENTS_TABLE_PRECONISATIONS
   }
   private getAllPrecoMvt() {
-    return this.serviceprecoMvt.getAllPrecomvts();
+    return this.servicePrecoMvt.getAllPrecomvts();
   }
   displayFn(preco: IPrecoMvt): string {
     return preco && preco.libelle ? preco.libelle : '';
@@ -120,7 +121,7 @@ export class ModalChoixPreconisationsComponent implements OnInit {
   }
 
   public rechercherListingPreco(option: IPrecoMvt) {
-    this.serviceprecoMvt
+    this.servicePrecoMvt
       .getPrecomvtsByLibelle(option.libelle.toLowerCase())
       .subscribe((valeurs) => {
         this.dataSourcePreco.data = valeurs;

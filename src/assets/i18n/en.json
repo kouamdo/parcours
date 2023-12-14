@@ -201,6 +201,8 @@
         "search-bar":"Rechercher",
         "title1":"View resuts",
         "title2":"Select attributs of this category",
+        "title4": "Pair other documents",
+        "title5": "Select documents to pair",
         "table":{
             "title0":"Id",
             "title1":"Title",
@@ -222,7 +224,8 @@
             "title17":"Preconisations",
             "title18": "price visibility ?",
             "title19": "link resources ?",
-            "title20": "Distributor visibility ?"
+            "title20": "Distributor visibility ?",
+            "title21": "Paired documents"
         },
         "form":{
             "text1":"Title is required.",

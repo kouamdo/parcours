@@ -200,6 +200,8 @@
     "search-bar": "Rechercher",
     "title1": "Affichage des resultats",
     "title2": "Selectionner les attributs de la categories",
+    "title4": "Associer des sous documents",
+    "title5": "Selectionner les documents à associer",
     "table": {
       "title0": "Id",
       "title1": "Titre",
@@ -221,7 +223,8 @@
       "title17": "Preconisations",
       "title18": "visibilité du prix ?",
       "title19": "lier des ressources ?",
-      "title20": "visibilité du distributeur ?"
+      "title20": "visibilité du distributeur ?",
+      "title21": "Sous documents"
     },
     "form": {
       "text1": "Le Titre est obligatoire.",

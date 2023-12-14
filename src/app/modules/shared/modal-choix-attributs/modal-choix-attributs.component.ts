@@ -83,8 +83,10 @@ export class ModalChoixAttributsComponent implements OnInit {
         this.ajoutSelectionAttribut(this.idAttribut);
       }
     } else {
-      const index = positionsAttr.get(this.idAttribut)
-      this.retirerSelectionAttribut(index);
+      if (listIdAttTemp.includes(this.idAttribut)) {
+        const index = positionsAttr.get(this.idAttribut)
+        this.retirerSelectionAttribut(index);
+      }
     }
   }
 

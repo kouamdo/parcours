@@ -165,6 +165,28 @@
                                 </div>
                             </div>
                         </div>
+
+                        <!-- sous documents ------------------------------------------------- -->
+
+                        <div class="form-group">
+                            <div class="champs">
+                                <label  for="" class="label">
+                                    {{"document.title4" | translate}}
+                                </label>
+                                <div class="w-100">
+
+                                    <!-- Ouvrir le formulair de selection des sous documents -->
+                                    <div class="listAttr">
+                                        <button type="button" class="btn p-0" title="{{'lists.button9' | translate}} / {{'lists.button8' | translate}}" (click)="openSousDocumentDialog()">
+                                            <i class="fas fa-plus-square"></i>
+                                        </button>
+                                        <span *ngFor="let listeSousDocuments of ELEMENTS_TABLE_SOUS_DOCUMENTS">
+                                            {{listeSousDocuments.titre | lowercase}}<span>, </span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="actionButton">
