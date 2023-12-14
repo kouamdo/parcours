@@ -17,6 +17,7 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { AppRoutingModule } from 'src/app/app-routing.module';
 import { HttpLoaderFactory } from 'src/app/app.module';
 import { ListExemplaireComponent } from './list-exemplaire/list-exemplaire.component';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
@@ -37,6 +38,7 @@ import { ListExemplaireComponent } from './list-exemplaire/list-exemplaire.compo
     MatPaginatorModule,
     MatTableModule,
     MatSortModule,
+    SharedModule,
     TranslateModule.forChild({
         loader: {
             provide: TranslateLoader,

@@ -5,6 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { EMPTY, Observable } from 'rxjs';
 import { IService } from 'src/app/modele/service';
 import { ITicket } from 'src/app/modele/ticket';
+import { DonneesEchangeService } from 'src/app/services/donnees-echange/donnees-echange.service';
 import { ServicesService } from 'src/app/services/services/services.service';
 import { TicketsService } from 'src/app/services/tickets/tickets.service';
 
@@ -20,7 +21,6 @@ export class NewTicketComponent implements OnInit {
   ticket : ITicket|undefined;
   forme: FormGroup;
   btnLibelle: string="Enregister";
-  titre: string="Ajouter ticket";
   submitted: boolean=false;
   currentDate = new Date;
   strIidPersonne: string = "";
@@ -42,8 +42,8 @@ export class NewTicketComponent implements OnInit {
     idPersonne: null,
     statut: ''
   };
-
-  constructor(private formBuilder:FormBuilder, private ticketsService:TicketsService,private router:Router, private infosPath:ActivatedRoute,
+  titre:string='';
+  constructor(private formBuilder:FormBuilder,private dataEnteteMenuService:DonneesEchangeService,private ticketsService:TicketsService,private router:Router, private infosPath:ActivatedRoute,
     private serviceService:ServicesService, private datePipe: DatePipe) {
     this.forme = this.formBuilder.group({})
   }
@@ -67,6 +67,7 @@ export class NewTicketComponent implements OnInit {
           })
       });
     }
+    this.titre=this.dataEnteteMenuService.dataEnteteMenu
   }
   get f(){
     return this.forme.controls;

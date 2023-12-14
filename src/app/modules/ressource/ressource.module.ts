@@ -15,6 +15,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { HttpLoaderFactory } from 'src/app/app.module';
 import { ListRessourcesComponent } from './list-ressources/list-ressources.component';
+import { SharedModule } from '../shared/shared.module';
 
 
 
@@ -36,6 +37,7 @@ import { ListRessourcesComponent } from './list-ressources/list-ressources.compo
     MatPaginatorModule,
     MatTableModule,
     MatSortModule,
+    SharedModule,
     TranslateModule.forChild({
         loader: {
             provide: TranslateLoader,

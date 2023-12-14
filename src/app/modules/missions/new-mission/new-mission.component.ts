@@ -5,6 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Observable, EMPTY } from 'rxjs';
 import { IMission } from 'src/app/modele/mission';
 import { IService } from 'src/app/modele/service';
+import { DonneesEchangeService } from 'src/app/services/donnees-echange/donnees-echange.service';
 import { MissionsService } from 'src/app/services/missions/missions.service';
 import { ServicesService } from 'src/app/services/services/services.service';
 import {v4 as uuidv4} from 'uuid';
@@ -18,16 +19,15 @@ export class NewMissionComponent implements OnInit {
   mission : IMission|undefined;
   forme: FormGroup;
   btnLibelle: string="Ajouter";
-  titre: string="Ajouter mission";
   submitted: boolean=false;
   services$: Observable<IService[]>=EMPTY;
   idService: string = ""
-  service : IService | undefined 
-
+  service : IService | undefined
+  titre:string='';
   initialDateCreation = new FormControl(new Date());
   initialDateModification = new FormControl(new Date());
 
-  constructor(private formBuilder:FormBuilder, private missionService:MissionsService,private router:Router, private infosPath:ActivatedRoute, private datePipe: DatePipe, private serviceService:ServicesService) {
+  constructor(private formBuilder:FormBuilder,private dataEnteteMenuService:DonneesEchangeService, private missionService:MissionsService,private router:Router, private infosPath:ActivatedRoute, private datePipe: DatePipe, private serviceService:ServicesService) {
     this.forme = this.formBuilder.group({
       libelle: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
       description: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
@@ -55,6 +55,7 @@ export class NewMissionComponent implements OnInit {
       });
     }
     this.services$ = this.getAllServices();
+    this.titre=this.dataEnteteMenuService.dataEnteteMenu
   }
 
   associerService(event: any){
@@ -90,7 +91,7 @@ export class NewMissionComponent implements OnInit {
     missionTemp.service = this.service!
 
     if(this.mission != undefined){
-      missionTemp.id = this.mission.id  
+      missionTemp.id = this.mission.id
     }
     this.missionService.ajouterMission(missionTemp).subscribe(
       object => {

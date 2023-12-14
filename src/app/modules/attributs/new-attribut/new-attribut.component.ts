@@ -5,6 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { IAttributs } from 'src/app/modele/attributs';
 import { TypeTicket } from 'src/app/modele/type-ticket';
 import { AttributService } from 'src/app/services/attributs/attribut.service';
+import { DonneesEchangeService } from 'src/app/services/donnees-echange/donnees-echange.service';
 import {v4 as uuidv4} from 'uuid';
 
 @Component({
@@ -16,7 +17,7 @@ export class NewAttributComponent implements OnInit {
   attribut : IAttributs|undefined;
   forme: FormGroup;
   btnLibelle: string="Ajouter";
-  titre: string="Ajouter attribut";
+  
   submitted: boolean=false;
 
   typeInt = TypeTicket.Int;
@@ -25,12 +26,12 @@ export class NewAttributComponent implements OnInit {
   typeFloat = TypeTicket.Float;
   typeBoolean = TypeTicket.Boolean;
   typeDate = TypeTicket.Date;
-  typeRadio = TypeTicket.Radio
+  titre:string='';  typeRadio = TypeTicket.Radio
 
   /*initialDateCreation = new FormControl(new Date());
   initialDateModification = new FormControl(new Date());*/
 
-  constructor(private formBuilder:FormBuilder, private attributService:AttributService,private router:Router, private infosPath:ActivatedRoute, private datePipe: DatePipe) {
+  constructor(private formBuilder:FormBuilder,private dataEnteteMenuService:DonneesEchangeService, private attributService:AttributService,private router:Router, private infosPath:ActivatedRoute, private datePipe: DatePipe) {
     this.forme = this.formBuilder.group({
       titre: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
       description: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
@@ -58,6 +59,7 @@ export class NewAttributComponent implements OnInit {
           })
       });
     }
+    this.titre=this.dataEnteteMenuService.dataEnteteMenu
   }
 
   get f(){
@@ -77,7 +79,7 @@ export class NewAttributComponent implements OnInit {
       type: attributInput.type,
       valeursParDefaut: attributInput.valeursParDefaut
     }
-   
+
     if(this.attribut != undefined){
       attributTemp.id = this.attribut.id
     }

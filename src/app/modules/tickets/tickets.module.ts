@@ -20,6 +20,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { MatDialogModule } from '@angular/material/dialog';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
@@ -42,6 +43,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatTableModule,
     MatSortModule,
     MatDialogModule,
+    SharedModule,
     TranslateModule.forChild({
         loader: {
             provide: TranslateLoader,

@@ -2,7 +2,7 @@
     <div class="entete">
         <h1>
             <span routerLink="../../list-documents" title="{{'lists.button2' | translate}}"><i class="fa fa-list lien" aria-hidden="true"></i></span>
-            {{'document.view.title' | translate}}
+            {{'document.view.title' | translate}} {{titre}}
         </h1>
         <div class="hoverBlock">
             <p class="infoBuble">
@@ -100,7 +100,7 @@
 
         <!-- tableau des preconisations -->
         <p *ngIf="document.preconisations.length>0" class="title">
-            {{'preconisation.view.text1' | translate}} : 
+            {{'preconisation.view.text1' | translate}} :
         </p>
         <div *ngIf="document.preconisations.length>0" class="tableAttributs card table-responsive">
             <table class="table table-striped table-sm table-inverse table-bordered">

@@ -54,7 +54,7 @@
     "button10":"Fermer"
   },
   "patient": {
-    "title1":"Ajouter patient",
+    "title1":"Ajouter ",
     "search-bar": "Rechercher",
     "table": {
       "title1": "Nom",
@@ -80,7 +80,7 @@
       }
   },
   "personnel":{
-      "title1":"Ajouter personnel",
+      "title1":"Ajouter ",
       "search-bar":"Rechercher",
       "table":{
           "title1":"Nom",
@@ -107,7 +107,7 @@
       }
   },
   "services": {
-    "title1":"Ajouter service",
+    "title1":"Ajouter",
     "table": {
       "title1": "Libelle",
       "title2": "Etat",
@@ -148,7 +148,7 @@
     }
   },
   "attributs": {
-    "title1":"Ajouter attribut",
+    "title1":"Ajouter",
     "table": {
       "title1": "titre",
       "title2": "Description",
@@ -171,7 +171,7 @@
     }
   },
   "missions": {
-    "title1":"Ajouter mission",
+    "title1":"Ajouter",
     "table": {
       "title1": "Libelle",
       "title2": "Description",
@@ -236,7 +236,7 @@
       "text7": "Si cette case est cochée, la colone du distributeur sera visible lors de la creation des mouvement d'un exemplaire de ce document"
     },
     "view": {
-      "title": "Modele du document",
+      "title": "Modele",
       "text1": "liste des missions du document",
       "text2": "liste des attributs du document",
       "text3": "liste des attributs par categorie du document"

@@ -3,6 +3,7 @@ import { EMPTY, Observable, UnaryFunction } from 'rxjs';
 import { IFonctionnalites } from '../modele/fonctionnalites';
 import { IMenus } from '../modele/menus';
 import { MenusService } from '../services/menus/menus.service';
+import { DonneesEchangeService } from '../services/donnees-echange/donnees-echange.service';
 
 @Component({
   selector: 'app-menu',
@@ -15,7 +16,7 @@ export class MenuComponent implements OnInit, OnChanges {
   @Input()
   langueParent :string = 'fr';
   userId !:any;
-  constructor(private menuService:MenusService ) { }
+  constructor(private menuService:MenusService,private dataEnteteMenuService:DonneesEchangeService) { }
 
   ngOnInit(): void {
     if(localStorage.getItem("userId")!=null){
@@ -41,10 +42,14 @@ export class MenuComponent implements OnInit, OnChanges {
 
       })
     }
-    
+
   }
 
   private getMenus(){
     return  this.menuService.getMenuByUserAndLangue(this.userId,this.langueParent);
-  } 
+  }
+
+  getElementMenu(titre:string){
+    this.dataEnteteMenuService.dataEnteteMenu=titre
+  }
 }

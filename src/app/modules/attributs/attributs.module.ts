@@ -16,6 +16,7 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { HttpLoaderFactory } from 'src/app/app.module';
 import { NewAttributComponent } from './new-attribut/new-attribut.component';
 import { AppRoutingModule } from 'src/app/app-routing.module';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
@@ -35,6 +36,7 @@ import { AppRoutingModule } from 'src/app/app-routing.module';
     MatPaginatorModule,
     MatTableModule,
     MatSortModule,
+    SharedModule,
     TranslateModule.forChild({
         loader: {
             provide: TranslateLoader,

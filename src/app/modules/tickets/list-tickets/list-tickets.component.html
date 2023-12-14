@@ -1,7 +1,5 @@
 <div id="" class="d-flex flex-column justify-content-around">
-    <div class="title" id="top1">
-        <h2>{{"lists.title" | translate}} tickets</h2>
-    </div>
+    <app-entete class="title" id="top1"></app-entete>
     <div class="card container-fluid" id="top">
         <div class='card-hearder pt-3' >
             <div class="d-flex align-items-center justify-content-end tableTools">
@@ -23,7 +21,7 @@
         <div class="card-body p-0" id="tableBlock">
             <div class='table-responsive w-100'>
                 <table class='table table-sm table-centered table-striped table-bordered w-100' mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)">
-                    
+
                   <!-- id Column -->
                   <ng-container matColumnDef="id">
                     <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'tickets.table.title1' | translate}} </th>
@@ -59,7 +57,7 @@
                     <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'tickets.table.title6' | translate}} </th>
                     <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.statut}} </td>
                   </ng-container>
-                  
+
                     <!-- action Column -->
                     <ng-container matColumnDef="actions">
                         <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef> {{"patient.table.title8" | translate}} </th>
@@ -85,7 +83,7 @@
                                 </div>
                             </div>
                         </td>
-                    </ng-container> 
+                    </ng-container>
                     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
                   </table>
@@ -99,7 +97,7 @@
 </div>
 
 
-    
+
 <div id="ticketView" class="card d-none" style="width: 20%;">
   <div class="title">
     <div class="d-flex align-items-center justify-content-between">

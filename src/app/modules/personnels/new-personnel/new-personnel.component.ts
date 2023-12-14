@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { IPersonnel } from 'src/app/modele/personnel';
+import { DonneesEchangeService } from 'src/app/services/donnees-echange/donnees-echange.service';
 import { PersonnelsService } from 'src/app/services/personnels/personnels.service';
 import {v4 as uuidv4} from 'uuid';
 
@@ -17,10 +18,9 @@ export class NewPersonnelComponent implements OnInit {
    personnel : IPersonnel|undefined;
    forme: FormGroup;
    btnLibelle: string="Ajouter";
-   titre: string="Ajouter Personnel";
    submitted: boolean=false;
-
-   constructor(private formBuilder:FormBuilder, private personnelService:PersonnelsService, private router:Router, private infosPath:ActivatedRoute, private datePipe: DatePipe) {
+   titre:string='';
+   constructor(private formBuilder:FormBuilder,private dataEnteteMenuService:DonneesEchangeService, private personnelService:PersonnelsService, private router:Router, private infosPath:ActivatedRoute, private datePipe: DatePipe) {
      this.forme =  this.formBuilder.group({
        nom: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
        prenom: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
@@ -58,6 +58,7 @@ export class NewPersonnelComponent implements OnInit {
          })
        });
      }
+     this.titre=this.dataEnteteMenuService.dataEnteteMenu
    }
 
    get f(){

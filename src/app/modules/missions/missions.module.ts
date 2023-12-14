@@ -17,6 +17,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { HttpLoaderFactory } from 'src/app/app.module';
 import { ExecuterMissionComponent } from './executer-mission/executer-mission.component';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
@@ -37,6 +38,7 @@ import { ExecuterMissionComponent } from './executer-mission/executer-mission.co
     MatPaginatorModule,
     MatTableModule,
     MatSortModule,
+    SharedModule,
     TranslateModule.forChild({
         loader: {
             provide: TranslateLoader,

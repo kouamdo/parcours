@@ -1,7 +1,5 @@
 <div id="" class="d-flex flex-column justify-content-around">
-    <div class="title" id="top1">
-        <h2>{{"lists.title" | translate}} services</h2>
-    </div>
+    <app-entete class="title" id="top1"></app-entete>
     <div class="card container-fluid" id="top">
         <div class='card-hearder pt-3' >
             <div class="d-flex align-items-center justify-content-end tableTools">
@@ -40,16 +38,18 @@
                         <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header>{{'services.table.title2' | translate}}</th>
                         <td class="text-dark text-center containCell" mat-cell *matCellDef="let element"> {{element.etat}} </td>
                     </ng-container>
-                     <!-- Etat Column -->
+                    
+                     <!-- localisation Column -->
                      <ng-container matColumnDef="localisation">
                       <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header>{{'services.table.title3' | translate}}</th>
                       <td class="text-dark text-center containCell" mat-cell *matCellDef="let element"> {{element.localisation}} </td>
-                  </ng-container>
-                   <!-- Etat Column -->
-                   <ng-container matColumnDef="description">
-                    <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header>{{'services.table.title4' | translate}}</th>
-                    <td class="text-dark text-center containCell" mat-cell *matCellDef="let element"> {{element.description}} </td>
-                </ng-container>
+                    </ng-container>
+
+                    <!-- description Column -->
+                    <ng-container matColumnDef="description">
+                        <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header>{{'services.table.title4' | translate}}</th>
+                        <td class="text-dark text-center containCell" mat-cell *matCellDef="let element"> {{element.description}} </td>
+                    </ng-container>
 
                     <ng-container matColumnDef="actions">
                         <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{"patient.table.title8" | translate}} </th>

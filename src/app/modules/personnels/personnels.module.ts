@@ -15,6 +15,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { ListPersonnelsComponent } from './list-personnels/list-personnels.component';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
@@ -34,7 +35,7 @@ import { ListPersonnelsComponent } from './list-personnels/list-personnels.compo
     MatTableModule,
     MatSortModule,
     TicketsModule,
-    
+    SharedModule,
     TranslateModule.forChild({
         loader: {
             provide: TranslateLoader,

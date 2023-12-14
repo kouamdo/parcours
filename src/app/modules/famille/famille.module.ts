@@ -17,6 +17,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { ListFamillesComponent } from './list-familles/list-familles.component';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
@@ -38,6 +39,7 @@ import { ListFamillesComponent } from './list-familles/list-familles.component';
     MatTableModule,
     MatSortModule,
     TicketsModule,
+    SharedModule,
     TranslateModule.forChild({
         loader: {
             provide: TranslateLoader,

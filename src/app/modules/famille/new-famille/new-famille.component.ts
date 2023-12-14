@@ -7,7 +7,8 @@ import { IService } from 'src/app/modele/service';
 import { ServicesService } from 'src/app/services/services/services.service';
 import { IFamille } from 'src/app/modele/famille';
 import { FamillesService } from 'src/app/services/familles/familles.service';
-import {v4 as uuidv4} from 'uuid';
+import {v4 as uuidv4} from 'uuid';import { DonneesEchangeService } from 'src/app/services/donnees-echange/donnees-echange.service';
+
 
 
 
@@ -22,10 +23,10 @@ export class NewFamilleComponent implements OnInit {
   forme: FormGroup;
   btnLibelle: string="Ajouter";
   submitted: boolean=false;
+  titre:string='';
 
 
-
-  constructor(private formBuilder:FormBuilder, private familleService:FamillesService,private router:Router, private infosPath:ActivatedRoute, private datePipe: DatePipe) {
+  constructor(private formBuilder:FormBuilder, private familleService:FamillesService,private dataEnteteMenuService:DonneesEchangeService,private router:Router, private infosPath:ActivatedRoute, private datePipe: DatePipe) {
     this.forme =  this.formBuilder.group({
       libelle: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
       description: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
@@ -54,7 +55,7 @@ export class NewFamilleComponent implements OnInit {
           })
         });
     }
-
+    this.titre=this.dataEnteteMenuService.dataEnteteMenu
   }
 
   get f(){

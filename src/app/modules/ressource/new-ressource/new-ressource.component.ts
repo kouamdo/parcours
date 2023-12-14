@@ -12,6 +12,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { EMPTY, Observable } from 'rxjs';
 import { IFamille } from 'src/app/modele/famille';
 import { FamillesService } from 'src/app/services/familles/familles.service';
+import { DonneesEchangeService } from 'src/app/services/donnees-echange/donnees-echange.service';
 
 @Component({
   selector: 'app-new-ressource',
@@ -33,8 +34,8 @@ export class NewRessourceComponent implements OnInit {
     description: '',
     etat:false
   };
-
-  constructor(private formBuilder:FormBuilder,private familleService:FamillesService,private ressourceService:RessourcesService,private serviceRessource:RessourcesService,private serviceFamille:FamillesService,private router:Router, private infosPath:ActivatedRoute, private datePipe: DatePipe) {
+  titre:string='';
+  constructor(private formBuilder:FormBuilder,private dataEnteteMenuService:DonneesEchangeService,private familleService:FamillesService,private ressourceService:RessourcesService,private serviceRessource:RessourcesService,private serviceFamille:FamillesService,private router:Router, private infosPath:ActivatedRoute, private datePipe: DatePipe) {
     this.forme = this.formBuilder.group({
       libelle: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
       etat: [true],
@@ -84,6 +85,7 @@ export class NewRessourceComponent implements OnInit {
           })
       });
     }
+    this.titre=this.dataEnteteMenuService.dataEnteteMenu
   }
   get f(){
     return this.forme.controls;
