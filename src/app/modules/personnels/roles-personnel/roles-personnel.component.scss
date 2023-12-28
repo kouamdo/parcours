@@ -1,0 +1,236 @@
+#mainSection{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.block{
+    width: 70%;
+    height: auto;
+}
+.example-radio-group {
+    display: flex;
+    flex-direction: column;
+    margin: 15px 0;
+    align-items: flex-start;
+  }
+  
+  .example-radio-button {
+    margin: 5px;
+  }
+.entete{
+    background-color: #28a745;
+    color: white;
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+}
+.example-form {
+    display: flex;
+    justify-content: space-around;
+}
+.form-control{
+    border: none;
+    box-shadow: 0 0 2px rgb(220, 220, 220);
+    height: 35px;
+}
+.modifDate{
+    width: 80%;
+    font-size: 15px;
+}
+.champs{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    label{
+        width: 170px;
+        font-weight: normal;
+    }
+}
+#search{
+    width: 114px;
+    justify-content: flex-start;
+}
+.div-date {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 10px 0;
+    flex-wrap: wrap;
+}
+.champs, input{
+    font-size: 15px;
+}
+.actionButton{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    button{
+        background-color: #28a745;
+        color: white;
+        height: 30px;
+        padding: 0 10px;
+        font-size: 15px;
+    }
+    .btnValidation{
+        background-color: #1473e6;
+    }
+}
+.title{
+    height: 100px;
+    h2{
+        color: #28a745;
+    }
+}
+.tableTools{
+    padding-bottom: 15px;
+    #addUserBotton{
+        background-color: #FFD700;
+        color: white;
+        font-size: 20px;
+        padding: 10px;
+        border-radius: 5px;
+        span{
+            padding: 6px;
+            border: none;
+            border-radius: 3px;
+        }
+    }
+}
+
+#tableBlock{
+    width: 100%;
+    div{
+        width: 100%;
+    }
+    table{
+        #actions{
+            font-size: 12px;
+            .dropdown-toggle{
+                padding: 0;
+                margin-left: 10px;
+                color: #28a745;
+                span{
+                    position: relative;
+                    bottom: 6px;
+                    font-size: 28px;
+                    margin-right: 5px;
+                }
+            }
+            div{
+                button{
+                    color: #28a745;
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    span{
+                        width: 70%;
+                        text-align: left;
+                    }
+                }
+            }
+        }
+    }
+}
+mat-form-field{
+    padding: 0;
+    margin: 0;
+    color: #28a745;
+    line-height: normal;
+    box-sizing: initial;
+    input{
+        padding: 0;
+        border: none;
+        margin: 0;
+    }
+}
+mat-form-field:focus{
+    border: none;
+    padding: 0;
+    margin: 0;
+    input{
+        padding: 0;
+        color: #28a745;
+        border: none;
+        margin: 0;
+    }
+}  
+.example-full-width {
+    height: 42px !important;
+    border: 2px solid #28a745;
+    border-radius: 5px;
+    background-color: transparent;
+    padding: 0;
+    margin: 0;
+}
+.searchBar {
+    position: relative;
+    width: 170px;
+    top: -2px;
+    padding: 0;
+    margin: 0;
+    color: #28a74596;
+    border: none;
+    font-size: small;
+}
+.searchBar:focus, .searchBar:active {
+    position: relative;
+    top: -2px;
+    padding: 0;
+    margin: 0;
+    color: #28a74596;
+    border: none;
+}
+.containHead{
+    padding: 1% 10px;
+    margin: auto;
+    text-align: center;
+}
+.containCell{
+    padding-top: 20px;
+    text-align: center;
+}
+td{
+    font-size: 13px;
+}
+th{
+    background-color: rgba(40, 167, 69, 0.2);
+    color: #28a745 !important;
+}
+@media screen and (max-width: 1200px) {
+    .title h2{
+        font-size: 15px;
+    }  
+    .example-full-width {
+        height: 42px !important;
+        border: 2px solid #28a745;
+    }
+}
+@media screen and (max-width: 1100px) {
+    .title h2{
+        font-size: 15px;
+    } 
+}
+@media screen and (max-width: 1060px) {
+    td{
+        font-size: 12px;
+    }
+    .block{
+        width: 100%;
+        margin: 4px;
+    }
+}
+@media screen and (max-width: 600px) {
+    .example-form, .champs{
+        flex-direction: column;
+        justify-content: flex-start;
+        label{
+            align-items: flex-start;
+        }
+    }
+    mat-form-field{
+        flex-direction: column;
+    }
+}

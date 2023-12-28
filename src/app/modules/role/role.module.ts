@@ -5,7 +5,6 @@ import { RoleRoutingModule } from './role-routing.module';
 import { NewRoleComponent } from './new-role/new-role.component';
 import { ListRolesComponent } from './list-roles/list-roles.component';
 
-
 import { AppRoutingModule } from 'src/app/app-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';

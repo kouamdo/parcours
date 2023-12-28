@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { NewPersonnelComponent } from './new-personnel/new-personnel.component';
 import { ListPersonnelsComponent } from './list-personnels/list-personnels.component';
+import { RolesPersonnelComponent } from './roles-personnel/roles-personnel.component';
 
 const routes= [
 
@@ -19,6 +20,11 @@ const routes= [
     path: 'list-personnels',
     title: 'Afficher le personnel de la clinique',
     component: ListPersonnelsComponent
+  },
+  {
+    path: 'affecte-role-personnel/:idPersonnel',
+    title: 'Affecter un ou plusieurs roles a un personnel',
+    component: RolesPersonnelComponent
   }
 ];
 

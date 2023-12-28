@@ -89,14 +89,24 @@
             "title3":"Birthday",
             "title4":"Sex",
             "title5":"Email",
-            "title6":"Date d'entrée",
+            "title6":"Date of entry",
             "title7":"Phone",
-            "title8":"Date De Sortie",
+            "title8":"Release date",
             "title9":"Actions",
+            "title10":"Search",
+            "title11":"End date",
+            "title12":"Assign roles",
+            "title13":"Selection",
+            "title14":"Title",
+            "title15":"Description",
+            "title16":"Status",
             "actions":{
+                "link1":"Add",
                 "link2":"Update",
                 "link3":"View",
-                "link4":"Delete"
+                "link4":"Delete",
+                "link5":"Roles",
+                "link6":"Cancel"
             }
         },
         "form":{

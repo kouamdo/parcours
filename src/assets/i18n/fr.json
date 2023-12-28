@@ -92,10 +92,20 @@
           "title7":"Téléphone",
           "title8":"Date De Sortie",
           "title9":"Actions",
+          "title10":"Recherche",
+          "title11":"Date de fin",
+          "title12":"Affecter roles",
+          "title13":"Sélection",
+          "title14":"Titre",
+          "title15":"Déscription",
+          "title16":"Etat",
           "actions":{
+              "link1":"Ajouter",
               "link2":"Modifier",
               "link3":"Détails",
-              "link4":"Supprimer"
+              "link4":"Supprimer",
+              "link5":"Roles",
+              "link6":"Annuler"
           }
       },
       "form":{

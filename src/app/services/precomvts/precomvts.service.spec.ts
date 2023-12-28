@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { PrecomvtsService } from './precomvts.service';
+import { PrecoMvtsService } from './precomvts.service';
 
 describe('PrecomvtsService', () => {
-  let service: PrecomvtsService;
+  let service: PrecoMvtsService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(PrecomvtsService);
+    service = TestBed.inject(PrecoMvtsService);
   });
 
   it('should be created', () => {

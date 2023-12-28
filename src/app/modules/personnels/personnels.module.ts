@@ -14,14 +14,17 @@ import { MatInputModule } from '@angular/material/input';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
+import {MatRadioModule} from '@angular/material/radio';
 import { ListPersonnelsComponent } from './list-personnels/list-personnels.component';
+import { RolesPersonnelComponent } from './roles-personnel/roles-personnel.component';
 import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
   declarations: [
     NewPersonnelComponent,
-    ListPersonnelsComponent
+    ListPersonnelsComponent,
+    RolesPersonnelComponent
   ],
   imports: [
     CommonModule,
@@ -35,6 +38,7 @@ import { SharedModule } from '../shared/shared.module';
     MatTableModule,
     MatSortModule,
     TicketsModule,
+    MatRadioModule,
     SharedModule,
     TranslateModule.forChild({
         loader: {
