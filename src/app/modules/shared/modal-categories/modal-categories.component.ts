@@ -12,7 +12,7 @@ import { ICategoriesAttributs } from 'src/app/modele/categories-attributs';
 import { AttributService } from 'src/app/services/attributs/attribut.service';
 import { CategorieAttributService } from 'src/app/services/categorie-attribut/categorie-attribut.service';
 import { DocumentService } from 'src/app/services/documents/document.service';
-import { TypeTicket } from "src/app/modele/type-ticket";
+import { IType } from "src/app/modele/type";
 import {v4 as uuidv4} from 'uuid';
 import { map } from 'rxjs';
 import { DonneesEchangeService } from 'src/app/services/donnees-echange/donnees-echange.service';
@@ -55,7 +55,7 @@ export class ModalCategoriesComponent implements OnInit {
     dateCreation: new Date,
     dateModification: new Date,
     valeursParDefaut: '',
-    type: TypeTicket.Int
+    type: IType.Int
   }
 
 // tableau contenant les categories creees a partir du premier tableau de la modal
@@ -348,7 +348,7 @@ export class ModalCategoriesComponent implements OnInit {
              description: '',
              etat: false,
              valeursParDefaut: '',
-             type: TypeTicket.Int
+             type: IType.Int
            }
          }
        }

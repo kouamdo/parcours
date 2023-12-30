@@ -18,7 +18,7 @@ import {MatDialog} from '@angular/material/dialog';
 import { ModalCategoriesComponent } from '../../shared/modal-categories/modal-categories.component';
 import {v4 as uuidv4} from 'uuid';
 import { ICategorieAffichage } from 'src/app/modele/categorie-affichage';
-import { TypeTicket } from 'src/app/modele/type-ticket';
+import { IType } from 'src/app/modele/type';
 import { DonneesEchangeService } from 'src/app/services/donnees-echange/donnees-echange.service';
 import { ModalChoixAttributsComponent } from '../../shared/modal-choix-attributs/modal-choix-attributs.component';
 import { ModalChoixPreconisationsComponent } from '../../shared/modal-choix-preconisations/modal-choix-preconisations.component';
@@ -53,6 +53,7 @@ export class NewFormDocumentComponent implements OnInit {
   submitted: boolean=false;
   validation: boolean=false;
   serviceDeMission!: IService;
+  titre:string='';
 
   // variables attributs, pour afficher le tableau d'attributs sur l'IHM
   ELEMENTS_TABLE_ATTRIBUTS: IAttributs[] = [];
@@ -77,7 +78,6 @@ export class NewFormDocumentComponent implements OnInit {
   //tableau contenent les sous documents
   ELEMENTS_TABLE_SOUS_DOCUMENTS: IDocument[] = [];
 
-  titre:string='';
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -152,7 +152,7 @@ export class NewFormDocumentComponent implements OnInit {
                       dateCreation: new Date(),
                       dateModification: new Date(),
                       valeursParDefaut: '',
-                      type: TypeTicket.Int
+                      type: IType.Int
                     }
                   }
                 }

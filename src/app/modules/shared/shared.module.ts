@@ -31,13 +31,14 @@ import { ModalChoixSousDocumentComponent} from './modal-choix-sous-document/moda
     ModalChoixPreconisationsComponent,
     EnteteComponent,
     ModalChoixSousDocumentComponent,
+    EnteteComponent,
 
   ],
   exports: [
     ModalCategoriesComponent,
     ModalChoixAttributsComponent,
-    EnteteComponent,
-    ModalChoixSousDocumentComponent
+    ModalChoixSousDocumentComponent,
+    EnteteComponent
   ],
   imports: [
     CommonModule,

@@ -124,10 +124,6 @@ select{
     background-color:#28a745;// #1473e6;
 }
 }
-/*input, #etat{
-  border: none !important;
-  box-shadow: none !important;
-}*/
 .choix{
   color: #28a745;
   font-size: 18px;
@@ -148,7 +144,7 @@ select{
   height: 100px;
   h2{
       color: #28a745;
-      text-transform: uppercase;
+      //text-transform: uppercase;
   }
 }
 .searchBlock{

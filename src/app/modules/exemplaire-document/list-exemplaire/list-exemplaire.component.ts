@@ -19,12 +19,12 @@ import { ExemplaireDocumentService } from 'src/app/services/exemplaire-document/
 export class ListExemplaireComponent implements OnInit {
 
   myControl = new FormControl<string | IExemplaireDocument>('');
- 
+
   ELEMENTS_TABLE: IExemplaireDocument[] = [];
   ELEMENTS_TABLE_DOCUMENT: IDocument[] = [];
   filteredOptions: IDocument[] | undefined;
 
-  displayedColumns: string[] = ['id', 'titre', 'description', 'actions'];
+  displayedColumns: string[] = ['titre', 'description', 'actions'];
 
   dataSource = new MatTableDataSource<IExemplaireDocument>(this.ELEMENTS_TABLE);
   dataSourceDocument = new MatTableDataSource<IDocument>(this.ELEMENTS_TABLE_DOCUMENT);
@@ -51,17 +51,17 @@ export class ListExemplaireComponent implements OnInit {
                   const titre = typeof document === 'string' ? document : document?.titre;
                   if(titre != undefined && titre?.length >0){
                     this.serviceDocument.getDocumentByTitre(titre.toLowerCase() as string).subscribe(
-                      reponse => { 
+                      reponse => {
                         this.filteredOptions = reponse;
                       }
                     )
                   }
                   else{
                     this.filteredOptions = [];
-                  } 
-                } 
+                  }
+                }
               );
-            }         
+            }
           }
         )
       }

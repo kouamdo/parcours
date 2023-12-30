@@ -18,6 +18,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { ListDistributeursComponent } from './list-distributeurs/list-distributeurs.component';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { ListDistributeursComponent } from './list-distributeurs/list-distribute
     MatTableModule,
     MatSortModule,
     TicketsModule,
+    SharedModule,
     TranslateModule.forChild({
       loader: {
           provide: TranslateLoader,

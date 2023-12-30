@@ -2,8 +2,11 @@ import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
+import { EMPTY } from 'rxjs';
+import { Observable } from 'rxjs/internal/Observable';
 import { IAttributs } from 'src/app/modele/attributs';
-import { TypeTicket } from 'src/app/modele/type-ticket';
+import { IType } from 'src/app/modele/type';
+import { TypeAttribut } from 'src/app/modele/type-attributs';
 import { AttributService } from 'src/app/services/attributs/attribut.service';
 import { DonneesEchangeService } from 'src/app/services/donnees-echange/donnees-echange.service';
 import {v4 as uuidv4} from 'uuid';
@@ -17,31 +20,28 @@ export class NewAttributComponent implements OnInit {
   attribut : IAttributs|undefined;
   forme: FormGroup;
   btnLibelle: string="Ajouter";
-  
+  //titre: string="Ajouter attribut";
   submitted: boolean=false;
+  titre:string='';
+  typeAttribut : String[] = [];
 
-  typeInt = TypeTicket.Int;
-  typeString = TypeTicket.String;
-  typeDouble = TypeTicket.Double;
-  typeFloat = TypeTicket.Float;
-  typeBoolean = TypeTicket.Boolean;
-  typeDate = TypeTicket.Date;
-  titre:string='';  typeRadio = TypeTicket.Radio
 
   /*initialDateCreation = new FormControl(new Date());
   initialDateModification = new FormControl(new Date());*/
-
   constructor(private formBuilder:FormBuilder,private dataEnteteMenuService:DonneesEchangeService, private attributService:AttributService,private router:Router, private infosPath:ActivatedRoute, private datePipe: DatePipe) {
     this.forme = this.formBuilder.group({
       titre: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
       description: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
       etat: [true],
       type: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
-      valeursParDefaut:['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
+      valeursParDefaut:[''],
     })
   }
 
   ngOnInit(): void {
+    this.attributService.getTypeAttribut().subscribe(t =>{
+      this.typeAttribut = t.type;
+    });
     let idAttribut = this.infosPath.snapshot.paramMap.get('idAttribut');
     if((idAttribut != null) && idAttribut!==''){
       this.btnLibelle="Modifier";

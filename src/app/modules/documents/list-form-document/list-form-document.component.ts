@@ -20,90 +20,28 @@ import { DocumentService } from 'src/app/services/documents/document.service';
 export class ListFormDocumentComponent implements OnInit, AfterViewInit {
 
   myControl = new FormControl<string | IDocument>('');
- 
-  ELEMENTS_TABLE: IDocument[] = [];
+
+  ELEMENTS_TABLE: IAfficheDocument[] = [];
   filteredOptions: IDocument[] | undefined;
 
-  displayedColumns: string[] = ['id', 'titre', 'description', 'etat', 'missions', 'attributs', 'categories', 'preconisations', 'sousDocuments', 'actions'];
+  displayedColumns: string[] = ['titre', 'description', 'missions', 'attributs', 'categories', 'preconisations', 'sousDocuments', 'actions'];
 
-  dataSource = new MatTableDataSource<IDocument>(this.ELEMENTS_TABLE);
+  dataSource = new MatTableDataSource<IAfficheDocument>(this.ELEMENTS_TABLE);
 
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
 
   @ViewChild(MatSort) sort!: MatSort;
 
-  tableDocuments : IAfficheDocument[] = []
-  
-  
-  afficheDocument : IAfficheDocument = {
-    id: '',
-    titre: '',
-    description: '',
-    missions: [],
-    attributs: [],
-    categories: [],
-    listeMissions: '',
-    listAttributs: '',
-    listCategories: '',
-    listPreconisations: '',
-    preconisations: [],
-    sousDocuments: [],
-    listSousDocuments: '',
-    etat: false,
-    affichagePrix: false,
-    contientRessources: false,
-    contientDistributeurs: false
-  }
-
-
   constructor(private translate: TranslateService, private router:Router, private serviceDocument: DocumentService,  private _liveAnnouncer: LiveAnnouncer) { }
 
   ngOnInit(): void {
     this.getAllDocuments().subscribe(valeurs => {
-     const tableDocuments : IAfficheDocument[] = this.tableDocuments
-     
+     const tableDocuments : IAfficheDocument[] = [];
+
       valeurs.forEach(
         x =>{
-          this.afficheDocument  = {
-            id: x.id,
-            titre: x.titre,
-            description: x.description,
-            etat: x.etat,
-            affichagePrix: x.affichagePrix,
-            contientRessources: x.contientRessources,
-            contientDistributeurs: x.contientDistributeurs,
-            missions: x.missions,
-            attributs: x.attributs,
-            categories: x.categories,
-            preconisations: x.preconisations,
-            sousDocuments:x.sousDocuments!,
-            listeMissions: '',
-            listAttributs: '',
-            listCategories: '',
-            listPreconisations: '',
-            listSousDocuments:''
-          }
-            x.missions.forEach(
-              m => {
-                this.afficheDocument.listeMissions += m.libelle + ", ";
-              } 
-            )
-            x.attributs.forEach(
-              a => this.afficheDocument.listAttributs += a.titre + ", "
-            )
-            x.categories.forEach(
-              c => this.afficheDocument.listCategories += c.nom + ", "
-            ) 
-            x.preconisations.forEach(
-              p => this.afficheDocument.listPreconisations += p.libelle + ", "
-            )
-            if (x.sousDocuments != undefined) {
-              x.sousDocuments.forEach(
-                d => this.afficheDocument.listSousDocuments += d.titre + ", "
-              )
-            } 
-          tableDocuments.push(this.afficheDocument)
+          tableDocuments.push(this.convertDocToDocAffiche(x))
         }
       )
       this.dataSource.data = tableDocuments;
@@ -114,7 +52,7 @@ export class ListFormDocumentComponent implements OnInit, AfterViewInit {
         const titre = typeof value === 'string' ? value : value?.titre;
         if(titre != undefined && titre?.length >0){
           this.serviceDocument.getDocumentByTitre(titre.toLowerCase() as string).subscribe(
-            reponse => { 
+            reponse => {
               this.filteredOptions = reponse;
             }
           )
@@ -134,7 +72,15 @@ export class ListFormDocumentComponent implements OnInit, AfterViewInit {
   }
   public rechercherListingDocument(option: IDocument){
     this.serviceDocument.getDocumentByTitre(option.titre.toLowerCase()).subscribe(
-        valeurs => {this.dataSource.data = valeurs;}
+        valeurs => {
+          const tableDocuments : IAfficheDocument[] = [];
+          valeurs.forEach(
+            x =>{  
+              tableDocuments.push(this.convertDocToDocAffiche(x))
+            }
+          )
+          this.dataSource.data = tableDocuments;
+        }
     )
   }
   announceSortChange(sortState: Sort) {
@@ -147,6 +93,48 @@ export class ListFormDocumentComponent implements OnInit, AfterViewInit {
 
   private getAllDocuments(){
     return this.serviceDocument.getAllDocuments();
+  }
+
+  private convertDocToDocAffiche(x: IDocument) : IAfficheDocument {
+   let  afficheDocument  : IAfficheDocument = {
+     id: '',
+     titre: '',
+     description: '',
+     missions: [],
+     attributs: [],
+     categories: [],
+     listeMissions: '',
+     listAttributs: '',
+     listCategories: '',
+     listPreconisations: '',
+     preconisations: [],
+     etat: false,
+     affichagePrix: false,
+     contientRessources: false,
+     contientDistributeurs: false,
+     listSousDocuments: ''
+   }
+    afficheDocument.id = x.id;
+    afficheDocument.titre = x.titre;
+    afficheDocument.description = x.description;
+    afficheDocument.etat = x.etat;
+    afficheDocument.missions = x.missions;
+    afficheDocument.attributs = x.attributs;
+      x.missions.forEach(
+        m => {
+          afficheDocument.listeMissions += m.libelle + ", ";
+        }
+      )
+      x.attributs.forEach(
+        a => afficheDocument.listAttributs += a.titre + ", "
+      )
+      x.categories.forEach(
+        c => afficheDocument.listCategories += c.nom + ", "
+      )
+      x.preconisations.forEach(
+        p => afficheDocument.listPreconisations += p.libelle + ", "
+      )
+      return afficheDocument;
   }
 
 }

@@ -1,9 +1,8 @@
 <div id="mainSection">
     <div class="card block" id="top2">
-        <div class="card-header pt-4 pb-4 entete">
-          <h2>{{"patient.title1" | translate}} {{titre}}</h2>
+        <div class="card-header" class="entete pt-4 pb-4">
+          {{"patient.title1" | translate}} {{titre}}
         </div>
-       <!-- <app-entete></app-entete>-->
         <div class="card-body">
             <form [formGroup]="forme" (ngSubmit)="onSubmit(forme.value)" *ngIf="forme" >
                 <div class="">
@@ -40,7 +39,7 @@
                                     {{"patient.table.title4" | translate}}
                                 </label>
                                 <select  class="form-control" formControlName="sexe" name="sexe" id="sexe">
-                                    <option value="M" >Homme</option>
+                                    <option value="M" selected="selected">Homme</option>
                                     <option value="F">Femme</option>
                                 </select>
                             </div>

@@ -3,11 +3,60 @@ select{
     border: none;
     box-shadow: 0 0 2px rgb(220, 220, 220);
     height: 24px;
-    background-color: #28a74563;
+    //background-color: #28a74563;
     color: rgb(108, 108, 108);
     padding: 0 10px;
     border-radius: 5px;
 }
-
-
-
+mat-form-field{
+  padding: 0;
+  margin: 0;
+  //color: #28a745;
+  line-height: normal;
+  box-sizing: initial;
+  input{
+      padding: 0;
+      border: none;
+      margin: 0;
+  }
+}
+mat-form-field:focus{
+  border: none;
+  padding: 0;
+  margin: 0;
+  input{
+      padding: 0;
+      //color: #28a745;
+      border: none;
+      margin: 0;
+  }
+}
+.example-full-width {
+  height: 42px !important;
+  border: 2px solid #28a745;
+  border-radius: 5px;
+  background-color: transparent;
+  padding: 0;
+  margin: 0;
+}
+.champs{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin: 10px 0;
+  label{
+      width: 300px;
+      font-weight: normal;
+  }
+  mat-label{
+      font-weight: normal;
+      font-size: 12px;
+      position: relative;
+      bottom: 5px;
+  }
+  .example-full-width{
+      background-color: #28a745;
+      padding: 0;
+      width: 100%;
+  }
+}

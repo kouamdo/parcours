@@ -8,8 +8,6 @@ import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { Observable, EMPTY } from 'rxjs';
 import { RessourcesService } from 'src/app/services/ressources/ressources.service';
-import { TypeUnite } from 'src/app/modele/type-unite';
-
 import { IRessource } from 'src/app/modele/ressource';
 
 

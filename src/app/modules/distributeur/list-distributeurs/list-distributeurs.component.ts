@@ -27,11 +27,6 @@ export interface User {
 })
 export class ListDistributeursComponent implements OnInit {
 
-
-  distributeurs$:Observable<IDistributeur[]>=EMPTY;
-  services$:Observable<IService[]>=EMPTY;
-  tickets$:Observable<ITicket[]>=EMPTY;
-
   id_distributeur : string = "0";
   id_service : number = 0;
   raisonSocial_distributeur : string = "";
@@ -54,8 +49,6 @@ export class ListDistributeursComponent implements OnInit {
   constructor(private translate: TranslateService,private router:Router, private serviceDistributeur:DistributeursService, private _liveAnnouncer: LiveAnnouncer, private serviceService:ServicesService, private serviceTicket:TicketsService){ }
 
   ngOnInit(): void {
-    this.services$ = this.getAllServices();
-    this.tickets$ = this.getAllTickets();
 
     this.getAllDistributeurs().subscribe(valeurs => {
       this.dataSource.data = valeurs;
@@ -126,10 +119,4 @@ export class ListDistributeursComponent implements OnInit {
     }
   }
 
-  private getAllServices(){
-    return this.serviceService.getAllServices();
-  }
-  private getAllTickets(){
-    return this.serviceTicket.getAllTickets();
-}
 }

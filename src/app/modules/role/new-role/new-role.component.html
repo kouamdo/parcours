@@ -1,6 +1,9 @@
 <div id="mainSection">
   <div class="card block" id="top2">
-      <div class="card-header" class="entete pt-4 pb-4">{{'role.header' | translate}}</div>
+    <!--<div class="card-header" class="entete pt-4 pb-4">{{'role.header' | translate}}</div>-->
+      <div class="card-header" class="entete pt-4 pb-4">
+        {{'role.header' | translate}} {{titre}}
+      </div>
       <div class="card-body">
           <form [formGroup]="forme" (ngSubmit)="onSubmit(forme.value)" *ngIf="forme" >
               <div class="">
@@ -43,7 +46,7 @@
                   </div>
               </div>
               <div class="actionButton">
-                <button class="btn" routerLink="../list-roles">{{'lists.button2' | translate}}Annuler</button>
+                <button class="btn" routerLink="../list-roles">{{'lists.button2' | translate}}</button>
                 <button type="submit" class="btn">{{btnLibelle}}</button>
               </div>
           </form>

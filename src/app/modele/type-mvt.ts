@@ -1,5 +1,3 @@
-export enum TypeMvt {
-  Neutre="neutre",
-  Ajout="ajout",
-  Reduire="reduire",
+export interface TypeMvt {
+   type: string[];
 }

@@ -35,7 +35,6 @@ export class ViewFormDocumentComponent implements OnInit {
           this.document = x;
         });
     }
-
     this.titre=this.dataEnteteMenuService.dataEnteteMenu
   }
 

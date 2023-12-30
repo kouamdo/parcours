@@ -23,7 +23,7 @@ import { IMouvement } from 'src/app/modele/mouvement';
 import { ObjetCleValeur } from 'src/app/modele/objet-cle-valeur';
 import { IPrecoMvt } from 'src/app/modele/precomvt';
 import { IRessource } from 'src/app/modele/ressource';
-import { TypeTicket } from 'src/app/modele/type-ticket';
+import { IType } from 'src/app/modele/type';
 import { AttributService } from 'src/app/services/attributs/attribut.service';
 import { DistributeursService } from 'src/app/services/distributeurs/distributeurs.service';
 import { DocumentService } from 'src/app/services/documents/document.service';
@@ -77,7 +77,7 @@ export class NewExemplaireComponent implements OnInit {
     dateCreation: new Date(),
     dateModification: new Date(),
     valeursParDefaut: '',
-    type: TypeTicket.Int,
+    type: IType.Int,
   };
 
   formeExemplaire: FormGroup;
@@ -91,14 +91,15 @@ export class NewExemplaireComponent implements OnInit {
   idPatientCourant: string | null = '';
   nomPatientCourant: string | null = '';
 
-  typeInt = TypeTicket.Int;
-  typeString = TypeTicket.String;
-  typeDouble = TypeTicket.Double;
-  typeFloat = TypeTicket.Float;
-  typeBoolean = TypeTicket.Boolean;
-  typeDate = TypeTicket.Date;
-  TypeBoolean = TypeTicket.Boolean;
-  TypeRadio = TypeTicket.Radio;
+  typeInt = IType.Int;
+  typeString = IType.String;
+  typeDouble = IType.Double;
+  typeFloat = IType.Float;
+  typeBoolean = IType.Boolean;
+  typeDate = IType.Date;
+  TypeBoolean = IType.Boolean;
+  TypeRadio = IType.Radio;
+  typeTextArea= IType.Textarea;
 
   compteur: number = -1;
   totalAttribut: number = 0;
@@ -409,7 +410,7 @@ export class NewExemplaireComponent implements OnInit {
     let valAttribut = this.rechercherValeurParIdAttribut(attributCategories.attribut.id);
     this.tempAttributsCpt.set(attributCategories.attribut.id, cpt+1)
     this.tempAttributsObbligatoires.set(cpt+1, attributCategories.attribut.titre)
-    if (attributCategories.attribut.type == TypeTicket.Date && valAttribut != null) {
+    if (attributCategories.attribut.type == IType.Date && valAttribut != null) {
       // si le type de l'attribut est Date et que la valeur de valAttribut n'est pas vide
       let dateAtt = new Date();
       if(valAttribut != "PARCOURS_NOT_FOUND_404")
@@ -431,7 +432,7 @@ export class NewExemplaireComponent implements OnInit {
       return num;
 
     let valAttribut = this.rechercherValeurParIdAttribut(attribut.id);
-    if (attribut.type == TypeTicket.Date && valAttribut != null) {
+    if (attribut.type == IType.Date && valAttribut != null) {
       let date = new Date(valAttribut);
       let dateReduite = this.datePipe.transform(date, 'yyyy-MM-dd');
       this.ajouterDisabledAttributs(dateReduite);

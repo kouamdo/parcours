@@ -1,5 +1,7 @@
 <div id="" class="d-flex flex-column justify-content-around">
-    <app-entete class="title" id="top1"></app-entete>
+    <div class="title" id="top1">
+        <app-entete class="title"></app-entete>
+    </div>
     <div class="card container-fluid" id="top">
         <div class='card-hearder pt-3' >
             <div class="d-flex align-items-center justify-content-end tableTools">
@@ -60,10 +62,7 @@
                                     <span>...</span>
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="triggerId">
-                                    <button class="dropdown-item nav-link" [routerLink]="['/service-nouveau']" title="{{'patient.table.actions.link3' | translate}}">
-                                        <i class="fa fa-eye text-secondary" aria-hidden="true"></i>
-                                        <span>{{'patient.table.actions.link3' | translate}}</span>
-                                    </button>
+
                                     <button class="dropdown-item nav-link" [routerLink]="['/service-nouveau',element.id]" title="{{'patient.table.actions.link2' | translate}}">
                                         <i class="fa fa-pen text-info" aria-hidden="true"></i>
                                         <span>{{'patient.table.actions.link2' | translate}}</span>

@@ -53,7 +53,6 @@ export class ListPatientsComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort) sort!: MatSort;
 
   constructor(private translate: TranslateService,private router:Router, private servicePatient:PatientsService, private _liveAnnouncer: LiveAnnouncer, private serviceService:ServicesService, private serviceTicket:TicketsService, private dialogDef : MatDialog) {
-
   }
 
   ngOnInit(): void {

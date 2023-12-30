@@ -16,6 +16,7 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { HttpLoaderFactory } from 'src/app/app.module';
 import { ListRessourcesComponent } from './list-ressources/list-ressources.component';
 import { SharedModule } from '../shared/shared.module';
+import { MatSelectModule } from '@angular/material/select';
 
 
 
@@ -37,6 +38,7 @@ import { SharedModule } from '../shared/shared.module';
     MatPaginatorModule,
     MatTableModule,
     MatSortModule,
+    MatSelectModule,
     SharedModule,
     TranslateModule.forChild({
         loader: {

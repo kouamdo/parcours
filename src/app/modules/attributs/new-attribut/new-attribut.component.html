@@ -1,91 +1,86 @@
 <div id="mainSection">
-    <div class="card block" id="top2">
-      <div class="card-header pt-4 pb-4 entete">
-        <h2>{{"attributs.title1" | translate}} {{titre}}</h2>
+  <div class="card block" id="top2">
+    <!--<div class="card-header" class="entete pt-4 pb-4">{{ titre }}</div>-->
+      <div class="card-header" class="entete pt-4 pb-4">
+        {{"attributs.title1" | translate}} {{titre}}
       </div>
-        <div class="card-body">
-            <form [formGroup]="forme" (ngSubmit)="onSubmit(forme.value)" *ngIf="forme" >
-                <div class="">
-                    <div class="">
-                        <div class="form-group">
-                            <div>
-                                <div class="champs">
-                                    <label for="titre" class="label">
-                                        {{'attributs.table.title1' | translate}} <span style="color: red;" aria-label="required">*</span>
-                                    </label>
-                                    <input type="text" formControlName="titre" name="titre" id="titre"  placeholder="{{'attributs.table.title1' | translate}}"  class="form-control">
-                                </div>
-                                <div  *ngIf="submitted && f['titre'].errors"  class="alert alert-danger" >
-                                    <div *ngIf="f['titre'].errors['required']">{{'attributs.form.text1' | translate}}</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div>
-                                <div class="champs">
-                                    <label for="description" class="label" >
-                                        {{'attributs.table.title2' | translate}}  <span style="color: red;" aria-label="required">*</span>
-                                    </label>
-                                    <input  type="text" formControlName="description"  name="description" id="description" placeholder="{{'attributs.table.title2' | translate}}" value="" class="form-control">
-                                </div>
-                                <div  *ngIf="submitted && f['description'].errors"  class="alert alert-danger" >
-                                    <div *ngIf="f['description'].errors['required']">{{'attributs.form.text2' | translate}}</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group" id="eta">
-                            <div>
-                                <div class="champs">
-                                    <label for="etat" class="label" >
-                                        {{'attributs.table.title3' | translate}}
-                                    </label>
-                                    <input  type="checkbox" value="true" checked  formControlName="etat"  name="etat" id="etat" placeholder="{{'attributs.table.title3' | translate}}"  class="form-control">
-                                </div>
-                                <div  *ngIf="submitted && f['etat'].errors"  class="alert alert-danger" >
-                                    <div *ngIf="f['etat'].errors['required']">{{'attributs.form.text3' | translate}}</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="champs">
-                                <label  for="type" class="label">
-                                    {{"attributs.table.title6" | translate}}
-                                </label>
-                                <select  class="form-control" formControlName="type" name="type" id="type">
-                                    <option value="{{typeInt}}" >{{typeInt}}</option>
-                                    <option value="{{typeString}}" >{{typeString}}</option>
-                                    <option value="{{typeDouble}}" >{{typeDouble}}</option>
-                                    <option value="{{typeFloat}}" >{{typeFloat}}</option>
-                                    <option value="{{typeBoolean}}" >{{typeBoolean}}</option>
-                                    <option value="{{typeDate}}" >{{typeDate}}</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="champs">
-                                <label  for="obligatoire"  class="label" >
-                                    {{'attributs.table.title8' | translate}}
-                                </label>
-                                <p class="w-100 d-flex align-items-center choix" >
-                                    <input type="checkbox" value="true" checked  formControlName="obligatoire" name="obligatoire" id="obligatoire" placeholder="{{'attributs.table.title5' | translate}}" class="ml-2" > oui
+      <div class="card-body">
+          <form [formGroup]="forme" (ngSubmit)="onSubmit(forme.value)" *ngIf="forme" >
+              <div class="">
+                  <div class="">
+                      <div class="form-group">
+                          <div>
+                              <div class="champs">
+                                  <label for="titre" class="label">
+                                      {{'attributs.table.title1' | translate}} <span style="color: red;" aria-label="required">*</span>
+                                  </label>
+                                  <input type="text" formControlName="titre" name="titre" id="titre"  placeholder="{{'attributs.table.title1' | translate}}"  class="form-control">
+                              </div>
+                              <div  *ngIf="submitted && f['titre'].errors"  class="alert alert-danger" >
+                                  <div *ngIf="f['titre'].errors['required']">{{'attributs.form.text1' | translate}}</div>
+                              </div>
+
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          <div>
+                              <div class="champs">
+                                  <label for="description" class="label" >
+                                      {{'attributs.table.title2' | translate}}  <span style="color: red;" aria-label="required">*</span>
+                                  </label>
+                                  <input  type="text" formControlName="description"  name="description" id="description" placeholder="{{'attributs.table.title2' | translate}}" value="" class="form-control">
+                              </div>
+                              <div  *ngIf="submitted && f['description'].errors"  class="alert alert-danger" >
+                                  <div *ngIf="f['description'].errors['required']">{{'attributs.form.text2' | translate}}</div>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="form-group" id="eta">
+                          <div>
+                              <div class="champs">
+                                  <label for="etat" class="label" >
+                                      {{'attributs.table.title3' | translate}}
+                                  </label>
+                                  <p class="w-100 d-flex align-items-center choix" >
+                                  <input type="checkbox" checked value="true"  formControlName="etat"  name="etat" id="etat" placeholder="{{'attributs.table.title3' | translate}}"  class="form-control">
                                 </p>
-                            </div>
+                              </div>
+                              <div  *ngIf="submitted && f['etat'].errors"  class="alert alert-danger" >
+                                  <div *ngIf="f['etat'].errors['required']">{{'attributs.form.text3' | translate}}</div>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          <div class="champs">
+                              <label  for="type" class="label">
+                                  {{"attributs.table.title6" | translate}}<span style="color: red;" aria-label="required">*</span>
+                              </label>
+                              <select  class="form-control" formControlName="type" name="type" id="type">
+                                  <option *ngFor="let item of typeAttribut" value="{{item}}">{{item}}</option>
+                              </select>
+                          </div>
+                          <div  *ngIf="submitted && f['type'].errors"  class="alert alert-danger" >
+                            <div *ngIf="f['type'].errors['required']">{{'attributs.form.text3' | translate}}</div>
                         </div>
-                        <div class="form-group">
-                            <div class="champs">
-                                <label  for="valeursParDefaut"  class="label" >
-                                    {{'attributs.table.title9' | translate}}
-                                </label>
-                                <input type="text" formControlName="valeursParDefaut" name="valeursParDefaut" id="valeursParDefaut" placeholder="{{'attributs.table.title10' | translate}}" class="form-control">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="actionButton">
-                    <button class="btn" routerLink="../list-attributs"><i class="fa fa-reply mr-1" aria-hidden="true"></i>{{'lists.button2' | translate}}</button>
-                    <button type="submit" class="btn btnValidation">{{btnLibelle}}</button>
-                </div>
-            </form>
+                      </div>
+                      <div class="form-group">
+                          <div class="champs">
+                              <label  for="valeursParDefaut"  class="label" >
+                                  {{'attributs.table.title9' | translate}}
+                              </label>
+                              <input type="text" formControlName="valeursParDefaut" name="valeursParDefaut" id="valeursParDefaut" placeholder="{{'attributs.table.title10' | translate}}" class="form-control"
+                              >
+                          </div>
+                      </div>
+
+
+                  </div>
+              </div>
+              <div class="actionButton">
+                  <button class="btn" routerLink="../list-attributs"><i class="fa fa-reply mr-1" aria-hidden="true"></i>{{'lists.button2' | translate}}</button>
+                  <button type="submit" class="btn btnValidation">{{btnLibelle}}</button>
+              </div>
+          </form>
         </div>
     </div>
 </div>

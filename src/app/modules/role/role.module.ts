@@ -18,6 +18,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
@@ -38,6 +39,7 @@ import { MatTableModule } from '@angular/material/table';
     MatTableModule,
     MatSortModule,
     TicketsModule,
+    SharedModule,
     TranslateModule.forChild({
       loader: {
           provide: TranslateLoader,

@@ -10,36 +10,36 @@
             </p>
             <div class="hoverElement" id="description">
                 <div>
-                    <span class="title"> {{'document.table.title2' | translate}} : </span>
+                    <span class="title1"> {{'document.table.title2' | translate}} : </span>
                     <p>{{document.description}}</p>
                 </div>
                 <div>
-                    <span class="title"> {{'services.form.label2' | translate}} : </span>
+                    <span class="title1"> {{'services.form.label2' | translate}} : </span>
                     <p>{{document.etat}}</p>
                 </div>
                 <div>
                     <span> {{"document.table.title18" | translate}} : </span>
-                    <p class="title">{{document.affichagePrix}}</p>
+                    <p class="title1">{{document.affichagePrix}}</p>
                 </div>
                 <div>
                     <span> {{"document.table.title19" | translate}} : </span>
-                    <p class="title">{{document.contientRessources}}</p>
+                    <p class="title1">{{document.contientRessources}}</p>
                 </div>
                 <div>
                     <span> {{"document.table.title20" | translate}} : </span>
-                    <p class="title">{{document.contientDistributeurs}}</p>
+                    <p class="title1">{{document.contientDistributeurs}}</p>
                 </div>
             </div>
         </div>
     </div>
     <div class="infos">
         <p id="titre">
-            <span class="title"> {{'document.table.title1' | translate}} : </span>
+            <span class="title1"> {{'document.table.title1' | translate}} : </span>
             {{document.titre}}
         </p>
         
         <!-- tableau des missions -->
-        <p class="title">
+        <p class="title1">
             {{'document.view.text1' | translate}} :
         </p>
         <div class="tableMissions card table-responsive">
@@ -64,7 +64,7 @@
         </div>
         
         <!-- tableau des categories -->
-        <p class="title">
+        <p class="title1">
             {{'document.view.text3' | translate}} :
         </p>
         <div *ngFor="let categorie of document.categories" id="blockCat">
@@ -99,8 +99,8 @@
         </div>
 
         <!-- tableau des preconisations -->
-        <p *ngIf="document.preconisations.length>0" class="title">
-            {{'preconisation.view.text1' | translate}} :
+        <p *ngIf="document.preconisations.length>0" class="title1">
+            {{'preconisation.view.text1' | translate}} : 
         </p>
         <div *ngIf="document.preconisations.length>0" class="tableAttributs card table-responsive">
             <table class="table table-striped table-sm table-inverse table-bordered">

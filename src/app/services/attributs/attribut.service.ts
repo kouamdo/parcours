@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import {  map } from 'rxjs/operators';
 import { IAttributs } from 'src/app/modele/attributs';
+import { TypeAttribut } from 'src/app/modele/type-attributs';
 
 @Injectable({
   providedIn: 'root'
@@ -36,6 +37,11 @@ export class AttributService {
   ajouterAttribut(attribut:IAttributs)
   {
     return this.http.post("api/attributs",attribut);
+  }
+
+  getTypeAttribut():Observable<TypeAttribut>
+  {
+    return this.http.get<TypeAttribut>('api/typeAttribut').pipe(map(x=>x));
   }
 
 }

@@ -7,8 +7,8 @@ import { IService } from 'src/app/modele/service';
 import { ServicesService } from 'src/app/services/services/services.service';
 import { IFamille } from 'src/app/modele/famille';
 import { FamillesService } from 'src/app/services/familles/familles.service';
-import {v4 as uuidv4} from 'uuid';import { DonneesEchangeService } from 'src/app/services/donnees-echange/donnees-echange.service';
-
+import {v4 as uuidv4} from 'uuid';
+import { DonneesEchangeService } from 'src/app/services/donnees-echange/donnees-echange.service';
 
 
 

@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import {  map } from 'rxjs/operators';
 import { IFamille } from 'src/app/modele/famille';
+import { TypeUnite } from 'src/app/modele/type-unite';
 
 @Injectable({
   providedIn: 'root'
@@ -37,5 +38,10 @@ export class FamillesService {
   ajouterFamille(famille:IFamille)
   {
     return this.http.post("api/famille",famille);
+  }
+
+  getTypeUnite():Observable<TypeUnite>
+  {
+    return this.http.get<TypeUnite>('api/typeUnite').pipe(map(x=>x));
   }
 }

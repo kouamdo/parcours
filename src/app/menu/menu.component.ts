@@ -16,7 +16,7 @@ export class MenuComponent implements OnInit, OnChanges {
   @Input()
   langueParent :string = 'fr';
   userId !:any;
-  constructor(private menuService:MenusService,private dataEnteteMenuService:DonneesEchangeService) { }
+  constructor(private menuService:MenusService,private dataEnteteMenuService:DonneesEchangeService ) { }
 
   ngOnInit(): void {
     if(localStorage.getItem("userId")!=null){

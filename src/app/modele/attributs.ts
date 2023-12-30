@@ -1,4 +1,5 @@
-import { TypeTicket } from "./type-ticket";
+import { IType } from "./type";
+
 
 export interface IAttributs {
     id:string,
@@ -8,5 +9,6 @@ export interface IAttributs {
     dateCreation?:Date,
     dateModification?:Date,
     valeursParDefaut: string,
-    type:TypeTicket
+    obligatoire?: boolean,
+    type:IType
 }

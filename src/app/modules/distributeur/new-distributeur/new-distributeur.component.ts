@@ -6,6 +6,7 @@ import {v4 as uuidv4} from 'uuid';
 import { DatePipe } from '@angular/common';
 import { IDistributeur } from 'src/app/modele/distributeur';
 import { DistributeursService } from 'src/app/services/distributeurs/distributeurs.service';
+import { DonneesEchangeService } from 'src/app/services/donnees-echange/donnees-echange.service';
 
 @Component({
   selector: 'app-new-distributeur',
@@ -18,9 +19,9 @@ export class NewDistributeurComponent implements OnInit {
   forme: FormGroup;
   btnLibelle: string="Ajouter";
   submitted: boolean=false;
-
+  titre:string=''
   //TODO validation du formulaire. particulièrment les mail
-  constructor(private formBuilder:FormBuilder, private distributeurService:DistributeursService,private router:Router, private infosPath:ActivatedRoute, private datePipe: DatePipe){
+  constructor(private formBuilder:FormBuilder, private distributeurService:DistributeursService,private dataEnteteMenuService:DonneesEchangeService,private router:Router, private infosPath:ActivatedRoute, private datePipe: DatePipe){
     this.forme = this.formBuilder.group({
     raisonSocial: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
     etat: [true],
@@ -51,6 +52,7 @@ export class NewDistributeurComponent implements OnInit {
         })
       });
     }
+    this.titre=this.dataEnteteMenuService.dataEnteteMenu
   }
 
 

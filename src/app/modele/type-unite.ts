@@ -1,4 +1,4 @@
-export enum TypeUnite {
-  
+export interface TypeUnite {
+  type:String[];
 }
 

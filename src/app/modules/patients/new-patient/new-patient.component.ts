@@ -19,18 +19,15 @@ export class NewPatientComponent implements OnInit {
   patient : IPatient|undefined;
   forme: FormGroup;
   btnLibelle: string="Ajouter";
-  //title: string="Ajouter un nouveau Patient";
   submitted: boolean=false;
   initialDate = new FormControl(new Date());
-
-  //TODO validation du formulaire. particulièrment les mail; les dates
   titre:string='';
-
+  //TODO validation du formulaire. particulièrment les mail; les dates
   constructor(private formBuilder:FormBuilder,private dataEnteteMenuService:DonneesEchangeService, private patientService:PatientsService,private router:Router, private infosPath:ActivatedRoute, private datePipe: DatePipe) {
     this.forme =  this.formBuilder.group({
       nom: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
       prenom: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
-      sexe: [''],
+      sexe: ['M'],
       mail: ['', [Validators.required, Validators.email, Validators.pattern(".+@.+\.{1}[a-z]{2,3}")]],
       //todo initialisation du composant à une date
       dateNaissance: ['1980-01-01', Validators.required],
@@ -62,7 +59,7 @@ export class NewPatientComponent implements OnInit {
         })
       });
     }
-
+    this.titre=this.dataEnteteMenuService.dataEnteteMenu
   }
 
   get f(){

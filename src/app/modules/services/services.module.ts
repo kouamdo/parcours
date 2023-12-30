@@ -34,6 +34,7 @@ import { SharedModule } from '../shared/shared.module';
     MatFormFieldModule,
     MatPaginatorModule,
     MatTableModule,
+    SharedModule,
     MatSortModule,
     SharedModule,
     TranslateModule.forChild({

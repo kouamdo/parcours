@@ -117,7 +117,7 @@
       }
   },
   "services": {
-    "title1":"Ajouter",
+    "title1":"Ajouter ",
     "table": {
       "title1": "Libelle",
       "title2": "Etat",
@@ -158,7 +158,7 @@
     }
   },
   "attributs": {
-    "title1":"Ajouter",
+    "title1":"Ajouter ",
     "table": {
       "title1": "titre",
       "title2": "Description",
@@ -181,7 +181,7 @@
     }
   },
   "missions": {
-    "title1":"Ajouter",
+    "title1":"Ajouter ",
     "table": {
       "title1": "Libelle",
       "title2": "Description",
@@ -206,7 +206,7 @@
     }
   },
   "document": {
-    "title3":"Ajouter un nouveau document",
+    "title3":"Ajouter ",
     "search-bar": "Rechercher",
     "title1": "Affichage des resultats",
     "title2": "Selectionner les attributs de la categories",
@@ -246,13 +246,13 @@
       "text7": "Si cette case est cochée, la colone du distributeur sera visible lors de la creation des mouvement d'un exemplaire de ce document"
     },
     "view": {
-      "title": "Modele",
+      "title": "Modele ",
       "text1": "liste des missions du document",
       "text2": "liste des attributs du document",
       "text3": "liste des attributs par categorie du document"
     },
     "exemplaire": {
-      "title": "Exemplaire du document",
+      "title": "Exemplaire ",
       "title2": "Donnees obsoletes",
       "title3": "Ajouter des ressources",
       "title4": "liste des mouvements",
@@ -268,7 +268,7 @@
     "libelle": "langues"
   },
   "famille": {
-    "header": "Ajouter Famille",
+    "header": "Ajouter ",
     "table": {
       "title1": "Libellé",
       "title2": "Description",
@@ -281,7 +281,7 @@
     "lists": {
       "button1": "Retour"
     },
-    "title": "Listing Famille",
+    "title": "Listing ",
     "search-bar": "Rechercher",
     "table1": {
       "title1": "Libellé",
@@ -298,7 +298,7 @@
   },
   "ressource": {
     "table": {
-      "title": "Ajouter ressource",
+      "title": "Ajouter ",
       "title1": " Libellé",
       "title2": "Etat",
       "title3": "Quantité",
@@ -327,7 +327,7 @@
     "lists": {
       "button2": "Retour"
     },
-    "title": "Listing Ressource",
+    "title": "Listing ",
     "search-bar": "Rechercher",
     "table2": {
       "title1": "Ajouter ressource",
@@ -338,9 +338,8 @@
       "title6": "Unité",
       "title7": "Prix",
       "title8": "Catégorie",
-      "title9": "Actions",
-      "title10": "Total ",
-      "title11": "Montant total "
+      "title9": "caracteristique",
+      "title10": "Actions"
     }
   },
   "preconisation":{
@@ -362,7 +361,7 @@
   },
   "distributeur": {
     "table": {
-      "title": "Ajouter Distributeur",
+      "title": "Ajouter ",
       "title1": "Raison Social ",
       "title2": "Etat",
       "title3": "Adresse",
@@ -376,7 +375,7 @@
     "lists": {
       "button1": "Annuler"
     },
-    "title": "listing Distributeur",
+    "title": "listing ",
     "search-bar": "Rechercher",
     "table2": {
       "title1": "raisonSocial",
@@ -388,7 +387,7 @@
     }
   },
   "precomvt": {
-    "header": "Nouvelle Préconisation",
+    "header": "Nouvelle ",
     "header1": "Assigner Familles",
     "header2": "Assigner Ressource",
     "table": {
@@ -446,7 +445,7 @@
     }
 },
 "role":{
-  "header":"Ajouter Role",
+  "header":"Ajouter ",
   "table":{
     "title1":"Titre",
     "title2":"titre",
@@ -460,7 +459,7 @@
 "lists":{
   "button1":"Annuler"
 },
-"title":"listing Role",
+"title":"listing ",
 "search-bar":"Rechercher",
 "table1":{
     "title1":"Titre",

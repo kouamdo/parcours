@@ -5,8 +5,8 @@ export interface IMission {
     libelle:string,
     description:string,
     etat:boolean,
-    dateCreation:Date,
-    dateModification:Date,
+    dateCreation?:Date,
+    dateModification?:Date,
     service:IService,
-    idLogin?:string 
+    idLogin?:string
 }

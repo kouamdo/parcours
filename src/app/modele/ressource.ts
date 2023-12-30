@@ -1,6 +1,6 @@
 import { IDistributeur } from "./distributeur";
 import { IFamille } from "./famille";
-import { Unites } from "./unites";
+//import { Unites } from "./unites";
 
 
 export interface IRessource {
@@ -9,7 +9,7 @@ export interface IRessource {
     etat:boolean,
     quantite:number,
     prix:number,
-    unite:Unites,
+    unite:string,
     famille:IFamille,
     caracteristique:string,
    /* dateCreation:Date,
