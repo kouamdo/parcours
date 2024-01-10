@@ -116,12 +116,32 @@
                             </ng-container>
 
                             <!-- prix Column -->
-                            <ng-container *ngIf="document.affichagePrix == true" matColumnDef="prix">
+                            <ng-container *ngIf="document.affichagePrix == true && document.typeMouvement == typeNeutre" matColumnDef="prix">
                                 <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{'ressource.table2.title7' | translate}} </th>
                                 <td class="text-dark containCell" mat-cell *matCellDef="let element">
                                     <label class="custom-control">
-                                        <input class="form-control" type="number" [(ngModel)]="element.prix" [ngModelOptions]="{standalone: true}" value="true">
-                                    </label>
+                                        <input class="form-control" type="number" [(ngModel)]="element.prix" [ngModelOptions]="{standalone: true}">
+                                    </label> 
+                                </td>
+                            </ng-container>
+
+                            <!-- prixEntrée Column -->
+                            <ng-container *ngIf="document.affichagePrix == true && document.typeMouvement == typeAjout" matColumnDef="prixEntrée">
+                                <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{'ressource.table.title5' | translate}} </th>
+                                <td class="text-dark containCell" mat-cell *matCellDef="let element">
+                                    <label class="custom-control">
+                                        <input class="form-control" type="number" [(ngModel)]="element.prix" [ngModelOptions]="{standalone: true}">
+                                    </label> 
+                                </td>
+                            </ng-container>
+
+                            <!-- prixDeSortie Column -->
+                            <ng-container *ngIf="document.affichagePrix == true && document.typeMouvement == typeReduire" matColumnDef="prixDeSortie">
+                                <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{'ressource.table.title9' | translate}} </th>
+                                <td class="text-dark containCell" mat-cell *matCellDef="let element">
+                                    <label class="custom-control">
+                                        <input class="form-control" type="number" [(ngModel)]="element.prix" [ngModelOptions]="{standalone: true}">
+                                    </label> 
                                 </td>
                             </ng-container>
 
@@ -154,7 +174,7 @@
                         </table>
 
                         <!-- montant total -->
-                        <div class="total" *ngIf="document.affichagePrix == true">
+                        <div class="total" *ngIf="document.affichagePrix == true && ELEMENTS_TABLE_MOUVEMENTS.length > 0">
                             <span class="mr-2">{{'ressource.table2.title11' | translate}}</span>
                             <input type="text" [value]="sommeMontants()" disabled>
                         </div>

@@ -41,7 +41,11 @@
                         <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'document.table.title2' | translate}} </th>
                         <td class="text-dark text-center containCell" mat-cell *matCellDef="let element"> {{element.description}} </td>
                     </ng-container>
-
+                   <!-- typeMouvement Column -->
+                    <ng-container matColumnDef="typeMouvement">
+                        <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'document.table.title22' | translate}} </th>
+                        <td class="text-dark text-center containCell" mat-cell *matCellDef="let element"> {{element.typeMouvement}} </td>
+                    </ng-container>
                     <!-- etat Column -->
                     <ng-container matColumnDef="etat">
                         <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'services.form.label2' | translate}} </th>
@@ -82,7 +86,7 @@
                     
                     <!-- sousDocuments Column -->
                     <ng-container matColumnDef="sousDocuments">
-                        <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'document.table.title18' | translate}} </th>
+                        <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'document.table.title21' | translate}} </th>
                         <td class="text-dark text-center containCell" mat-cell *matCellDef="let element">
                             <span> {{element.listSousDocuments}} </span>
                         </td>

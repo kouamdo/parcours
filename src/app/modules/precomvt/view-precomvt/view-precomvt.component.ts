@@ -33,11 +33,10 @@ export class ViewPrecomvtComponent implements OnInit {
 
   ngOnInit(): void {
     let idPrecoMvt = this.data.idPrecoMvt
-    console.log("idPrecoMvt :" + idPrecoMvt);
     if((idPrecoMvt != null) && idPrecoMvt!==''){
       this.precoMvtService.getPrecomvtById(idPrecoMvt).subscribe(
         x =>{
-          this.precoMvt = x; console.log("Voici le precomvt", this.precoMvt);
+          this.precoMvt = x;
           this.precoMvt.precomvtqte.forEach(
             element => {
                    if (element.ressource != undefined && element.ressource != null ){

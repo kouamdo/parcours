@@ -7,4 +7,5 @@ export interface IExemplaireDocument extends IDocument{
     idDocument : string,
     mouvements?: IMouvement[]
     objetEnregistre : ObjetCleValeur[]
+    idSousExelplaires? : string[]
 }

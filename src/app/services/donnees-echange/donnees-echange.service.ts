@@ -12,10 +12,12 @@ export class DonneesEchangeService {
   dataDocumentAttributs : any;
   dataDocumentSousDocuments : any;
   dataEnteteMenu : any;
+  dataDocumentSousExemplaireDocuments : any;
   constructor(private http:HttpClient) { }
 
   getTypeMvt():Observable<TypeMvt>
   {
-    return this.http.get<TypeMvt>('api/typeMvt').pipe(map(x=>x));
+    return this.http.get<TypeMvt>('api/typeMvt');
   }
+
 }

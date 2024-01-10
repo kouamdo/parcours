@@ -234,7 +234,8 @@
       "title18": "visibilité du prix ?",
       "title19": "lier des ressources ?",
       "title20": "visibilité du distributeur ?",
-      "title21": "Sous documents"
+      "title21": "Sous documents",
+      "title22": "type des mouvements"
     },
     "form": {
       "text1": "Le Titre est obligatoire.",
@@ -243,7 +244,9 @@
       "text4": "Les attributs sont obligatoires.",
       "text5": "Si cette case est cochée, la colone du prix sera visible lors de la creation des mouvement d'un exemplaire de ce document",
       "text6": "Si cette case est décochée, il n'y aura pas la possibilité de creer des mouvement lors de la creation d'un exemplaire du document",
-      "text7": "Si cette case est cochée, la colone du distributeur sera visible lors de la creation des mouvement d'un exemplaire de ce document"
+      "text7": "Si cette case est cochée, la colone du distributeur sera visible lors de la creation des mouvement d'un exemplaire de ce document",
+      "text8": "Le type des mouvements effectués sur ce document",
+      "text9": "Le type des mouvements effectués sur ce document est obligatoire"
     },
     "view": {
       "title": "Modele ",
@@ -256,6 +259,7 @@
       "title2": "Donnees obsoletes",
       "title3": "Ajouter des ressources",
       "title4": "liste des mouvements",
+      "title5": "Selectionner les exemplaires à associer",
       "text1": "Composition de l'exemplaire",
       "text2": "date de peremption",
       "text3": "Modifier le distributeur"
@@ -303,20 +307,21 @@
       "title2": "Etat",
       "title3": "Quantité",
       "title4": "Unité",
-      "title5": "Prix",
+      "title5": "Prix d'entree",
       "title6": "Catégorie",
       "title7": "Caractéristiques",
-      "title8": "Ressources"
+      "title8": "Ressources",
+      "title9": "Prix de sortie"
     },
     "form": {
       "text1": "Champ Obligatoire",
-      "text2": "Champ Obligatoire",
+      "text2": "",
       "text4": "litre",
       "text5": "kg",
       "text6": "m²",
       "text7": "quintaux",
-      "text8": "Champ Obligatoire",
-      "text9": "Champ Obligatoire",
+      "text8": "",
+      "text9": "",
       "text11": "Selectionnez une Unité",
       "text12": "souple",
       "text13": "dure",
@@ -338,8 +343,9 @@
       "title6": "Unité",
       "title7": "Prix",
       "title8": "Catégorie",
-      "title9": "caracteristique",
-      "title10": "Actions"
+      "title9": "Actions",
+      "title10": "Total",
+      "title11": "Montant total"
     }
   },
   "preconisation":{

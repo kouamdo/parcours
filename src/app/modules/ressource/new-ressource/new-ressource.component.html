@@ -40,7 +40,7 @@
                               <input type="number" list="" formControlName="quantite" name="quantite" id="quantite" placeholder=" {{'ressource.table.title3' | translate}}" class="form-control" >
                           </div>
                           <div  *ngIf="submitted && f['libelle'].errors"  class="alert alert-danger" >
-                            <div *ngIf="f['libelle'].errors['required']">{{'ressource.form.text8' | translate}}</div>
+                            <div *ngIf="f['libelle'].errors['required']">{{'ressource.form.text1' | translate}}</div>
                         </div>
                       </div>
                       <div class="form-group">
@@ -55,14 +55,30 @@
                             </mat-form-field>
                         </div>
                     </div>
-                       <div class="form-group">
-                          <div class="champs">
-                              <label  for="prix"  class="label" >
-                                {{'ressource.table.title5' | translate}}
-                              </label>
-                              <input type="number" formControlName="prix" name="prix" id="prix" placeholder=" {{'ressource.table.title5' | translate}}" class="form-control" >
-                          </div>
+                    <div class="form-group">
+                       <div class="champs">
+                           <label  for="prixEntree"  class="label" >
+                             {{'ressource.table.title5' | translate}}
+                           </label>
+                           <input type="number" formControlName="prixEntree" name="prixEntree" id="prixEntree" placeholder=" {{'ressource.table.title5' | translate}}" class="form-control" >
+                       </div>
+                   </div>
+                   <div  *ngIf="submitted && f['prixEntree'].errors"  class="alert alert-danger" >
+                     <div *ngIf="f['prixEntree'].errors['required']">{{'ressource.form.text1' | translate}}</div>
+                   </div>
+
+                   <div class="form-group">
+                      <div class="champs">
+                          <label  for="prixDeSortie"  class="label" >
+                            {{'ressource.table.title9' | translate}}
+                          </label>
+                          <input type="number" formControlName="prixDeSortie" name="prixDeSortie" id="prixDeSortie" placeholder=" {{'ressource.table.title9' | translate}}" class="form-control" >
                       </div>
+                  </div>
+                  <div  *ngIf="submitted && f['prixDeSortie'].errors"  class="alert alert-danger" >
+                    <div *ngIf="f['prixDeSortie'].errors['required']">{{'ressource.form.text1' | translate}}</div>
+                  </div>
+
                       <div class="form-group">
                     <div class="champs">
                         <label  for="famille"  class="label" >
@@ -78,8 +94,8 @@
                         </mat-form-field>
                     </div>
                     <div  *ngIf="submitted && f['libelle'].errors"  class="alert alert-danger" >
-                      <div *ngIf="f['libelle'].errors['required']">{{'ressource.form.text9' | translate}}</div>
-                  </div>
+                      <div *ngIf="f['libelle'].errors['required']">{{'ressource.form.text1' | translate}}</div>
+                    </div>
 
                   </div>
                   <div class="form-group">

@@ -25,6 +25,7 @@ import { ModalChoixPreconisationsComponent } from '../../shared/modal-choix-prec
 import { IPrecoMvt } from 'src/app/modele/precomvt';
 import { ModalChoixSousDocumentComponent } from '../../shared/modal-choix-sous-document/modal-choix-sous-document.component';
 import { IAssociationCategorieAttributs } from 'src/app/modele/association-categorie-attributs';
+import { TypeMouvement } from 'src/app/modele/typeMouvement';
 
 
 @Component({
@@ -45,7 +46,8 @@ export class NewFormDocumentComponent implements OnInit {
     preconisations: [],
     affichagePrix: false,
     contientRessources: false,
-    contientDistributeurs: false
+    contientDistributeurs: false,
+    typeMouvement: TypeMouvement.Neutre
   };
   mission$:Observable<IMission[]>=EMPTY;
   forme: FormGroup;
@@ -81,6 +83,8 @@ export class NewFormDocumentComponent implements OnInit {
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
+  
+  typeMvt: string[] = [];
 
   constructor(private router:Router, private formBuilder: FormBuilder, private infosPath:ActivatedRoute,private dataEnteteMenuService:DonneesEchangeService,
      private serviceDocument:DocumentService, private serviceMission:MissionsService, private serviceAttribut:AttributService,
@@ -90,6 +94,7 @@ export class NewFormDocumentComponent implements OnInit {
       _attributs :  new FormArray([]),
       titre: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
       description: [''],
+      typeMouvement: ['', [Validators.required]],
       etat: new FormControl(true),
       affichagePrix: new FormControl(true),
       contientRessources: new FormControl(true),
@@ -98,7 +103,7 @@ export class NewFormDocumentComponent implements OnInit {
   }
   ngOnInit(): void {
     this.mission$ = this.getAllMissions();
-
+    this.donneeDocCatService.getTypeMvt().subscribe(x => this.typeMvt = x.type);
     // chargement de la page a partir d'un Id pour la modification d'un document
     let idDocument = this.infosPath.snapshot.paramMap.get('idDocument');
     if((idDocument != null) && idDocument!==''){
@@ -111,6 +116,7 @@ export class NewFormDocumentComponent implements OnInit {
           titre: this.document.titre,
           description: this.document.description,
           etat: this.document.etat,
+          typeMouvement: this.document.typeMouvement,
           affichagePrix: this.document.affichagePrix,
           contientRessources: this.document.contientRessources,
           contientDistributeurs: this.document.contientDistributeurs,
@@ -320,6 +326,7 @@ export class NewFormDocumentComponent implements OnInit {
       titre: documentInput.titre,
       description: documentInput.description,
       etat: documentInput.etat,
+      typeMouvement: documentInput.typeMouvement,
       missions: documentInput._missions,
       attributs: [],
       categories: [],
@@ -327,7 +334,7 @@ export class NewFormDocumentComponent implements OnInit {
       sousDocuments: [],
       affichagePrix: documentInput.affichagePrix,
       contientRessources: documentInput.contientRessources,
-      contientDistributeurs: documentInput.contientDistributeurs
+      contientDistributeurs: documentInput.contientDistributeurs,
     }
 
     if(this.document.id != ""){

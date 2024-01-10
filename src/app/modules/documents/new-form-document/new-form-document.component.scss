@@ -11,10 +11,13 @@
     width: 60%;
 }
 #etat, #affichagePrix, #contientRessources, #contientDistributeurs{
-  border: none;
-  box-shadow: none;
-  height: 20px;
-  padding: 0;
+    height: 20px;
+    padding: 0;
+    input{
+        border: none;
+        box-shadow: none;
+        padding: 0;
+    }
 }
 .entete{
     background-color: #28a745;
@@ -214,6 +217,17 @@ th{
     }
     #ordreCategorie{
         width: 50px;
+    }
+}
+.groupChamps{
+    display: flex;
+    width: 100%;
+    .form-group{
+        width: 60%;
+    }
+    .champs{
+        margin: 2px 0;
+        width: 100%;
     }
 }
 @media screen and (max-width: 1200px) {

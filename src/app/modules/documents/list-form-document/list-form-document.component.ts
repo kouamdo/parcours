@@ -10,6 +10,7 @@ import { Observable, EMPTY } from 'rxjs';
 import { IAfficheDocument } from 'src/app/modele/affiche-document';
 import { IAttributs } from 'src/app/modele/attributs';
 import { IDocument } from 'src/app/modele/document';
+import { TypeMvt } from 'src/app/modele/type-mvt';
 import { DocumentService } from 'src/app/services/documents/document.service';
 
 @Component({
@@ -24,7 +25,7 @@ export class ListFormDocumentComponent implements OnInit, AfterViewInit {
   ELEMENTS_TABLE: IAfficheDocument[] = [];
   filteredOptions: IDocument[] | undefined;
 
-  displayedColumns: string[] = ['titre', 'description', 'missions', 'attributs', 'categories', 'preconisations', 'sousDocuments', 'actions'];
+  displayedColumns: string[] = ['titre', 'description', 'typeMouvement', 'etat', 'missions', 'attributs', 'categories', 'preconisations', 'sousDocuments', 'actions'];
 
   dataSource = new MatTableDataSource<IAfficheDocument>(this.ELEMENTS_TABLE);
 
@@ -32,6 +33,30 @@ export class ListFormDocumentComponent implements OnInit, AfterViewInit {
   paginator!: MatPaginator;
 
   @ViewChild(MatSort) sort!: MatSort;
+
+  tableDocuments : IAfficheDocument[] = []
+  
+  
+  afficheDocument : IAfficheDocument = {
+    id: '',
+    titre: '',
+    description: '',
+    missions: [],
+    attributs: [],
+    categories: [],
+    listeMissions: '',
+    listAttributs: '',
+    listCategories: '',
+    listPreconisations: '',
+    preconisations: [],
+    sousDocuments: [],
+    listSousDocuments: '',
+    etat: false,
+    typeMouvement: 'Neutre',
+    affichagePrix: false,
+    contientRessources: false,
+    contientDistributeurs: false
+  }
 
   constructor(private translate: TranslateService, private router:Router, private serviceDocument: DocumentService,  private _liveAnnouncer: LiveAnnouncer) { }
 
@@ -106,6 +131,7 @@ export class ListFormDocumentComponent implements OnInit, AfterViewInit {
      listeMissions: '',
      listAttributs: '',
      listCategories: '',
+     typeMouvement:'Neutre',
      listPreconisations: '',
      preconisations: [],
      etat: false,

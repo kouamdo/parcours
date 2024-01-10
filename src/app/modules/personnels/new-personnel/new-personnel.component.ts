@@ -36,7 +36,6 @@ export class NewPersonnelComponent implements OnInit {
 
    ngOnInit() {
      let idPersonnel = this.infosPath.snapshot.paramMap.get('idPersonnel');
-     console.log("idPersonnel:" + idPersonnel);
      if((idPersonnel != null) && idPersonnel!==''){
 
        this.btnLibelle="Modifier";
@@ -45,7 +44,7 @@ export class NewPersonnelComponent implements OnInit {
 
        this.personnelService.getPersonnelById(idPersonnel).subscribe(x =>
        {
-         this.personnel = x; console.log(this.personnel);
+         this.personnel = x;
          this.forme.setValue({
            nom: this.personnel?.nom,
            prenom: this.personnel?.prenom,

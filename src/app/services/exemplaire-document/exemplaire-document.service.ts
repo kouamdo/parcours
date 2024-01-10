@@ -23,6 +23,16 @@ export class ExemplaireDocumentService {
         })
     );
   }
+  
+  getExemplaireDocumentByTitre(titre:string): Observable<IExemplaireDocument[]> {
+    return this.http.get<IExemplaireDocument[]>('api/exemplaires').pipe(
+      map(x=>
+        {
+          return x.filter(e=> e.titre.toLowerCase().startsWith(titre))
+        })
+    );        
+  }
+
    ajouterExemplaireDocument(exemplaire:IExemplaireDocument )
    {
      return this.http.post("api/exemplaires",exemplaire);

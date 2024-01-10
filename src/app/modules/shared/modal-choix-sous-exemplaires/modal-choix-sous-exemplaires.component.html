@@ -1,0 +1,112 @@
+<div id="mainSection" class="bg-light card modalCategorie">
+    <form class="w-100">
+        <div class="form-group mt-5">
+            <div class='card-hearder'>
+                <h2 class="modal-title">{{"document.exemplaire.title5" | translate}}</h2>
+            </div>
+            <div class="newAttSection">
+                <div class="sarchBlock">
+                    <form class="example-form">
+                        <mat-form-field class="example-full-width" appearance="fill">
+                            <mat-label class="searchBar">{{'patient.search-bar' | translate}}</mat-label>
+                            <input type="text" matInput aria-label="Rechercher" [formControl]="myControl" [matAutocomplete]="auto">
+                            <mat-autocomplete class="blockAutocomplate" #auto="matAutocomplete" [displayWith]="displayFn">
+                                <mat-option class="options" *ngFor="let option of filteredOptions" [value]="option" (onSelectionChange)="rechercherListingExemplaireDocuments(option)">
+                                    {{option.titre}}
+                                </mat-option>
+                            </mat-autocomplete>
+                        </mat-form-field>
+                    </form>
+                </div>
+
+                <!-- tableau listing des PrecoMvts -->
+
+                <div class="card-body p-0 tableBlock" id="tableList">
+                    <div class='table-responsive w-100'>
+                        <table class='table table-sm table-centered table-striped table-bordered w-100' mat-table [dataSource]="dataSourceExemplaireDocument" matSort (matSortChange)="announceSortChange($event)">
+
+                            <!-- titre Column -->
+                            <ng-container matColumnDef="titre">
+                                <th class="text-dark containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'document.table.title1' | translate}} </th>
+                                <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.titre}} </td>
+                            </ng-container>
+
+                            <!-- description Column -->
+                            <ng-container matColumnDef="description">
+                                <th class="text-dark containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'document.table.title2' | translate}} </th>
+                                <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.description}} </td>
+                            </ng-container>
+
+                            <!-- Actions column -->
+                            <ng-container matColumnDef="actions">
+                                <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{"patient.table.title8" | translate}} </th>
+                                <td class="text-dark containCell" mat-cell *matCellDef="let element">
+                                    <div class="actions">
+                                        <input type="checkbox" [value]="element.titre" (click)="getDocumentId(element.id)" (change)="onCheckDocumentChange($event)">
+                                        <span role="button" (click)="getDocumentId(element.id)"><i class="fa fa-info-circle text-info" aria-hidden="true" title="{{'preconisation.table.title4' | translate}}"></i></span>
+                                    </div>
+                                </td>
+                            </ng-container>
+                            <tr mat-header-row *matHeaderRowDef="displayedDocumentsColumns"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayedDocumentsColumns;"></tr>
+                        </table>
+                        <mat-paginator style="background-color: rgba(40, 167, 69, 0.79);" [pageSizeOptions]="[2, 5, 10, 20]"
+                                       showFirstLastButtons
+                                       aria-label="Select page of periodic elements">
+                        </mat-paginator>
+                    </div>
+                </div>
+                
+                <!-- tableau affichage des resultats -->
+                <div class="result">
+                    <h2>
+                        {{'document.title1' | translate}}
+                    </h2>
+                    <div class="card" >
+                        <div class="card-body p-0 tableBlock" id="tableResultats">
+                            <div class='table-responsive w-100 m-0'>
+                                <table class='table table-sm table-centered table-striped w-100' mat-table [dataSource]="dataSourceExemplaireDocumentResultat" matSort (matSortChange)="announceSortChange($event)">
+
+                                    <!-- titre Column -->
+                                    <ng-container matColumnDef="titre">
+                                        <th class="text-dark containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'document.table.title1' | translate}} </th>
+                                        <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.titre}} </td>
+                                    </ng-container>
+
+                                    <!-- description Column -->
+                                    <ng-container matColumnDef="description">
+                                        <th class="text-dark containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'document.table.title2' | translate}} </th>
+                                        <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.description}} </td>
+                                    </ng-container>
+
+                                    <!-- actions Column -->
+                                    <ng-container matColumnDef="actions">
+                                        <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{"patient.table.title8" | translate}} </th>
+                                        <td class="text-dark containCell" mat-cell *matCellDef="let element;  let i=index">
+                                            <div class="actions">
+                                                <button class="btn p-0" name="PrecoMvts"  [value]="element.id" id="PrecoMvts" title="clicker pour annuler la selection" (click)="retirerSelectionDocument(i)">
+                                                    <i class="fa fa-trash text-danger" aria-hidden="true"></i>
+                                                </button>
+                                                <span><i class="fa fa-info-circle text-info" aria-hidden="true" title="{{'preconisation.table.title4' | translate}}"></i></span>
+                                            </div>
+                                        </td>
+                                    </ng-container>
+
+                                    <tr mat-header-row *matHeaderRowDef="displayedDocumentsColumns"></tr>
+                                    <tr mat-row *matRowDef="let row; columns: displayedDocumentsColumns;"></tr>
+                                </table>
+                                <mat-paginator style="background-color: rgba(40, 167, 69, 0.79);" [pageSizeOptions]="[5, 10, 20]"
+                                               showFirstLastButtons
+                                               aria-label="Select page of periodic elements">
+                                </mat-paginator>
+                            </div>
+                            <div class="actionButton mt-2">
+                                <button mat-button [mat-dialog-close] cdkFocusInitial class="btn btnValidation" (click)="choisirDocument()">{{'lists.button6' | translate}}</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

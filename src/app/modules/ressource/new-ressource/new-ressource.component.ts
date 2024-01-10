@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-
 import { IRessource } from 'src/app/modele/ressource';
 import { RessourcesService } from 'src/app/services/ressources/ressources.service';
 import {v4 as uuidv4} from 'uuid';
@@ -38,9 +37,10 @@ export class NewRessourceComponent implements OnInit {
     this.forme = this.formBuilder.group({
       libelle: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
       etat: [true],
-      quantite: [''],
-      unite: [''],
-      prix: [''],
+      quantite: ['', [Validators.required]],
+      unite: ['', [Validators.required]],
+      prixEntree: ['', [Validators.required]],
+      prixDeSortie: ['', [Validators.required]],
       famille: new FormControl<string | IFamille>(''),
       caracteristique:['']
     })
@@ -68,14 +68,15 @@ export class NewRessourceComponent implements OnInit {
       this.btnLibelle="Modifier";
       this.ressourceService.getRessourceById(idRessource).subscribe(x =>
         {
-          this.ressource = x; console.log(this.ressource);
+          this.ressource = x;
           this.ressource.id = idRessource!,
           this.forme.setValue({
             libelle: this.ressource.libelle,
             etat: this.ressource.etat,
             quantite: this.ressource.quantite,
             unite: this.ressource.unite,
-            prix: this.ressource.prix,
+            prixEntree: this.ressource.prixEntree,
+            prixDeSortie: this.ressource.prixDeSortie,
             famille: this.ressource.famille,
             caracteristique:this.ressource.caracteristique,
           })
@@ -97,7 +98,8 @@ export class NewRessourceComponent implements OnInit {
       etat: ressourceInput.etat,
       quantite: ressourceInput.quantite,
       unite: ressourceInput.unite,
-      prix: ressourceInput.prix,
+      prixEntree: ressourceInput.prixEntree,
+      prixDeSortie: ressourceInput.prixDeSortie,
       famille:ressourceInput.famille,
       caracteristique:ressourceInput.caracteristique,
     }
@@ -105,7 +107,7 @@ export class NewRessourceComponent implements OnInit {
     if(this.ressource != undefined){
       ressourceTemp.id = this.ressource.id
     }
-
+    ressourceTemp.famille = this.familleDeRessource
     this.ressourceService.ajouterRessource(ressourceTemp).subscribe(
       object => {
         this.router.navigate(['list-ressources']);

@@ -24,13 +24,13 @@ import { ObjetCleValeur } from 'src/app/modele/objet-cle-valeur';
 import { IPrecoMvt } from 'src/app/modele/precomvt';
 import { IRessource } from 'src/app/modele/ressource';
 import { IType } from 'src/app/modele/type';
-import { AttributService } from 'src/app/services/attributs/attribut.service';
 import { DistributeursService } from 'src/app/services/distributeurs/distributeurs.service';
 import { DocumentService } from 'src/app/services/documents/document.service';
 import { DonneesEchangeService } from 'src/app/services/donnees-echange/donnees-echange.service';
 import { ExemplaireDocumentService } from 'src/app/services/exemplaire-document/exemplaire-document.service';
 import { RessourcesService } from 'src/app/services/ressources/ressources.service';
 import { v4 as uuidv4 } from 'uuid';
+import { TypeMouvement } from 'src/app/modele/typeMouvement';
 
 @Component({
   selector: 'app-new-exemplaire',
@@ -52,7 +52,8 @@ export class NewExemplaireComponent implements OnInit {
     mouvements: [],
     affichagePrix: false,
     contientRessources: false,
-    contientDistributeurs: false
+    contientDistributeurs: false,
+    typeMouvement: 'Neutre'
   };
   
   document: IDocument = {
@@ -66,7 +67,8 @@ export class NewExemplaireComponent implements OnInit {
     preconisations: [],
     affichagePrix: false,
     contientRessources: false,
-    contientDistributeurs: false
+    contientDistributeurs: false,
+    typeMouvement: 'Neutre'
   };
 
   attribut: IAttributs = {
@@ -133,6 +135,9 @@ export class NewExemplaireComponent implements OnInit {
   distributeur : IDistributeur | undefined;
   modificationDistributeurActive : boolean = false
   indexmodificationDistributeur : number = -1
+  typeNeutre : string = TypeMouvement.Neutre
+  typeAjout : string = TypeMouvement.Ajout
+  typeReduire : string = TypeMouvement.Reduire
 
   constructor(
     private router: Router,
@@ -144,7 +149,8 @@ export class NewExemplaireComponent implements OnInit {
     private serviceDocument: DocumentService,
     private _liveAnnouncer: LiveAnnouncer,
     private serviceExemplaire: ExemplaireDocumentService,
-    private datePipe: DatePipe
+    private datePipe: DatePipe,
+    private donneeExemplaireDocService:DonneesEchangeService
   ) {
     this.formeExemplaire = this.formBuilder.group({
       _exemplaireDocument: new FormArray([]),
@@ -288,9 +294,29 @@ export class NewExemplaireComponent implements OnInit {
           this.document = document;
           this.totalAttribut = document.attributs.length - 1;
           this.formerEnteteTableauMissions()
+          this.concatMouvementsSousExemplaireDocument()
         });
     }
   }
+
+  /**
+   * 
+   */
+  concatMouvementsSousExemplaireDocument(){
+    let sousExelplaires : IExemplaireDocument[] = this.donneeExemplaireDocService.dataDocumentSousDocuments
+    sousExelplaires.forEach(
+      element => {
+        if (element.mouvements) {
+          element.mouvements.forEach(
+            mvt => {
+              this.ELEMENTS_TABLE_MOUVEMENTS.push(mvt)
+          });
+        }     
+    });
+    this.dataSourceMouvements.data = this.ELEMENTS_TABLE_MOUVEMENTS;
+    console.log("hhhhhhhhhhhhh ", this.ELEMENTS_TABLE_MOUVEMENTS)
+  }
+
 /**
  * Methode permettant de former la nouvelle structure du tableau de mouvement de l'exemplaire
  * si les données affiche prix et affiche ressourse sont modifiées dans le document initial 
@@ -302,6 +328,7 @@ export class NewExemplaireComponent implements OnInit {
         this.document.affichagePrix = value.affichagePrix
         this.document.contientRessources = value.contientRessources
         this.document.contientDistributeurs = value.contientDistributeurs
+        this.document.typeMouvement = value.typeMouvement
         this.formerEnteteTableauMissions();
       })
   }
@@ -317,6 +344,13 @@ export class NewExemplaireComponent implements OnInit {
     if ((this.document.affichagePrix == true)) {
       let prix : string = "prix"
       let montant : string = "montant total"
+      if (this.document.typeMouvement == TypeMouvement.Reduire) {
+        prix = "prixDeSortie"
+      } else if (this.document.typeMouvement == TypeMouvement.Ajout){
+        prix = "prixEntrée"
+      }else{
+        prix = "prix"
+      }
       this.displayedRessourcesColumns.push(prix)
       this.displayedRessourcesColumns.push(montant)
     }
@@ -503,7 +537,8 @@ export class NewExemplaireComponent implements OnInit {
       etat: this.document.etat,
       affichagePrix: this.document.affichagePrix,
       contientRessources: this.document.contientRessources,
-      contientDistributeurs: this.document.contientDistributeurs
+      contientDistributeurs: this.document.contientDistributeurs,
+      typeMouvement: this.document.typeMouvement
     };
 
     if (this.exemplaire.id != '') {
@@ -518,7 +553,7 @@ export class NewExemplaireComponent implements OnInit {
   }
 
   /**
-   * Methode permettant de récupérer un distributeur dans le template et de l'assicier à 
+   * Methode permettant de récupérer un distributeur dans le template et de l'associer à 
    * une ressource avant de la mettre dans le tablau de mouvement
    * @param distributeur valeur du distributeur récupéré dans l'autocomplate distributeur sur le template
    */
@@ -540,17 +575,28 @@ export class NewExemplaireComponent implements OnInit {
         id: '',
         description: '',
         quantite: option.quantite,
-        prix: option.prix,
+        prix: 0,
         dateCreation: new Date(),
         datePeremption:  new Date(),
         ressource: option
       }
+
+      if (this.document.typeMouvement == TypeMouvement.Ajout) {
+        mvt.prix = option.prixEntree
+      }else if (this.document.typeMouvement == TypeMouvement.Reduire) {
+        mvt.prix = option.prixDeSortie
+      } else {
+        mvt.prix = option.prixEntree
+      }
+
       if (this.distributeurControl.value == undefined || this.distributeurControl.value == '') {
         this.distributeur = undefined
       }
+
       if(this.distributeur != undefined){
         mvt.distributeur = this.distributeur
       }
+
       this.ELEMENTS_TABLE_MOUVEMENTS.unshift(mvt)
       this.dataSourceMouvements.data = this.ELEMENTS_TABLE_MOUVEMENTS
     }

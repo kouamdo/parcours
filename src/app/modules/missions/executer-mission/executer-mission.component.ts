@@ -6,6 +6,9 @@ import { IDocument } from 'src/app/modele/document';
 import { IMission } from 'src/app/modele/mission';
 import { DocumentService } from 'src/app/services/documents/document.service';
 import { MissionsService } from 'src/app/services/missions/missions.service';
+import { ModalChoixSousExemplairesComponent } from '../../shared/modal-choix-sous-exemplaires/modal-choix-sous-exemplaires.component';
+import { MatDialog } from '@angular/material/dialog';
+import { DonneesEchangeService } from 'src/app/services/donnees-echange/donnees-echange.service';
 
 @Component({
   selector: 'app-executer-mission',
@@ -19,9 +22,11 @@ export class ExecuterMissionComponent implements OnInit {
   documents: IDocument[]=[];
   aDesDocumentsDispo:boolean=false;
   missionChoisieLibelle: string="";
-  estClique : boolean = false
+  estClique : boolean = false;
+  idDocumentPourExemplaire : string = ""
 
-  constructor(private formBuilder:FormBuilder, private missionService:MissionsService,private router:Router, private infosPath:ActivatedRoute, private documentService:DocumentService ) {
+  constructor(private formBuilder:FormBuilder, private missionService:MissionsService,private router:Router, private infosPath:ActivatedRoute,
+     private documentService:DocumentService, private donneeExemplaireDocService:DonneesEchangeService, private dialogDef : MatDialog ) {
     this.formeMissionExec = this.formBuilder.group({
      
     });
@@ -49,9 +54,26 @@ export class ExecuterMissionComponent implements OnInit {
    ); 
   }
 
-  choisirDocument(value:any){
-    this.router.navigate(['exemplaire-nouveau/'.concat(value)]);
+  getDocumentId(valeur:string){
+    this.idDocumentPourExemplaire = valeur
+    sessionStorage.setItem("idDocumentPourExemplaire", this.idDocumentPourExemplaire);
   }
 
+  /**
+   * Methode permettant d'ouvrir la modal permettant d'associer des sous exemplaire à celui qu'on veut creer
+   */
+  openSousExemplaireDocumentDialog(){
 
+    const dialogRef = this.dialogDef.open(ModalChoixSousExemplairesComponent, 
+    {
+      maxWidth: '100vw',
+      maxHeight: '100vh',
+      width:'100%',
+      height:'100%',
+      enterAnimationDuration:'1000ms',
+      exitAnimationDuration:'1000ms',
+      data: this.idDocumentPourExemplaire
+    }
+    )
+  }
 }

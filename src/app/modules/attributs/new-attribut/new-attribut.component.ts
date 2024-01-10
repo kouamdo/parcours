@@ -1,12 +1,8 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-import { EMPTY } from 'rxjs';
-import { Observable } from 'rxjs/internal/Observable';
 import { IAttributs } from 'src/app/modele/attributs';
-import { IType } from 'src/app/modele/type';
-import { TypeAttribut } from 'src/app/modele/type-attributs';
 import { AttributService } from 'src/app/services/attributs/attribut.service';
 import { DonneesEchangeService } from 'src/app/services/donnees-echange/donnees-echange.service';
 import {v4 as uuidv4} from 'uuid';
@@ -87,9 +83,6 @@ export class NewAttributComponent implements OnInit {
     this.attributService.ajouterAttribut(attributTemp).subscribe(
       object => {
         this.router.navigate(['/list-attributs']);
-      },
-     error =>{
-        console.log(error)
       }
     )
   }

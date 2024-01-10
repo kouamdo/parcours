@@ -20,6 +20,7 @@ import { ModalChoixPreconisationsComponent } from './modal-choix-preconisations/
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { EnteteComponent } from './entete/entete.component';
 import { ModalChoixSousDocumentComponent} from './modal-choix-sous-document/modal-choix-sous-document.component';
+import { ModalChoixSousExemplairesComponent } from './modal-choix-sous-exemplaires/modal-choix-sous-exemplaires.component';
 
 
 
@@ -31,12 +32,16 @@ import { ModalChoixSousDocumentComponent} from './modal-choix-sous-document/moda
     ModalChoixPreconisationsComponent,
     EnteteComponent,
     ModalChoixSousDocumentComponent,
+    ModalChoixSousExemplairesComponent,
     EnteteComponent,
 
   ],
   exports: [
     ModalCategoriesComponent,
     ModalChoixAttributsComponent,
+    EnteteComponent,
+    ModalChoixSousDocumentComponent,
+    ModalChoixSousExemplairesComponent,
     ModalChoixSousDocumentComponent,
     EnteteComponent
   ],

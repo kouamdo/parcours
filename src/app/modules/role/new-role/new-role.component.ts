@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup,MaxLengthValidator,MinLengthValidator,ReactiveFormsModule, Validators  } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators  } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { EMPTY, isEmpty, Observable } from 'rxjs';
 import {v4 as uuidv4} from 'uuid';
 import { DatePipe } from '@angular/common';
 import { IRole } from 'src/app/modele/role';
@@ -32,7 +31,6 @@ export class NewRoleComponent implements OnInit {
 
   ngOnInit() {
     let idRole= this.infosPath.snapshot.paramMap.get('idRole');
-    //console.log("idRole :" + idRole);
     if((idRole != null) && idRole!==''){
 
       this.btnLibelle="Modifier";
@@ -40,7 +38,6 @@ export class NewRoleComponent implements OnInit {
       this.roleService.getRoleById(idRole).subscribe(x =>
       {
         this.role = x;
-        //console.log(this.role);
         this.forme.setValue({
           titre: this.role.titre,
           etat:this.role. etat,

@@ -325,7 +325,9 @@
         "title6":" Unit",
         "title7":"price",
         "title8":"Category",
-        "title9":"Actions "
+        "title9":"Actions ",
+        "title10": "Total",
+        "title11": "Total amont"
     }
     },
     "preconisation":{

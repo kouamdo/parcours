@@ -67,7 +67,6 @@ export class ModalChoixSousDocumentComponent implements OnInit {
     });
   }
   onCheckDocumentChange(event: any) {
-        console.log('ehhe', this.idDocument)
     let listidDocumentTemp : string[] = []
     let positionsDocument = new Map()
     let indexDocumentCourant : number = 0

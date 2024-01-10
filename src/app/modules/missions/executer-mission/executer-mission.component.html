@@ -25,7 +25,7 @@
             <div class="block">
                 <div class="inputBlock"  *ngFor="let document of documents; let i=index;">
                     <input type="button" class="button-options" style="font-weight: 400;"  [name]="document.id" [id]="document.id"
-                             [title]="document.description" [value]="document.titre"  (click)="choisirDocument(document.id)">
+                             [title]="document.description" [value]="document.titre"  (click)="openSousExemplaireDocumentDialog();getDocumentId(document.id)">
                 </div>
             </div>
         </div>
