@@ -75,7 +75,7 @@ import { PersonnelsModule } from './modules/personnels/personnels.module';
     MatIconModule,
     MatToolbarModule,
     MatSlideToggleModule,
-    ExemplaireDocumentModule,
+    ExemplaireDocumentModule
   ],
   providers: [],
   bootstrap: [AppComponent],
