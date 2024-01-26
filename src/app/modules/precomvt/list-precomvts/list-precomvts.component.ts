@@ -41,6 +41,7 @@ export class ListPrecomvtsComponent implements OnInit {
     ngOnInit(): void {
       this.getAllPrecomvts().subscribe((valeurs: IPrecoMvt[]) => {
         this.dataSource.data = valeurs;
+        this.filteredOptions = valeurs
       });
 
       this.myControl.valueChanges.subscribe(
@@ -54,7 +55,11 @@ export class ListPrecomvtsComponent implements OnInit {
             )
           }
           else{
-            this.filteredOptions = [];
+            this.servicePrecoMvt.getAllPrecomvts().subscribe(
+              (reponse) =>{
+                this.filteredOptions=reponse
+              }
+            )
           }
         }
       );

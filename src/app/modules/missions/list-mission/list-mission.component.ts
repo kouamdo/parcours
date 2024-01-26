@@ -36,6 +36,7 @@ export class ListMissionComponent implements OnInit {
   ngOnInit(): void {
     this.getAllMissions().subscribe(valeurs => {
       this.dataSource.data = valeurs;
+      this.filteredOptions = valeurs
     });
 
     this.myControl.valueChanges.subscribe(
@@ -49,7 +50,11 @@ export class ListMissionComponent implements OnInit {
           )
         }
         else{
-          this.filteredOptions = [];
+          this.serviceMission.getAllMissions().subscribe(
+            (reponse) =>{
+              this.filteredOptions=reponse
+            }
+          )
         }
 
       }

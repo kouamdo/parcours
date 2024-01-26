@@ -59,6 +59,12 @@ export class ListTicketsComponent implements OnInit, AfterViewInit {
       idPersonne: null,
       statut: ''
     };
+    
+    this.serviceTicket.getAllTickets().subscribe(
+      (reponse) =>{
+        this.filteredOptions=reponse
+      }
+    )
 
     this.getAllTickets().subscribe(valeurs => {
       this.dataSource.data = valeurs;
@@ -74,7 +80,11 @@ export class ListTicketsComponent implements OnInit, AfterViewInit {
           )
         }
         else{
-          this.filteredOptions = [];
+          this.serviceTicket.getAllTickets().subscribe(
+            (reponse) =>{
+              this.filteredOptions=reponse
+            }
+          )
         }
         
       }

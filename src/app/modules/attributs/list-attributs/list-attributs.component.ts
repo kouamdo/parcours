@@ -37,6 +37,7 @@ export class ListAttributsComponent implements OnInit {
   ngOnInit(): void {
     this.getAllAttributs().subscribe(valeurs => {
       this.dataSource.data = valeurs;
+        this.filteredOptions = valeurs
     });
 
     this.myControl.valueChanges.subscribe(
@@ -50,7 +51,11 @@ export class ListAttributsComponent implements OnInit {
           )
         }
         else{
-          this.filteredOptions = [];
+          this.serviceAttribut.getAllAttributs().subscribe(
+            (resultat) =>{
+              this.filteredOptions = resultat
+            }
+          )
         }
       }
     );

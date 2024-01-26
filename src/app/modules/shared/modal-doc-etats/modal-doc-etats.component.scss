@@ -1,0 +1,134 @@
+#mainBlock{
+    background-color: #ffffff;
+    padding: 5px;
+    width: 50%;
+    margin: auto;
+}
+.ordreInput{
+    input{
+        width: 100px;
+    }
+}
+.sarchBlock{
+    width: 100% !important;
+    padding: 0 5px;
+    div{
+        display: flex;
+        align-items: center;
+        label{
+            margin-right: 5px;
+        }
+    }
+    form{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+}
+.example-form{
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    h4{
+        font-size: 13px;
+        margin-right: 2px;
+        width: fit-content;
+    }
+    .example-full-width {
+        height: 42px !important;
+        border: 2px solid #28a745;
+        .form-control{
+            box-shadow: none !important;
+            border: none !important;
+            background-color: transparent;
+        }
+    }
+    .mat-input{
+        position: absolute;
+        bottom: 100px;
+        height: 20px !important;
+    }
+}
+#tableList{
+    margin-top: 50px !important;
+}
+.texteErreur{
+    position: absolute;
+    p{
+        font-size: small;
+        font-style: italic;
+        color: rgba(255, 0, 0, 0.766);
+    }
+}
+.valBtn{
+    justify-content: end;
+}
+.btnAddValidation{
+    color: #FFD700;
+    height: fit-content;
+    i{
+        font-size: 12px !important;
+    }
+}
+.actions{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    button{
+        width: fit-content;
+        padding: 0;
+        margin: 0 5px;
+        margin-bottom: 5px;
+        i{
+            font-size: 10px;
+        }
+    }
+}
+@media screen and (max-width: 950px ) {
+    #mainBlock{
+        width: 60%;
+    }
+}
+@media screen and (max-width: 800px ) {
+    #mainBlock{
+        width: 70%;
+    }
+}
+@media screen and (max-width: 700px ) {
+    #mainBlock{
+        width: 80%;
+    }
+}
+@media screen and (max-width: 600px ) {
+    #mainBlock{
+        width: 90%;
+    }
+}
+@media screen and (max-width: 550px ) {
+    #mainBlock{
+        width: 100%;
+    }
+    .sarchBlock{
+        form{
+            flex-wrap: wrap-reverse;
+            div{
+                width: 80%;
+            }
+            label{
+                width: 40%;
+            }
+            .example-full-width{
+                width: 50%;
+            }
+        }
+        .etatInput{
+            margin-bottom: 5px;
+        }
+        .ordreInput{
+            input{
+                width: 50%;
+            }
+        }
+    }
+}

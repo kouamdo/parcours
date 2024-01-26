@@ -21,6 +21,7 @@ import { TypeAttribut } from '../modele/type-attributs';
 import { TypeUnite } from '../modele/type-unite';
 import { TypeMvt } from '../modele/type-mvt';
 import { TypeMouvement } from '../modele/typeMouvement';
+import { IEtats } from '../modele/etats';
 
 export class InMemDBService implements InMemoryDbService {
 
@@ -296,6 +297,11 @@ export class InMemDBService implements InMemoryDbService {
               { nom: 'Créer', lien: './mission-nouveau', bouton: 'false' },
               { nom: 'Rechercher', lien: './list-missions', bouton: 'false' },
               { nom: 'Exécuter', lien: './executer-missions', bouton: 'false' },
+              {
+                nom: 'liste des exemplaires',
+                lien: './list-exemplaire',
+                bouton: 'false',
+              }
             ],
           },
           {
@@ -308,17 +314,7 @@ export class InMemDBService implements InMemoryDbService {
                 lien: './document-nouveau',
                 bouton: 'false',
               },
-              { nom: 'Rechercher', lien: './list-documents', bouton: 'false' },
-              {
-                nom: 'Creer un exemplaire',
-                lien: 'exemplaire-nouveau/1',
-                bouton: 'false',
-              },
-              {
-                nom: 'liste des exemplaires',
-                lien: './list-exemplaire',
-                bouton: 'false',
-              },
+              { nom: 'Rechercher', lien: './list-documents', bouton: 'false' }
             ],
           },
           {
@@ -360,6 +356,15 @@ export class InMemDBService implements InMemoryDbService {
                 lien: './list-distributeurs',
                 bouton: 'false',
               },
+            ],
+          },
+          {
+            fonction: 'Etats',
+            icone: 'fas fa-user-cog',
+            actif: '',
+            elements: [
+              { nom: 'Créer', lien: 'etat-nouveau', bouton: 'false' },
+              { nom: 'rechercher', lien: './list-etats', bouton: 'false' },
             ],
           }
         ]
@@ -412,6 +417,11 @@ export class InMemDBService implements InMemoryDbService {
               { nom: 'New', lien: './mission-nouveau', bouton: 'false' },
               { nom: 'Search', lien: './list-missions', bouton: 'false' },
               { nom: 'Execute', lien: './executer-missions', bouton: 'false' },
+              {
+                nom: 'list of exemplaires',
+                lien: './list-exemplaire',
+                bouton: 'false',
+              }
             ],
           },
           {
@@ -424,17 +434,7 @@ export class InMemDBService implements InMemoryDbService {
                 lien: './document-nouveau',
                 bouton: 'false',
               },
-              { nom: 'Search', lien: './list-documents', bouton: 'false' },
-              {
-                nom: 'Creat an exemplaire',
-                lien: 'exemplaire-nouveau/1',
-                bouton: 'false',
-              },
-              {
-                nom: 'list of exemplaires',
-                lien: './list-exemplaire',
-                bouton: 'false',
-              },
+              { nom: 'Search', lien: './list-documents', bouton: 'false' }
             ],
           },
           {
@@ -452,7 +452,7 @@ export class InMemDBService implements InMemoryDbService {
             icone: 'fas fa-user-cog',
             actif: '',
             elements: [
-              { nom: 'Créer', lien: 'ressource-nouvelle', bouton: 'false' },
+              { nom: 'New', lien: 'ressource-nouvelle', bouton: 'false' },
               { nom: 'Search', lien: './list-ressources', bouton: 'false' },
             ],
           },
@@ -461,7 +461,7 @@ export class InMemDBService implements InMemoryDbService {
             icone: 'fas fa-user-cog',
             actif: '',
             elements: [
-              { nom: 'Créer', lien: 'precomvt-nouvelle', bouton: 'false' },
+              { nom: 'New', lien: 'precomvt-nouvelle', bouton: 'false' },
               { nom: 'Search', lien: './list-precomvts', bouton: 'false' },
             ],
           },
@@ -470,8 +470,17 @@ export class InMemDBService implements InMemoryDbService {
             icone: 'fas fa-user-cog',
             actif: '',
             elements: [
-              { nom: 'Créer', lien: 'distributeur-nouveau', bouton: 'false' },
+              { nom: 'New', lien: 'distributeur-nouveau', bouton: 'false' },
               { nom: 'search', lien: './list-distributeurs', bouton: 'false' },
+            ],
+          },
+          {
+            fonction: 'Statut',
+            icone: 'fas fa-user-cog',
+            actif: '',
+            elements: [
+              { nom: 'New', lien: 'etat-nouveau', bouton: 'false' },
+              { nom: 'search', lien: './list-etats', bouton: 'false' },
             ],
           }
         ]
@@ -621,6 +630,20 @@ export class InMemDBService implements InMemoryDbService {
         titre: 'Note intervention',
         description:
           "Document delivre par le medecin ou un infirmier de l'etablissement",
+          DocEtats:[
+            {id: '1', ordre: 1, dateCreation: new Date("07/21/2024"),
+              etat: {id:"1", libelle:"etat 1", description:"premièr état du document", dateCreation: new Date("07/21/2024")}
+            },
+            {id: '2', ordre: 2, dateCreation: new Date("07/21/2024"),
+              etat: {id:"2", libelle:"etat 2", description:"deuxième état du document", dateCreation: new Date("07/21/2024")}
+            },
+            {id: '3', ordre: 3, dateCreation: new Date("07/21/2024"),
+              etat: {id:"3", libelle:"etat 3", description:"troisième état du document", dateCreation: new Date("07/21/2024")}
+            },
+            {id: '4', ordre: 4, dateCreation: new Date("07/21/2024"),
+              etat: {id:"4", libelle:"etat 4", description:"quatrième état du document", dateCreation: new Date("07/21/2024")}
+            }
+          ],
         typeMouvement: 'Ajout',
         etat:true,
         affichagePrix:true,
@@ -1069,6 +1092,20 @@ export class InMemDBService implements InMemoryDbService {
             titre: 'Note intervention',
             description:
               "Document delivre par le medecin ou un infirmier de l'etablissement",
+            DocEtats:[
+              {id: '1', ordre: 1, dateCreation: new Date("07/21/2024"),
+                etat: {id:"1", libelle:"etat 1", description:"premièr état du document", dateCreation: new Date("07/21/2024")}
+              },
+              {id: '2', ordre: 2, dateCreation: new Date("07/21/2024"),
+                etat: {id:"2", libelle:"etat 2", description:"deuxième état du document", dateCreation: new Date("07/21/2024")}
+              },
+              {id: '3', ordre: 3, dateCreation: new Date("07/21/2024"),
+                etat: {id:"3", libelle:"etat 3", description:"troisième état du document", dateCreation: new Date("07/21/2024")}
+              },
+              {id: '4', ordre: 4, dateCreation: new Date("07/21/2024"),
+                etat: {id:"4", libelle:"etat 4", description:"quatrième état du document", dateCreation: new Date("07/21/2024")}
+              }
+            ],
             typeMouvement: 'Ajout',
               etat:true,
               affichagePrix:true,
@@ -1507,13 +1544,24 @@ export class InMemDBService implements InMemoryDbService {
                   },
                 ],
               }
-            ]
+            ],
           },
           {
             id: '2',
             titre: 'Fiche de suivi',
             description:
               "Document delivre par le medecin ou un infirmier de l'etablissement",
+            DocEtats:[
+              {id: '1', ordre: 1, dateCreation: new Date("07/21/2024"),
+                etat: {id:"1", libelle:"etat 1", description:"premièr état du document", dateCreation: new Date("07/21/2024")}
+              },
+              {id: '2', ordre: 2, dateCreation: new Date("07/21/2024"),
+                etat: {id:"2", libelle:"etat 2", description:"deuxième état du document", dateCreation: new Date("07/21/2024")}
+              },
+              {id: '3', ordre: 3, dateCreation: new Date("07/21/2024"),
+                etat: {id:"3", libelle:"etat 3", description:"troisième état du document", dateCreation: new Date("07/21/2024")}
+              }
+            ],
             typeMouvement: 'Ajout',
             etat:true,
             affichagePrix:true,
@@ -1958,11 +2006,22 @@ export class InMemDBService implements InMemoryDbService {
             titre: 'Fiche de soin',
             description:
               "Document delivre par le medecin ou un infirmier de l'etablissement",
-              typeMouvement: 'Neutre',
-              etat:true,
-              affichagePrix:true,
-              contientRessources:true,
-              contientDistributeurs:true,
+            typeMouvement: 'Neutre',
+            etat:true,
+            affichagePrix:true,
+            contientRessources:true,
+            contientDistributeurs:true,
+            DocEtats:[
+              {id: '1', ordre: 1, dateCreation: new Date("07/21/2024"),
+                etat: {id:"1", libelle:"etat 1", description:"premièr état du document", dateCreation: new Date("07/21/2024")}
+              },
+              {id: '2', ordre: 2, dateCreation: new Date("07/21/2024"),
+                etat: {id:"2", libelle:"etat 2", description:"deuxième état du document", dateCreation: new Date("07/21/2024")}
+              },
+              {id: '4', ordre: 4, dateCreation: new Date("07/21/2024"),
+                etat: {id:"4", libelle:"etat 4", description:"quatrième état du document", dateCreation: new Date("07/21/2024")}
+              }
+            ],
             missions: [
               {
                 id: '2',
@@ -2358,6 +2417,17 @@ export class InMemDBService implements InMemoryDbService {
               affichagePrix:true,
               contientRessources:true,
               contientDistributeurs:true,
+              DocEtats:[
+                {id: '2', ordre: 2, dateCreation: new Date("07/21/2024"),
+                  etat: {id:"2", libelle:"etat 2", description:"deuxième état du document", dateCreation: new Date("07/21/2024")}
+                },
+                {id: '3', ordre: 3, dateCreation: new Date("07/21/2024"),
+                  etat: {id:"3", libelle:"etat 3", description:"troisième état du document", dateCreation: new Date("07/21/2024")}
+                },
+                {id: '4', ordre: 4, dateCreation: new Date("07/21/2024"),
+                  etat: {id:"4", libelle:"etat 4", description:"quatrième état du document", dateCreation: new Date("07/21/2024")}
+                }
+              ],
             missions: [
               {
                 id: '2',
@@ -2742,11 +2812,22 @@ export class InMemDBService implements InMemoryDbService {
             titre: 'Formulaire de sortie',
             description:
               "Document delivre par le medecin ou un infirmier de l'etablissement",
-              etat:true,
-              typeMouvement: TypeMouvement.Ajout,
-              affichagePrix:true,
-              contientRessources:true,
-              contientDistributeurs:true,
+            etat:true,
+            typeMouvement: TypeMouvement.Ajout,
+            affichagePrix:true,
+            contientRessources:true,
+            contientDistributeurs:true,
+            DocEtats:[
+              {id: '2', ordre: 2, dateCreation: new Date("07/21/2024"),
+                etat: {id:"2", libelle:"etat 2", description:"deuxième état du document", dateCreation: new Date("07/21/2024")}
+              },
+              {id: '3', ordre: 3, dateCreation: new Date("07/21/2024"),
+                etat: {id:"3", libelle:"etat 3", description:"troisième état du document", dateCreation: new Date("07/21/2024")}
+              },
+              {id: '4', ordre: 4, dateCreation: new Date("07/21/2024"),
+                etat: {id:"4", libelle:"etat 4", description:"quatrième état du document", dateCreation: new Date("07/21/2024")}
+              }
+            ],
             missions: [
               {
                 id: '2',
@@ -3291,6 +3372,17 @@ export class InMemDBService implements InMemoryDbService {
               affichagePrix:true,
               contientRessources:true,
               contientDistributeurs:true,
+              DocEtats:[
+                {id: '2', ordre: 2, dateCreation: new Date("07/21/2024"),
+                  etat: {id:"2", libelle:"etat 2", description:"deuxième état du document", dateCreation: new Date("07/21/2024")}
+                },
+                {id: '3', ordre: 3, dateCreation: new Date("07/21/2024"),
+                  etat: {id:"3", libelle:"etat 3", description:"troisième état du document", dateCreation: new Date("07/21/2024")}
+                },
+                {id: '4', ordre: 4, dateCreation: new Date("07/21/2024"),
+                  etat: {id:"4", libelle:"etat 4", description:"quatrième état du document", dateCreation: new Date("07/21/2024")}
+                }
+              ],
             missions: [
               {
                 id: '2',
@@ -3679,6 +3771,17 @@ export class InMemDBService implements InMemoryDbService {
             contientRessources:true,
             contientDistributeurs:true,
             typeMouvement: 'Ajout',
+            DocEtats:[
+              {id: '2', ordre: 2, dateCreation: new Date("07/21/2024"),
+                etat: {id:"2", libelle:"etat 2", description:"deuxième état du document", dateCreation: new Date("07/21/2024")}
+              },
+              {id: '3', ordre: 3, dateCreation: new Date("07/21/2024"),
+                etat: {id:"3", libelle:"etat 3", description:"troisième état du document", dateCreation: new Date("07/21/2024")}
+              },
+              {id: '4', ordre: 4, dateCreation: new Date("07/21/2024"),
+                etat: {id:"4", libelle:"etat 4", description:"quatrième état du document", dateCreation: new Date("07/21/2024")}
+              }
+            ],
             missions: [
               {
                 id: '2',
@@ -4262,6 +4365,20 @@ export class InMemDBService implements InMemoryDbService {
               affichagePrix:true,
               contientRessources:true,
               contientDistributeurs:true,
+              DocEtats:[
+                {id: '1', ordre: 1, dateCreation: new Date("07/21/2024"),
+                  etat: {id:"1", libelle:"etat 1", description:"premièr état du document", dateCreation: new Date("07/21/2024")}
+                },
+                {id: '2', ordre: 2, dateCreation: new Date("07/21/2024"),
+                  etat: {id:"2", libelle:"etat 2", description:"deuxième état du document", dateCreation: new Date("07/21/2024")}
+                },
+                {id: '3', ordre: 3, dateCreation: new Date("07/21/2024"),
+                  etat: {id:"3", libelle:"etat 3", description:"troisième état du document", dateCreation: new Date("07/21/2024")}
+                },
+                {id: '4', ordre: 4, dateCreation: new Date("07/21/2024"),
+                  etat: {id:"4", libelle:"etat 4", description:"quatrième état du document", dateCreation: new Date("07/21/2024")}
+                }
+              ],
             missions: [
               {
                 id: '1',
@@ -4705,6 +4822,17 @@ export class InMemDBService implements InMemoryDbService {
         titre: 'Fiche de suivi',
         description:
           "Document delivre par le medecin ou un infirmier de l'etablissement",
+          DocEtats:[
+            {id: '1', ordre: 1, dateCreation: new Date("07/21/2024"),
+              etat: {id:"1", libelle:"etat 1", description:"premièr état du document", dateCreation: new Date("07/21/2024")}
+            },
+            {id: '2', ordre: 2, dateCreation: new Date("07/21/2024"),
+              etat: {id:"2", libelle:"etat 2", description:"deuxième état du document", dateCreation: new Date("07/21/2024")}
+            },
+            {id: '3', ordre: 3, dateCreation: new Date("07/21/2024"),
+              etat: {id:"3", libelle:"etat 3", description:"troisième état du document", dateCreation: new Date("07/21/2024")}
+            }
+          ],
         typeMouvement: 'Ajout',
         etat:false,
         affichagePrix:true,
@@ -5155,6 +5283,17 @@ export class InMemDBService implements InMemoryDbService {
         affichagePrix:false,
         contientRessources:true,
         contientDistributeurs:false,
+        DocEtats:[
+          {id: '1', ordre: 1, dateCreation: new Date("07/21/2024"),
+            etat: {id:"1", libelle:"etat 1", description:"premièr état du document", dateCreation: new Date("07/21/2024")}
+          },
+          {id: '2', ordre: 2, dateCreation: new Date("07/21/2024"),
+            etat: {id:"2", libelle:"etat 2", description:"deuxième état du document", dateCreation: new Date("07/21/2024")}
+          },
+          {id: '4', ordre: 4, dateCreation: new Date("07/21/2024"),
+            etat: {id:"4", libelle:"etat 4", description:"quatrième état du document", dateCreation: new Date("07/21/2024")}
+          }
+        ],
         missions: [
           {
             id: '2',
@@ -5546,6 +5685,20 @@ export class InMemDBService implements InMemoryDbService {
             titre: 'Note intervention',
             description:
               "Document delivre par le medecin ou un infirmier de l'etablissement",
+            DocEtats:[
+              {id: '1', ordre: 1, dateCreation: new Date("07/21/2024"),
+                etat: {id:"1", libelle:"etat 1", description:"premièr état du document", dateCreation: new Date("07/21/2024")}
+              },
+              {id: '2', ordre: 2, dateCreation: new Date("07/21/2024"),
+                etat: {id:"2", libelle:"etat 2", description:"deuxième état du document", dateCreation: new Date("07/21/2024")}
+              },
+              {id: '3', ordre: 3, dateCreation: new Date("07/21/2024"),
+                etat: {id:"3", libelle:"etat 3", description:"troisième état du document", dateCreation: new Date("07/21/2024")}
+              },
+              {id: '4', ordre: 4, dateCreation: new Date("07/21/2024"),
+                etat: {id:"4", libelle:"etat 4", description:"quatrième état du document", dateCreation: new Date("07/21/2024")}
+              }
+            ],
             typeMouvement: 'Ajout',
               etat:true,
               affichagePrix:true,
@@ -5992,6 +6145,17 @@ export class InMemDBService implements InMemoryDbService {
             titre: 'Fiche de suivi',
             description:
               "Document delivre par le medecin ou un infirmier de l'etablissement",
+            DocEtats:[
+              {id: '1', ordre: 1, dateCreation: new Date("07/21/2024"),
+                etat: {id:"1", libelle:"etat 1", description:"premièr état du document", dateCreation: new Date("07/21/2024")}
+              },
+              {id: '2', ordre: 2, dateCreation: new Date("07/21/2024"),
+                etat: {id:"2", libelle:"etat 2", description:"deuxième état du document", dateCreation: new Date("07/21/2024")}
+              },
+              {id: '3', ordre: 3, dateCreation: new Date("07/21/2024"),
+                etat: {id:"3", libelle:"etat 3", description:"troisième état du document", dateCreation: new Date("07/21/2024")}
+              }
+            ],
             typeMouvement: 'Ajout',
             etat:true,
             affichagePrix:true,
@@ -6442,6 +6606,17 @@ export class InMemDBService implements InMemoryDbService {
               affichagePrix:true,
               contientRessources:true,
               contientDistributeurs:true,
+              DocEtats:[
+                {id: '1', ordre: 1, dateCreation: new Date("07/21/2024"),
+                  etat: {id:"1", libelle:"etat 1", description:"premièr état du document", dateCreation: new Date("07/21/2024")}
+                },
+                {id: '2', ordre: 2, dateCreation: new Date("07/21/2024"),
+                  etat: {id:"2", libelle:"etat 2", description:"deuxième état du document", dateCreation: new Date("07/21/2024")}
+                },
+                {id: '4', ordre: 4, dateCreation: new Date("07/21/2024"),
+                  etat: {id:"4", libelle:"etat 4", description:"quatrième état du document", dateCreation: new Date("07/21/2024")}
+                }
+              ],
             missions: [
               {
                 id: '2',
@@ -6838,6 +7013,17 @@ export class InMemDBService implements InMemoryDbService {
               affichagePrix:true,
               contientRessources:true,
               contientDistributeurs:true,
+              DocEtats:[
+                {id: '2', ordre: 2, dateCreation: new Date("07/21/2024"),
+                  etat: {id:"2", libelle:"etat 2", description:"deuxième état du document", dateCreation: new Date("07/21/2024")}
+                },
+                {id: '3', ordre: 3, dateCreation: new Date("07/21/2024"),
+                  etat: {id:"3", libelle:"etat 3", description:"troisième état du document", dateCreation: new Date("07/21/2024")}
+                },
+                {id: '4', ordre: 4, dateCreation: new Date("07/21/2024"),
+                  etat: {id:"4", libelle:"etat 4", description:"quatrième état du document", dateCreation: new Date("07/21/2024")}
+                }
+              ],
             missions: [
               {
                 id: '2',
@@ -7413,6 +7599,20 @@ export class InMemDBService implements InMemoryDbService {
               affichagePrix:true,
               contientRessources:true,
               contientDistributeurs:true,
+              DocEtats:[
+                {id: '1', ordre: 1, dateCreation: new Date("07/21/2024"),
+                  etat: {id:"1", libelle:"etat 1", description:"premièr état du document", dateCreation: new Date("07/21/2024")}
+                },
+                {id: '2', ordre: 2, dateCreation: new Date("07/21/2024"),
+                  etat: {id:"2", libelle:"etat 2", description:"deuxième état du document", dateCreation: new Date("07/21/2024")}
+                },
+                {id: '3', ordre: 3, dateCreation: new Date("07/21/2024"),
+                  etat: {id:"3", libelle:"etat 3", description:"troisième état du document", dateCreation: new Date("07/21/2024")}
+                },
+                {id: '4', ordre: 4, dateCreation: new Date("07/21/2024"),
+                  etat: {id:"4", libelle:"etat 4", description:"quatrième état du document", dateCreation: new Date("07/21/2024")}
+                }
+              ],
             missions: [
               {
                 id: '1',
@@ -7860,6 +8060,17 @@ export class InMemDBService implements InMemoryDbService {
         affichagePrix:true,
         contientRessources:true,
         contientDistributeurs:false,
+        DocEtats:[
+          {id: '2', ordre: 2, dateCreation: new Date("07/21/2024"),
+            etat: {id:"2", libelle:"etat 2", description:"deuxième état du document", dateCreation: new Date("07/21/2024")}
+          },
+          {id: '3', ordre: 3, dateCreation: new Date("07/21/2024"),
+            etat: {id:"3", libelle:"etat 3", description:"troisième état du document", dateCreation: new Date("07/21/2024")}
+          },
+          {id: '4', ordre: 4, dateCreation: new Date("07/21/2024"),
+            etat: {id:"4", libelle:"etat 4", description:"quatrième état du document", dateCreation: new Date("07/21/2024")}
+          }
+        ],
         missions: [
           {
             id: '2',
@@ -8434,6 +8645,20 @@ export class InMemDBService implements InMemoryDbService {
         affichagePrix:false,
         contientRessources:true,
         contientDistributeurs:true,
+        DocEtats:[
+          {id: '1', ordre: 1, dateCreation: new Date("07/21/2024"),
+            etat: {id:"1", libelle:"etat 1", description:"premièr état du document", dateCreation: new Date("07/21/2024")}
+          },
+          {id: '2', ordre: 2, dateCreation: new Date("07/21/2024"),
+            etat: {id:"2", libelle:"etat 2", description:"deuxième état du document", dateCreation: new Date("07/21/2024")}
+          },
+          {id: '3', ordre: 3, dateCreation: new Date("07/21/2024"),
+            etat: {id:"3", libelle:"etat 3", description:"troisième état du document", dateCreation: new Date("07/21/2024")}
+          },
+          {id: '4', ordre: 4, dateCreation: new Date("07/21/2024"),
+            etat: {id:"4", libelle:"etat 4", description:"quatrième état du document", dateCreation: new Date("07/21/2024")}
+          }
+        ],
         missions: [
           {
             id: '1',
@@ -8879,6 +9104,17 @@ export class InMemDBService implements InMemoryDbService {
               affichagePrix:true,
               contientRessources:true,
               contientDistributeurs:true,
+              DocEtats:[
+                {id: '1', ordre: 1, dateCreation: new Date("07/21/2024"),
+                  etat: {id:"1", libelle:"etat 1", description:"premièr état du document", dateCreation: new Date("07/21/2024")}
+                },
+                {id: '2', ordre: 2, dateCreation: new Date("07/21/2024"),
+                  etat: {id:"2", libelle:"etat 2", description:"deuxième état du document", dateCreation: new Date("07/21/2024")}
+                },
+                {id: '4', ordre: 4, dateCreation: new Date("07/21/2024"),
+                  etat: {id:"4", libelle:"etat 4", description:"quatrième état du document", dateCreation: new Date("07/21/2024")}
+                }
+              ],
             missions: [
               {
                 id: '2',
@@ -9273,6 +9509,17 @@ export class InMemDBService implements InMemoryDbService {
               affichagePrix:true,
               contientRessources:true,
               contientDistributeurs:true,
+              DocEtats:[
+                {id: '2', ordre: 2, dateCreation: new Date("07/21/2024"),
+                  etat: {id:"2", libelle:"etat 2", description:"deuxième état du document", dateCreation: new Date("07/21/2024")}
+                },
+                {id: '3', ordre: 3, dateCreation: new Date("07/21/2024"),
+                  etat: {id:"3", libelle:"etat 3", description:"troisième état du document", dateCreation: new Date("07/21/2024")}
+                },
+                {id: '4', ordre: 4, dateCreation: new Date("07/21/2024"),
+                  etat: {id:"4", libelle:"etat 4", description:"quatrième état du document", dateCreation: new Date("07/21/2024")}
+                }
+              ],
             missions: [
               {
                 id: '2',
@@ -9842,6 +10089,20 @@ export class InMemDBService implements InMemoryDbService {
               affichagePrix:true,
               contientRessources:true,
               contientDistributeurs:true,
+              DocEtats:[
+                {id: '1', ordre: 1, dateCreation: new Date("07/21/2024"),
+                  etat: {id:"1", libelle:"etat 1", description:"premièr état du document", dateCreation: new Date("07/21/2024")}
+                },
+                {id: '2', ordre: 2, dateCreation: new Date("07/21/2024"),
+                  etat: {id:"2", libelle:"etat 2", description:"deuxième état du document", dateCreation: new Date("07/21/2024")}
+                },
+                {id: '3', ordre: 3, dateCreation: new Date("07/21/2024"),
+                  etat: {id:"3", libelle:"etat 3", description:"troisième état du document", dateCreation: new Date("07/21/2024")}
+                },
+                {id: '4', ordre: 4, dateCreation: new Date("07/21/2024"),
+                  etat: {id:"4", libelle:"etat 4", description:"quatrième état du document", dateCreation: new Date("07/21/2024")}
+                }
+              ],
             missions: [
               {
                 id: '1',
@@ -10292,6 +10553,17 @@ export class InMemDBService implements InMemoryDbService {
         affichagePrix:true,
         contientRessources:true,
         contientDistributeurs:false,
+        DocEtats:[
+          {id: '2', ordre: 2, dateCreation: new Date("07/21/2024"),
+            etat: {id:"2", libelle:"etat 2", description:"deuxième état du document", dateCreation: new Date("07/21/2024")}
+          },
+          {id: '3', ordre: 3, dateCreation: new Date("07/21/2024"),
+            etat: {id:"3", libelle:"etat 3", description:"troisième état du document", dateCreation: new Date("07/21/2024")}
+          },
+          {id: '4', ordre: 4, dateCreation: new Date("07/21/2024"),
+            etat: {id:"4", libelle:"etat 4", description:"quatrième état du document", dateCreation: new Date("07/21/2024")}
+          }
+        ],
         missions: [
           {
             id: '2',
@@ -11061,6 +11333,20 @@ export class InMemDBService implements InMemoryDbService {
             titre: 'Note intervention',
             description:
               "Document delivre par le medecin ou un infirmier de l'etablissement",
+            DocEtats:[
+              {id: '1', ordre: 1, dateCreation: new Date("07/21/2024"),
+                etat: {id:"1", libelle:"etat 1", description:"premièr état du document", dateCreation: new Date("07/21/2024")}
+              },
+              {id: '2', ordre: 2, dateCreation: new Date("07/21/2024"),
+                etat: {id:"2", libelle:"etat 2", description:"deuxième état du document", dateCreation: new Date("07/21/2024")}
+              },
+              {id: '3', ordre: 3, dateCreation: new Date("07/21/2024"),
+                etat: {id:"3", libelle:"etat 3", description:"troisième état du document", dateCreation: new Date("07/21/2024")}
+              },
+              {id: '4', ordre: 4, dateCreation: new Date("07/21/2024"),
+                etat: {id:"4", libelle:"etat 4", description:"quatrième état du document", dateCreation: new Date("07/21/2024")}
+              }
+            ],
             typeMouvement: 'Ajout',
             etat:true,
             affichagePrix:true,
@@ -11512,6 +11798,17 @@ export class InMemDBService implements InMemoryDbService {
               affichagePrix:true,
               contientRessources:true,
               contientDistributeurs:true,
+              DocEtats:[
+                {id: '2', ordre: 2, dateCreation: new Date("07/21/2024"),
+                  etat: {id:"2", libelle:"etat 2", description:"deuxième état du document", dateCreation: new Date("07/21/2024")}
+                },
+                {id: '3', ordre: 3, dateCreation: new Date("07/21/2024"),
+                  etat: {id:"3", libelle:"etat 3", description:"troisième état du document", dateCreation: new Date("07/21/2024")}
+                },
+                {id: '4', ordre: 4, dateCreation: new Date("07/21/2024"),
+                  etat: {id:"4", libelle:"etat 4", description:"quatrième état du document", dateCreation: new Date("07/21/2024")}
+                }
+              ],
             missions: [
               {
                 id: '2',
@@ -12213,6 +12510,20 @@ export class InMemDBService implements InMemoryDbService {
         affichagePrix:true,
         contientRessources:true,
         contientDistributeurs:true,
+        DocEtats:[
+          {id: '1', ordre: 1, dateCreation: new Date("07/21/2024"),
+            etat: {id:"1", libelle:"etat 1", description:"premièr état du document", dateCreation: new Date("07/21/2024")}
+          },
+          {id: '2', ordre: 2, dateCreation: new Date("07/21/2024"),
+            etat: {id:"2", libelle:"etat 2", description:"deuxième état du document", dateCreation: new Date("07/21/2024")}
+          },
+          {id: '3', ordre: 3, dateCreation: new Date("07/21/2024"),
+            etat: {id:"3", libelle:"etat 3", description:"troisième état du document", dateCreation: new Date("07/21/2024")}
+          },
+          {id: '4', ordre: 4, dateCreation: new Date("07/21/2024"),
+            etat: {id:"4", libelle:"etat 4", description:"quatrième état du document", dateCreation: new Date("07/21/2024")}
+          }
+        ],
         missions: [
           {
             id: '1',
@@ -12746,6 +13057,17 @@ export class InMemDBService implements InMemoryDbService {
               affichagePrix:true,
               contientRessources:true,
               contientDistributeurs:true,
+              DocEtats:[
+                {id: '1', ordre: 1, dateCreation: new Date("07/21/2024"),
+                  etat: {id:"1", libelle:"etat 1", description:"premièr état du document", dateCreation: new Date("07/21/2024")}
+                },
+                {id: '2', ordre: 2, dateCreation: new Date("07/21/2024"),
+                  etat: {id:"2", libelle:"etat 2", description:"deuxième état du document", dateCreation: new Date("07/21/2024")}
+                },
+                {id: '4', ordre: 4, dateCreation: new Date("07/21/2024"),
+                  etat: {id:"4", libelle:"etat 4", description:"quatrième état du document", dateCreation: new Date("07/21/2024")}
+                }
+              ],
             missions: [
               {
                 id: '2',
@@ -13142,6 +13464,17 @@ export class InMemDBService implements InMemoryDbService {
               affichagePrix:true,
               contientRessources:true,
               contientDistributeurs:true,
+              DocEtats:[
+                {id: '2', ordre: 2, dateCreation: new Date("07/21/2024"),
+                  etat: {id:"2", libelle:"etat 2", description:"deuxième état du document", dateCreation: new Date("07/21/2024")}
+                },
+                {id: '3', ordre: 3, dateCreation: new Date("07/21/2024"),
+                  etat: {id:"3", libelle:"etat 3", description:"troisième état du document", dateCreation: new Date("07/21/2024")}
+                },
+                {id: '4', ordre: 4, dateCreation: new Date("07/21/2024"),
+                  etat: {id:"4", libelle:"etat 4", description:"quatrième état du document", dateCreation: new Date("07/21/2024")}
+                }
+              ],
             missions: [
               {
                 id: '2',
@@ -13717,6 +14050,20 @@ export class InMemDBService implements InMemoryDbService {
               affichagePrix:true,
               contientRessources:true,
               contientDistributeurs:true,
+              DocEtats:[
+                {id: '1', ordre: 1, dateCreation: new Date("07/21/2024"),
+                  etat: {id:"1", libelle:"etat 1", description:"premièr état du document", dateCreation: new Date("07/21/2024")}
+                },
+                {id: '2', ordre: 2, dateCreation: new Date("07/21/2024"),
+                  etat: {id:"2", libelle:"etat 2", description:"deuxième état du document", dateCreation: new Date("07/21/2024")}
+                },
+                {id: '3', ordre: 3, dateCreation: new Date("07/21/2024"),
+                  etat: {id:"3", libelle:"etat 3", description:"troisième état du document", dateCreation: new Date("07/21/2024")}
+                },
+                {id: '4', ordre: 4, dateCreation: new Date("07/21/2024"),
+                  etat: {id:"4", libelle:"etat 4", description:"quatrième état du document", dateCreation: new Date("07/21/2024")}
+                }
+              ],
             missions: [
               {
                 id: '1',
@@ -14595,7 +14942,13 @@ export class InMemDBService implements InMemoryDbService {
     ];
     let typeAttribut:TypeAttribut={type:["Number","Text", "Checkbox", "Radio", "Date","Url", "Textarea", "Email"]};
     let typeUnite : TypeUnite = {type:["Litre","Kg","Packs","Boite"]};
-    let typeMvt: TypeMvt = {type :["Neutre", "Ajout", "Reduire"]}; 
-    return{patients, services, menus, tickets, missions, attributs, documents,exemplaires,famille,ressource,precomvt,distributeur,role, personnels, typeAttribut, typeUnite, typeMvt};
+    let typeMvt: TypeMvt = {type :["Neutre", "Ajout", "Reduire"]};
+    let etats: IEtats[] = [
+      {id:"1", libelle:"etat 1", description:"premièr état du document", dateCreation: new Date("07/21/2024")},
+      {id:"2", libelle:"etat 2", description:"deuxième état du document", dateCreation: new Date("07/21/2024")},
+      {id:"3", libelle:"etat 3", description:"troisième état du document", dateCreation: new Date("07/21/2024")},
+      {id:"4", libelle:"etat 4", description:"quatrième état du document", dateCreation: new Date("07/21/2024")}
+    ];
+    return{patients, services, menus, tickets, missions, attributs, documents,exemplaires,famille,ressource,precomvt,distributeur,role, personnels, typeAttribut, typeUnite, typeMvt, etats};
   }
 }

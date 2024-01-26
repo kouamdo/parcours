@@ -61,6 +61,7 @@ export class ListFamillesComponent implements OnInit, AfterViewInit {
 
     this.getAllFamilles().subscribe(valeurs => {
       this.dataSource.data = valeurs;
+      this.filteredOptions = valeurs
     });
 
     this.myControl.valueChanges.subscribe(
@@ -74,7 +75,11 @@ export class ListFamillesComponent implements OnInit, AfterViewInit {
           )
         }
         else{
-          this.filteredOptions = [];
+          this.serviceFamille.getAllFamilles().subscribe(
+            (reponse) =>{
+              this.filteredOptions=reponse
+            }
+          )
         }
 
       }

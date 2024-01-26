@@ -60,6 +60,7 @@ export class ListPersonnelsComponent implements OnInit, AfterViewInit {
 
     this.getAllPersonnels().subscribe(valeurs => {
       this.dataSource.data = valeurs;
+      this.filteredOptions = valeurs
     });
 
     this.myControl.valueChanges.subscribe(
@@ -73,7 +74,11 @@ export class ListPersonnelsComponent implements OnInit, AfterViewInit {
           )
         }
         else{
-          this.filteredOptions = [];
+          this.servicePersonnel.getAllPersonnels().subscribe(
+            (reponse) =>{
+              this.filteredOptions=reponse
+            }
+          )
         }
         
       }

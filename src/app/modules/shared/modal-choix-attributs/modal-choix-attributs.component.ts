@@ -53,6 +53,7 @@ export class ModalChoixAttributsComponent implements OnInit {
   ngOnInit(): void {
     this.getAllAttributs().subscribe((valeurs) => {
       this.dataSourceAttribut.data = valeurs;
+      this.filteredOptions = valeurs
     });
     this.dataSourceAttributResultat.data = this.donneeDocCatService.dataDocumentAttributs
     this.myControl.valueChanges.subscribe((value) => {
@@ -64,7 +65,11 @@ export class ModalChoixAttributsComponent implements OnInit {
             this.filteredOptions = reponse;
           });
       } else {
-        this.filteredOptions = [];
+        this.serviceAttribut.getAllAttributs().subscribe(
+          (reponse) =>{
+            this.filteredOptions=reponse
+          }
+        )
       }
     });
   }

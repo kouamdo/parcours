@@ -47,6 +47,11 @@ export class NewRessourceComponent implements OnInit {
   };
 
   ngOnInit(): void {
+    this.serviceFamille.getAllFamilles().subscribe(
+      (reponse) =>{
+        this.filteredOptions=reponse
+      }
+    )
     this.forme.controls["famille"].valueChanges.subscribe(
       value => {
         const libelle = typeof value === 'string' ? value : value?.libelle;
@@ -58,7 +63,11 @@ export class NewRessourceComponent implements OnInit {
           )
         }
         else{
-          this.filteredOptions = [];
+          this.serviceFamille.getAllFamilles().subscribe(
+            (reponse) =>{
+              this.filteredOptions=reponse
+            }
+          )
         }
 
       }

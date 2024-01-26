@@ -43,6 +43,7 @@
         "text1": "Field Required",
         "text2": "Field not Required",
         "text3": "is a required field",
+        "text4": "entrer value here",
         "button1":"Print",
         "button2":"Back",
         "button3":"Cancel",
@@ -55,7 +56,7 @@
         "button10":"Close"
     },
     "patient":{
-        "title1":"Add a new patient",
+        "title1":"Add patient",
         "search-bar":"search",
         "table":{
             "title1":"Name",
@@ -81,7 +82,7 @@
         }
     },
     "personnel":{
-        "title1":"Add a new staff",
+        "title1":"Add staff",
         "search-bar":"search",
         "table":{
             "title1":"Name",
@@ -89,24 +90,24 @@
             "title3":"Birthday",
             "title4":"Sex",
             "title5":"Email",
-            "title6":"Date d'entrée",
+            "title6":"Date of entry",
             "title7":"Phone",
-            "title8":"Date De Sortie",
+            "title8":"Release date",
             "title9":"Actions",
             "title10":"Search",
-            "title11":"Date de fin",
-            "title12":"Affecter roles",
-            "title13":"Sélection",
-            "title14":"Titre",
-            "title15":"Déscription",
-            "title16":"Etat",
+            "title11":"End date",
+            "title12":"Assign roles",
+            "title13":"Selection",
+            "title14":"Title",
+            "title15":"Description",
+            "title16":"Status",
             "actions":{
-                "link1":"Ajouter",
                 "link2":"Update",
                 "link3":"View",
                 "link4":"Delete",
                 "link5":"Roles",
-                "link6":"Annuler"
+                "link1":"Add",
+                "link6":"Cancel"
             }
         },
         "form":{
@@ -114,22 +115,22 @@
             "text2":"Surname is requied",
             "text3":"Birthday is requied",
             "text4":"email address is requied is requied",
-            "text5":"Day of entry is required."       
+            "text5":"Day of entry is required."
         }
     },
     "services":{
-        "title1":"Add a new service",
+      "title1":"Add service",
         "table":{
             "title1":"Libel",
             "title2":"Status",
-            "title3":"Last modification's date",
-            "title4":"Allocation's date",
-            "title5":"Date end"
+            "title3": "location",
+            "title4": "description"
         },
         "form":{
             "label1":"Libel",
             "label2":"Status",
-            "label3":"Last modification's date",
+            "label3": "location",
+            "label4": "description",
             "text1":"Libel is requied",
             "text2":"Status is requied",
             "text3":"the Last modification's date is requied"
@@ -158,7 +159,7 @@
         }
     },
     "attributs":{
-        "title1":"Add a new attribut",
+        "title1":"Add attribut",
         "table":{
             "title1":"title",
             "title2":"Description",
@@ -181,11 +182,11 @@
         }
     },
     "missions":{
-        "title1":"Add a new mission",
+        "title1":"Add mission",
         "table":{
             "title1":"Label",
             "title2":"Description",
-            "title3":"Statut",
+            "title3":"Status",
             "title4":"Allocation's Date",
             "title5":"Modification's Date",
             "title6":"Service"
@@ -193,7 +194,7 @@
         "form":{
             "text1":"Title is required.",
             "text2":"Description is required.",
-            "text3":"Statut is required.",
+            "text3":"Status is required.",
             "text4":"Last modification's date is required.",
             "text5":"Type is required.",
             "text6":"Service is required",
@@ -206,10 +207,13 @@
         }
     },
     "document":{
-        "title3":"Add a new document",
+        "title3":"Add document",
         "search-bar":"Rechercher",
         "title1":"View resuts",
         "title2":"Select attributs of this category",
+        "title4": "Pair other documents",
+        "title5": "Select documents to pair",
+        "title6": "Creat document's statuts",
         "table":{
             "title0":"Id",
             "title1":"Title",
@@ -228,24 +232,41 @@
             "title14":"Category's range",
             "title15":"Categories",
             "title16":"libelle attribut",
-            "title17":"Preconisations"
+            "title17":"Preconisations",
+            "title18": "price visibility ?",
+            "title19": "link resources ?",
+            "title20": "Distributor visibility ?",
+            "title21": "Paired documents",
+            "title22": "Mouvement's nature",
+            "title23": "Document's statut"
         },
         "form":{
             "text1":"Title is required.",
             "text2":"Description is required.",
             "text3":"Missions are required.",
-            "text4":"Attributs are required."
+            "text4":"Attributs are required.",
+            "text5": "If this box is checked, the price column will be visible when creating the movement of a copy of this document",
+            "text6": "If this box is unchecked, there will be no possibility of creating movements when creating a copy of the document",
+            "text7": "If this box is checked, the distributor column will be visible when creating the movement of a copy of this document",
+            "text8": "Mouvement's nature applied to thid document",
+            "text9": "Mouvement's nature to apply to this document is required"
         },
         "view":{
             "title":"Document's Model",
             "text1":"missions's list of document",
             "text2":"attributs's list of document",
-            "text3":"attributs's list by categories"
+            "text3":"attributs's list by categories",
+            "text4": "Statut's list of document"
         },
-        "exemplaire":{
+        "exemplaire": {
             "title":"Document's instance ",
             "title2":"Old datas",
-            "text1":"composition of this instance"
+            "title3": "Add ressources",
+            "title4": "list of mouvements",
+            "title5": "Select instances to pair",
+            "text1":"composition of this instance",
+            "text2": "Expiration's date",
+            "text3": "Update distributor"
         }      
     },
     "theme":{
@@ -255,7 +276,7 @@
         "libelle":"langages"
     },
     "famille":{
-      "header":"Add a New Category of resource",
+      "header":"Add family",
       "table":{
         "title1":"Libel",
         "title2":"Description",
@@ -268,7 +289,7 @@
     "lists":{
       "button1":"Feedback"
     },
-    "title":"Resource Category Listing",
+    "title":"Family Listing",
     "search-bar":"Research",
     "table1":{
         "title1":"Libel",
@@ -285,31 +306,33 @@
   },
     "ressource":{
     "table":{
-        "title":"Add a New Resource",
+        "title":"Add Resource",
         "title1":" Libel",
         "title2":"State",
         "title3":"Quantity",
         "title4":"Unit",
-        "title5":"Price",
+        "title5":"buy Price",
         "title6":"Category",
         "title7":"Caracteristic",
-        "title8": "Ressources"
+        "title8": "Ressources",
+        "title9": "sell prise"
 
     },
     "form":{
         "text1":"Field Required",
-        "text2":"Field Required",
+        "text2":"",
         "text4":"liter",
         "text5":"kg",
         "text6":"m²",
         "text7":"quintals",
-        "text8":"Field Required",
-        "text9":"Field Required",
+        "text8":"",
+        "text9":"",
         "text11":"Select a Unit",
         "text12":"soft",
         "text13":"hard",
         "text14":"light",
-        "text15":"Select your Characteristics"
+        "text15":"Select your Characteristics",
+        "text16": "Search a ressource"
     },
     "lists":{
         "button2":"Retour"
@@ -329,9 +352,36 @@
         "title10": "Total",
         "title11": "Total amont"
     }
+},
+
+"role":{
+  "header":"Add Role",
+  "table":{
+    "title1":"Title",
+    "title2":"title",
+    "title3":"State",
+    "title4":"Description",
+    "title5":"description"
+  },
+  "form":{
+    "text1":"Field Required"
+},
+"lists":{
+  "button1":"Cancel",
+  "btnLibelle":"Add"
+},
+"title":"Role listing",
+"search-bar":"Research",
+"table1":{
+    "title1":"Title",
+    "title2":"Description",
+    "title3":"State",
+    "title4":"Actions"
+
+}
     },
     "preconisation":{
-        "title1":"Add a new preconisation",
+        "title1":"Add preconisation",
         "form":{
             "title1":"Select preconisations"
         },
@@ -339,10 +389,111 @@
             "title1":"Label",
             "title2":"Status",
             "title3":"Type",
-            "title4":"View more infos"
+            "title4":"View more infos",
+            "title5":"Distributor",
+            "title6":"pair a distributor"
         },
         "view":{
             "text1":"Preconisations of this document"
         }
+    },
+    "distributeur": {
+      "table": {
+        "title": "Add Distributor",
+        "title1": "Social Reason ",
+        "title2": "state",
+        "title3": "Address",
+        "title4": "phone",
+        "title5": "Email"
+      },
+      "form": {
+        "text1": "Field Required",
+        "text2": "Field Required"
+      },
+      "lists": {
+        "button1": "Cancel"
+      },
+      "title": "Distributor listing ",
+      "search-bar": "Research",
+      "table2": {
+        "title1": "Socialreason ",
+        "title2": "address",
+        "title3": "state",
+        "title4": "phone",
+        "title5": "Email",
+        "title9": "Actions "
+      }
+    },
+    "precomvt": {
+      "header": "New Préconisation",
+      "header1": "Assign Families",
+      "header2": "Assign Resource",
+      "table": {
+        "title1": "label",
+        "title2": "State",
+        "title3": "Type",
+        "title4": "Family",
+        "title5": "Resource ",
+        "title6": "Max Quantity",
+        "title7": "Enter maximum quantity",
+        "title8": "Min Quantity",
+        "title9": "Enter minimum quantity",
+        "title10": "Max Amount",
+        "title11": "Enter minimum Amount",
+        "title12": "Min Amount ",
+        "title13": "Enter maximum Amount",
+        "title14": "Fournisseurs ",
+        "title15": "Back",
+        "title16": "Cancel",
+        "title17": "Family",
+        "title18": "Resource",
+        "title19": "Stage",
+        "title20": "Type:",
+        "title21": "Max Qtity :",
+        "title22": "Min Qtity : ",
+        "title23": "Max Amount : ",
+        "title24": "Min Amount : ",
+        "title25": "Save"
+      },
+      "title": "Listing PrecoMvt",
+      "search-bar": "Search",
+      "table2": {
+        "title1": "libel",
+        "title2": "state",
+        "title3": "typ",
+        "title4": "Actions"
+      },
+      "title0": "table of operations carried out",
+      "table3": {
+        "title1": "Libel",
+        "title2": "State",
+        "title3": "Typ",
+        "title4": "Resource",
+        "title5": "Max Quantity",
+        "title6": "Min Quantity",
+        "title7": "Amount Max",
+        "title8": "Min Amount",
+        "title9": "Distributor",
+        "title10": "families",
+        "title11": "Max Quantity",
+        "title12": "Min Quantity",
+        "title13": "Amount Max",
+        "title14": "Min Amount",
+        "title15": "Distributor"
+      }
+    },
+    "etats":{
+      "table":{
+        "title1":"Add Status"
+      }
+    },
+    "doc-etats":{
+      "button1":"Statut",
+      "text1":"Update the statut of this document",
+      "form":{
+        "text1":"Current statut",
+        "text2":"next statut",
+        "text3":"Statut's position"
+      }
     }
 }

@@ -74,8 +74,13 @@ export class NewPrecomvtComponent implements OnInit {
 
     this.familles$ = this.getAllFamilles();
     this.distributeurs$ = this.getAllDistributeurs();
+    this.serviceRessource.getAllRessources().subscribe(
+      (reponse) =>{
+        this.filteredOptions=reponse
+      }
+    )
+
     //code autocompletion qui retourne les éléments du type déclaré
-    //this.myControl.valueChanges.subscribe(
       this.forme.controls["ressource"].valueChanges.subscribe(
       value => {
         const libelle = typeof value === 'string' ? value : value?.libelle;
@@ -87,7 +92,11 @@ export class NewPrecomvtComponent implements OnInit {
           )
         }
         else{
-          this.filteredOptions = [];
+          this.serviceRessource.getAllRessources().subscribe(
+            (reponse) =>{
+              this.filteredOptions=reponse
+            }
+          )
         }
       }
     );

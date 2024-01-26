@@ -61,6 +61,7 @@ export class ListPatientsComponent implements OnInit, AfterViewInit {
 
     this.getAllPatients().subscribe(valeurs => {
       this.dataSource.data = valeurs;
+      this.filteredOptions =valeurs
     });
 
     this.myControl.valueChanges.subscribe(
@@ -74,7 +75,11 @@ export class ListPatientsComponent implements OnInit, AfterViewInit {
           )
         }
         else{
-         this.filteredOptions = [];
+          this.servicePatient.getAllPatients().subscribe(
+            (reponse) =>{
+              this.filteredOptions=reponse
+            }
+          )
         }
 
       }

@@ -54,6 +54,7 @@ export class ListRolesComponent implements OnInit {
 
     this.getAllRoles().subscribe(valeurs => {
       this.dataSource.data = valeurs;
+      this.filteredOptions = valeurs
     });
 
     this.myControl.valueChanges.subscribe(
@@ -67,7 +68,11 @@ export class ListRolesComponent implements OnInit {
           )
         }
         else{
-          this.filteredOptions = [];
+          this.serviceRole.getAllRoles().subscribe(
+            (reponse) =>{
+              this.filteredOptions=reponse
+            }
+          )
         }
 
       }

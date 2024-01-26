@@ -54,6 +54,7 @@ export class ModalChoixPreconisationsComponent implements OnInit {
   ngOnInit(): void {
     this.getAllPrecoMvt().subscribe((valeurs) => {
       this.dataSourcePreco.data = valeurs;
+      this.filteredOptions = valeurs
     });
     this.dataSourcePrecoResultat.data = this.donneeDocCatService.dataDocumentPrecoMvts
     this.myControl.valueChanges.subscribe((value) => {
@@ -65,7 +66,11 @@ export class ModalChoixPreconisationsComponent implements OnInit {
             this.filteredOptions = reponse;
           });
       } else {
-        this.filteredOptions = [];
+        this.servicePrecoMvt.getAllPrecomvts().subscribe(
+          (reponse) =>{
+            this.filteredOptions=reponse
+          }
+        )
       }
     });
   }

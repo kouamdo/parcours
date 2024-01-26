@@ -10,4 +10,5 @@ export interface IAfficheDocument extends IDocument {
     listCategories : string,
     listPreconisations : string
     listSousDocuments : string
+    listDocEtats : string
 }

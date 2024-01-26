@@ -99,6 +99,7 @@ export class RolesPersonnelComponent implements OnInit {
 
       this.getAllRoles().subscribe((valeurs) => {
         this.dataSource.data = valeurs;
+        this.filteredOptions = valeurs
       });
 
       this.myControl.valueChanges.subscribe((value) => {
@@ -110,7 +111,11 @@ export class RolesPersonnelComponent implements OnInit {
               this.filteredOptions = reponse;
             });
         } else {
-          this.filteredOptions = [];
+          this.serviceRole.getAllRoles().subscribe(
+            (reponse) =>{
+              this.filteredOptions=reponse
+            }
+          )
         }
       });
     }

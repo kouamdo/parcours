@@ -29,7 +29,8 @@ export class ViewExemplaireComponent implements OnInit {
     affichagePrix: false,
     contientRessources: false,
     contientDistributeurs: false,
-    typeMouvement: TypeMouvement.Neutre
+    typeMouvement: TypeMouvement.Neutre,
+    DocEtats: []
   };
   titre:string='';
   mouvements : IMouvement[] = []

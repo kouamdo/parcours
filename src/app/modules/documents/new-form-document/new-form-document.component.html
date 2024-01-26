@@ -5,8 +5,8 @@
         </div>
         <div class="card-body">
             <form [formGroup]="forme" (ngSubmit)="onSubmit(forme.value)" *ngIf="forme" >
-                <div class="">
-                    <div class="">
+                <div>
+                    <div>
                         <div class="form-group">
                             <div>
                                 <div class="champs">
@@ -205,6 +205,28 @@
                                         </button>
                                         <span *ngFor="let listeSousDocuments of ELEMENTS_TABLE_SOUS_DOCUMENTS">
                                             {{listeSousDocuments.titre | lowercase}}<span>, </span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Etats du document ------------------------------------------------- -->
+
+                        <div class="form-group">
+                            <div class="champs">
+                                <label  for="" class="label">
+                                    {{"document.title6" | translate}}
+                                </label>
+                                <div class="w-100">
+
+                                    <!-- Ouvrir le formulair de creation des docEtats -->
+                                    <div class="listAttr">
+                                        <button type="button" class="btn p-0" title="{{'lists.button9' | translate}} / {{'lists.button8' | translate}}" (click)="openDocEtatDialog()">
+                                            <i class="fas fa-plus-square"></i>
+                                        </button>
+                                        <span *ngFor="let listeDocEtats of ELEMENTS_TABLE_DOC_ETATS">
+                                            {{listeDocEtats.etat.libelle | lowercase}}<span>, </span>
                                         </span>
                                     </div>
                                 </div>

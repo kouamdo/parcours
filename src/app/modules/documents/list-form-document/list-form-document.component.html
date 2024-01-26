@@ -92,6 +92,14 @@
                         </td>
                     </ng-container>
 
+                    <!-- docEtats Column -->
+                    <ng-container matColumnDef="docEtats">
+                        <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'document.table.title23' | translate}} </th>
+                        <td class="text-dark text-center containCell" mat-cell *matCellDef="let element">
+                            <span> {{element.listDocEtats}} </span>
+                        </td>
+                    </ng-container>
+
                     <!-- action column -->
                     <ng-container matColumnDef="actions">
                         <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{"patient.table.title8" | translate}} </th>

@@ -53,7 +53,8 @@ export class NewExemplaireComponent implements OnInit {
     affichagePrix: false,
     contientRessources: false,
     contientDistributeurs: false,
-    typeMouvement: 'Neutre'
+    typeMouvement: 'Neutre',
+    DocEtats: []
   };
   
   document: IDocument = {
@@ -68,7 +69,8 @@ export class NewExemplaireComponent implements OnInit {
     affichagePrix: false,
     contientRessources: false,
     contientDistributeurs: false,
-    typeMouvement: 'Neutre'
+    typeMouvement: 'Neutre',
+    DocEtats: []
   };
 
   attribut: IAttributs = {
@@ -159,6 +161,16 @@ export class NewExemplaireComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.serviceRessource.getAllRessources().subscribe(
+      (resultat) =>{
+        this.filteredOptionsRessource = resultat
+      }
+    )
+    this.serviceDistributeur.getAllDistributeurs().subscribe(
+      (reponse) =>{
+        this.filteredDistributeurOptions=reponse
+      }
+    )
     this.nomPatientCourant = sessionStorage.getItem('nomPatientCourant');
     this.compteur = -1;
 
@@ -300,7 +312,8 @@ export class NewExemplaireComponent implements OnInit {
   }
 
   /**
-   * 
+   * methode permettant de regrouper les mouvement des sous exemplaires pour
+   * pré-former le tableau de mouvement
    */
   concatMouvementsSousExemplaireDocument(){
     let sousExelplaires : IExemplaireDocument[] = this.donneeExemplaireDocService.dataDocumentSousDocuments
@@ -314,7 +327,6 @@ export class NewExemplaireComponent implements OnInit {
         }     
     });
     this.dataSourceMouvements.data = this.ELEMENTS_TABLE_MOUVEMENTS;
-    console.log("hhhhhhhhhhhhh ", this.ELEMENTS_TABLE_MOUVEMENTS)
   }
 
 /**
@@ -538,7 +550,8 @@ export class NewExemplaireComponent implements OnInit {
       affichagePrix: this.document.affichagePrix,
       contientRessources: this.document.contientRessources,
       contientDistributeurs: this.document.contientDistributeurs,
-      typeMouvement: this.document.typeMouvement
+      typeMouvement: this.document.typeMouvement,
+      DocEtats: []
     };
 
     if (this.exemplaire.id != '') {

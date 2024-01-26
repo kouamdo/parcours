@@ -13,6 +13,7 @@ export class DonneesEchangeService {
   dataDocumentSousDocuments : any;
   dataEnteteMenu : any;
   dataDocumentSousExemplaireDocuments : any;
+  dataDocumentEtats : any;
   constructor(private http:HttpClient) { }
 
   getTypeMvt():Observable<TypeMvt>

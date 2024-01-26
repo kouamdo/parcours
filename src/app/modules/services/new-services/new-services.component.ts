@@ -1,8 +1,7 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, MaxLengthValidator,MinLengthValidator,ReactiveFormsModule, Validators, FormControl } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-import { EMPTY, Observable } from 'rxjs';
 import { IService } from 'src/app/modele/service';
 import { DonneesEchangeService } from 'src/app/services/donnees-echange/donnees-echange.service';
 import { ServicesService } from 'src/app/services/services/services.service';

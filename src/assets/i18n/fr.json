@@ -38,7 +38,7 @@
   },
   "lists": {
     "title": "listing",
-    "text1": "Champs obligatoires",
+    "text1": "Champs obligatoire",
     "text2": "Champs non obligatoires",
     "text3": "est un champs non obligatoires",
     "text4": "entrer la valeur ici",
@@ -51,10 +51,11 @@
     "button7": "Modifier",
     "button8": "Supprimer",
     "button9": "Ajouter",
-    "button10":"Fermer"
+    "button10": "Fermer",
+    "button11": "Enregistrer"
   },
   "patient": {
-    "title1":"Ajouter ",
+    "title1": "Ajouter ",
     "search-bar": "Rechercher",
     "table": {
       "title1": "Nom",
@@ -72,58 +73,57 @@
         "link4": "Supprimer"
       }
     },
-      "form": {
-        "text1": "Le nom est obligatoire.",
-        "text2": "Le prénom est obligatoire.",
-        "text3": "La date de naissance est obligatoire.",
-        "text4": "L'addresse mail est obligatoire."
-      }
+    "form": {
+      "text1": "Le nom est obligatoire.",
+      "text2": "Le prénom est obligatoire.",
+      "text3": "La date de naissance est obligatoire.",
+      "text4": "L'addresse mail est obligatoire."
+    }
   },
-  "personnel":{
-      "title1":"Ajouter ",
-      "search-bar":"Rechercher",
-      "table":{
-          "title1":"Nom",
-          "title2":"Prénom",
-          "title3":"Date Naissance",
-          "title4":"Sexe",
-          "title5":"Email",
-          "title6":"Date d'entrée",
-          "title7":"Téléphone",
-          "title8":"Date De Sortie",
-          "title9":"Actions",
-          "title10":"Recherche",
-          "title11":"Date de fin",
-          "title12":"Affecter roles",
-          "title13":"Sélection",
-          "title14":"Titre",
-          "title15":"Déscription",
-          "title16":"Etat",
-          "actions":{
-              "link1":"Ajouter",
-              "link2":"Modifier",
-              "link3":"Détails",
-              "link4":"Supprimer",
-              "link5":"Roles",
-              "link6":"Annuler"
-          }
-      },
-      "form":{
-          "text1":"Le nom est obligatoire.",
-          "text2":"Le prénom est obligatoire.",
-          "text3":"La date de naissance est obligatoire.",
-          "text4":"email address is requied is requied",
-          "text5":"La date d'entrée est aubligatoire."
+  "personnel": {
+    "title1": "Ajouter ",
+    "search-bar": "Rechercher",
+    "table": {
+      "title1": "Nom",
+      "title2": "Prénom",
+      "title3": "Date Naissance",
+      "title4": "Sexe",
+      "title5": "Email",
+      "title6": "Date d'entrée",
+      "title7": "Téléphone",
+      "title8": "Date De Sortie",
+      "title9": "Actions",
+      "title10": "Recherche",
+      "title11": "Date de fin",
+      "title12": "Affecter roles",
+      "title13": "Sélection",
+      "title14": "Titre",
+      "title15": "Déscription",
+      "title16": "Etat",
+      "actions": {
+        "link1": "Ajouter",
+        "link2": "Modifier",
+        "link3": "Détails",
+        "link4": "Supprimer",
+        "link5": "Roles",
+        "link6": "Annuler"
       }
+    },
+    "form": {
+      "text1": "Le nom est obligatoire.",
+      "text2": "Le prénom est obligatoire.",
+      "text3": "La date de naissance est obligatoire.",
+      "text4": "email address is requied is requied",
+      "text5": "La date d'entrée est aubligatoire."
+    }
   },
   "services": {
-    "title1":"Ajouter ",
+    "title1": "Ajouter ",
     "table": {
       "title1": "Libelle",
       "title2": "Etat",
       "title3": "localisation",
       "title4": "description"
-
     },
     "form": {
       "label1": "libelle",
@@ -158,7 +158,7 @@
     }
   },
   "attributs": {
-    "title1":"Ajouter ",
+    "title1": "Ajouter ",
     "table": {
       "title1": "titre",
       "title2": "Description",
@@ -181,7 +181,7 @@
     }
   },
   "missions": {
-    "title1":"Ajouter ",
+    "title1": "Ajouter ",
     "table": {
       "title1": "Libelle",
       "title2": "Description",
@@ -206,12 +206,13 @@
     }
   },
   "document": {
-    "title3":"Ajouter ",
+    "title3": "Ajouter ",
     "search-bar": "Rechercher",
     "title1": "Affichage des resultats",
     "title2": "Selectionner les attributs de la categories",
     "title4": "Associer des sous documents",
     "title5": "Selectionner les documents à associer",
+    "title6": "Creer les etats du document",
     "table": {
       "title0": "Id",
       "title1": "Titre",
@@ -235,7 +236,8 @@
       "title19": "lier des ressources ?",
       "title20": "visibilité du distributeur ?",
       "title21": "Sous documents",
-      "title22": "type des mouvements"
+      "title22": "type des mouvements",
+      "title23": "Etats du document"
     },
     "form": {
       "text1": "Le Titre est obligatoire.",
@@ -252,7 +254,8 @@
       "title": "Modele ",
       "text1": "liste des missions du document",
       "text2": "liste des attributs du document",
-      "text3": "liste des attributs par categorie du document"
+      "text3": "liste des attributs par categorie du document",
+      "text4": "liste des états du document"
     },
     "exemplaire": {
       "title": "Exemplaire ",
@@ -348,22 +351,22 @@
       "title11": "Montant total"
     }
   },
-  "preconisation":{
-    "title1":"Ajouter préconisation",
-      "form":{
-          "title1":"Sélectionnez des preconisations"
-      },
-      "table":{
-          "title1":"Libellé",
-          "title2":"Etat",
-          "title3":"Type",
-          "title4":"Voir le detail",
-          "title5":"Distributeur",
-          "title6":"Associer un distributeur"
-      },
-      "view":{
-          "text1":"Les préconisations du document"
-      }
+  "preconisation": {
+    "title1": "Ajouter préconisation",
+    "form": {
+      "title1": "Sélectionnez des preconisations"
+    },
+    "table": {
+      "title1": "Libellé",
+      "title2": "Etat",
+      "title3": "Type",
+      "title4": "Voir le detail",
+      "title5": "Distributeur",
+      "title6": "Associer un distributeur"
+    },
+    "view": {
+      "text1": "Les préconisations du document"
+    }
   },
   "distributeur": {
     "table": {
@@ -449,33 +452,50 @@
       "title14": "Montant Min",
       "title15": "Distributeur"
     }
-},
-"role":{
-  "header":"Ajouter ",
-  "table":{
-    "title1":"Titre",
-    "title2":"titre",
-    "title3":"Etat",
-    "title4":"Description",
-    "title5":"description"
   },
-  "form":{
-    "text1":"Champ Obligatoire"
-},
-"lists":{
-  "button1":"Annuler"
-},
-"title":"listing ",
-"search-bar":"Rechercher",
-"table1":{
-    "title1":"Titre",
-    "title2":"Description",
-    "title3":"Etat",
-    "title4":"Actions",
-    "actions":{
-        "link2":"Modifier",
-        "link4":"Supprimer"
+  "role": {
+    "header": "Ajouter ",
+    "table": {
+      "title1": "Titre",
+      "title2": "titre",
+      "title3": "Etat",
+      "title4": "Description",
+      "title5": "description"
+    },
+    "form": {
+      "text1": "Champ Obligatoire"
+    },
+    "lists": {
+      "button1": "Annuler"
+    },
+    "title": "listing ",
+    "search-bar": "Rechercher",
+    "table1": {
+      "title1": "Titre",
+      "title2": "Description",
+      "title3": "Etat",
+      "title4": "Actions",
+      "actions": {
+        "link2": "Modifier",
+        "link4": "Supprimer"
+      }
     }
-}
-}
+  },
+  "etats": {
+    "table": {
+      "title1": "Ajouter un etat"
+    }
+  },
+  "doc-etats": {
+    "button1": "Etat",
+    "button2": "Ajouter une validation ?",
+    "text1": "Modifier l'état du document",
+    "form": {
+      "text1": "Status courant",
+      "text2": "Status suivant",
+      "text3": "Ordre de l'état",
+       "text4": "Cet ordre existe déjà",
+      "text5": "Cet etat existe déjà"
+    }
+  }
 }

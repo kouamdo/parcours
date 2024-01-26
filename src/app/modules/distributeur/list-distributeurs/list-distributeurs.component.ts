@@ -52,6 +52,7 @@ export class ListDistributeursComponent implements OnInit {
 
     this.getAllDistributeurs().subscribe(valeurs => {
       this.dataSource.data = valeurs;
+      this.filteredOptions = valeurs
     });
 
     this.myControl.valueChanges.subscribe(
@@ -65,7 +66,11 @@ export class ListDistributeursComponent implements OnInit {
           )
         }
         else{
-          this.filteredOptions = [];
+          this.serviceDistributeur.getAllDistributeurs().subscribe(
+            (resultat) =>{
+              this.filteredOptions = resultat
+            }
+          )
         }
 
       }

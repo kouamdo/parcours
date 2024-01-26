@@ -38,6 +38,7 @@ export class ListExemplaireComponent implements OnInit {
   ngOnInit(): void {
     this.getAllExemplaires().subscribe(valeurs => {
       this.dataSource.data = valeurs;
+      this.filteredOptions = valeurs
     });
 
     this.myControl.valueChanges.subscribe(
@@ -57,7 +58,11 @@ export class ListExemplaireComponent implements OnInit {
                     )
                   }
                   else{
-                    this.filteredOptions = [];
+                    this.serviceDocument.getAllDocuments().subscribe(
+                      (resultat) =>{
+                        this.filteredOptions = resultat
+                      }
+                    )
                   }
                 }
               );

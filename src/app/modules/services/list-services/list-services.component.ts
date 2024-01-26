@@ -28,7 +28,7 @@ export class ListServicesComponent implements OnInit, AfterViewInit {
   ELEMENTS_TABLE: IService[] = [];
   filteredOptions: IService[] | undefined;
 
-  displayedColumns: string[] = ['libelle','etat','localisation','description','actions'];
+  displayedColumns: string[] = ['libelle','description','actions'];
 
   dataSource = new MatTableDataSource<IService>(this.ELEMENTS_TABLE);
 
@@ -44,6 +44,7 @@ export class ListServicesComponent implements OnInit, AfterViewInit {
 
     this.getAllServices().subscribe(valeurs => {
       this.dataSource.data = valeurs;
+      this.filteredOptions = valeurs
     });
 
     this.myControl.valueChanges.subscribe(
@@ -57,7 +58,11 @@ export class ListServicesComponent implements OnInit, AfterViewInit {
           )
         }
         else{
-          this.filteredOptions = [];
+          this.serviceService.getAllServices().subscribe(
+            (reponse) =>{
+              this.filteredOptions=reponse
+            }
+          )
         }
       }
     );

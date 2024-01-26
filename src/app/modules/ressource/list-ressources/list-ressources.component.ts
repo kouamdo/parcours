@@ -40,6 +40,7 @@ export class  ListRessourcesComponent implements OnInit {
   ngOnInit(): void {
     this.getAllRessources().subscribe(valeurs => {
       this.dataSource.data = valeurs;
+      this.filteredOptions = valeurs
     });
 
     this.myControl.valueChanges.subscribe(
@@ -53,7 +54,11 @@ export class  ListRessourcesComponent implements OnInit {
           )
         }
         else{
-          this.filteredOptions = [];
+          this.serviceRessource.getAllRessources().subscribe(
+            (reponse) =>{
+              this.filteredOptions=reponse
+            }
+          )
         }
       }
     );

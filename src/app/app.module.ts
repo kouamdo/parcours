@@ -33,6 +33,7 @@ import { CommonModule } from '@angular/common';
 import { DistributeurModule } from './modules/distributeur/distributeur.module';
 import { RoleModule } from './modules/role/role.module';
 import { PersonnelsModule } from './modules/personnels/personnels.module';
+import { EtatsModule } from './modules/etats/etats.module';
 
 @NgModule({
   declarations: [AppComponent, NotFoundComponent, MenuComponent],
@@ -57,9 +58,9 @@ import { PersonnelsModule } from './modules/personnels/personnels.module';
     RessourceModule,
     PrecomvtModule,
     CommonModule,
-
     DistributeurModule,
     RoleModule,
+
     // ngx-translate and the loader module
     HttpClientModule,
     TranslateModule.forRoot({
@@ -75,7 +76,8 @@ import { PersonnelsModule } from './modules/personnels/personnels.module';
     MatIconModule,
     MatToolbarModule,
     MatSlideToggleModule,
-    ExemplaireDocumentModule
+    ExemplaireDocumentModule,
+    EtatsModule
   ],
   providers: [],
   bootstrap: [AppComponent],
