@@ -18,13 +18,15 @@ import { MatInputModule } from '@angular/material/input';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
-import { SharedModule } from '../shared/shared.module';
+import { MatSelectModule } from '@angular/material/select';
+import { MissionsRoleComponent } from './missions-role/missions-role.component';
 
 
 @NgModule({
   declarations: [
     NewRoleComponent,
-    ListRolesComponent
+    ListRolesComponent,
+    MissionsRoleComponent
   ],
   imports: [
     CommonModule,
@@ -38,8 +40,8 @@ import { SharedModule } from '../shared/shared.module';
     MatPaginatorModule,
     MatTableModule,
     MatSortModule,
+    MatSelectModule,
     TicketsModule,
-    SharedModule,
     TranslateModule.forChild({
       loader: {
           provide: TranslateLoader,

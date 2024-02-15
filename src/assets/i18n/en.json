@@ -479,6 +479,21 @@
       "title15": "Distributor"
     }
   },
+  "validation":{
+    "header":"Add Validation",
+    "title0": "listing validation",
+        "table":{
+      "title0":"validation"
+        },
+        "form":{
+          "label1":"code",
+          "label2":"etat",
+          "label3":"Creation day",
+          "label4": "Voting Type",
+          "label5": "Duration vote",
+          "label6": "role"
+        }
+      },
   "etats": {
     "table": {
       "title1": "Add Status"

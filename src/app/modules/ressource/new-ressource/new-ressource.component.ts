@@ -109,7 +109,7 @@ export class NewRessourceComponent implements OnInit {
       unite: ressourceInput.unite,
       prixEntree: ressourceInput.prixEntree,
       prixDeSortie: ressourceInput.prixDeSortie,
-      famille:ressourceInput.famille,
+      famille: ressourceInput.famille,
       caracteristique:ressourceInput.caracteristique,
     }
 

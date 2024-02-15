@@ -181,6 +181,23 @@
             "text5":"This field is required."
         }
     },
+    "validation":{
+        "header":"Ajouter Validation",
+        "title":"listing Validation",
+        "title0": "liste validation",
+        "table":{
+          "title0":"validation"
+        },
+        "form":{
+          "label1":"code",
+          "label2":"etat",
+          "label3":"Date de création",
+          "label4": "Type vote",
+          "label5": "Duree vote",
+          "label6": "role",
+          "text1":"Field Required"
+        }
+      },
     "missions":{
         "title1":"Add mission",
         "table":{

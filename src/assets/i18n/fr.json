@@ -54,6 +54,23 @@
     "button10": "Fermer",
     "button11": "Enregistrer"
   },
+  "validation":{
+    "header":"Ajouter Validation",
+    "title0": "liste validation",
+    "title":"listing Validation",
+    "table":{
+      "title0":"validation"
+    },
+    "form":{
+      "label1":"code",
+      "label2":"etat",
+      "label3":"Date de création",
+      "label4": "Type vote",
+      "label5": "Duree vote",
+      "label6": "role",
+      "text1":"Champ Obligatoire"
+    }
+  },
   "patient": {
     "title1": "Ajouter ",
     "search-bar": "Rechercher",

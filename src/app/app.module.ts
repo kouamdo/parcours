@@ -34,6 +34,7 @@ import { DistributeurModule } from './modules/distributeur/distributeur.module';
 import { RoleModule } from './modules/role/role.module';
 import { PersonnelsModule } from './modules/personnels/personnels.module';
 import { EtatsModule } from './modules/etats/etats.module';
+import { ValidationModule } from './modules/validation/validation.module';
 
 @NgModule({
   declarations: [AppComponent, NotFoundComponent, MenuComponent],
@@ -60,6 +61,7 @@ import { EtatsModule } from './modules/etats/etats.module';
     CommonModule,
     DistributeurModule,
     RoleModule,
+    ValidationModule,
 
     // ngx-translate and the loader module
     HttpClientModule,

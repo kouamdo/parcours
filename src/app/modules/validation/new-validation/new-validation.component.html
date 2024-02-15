@@ -1,0 +1,124 @@
+<div id="mainSection">
+    <div class="card block" id="top2">
+        <div class="card-header" class="entete pt-4 pb-4">
+            {{ "validation.header" | translate }}
+        </div>
+        <div class="card-body">
+            <form [formGroup]="forme" (ngSubmit)="onSubmit(forme.value)" *ngIf="forme">
+                <div class="">
+                    <div class="">
+                        <div class="form-group">
+                            <div>
+                                <div class="champs">
+                                    <label for="code" class="label">
+                                        {{ "validation.form.label1" | translate
+                                        }}<span style="color: red" aria-label="required">*</span>
+                                    </label>
+                                    <input type="text" formControlName="code" name="code" id="code"
+                                        placeholder="{{ 'validation.form.label1' | translate }}" class="form-control"
+                                        required />
+                                </div>
+                                <div *ngIf="submitted && f['code'].errors" class="alert alert-danger">
+                                    <div *ngIf="f['code'].errors['required']">
+                                        {{ "validation.form.text1" | translate }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div>
+                                <div class="champs">
+                                    <label for="libelle" class="label">
+                                        {{ "services.table.title1" | translate
+                                        }}<span style="color: red" aria-label="required">*</span>
+                                    </label>
+                                    <input type="text" formControlName="libelle" name="libelle" id="libelle"
+                                        placeholder="{{ 'services.table.title1' | translate }}" class="form-control"
+                                        required />
+                                </div>
+                                <div *ngIf="submitted && f['libelle'].errors" class="alert alert-danger">
+                                    <div *ngIf="f['libelle'].errors['required']">
+                                        {{ "validation.form.text1" | translate }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div>
+                                <div class="champs">
+                                    <label for="etat" class="label">
+                                        {{ "validation.form.label2" | translate
+                                        }}<span style="color: red" aria-label="required">*</span>
+                                    </label>
+                                    <p class="w-100 d-flex align-items-center choix">
+                                        <input type="checkbox" [checked]="forme.get('etat')?.value"
+                                            formControlName="etat" name="etat" id="etat" class="form-control" />
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="champs">
+                                <label for="typeVote" class="label">
+                                    {{ "validation.form.label4" | translate }}<span style="color: red" aria-label="required">*</span>
+                                </label>
+                                <select class="form-control" formControlName="typeVote" name="typeVote" id="typeVote" required>
+                                    <option>Unanime</option>
+                                    <option>Majoritaire</option>
+                                </select>
+                            </div>
+                            <div *ngIf="submitted && f['typeVote'].errors" class="alert alert-danger">
+                                <div *ngIf="f['typeVote'].errors['required']">
+                                    {{ "validation.form.text1" | translate }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="champs">
+                                <label for="dureeVote" class="label">
+                                    {{ "validation.form.label5" | translate }}
+                                </label>
+                                <input type="number" required formControlName="dureeVote" name="dureeVote" id="dureeVote"
+                                     class="form-control" />
+                            </div>
+                            <div *ngIf="submitted && f['dureeVote'].errors" class="alert alert-danger">
+                                <div *ngIf="f['dureeVote'].errors['required']">
+                                    {{ "validation.form.text1" | translate }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="champs">
+                                <label  for="roleval"  class="label" >
+                                  {{'validation.form.label6' | translate}} <sup>*</sup>
+                                </label>
+                                <mat-form-field class="example-full-width w-100" appearance="fill">
+                                    <input  type="text" matInput [matAutocomplete]="auto"  aria-label="roleval" formControlName="roleval" name="roleval" id="roleval" placeholder="" class="w-100">
+                                    <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn" >
+                                    <mat-option *ngFor="let option of roles" [value]="option">
+                                        {{option.titre}}
+                                    </mat-option>
+                                    </mat-autocomplete>
+                                </mat-form-field>
+                            </div>
+                            <div *ngIf="submitted && f['roleval'].errors" class="alert alert-danger">
+                                <div *ngIf="f['roleval'].errors['required']">
+                                    {{ "validation.form.text1" | translate }}
+                                </div>
+                            </div>
+        
+                          </div>
+                    </div>
+                </div>
+                <div class="actionButton">
+                    <button class="btn" routerLink="../list-validations">
+                        <i class="fa fa-reply mr-1" aria-hidden="true"></i>{{ "lists.button2" | translate }}
+                    </button>
+                    <button type="submit" class="btn btnValidation">
+                        {{ btnLibelle }}
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -14,6 +14,7 @@ import {MatTableDataSource} from '@angular/material/table';
 import {MatSort, Sort} from '@angular/material/sort';
 import {LiveAnnouncer} from '@angular/cdk/a11y';
 import { RolesService } from 'src/app/services/roles/roles.service';
+import { log } from 'console';
 
 @Component({
   selector: 'app-list-roles',
@@ -38,12 +39,24 @@ export class ListRolesComponent implements OnInit {
   ELEMENTS_TABLE: IRole[] = [];
   filteredOptions: IRole[] | undefined;
 
-  displayedColumns: string[] = ['titre', 'description', 'etat','actions'];
+  displayedColumns: string[] = ['titre', 'description', 'etat', 'validations','actions'];
 
   dataSource = new MatTableDataSource<IRole>(this.ELEMENTS_TABLE);
 
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
+
+  tableRoles : any[] = []
+  
+  
+  afficheRoles : any = {
+    id: '',
+    titre: '',
+    description: '',
+    validations: [],
+    listeValidations: '',
+    etat: false
+  }
 
   @ViewChild(MatSort) sort!: MatSort;
   constructor(private translate: TranslateService,private router:Router, private serviceRole:RolesService, private _liveAnnouncer: LiveAnnouncer, private serviceService:ServicesService, private serviceTicket:TicketsService){ }
@@ -53,8 +66,32 @@ export class ListRolesComponent implements OnInit {
     this.tickets$ = this.getAllTickets();
 
     this.getAllRoles().subscribe(valeurs => {
-      this.dataSource.data = valeurs;
-      this.filteredOptions = valeurs
+      const tableRoles : any[] = this.tableRoles
+     
+      valeurs.forEach(
+        x =>{
+          this.afficheRoles  = {
+            id: x.id,
+            titre: x.titre,
+            description: x.description,
+            etat: x.etat,
+            validations: x.validations!,
+            listeValidations: ''
+          }
+          console.log("valid:", x.validations);
+          
+          if (x.validations) {
+            x.validations.forEach(
+              m => {
+                this.afficheRoles.listeValidations += m.code + ", ";
+              } 
+            )    
+          }
+        
+          tableRoles.push(this.afficheRoles)
+        }
+      )
+      this.dataSource.data = tableRoles;
     });
 
     this.myControl.valueChanges.subscribe(
@@ -68,11 +105,7 @@ export class ListRolesComponent implements OnInit {
           )
         }
         else{
-          this.serviceRole.getAllRoles().subscribe(
-            (reponse) =>{
-              this.filteredOptions=reponse
-            }
-          )
+          this.filteredOptions = [];
         }
 
       }
