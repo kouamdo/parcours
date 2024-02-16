@@ -16,48 +16,61 @@ import { TicketsService } from 'src/app/services/tickets/tickets.service';
 @Component({
   selector: 'app-list-tickets',
   templateUrl: './list-tickets.component.html',
-  styleUrls: ['./list-tickets.component.scss']
+  styleUrls: ['./list-tickets.component.scss'],
 })
 export class ListTicketsComponent implements OnInit, AfterViewInit {
-
-  tickets$:Observable<ITicket[]>=EMPTY;
-  ticketImpression:ITicket | undefined;
-  patientCorrespondant:IPatient = {
+  tickets$: Observable<ITicket[]> = EMPTY;
+  ticketImpression: ITicket | undefined;
+  patientCorrespondant: IPatient = {
     id: '',
     nom: '',
     adresse: '',
     mail: '',
-    telephone: ''
+    telephone: '',
+    qrCodeValue: '',
   };
-  idTicketImpression : string = "";
-  statutTicketActif = StatutTicket.actif
-  statutTicketAttente = StatutTicket.attente
-  statutTicketTraite = StatutTicket.traite
-  
+  idTicketImpression: string = '';
+  statutTicketActif = StatutTicket.actif;
+  statutTicketAttente = StatutTicket.attente;
+  statutTicketTraite = StatutTicket.traite;
+
   myControl = new FormControl<string | ITicket>('');
- 
+
   ELEMENTS_TABLE: ITicket[] = [];
   filteredOptions: ITicket[] | undefined;
 
-  displayedColumns: string[] = ['id', 'idUnique', 'idFileAttente', 'idPersonne', 'statut', 'actions'];
-  
+  displayedColumns: string[] = [
+    'id',
+    'idUnique',
+    'idFileAttente',
+    'idPersonne',
+    'statut',
+    'actions',
+  ];
+
   dataSource = new MatTableDataSource<ITicket>(this.ELEMENTS_TABLE);
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
 
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private translate: TranslateService, private router:Router, private serviceTicket:TicketsService, private _liveAnnouncer: LiveAnnouncer,private servicePatient:PatientsService) { }
+  constructor(
+    private translate: TranslateService,
+    private router: Router,
+    private serviceTicket: TicketsService,
+    private _liveAnnouncer: LiveAnnouncer,
+    private servicePatient: PatientsService
+  ) {}
 
   ngOnInit(): void {
     this.tickets$ = this.getAllTickets();
-    this.ticketImpression  = {
-      id: "1",
+    this.ticketImpression = {
+      id: '1',
       idUnique: '',
-      date_heure: new Date,
+      date_heure: new Date(),
       idFileAttente: null,
       idPersonne: null,
-      statut: ''
+      statut: '',
     };
     
     this.serviceTicket.getAllTickets().subscribe(
@@ -68,13 +81,13 @@ export class ListTicketsComponent implements OnInit, AfterViewInit {
 
     this.getAllTickets().subscribe(valeurs => {
       this.dataSource.data = valeurs;
-      
-    this.myControl.valueChanges.subscribe(
-      value => {
+
+      this.myControl.valueChanges.subscribe((value) => {
         const uniqueId = typeof value === 'string' ? value : value?.idUnique;
-        if(uniqueId != undefined && uniqueId?.length >0){
-          this.serviceTicket.getTicketByIdUnique(uniqueId.toLowerCase() as string).subscribe(
-            reponse => { 
+        if (uniqueId != undefined && uniqueId?.length > 0) {
+          this.serviceTicket
+            .getTicketByIdUnique(uniqueId.toLowerCase() as string)
+            .subscribe((reponse) => {
               this.filteredOptions = reponse;
             }
           )
@@ -86,9 +99,7 @@ export class ListTicketsComponent implements OnInit, AfterViewInit {
             }
           )
         }
-        
-      }
-    );
+      });
     });
   }
 
@@ -101,12 +112,14 @@ export class ListTicketsComponent implements OnInit, AfterViewInit {
     this.dataSource.sort = this.sort;
   }
 
-  public rechercherListingTicket(option: ITicket){
-    this.serviceTicket.getTicketByIdUnique(option.idUnique.toLowerCase()).subscribe(
-        valeurs => {this.dataSource.data = valeurs;}
-    )
+  public rechercherListingTicket(option: ITicket) {
+    this.serviceTicket
+      .getTicketByIdUnique(option.idUnique.toLowerCase())
+      .subscribe((valeurs) => {
+        this.dataSource.data = valeurs;
+      });
   }
-  
+
   announceSortChange(sortState: Sort) {
     if (sortState.direction) {
       this._liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);
@@ -115,24 +128,26 @@ export class ListTicketsComponent implements OnInit, AfterViewInit {
     }
   }
 
-  recupIdTicket(idTicket : string){
-    this.idTicketImpression = idTicket
+  recupIdTicket(idTicket: string) {
+    this.idTicketImpression = idTicket;
   }
 
-  ticketAImprimer(){
-    this.serviceTicket.getTicketById(this.idTicketImpression).subscribe(
-      objet=>{
+  ticketAImprimer() {
+    this.serviceTicket
+      .getTicketById(this.idTicketImpression)
+      .subscribe((objet) => {
         this.ticketImpression = objet;
-        if(this.ticketImpression?.idPersonne){
-          this.servicePatient.getPatientById(this.ticketImpression?.idPersonne).subscribe(
-            valeur =>{this.patientCorrespondant= valeur;} 
-          );
+        if (this.ticketImpression?.idPersonne) {
+          this.servicePatient
+            .getPatientById(this.ticketImpression?.idPersonne)
+            .subscribe((valeur) => {
+              this.patientCorrespondant = valeur;
+            });
         }
-      }
-    )
+      });
   }
 
-  private getAllTickets(){
+  private getAllTickets() {
     return this.serviceTicket.getAllTickets();
   }
 }

@@ -1,0 +1,11 @@
+<div class="video-wrapper">
+  <div class="video-container">
+    <div class="button-container">
+      <i class="fas fa-camera fa-2x icon" (click)="createMediaStream()"></i>
+    </div>
+    <div class="video-content">
+      <video #video [width]="isCameraOpen ? 300 : 0" [height]="isCameraOpen ? 70 : 0"></video>
+    </div>
+      <div *ngIf="isCameraOpen" class="close-button" (click)="stopScanner()">✕</div>
+  </div>
+</div>

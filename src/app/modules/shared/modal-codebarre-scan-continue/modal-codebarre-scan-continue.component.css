@@ -1,0 +1,45 @@
+.video-wrapper {
+  position: relative;
+}
+.video-content {
+  display: flex;
+  align-items: center;
+}
+
+.video-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-right: 0px;
+  margin-left: 100px;
+}
+
+.button-container {
+  margin-left: 5px; /* Adjust the margin as needed */
+  margin-bottom: 7px;
+}
+
+.video-container .icon {
+  cursor: pointer;
+}
+
+.video-container video {
+  transition: all 0.3s ease; /* Add smooth transition for the video element */
+}
+
+.close-button {
+  position: absolute;
+  right: 100px;
+  top: 1px;
+  font-size: 5px;
+  cursor: pointer;
+  color: white;
+  background-color: red;
+  padding: 5px;
+  border-radius: 30%;
+}
+.icon {  
+  color: #28a745;
+  cursor: pointer;
+  position: absolute;
+}

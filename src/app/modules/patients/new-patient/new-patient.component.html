@@ -4,38 +4,46 @@
           {{"patient.title1" | translate}} {{titre}}
         </div>
         <div class="card-body">
-            <form [formGroup]="forme" (ngSubmit)="onSubmit(forme.value)" *ngIf="forme" >
+            <form [formGroup]="forme" (ngSubmit)="onSubmit(forme.value)" *ngIf="forme">
                 <div class="">
                     <div class="">
                         <div class="form-group">
                             <div>
                                 <div class="champs">
                                     <label for="nom" class="label">
-                                        {{'patient.table.title1' | translate}} <span style="color: red;" aria-label="required">*</span>
+                                        {{'patient.table.title1' | translate}} <span style="color: red;"
+                                            aria-label="required">*</span>
                                     </label>
-                                    <input type="text" formControlName="nom" name="nom" id="nom"  placeholder="{{'patient.table.title1' | translate}}"  class="form-control" required>
+                                    <input type="text" formControlName="nom" name="nom" id="nom"
+                                        placeholder="{{'patient.table.title1' | translate}}" class="form-control"
+                                        required>
                                 </div>
-                                <div  *ngIf="submitted && f['nom'].errors"  class="alert alert-danger" >
+                                <div *ngIf="submitted && f['nom'].errors" class="alert alert-danger">
                                     <div *ngIf="f['nom'].errors['required']">{{'patient.form.text1' | translate}}</div>
                                 </div>
                             </div>
                         </div>
+
                         <div class="form-group">
                             <div>
                                 <div class="champs">
-                                    <label for="prenom" class="label" >
-                                        {{"patient.table.title2" | translate}} <span style="color: red;" aria-label="required">*</span>
+                                    <label for="prenom" class="label">
+                                        {{"patient.table.title2" | translate}} <span style="color: red;"
+                                            aria-label="required">*</span>
                                     </label>
-                                    <input  type="text" formControlName="prenom" name="prenom" id="prenom" placeholder="{{'patient.table.title2' | translate}}" class="form-control"  required  >
+                                    <input type="text" formControlName="prenom" name="prenom" id="prenom"
+                                        placeholder="{{'patient.table.title2' | translate}}" class="form-control"
+                                        required>
                                 </div>
-                                <div  *ngIf="submitted && f['prenom'].errors"  class="alert alert-danger" >
-                                    <div *ngIf="f['prenom'].errors['required']">{{'patient.form.text2' | translate}}</div>
+                                <div *ngIf="submitted && f['prenom'].errors" class="alert alert-danger">
+                                    <div *ngIf="f['prenom'].errors['required']">{{'patient.form.text2' | translate}}
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="champs">
-                                <label  for="type" class="label">
+                                <label for="type" class="label">
                                     {{"patient.table.title4" | translate}}
                                 </label>
                                 <select  class="form-control" formControlName="sexe" name="sexe" id="sexe">
@@ -47,51 +55,98 @@
                         <div class="form-group">
                             <div>
                                 <div class="champs">
-                                    <label for="dateNaissance" class="label" >
-                                        {{"patient.table.title3" | translate}}<span style="color: red;" aria-label="required">*</span>
+                                    <label for="dateNaissance" class="label">
+                                        {{"patient.table.title3" | translate}}<span style="color: red;"
+                                            aria-label="required">*</span>
                                     </label>
-                                    <input  type="date" formControlName="dateNaissance"  name="dateNaissance" id="dateNaissance" placeholder="{{'patient.table.title3' | translate}}" value="" required class="form-control">
+                                    <input type="date" formControlName="dateNaissance" name="dateNaissance"
+                                        id="dateNaissance" placeholder="{{'patient.table.title3' | translate}}" value=""
+                                        required class="form-control">
                                 </div>
-                                <div  *ngIf="submitted && f['dateNaissance'].errors"  class="alert alert-danger" >
-                                    <div *ngIf="f['dateNaissance'].errors['required']">{{'patient.form.text3' | translate}}</div>
+                                <div *ngIf="submitted && f['dateNaissance'].errors" class="alert alert-danger">
+                                    <div *ngIf="f['dateNaissance'].errors['required']">{{'patient.form.text3' |
+                                        translate}}</div>
                                 </div>
                             </div>
                         </div>
+
+
                         <div class="form-group">
                             <div>
                                 <div class="champs">
-                                    <label for="mail" class="label" >
-                                        {{"patient.table.title5" | translate}}<span style="color: red;" aria-label="required">*</span>
+                                    <label for="mail" class="label">
+                                        {{"patient.table.title5" | translate}}<span style="color: red;"
+                                            aria-label="required">*</span>
                                     </label>
-                                    <input type="email" formControlName="mail"  name="mail"  id="mail" placeholder="{{'patient.table.title5' | translate}}"   required  class="form-control" >
+                                    <input type="email" formControlName="mail" name="mail" id="mail"
+                                        placeholder="{{'patient.table.title5' | translate}}" required
+                                        class="form-control">
                                 </div>
-                                <div  *ngIf="submitted && f['mail'].errors"  class="alert alert-danger" >
-                                <div *ngIf="f['mail'].errors['required']">{{'patient.form.text4' | translate}}</div>
+                                <div *ngIf="submitted && f['mail'].errors" class="alert alert-danger">
+                                    <div *ngIf="f['mail'].errors['required']">{{'patient.form.text4' | translate}}</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="champs">
+                                <label for="telephone" class="label">
+                                    {{"patient.table.title7" | translate}}
+                                </label>
+                                <input type="text" formControlName="telephone" name="telephone" id="telephone"
+                                    placeholder="{{'patient.table.title7' | translate}}" class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div>
+                                <div class="champs">
+                                    <label for="adresse" class="label">
+                                        {{"patient.table.title6" | translate}}
+                                    </label>
+                                    <input type="text" formControlName="adresse" name="adresse" id="adresse"
+                                        placeholder="{{'patient.table.title6' | translate}}" class="form-control">
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="champs">
-                                <label  for="telephone"  class="label" >
-                                    {{"patient.table.title7" | translate}}
+                                <label for="famille" class="label">
+                                    Personnes Rattachées
                                 </label>
-                                <input type="text" formControlName="telephone" name="telephone" id="telephone" placeholder="{{'patient.table.title7' | translate}}" class="form-control" >
+                                <input type="text" matInput [matAutocomplete]="auto" formControlName="myControl"
+                                    [formControl]="myControl" aria-label="personne"
+                                    placeholder="Entrer le nom de la personne" class="w-100 form-control" />
+                                <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn"
+                                    (optionSelected)="onSelectPersonne($event)">
+                                    <mat-option *ngFor="let option of filteredOptions" [value]="option"
+                                        (click)="rechercherListingPersonne(option)">
+                                        {{ option.nom }}
+                                        {{option.prenom}} Né le
+                                        {{option.dateNaissance | date: 'dd/MM/yyyy'}}
+                                    </mat-option>
+                                </mat-autocomplete>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <div>
-                                <div class="champs">
-                                    <label for="adresse" class="label" >
-                                        {{"patient.table.title6" | translate}}
-                                    </label>
-                                    <input type="text" formControlName="adresse"  name="adresse"  id="adresse" placeholder="{{'patient.table.title6' | translate}}" class="form-control" >
-                                </div>
+
+                    </div>
+
+                    <!-- Display selected personnesRatachees as badges -->
+                    <!-- Display selected personnesRatachees as badges with a button to remove -->
+                    <div *ngIf="personnesRatachees.length > 0" class="display">
+                        <div *ngFor="let personne of personnesRatachees; let i = index" class="badge-container"
+                            style="flex-grow: 1;flex-shrink: 0;">
+                            <div class="badge-content">
+                                {{ personne.nom }} - {{ personne.prenom }} - {{ personne.sexe }} - {{
+                                personne.dateNaissance | date: 'dd/MM/yyyy' }}
+                                <button mat-button class="remove-button" (click)="removePersonne(i)">X</button>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="actionButton">
-                    <button class="btn" routerLink="../list-patients"><i class="fa fa-reply mr-1" aria-hidden="true"></i>{{'lists.button2' | translate}}</button>
+                    <button class="btn" routerLink="../list-patients"><i class="fa fa-reply mr-1"
+                            aria-hidden="true"></i>{{'lists.button2' | translate}}</button>
                     <button type="submit" class="btn btnValidation">{{btnLibelle}}</button>
                 </div>
             </form>

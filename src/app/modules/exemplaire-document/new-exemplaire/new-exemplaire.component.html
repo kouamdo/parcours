@@ -57,6 +57,7 @@
                                     </mat-autocomplete>
                                 </mat-form-field>
                                 <button *ngIf="modificationDistributeurActive == true" class="btn btnModifierDistributeurBlock" type="button" (click)="modifierDistributeur()">{{'lists.button6' | translate}}</button>
+                                
                             </form>
                         </div>
                         <div class="blockAutoRessources">
@@ -64,12 +65,13 @@
                                 <h4>{{'ressource.form.text16' | translate}}</h4>
                                 <mat-form-field class="example-full-width" appearance="fill">
                                     <mat-label class="searchBar"></mat-label>
-                                    <input type="text" matInput [formControl]="ressourceControl" [matAutocomplete]="auto">
+                                    <input type="text" matInput [formControl]="ressourceControl" [(ngModel)]="scan_val" [value]="scan_val" [matAutocomplete]="auto">
                                     <mat-autocomplete class="blockAutocomplate" #auto="matAutocomplete" [displayWith]="displayFn">
                                         <mat-option class="options" *ngFor="let option of filteredOptionsRessource" [value]="option" (click)="rechercherListingRessources(option); reinitialliseRessourceControl()">
                                             {{option.libelle}}
                                         </mat-option>
                                     </mat-autocomplete>
+                                    
                                 </mat-form-field>
                             </form>
                         </div>
@@ -187,8 +189,10 @@
                 </div>
             </div>
         </div>
-        <div class="actionButton">
-            <button class="btn" type="reset" routerLink="../../executer-missions"><i class="fa fa-reply mr-1"></i>{{'lists.button2' | translate}}</button>
+        
+        <div class="actionButton container">
+            <button class="btn" type="reset" routerLink="../../executer-missions"><i class="fa fa-reply mr-1"></i>{{'lists.button2' | translate}}</button>      
+            <app-modal-codebarre-scan-continue></app-modal-codebarre-scan-continue>
             <button type="submit" class="btn btnValidation">{{btnLibelle}}</button>
         </div>
     </form>

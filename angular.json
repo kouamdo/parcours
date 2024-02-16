@@ -30,7 +30,7 @@
             ],
             
             "styles": [
-              "./node_modules/@angular/material/prebuilt-themes/pink-bluegrey.css",
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.css",
               "src/styles.scss",
               "src/styles.sass",
@@ -42,7 +42,6 @@
               "node_modules/admin-lte/plugins/daterangepicker/daterangepicker.css",
               "node_modules/admin-lte/plugins/summernote/summernote-bs4.min.css",
               "node_modules/admin-lte/dist/css/adminlte.min.css"
-              
             ],
             "scripts": [
               "node_modules/admin-lte/plugins/jquery/jquery.min.js",
@@ -131,7 +130,7 @@
               "src/assets"
             ],
             "styles": [
-              "./node_modules/@angular/material/prebuilt-themes/pink-bluegrey.css",
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.scss"
             ],
             "scripts": []

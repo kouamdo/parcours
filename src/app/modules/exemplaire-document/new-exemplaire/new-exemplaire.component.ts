@@ -10,10 +10,7 @@ import {
 } from '@angular/forms';
 import { Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import {
-  Router,
-  ActivatedRoute,
-} from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { IAssociationCategorieAttributs } from 'src/app/modele/association-categorie-attributs';
 import { IAttributs } from 'src/app/modele/attributs';
 import { IDistributeur } from 'src/app/modele/distributeur';
@@ -31,6 +28,7 @@ import { ExemplaireDocumentService } from 'src/app/services/exemplaire-document/
 import { RessourcesService } from 'src/app/services/ressources/ressources.service';
 import { v4 as uuidv4 } from 'uuid';
 import { TypeMouvement } from 'src/app/modele/typeMouvement';
+import { ModalCodebarreService } from '../../shared/modal-codebarre/modal-codebarre.service';
 
 @Component({
   selector: 'app-new-exemplaire',
@@ -56,7 +54,7 @@ export class NewExemplaireComponent implements OnInit {
     typeMouvement: 'Neutre',
     DocEtats: []
   };
-  
+
   document: IDocument = {
     id: '',
     titre: '',
@@ -108,7 +106,7 @@ export class NewExemplaireComponent implements OnInit {
   compteur: number = -1;
   totalAttribut: number = 0;
   numerateur: number = -1;
-  totalAttributSupprime: number = 0.;
+  totalAttributSupprime: number = 0;
   objetCleValeurSupprime: ObjetCleValeur[] = [];
   tableauAttributsSupprime: IAttributs[] = [];
 
@@ -119,9 +117,11 @@ export class NewExemplaireComponent implements OnInit {
   titre:string='';  
   ressourceControl = new FormControl<string | IRessource>('');
   distributeurControl = new FormControl<string | IDistributeur>('');
-  idRessource : string = "";
+  idRessource: string = '';
   ELEMENTS_TABLE_MOUVEMENTS: IMouvement[] = [];
-  dataSourceMouvements = new MatTableDataSource<IMouvement>(this.ELEMENTS_TABLE_MOUVEMENTS);
+  dataSourceMouvements = new MatTableDataSource<IMouvement>(
+    this.ELEMENTS_TABLE_MOUVEMENTS
+  );
   filteredOptionsRessource: IRessource[] | undefined;
   filteredDistributeurOptions: IDistributeur[] | undefined;
   displayedRessourcesColumns: string[] = [
@@ -152,20 +152,30 @@ export class NewExemplaireComponent implements OnInit {
     private _liveAnnouncer: LiveAnnouncer,
     private serviceExemplaire: ExemplaireDocumentService,
     private datePipe: DatePipe,
-    private donneeExemplaireDocService:DonneesEchangeService
+    private donneeExemplaireDocService:DonneesEchangeService,
+    private barService: ModalCodebarreService
   ) {
     this.formeExemplaire = this.formBuilder.group({
       _exemplaireDocument: new FormArray([]),
-      _controlsSupprime: new FormArray([])
+      _controlsSupprime: new FormArray([]),
     });
   }
+  scan_val: any | undefined;
 
   ngOnInit(): void {
-    this.serviceRessource.getAllRessources().subscribe(
-      (resultat) =>{
-        this.filteredOptionsRessource = resultat
+    this.barService.getCode().subscribe((dt) => {
+      this.scan_val = dt;
+      this.ressourceControl.setValue(this.scan_val); // Set the initial value in the search bar
+
+      if (this.scan_val) {
+        // If scan_val is set, perform a search to get the corresponding libelle
+        this.serviceRessource
+          .getRessourcesByScanBarCodeorLibelle(this.scan_val)
+          .subscribe((response) => {
+            this.filteredOptionsRessource = response;
+          });
       }
-    )
+    });
     this.serviceDistributeur.getAllDistributeurs().subscribe(
       (reponse) =>{
         this.filteredDistributeurOptions=reponse
@@ -184,24 +194,22 @@ export class NewExemplaireComponent implements OnInit {
     this.titre=this.dataEnteteMenuService.dataEnteteMenu
     
     this.ressourceControl.valueChanges.subscribe((value) => {
-      const libelle = typeof value === 'string' ? value : value?.libelle;
-      if (libelle != undefined && libelle?.length > 0) {
+      const query = value?.toString().toLowerCase(); // Convert to lower case for case-insensitive search
+      if (query && query.length > 0) {
+        // Search by name or ID
         this.serviceRessource
-          .getRessourcesByLibelle(libelle.toLowerCase() as string)
-          .subscribe((resultat) => {
-            this.filteredOptionsRessource = resultat;
+          .getRessourcesByScanBarCodeorLibelle(query)
+          .subscribe((reponse) => {
+            this.filteredOptionsRessource = reponse;
           });
       } else {
-        this.serviceRessource.getAllRessources().subscribe(
-          (resultat) =>{
-            this.filteredOptionsRessource = resultat
-          }
-        )
+        this.filteredOptionsRessource = [];
       }
     });
-    
+
     this.distributeurControl.valueChanges.subscribe((value) => {
-      const raisonSocial = typeof value === 'string' ? value : value?.raisonSocial;
+      const raisonSocial =
+        typeof value === 'string' ? value : value?.raisonSocial;
       if (raisonSocial != undefined && raisonSocial?.length > 0) {
         this.serviceDistributeur
           .getDistributeursByraisonSocial(raisonSocial.toLowerCase() as string)
@@ -209,11 +217,9 @@ export class NewExemplaireComponent implements OnInit {
             this.filteredDistributeurOptions = reponse;
           });
       } else {
-        this.serviceDistributeur.getAllDistributeurs().subscribe(
-          (reponse) =>{
-            this.filteredDistributeurOptions=reponse
-          }
-        )
+        this.serviceDistributeur.getAllDistributeurs().subscribe((reponse) => {
+          this.filteredDistributeurOptions = reponse;
+        });
       }
     });
   }
@@ -222,23 +228,26 @@ export class NewExemplaireComponent implements OnInit {
    * Methode pour l'initialisation d'un control avec une valeur
    * @param valParDefaut valeur recuperer dans objetEnregistre et qui servira de valeur du control cree
    */
-  addAttributs(valParDefaut: any, obligatoire : Boolean) {
-    if (valParDefaut != '' && valParDefaut != 'PARCOURS_NOT_FOUND_404'){
+  addAttributs(valParDefaut: any, obligatoire: Boolean) {
+    if (valParDefaut != '' && valParDefaut != 'PARCOURS_NOT_FOUND_404') {
       if (obligatoire == true) {
-        this._exemplaireDocument.push(this.formBuilder.control(valParDefaut, Validators.required));
+        this._exemplaireDocument.push(
+          this.formBuilder.control(valParDefaut, Validators.required)
+        );
       } else {
         this._exemplaireDocument.push(this.formBuilder.control(valParDefaut));
       }
-    }
-    else{
+    } else {
       if (obligatoire == true) {
-        this._exemplaireDocument.push(this.formBuilder.control('', Validators.required));
+        this._exemplaireDocument.push(
+          this.formBuilder.control('', Validators.required)
+        );
       } else {
         this._exemplaireDocument.push(this.formBuilder.control(''));
       }
     }
   }
-  
+
   /**
    * Methode pour l'initialisation d'un control avec une valeur
    * @param valParDefaut valeur recuperer dans objetEnregistre et qui servira de valeur du control cree
@@ -273,7 +282,7 @@ export class NewExemplaireComponent implements OnInit {
       }
       if (flag == false) {
         this.objetCleValeurSupprime.push(keyVal);
-        this.totalAttributSupprime = this.objetCleValeurSupprime.length-1
+        this.totalAttributSupprime = this.objetCleValeurSupprime.length - 1;
       }
     }
   }
@@ -388,11 +397,7 @@ export class NewExemplaireComponent implements OnInit {
    * methode permettant de renvoyer la valeur de l'attribut
    */
   rechercherValeurParIdAttributSupprime(idAttribut: string): string {
-    for (
-      let index = 0;
-      index < this.objetCleValeurSupprime.length;
-      index++
-    ) {
+    for (let index = 0; index < this.objetCleValeurSupprime.length; index++) {
       const element = this.objetCleValeurSupprime[index];
       if (element.key.id == idAttribut) {
         return element.value;
@@ -438,7 +443,9 @@ export class NewExemplaireComponent implements OnInit {
    * recuperation du formArray qui servira à initialiser les controls d'autocompletion des didtributeurs.
    */
   get _controlsAutocomplateDistributeur(): FormArray {
-    return this.formeExemplaire.get('_controlsAutocomplateDistributeur') as FormArray;
+    return this.formeExemplaire.get(
+      '_controlsAutocomplateDistributeur'
+    ) as FormArray;
   }
 
   /**
@@ -448,8 +455,11 @@ export class NewExemplaireComponent implements OnInit {
    * @param idAttribut id attribut à afficher
    * @returns valeur courante + 1
    */
-  incrementeCompteur(cpt: number, attributCategories: IAssociationCategorieAttributs): number {
-    if (this.compteur > -1 && this.compteur >= this.totalAttribut){
+  incrementeCompteur(
+    cpt: number,
+    attributCategories: IAssociationCategorieAttributs
+  ): number {
+    if (this.compteur > -1 && this.compteur >= this.totalAttribut) {
       return cpt;
     }
 
@@ -471,10 +481,7 @@ export class NewExemplaireComponent implements OnInit {
     return this.compteur;
   }
   incrementeNumerateur(num: number, attribut: IAttributs): number {
-    if (
-      this.numerateur >= -1 &&
-      this.numerateur >= this.totalAttributSupprime
-    )
+    if (this.numerateur >= -1 && this.numerateur >= this.totalAttributSupprime)
       return num;
 
     let valAttribut = this.rechercherValeurParIdAttribut(attribut.id);
@@ -498,15 +505,15 @@ export class NewExemplaireComponent implements OnInit {
     this.estValide = true
     for (let index = 0; index < this.tempAttributsObbligatoires.size; index++) {
       if (this.f.controls[index].errors) {
-        this.estValide = false
-        this.eValvalide = this.tempAttributsObbligatoires.get(index)
-        break
+        this.estValide = false;
+        this.eValvalide = this.tempAttributsObbligatoires.get(index);
+        break;
       }
     }
-      return this.eValvalide
+    return this.eValvalide;
   }
 
-  get f(){
+  get f() {
     return this.formeExemplaire.get('_exemplaireDocument') as FormArray;
   }
 
@@ -514,15 +521,18 @@ export class NewExemplaireComponent implements OnInit {
    * Methodr qui permet de faire la somme des montants du tableau de mouvements
    * pour afficher le resultat dans la case montant total
    */
-  sommeMontants():number{
+  sommeMontants(): number {
     this.montantTotal = 0;
-    this.ELEMENTS_TABLE_MOUVEMENTS.forEach(
-      mouvement => {
-        if (mouvement.ressource != undefined && mouvement.quantite!=null && mouvement.prix!=null) {
-          this.montantTotal += mouvement.prix*mouvement.quantite;
-        }
+    this.ELEMENTS_TABLE_MOUVEMENTS.forEach((mouvement) => {
+      if (
+        mouvement.ressource != undefined &&
+        mouvement.quantite != null &&
+        mouvement.prix != null
+      ) {
+        this.montantTotal += mouvement.prix * mouvement.quantite;
+      }
     });
-    return this.montantTotal
+    return this.montantTotal;
   }
 
   /**
@@ -531,8 +541,8 @@ export class NewExemplaireComponent implements OnInit {
   onSubmit() {
     const exemplaireDocument = this._exemplaireDocument;
     this.submitted = true;
-    this.enregistrerObjet()
-    this.evaluation()
+    this.enregistrerObjet();
+    this.evaluation();
     if (this.formeExemplaire.invalid) return;
 
     let exemplaireTemp: IExemplaireDocument = {
@@ -570,21 +580,23 @@ export class NewExemplaireComponent implements OnInit {
    * une ressource avant de la mettre dans le tablau de mouvement
    * @param distributeur valeur du distributeur récupéré dans l'autocomplate distributeur sur le template
    */
-  public associerDistributeur(distributeur : IDistributeur){
-    this.distributeur = distributeur
+  public associerDistributeur(distributeur: IDistributeur) {
+    this.distributeur = distributeur;
   }
   public rechercherListingRessources(option: IRessource) {
-    this.modificationDistributeurActive = false
-    this.indexmodificationDistributeur = -1
-    let tabIdRessource : string[] = []
-    this.ELEMENTS_TABLE_MOUVEMENTS.forEach(
-      mouvement => {
-        if ((mouvement.ressource.id == option.id && mouvement.distributeur?.id == this.distributeur?.id) ) {
-          tabIdRessource.push(mouvement.ressource.id)
-        }
+    this.modificationDistributeurActive = false;
+    this.indexmodificationDistributeur = -1;
+    let tabIdRessource: string[] = [];
+    this.ELEMENTS_TABLE_MOUVEMENTS.forEach((mouvement) => {
+      if (
+        mouvement.ressource.id == option.id &&
+        mouvement.distributeur?.id == this.distributeur?.id
+      ) {
+        tabIdRessource.push(mouvement.ressource.id);
+      }
     });
     if (!tabIdRessource.includes(option.id)) {
-      let mvt : IMouvement = {
+      let mvt: IMouvement = {
         id: '',
         description: '',
         quantite: option.quantite,
@@ -619,13 +631,11 @@ export class NewExemplaireComponent implements OnInit {
    * Methode qui permet d'effacer la valeur du control ressource lorsqu'on a
    * déjà choisi la ressource en cliquant dessus
    */
-  reinitialliseRessourceControl(){
-    this.serviceRessource.getAllRessources().subscribe(
-      (resultat) =>{
-        this.filteredOptionsRessource = resultat
-      }
-    )
-    this.ressourceControl.reset()
+  reinitialliseRessourceControl() {
+    this.serviceRessource.getAllRessources().subscribe((resultat) => {
+      this.filteredOptionsRessource = resultat;
+    });
+    this.ressourceControl.reset();
   }
 
   InitialiseDistributeurControlPourModufication(index : number){
@@ -635,22 +645,33 @@ export class NewExemplaireComponent implements OnInit {
     this.distributeurControl.setValue(mouvement.distributeur!)
   }
 
-  modifierDistributeur(){
-    if (this.modificationDistributeurActive == true && this.indexmodificationDistributeur != -1) {
-      let mouvement = this.ELEMENTS_TABLE_MOUVEMENTS[this.indexmodificationDistributeur]
-      mouvement.distributeur = this.distributeur
-      this.dataSourceMouvements.data = this.ELEMENTS_TABLE_MOUVEMENTS
+  modifierDistributeur() {
+    if (
+      this.modificationDistributeurActive == true &&
+      this.indexmodificationDistributeur != -1
+    ) {
+      let mouvement =
+        this.ELEMENTS_TABLE_MOUVEMENTS[this.indexmodificationDistributeur];
+      mouvement.distributeur = this.distributeur;
+      this.dataSourceMouvements.data = this.ELEMENTS_TABLE_MOUVEMENTS;
     }
-    this.modificationDistributeurActive = false
-    this.indexmodificationDistributeur = -1
+    this.modificationDistributeurActive = false;
+    this.indexmodificationDistributeur = -1;
   }
 
   displayFn(Ressource: IRessource): string {
-    return Ressource && Ressource.libelle ? Ressource.libelle : '';
+    return Ressource && Ressource.libelle && Ressource.scanBarCode
+      ? Ressource.libelle
+      : '';
+  }
+  displayFnn(option: any): string {
+    return option.scanBarCode ? option.scanBarCode : option.libelle;
   }
 
   displayDistributeurFn(distributeur: IDistributeur): string {
-    return distributeur && distributeur.raisonSocial ? distributeur.raisonSocial : '';
+    return distributeur && distributeur.raisonSocial
+      ? distributeur.raisonSocial
+      : '';
   }
 
   announceSortChange(sortState: Sort) {

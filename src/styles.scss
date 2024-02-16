@@ -124,6 +124,13 @@ select{
     background-color:#28a745;// #1473e6;
 }
 }
+.button-right {
+  margin-left: auto;
+}
+.container {
+  display: flex;
+  align-items: center;
+}
 .choix{
   color: #28a745;
   font-size: 18px;
@@ -251,6 +258,11 @@ td{
 #top{
   margin-top: -70px;
 }
+
+.align-items{
+  display: flex;
+}
+
 
 @media screen and (max-width: 1200px) {
   .title h2{

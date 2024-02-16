@@ -1,0 +1,43 @@
+/* Add your custom styles here */
+.container {
+    max-width: 800px;
+    padding-left: 50px;
+  }
+  
+  .card {
+    margin-bottom: 20px;
+  }
+  
+  .card-header {
+    background-color: #f8f9fa;
+    padding: 10px;
+  }
+
+  .col-md-6[_ngcontent-mnc-c48] {
+    max-width: 100%;
+  }
+  
+  .card-body {
+    padding: 20px;
+    width: 300px;
+  }
+  
+  .row {
+    margin-left: -10px;
+    margin-right: -10px;
+  }
+  
+  .col-md-6 {
+    flex: 0 0 50%;
+    max-width: 50%;
+    padding: 10px;
+  }
+
+  .qr-code {
+    display: inline-block; 
+    align-self: center;
+  }
+  .qrcode {
+    margin-top: 12px;
+  }
+  

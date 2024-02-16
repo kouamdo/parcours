@@ -1,0 +1,65 @@
+<div class="container mt-4 justify-content-center">
+  <div class="d-block">
+    <!-- Main patient card -->
+    <div class="card mb-4" style="margin: 0 auto;">
+      <div class="card-body">
+        <div class="col-md-12">
+          <div style="margin-left: 80px; margin-bottom: 12px;">
+            <img src="assets/img/logo_camnafaw.jpg" alt="logo_camnafaw.jpg" style="width: 100px; height: auto;">
+          </div>
+          <p style="font: FrankRuhlLibre;"><strong>Nom: </strong> <span style="white-space: nowrap;">{{
+              patient?.nom}}</span></p>
+          <p><strong>Prenom: </strong> <span style="white-space: nowrap;">{{ patient?.prenom }}</span></p>
+          <!-- Display QR Code if personnesRatachees is empty -->
+          <div *ngIf="!patient?.personnesRatachees || patient?.personnesRatachees.length === 0"
+            style="display: flex; gap: 10px; align-items: center;">
+            <div style="display: flex;gap: 10px; align-items: center;">
+              <p><strong style="padding-bottom: 12px;">QR Code:</strong> </p>
+              <span class="qr-code">
+                <qrcode [qrdata]="patient?.id" [width]="40"></qrcode>
+              </span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Display cards for personnesRatachees -->
+    <div *ngIf="patient?.personnesRatachees && patient?.personnesRatachees.length > 0">
+      <div class="row">
+        <div class="border border-dark p-3 rounded shadow" style="min-width: 200px; margin: 0 auto;">
+          <div class="col-md-12">
+
+            <p style="text-align: center; "><strong>Enfant de: </strong></p>
+            <hr color="blue">
+            <div *ngFor="let personne of patient.personnesRatachees">
+              {{ personne?.nom }} {{ personne?.prenom }}
+              <div style="display: flex;gap: 10px; align-items: center; margin-bottom: 12px;">
+                <p style="padding-bottom: 0px;">QR Code: </p>
+                <span class="qr-code">
+                  <qrcode [qrdata]="personne?.id" [width]="40"></qrcode>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="attachedPatients.length > 0">
+      <div class="row">
+        <div class="border border-dark p-3 rounded shadow" style="min-width: 200px; margin: 0 auto;">
+          <div class="col-md-12">
+            <p style="text-align: center;"><strong>Parent de: </strong></p>
+            <hr color="blue">
+            <div *ngFor="let attachedPatient of attachedPatients">
+              {{ attachedPatient.nom }} {{ attachedPatient.prenom }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

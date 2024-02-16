@@ -1,16 +1,17 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { IPersonnel } from 'src/app/modele/personnel';
 import { DonneesEchangeService } from 'src/app/services/donnees-echange/donnees-echange.service';
 import { PersonnelsService } from 'src/app/services/personnels/personnels.service';
-import {v4 as uuidv4} from 'uuid';
+import { v4 as uuidv4 } from 'uuid';
+import * as QRCode from 'qrcode';
 
 @Component({
   selector: 'app-new-personnel',
   templateUrl: './new-personnel.component.html',
-  styleUrls: ['./new-personnel.component.scss']
+  styleUrls: ['./new-personnel.component.scss'],
 })
 export class NewPersonnelComponent implements OnInit {
 
@@ -19,6 +20,8 @@ export class NewPersonnelComponent implements OnInit {
    forme: FormGroup;
    btnLibelle: string="Ajouter";
    submitted: boolean=false;
+   // Import the QRCodeModule
+   qrCodeValue: string = '';
    titre:string='';
    constructor(private formBuilder:FormBuilder,private dataEnteteMenuService:DonneesEchangeService, private personnelService:PersonnelsService, private router:Router, private infosPath:ActivatedRoute, private datePipe: DatePipe) {
      this.forme =  this.formBuilder.group({
@@ -60,36 +63,39 @@ export class NewPersonnelComponent implements OnInit {
      this.titre=this.dataEnteteMenuService.dataEnteteMenu
    }
 
-   get f(){
-     return this.forme.controls;
-   }
+  get f() {
+    return this.forme.controls;
+  }
 
-   onSubmit(personnelInput:any){
-     this.submitted=true;
-     //Todo la validation d'element non conforme passe
-     if(this.forme.invalid) return;
+  onSubmit(personnelInput: any) {
+    this.submitted = true;
 
-     let personnelTemp : IPersonnel={
-       id: uuidv4(),
-       nom:personnelInput.nom,
-       prenom:personnelInput.prenom,
-       sexe:personnelInput.sexe,
-       email:personnelInput.email,
-       telephone:personnelInput.telephone,
-       dateNaissance:personnelInput.dateNaissance,
-       dateEntree: personnelInput.dateEntree,
-       dateSortie: personnelInput.dateSortie
-     }
+    if (this.forme.invalid) return;
 
-     if(this.personnel != undefined){
-       personnelTemp.id = this.personnel.id
-     }
-     this.personnelService.ajouterPersonnel(personnelTemp).subscribe(
-       object => {
-         this.router.navigate(['/list-personnels']);
-       }
-     )
-   }
+    let personnelTemp: IPersonnel = {
+      id: uuidv4(),
+      nom: personnelInput.nom,
+      prenom: personnelInput.prenom,
+      sexe: personnelInput.sexe,
+      email: personnelInput.email,
+      telephone: personnelInput.telephone,
+      dateNaissance: personnelInput.dateNaissance,
+      dateEntree: personnelInput.dateEntree,
+      dateSortie: personnelInput.dateSortie,
+      qrCodeValue: personnelInput.qrCodeValue,
+    };
 
+    console.log('the person is', personnelTemp);
+
+    if (this.personnel != undefined) {
+      personnelTemp.id = this.personnel.id;
+    }
+
+    // Save personnel data
+    this.personnelService
+      .ajouterPersonnel(personnelTemp)
+      .subscribe((object) => {
+        this.router.navigate(['/list-personnels']);
+      });
+  }
 }
-

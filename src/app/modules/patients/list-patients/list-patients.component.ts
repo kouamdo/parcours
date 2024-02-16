@@ -8,14 +8,21 @@ import { ITicket } from 'src/app/modele/ticket';
 import { PatientsService } from 'src/app/services/patients/patients.service';
 import { ServicesService } from 'src/app/services/services/services.service';
 import { TicketsService } from 'src/app/services/tickets/tickets.service';
-import {FormControl, FormsModule,ReactiveFormsModule} from '@angular/forms';
-import {MatPaginator} from '@angular/material/paginator';
-import {MatTableDataSource} from '@angular/material/table';
-import {MatSort, Sort} from '@angular/material/sort';
-import {LiveAnnouncer} from '@angular/cdk/a11y';
+import {
+  FormControl,
+  FormsModule,
+  ReactiveFormsModule,
+  FormBuilder,
+  FormGroup,
+  FormArray,
+} from '@angular/forms';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatSort, Sort } from '@angular/material/sort';
+import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { NewTicketComponent } from '../../tickets/new-ticket/new-ticket.component';
-import {MatDialog} from '@angular/material/dialog';
-
+import { MatDialog } from '@angular/material/dialog';
+import { ModalCodebarreService } from '../../shared/modal-codebarre/modal-codebarre.service';
 
 export interface User {
   nom: string;
@@ -27,92 +34,139 @@ export interface User {
   styleUrls: ['./list-patients.component.scss'],
 })
 export class ListPatientsComponent implements OnInit, AfterViewInit {
+  patients$: Observable<IPatient[]> = EMPTY;
+  services$: Observable<IService[]> = EMPTY;
+  tickets$: Observable<ITicket[]> = EMPTY;
 
-  patients$:Observable<IPatient[]>=EMPTY;
-  services$:Observable<IService[]>=EMPTY;
-  tickets$:Observable<ITicket[]>=EMPTY;
-
-  id_personne : string = "0";
-  id_service : number = 0;
-  nom_patient : string = "";
-  libelle_service : string = "";
-  currentDate : Date = new Date()
+  id_personne: string = '0';
+  id_service: number = 0;
+  nom_patient: string = '';
+  libelle_service: string = '';
+  currentDate: Date = new Date();
 
   myControl = new FormControl<string | IPatient>('');
 
   ELEMENTS_TABLE: IPatient[] = [];
   //filteredOptions: IPatient[] | undefined;
   filteredOptions: IPatient[] | undefined;
-  displayedColumns: string[] = ['nom', 'prenom', 'anniversaire', 'sexe', 'mail', 'adresse', 'telephone', 'actions'];
+  displayedColumns: string[] = [
+    'nom',
+    'prenom',
+    'anniversaire',
+    'sexe',
+    'mail',
+    'adresse',
+    'telephone',
+    'actions',
+  ];
 
   dataSource = new MatTableDataSource<IPatient>(this.ELEMENTS_TABLE);
+
+  formPatient: FormGroup;
 
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
 
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private translate: TranslateService,private router:Router, private servicePatient:PatientsService, private _liveAnnouncer: LiveAnnouncer, private serviceService:ServicesService, private serviceTicket:TicketsService, private dialogDef : MatDialog) {
+  constructor(
+    private translate: TranslateService,
+    private router: Router,
+    private servicePatient: PatientsService,
+    private _liveAnnouncer: LiveAnnouncer,
+    private serviceService: ServicesService,
+    private serviceTicket: TicketsService,
+    private formBuilder: FormBuilder,
+    private dialogDef: MatDialog,
+    private barService: ModalCodebarreService
+  ) {
+    this.formPatient = this.formBuilder.group({
+      _listPatient: new FormArray([]),
+    });
   }
 
+  scan_val: any | undefined;
+
   ngOnInit(): void {
+    this.barService.getCode().subscribe((dt) => {
+      this.scan_val = dt;
+      this.myControl.setValue(this.scan_val); // Set the initial value in the search bar
+
+      this.handleScanValChange(); // Trigger the search when scan_val changes
+
+      this.myControl.valueChanges.subscribe(() => {
+        this.handleScanValChange();
+      });
+
+      if (this.scan_val) {
+        // If scan_val is set, perform a search to get the corresponding libelle
+        this.servicePatient
+          .getPatientsByNameOrId(this.scan_val)
+          .subscribe((response) => {
+            this.filteredOptions = response;
+
+            // Manually set the selected option in filteredOptions
+            const selectedOption = this.filteredOptions.find(
+              (option) => option.id === this.scan_val
+            );
+            if (selectedOption) {
+              this.filteredOptions = [selectedOption];
+              this.dataSource.data = [selectedOption]; // Update the dataSource with the selected option
+            }
+          });
+      }
+    });
+
     this.services$ = this.getAllServices();
     this.tickets$ = this.getAllTickets();
 
-    this.getAllPatients().subscribe(valeurs => {
+    this.getAllPatients().subscribe((valeurs) => {
       this.dataSource.data = valeurs;
       this.filteredOptions =valeurs
     });
 
-    this.myControl.valueChanges.subscribe(
-      value => {
-        const name = typeof value === 'string' ? value : value?.nom;
-        if(name != undefined && name?.length >0){
-          this.servicePatient.getPatientsByName(name.toLowerCase() as string).subscribe(
-            reponse => {
-             this.filteredOptions = reponse;
-            }
-          )
-        }
-        else{
-          this.servicePatient.getAllPatients().subscribe(
-            (reponse) =>{
-              this.filteredOptions=reponse
-            }
-          )
-        }
-
+    this.myControl.valueChanges.subscribe((value) => {
+      const query = value?.toString().toLowerCase(); // Convert to lower case for case-insensitive search
+      if (query && query.length > 0) {
+        // Search by name or ID
+        this.servicePatient
+          .getPatientsByNameOrId(query)
+          .subscribe((reponse) => {
+            this.filteredOptions = reponse;
+          });
+      } else {
+        this.filteredOptions = [];
       }
-    );
+    });
+    const defaultValue = 'YourDefaultSearchValue'; // Replace with your desired default value
+    this.myControl.setValue(defaultValue);
   }
 
-  setIdPersonne(id_personne : string, nom_patient : string){
+  setIdPersonne(id_personne: string, nom_patient: string) {
     this.id_personne = id_personne;
-    this.nom_patient = nom_patient
-    sessionStorage.setItem("id_patient", this.id_personne.toString());
-    sessionStorage.setItem("nom_patient", this.nom_patient);
+    this.nom_patient = nom_patient;
+    sessionStorage.setItem('id_patient', this.id_personne.toString());
+    sessionStorage.setItem('nom_patient', this.nom_patient);
   }
-  setLibelleService(id_service : number, libelleService: string){
+  setLibelleService(id_service: number, libelleService: string) {
     this.libelle_service = libelleService;
     this.id_service = id_service;
 
-    sessionStorage.setItem("id_service", this.id_service.toString());
-    sessionStorage.setItem("libelle_service", this.libelle_service);
+    sessionStorage.setItem('id_service', this.id_service.toString());
+    sessionStorage.setItem('libelle_service', this.libelle_service);
   }
 
-  private getAllPatients(){
+  private getAllPatients() {
     return this.servicePatient.getAllPatients();
   }
 
-  openNewTicketDialog(){
-    this.dialogDef.open(NewTicketComponent,
-    {
+  openNewTicketDialog() {
+    this.dialogDef.open(NewTicketComponent, {
       height: '500px',
       width: '400px',
-      enterAnimationDuration:'1000ms',
-      exitAnimationDuration:'1000ms',
-    }
-    )
+      enterAnimationDuration: '1000ms',
+      exitAnimationDuration: '1000ms',
+    });
   }
 
   displayFn(user: IPatient): string {
@@ -124,10 +178,31 @@ export class ListPatientsComponent implements OnInit, AfterViewInit {
     this.dataSource.sort = this.sort;
   }
 
-  public rechercherListingPersonne(option: IPatient){
-    this.servicePatient.getPatientsByName(option.nom.toLowerCase()).subscribe(
-        valeurs => {this.dataSource.data = valeurs;}
-    )
+  private handleScanValChange() {
+    if (this.scan_val) {
+      this.servicePatient
+        .getPatientsByNameOrId(this.scan_val)
+        .subscribe((response) => {
+          this.filteredOptions = response;
+
+          // Manually set the selected option in filteredOptions
+          const selectedOption = this.filteredOptions.find(
+            (option) => option.id === this.scan_val
+          );
+          if (selectedOption) {
+            this.filteredOptions = [selectedOption];
+            this.dataSource.data = [selectedOption]; // Update the dataSource with the selected option
+          }
+        });
+    }
+  }
+
+  public rechercherListingPersonne(option: IPatient) {
+    this.servicePatient
+      .getPatientsByName(option.nom.toLowerCase())
+      .subscribe((valeurs) => {
+        this.dataSource.data = valeurs;
+      });
   }
 
   /** Announce the change in sort state for assistive technology. */
@@ -143,10 +218,10 @@ export class ListPatientsComponent implements OnInit, AfterViewInit {
     }
   }
 
-  private getAllServices(){
+  private getAllServices() {
     return this.serviceService.getAllServices();
   }
-  private getAllTickets(){
+  private getAllTickets() {
     return this.serviceTicket.getAllTickets();
   }
 }
