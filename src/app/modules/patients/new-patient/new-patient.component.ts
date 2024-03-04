@@ -11,7 +11,7 @@ import {
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PatientsService } from 'src/app/services/patients/patients.service';
-import { IPatient, IPersonneRattachee } from '../../../modele/Patient';
+import { IPatient } from '../../../modele/Patient';
 import { v4 as uuidv4 } from 'uuid';
 import { DonneesEchangeService } from 'src/app/services/donnees-echange/donnees-echange.service';
 import { MatTableDataSource } from '@angular/material/table';
@@ -26,15 +26,15 @@ export class NewPatientComponent implements OnInit {
   //patient$:Observable<patientient>=EMPTY;
   patient: IPatient | undefined;
   forme: FormGroup;
-  btnLibelle: string="Ajouter";
-  submitted: boolean=false;
+  btnLibelle: string = 'Ajouter';
+  submitted: boolean = false;
   titre: string = 'Ajouter un nouveau Patient';
   myControl = new FormControl<string | IPatient>('');
   initialDate = new FormControl(new Date());
   qrCodeValue: string = '';
 
   ELEMENTS_TABLE: IPatient[] = [];
-  personnesRatachees: IPersonneRattachee[] = [];
+  personnesRatachees: IPatient[] = [];
 
   dataSource = new MatTableDataSource<IPatient>(this.ELEMENTS_TABLE);
 
@@ -57,7 +57,7 @@ export class NewPatientComponent implements OnInit {
   }
 
   onSelectPersonne(event: MatAutocompleteSelectedEvent): void {
-    const selectedPersonne: IPersonneRattachee = event.option.value;
+    const selectedPersonne: IPatient = event.option.value;
 
     if (this.personnesRatachees.length < 2) {
       if (this.forme && this.forme.get('myControl')) {
@@ -99,12 +99,40 @@ export class NewPatientComponent implements OnInit {
   }
 
   //TODO validation du formulaire. particulièrment les mail; les dates
-  constructor(private formBuilder:FormBuilder,private dataEnteteMenuService:DonneesEchangeService, private patientService:PatientsService,private router:Router, private infosPath:ActivatedRoute, private datePipe: DatePipe) {
-    this.forme =  this.formBuilder.group({
-      nom: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
-      prenom: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
+  constructor(
+    private formBuilder: FormBuilder,
+    private dataEnteteMenuService: DonneesEchangeService,
+    private patientService: PatientsService,
+    private router: Router,
+    private infosPath: ActivatedRoute,
+    private datePipe: DatePipe
+  ) {
+    this.forme = this.formBuilder.group({
+      nom: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(2),
+          Validators.maxLength(50),
+        ],
+      ],
+      prenom: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(2),
+          Validators.maxLength(50),
+        ],
+      ],
       sexe: ['M'],
-      mail: ['', [Validators.required, Validators.email, Validators.pattern(".+@.+\.{1}[a-z]{2,3}")]],
+      mail: [
+        '',
+        [
+          Validators.required,
+          Validators.email,
+          Validators.pattern('.+@.+.{1}[a-z]{2,3}'),
+        ],
+      ],
       //todo initialisation du composant à une date
       dateNaissance: ['1980-01-01', Validators.required],
       telephone: [''],
@@ -133,7 +161,7 @@ export class NewPatientComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.titre=this.dataEnteteMenuService.dataEnteteMenu
+    this.titre = this.dataEnteteMenuService.dataEnteteMenu;
     let idPatient = this.infosPath.snapshot.paramMap.get('idPatient');
     if (idPatient != null && idPatient !== '') {
       this.btnLibelle = 'Modifier';
@@ -160,7 +188,7 @@ export class NewPatientComponent implements OnInit {
         });
       });
     }
-    this.titre=this.dataEnteteMenuService.dataEnteteMenu
+    this.titre = this.dataEnteteMenuService.dataEnteteMenu;
   }
 
   get f() {
@@ -171,9 +199,18 @@ export class NewPatientComponent implements OnInit {
     this.submitted = true;
     //Todo la validation d'element non conforme passe
     if (this.forme.invalid) return;
+    if (!patientInput.id) {
+      patientInput.id = uuidv4();
+    }
+
+    if (this.personnesRatachees.length > 0) {
+      patientInput.qrCodeValue = '';
+    } else {
+      patientInput.qrCodeValue = patientInput.id;
+    }
 
     let patientTemp: IPatient = {
-      id: uuidv4(),
+      id: patientInput.id,
       nom: patientInput.nom,
       prenom: patientInput.prenom,
       sexe: patientInput.sexe,
@@ -188,8 +225,8 @@ export class NewPatientComponent implements OnInit {
 
     patientTemp.dateNaissance = this.initialDate.value!;
 
-    if(this.patient != undefined){
-      patientTemp.id = this.patient.id
+    if (this.patient != undefined) {
+      patientTemp.id = this.patient.id;
     }
     this.patientService.ajouterPatient(patientTemp).subscribe((object) => {
       this.router.navigate(['/list-patients']);

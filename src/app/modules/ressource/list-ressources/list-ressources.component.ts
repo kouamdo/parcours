@@ -10,23 +10,30 @@ import { Observable, EMPTY } from 'rxjs';
 import { RessourcesService } from 'src/app/services/ressources/ressources.service';
 import { IRessource } from 'src/app/modele/ressource';
 
-
-
-
 @Component({
   selector: 'app-list-ressources',
   templateUrl: './list-ressources.component.html',
-  styleUrls: ['./list-ressources.component.scss']
+  styleUrls: ['./list-ressources.component.scss'],
 })
-export class  ListRessourcesComponent implements OnInit {
-  ressources$:Observable<IRessource>=EMPTY;
+export class ListRessourcesComponent implements OnInit {
+  ressources$: Observable<IRessource> = EMPTY;
 
   myControl = new FormControl<string | IRessource>('');
 
   ELEMENTS_TABLE: IRessource[] = [];
   filteredOptions: IRessource[] | undefined;
 
-  displayedColumns: string[] = ['libelle','etat','quantite','unite','prixEntree','prixDeSortie','famille','caracteristique','actions'];
+  displayedColumns: string[] = [
+    'libelle',
+    'etat',
+    'quantite',
+    'unite',
+    'prixEntree',
+    'prixDeSortie',
+    'famille',
+    'caracteristique',
+    'actions',
+  ];
 
   dataSource = new MatTableDataSource<IRessource>(this.ELEMENTS_TABLE);
 
@@ -35,36 +42,36 @@ export class  ListRessourcesComponent implements OnInit {
 
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private translate: TranslateService,private router:Router, private serviceRessource:RessourcesService, private _liveAnnouncer: LiveAnnouncer) { }
+  constructor(
+    private translate: TranslateService,
+    private router: Router,
+    private serviceRessource: RessourcesService,
+    private _liveAnnouncer: LiveAnnouncer
+  ) {}
 
   ngOnInit(): void {
-    this.getAllRessources().subscribe(valeurs => {
+    this.getAllRessources().subscribe((valeurs) => {
       this.dataSource.data = valeurs;
-      this.filteredOptions = valeurs
+      this.filteredOptions = valeurs;
     });
 
-    this.myControl.valueChanges.subscribe(
-      value => {
-        const libelle = typeof value === 'string' ? value : value?.libelle;
-        if(libelle != undefined && libelle?.length >0){
-          this.serviceRessource.getRessourcesByLibelle(libelle.toLowerCase() as string).subscribe(
-            reponse => {
-              this.filteredOptions = reponse;
-            }
-          )
-        }
-        else{
-          this.serviceRessource.getAllRessources().subscribe(
-            (reponse) =>{
-              this.filteredOptions=reponse
-            }
-          )
-        }
+    this.myControl.valueChanges.subscribe((value) => {
+      const libelle = typeof value === 'string' ? value : value?.libelle;
+      if (libelle != undefined && libelle?.length > 0) {
+        this.serviceRessource
+          .getRessourcesByLibelle(libelle.toLowerCase() as string)
+          .subscribe((reponse) => {
+            this.filteredOptions = reponse;
+          });
+      } else {
+        this.serviceRessource.getAllRessources().subscribe((reponse) => {
+          this.filteredOptions = reponse;
+        });
       }
-    );
+    });
   }
 
-  private getAllRessources(){
+  private getAllRessources() {
     return this.serviceRessource.getAllRessources();
   }
   displayFn(attribue: IRessource): string {
@@ -76,10 +83,12 @@ export class  ListRessourcesComponent implements OnInit {
     this.dataSource.sort = this.sort;
   }
 
-  public rechercherListingRessource(option: IRessource){
-    this.serviceRessource.getRessourcesByLibelle(option.libelle.toLowerCase()).subscribe(
-        valeurs => {this.dataSource.data = valeurs;}
-    )
+  public rechercherListingRessource(option: IRessource) {
+    this.serviceRessource
+      .getRessourcesByLibelle(option.libelle.toLowerCase())
+      .subscribe((valeurs) => {
+        this.dataSource.data = valeurs;
+      });
   }
 
   announceSortChange(sortState: Sort) {
@@ -90,4 +99,3 @@ export class  ListRessourcesComponent implements OnInit {
     }
   }
 }
-

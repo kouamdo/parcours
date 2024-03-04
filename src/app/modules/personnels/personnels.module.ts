@@ -19,12 +19,14 @@ import { ListPersonnelsComponent } from './list-personnels/list-personnels.compo
 import { RolesPersonnelComponent } from './roles-personnel/roles-personnel.component';
 import { SharedModule } from '../shared/shared.module';
 import { QRCodeModule } from 'angularx-qrcode';
+import { DetailPersonnelsComponent } from './detail-personnels/detail-personnels.component';
 
 @NgModule({
   declarations: [
     NewPersonnelComponent, 
     ListPersonnelsComponent,
-    RolesPersonnelComponent
+    RolesPersonnelComponent,
+    DetailPersonnelsComponent
   ],
   imports: [
     CommonModule,

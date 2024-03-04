@@ -11,16 +11,41 @@ select {
   .badge-container {
     margin-top: 8px;
     display: flex;
-    flex-wrap: wrap; /* Allow badges to wrap to the next line */
+    flex-wrap: wrap;
   }
   
   .badge-content {
     background-color: #e0e0e0;
-    padding: 4px 8px;
     border-radius: 4px;
     margin-right: 8px;
-    margin-bottom: 8px; 
+    margin-bottom: 8px;
+    min-width: 48vw; /* Default min-width */
+    display: flex;
+    justify-content: space-between;
   }
+  
+  @media screen and (min-width: 1024px) {
+    /* Adjust min-width for larger screens */
+    .badge-content {
+      min-width: 44.7vw; /* Set min-width for each badge when there are two badges per row */
+    }
+
+    .badge-content {   
+      background-color: #e0e0e0;
+      min-width: 21.9vw; /* Set min-width for each badge when there are two badges per row */
+      border-radius: 4px;
+      margin-right: 8px;
+      margin-bottom: 8px;
+      display: flex;
+      justify-content: space-between;
+
+    }
+    .badge-container {
+      margin-top: 8px;
+      display: flex;
+    }
+  }
+  
 
   .display{
     display: flex;
@@ -30,12 +55,10 @@ select {
   .remove-button {
     margin-left: 8px;
     cursor: pointer;
-    background-color: red;
     color: white; 
     border: none; 
     padding: 4px 6px; 
     border-radius: 4px;
-    font-size: 12px;
   }
   
   

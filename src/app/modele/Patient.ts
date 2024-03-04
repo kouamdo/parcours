@@ -8,13 +8,5 @@ export interface IPatient {
   mail: string;
   telephone: string;
   qrCodeValue: string;
-  personnesRatachees?: IPersonneRattachee[];
-}
-
-export interface IPersonneRattachee {
-  id?: string;
-  nom?: string;
-  prenom?: string;
-  sexe?: string;
-  dateNaissance?: Date;
+  personnesRatachees?: IPatient[];
 }

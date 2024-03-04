@@ -1,0 +1,43 @@
+<div id="mainSection">
+    <div class="card block" id="top2" style="width: 50%;">
+        <div *ngIf="personnel">
+            <div class="card-header" class="entete " style="display: flex; justify-content: center;">
+                <h2 class="label" style="margin-top: 12px;">Détails du Personnel </h2>
+            </div>
+
+            <div class="details" style="margin-left: 12px; margin-right: 12px;">
+                <p style="margin-top: 10px; font-size: medium;" class="label"><strong>{{'personnel.table.title1' |
+                        translate}}:</strong> {{
+                    personnel.nom }} {{
+                    personnel.prenom }}
+                </p>
+                <hr>
+                <p style="font-size: medium;"><strong>{{"personnel.table.title4" | translate}}:</strong> {{
+                    personnel.sexe }}</p>
+                <hr>
+                <p style="font-size: medium;"><strong>{{"personnel.table.title5" | translate}}:</strong> {{
+                    personnel.email }}</p>
+                <hr>
+                <p style="font-size: medium;"><strong>{{"personnel.table.title3" | translate}}:</strong> {{
+                    personnel.dateNaissance | date: 'dd/MM/yyyy' }}</p>
+                <hr>
+                <p style="font-size: medium;"><strong>{{"personnel.table.title6" | translate}}:</strong> {{
+                    personnel.dateEntree | date: 'dd/MM/yyyy' }}</p>
+                <hr>
+                <p style="font-size: medium;"><strong>{{"personnel.table.title8" | translate}}:</strong> {{
+                    personnel.dateSortie | date | date: 'dd/MM/yyyy' }}</p>
+                <hr>
+                <p style="font-size: medium;"><strong>{{"personnel.table.title7" | translate}}:</strong> {{
+                    personnel.telephone }}</p>
+                <hr>
+                <div class="actionButton" style="justify-content: center;">
+                    <button style="width: 200px; margin-bottom: 10px;" class="btn" routerLink="../../list-personnels"><i
+                            class="fa fa-reply mr-1" aria-hidden="true"></i>{{'lists.button2' | translate}}</button>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="!personnel">
+            <p>Loading...</p>
+        </div>
+    </div>
+</div>

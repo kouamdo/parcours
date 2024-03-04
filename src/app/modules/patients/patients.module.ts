@@ -20,7 +20,11 @@ import { QRCodeModule } from 'angularx-qrcode';
 import { DetailPatientsComponent } from './detail-patients/detail-patients.component';
 
 @NgModule({
-  declarations: [NewPatientComponent, ListPatientsComponent, DetailPatientsComponent],
+  declarations: [
+    NewPatientComponent,
+    ListPatientsComponent,
+    DetailPatientsComponent,
+  ],
   imports: [
     CommonModule,
     FormsModule,

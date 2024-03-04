@@ -1,7 +1,7 @@
 <div id="mainSection">
     <div class="card block" id="top2">
         <div class="card-header" class="entete pt-4 pb-4">
-          {{"patient.title1" | translate}} {{titre}}
+            {{"patient.title1" | translate}} {{titre}}
         </div>
         <div class="card-body">
             <form [formGroup]="forme" (ngSubmit)="onSubmit(forme.value)" *ngIf="forme">
@@ -46,7 +46,7 @@
                                 <label for="type" class="label">
                                     {{"patient.table.title4" | translate}}
                                 </label>
-                                <select  class="form-control" formControlName="sexe" name="sexe" id="sexe">
+                                <select class="form-control" formControlName="sexe" name="sexe" id="sexe">
                                     <option value="M" selected="selected">Homme</option>
                                     <option value="F">Femme</option>
                                 </select>
@@ -131,15 +131,26 @@
 
                     </div>
 
-                    <!-- Display selected personnesRatachees as badges -->
                     <!-- Display selected personnesRatachees as badges with a button to remove -->
-                    <div *ngIf="personnesRatachees.length > 0" class="display">
-                        <div *ngFor="let personne of personnesRatachees; let i = index" class="badge-container"
-                            style="flex-grow: 1;flex-shrink: 0;">
+                    <div *ngIf="personnesRatachees.length === 1" class="display">
+                        <div *ngFor="let personne of personnesRatachees; let i = index" class="badge-container">
                             <div class="badge-content">
                                 {{ personne.nom }} - {{ personne.prenom }} - {{ personne.sexe }} - {{
                                 personne.dateNaissance | date: 'dd/MM/yyyy' }}
-                                <button mat-button class="remove-button" (click)="removePersonne(i)">X</button>
+                                <button mat-button class="remove-button" (click)="removePersonne(i)">
+                                    <i class="fa fa-trash text-danger" aria-hidden="true"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="personnesRatachees.length > 1" class="display">
+                        <div *ngFor="let personne of personnesRatachees; let i = index" class="badge-container">
+                            <div class="badge-content">
+                                {{ personne.nom }} - {{ personne.prenom }} - {{ personne.sexe }} - {{
+                                personne.dateNaissance | date: 'dd/MM/yyyy' }}
+                                <button mat-button class="remove-button" (click)="removePersonne(i)">
+                                    <i class="fa fa-trash text-danger" aria-hidden="true"></i>
+                                </button>
                             </div>
                         </div>
                     </div>

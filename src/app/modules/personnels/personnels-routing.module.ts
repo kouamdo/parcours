@@ -3,33 +3,38 @@ import { RouterModule, Routes } from '@angular/router';
 import { NewPersonnelComponent } from './new-personnel/new-personnel.component';
 import { ListPersonnelsComponent } from './list-personnels/list-personnels.component';
 import { RolesPersonnelComponent } from './roles-personnel/roles-personnel.component';
+import { DetailPersonnelsComponent } from './detail-personnels/detail-personnels.component';
 
-const routes= [
-
+const routes = [
   {
     path: 'nouveau-personnel',
     title: 'Enregistrer un nouveau personnel',
-    component: NewPersonnelComponent
+    component: NewPersonnelComponent,
   },
   {
     path: 'update-personnel/:idPersonnel',
     title: 'Modifier un personnel',
-    component: NewPersonnelComponent
+    component: NewPersonnelComponent,
   },
   {
     path: 'list-personnels',
     title: 'Afficher le personnel de la clinique',
-    component: ListPersonnelsComponent
+    component: ListPersonnelsComponent,
   },
   {
     path: 'affecte-role-personnel/:idPersonnel',
     title: 'Affecter un ou plusieurs roles a un personnel',
-    component: RolesPersonnelComponent
-  }
+    component: RolesPersonnelComponent,
+  },
+  {
+    path: 'detail-personnels/:idPersonnel',
+    title: 'Details du personnel ',
+    component: DetailPersonnelsComponent,
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class PersonnelsRoutingModule { }
+export class PersonnelsRoutingModule {}

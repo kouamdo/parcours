@@ -26,10 +26,10 @@ import { ModalCodebarreService } from '../../shared/modal-codebarre/modal-codeba
 export class NewRessourceComponent implements OnInit {
   ressource: IRessource | undefined;
   forme: FormGroup;
-  btnLibelle: string="Ajouter";
-  submitted: boolean=false;
-  unites : String[] = [];
-  IdRessource:string= ""
+  btnLibelle: string = 'Ajouter';
+  submitted: boolean = false;
+  unites: String[] = [];
+  IdRessource: string = '';
   filteredOptions: IFamille[] | undefined;
   dataSource = new MatTableDataSource<IFamille>();
   familleDeRessource: IFamille = {
@@ -38,10 +38,11 @@ export class NewRessourceComponent implements OnInit {
     description: '',
     etat: false,
   };
-  titre:string='';
+  titre: string = '';
   scan_val: any | undefined;
   constructor(
-    private formBuilder: FormBuilder,private dataEnteteMenuService:DonneesEchangeService,
+    private formBuilder: FormBuilder,
+    private dataEnteteMenuService: DonneesEchangeService,
     private dataDocumentCodebarre: DonneesEchangeService,
     private barService: ModalCodebarreService,
     private familleService: FamillesService,
@@ -67,47 +68,39 @@ export class NewRessourceComponent implements OnInit {
       prixEntree: ['', [Validators.required]],
       prixDeSortie: ['', [Validators.required]],
       famille: new FormControl<string | IFamille>(''),
-      caracteristique:[''],
-      scanBarcode: ['']
-    })
-  };
+      caracteristique: [''],
+      scanBarcode: [''],
+    });
+  }
 
   ngOnInit(): void {
     this.barService.getCode().subscribe((dt) => {
       this.scan_val = dt;
       this.forme.get('scanBarcode')?.setValue(dt);
     });
-    this.serviceFamille.getAllFamilles().subscribe(
-      (reponse) =>{
-        this.filteredOptions=reponse
+    this.serviceFamille.getAllFamilles().subscribe((reponse) => {
+      this.filteredOptions = reponse;
+    });
+    this.forme.controls['famille'].valueChanges.subscribe((value) => {
+      const libelle = typeof value === 'string' ? value : value?.libelle;
+      if (libelle != undefined && libelle?.length > 0) {
+        this.serviceFamille
+          .getFamillesByLibelle(libelle.toLowerCase() as string)
+          .subscribe((reponse) => {
+            this.filteredOptions = reponse;
+          });
+      } else {
+        this.serviceFamille.getAllFamilles().subscribe((reponse) => {
+          this.filteredOptions = reponse;
+        });
       }
-    )
-    this.forme.controls["famille"].valueChanges.subscribe(
-      value => {
-        const libelle = typeof value === 'string' ? value : value?.libelle;
-        if(libelle != undefined && libelle?.length >0){
-          this.serviceFamille.getFamillesByLibelle(libelle.toLowerCase() as string).subscribe(
-            reponse => {
-              this.filteredOptions = reponse;
-            }
-          )
-        }
-        else{
-          this.serviceFamille.getAllFamilles().subscribe(
-            (reponse) =>{
-              this.filteredOptions=reponse
-            }
-          )
-        }
-      }
-    );
+    });
     let idRessource = this.infosPath.snapshot.paramMap.get('idRessource');
-    if((idRessource != null) && idRessource!==''){
-      this.btnLibelle="Modifier";
-      this.ressourceService.getRessourceById(idRessource).subscribe(x =>
-        {
-          this.ressource = x;
-          this.ressource.id = idRessource!,
+    if (idRessource != null && idRessource !== '') {
+      this.btnLibelle = 'Modifier';
+      this.ressourceService.getRessourceById(idRessource).subscribe((x) => {
+        this.ressource = x;
+        (this.ressource.id = idRessource!),
           this.forme.setValue({
             libelle: this.ressource.libelle,
             etat: this.ressource.etat,
@@ -121,8 +114,10 @@ export class NewRessourceComponent implements OnInit {
           });
       });
     }
-    this.familleService.getTypeUnite().subscribe(u=>{ this.unites = u.type});
-    this.titre=this.dataEnteteMenuService.dataEnteteMenu
+    this.familleService.getTypeUnite().subscribe((u) => {
+      this.unites = u.type;
+    });
+    this.titre = this.dataEnteteMenuService.dataEnteteMenu;
   }
 
   get f() {
@@ -142,31 +137,30 @@ export class NewRessourceComponent implements OnInit {
       prixEntree: ressourceInput.prixEntree,
       prixDeSortie: ressourceInput.prixDeSortie,
       famille: ressourceInput.famille,
-      caracteristique:ressourceInput.caracteristique,
+      caracteristique: ressourceInput.caracteristique,
       scanBarCode: this.forme.get('scanBarcode')?.value,
-    }
+    };
 
-    if (this.ressource != undefined) {
-      ressourceTemp.id = this.ressource.id;
+    if(this.ressource != undefined){
+      ressourceTemp.id = this.ressource.id
     }
-    ressourceTemp.famille = this.familleDeRessource
-    this.ressourceService.ajouterRessource(ressourceTemp).subscribe(
-      (object) => {
+    ressourceTemp.famille = this.familleDeRessource;
+    this.ressourceService
+      .ajouterRessource(ressourceTemp)
+      .subscribe((object) => {
         this.router.navigate(['list-ressources']);
-      }
-    );
+      });
   }
 
   displayFn(famille: IFamille): string {
     return famille && famille.libelle ? famille.libelle : '';
   }
-  
-  private getAllRessources(){
+
+  private getAllRessources() {
     return this.serviceRessource.getAllRessources();
   }
 
   compareItem(unite1: string, unite2: string) {
     return unite2 && unite1 ? unite2 == unite1 : false;
   }
-
 }

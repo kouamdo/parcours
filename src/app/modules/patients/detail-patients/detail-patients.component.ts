@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PatientsService } from 'src/app/services/patients/patients.service';
-import { IPatient, IPersonneRattachee } from 'src/app/modele/Patient';
+import { IPatient } from 'src/app/modele/Patient';
 
 @Component({
   selector: 'app-detail-patients',

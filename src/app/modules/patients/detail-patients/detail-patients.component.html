@@ -1,22 +1,29 @@
 <div class="container mt-4 justify-content-center">
   <div class="d-block">
     <!-- Main patient card -->
-    <div class="card mb-4" style="margin: 0 auto;">
-      <div class="card-body">
+    <div class="card mb-3" style="margin: 0 auto; max-width: 300px;">
+      <div class="card-body" style="display: flex; align-self: center;">
         <div class="col-md-12">
           <div style="margin-left: 80px; margin-bottom: 12px;">
             <img src="assets/img/logo_camnafaw.jpg" alt="logo_camnafaw.jpg" style="width: 100px; height: auto;">
           </div>
-          <p style="font: FrankRuhlLibre;"><strong>Nom: </strong> <span style="white-space: nowrap;">{{
-              patient?.nom}}</span></p>
-          <p><strong>Prenom: </strong> <span style="white-space: nowrap;">{{ patient?.prenom }}</span></p>
+          <p style="font: FrankRuhlLibre;"> <span style="white-space: nowrap;">{{
+              patient?.nom}} {{ patient?.prenom }}</span></p>
+
+
+          <p><strong>Sexe: </strong> <span style="white-space: nowrap;">{{ patient?.sexe === 'F' ? 'Femme' :
+              (patient?.sexe === 'M' ? 'Homme' : '') }}</span></p>
+          <p><strong>Date de Naisance: </strong> <span style="white-space: nowrap;">{{ patient?.dateNaissance | date:
+              'dd/MM/yyyy' }}</span>
+          </p>
+
           <!-- Display QR Code if personnesRatachees is empty -->
           <div *ngIf="!patient?.personnesRatachees || patient?.personnesRatachees.length === 0"
             style="display: flex; gap: 10px; align-items: center;">
             <div style="display: flex;gap: 10px; align-items: center;">
               <p><strong style="padding-bottom: 12px;">QR Code:</strong> </p>
               <span class="qr-code">
-                <qrcode [qrdata]="patient?.id" [width]="40"></qrcode>
+                <qrcode [qrdata]="patient?.qrCodeValue" [width]="40"></qrcode>
               </span>
             </div>
           </div>
@@ -28,17 +35,48 @@
     <!-- Display cards for personnesRatachees -->
     <div *ngIf="patient?.personnesRatachees && patient?.personnesRatachees.length > 0">
       <div class="row">
-        <div class="border border-dark p-3 rounded shadow" style="min-width: 200px; margin: 0 auto;">
+        <div *ngIf="patient.personnesRatachees.length === 1" class="border border-dark p-3 rounded shadow"
+          style="min-width: 300px; margin: 0 auto; margin-bottom: 12px;">
           <div class="col-md-12">
+            <p style="text-align: center; "><strong>Est rattaché à: </strong></p>
+            <hr color="green">
+            <p>{{ patient.personnesRatachees[0].nom }} {{ patient.personnesRatachees[0].prenom }}</p>
+            <p><strong>Sexe: </strong> <span style="white-space: nowrap;">{{ patient.personnesRatachees[0].sexe === 'F'
+                ? 'Femme' :
+                (patient.personnesRatachees[0].sexe === 'M' ? 'Homme' : '') }}</span></p>
+            <p><strong>Date de Naisance: </strong> <span style="white-space: nowrap;">{{
+                patient.personnesRatachees[0].dateNaissance |
+                date:
+                'dd/MM/yyyy' }}</span>
+            </p>
+            <div style="display: flex;gap: 10px; align-items: center; margin-bottom: 12px;">
+              <p style="padding-bottom: 0px;">QR Code: </p>
+              <span class="qr-code">
+                <qrcode [qrdata]="patient.personnesRatachees[0].qrCodeValue" [width]="40"></qrcode>
+              </span>
+            </div>
+          </div>
+        </div>
 
-            <p style="text-align: center; "><strong>Enfant de: </strong></p>
-            <hr color="blue">
-            <div *ngFor="let personne of patient.personnesRatachees">
-              {{ personne?.nom }} {{ personne?.prenom }}
+        <!-- If there are more than one personnesRatachees, display them next to each other -->
+        <div *ngIf="patient.personnesRatachees.length > 1" class="d-flex flex-wrap justify-content-center">
+          <div *ngFor="let personne of patient.personnesRatachees" class="border border-dark p-3 rounded shadow"
+            style="min-width: 100px; margin: 0 10px; margin-bottom: 12px;">
+            <div class="col-md-12">
+              <!-- Content for each personneRatachee -->
+              <p style="text-align: center; "><strong>Est rattaché à: </strong></p>
+              <hr color="green">
+              <p>{{ personne.nom }} {{ personne.prenom }}</p>
+              <p><strong>Sexe: </strong> <span style="white-space: nowrap;">{{ personne?.sexe === 'F' ? 'Femme' :
+                  (personne?.sexe === 'M' ? 'Homme' : '') }}</span></p>
+              <p><strong>Date de Naisance: </strong> <span style="white-space: nowrap;">{{ personne?.dateNaissance |
+                  date:
+                  'dd/MM/yyyy' }}</span>
+              </p>
               <div style="display: flex;gap: 10px; align-items: center; margin-bottom: 12px;">
                 <p style="padding-bottom: 0px;">QR Code: </p>
                 <span class="qr-code">
-                  <qrcode [qrdata]="personne?.id" [width]="40"></qrcode>
+                  <qrcode [qrdata]="patient.personnesRatachees[0].qrCodeValue" [width]="40"></qrcode>
                 </span>
               </div>
             </div>
@@ -47,18 +85,53 @@
       </div>
     </div>
 
+
     <div *ngIf="attachedPatients.length > 0">
       <div class="row">
-        <div class="border border-dark p-3 rounded shadow" style="min-width: 200px; margin: 0 auto;">
+        <!-- If there are more than one attachedPatients, reduce the width of each modal -->
+        <div *ngIf="attachedPatients.length > 1" class="d-flex flex-wrap justify-content-center">
+          <div *ngFor="let attachedPatient of attachedPatients" class="border border-dark p-3 rounded shadow"
+            style="min-width: 200px; margin: 0 10px; margin-bottom: 12px;">
+            <div class="col-md-12">
+              <p style="text-align: center;"><strong>Personnes Rattachés: </strong></p>
+              <hr color="green">
+              <p>{{ attachedPatient.nom }} {{ attachedPatient.prenom }}</p>
+              <p><strong>Sexe: </strong> <span style="white-space: nowrap;">{{ attachedPatient?.sexe === 'F' ? 'Femme' :
+                  (attachedPatient?.sexe === 'M' ? 'Homme' : '') }}</span></p>
+              <p><strong>Date de Naisance: </strong> <span style="white-space: nowrap;">{{
+                  attachedPatient?.dateNaissance |
+                  date:
+                  'dd/MM/yyyy' }}</span>
+              </p>
+            </div>
+          </div>
+        </div>
+        <!-- If there is only one attachedPatient, maintain the original width -->
+        <div *ngIf="attachedPatients.length === 1" class="border border-dark p-3 rounded shadow"
+          style="min-width: 300px; margin: 0 auto; margin-bottom: 12px;">
           <div class="col-md-12">
-            <p style="text-align: center;"><strong>Parent de: </strong></p>
-            <hr color="blue">
+            <p style="text-align: center;"><strong>Personnes Rattachés: </strong></p>
+            <hr color="green">
             <div *ngFor="let attachedPatient of attachedPatients">
-              {{ attachedPatient.nom }} {{ attachedPatient.prenom }}
+              <p>{{ attachedPatient.nom }} {{ attachedPatient.prenom }}</p>
+              <p><strong>Sexe: </strong> <span style="white-space: nowrap;">{{ attachedPatient?.sexe === 'F' ? 'Femme' :
+                  (attachedPatient?.sexe === 'M' ? 'Homme' : '') }}</span></p>
+              <p><strong>Date de Naisance: </strong> <span style="white-space: nowrap;">{{
+                  attachedPatient?.dateNaissance |
+                  date:
+                  'dd/MM/yyyy' }}</span>
+              </p>
             </div>
           </div>
         </div>
       </div>
+    </div>
+
+
+
+    <div class="actionButton" style="justify-content: center;">
+      <button style="width: 300px;" class="btn" routerLink="../../list-patients"><i class="fa fa-reply mr-1"
+          aria-hidden="true"></i>{{'lists.button2' | translate}}</button>
     </div>
 
   </div>
