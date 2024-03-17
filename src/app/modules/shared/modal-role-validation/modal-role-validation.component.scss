@@ -1,0 +1,26 @@
+#mainBlock{
+    background-color: #ffffff;
+    padding: 5px;
+    width: 20%;
+    height: max-content !important;
+    margin: auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+}
+.sarchBlock{
+    width: fit-content !important;
+    padding: 0 5px;
+    div{
+        display: flex;
+        align-items: center;
+        label{
+            margin-right: 5px;
+        }
+    }
+    form{
+    }
+}
+.example-form{
+    width: fit-content !important;
+}

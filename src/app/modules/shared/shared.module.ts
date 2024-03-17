@@ -25,6 +25,7 @@ import { EnteteComponent } from './entete/entete.component';
 import { ModalChoixSousDocumentComponent} from './modal-choix-sous-document/modal-choix-sous-document.component';
 import { ModalChoixSousExemplairesComponent } from './modal-choix-sous-exemplaires/modal-choix-sous-exemplaires.component';
 import { ModalDocEtatsComponent } from './modal-doc-etats/modal-doc-etats.component';
+import { ModalRoleValidationComponent } from './modal-role-validation/modal-role-validation.component';
 import { ModalCodebarreComponent } from './modal-codebarre/modal-codebarre.component';
 import { ModalCodebarreDialogComponent } from './modal-codebarre-dialog/modal-codebarre-dialog.component';
 import { ModalCodebarreScanContinueComponent } from './modal-codebarre-scan-continue/modal-codebarre-scan-continue.component';
@@ -38,6 +39,7 @@ import { ModalCodebarreScanContinueComponent } from './modal-codebarre-scan-cont
     ModalChoixSousDocumentComponent,
     ModalChoixSousExemplairesComponent,
     ModalDocEtatsComponent,
+    ModalRoleValidationComponent,
     ModalCodebarreComponent,
     ModalCodebarreDialogComponent,
     ModalCodebarreScanContinueComponent,
@@ -52,6 +54,7 @@ import { ModalCodebarreScanContinueComponent } from './modal-codebarre-scan-cont
     ModalCodebarreComponent,
     ModalCodebarreDialogComponent,
     ModalCodebarreScanContinueComponent,
+    ModalRoleValidationComponent
   ],
   imports: [
     CommonModule,

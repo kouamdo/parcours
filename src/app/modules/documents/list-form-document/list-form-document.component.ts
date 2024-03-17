@@ -27,7 +27,7 @@ export class ListFormDocumentComponent implements OnInit, AfterViewInit {
   ELEMENTS_TABLE: IAfficheDocument[] = [];
   filteredOptions: IDocument[] | undefined;
 
-  displayedColumns: string[] = ['titre', 'description', 'typeMouvement', 'etat', 'missions', 'attributs', 'categories', 'preconisations', 'sousDocuments', 'docEtats', 'actions'];
+  displayedColumns: string[] = ['titre', 'description', 'typeMouvement', 'etat', 'missions', 'attributs', 'categories', 'actions'];
 
   dataSource = new MatTableDataSource<IAfficheDocument>(this.ELEMENTS_TABLE);
 

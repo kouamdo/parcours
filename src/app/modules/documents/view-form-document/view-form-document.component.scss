@@ -107,11 +107,12 @@ th{
 #blockCat{
     .infosCat{
         display: flex;
+        align-items: center;
         justify-content: space-between;
         p{
             margin: 10px 0;
             padding: 0;
-            width: 50%;
+            width: fit-content;
             font-weight: bold;
             text-transform: capitalize;
             span{

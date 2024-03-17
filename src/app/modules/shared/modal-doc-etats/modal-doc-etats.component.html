@@ -34,7 +34,7 @@
                         <p *ngIf="etatExiste">{{'doc-etats.form.text5' | translate}}</p>
                     </div>
                 </div>
-                <!-- tableau listing des mouvements -->
+                <!-- tableau listing des etats du document -->
 
                 <div class="card-body p-0 tableBlock" id="tableList">
                     <div class='table-responsive w-100'>
@@ -49,7 +49,20 @@
                             <!-- ordre Column -->
                             <ng-container matColumnDef="ordre">
                                 <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{'doc-etats.form.text3' | translate}} </th>
-                                <td class="text-dark containCell" mat-cell *matCellDef="let element">{{element.ordre}}</td>
+                                <td class="text-dark containCell" mat-cell *matCellDef="let element, let cpt = index">
+                                    <div class="ordreInput2">
+                                        <p *ngIf="changeOrdreValeur && ordreExiste" class="texteErreurChange">
+                                            <span>{{'doc-etats.form.text4' | translate}}</span>
+                                        </p>
+                                        <input class="form-control w-25" type="number" name="" id="" [value]="element.ordre" (change)="verificationChangementOrdre(element, $event, cpt)">
+                                    </div>
+                                </td>
+                            </ng-container>
+
+                            <!-- role Column -->
+                            <ng-container matColumnDef="role">
+                                <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{'doc-etats.form.text6' | translate}} </th>
+                                <td class="text-dark containCell" mat-cell *matCellDef="let element">{{element.validation?.roleValidation.titre}}</td>
                             </ng-container>
 
                             <!-- Actions column -->
@@ -61,7 +74,7 @@
                                             <i class="fa fa-trash text-danger" aria-hidden="true"></i>
                                         </button>
                                         <span><i class="fa fa-info-circle text-info ml-1" aria-hidden="true" title="{{'preconisation.table.title4' | translate}}"></i></span>
-                                        <button mat-button class="btn btnAddValidation" title="{{'doc-etats.button2' | translate}}">
+                                        <button mat-button class="btn btnAddValidation" title="{{'doc-etats.button2' | translate}}" (click)="openRoleValidationDialog(); getIdDocEtat(element.id)">
                                             <i class="fa fa-plus" aria-hidden="true"></i>
                                         </button>
                                     </div>

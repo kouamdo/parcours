@@ -85,6 +85,18 @@
         }
     }
 }
+.ordreInput2 input{
+    margin: auto;
+    height: 20px;
+    position: absolute;
+}
+.texteErreurChange span{
+    font-size: 8px;
+    color: red;
+    font-style: italic;
+    position: relative;
+    top: -2px;
+}
 @media screen and (max-width: 950px ) {
     #mainBlock{
         width: 60%;

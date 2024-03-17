@@ -15,6 +15,7 @@ export class DonneesEchangeService {
   dataEnteteMenu : any;
   dataDocumentSousExemplaireDocuments : any;
   dataDocumentEtats : any;
+  dataRoleValidation : any;
   constructor(private http:HttpClient) { }
 
   getTypeMvt():Observable<TypeMvt>

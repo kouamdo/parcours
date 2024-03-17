@@ -105,7 +105,11 @@ export class ListRolesComponent implements OnInit {
           )
         }
         else{
-          this.filteredOptions = [];
+          this.serviceRole.getAllRoles().subscribe(
+            (reponse) =>{
+              this.filteredOptions=reponse
+            }
+          )
         }
 
       }

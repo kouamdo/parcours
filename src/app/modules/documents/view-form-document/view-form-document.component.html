@@ -67,10 +67,11 @@
         <p class="title1">
             {{'document.view.text3' | translate}} :
         </p>
-        <div *ngFor="let categorie of document.categories" id="blockCat">
+        <div *ngFor="let categorie of document.categories, let i = index" id="blockCat">
             <div class="infosCat">
                 <p><span>{{'document.table.title8' | translate}} : </span>{{categorie.nom}}</p>
                 <p><span>{{'document.table.title14' | translate}} : </span>{{categorie.ordre}}</p>
+                <p><span> {{i+1}}/{{document.categories.length}} </span></p>
             </div>
             <div class="tableAttributs card table-responsive">
                 <table class="table table-striped table-sm table-inverse table-bordered">

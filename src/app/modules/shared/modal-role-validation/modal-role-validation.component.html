@@ -1,0 +1,17 @@
+<div id="mainBlock" class="bg-light card modalCategorie">
+    <h2>{{'doc-etats.form.text7' | translate}}</h2>
+    <form class="example-form">
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label class="searchBar">{{'patient.search-bar' | translate}}</mat-label>
+          <input type="text" matInput aria-label="Rechercher" [formControl]="myControl" [matAutocomplete]="auto">
+          <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+            <mat-option *ngFor="let option of filteredOptions" [value]="option" (onSelectionChange)="rechercherListingRole(option)">
+              {{option.titre}}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+    </form>
+    <div class="actionButton valBtn mt-2">
+        <button mat-button [mat-dialog-close] cdkFocusInitial class="btn btnValidation">{{'lists.button11' | translate}}</button>
+    </div>
+</div>
