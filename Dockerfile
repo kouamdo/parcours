@@ -22,4 +22,4 @@ WORKDIR /app/dist/clinique
 
 RUN npm install -g angular-http-server
 
-CMD ["angular-http-server"]
+ENTRYPOINT ["angular-http-server"]
