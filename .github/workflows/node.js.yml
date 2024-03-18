@@ -58,9 +58,11 @@ jobs:
       - name: Build docker image
         run: |
           docker build -t frontApp:latest .
+        fail-fast: true  # Stop on build failure
       - name: Test Docker image
         run: |
           docker run frontApp:latest -p 8080:80 testFrontApp
+        fail-fast: true  # Stop on build failure
       - name: Conventional Changelog Action
         id: changelog
         uses: TriPSs/conventional-changelog-action@v3
