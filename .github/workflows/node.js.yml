@@ -53,13 +53,20 @@ jobs:
 #      - name: Test
 #        run: |
 #          npm run test:ci
+      - name: Install Docker Engine
+        uses: docker/setup-docker@v1
+      - name: Build docker image
+        run: |
+          docker build -t frontApp:latest .
+      - name: Test Docker image
+        run: |
+          docker run frontApp:latest -p 8080:80 testFrontApp
       - name: Conventional Changelog Action
         id: changelog
         uses: TriPSs/conventional-changelog-action@v3
         with:
           github-token: ${{ secrets.SONAR_TOKEN }}
           output-file: "false"
-
       - name: Create Release 
         uses: actions/create-release@v1
         if: ${{ steps.changelog.outputs.skipped == 'false' }}
