@@ -2,7 +2,7 @@
 Library           OperatingSystem
 
 *** Variables ***
-${DOCKERFILE_PATH}         ${CURDIR}/Dockerfile
+${DOCKERFILE_PATH}         ../Dockerfile
 ${IMAGE_NAME}   frontapp:latest
 ${CONTAINER_NAME}     frontapptest
 ${URL_TO_TEST}    http://localhost:8080
