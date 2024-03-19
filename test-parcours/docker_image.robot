@@ -14,7 +14,7 @@ Docker File should exist
 Build And Run Docker Image
     ${result} =    Run And Return Rc And Output    docker build -t ${IMAGE_NAME} -f ${DOCKERFILE_PATH} .
     Should Be Equal As Integers    ${result[0]}    0
-    ${result} =    Run And Return Rc And Output    docker run -d -p 8080:80 --name ${CONTAINER_NAME} ${IMAGE_NAME}
+    ${result} =    Run And Return Rc And Output    docker run -d -p 8080:8080 --name ${CONTAINER_NAME} ${IMAGE_NAME}
     Should Be Equal As Integers    ${result[0]}    0
 
 Docker Image Should Be Running
