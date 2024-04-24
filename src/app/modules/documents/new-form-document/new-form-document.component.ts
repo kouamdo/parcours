@@ -225,7 +225,7 @@ export class NewFormDocumentComponent implements OnInit {
   }
 
   /**
-   * Methode permettant d'ouvrir la modal de selection des attributs du dociment
+   * Methode permettant d'ouvrir la modal de selection des attributs du document
    */
   openAttributDialog(){
     const dialogRef = this.dialogDef.open(ModalChoixAttributsComponent,

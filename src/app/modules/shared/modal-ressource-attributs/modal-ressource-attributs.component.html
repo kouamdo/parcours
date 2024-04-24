@@ -1,0 +1,143 @@
+<div id="mainSection" class="bg-light card modalCategorie">
+    <form [formGroup]="formeAttribut" (ngSubmit)="onSubmit(formeAttribut.value)" *ngIf="formeAttribut" class="w-100">
+        <div class="form-group mt-5">
+            <div class='card-hearder'>
+                <h2 class="modal-title">{{'document.table.title6' | translate}}</h2>
+            </div>
+            <div class="newAttSection">
+                <div class="sarchBlock">
+                    <form class="example-form">
+                        <mat-form-field class="example-full-width" appearance="fill">
+                            <mat-label class="searchBar">{{'patient.search-bar' | translate}}</mat-label>
+                            <input type="text" matInput aria-label="Rechercher" [formControl]="myControl" [matAutocomplete]="auto">
+                            <mat-autocomplete class="blockAutocomplate" #auto="matAutocomplete" [displayWith]="displayFn">
+                                <mat-option class="options" *ngFor="let option of filteredOptions" [value]="option" (onSelectionChange)="rechercherListingAttribut(option)">
+                                    {{option.titre}}
+                                </mat-option>
+                            </mat-autocomplete>
+                        </mat-form-field>
+                    </form>
+                </div>
+
+                <!-- tableau listing des attributs -->
+
+                <div class="card-body p-0 tableBlock" id="tableList">
+                    <div class='table-responsive w-100'>
+                        <table class='table table-sm table-centered table-striped table-bordered w-100' mat-table [dataSource]="dataSourceAttribut" matSort (matSortChange)="announceSortChange($event)">
+
+                            <!-- id Column -->
+                            <ng-container matColumnDef="id">
+                                <th class="text-dark containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'tickets.table.title1' | translate}} </th>
+                                <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.id}} </td>
+                            </ng-container>
+
+                            <!-- titre Column -->
+                            <ng-container matColumnDef="titre">
+                                <th class="text-dark containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'attributs.table.title1' | translate}} </th>
+                                <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.titre}} </td>
+                            </ng-container>
+
+                            <!-- description Column -->
+                            <ng-container matColumnDef="description">
+                                <th class="text-dark containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'attributs.table.title2' | translate}} </th>
+                                <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.description}} </td>
+                            </ng-container>
+
+                            <!-- etat Column -->
+                            <ng-container matColumnDef="etat">
+                                <th class="text-dark containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'attributs.table.title3' | translate}} </th>
+                                <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.etat}} </td>
+                            </ng-container>
+
+                            <!-- type Column -->
+                            <ng-container matColumnDef="type">
+                                <th class="text-dark containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'attributs.table.title6' | translate}} </th>
+                                <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.type}} </td>
+                            </ng-container>
+
+                            <!-- Actions column -->
+                            <ng-container matColumnDef="actions">
+                                <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{"patient.table.title8" | translate}} </th>
+                                <td class="text-dark containCell" mat-cell *matCellDef="let element">
+                                    <div class="actions" class="">
+                                        <label style="width: 2px;" for="attributs">
+                                            <input type="checkbox" [value]="element.titre" name="attributs" id="attributs" (click)="getAttributId(element.id)" (change)="onCheckAttributChange($event, element)">
+                                        </label>
+                                    </div>
+                                </td>
+                            </ng-container>
+                            <tr mat-header-row *matHeaderRowDef="displayedAttributsColumns"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayedAttributsColumns;"></tr>
+                        </table>
+                        <mat-paginator style="background-color: rgba(40, 167, 69, 0.79);" [pageSizeOptions]="[2, 5, 10, 20]"
+                                       showFirstLastButtons
+                                       aria-label="Select page of periodic elements">
+                        </mat-paginator>
+                    </div>
+                </div>
+                <!-- tableau affichage des resultats -->
+                <div class="result">
+                    <h2>
+                        {{'document.title1' | translate}}
+                    </h2>
+                    <div class="card" >
+                        <div class="card-body p-0 tableBlock" id="tableResultats">
+                            <div class='table-responsive w-100 m-0'>
+                                <table class='table table-sm table-centered table-striped w-100' mat-table [dataSource]="dataSourceAttributResultat" matSort (matSortChange)="announceSortChange($event)">
+                                    <!-- titre Column -->
+                                    <ng-container matColumnDef="titre">
+                                        <th class="text-dark containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'attributs.table.title1' | translate}} </th>
+                                        <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.attributs.titre}} </td>
+                                    </ng-container>
+
+                                    <!-- type Column -->
+                                    <ng-container matColumnDef="type">
+                                        <th class="text-dark containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'attributs.table.title6' | translate}} </th>
+                                        <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.attributs.type}} </td>
+                                    </ng-container>
+
+                                    <!-- valeur Column -->
+                                    <ng-container matColumnDef="valeur">
+                                        <th class="text-dark containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'attributs.table.title12' | translate}} </th>
+                                        <td class="text-dark containCell" mat-cell *matCellDef="let element; let i = index"> 
+                                            <input class="form-control" *ngIf="(element.attributs.type != 'Textarea') && (element.attributs.type != 'Radio') && (element.attributs.type != 'Checkbox')" [type]="element.attributs.type" (change)="verificationModificationDansTableau(element, $event, i)" [ngModelOptions]="{standalone: true}" [(ngModel)]="element.valeur" name="res" id="res" required>
+                            <textarea *ngIf="element.attributs.type == 'Textarea'" class="form-control"  (change)="verificationModificationDansTableau(element, $event, i)" [ngModelOptions]="{standalone: true}" [(ngModel)]="element.valeur" name="res" id="res" required></textarea>
+                            <select class="form-control" *ngIf="(element.attributs.type == 'Radio') || (element.attributs.type == 'Checkbox')" (change)="verificationModificationDansTableau(element, $event, i)" [ngModelOptions]="{standalone: true}" [(ngModel)]="element.valeur" name="res" id="res" required>
+                                <option value="{{val.trim()}}" *ngFor="let val of element.attributs.valeursParDefaut.trim().split(',')" >{{val}}</option>
+                            </select>
+                                            <div  *ngIf="submitted && f['res'].errors"  class="alert alert-danger" >
+                                                <div *ngIf="f['res'].errors['required']">{{'personnel.form.text1' | translate}}</div>
+                                            </div>
+                                        </td>
+                                    </ng-container>
+
+                                    <!-- actions Column -->
+                                    <ng-container matColumnDef="actions">
+                                        <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{"patient.table.title8" | translate}} </th>
+                                        <td class="text-dark containCell" mat-cell *matCellDef="let element;  let i=index">
+                                            <div class="actions">
+                                                <button class="btn p-0" name="attributs"  [value]="element.attributs.id" id="attributs" title="clicker pour annuler la selection" (click)="retirerSelectionAttribut(i)">
+                                                    <i class="fa fa-trash text-danger" aria-hidden="true"></i>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </ng-container>
+                                    <tr mat-header-row *matHeaderRowDef="displayedResultAttributsColumns"></tr>
+                                    <tr mat-row *matRowDef="let row; columns: displayedResultAttributsColumns;"></tr>
+                                </table>
+                                <mat-paginator style="background-color: rgba(40, 167, 69, 0.79);" [pageSizeOptions]="[5, 10, 20]"
+                                               showFirstLastButtons
+                                               aria-label="Select page of periodic elements">
+                                </mat-paginator>
+                            </div>
+                            <div class="actionButton mt-2">
+                                <button mat-button [mat-dialog-close] (click)="lastElementModal()" class="btn btnValidation">{{'lists.button2' | translate}}</button>
+                                <button mat-button [mat-dialog-close] cdkFocusInitial [disabled]="valid" class="btn btnValidation">{{'lists.button6' | translate}}</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

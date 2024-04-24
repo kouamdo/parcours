@@ -1,4 +1,5 @@
 import { ModalCodebarreService } from "../modules/shared/modal-codebarre/modal-codebarre.service";
+import { IAttributs } from "./attributs";
 import { IFamille } from "./famille";
 
 
@@ -11,7 +12,13 @@ export interface IRessource {
     prixDeSortie:number,
     unite:string,
     famille:IFamille,
-    caracteristique:string,
+    caracteristiques? :
+    [
+        {
+            attribut : IAttributs,
+            Valeur: any
+        }
+    ]
     scanBarCode?: any,
    /* dateCreation:Date,
     dateModification:Date,*/

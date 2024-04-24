@@ -31,7 +31,6 @@ export class ListRessourcesComponent implements OnInit {
     'prixEntree',
     'prixDeSortie',
     'famille',
-    'caracteristique',
     'actions',
   ];
 

@@ -187,7 +187,8 @@
       "title8": "Attribut obligatoire ?",
       "title9": "Valeurs par defaut",
       "title10": "Separer les valeurs par un point virgule (;)",
-      "title11": "Obligatoire ?"
+      "title11": "Obligatoire ?",
+      "title12":"valeur"
     },
     "form": {
       "text1": "Le titre est obligatoire.",

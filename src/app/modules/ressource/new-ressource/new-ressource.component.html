@@ -85,7 +85,7 @@
                           {{'ressource.table.title6' | translate}} <sup>*</sup>
                         </label>
                         <mat-form-field class="example-full-width w-100" appearance="fill">
-                            <input  type="text" matInput [matAutocomplete]="auto"  aria-label="famille" formControlName="famille" name="famille" id="famille" placeholder="" class="w-100">
+                            <input  type="text" matInput [matAutocomplete]="auto"  aria-label="famille" formControlName="famille" name="famille" id="famille" placeholder="" class="w-100" style="color: white;">
                             <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn" >
                             <mat-option *ngFor="let option of filteredOptions" [value]="option">
                                 {{option.libelle}}
@@ -98,20 +98,27 @@
                     </div>
 
                   </div>
-                  <div class="form-group">
-                    <div class="champs">
-                        <label  for="caracteristique"  class="label" >
-                          {{'ressource.table.title7' | translate}}
-                        </label>
-                    <select  class="form-control" formControlName="caracteristique" name="caracteristique" id="caracteristique">
-                      <option>{{'ressource.form.text15' | translate}}</option>
-                      <option>{{'ressource.form.text12' | translate}}</option>
-                      <option>{{'ressource.form.text13' | translate}}</option>
-                      <option>{{'ressource.form.text14' | translate}}</option>
-
-                  </select>
-                    </div>
-                </div>
+                <div class="form-group">
+                  <div class="champs">
+                      <label for="" class="label">
+                          {{"document.table.title4" | translate}}
+                      </label>
+                      <div class="dropdown w-100">
+                          <!-- affichage list attributs selectiones -->
+                          <div class="listAttr">
+                              <button type="button" class="btn p-0" title="{{'lists.button9' | translate}} / {{'lists.button8' | translate}}" (click)="openAttributDialog()">
+                                  <i class="fas fa-plus-square"></i>
+                              </button>
+                              <span *ngFor="let listeAttributs of ELEMENTS_TABLE_ATTRIBUTS">
+                                  {{listeAttributs.attributs!.titre! | lowercase}}<span>, </span>
+                              </span>
+                          </div>
+                      </div>
+                  </div>
+                  <div  *ngIf="submitted && ELEMENTS_TABLE_ATTRIBUTS.length<1"  class="alert alert-danger blockErreur" >
+                      <div>{{'document.form.text4' | translate}}</div>
+                  </div>
+              </div>
                 <div class="form-group">
                   <div>
                       <div class="champs">
