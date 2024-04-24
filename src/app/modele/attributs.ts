@@ -9,6 +9,5 @@ export interface IAttributs {
     dateCreation?:Date,
     dateModification?:Date,
     valeursParDefaut: string,
-    obligatoire?: boolean,
     type:IType
 }
