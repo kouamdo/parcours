@@ -78,7 +78,6 @@ export class ListRolesComponent implements OnInit {
             validations: x.validations!,
             listeValidations: ''
           }
-          console.log("valid:", x.validations);
           
           if (x.validations) {
             x.validations.forEach(
@@ -116,20 +115,6 @@ export class ListRolesComponent implements OnInit {
     );
   }
 
-
-  setIdRole (id_role: string, titre_role : string){
-    this.id_role = id_role;
-    this.titre_role = titre_role
-    sessionStorage.setItem("id_role", this.id_role.toString());
-    sessionStorage.setItem("titre_role", this.titre_role);
-  }
-  setraisonSocialService(id_service : number, raisonSocialService: string){
-    this.titre_service = raisonSocialService;
-    this.id_service = id_service;
-
-    sessionStorage.setItem("id_service", this.id_service.toString());
-    sessionStorage.setItem("raisonSocial_service", this.titre_service);
-  }
 
   private getAllRoles(){
     return this.serviceRole.getAllRoles();

@@ -32,6 +32,15 @@ export class ExemplaireDocumentService {
         })
     );        
   }
+  
+  getExemplaireDocumentByIdPersonneRatachee(idPersonne:string): Observable<IExemplaireDocument[]> {
+    return this.http.get<IExemplaireDocument[]>('api/exemplaires').pipe(
+      map(x=>
+        {
+          return x.filter(e=> e.personneRattachee.id.toLowerCase() == idPersonne)
+        })
+    );        
+  }
 
    ajouterExemplaireDocument(exemplaire:IExemplaireDocument )
    {

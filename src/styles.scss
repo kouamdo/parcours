@@ -34,16 +34,9 @@ body, table, .mat-table {
   z-index: 9999 !important;
   display: flex;
 }
-.modalCategorie .cdk-overlay-pane {
+.cdk-overlay-pane {
   padding: 0;
   border-top: none;
-}
-.modalCategorie .mat-form-field-infix {
-  padding: 0;
-  border-top: none;
-}
-.modalCategorie .mat-form-field-wrapper {
-  padding-bottom: 15px !important;
 }
 .mat-select-value {
   overflow: visible;
@@ -55,6 +48,10 @@ body, table, .mat-table {
 mat-dialog-container {
   background-color: transparent !important;
   border: none;
+}
+.modalExemplairecDePersonne .mat-dialog-container {
+    background-color: white !important;
+    margin: auto;
 }
 .mat-dialog-container{
   border-radius: none;

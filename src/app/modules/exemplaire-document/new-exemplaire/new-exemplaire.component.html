@@ -5,8 +5,14 @@
         </h1>
         <div class="infos">
             <p id="titre">
-                {{'tickets.table.title5' | translate}} :
+                {{'document.exemplaire.text9' | translate}} :
                 <span class="title">{{this.nomPatientCourant}}</span>
+            </p>
+            <p id="titre">
+                {{'document.exemplaire.text6' | translate}} :
+                <span class="title">{{this.exemplaire.dateCreation | date: 'dd/MM/yyyy'}}</span>
+                {{'document.exemplaire.text7' | translate}} 
+                <span class="title">{{this.exemplaire.dateCreation | date: 'hh:mm:ss'}}</span>
             </p>
             <div  *ngIf="submitted && estValide == false" class="alert alert-danger">
                 <div >{{eValvalide}} {{'lists.text3' | translate}}</div>
@@ -191,8 +197,9 @@
         </div>
         
         <div class="actionButton container">
-            <button class="btn" type="reset" routerLink="../../executer-missions"><i class="fa fa-reply mr-1"></i>{{'lists.button2' | translate}}</button>      
-            <app-modal-codebarre-scan-continue></app-modal-codebarre-scan-continue>
+            <button class="btn" type="reset" routerLink="../../executer-missions"><i class="fa fa-reply mr-1"></i>{{'lists.button2' | translate}}</button>
+            <div *ngIf="document.contientRessources == true"><app-modal-codebarre-scan-continue></app-modal-codebarre-scan-continue></div>      
+            
             <button type="submit" class="btn btnValidation">{{btnLibelle}}</button>
         </div>
     </form>

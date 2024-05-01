@@ -47,7 +47,6 @@ export class ListPatientsComponent implements OnInit, AfterViewInit {
   myControl = new FormControl<string | IPatient>('');
 
   ELEMENTS_TABLE: IPatient[] = [];
-  //filteredOptions: IPatient[] | undefined;
   filteredOptions: IPatient[] | undefined;
   displayedColumns: string[] = [
     'nom',

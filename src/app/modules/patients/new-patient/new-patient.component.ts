@@ -156,7 +156,6 @@ export class NewPatientComponent implements OnInit {
       }
     });
     this.myControl.registerOnChange(() => {
-      console.log('myControl changed:', this.myControl.value);
     });
   }
 
@@ -170,7 +169,7 @@ export class NewPatientComponent implements OnInit {
       //trouver un autre moyen d'initialiser avec des valeurs
       this.patientService.getPatientById(idPatient).subscribe((x) => {
         this.patient = x;
-        console.log('Personnes Ratachees:', this.patient.personnesRatachees);
+
         this.personnesRatachees = this.patient.personnesRatachees || [];
         this.forme.setValue({
           nom: this.patient.nom,
@@ -221,7 +220,6 @@ export class NewPatientComponent implements OnInit {
       qrCodeValue: patientInput.qrCodeValue,
       personnesRatachees: this.personnesRatachees,
     };
-    console.log('hello', patientTemp);
 
     patientTemp.dateNaissance = this.initialDate.value!;
 

@@ -10,7 +10,6 @@ export class ModalCodebarreService {
 
   setCode(data: string): void {
     this.code.next(data)
-    console.log("----->>", this.code);
   }
 
   getCode(): Observable<string|undefined> {

@@ -107,7 +107,6 @@ export class MissionsRoleComponent {
         this.role = x;
         this.titreRole = this.role?.titre;
         this.dataSourceMissionResultat.data = this.role?.missions!;
-        console.log('modification :', this.dataSourceMissionResultat.data);
         if (this.role?.missions) {
           this.modif = true;
         }
@@ -141,7 +140,6 @@ export class MissionsRoleComponent {
   }
 
   public checkdroitmission(action: any, element: any, text: string) {
-    console.log("event action :", action.target.checked);
     
     if (action.target.checked) {
       if (text == "add") {
@@ -176,9 +174,7 @@ export class MissionsRoleComponent {
       if (text == "eta") {
         element.etat = false
       }
-    }
-
-    console.log("element val :", element);   
+    }   
   }
 
   /**
@@ -258,7 +254,6 @@ export class MissionsRoleComponent {
    * @param pos indique si c'est la date de début ou de fin
    */
   verificationModificationDansTableau(element:any, event: any, indexElement: number, pos:String){
-    console.log("element sélectionné :", element, event.target.value);
     let newdates : IObjetDates = {
       dateDebut: element.dateDebut,
       dateFin: event.target.value
@@ -323,7 +318,6 @@ export class MissionsRoleComponent {
   }
 
   ajoutSelectionMission(mission: IMission) {
-    console.log('element selectionne :', this.ELEMENTS_TABLE);
 
     this.ELEMENTS_TABLE.push({
       mission: mission,

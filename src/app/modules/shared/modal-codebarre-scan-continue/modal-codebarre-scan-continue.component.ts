@@ -84,7 +84,6 @@ export class ModalCodebarreScanContinueComponent
     // You can use this.scannedData as needed in your application
 
     this.barService.setCode(this.scannedData);
-    console.log('Scaaaaan', this.scannedData);
   }
 
   playBeep(): void {

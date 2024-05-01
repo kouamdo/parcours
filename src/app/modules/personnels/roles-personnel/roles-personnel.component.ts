@@ -94,7 +94,6 @@ export class RolesPersonnelComponent implements OnInit {
         this.personnel = x;
         this.nomPersonnel = this.personnel?.nom + ' ' + this.personnel?.prenom;
         this.dataSourceRoleResultat.data = this.personnel?.roles!;
-        console.log('modification :', this.dataSourceRoleResultat.data);
       });
 
       this.getAllRoles().subscribe((valeurs) => {
@@ -206,7 +205,6 @@ export class RolesPersonnelComponent implements OnInit {
    * @param pos indique si c'est la date de début ou de fin
    */
   verificationModificationDansTableau(element:any, event: any, indexElement: number, pos:String){
-    console.log("element sélectionné :", element, event.target.value);
     let newdates : IObjetDates = {
       dateDebut: element.dateDebut,
       dateFin: event.target.value
@@ -272,7 +270,6 @@ export class RolesPersonnelComponent implements OnInit {
   }
 
   ajoutSelectionRole(rol: IRole) {
-    console.log('element selectionne :', this.ELEMENTS_TABLE);
 
     this.ELEMENTS_TABLE.push({
       role: rol,

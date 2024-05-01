@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DecimalPipe } from '@angular/common';
 
 import { ExemplaireDocumentRoutingModule } from './exemplaire-document-routing.module';
 import { NewExemplaireComponent } from './new-exemplaire/new-exemplaire.component';
@@ -17,13 +17,21 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { AppRoutingModule } from 'src/app/app-routing.module';
 import { HttpLoaderFactory } from 'src/app/app.module';
 import { ListExemplaireComponent } from './list-exemplaire/list-exemplaire.component';
-import { SharedModule} from '../shared/shared.module';
+import { SharedModule } from '../shared/shared.module';
+import { PrevisualisationExemplaireComponent } from './previsualisation-exemplaire/previsualisation-exemplaire.component';
+import { HistoriqueParPersonneComponent } from './historique-par-personne/historique-par-personne.component';
+import { PageIntermediaireComponent } from './page-intermediaire/page-intermediaire.component';
+import { NgxPrintModule } from 'ngx-print';
+
 
 @NgModule({
   declarations: [
     NewExemplaireComponent,
     ViewExemplaireComponent,
     ListExemplaireComponent,
+    PrevisualisationExemplaireComponent,
+    HistoriqueParPersonneComponent,
+    PageIntermediaireComponent
   ],
   imports: [
     CommonModule,
@@ -47,6 +55,8 @@ import { SharedModule} from '../shared/shared.module';
       extend: true,
     }),
     BrowserModule,
+    NgxPrintModule
   ],
+  providers : [DecimalPipe]
 })
 export class ExemplaireDocumentModule {}

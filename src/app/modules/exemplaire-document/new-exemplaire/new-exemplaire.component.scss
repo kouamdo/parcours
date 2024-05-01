@@ -49,6 +49,9 @@ h3{
     font-weight: normal;
     text-transform: uppercase;
 }
+#titre .title{
+    text-transform: capitalize;
+}
 .contentBlock{
     display: flex;
     align-items: start;

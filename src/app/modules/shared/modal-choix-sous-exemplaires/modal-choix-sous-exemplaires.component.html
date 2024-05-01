@@ -8,7 +8,6 @@
                 <div class="sarchBlock">
                     <form class="example-form">
                         <mat-form-field class="example-full-width" appearance="fill">
-                            <mat-label class="searchBar">{{'patient.search-bar' | translate}}</mat-label>
                             <input type="text" matInput aria-label="Rechercher" [formControl]="myControl" [matAutocomplete]="auto">
                             <mat-autocomplete class="blockAutocomplate" #auto="matAutocomplete" [displayWith]="displayFn">
                                 <mat-option class="options" *ngFor="let option of filteredOptions" [value]="option" (onSelectionChange)="rechercherListingExemplaireDocuments(option)">

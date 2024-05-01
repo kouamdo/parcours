@@ -3,6 +3,9 @@ import { RouterModule, Routes } from '@angular/router';
 import { ListExemplaireComponent } from './list-exemplaire/list-exemplaire.component';
 import { NewExemplaireComponent } from './new-exemplaire/new-exemplaire.component';
 import { ViewExemplaireComponent } from './view-exemplaire/view-exemplaire.component';
+import { PrevisualisationExemplaireComponent } from './previsualisation-exemplaire/previsualisation-exemplaire.component';
+import { HistoriqueParPersonneComponent } from './historique-par-personne/historique-par-personne.component';
+import { PageIntermediaireComponent } from './page-intermediaire/page-intermediaire.component';
 
 const routes: Routes = [
   {
@@ -10,11 +13,6 @@ const routes: Routes = [
     title: 'Nouvel exemplaire de documents',
     component: NewExemplaireComponent
   },
-  // {
-  //   path: 'exemplaire-nouveau/:idExemplaire',
-  //   title: 'Nouvel exemplaire de documents',
-  //   component: NewExemplaireComponent
-  // },
   {
     path: 'exemplaire-nouveau/modify/:idExemplaire',
     title: 'Modifier formulaire de documents',
@@ -29,6 +27,21 @@ const routes: Routes = [
     path: 'list-exemplaire',
     title: 'Voir les exemplaires',
     component: ListExemplaireComponent
+  },
+  {
+    path: 'previsualisation-exemplaire/:idExemplaire',
+    title: 'Voir le document',
+    component: PrevisualisationExemplaireComponent
+  },
+  {
+    path: 'historique-par-personne',
+    title: 'Historique',
+    component: HistoriqueParPersonneComponent
+  },
+  {
+    path: 'page-intermedaire',
+    title: 'Historique',
+    component: PageIntermediaireComponent
   }
 ];
 

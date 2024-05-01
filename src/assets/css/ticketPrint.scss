@@ -1,7 +1,7 @@
 /* print with this style */
 @media print {
     @page {
-        size:  20% !important;
+        size:  100% !important;
         //size: portrait;
         
     }
@@ -67,5 +67,13 @@
     }
     #ticketContent .barCode{
         justify-content: center;
+    }
+    th{
+        background-color: rgba(40, 167, 69, 0.2) !important;
+        color: #28a745 !important;
+        text-align: center;
+    }
+    .options{
+        display: none !important;
     }
 }

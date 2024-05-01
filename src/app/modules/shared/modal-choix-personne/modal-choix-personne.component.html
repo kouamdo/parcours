@@ -1,0 +1,84 @@
+<div id="mainBlock" class="bg-light card modalExemplairecDePersonne">
+    <h2>{{'document.exemplaire.text8' | translate}}</h2>
+    <form class="example-form">
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label class="searchBar">{{'patient.search-bar' | translate}}</mat-label>
+          <input type="text" matInput aria-label="Rechercher" autofocus [formControl]="myControl" [value]="scan_val" [matAutocomplete]="auto">
+          <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+            <mat-option *ngFor="let option of filteredOptions" [value]="option" (onSelectionChange)="rechercherListingPersonnes(option)" title="{{option.nom}} {{option.prenom}} {{'patient.form.text5' | translate}} {{option.dateNaissance | date : 'dd-mm-yyyy'}}">
+              {{option.nom}} {{option.prenom}} {{'patient.form.text5' | translate}} {{option.dateNaissance | date : 'dd-mm-yyyy'}}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+        <div class="cameraBlock"><app-modal-codebarre-scan-continue></app-modal-codebarre-scan-continue></div>      
+    </form>
+    <div *ngIf="this.personne != undefined" class="affichePersonne">
+      <p>
+        <span class="libelle">
+          {{'patient.table.title1' | translate}} : 
+        </span>
+        <span class="resultat">
+          {{this.personne.nom}}
+        </span>
+      </p>
+      <p>
+        <span class="libelle">
+          {{'patient.table.title2' | translate}} : 
+        </span>
+        <span class="resultat">
+          {{this.personne.prenom}}
+        </span>
+      </p>
+      <p>
+        <span class="libelle">
+          {{'patient.table.title4' | translate}} : 
+        </span>
+        <span class="resultat">
+          {{this.personne.sexe}}
+        </span>
+      </p>
+      <p>
+        <span class="libelle">
+          {{'patient.table.title3' | translate}} : 
+        </span>
+        <span class="resultat">
+          {{this.personne.dateNaissance}}
+        </span>
+      </p>
+      <p>
+        <span class="libelle">
+          {{'patient.table.title5' | translate}} : 
+        </span>
+        <span class="resultat">
+          {{this.personne.mail}}
+        </span>
+      </p>
+      <p>
+        <span class="libelle">
+          {{'patient.table.title6' | translate}} : 
+        </span>
+        <span class="resultat">
+          {{this.personne.adresse}}
+        </span>
+      </p>
+      <p>
+        <span class="libelle">
+          {{'patient.table.title7' | translate}} : 
+        </span>
+        <span class="resultat">
+          {{this.personne.telephone}}
+        </span>
+      </p>
+    </div>
+    <div class="actionButton valBtn mt-2">
+      <button mat-button [mat-dialog-close] routerLink="../list-exemplaire" class="btn btnValidation retour" title="{{'lists.button10' | translate}}">
+        <i class="fa fa-times" aria-hidden="true"></i>
+      </button>
+      <button *ngIf="this.personne != undefined" mat-button (click)="reinitialiser()" class="btn btnValidation annuler" title="{{'lists.button3' | translate}}">
+        <i class="fa fa-undo" aria-hidden="true"></i>
+      </button>
+      <button *ngIf="this.personne != undefined" mat-button [mat-dialog-close] cdkFocusInitial routerLink = "{{navigate()}}" class="btn btnValidation" title="{{'lists.button11' | translate}}">
+        <i class="fa fa-check" aria-hidden="true"></i>
+      </button>
+    </div>
+</div>

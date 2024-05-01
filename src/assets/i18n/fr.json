@@ -94,7 +94,8 @@
       "text1": "Le nom est obligatoire.",
       "text2": "Le prénom est obligatoire.",
       "text3": "La date de naissance est obligatoire.",
-      "text4": "L'addresse mail est obligatoire."
+      "text4": "L'addresse mail est obligatoire.",
+      "text5": "Né le"
     }
   },
   "personnel": {
@@ -164,7 +165,7 @@
     "form": {
       "label1": "Intitule du service  : ",
       "label2": "id unique du ticket  : ",
-      "label3": "Date  : ",
+      "label3": "Date",
       "label4": "Nom du beneficiaire  : ",
       "label5": "ticket : ",
       "label6": "Nom : ",
@@ -231,6 +232,7 @@
     "title4": "Associer des sous documents",
     "title5": "Selectionner les documents à associer",
     "title6": "Creer les etats du document",
+    "title7": "Aucun document trouvé",
     "table": {
       "title0": "Id",
       "title1": "Titre",
@@ -283,7 +285,14 @@
       "title5": "Selectionner les exemplaires à associer",
       "text1": "Composition de l'exemplaire",
       "text2": "date de peremption",
-      "text3": "Modifier le distributeur"
+      "text3": "Modifier le distributeur",
+      "text4": "Previsualiser",
+      "text5": "Autres documents",
+      "text6": "Fait le ",
+      "text7": "à ",
+      "text8": "Selectionner la personne",
+      "text9": "Nom du bénéficiaire",
+      "text10": "Trier par "
     }
   },
   "theme": {

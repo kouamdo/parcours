@@ -64,20 +64,6 @@ export class ListValidationsComponent implements OnInit {
   }
 
 
-  /* setIdValidation (id_validation: string, code_validation : string){
-    this.id_validation = id_validation;
-    this.code = code_validation
-    sessionStorage.setItem("id_role", this.id_role.toString());
-    sessionStorage.setItem("titre_role", this.titre_role);
-  }
-  setraisonSocialService(id_service : number, raisonSocialService: string){
-    this.titre_service = raisonSocialService;
-    this.id_service = id_service;
-
-    sessionStorage.setItem("id_service", this.id_service.toString());
-    sessionStorage.setItem("raisonSocial_service", this.titre_service);
-  } */
-
   private getAllValidations(){
     return this.serviceValidation.getAllValidations();
   }

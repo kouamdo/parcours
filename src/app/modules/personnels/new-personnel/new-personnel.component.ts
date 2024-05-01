@@ -85,8 +85,6 @@ export class NewPersonnelComponent implements OnInit {
       qrCodeValue: personnelInput.qrCodeValue,
     };
 
-    console.log('the person is', personnelTemp);
-
     if (this.personnel != undefined) {
       personnelTemp.id = this.personnel.id;
     }

@@ -35,6 +35,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { ModalChoixDocEtatComponent } from './modal-choix-doc-etat/modal-choix-doc-etat.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatRadioModule } from '@angular/material/radio';
+import { ModalChoixPersonneComponent } from './modal-choix-personne/modal-choix-personne.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { MatRadioModule } from '@angular/material/radio';
     ModalCodebarreScanContinueComponent,
     ModalChoixDocumentsComponent,
     ModalChoixDocEtatComponent,
+    ModalChoixPersonneComponent,
   ],
   exports: [
     ModalCategoriesComponent,

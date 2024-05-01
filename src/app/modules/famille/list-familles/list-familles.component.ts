@@ -86,20 +86,6 @@ export class ListFamillesComponent implements OnInit, AfterViewInit {
     );
   }
 
-  setIdFamille(id_famille : string, libelle_famille : string){
-    this.id_famille = id_famille;
-    this.libelle_famille = libelle_famille
-    sessionStorage.setItem("id_famille", this.id_famille.toString());
-    sessionStorage.setItem("libelle_famille", this.libelle_famille);
-  }
-  setLibelleService(id_service : number, libelleService: string){
-    this.libelle_service = libelleService;
-    this.id_service = id_service;
-
-    sessionStorage.setItem("id_service", this.id_service.toString());
-    sessionStorage.setItem("libelle_service", this.libelle_service);
-  }
-
   private getAllFamilles(){
     return this.serviceFamille.getAllFamilles();
   }

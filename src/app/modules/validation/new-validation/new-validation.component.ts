@@ -60,7 +60,6 @@ export class NewValidationComponent implements OnInit {
 
       }
     );
-    console.log("roles all :", this.roles);
     if((idValidation != null) && idValidation!==''){
       this.btnLibelle="Modifier";
       this.titre="Modifier validation";
@@ -97,7 +96,7 @@ export class NewValidationComponent implements OnInit {
   onSubmit(validationInput:any){
 
     this.submitted=true;
-    if(this.forme.invalid) return console.log("elements error :", validationInput);
+    if(this.forme.invalid) return
 
     let validationTemp : IValidation={
       id: uuidv4(),
@@ -109,8 +108,6 @@ export class NewValidationComponent implements OnInit {
       role: validationInput.roleval,
       dateCreation: new Date
     }
-
-    console.log("elements :", validationInput)
 
     if(this.validation != undefined){
       validationTemp.id = this.validation.id,

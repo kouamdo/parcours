@@ -78,20 +78,6 @@ export class ListDistributeursComponent implements OnInit {
   }
 
 
-  setIdDistributeur (id_distributeur: string, raisonSocial_distributeur : string){
-    this.id_distributeur = id_distributeur;
-    this.raisonSocial_distributeur = raisonSocial_distributeur
-    sessionStorage.setItem("id_distributeur", this.id_distributeur.toString());
-    sessionStorage.setItem("raisonSocial_distributeur", this.raisonSocial_distributeur);
-  }
-  setraisonSocialService(id_service : number, raisonSocialService: string){
-    this.raisonSocial_service = raisonSocialService;
-    this.id_service = id_service;
-
-    sessionStorage.setItem("id_service", this.id_service.toString());
-    sessionStorage.setItem("raisonSocial_service", this.raisonSocial_service);
-  }
-
   private getAllDistributeurs(){
     return this.serviceDistributeur.getAllDistributeurs();
   }

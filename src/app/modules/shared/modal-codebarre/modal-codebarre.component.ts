@@ -84,7 +84,6 @@ export class ModalCodebarreComponent implements AfterViewInit, OnDestroy {
         this.scannedDataList.push(result.getText());
         this.playBeep();
         this.isScanning = false;
-        console.log('data list', this.scannedDataList);
         this.stopScannerForDelay();
       })
       .catch((err) => {
@@ -113,7 +112,6 @@ export class ModalCodebarreComponent implements AfterViewInit, OnDestroy {
 
   handleScanResult(scannedData: string): void {
     this.barService.setCode(scannedData);
-    console.log('Scaaaaan', scannedData);
   }
 
   playBeep(): void {
