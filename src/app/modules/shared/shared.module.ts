@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule} from '@angular/material/input';
+import { MatInputModule } from '@angular/material/input';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
@@ -22,14 +22,19 @@ import { ModalChoixAttributsComponent } from './modal-choix-attributs/modal-choi
 import { ModalChoixPreconisationsComponent } from './modal-choix-preconisations/modal-choix-preconisations.component';
 //import { MatCheckboxModule } from '@angular/material/checkbox';
 import { EnteteComponent } from './entete/entete.component';
-import { ModalChoixSousDocumentComponent} from './modal-choix-sous-document/modal-choix-sous-document.component';
+import { ModalChoixSousDocumentComponent } from './modal-choix-sous-document/modal-choix-sous-document.component';
 import { ModalChoixSousExemplairesComponent } from './modal-choix-sous-exemplaires/modal-choix-sous-exemplaires.component';
+import { ModalChoixDocumentsComponent } from './modal-choix-documents/modal-choix-documents.component';
 import { ModalDocEtatsComponent } from './modal-doc-etats/modal-doc-etats.component';
 import { ModalRessourceAttributsComponent } from './modal-ressource-attributs/modal-ressource-attributs.component';
 import { ModalRoleValidationComponent } from './modal-role-validation/modal-role-validation.component';
 import { ModalCodebarreComponent } from './modal-codebarre/modal-codebarre.component';
 import { ModalCodebarreDialogComponent } from './modal-codebarre-dialog/modal-codebarre-dialog.component';
 import { ModalCodebarreScanContinueComponent } from './modal-codebarre-scan-continue/modal-codebarre-scan-continue.component';
+import { MatIconModule } from '@angular/material/icon';
+import { ModalChoixDocEtatComponent } from './modal-choix-doc-etat/modal-choix-doc-etat.component';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatRadioModule } from '@angular/material/radio';
 
 @NgModule({
   declarations: [
@@ -45,6 +50,8 @@ import { ModalCodebarreScanContinueComponent } from './modal-codebarre-scan-cont
     ModalCodebarreComponent,
     ModalCodebarreDialogComponent,
     ModalCodebarreScanContinueComponent,
+    ModalChoixDocumentsComponent,
+    ModalChoixDocEtatComponent,
   ],
   exports: [
     ModalCategoriesComponent,
@@ -57,7 +64,8 @@ import { ModalCodebarreScanContinueComponent } from './modal-codebarre-scan-cont
     ModalCodebarreDialogComponent,
     ModalCodebarreScanContinueComponent,
     ModalRoleValidationComponent,
-    ModalRessourceAttributsComponent
+    ModalRessourceAttributsComponent,
+    ModalChoixDocumentsComponent,
   ],
   imports: [
     CommonModule,
@@ -72,6 +80,9 @@ import { ModalCodebarreScanContinueComponent } from './modal-codebarre-scan-cont
     MatTableModule,
     MatSortModule,
     MatDialogModule,
+    MatIconModule,
+    MatCheckboxModule,
+    MatRadioModule,
     //MatCheckboxModule,
     TranslateModule.forChild({
       loader: {

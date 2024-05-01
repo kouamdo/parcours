@@ -1,5 +1,5 @@
 import { LiveAnnouncer } from '@angular/cdk/a11y';
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
@@ -15,7 +15,7 @@ import { ModalRoleValidationComponent } from '../modal-role-validation/modal-rol
   templateUrl: './modal-doc-etats.component.html',
   styleUrls: ['./modal-doc-etats.component.scss']
 })
-export class ModalDocEtatsComponent {
+export class ModalDocEtatsComponent implements OnInit{
   formeDocEtats: FormGroup;
   etatControl = new FormControl<string | IEtats>('');
   filteredOptions: IEtats[] | undefined;

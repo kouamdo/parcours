@@ -1,0 +1,60 @@
+<div class="modal">
+    <div class="modal-content">
+        <div class="result">
+            <h2>Document Etats - {{ data.documentChoisi.titre }}</h2>
+        </div>
+        <div class="card">
+            <div class="card-body p-0 tableBlock" id="tableResultats" matSort>
+                <div class='table-responsive w-100 m-0'>
+                    <table class='table table-sm table-centered table-striped w-100' mat-table
+                        [dataSource]="data.documentChoisi.DocEtats" matSort>
+                        <!-- Libelle Column -->
+                        <ng-container matColumnDef="libelle">
+                            <th class="text-dark containHead" mat-header-cell *matHeaderCellDef mat-sort-header> Libelle
+                            </th>
+                            <td class="text-dark containCell" mat-cell *matCellDef="let etat"> {{ etat.etat.libelle }}
+                            </td>
+                        </ng-container>
+
+                        <!-- Description Column -->
+                        <ng-container matColumnDef="description">
+                            <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> Description </th>
+                            <td class="text-dark containCell" mat-cell *matCellDef="let etat"> {{ etat.etat.description
+                                }} </td>
+                        </ng-container>
+
+                        <!-- Select Column -->
+                        <ng-container matColumnDef="select">
+                            <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> Select </th>
+                            <td class="text-dark containCell" mat-cell *matCellDef="let etat">
+                                <mat-radio-group [(ngModel)]="selectedEtat"
+                                    (change)="onRadioChange(etat, data.documentChoisi.id)">
+                                    <mat-radio-button [value]="etat.etat.libelle"
+                                        [checked]="etat.etat.libelle === selectedEtat"></mat-radio-button>
+                                </mat-radio-group>
+                            </td>
+
+                        </ng-container>
+
+                        <tr mat-header-row *matHeaderRowDef="['libelle', 'description', 'select']"
+                            style="background-color: rgba(40, 167, 69, 0.79);"></tr>
+                        <tr mat-row *matRowDef="let row; columns: ['libelle', 'description', 'select']"></tr>
+                    </table>
+                    <mat-paginator style="background-color: rgba(40, 167, 69, 0.79);" [pageSizeOptions]="[5, 10, 20]"
+                        showFirstLastButtons aria-label="Select page of periodic elements">
+                    </mat-paginator>
+                </div>
+            </div>
+        </div>
+        <div style="display: flex; justify-content: space-between;">
+            <div class="actionButton mt-2">
+                <button class="btn btnValidation" mat-raised-button color="primary"
+                    (click)="onCancel()">Annuler</button>
+            </div>
+            <div class="actionButton mt-2">
+                <button class="btn btnValidation" mat-raised-button color="primary"
+                    (click)="onSave(data.documentChoisi.id)">Enregistrer</button>
+            </div>
+        </div>
+    </div>
+</div>

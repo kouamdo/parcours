@@ -1,8 +1,8 @@
 <div id="mainSection" class="bg-light card modalCategorie">
-    <form class="w-100">
+    <form class="w-100" [formGroup]="formeDocument">
         <div class="form-group mt-5">
             <div class='card-hearder'>
-                <h2 class="modal-title">{{"document.title5" | translate}}</h2>
+                <h2 class="modal-title">Selectionner les Documents</h2>
             </div>
             <div class="newAttSection">
                 <div class="sarchBlock">
@@ -22,7 +22,7 @@
                     </form>
                 </div>
 
-                <!-- tableau listing des PrecoMvts -->
+                <!-- tableau listing des Documents -->
 
                 <div class="card-body p-0 tableBlock" id="tableList">
                     <div class='table-responsive w-100'>
@@ -32,17 +32,16 @@
                             <!-- titre Column -->
                             <ng-container matColumnDef="titre">
                                 <th class="text-dark containHead" mat-header-cell *matHeaderCellDef mat-sort-header>
-                                    {{'document.table.title1' | translate}} </th>
+                                    titre</th>
                                 <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.titre}}
                                 </td>
                             </ng-container>
-
-                            <!-- description Column -->
-                            <ng-container matColumnDef="description">
-                                <th class="text-dark containHead" mat-header-cell *matHeaderCellDef mat-sort-header>
-                                    {{'document.table.title2' | translate}} </th>
-                                <td class="text-dark containCell" mat-cell *matCellDef="let element">
-                                    {{element.description}} </td>
+                            <!-- etat Column -->
+                            <ng-container matColumnDef="etat">
+                                <th class="text-dark containHead" mat-header-cell *matHeaderCellDef mat-sort-header>etat
+                                </th>
+                                <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.etat}}
+                                </td>
                             </ng-container>
 
                             <!-- Actions column -->
@@ -54,9 +53,7 @@
                                         <input type="checkbox" [value]="element.titre"
                                             (click)="getDocumentId(element.id)"
                                             (change)="onCheckDocumentChange($event)">
-                                        <span role="button" (click)="getDocumentId(element.id)"><i
-                                                class="fa fa-info-circle text-info" aria-hidden="true"
-                                                title="{{'preconisation.table.title4' | translate}}"></i></span>
+                                        <span role="button" (click)="getDocumentId(element.id)"></span>
                                     </div>
                                 </td>
                             </ng-container>
@@ -69,11 +66,10 @@
                         </mat-paginator>
                     </div>
                 </div>
-
                 <!-- tableau affichage des resultats -->
                 <div class="result">
                     <h2>
-                        {{'document.title1' | translate}}
+                        Afficher Resultats
                     </h2>
                     <div class="card">
                         <div class="card-body p-0 tableBlock" id="tableResultats">
@@ -85,57 +81,43 @@
                                     <!-- titre Column -->
                                     <ng-container matColumnDef="titre">
                                         <th class="text-dark containHead" mat-header-cell *matHeaderCellDef
-                                            mat-sort-header> {{'document.table.title1' | translate}} </th>
+                                            mat-sort-header>titre</th>
                                         <td class="text-dark containCell" mat-cell *matCellDef="let element">
                                             {{element.titre}} </td>
                                     </ng-container>
-
-                                    <!-- description Column -->
-                                    <ng-container matColumnDef="description">
-                                        <th class="text-dark containHead" mat-header-cell *matHeaderCellDef
-                                            mat-sort-header> {{'document.table.title2' | translate}} </th>
-                                        <td class="text-dark containCell" mat-cell *matCellDef="let element">
-                                            {{element.description}} </td>
-                                    </ng-container>
-
                                     <!-- etat Column -->
                                     <ng-container matColumnDef="etat">
-                                        <th class="text-dark containHead" mat-header-cell *matHeaderCellDef>
-                                            {{ 'document.table.title3' | translate }}
-                                        </th>
+                                        <th class="text-dark containHead" mat-header-cell *matHeaderCellDef
+                                            mat-sort-header> etat</th>
                                         <td class="text-dark containCell" mat-cell *matCellDef="let element">
-                                            <div class="actions">
-                                                <button type="button" class="btn p-1" (click)="openModal(element)">
-                                                    <i class="fas fa-plus-square fa-lg"
-                                                        style="color: rgba(40, 167, 69, 0.79);"></i>
-                                                </button>
-                                                <span style="font-size: small; min-width: 67px;">{{
-                                                    selectedEtatsMap[element.id] }}</span>
-                                            </div>
+                                            <!-- Read-only input field to display etat -->
+                                            <input type="text" class="form-control" formControlName="etat"
+                                                [value]="element.etat" readonly>
+                                            <!-- Error message for empty etat -->
+                                            <div *ngIf="formeDocument.get('etat')?.invalid && formeDocument.get('etat')?.touched"
+                                                class="text-danger">Etat est obligatoire</div>
+
                                         </td>
                                     </ng-container>
 
-
-                                    <!-- actions Column -->
+                                    <!-- actions Column-->
                                     <ng-container matColumnDef="actions">
                                         <th class="text-dark containHead" mat-header-cell *matHeaderCellDef>
                                             {{"patient.table.title8" | translate}} </th>
                                         <td class="text-dark containCell" mat-cell
                                             *matCellDef="let element;  let i=index">
                                             <div class="actions">
-                                                <button class="btn p-0" name="PrecoMvts" [value]="element.id"
-                                                    id="PrecoMvts" title="clicker pour annuler la selection"
+                                                <button class="btn p-0" name="documents" [value]="element.id"
+                                                    id="documents" title="clicker pour annuler la selection"
                                                     (click)="retirerSelectionDocument(i)">
                                                     <i class="fa fa-trash text-danger" aria-hidden="true"></i>
                                                 </button>
-                                                <span><i class="fa fa-info-circle text-info" aria-hidden="true"
-                                                        title="{{'preconisation.table.title4' | translate}}"></i></span>
                                             </div>
                                         </td>
                                     </ng-container>
 
-                                    <tr mat-header-row *matHeaderRowDef="displayedDocumentsColumnsOnSelect"></tr>
-                                    <tr mat-row *matRowDef="let row; columns: displayedDocumentsColumnsOnSelect;"></tr>
+                                    <tr mat-header-row *matHeaderRowDef="displayedDocumentsColumns"></tr>
+                                    <tr mat-row *matRowDef="let row; columns: displayedDocumentsColumns;"></tr>
                                 </table>
                                 <mat-paginator style="background-color: rgba(40, 167, 69, 0.79);"
                                     [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons
@@ -144,8 +126,7 @@
                             </div>
                             <div class="actionButton mt-2">
                                 <button mat-button [mat-dialog-close] cdkFocusInitial
-                                    class="btn btnValidation">{{'lists.button6' | translate}}
-                                </button>
+                                    class="btn btnValidation">{{'lists.button6' | translate}}</button>
                             </div>
                         </div>
                     </div>

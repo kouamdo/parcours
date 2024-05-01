@@ -1,0 +1,40 @@
+
+#tableBlock{
+  width: 100%;
+  div{
+      width: 100%;
+  }
+  table{
+      #actions{
+          font-size: 12px;
+          .dropdown-toggle{
+              padding: 0;
+              margin-left: 10px;
+              color: #28a745;
+              span{
+                  position: relative;
+                  bottom: 6px;
+                  font-size: 28px;
+                  margin-right: 5px;
+              }
+          }
+          div{
+              button{
+                  color: #28a745;
+                  display: flex;
+                  align-items: center;
+                  justify-content: space-between;
+                  span{
+                      width: 70%;
+                      text-align: left;
+                  }
+              }
+          }
+      }
+  }
+}
+
+th{
+  background-color: rgba(40, 167, 69, 0.2);
+  color: #28a745 !important;
+}

@@ -1,0 +1,151 @@
+<div id="mainSection">
+  <div class="card block" id="top2">
+    <div class="card-header" class="entete pt-4 pb-4">
+      {{"parours.title" | translate}} {{titre}}
+    </div>
+    <div class="card-body">
+      <form [formGroup]="forme" (ngSubmit)="onSubmit(forme.value)" *ngIf="forme">
+        <div>
+          <div>
+            <div class="form-group">
+              <div>
+                <div class="champs">
+                  <label for="libelle" class="label">
+                    {{"parours.table.title1" | translate}}<span style="color: red;" aria-label="required">*</span>
+                  </label>
+                  <input type="text" formControlName="libelle" name="libelle" id="libelle" placeholder="libelle"
+                    class="form-control" required>
+
+                </div>
+                <div *ngIf="submitted && f['libelle'].errors" class="alert alert-danger">
+                  <div *ngIf="f['libelle'].errors['required']">{{"parours.form.text1" | translate}}</div>
+                </div>
+
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div>
+                <div class="champs">
+                  <label for="_etape" class="label">
+                    {{"parours.table.title2" | translate}}<span style="color: red;" aria-label="required">*</span>
+                  </label>
+                  <input readonly type="text" formControlName="_etape" [value]="getEtapeLibelles()" name="_etape"
+                    id="_etape" placeholder="etape" class="form-control" required>
+
+                  <button type="button" class="btn p-1" (click)="openNewEtape()">
+                    <i class="fas fa-plus-square fa-lg" style="color: rgba(40, 167, 69, 0.79);"></i>
+                  </button>
+                </div>
+              </div>
+              <div *ngIf="submitted && f['_etape'].value.length<1" class="alert alert-danger blockErreur">
+                <div>{{"parours.form.text1" | translate}}</div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div class="actionButton">
+          <button class="btn" routerLink="../list-missions"><i class="fa fa-reply mr-1"
+              aria-hidden="true"></i>{{'lists.button2' | translate}}</button>
+          <button type="submit" class="btn btnValidation">{{btnLibelle}}</button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>
+
+<div id="" class="d-flex flex-column justify-content-around" style="margin-top: 100px;">
+  <div class="title" id="top1">
+    <!--<h2>{{"distributeur.title"| translate}}</h2>-->
+    <!--<app-entete class="title"></app-entete>-->
+
+    <div class="title">
+      <h2>LISTING DES ETAPES</h2>
+    </div>
+
+  </div>
+  <div class="card container-fluid" id="top">
+    <div class='card-hearder pt-3'>
+      <div class="d-flex align-items-center justify-content-end mr-4 tableTools">
+        <div class="form-inline mr-3">
+          <form class="example-form">
+            <mat-form-field class="example-full-width" appearance="fill">
+              <mat-label class="searchBar">{{'patient.search-bar' | translate}}</mat-label>
+              <input type="text" matInput aria-label="Rechercher" [formControl]="myControl" [matAutocomplete]="auto">
+              <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+                <mat-option *ngFor="let option of filteredOptions" [value]="option"
+                  (onSelectionChange)="rechercherListingEtape(option)">
+                  {{option.libelle}}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+          </form>
+        </div>
+        <!--<div role="button" id="addUserBotton" routerLink="../etape-nouvelle">
+          <span title="Ajouter une etape">
+            <i class="fa fa-user-plus" aria-hidden="true"></i>
+          </span>
+        </div>-->
+      </div>
+    </div>
+    <div class="card-body p-0" id="tableBlock">
+      <div class="table-responsive w-100">
+        <table class='table table-sm table-centered table-striped table-bordered w-100' mat-table
+          [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)">
+
+          <!-- libelle Column -->
+          <ng-container matColumnDef="libelle">
+            <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header>
+              {{"etape.table1.title1"| translate}}</th>
+            <td class="text-dark text-center containCell" mat-cell *matCellDef="let element"> {{element.libelle}} </td>
+          </ng-container>
+          <!-- etat Column -->
+          <ng-container matColumnDef="etat">
+            <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header>
+              {{"etape.table1.title2"| translate}}</th>
+            <td class="text-dark text-center containCell" mat-cell *matCellDef="let element"> {{element.etat}} </td>
+          </ng-container>
+          <!--Documents Column -->
+          <ng-container matColumnDef="Document">
+            <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header>Document</th>
+            <td class="text-dark text-center containCell" mat-cell *matCellDef="let element">
+              <span> {{element.listSousDocuments}} </span>
+            </td>
+          </ng-container>
+
+          <!-- action Column -->
+          <ng-container matColumnDef="actions">
+            <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{"patient.table.title8" | translate}}
+            </th>
+            <td class="text-dark containCell" mat-cell *matCellDef="let element">
+              <div id="actions" class="dropdown open">
+                <button class="btn dropdown-toggle" type="button" id="triggerId" data-toggle="dropdown"
+                  aria-haspopup="true" aria-expanded="false">
+                  <span>...</span>
+                </button>
+                <div class="dropdown-menu" aria-labelledby="triggerId">
+                  <button class="dropdown-item nav-link" (click)="openNewEtape(element.id)"
+                    title="{{'patient.table.actions.link2' | translate}}">
+                    <i class="fa fa-pen text-info" aria-hidden="true"></i>
+                    <span>{{'patient.table.actions.link2' | translate}}</span>
+                  </button>
+                </div>
+              </div>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        <mat-paginator style="background-color:  rgba(40, 167, 69, 0.79);" [pageSizeOptions]="[5, 10, 20]"
+          showFirstLastButtons aria-label="Select page of periodic elements">
+        </mat-paginator>
+      </div>
+
+    </div>
+
+
+  </div>
+</div>

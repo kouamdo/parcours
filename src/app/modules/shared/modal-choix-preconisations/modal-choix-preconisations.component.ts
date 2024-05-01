@@ -26,7 +26,7 @@ export class ModalChoixPreconisationsComponent implements OnInit {
     'libelle',
     'type'
   ]; // structure du tableau presentant les preconisations
-  
+
   dataSourcePreco = new MatTableDataSource<IPrecoMvt>(
     this.ELEMENTS_TABLE_PRECONISATIONS
   );
@@ -133,7 +133,7 @@ export class ModalChoixPreconisationsComponent implements OnInit {
       });
   }
   openViewPrecoDialog(){
-    this.dialogDef.open(ViewPrecomvtComponent, 
+    this.dialogDef.open(ViewPrecomvtComponent,
     {
       maxWidth: '100vw',
       maxHeight: '100vh',
