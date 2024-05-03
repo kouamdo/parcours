@@ -232,7 +232,8 @@
     "title4": "Associer des sous documents",
     "title5": "Selectionner les documents à associer",
     "title6": "Creer les etats du document",
-    "title7": "Aucun document trouvé",
+    "title7": "Etat courant",
+    "title8": "Aucun document trouvé",
     "table": {
       "title0": "Id",
       "title1": "Titre",
@@ -279,6 +280,7 @@
     },
     "exemplaire": {
       "title": "Exemplaire ",
+      "title0": "selection",
       "title2": "Donnees obsoletes",
       "title3": "Ajouter des ressources",
       "title4": "liste des mouvements",

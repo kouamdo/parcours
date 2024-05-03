@@ -231,6 +231,7 @@
         "title4": "Pair other documents",
         "title5": "Select documents to pair",
         "title6": "Creat document's statuts",
+        "title7": "Current state",
         "table":{
             "title0":"Id",
             "title1":"Title",
@@ -277,6 +278,7 @@
         },
         "exemplaire": {
             "title":"Document's instance ",
+            "title0": "select",
             "title2":"Old datas",
             "title3": "Add ressources",
             "title4": "list of mouvements",

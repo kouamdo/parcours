@@ -1041,7 +1041,7 @@ export class InMemDBService implements InMemoryDbService {
         titre: 'Note intervention',
         description:
           "Document delivre par le medecin ou un infirmier de l'etablissement",
-        DocEtats: [
+        docEtats: [
           {
             id: '1',
             ordre: 1,
@@ -1548,7 +1548,7 @@ export class InMemDBService implements InMemoryDbService {
             titre: 'Note intervention',
             description:
               "Document delivre par le medecin ou un infirmier de l'etablissement",
-            DocEtats: [
+            docEtats: [
               {
                 id: '1',
                 ordre: 1,
@@ -2054,7 +2054,7 @@ export class InMemDBService implements InMemoryDbService {
             titre: 'Fiche de suivi',
             description:
               "Document delivre par le medecin ou un infirmier de l'etablissement",
-            DocEtats: [
+            docEtats: [
               {
                 id: '1',
                 ordre: 1,
@@ -2555,7 +2555,7 @@ export class InMemDBService implements InMemoryDbService {
             affichagePrix: true,
             contientRessources: true,
             contientDistributeurs: true,
-            DocEtats: [
+            docEtats: [
               {
                 id: '1',
                 ordre: 1,
@@ -2998,7 +2998,7 @@ export class InMemDBService implements InMemoryDbService {
             affichagePrix: true,
             contientRessources: true,
             contientDistributeurs: true,
-            DocEtats: [
+            docEtats: [
               {
                 id: '2',
                 ordre: 2,
@@ -3442,7 +3442,7 @@ export class InMemDBService implements InMemoryDbService {
             affichagePrix: true,
             contientRessources: true,
             contientDistributeurs: true,
-            DocEtats: [
+            docEtats: [
               {
                 id: '2',
                 ordre: 2,
@@ -4053,7 +4053,7 @@ export class InMemDBService implements InMemoryDbService {
             affichagePrix: true,
             contientRessources: true,
             contientDistributeurs: true,
-            DocEtats: [
+            docEtats: [
               {
                 id: '2',
                 ordre: 2,
@@ -4496,7 +4496,7 @@ export class InMemDBService implements InMemoryDbService {
             contientRessources: true,
             contientDistributeurs: true,
             typeMouvement: 'Ajout',
-            DocEtats: [
+            docEtats: [
               {
                 id: '2',
                 ordre: 2,
@@ -5136,7 +5136,7 @@ export class InMemDBService implements InMemoryDbService {
             affichagePrix: true,
             contientRessources: true,
             contientDistributeurs: true,
-            DocEtats: [
+            docEtats: [
               {
                 id: '1',
                 ordre: 1,
@@ -5641,7 +5641,7 @@ export class InMemDBService implements InMemoryDbService {
         titre: 'Fiche de suivi',
         description:
           "Document delivre par le medecin ou un infirmier de l'etablissement",
-        DocEtats: [
+        docEtats: [
           {
             id: '1',
             ordre: 1,
@@ -6143,7 +6143,7 @@ export class InMemDBService implements InMemoryDbService {
         affichagePrix: false,
         contientRessources: true,
         contientDistributeurs: false,
-        DocEtats: [
+        docEtats: [
           {
             id: '1',
             ordre: 1,
@@ -6584,7 +6584,7 @@ export class InMemDBService implements InMemoryDbService {
             titre: 'Note intervention',
             description:
               "Document delivre par le medecin ou un infirmier de l'etablissement",
-            DocEtats: [
+            docEtats: [
               {
                 id: '1',
                 ordre: 1,
@@ -7090,7 +7090,7 @@ export class InMemDBService implements InMemoryDbService {
             titre: 'Fiche de suivi',
             description:
               "Document delivre par le medecin ou un infirmier de l'etablissement",
-            DocEtats: [
+            docEtats: [
               {
                 id: '1',
                 ordre: 1,
@@ -7592,7 +7592,7 @@ export class InMemDBService implements InMemoryDbService {
             affichagePrix: true,
             contientRessources: true,
             contientDistributeurs: true,
-            DocEtats: [
+            docEtats: [
               {
                 id: '1',
                 ordre: 1,
@@ -8037,7 +8037,7 @@ export class InMemDBService implements InMemoryDbService {
             affichagePrix: true,
             contientRessources: true,
             contientDistributeurs: true,
-            DocEtats: [
+            docEtats: [
               {
                 id: '2',
                 ordre: 2,
@@ -8666,7 +8666,7 @@ export class InMemDBService implements InMemoryDbService {
             affichagePrix: true,
             contientRessources: true,
             contientDistributeurs: true,
-            DocEtats: [
+            docEtats: [
               {
                 id: '1',
                 ordre: 1,
@@ -9176,7 +9176,7 @@ export class InMemDBService implements InMemoryDbService {
         affichagePrix: true,
         contientRessources: true,
         contientDistributeurs: false,
-        DocEtats: [
+        docEtats: [
           {
             id: '2',
             ordre: 2,
@@ -9804,7 +9804,7 @@ export class InMemDBService implements InMemoryDbService {
         affichagePrix: false,
         contientRessources: true,
         contientDistributeurs: true,
-        DocEtats: [
+        docEtats: [
           {
             id: '1',
             ordre: 1,
@@ -9826,6 +9826,22 @@ export class InMemDBService implements InMemoryDbService {
               description: 'deuxième état du document',
               dateCreation: new Date('07/21/2024'),
             },
+            validation: {
+              id: '2',
+              code: 'qwerty',
+              etat: true,
+              libelle: 'passable',
+              typeVote: 'Majoritaire',
+              dureeVote: 10,
+              role: {
+                id: '2',
+                titre: 'traiteur',
+                description: 'Personnel administratif',
+                etat: true,
+                dateCreation: new Date('07/03/2000'),
+              },
+              dateCreation: new Date('01/04/2014'),
+            }
           },
           {
             id: '3',
@@ -10312,7 +10328,7 @@ export class InMemDBService implements InMemoryDbService {
             affichagePrix: true,
             contientRessources: true,
             contientDistributeurs: true,
-            DocEtats: [
+            docEtats: [
               {
                 id: '1',
                 ordre: 1,
@@ -10755,7 +10771,7 @@ export class InMemDBService implements InMemoryDbService {
             affichagePrix: true,
             contientRessources: true,
             contientDistributeurs: true,
-            DocEtats: [
+            docEtats: [
               {
                 id: '2',
                 ordre: 2,
@@ -11384,7 +11400,7 @@ export class InMemDBService implements InMemoryDbService {
             affichagePrix: true,
             contientRessources: true,
             contientDistributeurs: true,
-            DocEtats: [
+            docEtats: [
               {
                 id: '1',
                 ordre: 1,
@@ -11922,7 +11938,7 @@ export class InMemDBService implements InMemoryDbService {
         affichagePrix: true,
         contientRessources: true,
         contientDistributeurs: false,
-        DocEtats: [
+        docEtats: [
           {
             id: '2',
             ordre: 2,
@@ -12744,7 +12760,7 @@ export class InMemDBService implements InMemoryDbService {
             titre: 'Note intervention',
             description:
               "Document delivre par le medecin ou un infirmier de l'etablissement",
-            DocEtats: [
+            docEtats: [
               {
                 id: '1',
                 ordre: 1,
@@ -13255,7 +13271,7 @@ export class InMemDBService implements InMemoryDbService {
             affichagePrix: true,
             contientRessources: true,
             contientDistributeurs: true,
-            DocEtats: [
+            docEtats: [
               {
                 id: '2',
                 ordre: 2,
@@ -14033,7 +14049,7 @@ export class InMemDBService implements InMemoryDbService {
         affichagePrix: true,
         contientRessources: true,
         contientDistributeurs: true,
-        DocEtats: [
+        docEtats: [
           {
             id: '1',
             ordre: 1,
@@ -14055,6 +14071,22 @@ export class InMemDBService implements InMemoryDbService {
               description: 'deuxième état du document',
               dateCreation: new Date('07/21/2024'),
             },
+            validation: {
+              id: '2',
+              code: 'qwerty',
+              etat: true,
+              libelle: 'passable',
+              typeVote: 'Majoritaire',
+              dureeVote: 10,
+              role: {
+                id: '2',
+                titre: 'traiteur',
+                description: 'Personnel administratif',
+                etat: true,
+                dateCreation: new Date('07/03/2000'),
+              },
+              dateCreation: new Date('01/04/2014'),
+            }
           },
           {
             id: '3',
@@ -14076,8 +14108,32 @@ export class InMemDBService implements InMemoryDbService {
               libelle: 'etat 4',
               description: 'quatrième état du document',
               dateCreation: new Date('07/21/2024'),
+            }
+          },
+        ],
+        ordreEtats: [
+          {
+            id: '1',
+            ordre: 1,
+            dateCreation: new Date('07/21/2024'),
+            etat: {
+              id: '1',
+              libelle: 'etat 1',
+              description: 'premièr état du document',
+              dateCreation: new Date('07/21/2024'),
             },
           },
+          {
+            id: '2',
+            ordre: 2,
+            dateCreation: new Date('07/21/2024'),
+            etat: {
+              id: '2',
+              libelle: 'etat 2',
+              description: 'deuxième état du document',
+              dateCreation: new Date('07/21/2024'),
+            }
+          }
         ],
         missions: [
           {
@@ -14635,7 +14691,7 @@ export class InMemDBService implements InMemoryDbService {
             affichagePrix: true,
             contientRessources: true,
             contientDistributeurs: true,
-            DocEtats: [
+            docEtats: [
               {
                 id: '1',
                 ordre: 1,
@@ -15080,7 +15136,7 @@ export class InMemDBService implements InMemoryDbService {
             affichagePrix: true,
             contientRessources: true,
             contientDistributeurs: true,
-            DocEtats: [
+            docEtats: [
               {
                 id: '2',
                 ordre: 2,
@@ -15709,7 +15765,7 @@ export class InMemDBService implements InMemoryDbService {
             affichagePrix: true,
             contientRessources: true,
             contientDistributeurs: true,
-            DocEtats: [
+            docEtats: [
               {
                 id: '1',
                 ordre: 1,
@@ -16335,7 +16391,7 @@ export class InMemDBService implements InMemoryDbService {
         affichagePrix:true,
         contientRessources:true,
         contientDistributeurs:false,
-        DocEtats:[
+        docEtats: [
           {id: '3', ordre: 3, dateCreation: new Date("07/21/2024"),
             etat: {id:"3", libelle:"etat 3", description:"troisième état du document", dateCreation: new Date("07/21/2024")}
           },
@@ -17110,7 +17166,7 @@ export class InMemDBService implements InMemoryDbService {
             titre: 'Note intervention',
             description:
               "Document delivre par le medecin ou un infirmier de l'etablissement",
-            DocEtats:[
+            docEtats: [
               {id: '1', ordre: 1, dateCreation: new Date("07/21/2024"),
                 etat: {id:"1", libelle:"etat 1", description:"premièr état du document", dateCreation: new Date("07/21/2024")}
               },
@@ -17574,7 +17630,7 @@ export class InMemDBService implements InMemoryDbService {
               affichagePrix:true,
               contientRessources:true,
               contientDistributeurs:true,
-              DocEtats:[
+              docEtats: [
                 {id: '2', ordre: 2, dateCreation: new Date("07/21/2024"),
                   etat: {id:"2", libelle:"etat 2", description:"deuxième état du document", dateCreation: new Date("07/21/2024")}
                 },
@@ -18309,7 +18365,7 @@ export class InMemDBService implements InMemoryDbService {
         affichagePrix:true,
         contientRessources:true,
         contientDistributeurs:true,
-        DocEtats:[
+        docEtats: [
           {id: '1', ordre: 1, dateCreation: new Date("07/21/2024"),
             etat: {id:"1", libelle:"etat 1", description:"premièr état du document", dateCreation: new Date("07/21/2024")}
           },
@@ -18858,7 +18914,7 @@ export class InMemDBService implements InMemoryDbService {
               affichagePrix:true,
               contientRessources:true,
               contientDistributeurs:true,
-              DocEtats:[
+              docEtats: [
                 {id: '1', ordre: 1, dateCreation: new Date("07/21/2024"),
                   etat: {id:"1", libelle:"etat 1", description:"premièr état du document", dateCreation: new Date("07/21/2024")}
                 },
@@ -19264,7 +19320,7 @@ export class InMemDBService implements InMemoryDbService {
               affichagePrix:true,
               contientRessources:true,
               contientDistributeurs:true,
-              DocEtats:[
+              docEtats: [
                 {id: '1', ordre: 1, dateCreation: new Date("07/21/2024"),
                   etat: {id:"1", libelle:"etat 1", description:"premièr état du document", dateCreation: new Date("07/21/2024")}
                 },
@@ -19840,7 +19896,7 @@ export class InMemDBService implements InMemoryDbService {
         affichagePrix:true,
         contientRessources:true,
         contientDistributeurs:true,
-        DocEtats:[
+        docEtats: [
           {id: '2', ordre: 2, dateCreation: new Date("07/21/2024"),
             etat: {id:"2", libelle:"etat 2", description:"deuxième état du document", dateCreation: new Date("07/21/2024")}
           },
@@ -20289,7 +20345,7 @@ export class InMemDBService implements InMemoryDbService {
               affichagePrix:true,
               contientRessources:true,
               contientDistributeurs:true,
-              DocEtats:[
+              docEtats: [
                 {id: '1', ordre: 1, dateCreation: new Date("07/21/2024"),
                   etat: {id:"1", libelle:"etat 1", description:"premièr état du document", dateCreation: new Date("07/21/2024")}
                 },
@@ -20833,7 +20889,7 @@ export class InMemDBService implements InMemoryDbService {
         affichagePrix: true,
         contientRessources: true,
         contientDistributeurs: false,
-        DocEtats: [
+        docEtats: [
           {
             id: '2',
             ordre: 2,
@@ -21655,7 +21711,7 @@ export class InMemDBService implements InMemoryDbService {
             titre: 'Note intervention',
             description:
               "Document delivre par le medecin ou un infirmier de l'etablissement",
-            DocEtats: [
+            docEtats: [
               {
                 id: '1',
                 ordre: 1,
@@ -22166,7 +22222,7 @@ export class InMemDBService implements InMemoryDbService {
             affichagePrix: true,
             contientRessources: true,
             contientDistributeurs: true,
-            DocEtats: [
+            docEtats: [
               {
                 id: '2',
                 ordre: 2,
@@ -23371,7 +23427,7 @@ export class InMemDBService implements InMemoryDbService {
           titre: 'Note intervention',
           description:
             "Document delivre par le medecin ou un infirmier de l'etablissement",
-          DocEtats: [
+          docEtats: [
             {
               id: '1',
               ordre: 1,
@@ -23879,7 +23935,7 @@ export class InMemDBService implements InMemoryDbService {
               titre: 'Note intervention',
               description:
                 "Document delivre par le medecin ou un infirmier de l'etablissement",
-              DocEtats: [
+              docEtats: [
                 {
                   id: '1',
                   ordre: 1,
@@ -24385,7 +24441,7 @@ export class InMemDBService implements InMemoryDbService {
               titre: 'Fiche de suivi',
               description:
                 "Document delivre par le medecin ou un infirmier de l'etablissement",
-              DocEtats: [
+              docEtats: [
                 {
                   id: '1',
                   ordre: 1,
@@ -24886,7 +24942,7 @@ export class InMemDBService implements InMemoryDbService {
               affichagePrix: true,
               contientRessources: true,
               contientDistributeurs: true,
-              DocEtats: [
+              docEtats: [
                 {
                   id: '1',
                   ordre: 1,
@@ -25328,7 +25384,7 @@ export class InMemDBService implements InMemoryDbService {
               affichagePrix: true,
               contientRessources: true,
               contientDistributeurs: true,
-              DocEtats: [
+              docEtats: [
                 {
                   id: '2',
                   ordre: 2,
@@ -25772,7 +25828,7 @@ export class InMemDBService implements InMemoryDbService {
               affichagePrix: true,
               contientRessources: true,
               contientDistributeurs: true,
-              DocEtats: [
+              docEtats: [
                 {
                   id: '2',
                   ordre: 2,
@@ -26384,7 +26440,7 @@ export class InMemDBService implements InMemoryDbService {
               affichagePrix: true,
               contientRessources: true,
               contientDistributeurs: true,
-              DocEtats: [
+              docEtats: [
                 {
                   id: '2',
                   ordre: 2,
@@ -26827,7 +26883,7 @@ export class InMemDBService implements InMemoryDbService {
               contientRessources: true,
               contientDistributeurs: true,
               typeMouvement: 'Ajout',
-              DocEtats: [
+              docEtats: [
                 {
                   id: '2',
                   ordre: 2,
@@ -27467,7 +27523,7 @@ export class InMemDBService implements InMemoryDbService {
               affichagePrix: true,
               contientRessources: true,
               contientDistributeurs: true,
-              DocEtats: [
+              docEtats: [
                 {
                   id: '1',
                   ordre: 1,
@@ -27973,7 +28029,7 @@ export class InMemDBService implements InMemoryDbService {
           titre: 'Fiche de suivi',
           description:
             "Document delivre par le medecin ou un infirmier de l'etablissement",
-          DocEtats: [
+          docEtats: [
             {
               id: '1',
               ordre: 1,
@@ -28476,7 +28532,7 @@ export class InMemDBService implements InMemoryDbService {
             titre: 'Note intervention',
             description:
               "Document delivre par le medecin ou un infirmier de l'etablissement",
-            DocEtats: [
+            docEtats: [
               {
                 id: '1',
                 ordre: 1,
@@ -28984,7 +29040,7 @@ export class InMemDBService implements InMemoryDbService {
                 titre: 'Note intervention',
                 description:
                   "Document delivre par le medecin ou un infirmier de l'etablissement",
-                DocEtats: [
+                docEtats: [
                   {
                     id: '1',
                     ordre: 1,
@@ -29490,7 +29546,7 @@ export class InMemDBService implements InMemoryDbService {
                 titre: 'Fiche de suivi',
                 description:
                   "Document delivre par le medecin ou un infirmier de l'etablissement",
-                DocEtats: [
+                docEtats: [
                   {
                     id: '1',
                     ordre: 1,
@@ -29991,7 +30047,7 @@ export class InMemDBService implements InMemoryDbService {
                 affichagePrix: true,
                 contientRessources: true,
                 contientDistributeurs: true,
-                DocEtats: [
+                docEtats: [
                   {
                     id: '1',
                     ordre: 1,
@@ -30433,7 +30489,7 @@ export class InMemDBService implements InMemoryDbService {
                 affichagePrix: true,
                 contientRessources: true,
                 contientDistributeurs: true,
-                DocEtats: [
+                docEtats: [
                   {
                     id: '2',
                     ordre: 2,
@@ -30877,7 +30933,7 @@ export class InMemDBService implements InMemoryDbService {
                 affichagePrix: true,
                 contientRessources: true,
                 contientDistributeurs: true,
-                DocEtats: [
+                docEtats: [
                   {
                     id: '2',
                     ordre: 2,
@@ -31489,7 +31545,7 @@ export class InMemDBService implements InMemoryDbService {
                 affichagePrix: true,
                 contientRessources: true,
                 contientDistributeurs: true,
-                DocEtats: [
+                docEtats: [
                   {
                     id: '2',
                     ordre: 2,
@@ -31932,7 +31988,7 @@ export class InMemDBService implements InMemoryDbService {
                 contientRessources: true,
                 contientDistributeurs: true,
                 typeMouvement: 'Ajout',
-                DocEtats: [
+                docEtats: [
                   {
                     id: '2',
                     ordre: 2,
@@ -32572,7 +32628,7 @@ export class InMemDBService implements InMemoryDbService {
                 affichagePrix: true,
                 contientRessources: true,
                 contientDistributeurs: true,
-                DocEtats: [
+                docEtats: [
                   {
                     id: '1',
                     ordre: 1,
@@ -33089,7 +33145,7 @@ export class InMemDBService implements InMemoryDbService {
             affichagePrix: false,
             contientRessources: true,
             contientDistributeurs: false,
-            DocEtats: [
+            docEtats: [
               {
                 id: '1',
                 ordre: 1,
@@ -33530,7 +33586,7 @@ export class InMemDBService implements InMemoryDbService {
                 titre: 'Note intervention',
                 description:
                   "Document delivre par le medecin ou un infirmier de l'etablissement",
-                DocEtats: [
+                docEtats: [
                   {
                     id: '1',
                     ordre: 1,
@@ -34036,7 +34092,7 @@ export class InMemDBService implements InMemoryDbService {
                 titre: 'Fiche de suivi',
                 description:
                   "Document delivre par le medecin ou un infirmier de l'etablissement",
-                DocEtats: [
+                docEtats: [
                   {
                     id: '1',
                     ordre: 1,
@@ -34538,7 +34594,7 @@ export class InMemDBService implements InMemoryDbService {
                 affichagePrix: true,
                 contientRessources: true,
                 contientDistributeurs: true,
-                DocEtats: [
+                docEtats: [
                   {
                     id: '1',
                     ordre: 1,
@@ -34983,7 +35039,7 @@ export class InMemDBService implements InMemoryDbService {
                 affichagePrix: true,
                 contientRessources: true,
                 contientDistributeurs: true,
-                DocEtats: [
+                docEtats: [
                   {
                     id: '2',
                     ordre: 2,
@@ -35612,7 +35668,7 @@ export class InMemDBService implements InMemoryDbService {
                 affichagePrix: true,
                 contientRessources: true,
                 contientDistributeurs: true,
-                DocEtats: [
+                docEtats: [
                   {
                     id: '1',
                     ordre: 1,

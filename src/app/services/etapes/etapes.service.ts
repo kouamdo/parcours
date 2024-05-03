@@ -39,7 +39,7 @@ export class EtapesService {
 
   updateDocEtatsWithCheckedEtapes(etape: IEtape) {
     etape.document.forEach((document) => {
-      document.DocEtats.forEach((docEtat) => {
+      document.docEtats.forEach((docEtat) => {
         if (docEtat.checked) {
           docEtat.etape = etape;
           console.log('etape new', docEtat);

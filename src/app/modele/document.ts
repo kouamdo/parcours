@@ -19,5 +19,5 @@ export interface IDocument {
     categories : ICategoriesAttributs[]
     preconisations : IPrecoMvt[]
     sousDocuments? : IDocument[]
-    DocEtats : IDocEtats[]
+    docEtats : IDocEtats[]
 }

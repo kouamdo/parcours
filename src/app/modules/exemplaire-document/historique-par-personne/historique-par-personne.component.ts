@@ -38,7 +38,7 @@ export class HistoriqueParPersonneComponent implements OnInit {
     contientRessources: false,
     contientDistributeurs: false,
     typeMouvement: TypeMouvement.Neutre,
-    DocEtats: [],
+    docEtats: [],
     dateCreation: new Date,
     personneRattachee: {
       id: '',

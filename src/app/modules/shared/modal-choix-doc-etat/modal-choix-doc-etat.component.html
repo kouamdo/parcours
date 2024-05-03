@@ -7,10 +7,10 @@
             <div class="card-body p-0 tableBlock" id="tableResultats" matSort>
                 <div class='table-responsive w-100 m-0'>
                     <table class='table table-sm table-centered table-striped w-100' mat-table
-                        [dataSource]="data.documentChoisi.DocEtats" matSort>
+                        [dataSource]="data.EtatsChoisi" matSort>
                         <!-- Libelle Column -->
                         <ng-container matColumnDef="libelle">
-                            <th class="text-dark containHead" mat-header-cell *matHeaderCellDef mat-sort-header> Libelle
+                            <th class="text-dark containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'famille.table.title1' | translate}}
                             </th>
                             <td class="text-dark containCell" mat-cell *matCellDef="let etat"> {{ etat.etat.libelle }}
                             </td>
@@ -18,22 +18,20 @@
 
                         <!-- Description Column -->
                         <ng-container matColumnDef="description">
-                            <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> Description </th>
+                            <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{'document.table.title2' | translate}} </th>
                             <td class="text-dark containCell" mat-cell *matCellDef="let etat"> {{ etat.etat.description
                                 }} </td>
                         </ng-container>
 
                         <!-- Select Column -->
                         <ng-container matColumnDef="select">
-                            <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> Select </th>
+                            <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{ 'document.exemplaire.title0' | translate }} </th>
                             <td class="text-dark containCell" mat-cell *matCellDef="let etat">
                                 <mat-radio-group [(ngModel)]="selectedEtat"
-                                    (change)="onRadioChange(etat, data.documentChoisi.id)">
-                                    <mat-radio-button [value]="etat.etat.libelle"
-                                        [checked]="etat.etat.libelle === selectedEtat"></mat-radio-button>
+                                    (change)="onRadioChange(etat)">
+                                    <mat-radio-button [value]="etat" [checked]="etat.checked"></mat-radio-button>
                                 </mat-radio-group>
                             </td>
-
                         </ng-container>
 
                         <tr mat-header-row *matHeaderRowDef="['libelle', 'description', 'select']"
@@ -53,7 +51,7 @@
             </div>
             <div class="actionButton mt-2">
                 <button class="btn btnValidation" mat-raised-button color="primary"
-                    (click)="onSave(data.documentChoisi.id)">Enregistrer</button>
+                    (click)="onSave()">Valider</button>
             </div>
         </div>
     </div>

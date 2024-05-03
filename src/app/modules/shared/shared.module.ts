@@ -77,6 +77,7 @@ import { ModalChoixPersonneComponent } from './modal-choix-personne/modal-choix-
     ReactiveFormsModule,
     MatAutocompleteModule,
     MatInputModule,
+    MatRadioModule,
     //MatFormFieldModule,
     MatPaginatorModule,
     MatTableModule,

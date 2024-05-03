@@ -59,7 +59,7 @@ export class ListFormDocumentComponent implements OnInit, AfterViewInit {
     contientRessources: false,
     contientDistributeurs: false,
     listDocEtats: '',
-    DocEtats: []
+    docEtats: []
   }
 
   constructor(private translate: TranslateService, private router:Router,
@@ -152,7 +152,7 @@ export class ListFormDocumentComponent implements OnInit, AfterViewInit {
      attributs: [],
      categories: [],
      preconisations: [],
-     DocEtats: []
+     docEtats: []
    }
     afficheDocument.id = x.id;
     afficheDocument.titre = x.titre;
@@ -174,7 +174,7 @@ export class ListFormDocumentComponent implements OnInit, AfterViewInit {
       x.preconisations.forEach(
         p => afficheDocument.listPreconisations += p.libelle + ", "
       )
-      x.DocEtats.forEach(
+      x.docEtats.forEach(
         de => afficheDocument.listDocEtats += de.etat.libelle + ", "
       )
       return afficheDocument;
