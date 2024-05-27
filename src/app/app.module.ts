@@ -37,9 +37,10 @@ import { EtatsModule } from './modules/etats/etats.module';
 import { ValidationModule } from './modules/validation/validation.module';
 import { EtapeModule } from './modules/etape/etape.module';
 import { ParoursModule } from './modules/parours/parours.module';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
-  declarations: [AppComponent, NotFoundComponent, MenuComponent],
+  declarations: [LoginComponent, AppComponent, NotFoundComponent, MenuComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -64,7 +65,6 @@ import { ParoursModule } from './modules/parours/parours.module';
     DistributeurModule,
     RoleModule,
     ValidationModule,
-
     EtapeModule,
     ParoursModule,
     // ngx-translate and the loader module

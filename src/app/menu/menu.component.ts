@@ -4,7 +4,6 @@ import { IFonctionnalites } from '../modele/fonctionnalites';
 import { IMenus } from '../modele/menus';
 import { MenusService } from '../services/menus/menus.service';
 import { DonneesEchangeService } from '../services/donnees-echange/donnees-echange.service';
-import { log } from 'console';
 
 @Component({
   selector: 'app-menu',

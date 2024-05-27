@@ -18,10 +18,15 @@ import { EtatsRoutingModule } from './modules/etats/etats-routing.module';
 import { ValidationRoutingModule } from './modules/validation/validation-routing.module';
 import { EtapeRoutingModule } from './modules/etape/etape-routing.module';
 import { ParoursRoutingModule } from './modules/parours/parours-routing.module';
+import { AppComponent } from './app.component';
+import { AuthGuard } from './auth/auth.guard';
+import { LoginComponent } from './login/login.component';
 
 
 
 const routes: Routes = [
+  { path: 'auth', component: LoginComponent },
+  { path: '', component: AppComponent, canActivate: [AuthGuard] }, // Protège la route principale avec AuthGuard
   {
     path: '**',
     component: NotFoundComponent
