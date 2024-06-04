@@ -1,143 +1,152 @@
 <div id="mainSection">
   <div class="card block" id="top1">
-      <div class="card-header" class="entete pt-4 pb-4">
-        {{'ressource.table.title' | translate}} {{titre}}
-      </div>
-      <div class="card-body">
-          <form [formGroup]="forme" (ngSubmit)="onSubmit(forme.value)" *ngIf="forme" >
-              <div class="">
-                  <div class="">
-                      <div class="form-group">
-                          <div>
-                              <div class="champs">
-                                  <label for="libelle" class="label">
-                                    {{'ressource.table.title1' | translate}} <sup>*</sup>
-                                  </label>
-                                  <input type="text" formControlName="libelle" name="libelle" id="libelle"  placeholder="{{'ressource.table.title1' | translate}}"  class="form-control">
-                              </div>
-                              <div  *ngIf="submitted && f['libelle'].errors"  class="alert alert-danger" >
-                                  <div *ngIf="f['libelle'].errors['required']">{{'ressource.form.text1' | translate}}</div>
-                              </div>
-                          </div>
-                      </div>
-                      <div class="form-group">
-                          <div>
-                              <div class="champs">
-                                  <label for="etat" class="label" >
-                                    {{'ressource.table.title2' | translate}}
-                                  </label>
-                                  <p class="w-100 d-flex align-items-center choix" >
-                                    <input  type="checkbox" checked  value="true" formControlName="etat"  name="etat" id="etat" placeholder="" class="form-control" >
-                                  </p>
-                              </div>
-                          </div>
-                      </div>
-                      <div class="form-group">
-                          <div class="champs">
-                              <label  for="quantite"  class="label" >
-                                {{'ressource.table.title3' | translate}} <sup>*</sup>
-                              </label>
-                              <input type="number" list="" formControlName="quantite" name="quantite" id="quantite" placeholder=" {{'ressource.table.title3' | translate}}" class="form-control" >
-                          </div>
-                          <div  *ngIf="submitted && f['libelle'].errors"  class="alert alert-danger" >
-                            <div *ngIf="f['libelle'].errors['required']">{{'ressource.form.text1' | translate}}</div>
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <div class="champs">
-                            <label  for="unite"  class="label" >
-                              {{'ressource.table.title4' | translate}}<sup>*</sup>
-                            </label>
-                            <mat-form-field class="example-full-width1" appearance="fill">
-                              <mat-select  formControlName="unite"  name="unite" [compareWith]="compareItem">
-                                <mat-option  *ngFor="let membre of unites" [value]="membre">{{membre}}</mat-option>
-                              </mat-select>
-                            </mat-form-field>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                       <div class="champs">
-                           <label  for="prixEntree"  class="label" >
-                             {{'ressource.table.title5' | translate}}
-                           </label>
-                           <input type="number" formControlName="prixEntree" name="prixEntree" id="prixEntree" placeholder=" {{'ressource.table.title5' | translate}}" class="form-control" >
-                       </div>
-                   </div>
-                   <div  *ngIf="submitted && f['prixEntree'].errors"  class="alert alert-danger" >
-                     <div *ngIf="f['prixEntree'].errors['required']">{{'ressource.form.text1' | translate}}</div>
-                   </div>
-
-                   <div class="form-group">
-                      <div class="champs">
-                          <label  for="prixDeSortie"  class="label" >
-                            {{'ressource.table.title9' | translate}}
-                          </label>
-                          <input type="number" formControlName="prixDeSortie" name="prixDeSortie" id="prixDeSortie" placeholder=" {{'ressource.table.title9' | translate}}" class="form-control" >
-                      </div>
-                  </div>
-                  <div  *ngIf="submitted && f['prixDeSortie'].errors"  class="alert alert-danger" >
-                    <div *ngIf="f['prixDeSortie'].errors['required']">{{'ressource.form.text1' | translate}}</div>
-                  </div>
-
-                      <div class="form-group">
-                    <div class="champs">
-                        <label  for="famille"  class="label" >
-                          {{'ressource.table.title6' | translate}} <sup>*</sup>
-                        </label>
-                        <mat-form-field class="example-full-width w-100" appearance="fill">
-                            <input  type="text" matInput [matAutocomplete]="auto"  aria-label="famille" formControlName="famille" name="famille" id="famille" placeholder="" class="w-100" style="color: white;">
-                            <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn" >
-                            <mat-option *ngFor="let option of filteredOptions" [value]="option">
-                                {{option.libelle}}
-                            </mat-option>
-                            </mat-autocomplete>
-                        </mat-form-field>
-                    </div>
-                    <div  *ngIf="submitted && f['libelle'].errors"  class="alert alert-danger" >
-                      <div *ngIf="f['libelle'].errors['required']">{{'ressource.form.text1' | translate}}</div>
-                    </div>
-
-                  </div>
-                <div class="form-group">
-                  <div class="champs">
-                      <label for="" class="label">
-                          {{"document.table.title4" | translate}}
-                      </label>
-                      <div class="dropdown w-100">
-                          <!-- affichage list attributs selectiones -->
-                          <div class="listAttr">
-                              <button type="button" class="btn p-0" title="{{'lists.button9' | translate}} / {{'lists.button8' | translate}}" (click)="openAttributDialog()">
-                                  <i class="fas fa-plus-square"></i>
-                              </button>
-                              <span *ngFor="let listeAttributs of ELEMENTS_TABLE_ATTRIBUTS">
-                                  {{listeAttributs.attributs!.titre! | lowercase}}<span>, </span>
-                              </span>
-                          </div>
-                      </div>
-                  </div>
-                  <div  *ngIf="submitted && ELEMENTS_TABLE_ATTRIBUTS.length<1"  class="alert alert-danger blockErreur" >
-                      <div>{{'document.form.text4' | translate}}</div>
-                  </div>
-              </div>
-                <div class="form-group">
-                  <div>
-                      <div class="champs">
-                        <label for="Scanner" class="label">
-                          {{'ressource.table.title10' | translate}}
-                        </label>
-                        <app-modal-codebarre-dialog  [multipleScan]="false"></app-modal-codebarre-dialog>
-                        <input type="text" readonly name="scanBarcode" formControlName="scanBarcode" [value]="scan_val" class="w-100 align-items-center form-control"> 
-                      </div>
-                  </div>
-              </div>
-              </div>
-              <div class="actionButton">
-                <button class="btn" routerLink="../list-ressources">{{'lists.button2' | translate}}</button>
-                  <button type="submit" class="btn">{{btnLibelle}}</button>
+    <div class="card-header" class="entete pt-4 pb-4">
+      {{'ressource.table.title' | translate}} {{titre}}
+    </div>
+    <div class="card-body">
+      <form [formGroup]="forme" (ngSubmit)="onSubmit(forme.value)" *ngIf="forme">
+        <div class="">
+          <div class="">
+            <div class="form-group">
+              <div>
+                <div class="champs">
+                  <label for="libelle" class="label">
+                    {{'ressource.table.title1' | translate}} <sup>*</sup>
+                  </label>
+                  <input type="text" formControlName="libelle" name="libelle" id="libelle"
+                    placeholder="{{'ressource.table.title1' | translate}}" class="form-control">
+                </div>
+                <div *ngIf="submitted && f['libelle'].errors" class="alert alert-danger">
+                  <div *ngIf="f['libelle'].errors['required']">{{'ressource.form.text1' | translate}}</div>
+                </div>
               </div>
             </div>
-            </form>
-      </div>
+            <div class="form-group">
+              <div>
+                <div class="champs">
+                  <label for="etat" class="label">
+                    {{'ressource.table.title2' | translate}}
+                  </label>
+                  <p class="w-100 d-flex align-items-center choix">
+                    <input type="checkbox" checked value="true" formControlName="etat" name="etat" id="etat"
+                      placeholder="" class="form-control">
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="champs">
+                <label for="quantite" class="label">
+                  {{'ressource.table.title3' | translate}} <sup>*</sup>
+                </label>
+                <input type="number" list="" formControlName="quantite" name="quantite" id="quantite"
+                  placeholder=" {{'ressource.table.title3' | translate}}" class="form-control">
+              </div>
+              <div *ngIf="submitted && f['libelle'].errors" class="alert alert-danger">
+                <div *ngIf="f['libelle'].errors['required']">{{'ressource.form.text1' | translate}}</div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="champs">
+                <label for="unite" class="label">
+                  {{'ressource.table.title4' | translate}}<sup>*</sup>
+                </label>
+                <mat-form-field class="example-full-width1" appearance="fill">
+                  <mat-select formControlName="unite" name="unite" [compareWith]="compareItem">
+                    <mat-option *ngFor="let membre of unites" [value]="membre">{{membre}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="champs">
+                <label for="prixEntree" class="label">
+                  {{'ressource.table.title5' | translate}}
+                </label>
+                <input type="number" formControlName="prixEntree" name="prixEntree" id="prixEntree"
+                  placeholder=" {{'ressource.table.title5' | translate}}" class="form-control">
+              </div>
+            </div>
+            <div *ngIf="submitted && f['prixEntree'].errors" class="alert alert-danger">
+              <div *ngIf="f['prixEntree'].errors['required']">{{'ressource.form.text1' | translate}}</div>
+            </div>
+
+            <div class="form-group">
+              <div class="champs">
+                <label for="prixDeSortie" class="label">
+                  {{'ressource.table.title9' | translate}}
+                </label>
+                <input type="number" formControlName="prixDeSortie" name="prixDeSortie" id="prixDeSortie"
+                  placeholder=" {{'ressource.table.title9' | translate}}" class="form-control">
+              </div>
+            </div>
+            <div *ngIf="submitted && f['prixDeSortie'].errors" class="alert alert-danger">
+              <div *ngIf="f['prixDeSortie'].errors['required']">{{'ressource.form.text1' | translate}}</div>
+            </div>
+
+            <div class="form-group">
+              <div class="champs">
+                <label for="famille" class="label">
+                  {{'ressource.table.title6' | translate}} <sup>*</sup>
+                </label>
+                <mat-form-field class="example-full-width w-100" appearance="fill">
+                  <input type="text" matInput [matAutocomplete]="auto" aria-label="famille" formControlName="famille"
+                    name="famille" id="famille" placeholder="" class="w-100" style="color: white;">
+                  <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+                    <mat-option *ngFor="let option of filteredOptions" [value]="option">
+                      {{option.libelle}}
+                    </mat-option>
+                  </mat-autocomplete>
+                </mat-form-field>
+              </div>
+              <div *ngIf="submitted && f['libelle'].errors" class="alert alert-danger">
+                <div *ngIf="f['libelle'].errors['required']">{{'ressource.form.text1' | translate}}</div>
+              </div>
+
+            </div>
+            <div class="form-group">
+              <div class="champs">
+                <label for="" class="label">
+                  {{"document.table.title4" | translate}}
+                </label>
+                <div class="dropdown w-100">
+                  <!-- affichage list attributs selectiones -->
+                  <div class="listAttr">
+                    <button type="button" class="btn p-0"
+                      title="{{'lists.button9' | translate}} / {{'lists.button8' | translate}}"
+                      (click)="openAttributDialog()">
+                      <i class="fas fa-plus-square"></i>
+                    </button>
+                    <span *ngFor="let listeAttributs of ELEMENTS_TABLE_ATTRIBUTS">
+                      {{listeAttributs.attributs!.titre! | lowercase}}<span>, </span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div *ngIf="submitted && ELEMENTS_TABLE_ATTRIBUTS.length<1" class="alert alert-danger blockErreur">
+                <div>{{'document.form.text4' | translate}}</div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div>
+                <div class="champs">
+                  <label for="Scanner" class="label">
+                    {{'ressource.table.title10' | translate}}
+                  </label>
+                  <app-modal-codebarre-dialog [multipleScan]="false"
+                    style="margin-right: 13px; margin-left: 21px; color: #28a745;"></app-modal-codebarre-dialog>
+                  <input type="text" readonly name="scanBarcode" formControlName="scanBarcode" [value]="scan_val"
+                    class="w-100 align-items-center form-control">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="actionButton">
+            <button class="btn" routerLink="../list-ressources">{{'lists.button2' | translate}}</button>
+            <button type="submit" class="btn">{{btnLibelle}}</button>
+          </div>
+        </div>
+      </form>
+    </div>
   </div>
 </div>
-

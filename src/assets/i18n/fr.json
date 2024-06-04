@@ -258,7 +258,9 @@
       "title20": "visibilité du distributeur ?",
       "title21": "Sous documents",
       "title22": "type des mouvements",
-      "title23": "Etats du document"
+      "title23": "Etats du document",
+      "title24": "Etat"
+
     },
     "form": {
       "text1": "Le Titre est obligatoire.",

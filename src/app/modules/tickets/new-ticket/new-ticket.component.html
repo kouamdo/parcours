@@ -1,63 +1,137 @@
-
 <!-- Modal -->
 <div class="modal-dialog" role="document">
-    <form [formGroup]="forme" (ngSubmit)="onSubmit(forme.value)" *ngIf="forme"  class="modal-content">
-        <div id="mainSection"  class="modal-body">
-            <div class="card block" *ngIf="step == 1" >
-                <div class="card-header pt-4 pb-4 entete">
-                  <h2>{{"personnel.title1" | translate}} {{titre}}</h2>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="card-body" id="top2">
-                    <div class="container-fluid blockServices">
-                        <label *ngFor='let service of (services$ | async) as services'>
-                            <input type="radio"  name="serviceId" required id="{{service.id}}" value="{{service.libelle}}" (click)="setLibelleService(service.id,service.libelle)">
-                            {{service.libelle}}
-                        </label>
-                    </div>
-                </div>
-            </div>
-            <div id="ticketView" class="card" *ngIf="step == 2">
-                <div class="title">
-                    <div class="d-flex align-items-start">
-                        <img src="../../../../assets/img/logo_camnafaw.jpg" alt="" width="40px">
-                        <h2>CAMNAFAW</h2>
-                    </div>
-                    <small>{{'tickets.form.text1' | translate}}</small>
-                </div>
-                <div class="objetTicket pt-3 pb-3">
-                    <h3>Ticket de validation service</h3>
-                </div>
-                <div id="filigramme">
-                    <div id="ticketContent">
-                        <p><span>{{'tickets.form.label1' | translate}}</span>{{this.libelleService}}</p>
-                        <p><span>{{'tickets.form.label2' | translate}}</span>{{this._ticket.idUnique}}</p>
-                        <p><span>{{'tickets.form.label3' | translate}}</span>{{this._ticket.date_heure | date: 'dd/MM/yyyy A hh:mm:ss'}}</p>
-                        <p><span>{{'tickets.form.label4' | translate}}</span>{{this.nomPersonne}}</p>
-                        <p class="barCode pt-2 pb-1">
-                            <i class="fa fa-barcode fa-4x" aria-hidden="true"></i>
-                            <i class="fa fa-barcode fa-4x" aria-hidden="true"></i>
-                            <i class="fa fa-barcode fa-4x" aria-hidden="true"></i>
-                        </p>
-                    </div>
-                </div>
-            </div>
+  <form
+    [formGroup]="forme"
+    (ngSubmit)="onSubmit(forme.value)"
+    *ngIf="forme"
+    class="modal-content"
+  >
+    <div id="mainSection" class="modal-body">
+      <!-- Step 1: Select a service -->
+      <div class="card block" *ngIf="step == 1">
+        <div class="card-header pt-4 pb-4 entete" style="margin-bottom: 39px">
+          <h2>{{ "personnel.title1" | translate }} {{ titre }}</h2>
         </div>
-        <div class="modal-footer w-100">
-            <div class="actionButton">
-                <button [mat-dialog-close] class="btn" *ngIf="step == 1" (click)="removeData()">{{'lists.button3' | translate}}</button>
-                <button class="btn" *ngIf="step == 2" (click)="previousStep()">{{'lists.button4' | translate}}</button>
-                <button class="btn" routerLink="../list-patients" data-dismiss="modal" *ngIf="step == 2"
-                     [useExistingCss]="true"
-                     styleSheetFile="assets/css/ticketPrint.scss"
-                     printSectionId="ticketView"
-                     ngxPrint (click)="removeData()">
-                     {{'lists.button1' | translate}}
-                </button>
-                <button type="submit" class="btn btnValidation" *ngIf="step == 1">{{btnLibelle}}</button>
-            </div>
+        <div class="card-body" id="top2">
+          <div class="container-fluid blockServices">
+            <label *ngFor="let service of services$ | async as services">
+              <input
+                type="radio"
+                name="serviceId"
+                required
+                id="{{ service.id }}"
+                value="{{ service.libelle }}"
+                (click)="setLibelleService(service.id, service.libelle)"
+              />
+              {{ service.libelle }}
+            </label>
+          </div>
         </div>
-    </form>
+      </div>
+      <!-- Step 2: Select an personnesRatachees -->
+      <div class="card block" *ngIf="step == 2">
+        <div class="card-header pt-2 pb-2 entete" style="margin-bottom: 39px">
+          <h2>Sélectionnez un parent à associer</h2>
+        </div>
+        <div class="card-body" id="top2">
+          <div class="container-fluid blockpersonnesRatacheess">
+            <div class="personnesRatacheess-wrapper">
+              <label *ngFor="let personnesRatachees of personnesRatacheess$ | async">
+                <input
+                  type="checkbox"
+                  name="personnesRatacheesId"
+                  required
+                  id="{{ personnesRatachees.id }}"
+                  value="{{ personnesRatachees.nom }}"
+                  [checked]="isSelected(personnesRatachees)"
+                  (click)="togglepersonnesRatacheesSelection(personnesRatachees)"
+                />
+                {{ personnesRatachees.nom }}
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+\      <!-- Step 3: Ticket View -->
+<div id="ticketView" class="card" *ngIf="step == 3">
+  <div class="title">
+    <div class="d-flex align-items-start">
+      <img src="../../../../assets/img/logo_camnafaw.jpg" alt="" width="40px" />
+      <h2>CAMNAFAW</h2>
+    </div>
+    <small>{{ "tickets.form.text1" | translate }}</small>
+  </div>
+  <div class="objetTicket pt-3 pb-3">
+    <h3>Ticket de validation service</h3>
+  </div>
+  <div id="filigramme">
+    <div id="ticketContent">
+      <p *ngIf="selectedpersonnesRatachees">
+        <span>{{ "Titulaire: " }}</span>{{ selectedpersonnesRatachees.nom }}
+      </p>
+      <p>
+        <span>{{ "tickets.form.label1" | translate }}</span
+        >{{ this.libelleService }}
+      </p>
+      <p>
+        <span>{{ "tickets.form.label2" | translate }}</span
+        >{{ this._ticket.idUnique }}
+      </p>
+      <p>
+        <span>{{ "tickets.form.label3" | translate }}</span
+        >{{ this._ticket.date_heure | date : "dd/MM/yyyy A hh:mm:ss" }}
+      </p>
+      <p>
+        <span>{{ "tickets.form.label4" | translate }}</span
+        >{{ this.nomPersonne }}
+      </p>
+      <p class="barCode pt-2 pb-1">
+        <i class="fa fa-barcode fa-4x" aria-hidden="true"></i>
+        <i class="fa fa-barcode fa-4x" aria-hidden="true"></i>
+        <i class="fa fa-barcode fa-4x" aria-hidden="true"></i>
+      </p>
+    </div>
+  </div>
+</div>
+
+    </div>
+    <div class="modal-footer w-100">
+      <div class="actionButton">
+        <button
+          [mat-dialog-close]
+          class="btn"
+          *ngIf="step == 1"
+          (click)="removeData()"
+        >
+          {{ "lists.button3" | translate }}
+        </button>
+        <button class="btn" *ngIf="step == 2" (click)="previousStep()">
+          {{ "lists.button4" | translate }}
+        </button>
+        <button class="btn" *ngIf="step == 3" (click)="previousStep()">
+          {{ "lists.button4" | translate }}
+        </button>
+        <button
+          class="btn"
+          routerLink="../list-patients"
+          data-dismiss="modal"
+          *ngIf="step == 3"
+          [useExistingCss]="true"
+          styleSheetFile="assets/css/ticketPrint.scss"
+          printSectionId="ticketView"
+          ngxPrint
+          (click)="removeData()"
+        >
+          {{ "lists.button1" | translate }}
+        </button>
+        <button type="submit" class="btn btnValidation" *ngIf="step === 1">
+          {{ btnLibelle }}
+        </button>
+        <button type="submit" class="btn btnValidation" *ngIf="step === 2">
+          {{ btnLibelleNew }}
+        </button>
+      </div>
+    </div>
+  </form>
 </div>

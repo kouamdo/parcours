@@ -45,6 +45,22 @@
         }
     }
 }
+.blockpersonnesRatacheess {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .personnesRatacheess-wrapper {
+    flex-wrap: wrap;
+    gap: 10px; 
+  }
+  
+  .personnesRatacheess-wrapper label {
+    flex: 1 1 45%; 
+    min-width: 45%; 
+    margin-bottom: 10px;
+  }
+  
 #ticketView{
     display: flex;
     flex-direction: column;

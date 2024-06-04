@@ -124,6 +124,17 @@
     rxjs "6.6.7"
     source-map "0.7.4"
 
+"@angular-devkit/core@15.2.9":
+  version "15.2.9"
+  resolved "https://registry.npmjs.org/@angular-devkit/core/-/core-15.2.9.tgz"
+  integrity sha512-6u44YJ9tEG2hiWITL1rwA9yP6ot4a3cyN/UOMRkYSa/XO2Gz5/dM3U74E2kwg+P1NcxLXffBWl0rz8/Y/lSZyQ==
+  dependencies:
+    ajv "8.12.0"
+    ajv-formats "2.1.1"
+    jsonc-parser "3.2.0"
+    rxjs "6.6.7"
+    source-map "0.7.4"
+
 "@angular-devkit/schematics@15.2.9":
   version "15.2.9"
   resolved "https://registry.npmjs.org/@angular-devkit/schematics/-/schematics-15.2.9.tgz"

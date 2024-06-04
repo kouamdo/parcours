@@ -107,21 +107,25 @@ export class NewAttributComponent implements OnInit {
   isValidDate(dateString: string) {
     // Utiliser une expression régulière pour vérifier le format de la date (jj/mm/aaaa)
     var dateRegex = /^\d{2}\/\d{2}\/\d{4}$/;
-    
+
     // Vérifier si la chaîne de caractères correspond au format de date
     if (!dateRegex.test(dateString)) {
       return false;
     }
-    
+
     // Vérifier si la date est réellement valide
     var dateParts = dateString.split('/');
     var day = parseInt(dateParts[0], 10);
     var month = parseInt(dateParts[1], 10) - 1; // Mois en JavaScript commence à partir de 0
     var year = parseInt(dateParts[2], 10);
-    
+
     var date = new Date(year, month, day);
-    
-    return (date.getFullYear() === year && date.getMonth() === month && date.getDate() === day);
+
+    return (
+      date.getFullYear() === year &&
+      date.getMonth() === month &&
+      date.getDate() === day
+    );
   }
 
   verifierURL(url: string): boolean {
@@ -217,10 +221,12 @@ export class NewAttributComponent implements OnInit {
           console.log('La valeur saisie est un nombre.', this.inputValeur);
         } else {
           this.errorNb = true;
-        this.textError = 'votre saisie ne respecte pas le format de ce type';
-        console.log("La valeur saisie n'est pas un nombre.", this.inputValeur);
+          this.textError = 'votre saisie ne respecte pas le format de ce type';
+          console.log(
+            "La valeur saisie n'est pas un nombre.",
+            this.inputValeur
+          );
         }
-        
       } else {
         this.errorNb = true;
         this.textError = 'votre saisie ne respecte pas le format de ce type';
@@ -267,9 +273,7 @@ export class NewAttributComponent implements OnInit {
     this.submitted = true;
     if (this.forme.invalid) return;
 
-    if (
-      this.errorNb == true
-    ) {
+    if (this.errorNb == true) {
     } else {
       let attributTemp: IAttributs = {
         id: uuidv4(),

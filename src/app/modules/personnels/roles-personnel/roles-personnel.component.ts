@@ -30,7 +30,7 @@ export class RolesPersonnelComponent implements OnInit {
   personnel!: IPersonnel;
   forme: FormGroup;
   nomPersonnel = '';
-  textError = "";
+  textError = '';
   datas: any[] = [];
   ELEMENTS_TABLE: any[] = [];
   VERIF_TABLE: any[] = [];
@@ -98,7 +98,7 @@ export class RolesPersonnelComponent implements OnInit {
 
       this.getAllRoles().subscribe((valeurs) => {
         this.dataSource.data = valeurs;
-        this.filteredOptions = valeurs
+        this.filteredOptions = valeurs;
       });
 
       this.myControl.valueChanges.subscribe((value) => {
@@ -110,11 +110,9 @@ export class RolesPersonnelComponent implements OnInit {
               this.filteredOptions = reponse;
             });
         } else {
-          this.serviceRole.getAllRoles().subscribe(
-            (reponse) =>{
-              this.filteredOptions=reponse
-            }
-          )
+          this.serviceRole.getAllRoles().subscribe((reponse) => {
+            this.filteredOptions = reponse;
+          });
         }
       });
     }
@@ -139,21 +137,19 @@ export class RolesPersonnelComponent implements OnInit {
           return;
         }
 
-        let newdates : IObjetDates = {
+        let newdates: IObjetDates = {
           dateDebut: this.forme.value.dateEntree,
           dateFin: this.forme.value.dateFin,
         };
-        
-        if (this.verificationValeursDate(element.id,newdates,-2)) {
+
+        if (this.verificationValeursDate(element.id, newdates, -2)) {
           this.ajoutSelectionRole(element);
           this.datas.push({ id: element.id, event: event });
-          this.verif=false;
-        }
-        else{
+          this.verif = false;
+        } else {
           event.target.checked = false;
           this.verif = true;
         }
-          
       }
     } else {
       let i = 0;
@@ -174,77 +170,85 @@ export class RolesPersonnelComponent implements OnInit {
    * permet de vérifier qu'une nouvelle date remplit bien les critères d'ajout (pas d'intersection avec une date existante)
    * @param idElement idenfiant de l'élément recherché (role)
    * @param newdates intervalle de dates à vérifier
-   * @param indexElement (facultatif) index du tableau à ne pas prendre en compte dans la vérification 
+   * @param indexElement (facultatif) index du tableau à ne pas prendre en compte dans la vérification
    * @returns true aucune contreindication, false une regle d'intersection est violée
    */
-  verificationValeursDate(idElement:String, newdates:IObjetDates, indexElement:number) : boolean {
+  verificationValeursDate(
+    idElement: String,
+    newdates: IObjetDates,
+    indexElement: number
+  ): boolean {
     var j = 0;
     while (j < this.dataSourceRoleResultat.data.length) {
-      if (this.dataSourceRoleResultat.data[j].role.id == idElement && j != indexElement) {
-        
-        let olddates : IObjetDates = {
+      if (
+        this.dataSourceRoleResultat.data[j].role.id == idElement &&
+        j != indexElement
+      ) {
+        let olddates: IObjetDates = {
           dateDebut: this.dataSourceRoleResultat.data[j].dateDebut,
           dateFin: this.dataSourceRoleResultat.data[j].dateFin,
         };
 
-        if(!this.verificationsServices.OncheckedDatesRoles(olddates, newdates)) {
-          this.textError = "Impossible les intervalles de temps ne sont pas correctes";
+        if (
+          !this.verificationsServices.OncheckedDatesRoles(olddates, newdates)
+        ) {
+          this.textError =
+            'Impossible les intervalles de temps ne sont pas correctes';
           return false;
         }
       }
       j++;
     }
-    return true;  
+    return true;
   }
 
   /**
    * Méthode de vérification des valeurs de dates directement dans le tableau
    * @param element élément du tableau
    * @param event  input html selectionné
-   * @param indexElement index de l'élement dans le tableau 
+   * @param indexElement index de l'élement dans le tableau
    * @param pos indique si c'est la date de début ou de fin
    */
-  verificationModificationDansTableau(element:any, event: any, indexElement: number, pos:String){
-    let newdates : IObjetDates = {
+  verificationModificationDansTableau(
+    element: any,
+    event: any,
+    indexElement: number,
+    pos: String
+  ) {
+    let newdates: IObjetDates = {
       dateDebut: element.dateDebut,
-      dateFin: event.target.value
+      dateFin: event.target.value,
     };
 
-    if (pos == "debut") 
-      newdates  = {
+    if (pos == 'debut')
+      newdates = {
         dateDebut: event.target.value,
-        dateFin: element.dateFin
-      };  
+        dateFin: element.dateFin,
+      };
 
-    //si l'utilisateur l'utilisateur supprime la date de début ou la renseigne plus grand que la date fin  
-    if(
-      (pos == "debut" && event.target.value=='')
-      ||
-      (newdates.dateFin && (newdates.dateDebut > newdates.dateFin))
-      )
-    {
-      if (pos == "debut") 
-         event.target.value = element.dateDebut;
-      else 
-        event.target.value = element.dateFin;
+    //si l'utilisateur l'utilisateur supprime la date de début ou la renseigne plus grand que la date fin
+    if (
+      (pos == 'debut' && event.target.value == '') ||
+      (newdates.dateFin && newdates.dateDebut > newdates.dateFin)
+    ) {
+      if (pos == 'debut') event.target.value = element.dateDebut;
+      else event.target.value = element.dateFin;
       return;
     }
     //si une regle non respecté, on remet l'ancienne valeur
-    if(!this.verificationValeursDate(element.role.id, newdates,indexElement)){
-      if (pos == "debut") 
-        event.target.value = element.dateDebut;
-      else 
-        event.target.value = element.dateFin;
-      this.verif=true;
-    }else{
+    if (
+      !this.verificationValeursDate(element.role.id, newdates, indexElement)
+    ) {
+      if (pos == 'debut') event.target.value = element.dateDebut;
+      else event.target.value = element.dateFin;
+      this.verif = true;
+    } else {
       //si tous les controles ok, on pousse dans le tableau la nouvelle valeur
-      if (pos == "debut") 
+      if (pos == 'debut')
         this.VERIF_TABLE[indexElement].dateDebut = event.target.value;
-      else 
-        this.VERIF_TABLE[indexElement].dateFin = event.target.value;
-      this.verif=false;
+      else this.VERIF_TABLE[indexElement].dateFin = event.target.value;
+      this.verif = false;
     }
-    
   }
 
   retirerSelectionRole(index: number) {
@@ -270,7 +274,6 @@ export class RolesPersonnelComponent implements OnInit {
   }
 
   ajoutSelectionRole(rol: IRole) {
-
     this.ELEMENTS_TABLE.push({
       role: rol,
       status: false,

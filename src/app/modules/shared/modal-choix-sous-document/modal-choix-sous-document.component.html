@@ -51,7 +51,7 @@
                                     {{"patient.table.title8" | translate}} </th>
                                 <td class="text-dark containCell" mat-cell *matCellDef="let element">
                                     <div class="actions">
-                                        <input type="checkbox" [value]="element.titre"
+                                        <input type="checkbox" [checked]="isDocumentSelected(element.id)"
                                             (click)="getDocumentId(element.id)"
                                             (change)="onCheckDocumentChange($event)">
                                         <span role="button" (click)="getDocumentId(element.id)"><i
@@ -101,14 +101,11 @@
                                     <!-- etat Column -->
                                     <ng-container matColumnDef="etat">
                                         <th class="text-dark containHead" mat-header-cell *matHeaderCellDef>
-                                            {{ 'document.table.title3' | translate }}
+                                            {{ 'document.table.title24' | translate }}
                                         </th>
                                         <td class="text-dark containCell" mat-cell *matCellDef="let element">
                                             <div class="actions">
-                                                <button type="button" class="btn p-1" (click)="openModal(element)">
-                                                    <i class="fas fa-plus-square fa-lg"
-                                                        style="color: rgba(40, 167, 69, 0.79);"></i>
-                                                </button>
+
                                                 <span style="font-size: small; min-width: 67px;">{{
                                                     selectedEtatsMap[element.id] }}</span>
                                             </div>
@@ -130,6 +127,11 @@
                                                 </button>
                                                 <span><i class="fa fa-info-circle text-info" aria-hidden="true"
                                                         title="{{'preconisation.table.title4' | translate}}"></i></span>
+                                                <button type="button" title="Ajouter un etat" class="btn p-1"
+                                                    (click)="openModal(element)">
+                                                    <i class="fas fa-plus-square fa-lg"
+                                                        style="color: rgba(40, 167, 69, 0.79);"></i>
+                                                </button>
                                             </div>
                                         </td>
                                     </ng-container>
@@ -142,9 +144,11 @@
                                     aria-label="Select page of periodic elements">
                                 </mat-paginator>
                             </div>
-                            <div class="actionButton mt-2">
-                                <button mat-button [mat-dialog-close] cdkFocusInitial
-                                    class="btn btnValidation">{{'lists.button6' | translate}}
+                            <div class="actionButton mt-2" style="display: flex; justify-content: space-between;">
+
+                                <button mat-button class="btn btnValidation" (click)="onCancel()">Annuler</button>
+                                <button mat-button (click)="onSave()" class="btn btnValidation">{{'lists.button6' |
+                                    translate}}
                                 </button>
                             </div>
                         </div>

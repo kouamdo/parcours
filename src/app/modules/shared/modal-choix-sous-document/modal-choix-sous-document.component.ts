@@ -1,6 +1,10 @@
 import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import {
+  MatDialog,
+  MAT_DIALOG_DATA,
+  MatDialogRef,
+} from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -16,40 +20,37 @@ import { Observable, mergeMap, of } from 'rxjs';
   styleUrls: ['./modal-choix-sous-document.component.scss'],
 })
 export class ModalChoixSousDocumentComponent implements OnInit {
-  selectedEtatsMap: { [documentId: string]: string } = {};
-  myControl = new FormControl<string | IDocument>('');
-  ELEMENTS_TABLE_DOCUMENTS: IDocument[] = [];
-  filteredOptions: IDocument[] | undefined;
-  displayedDocumentsColumns: string[] = ['actions', 'titre', 'description'];
-  documentIds: string[];
-  displayedDocumentsColumnsOnSelect: string[] = [
-    'actions',
-    'titre',
-    'description',
-    'etat',
-  ];
+  formeDocument: FormGroup; 
+  selectedEtatsMap: { [documentId: string]: string } = {}; 
+  myControl = new FormControl<string | IDocument>(''); 
+  ELEMENTS_TABLE_DOCUMENTS: IDocument[] = []; 
+  filteredOptions: IDocument[] | undefined; 
+  displayedDocumentsColumns: string[] = ['actions', 'titre', 'description']; 
+  documentIds: string[]; 
+  displayedDocumentsColumnsOnSelect: string[] = ['actions', 'titre', 'description', 'etat']; 
+  originalDocumentIds: IDocument[] = []; 
 
-  dataSourceDocument = new MatTableDataSource<IDocument>(
-    this.ELEMENTS_TABLE_DOCUMENTS
-  );
-  dataSourceDocumentResultat = new MatTableDataSource<IDocument>();
-  idDocument: string = '';
+  dataSourceDocument = new MatTableDataSource<IDocument>(this.ELEMENTS_TABLE_DOCUMENTS); 
+  dataSourceDocumentResultat = new MatTableDataSource<IDocument>(); 
+  idDocument: string = ''; 
 
   @ViewChild(MatPaginator)
-  paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
+  paginator!: MatPaginator; 
+  @ViewChild(MatSort) sort!: MatSort; 
 
   constructor(
-    private formBuilder: FormBuilder,
-    private serviceDocument: DocumentService,
-    private donneeDocCatService: DonneesEchangeService,
+    private formBuilder: FormBuilder, 
+    private serviceDocument: DocumentService, 
+    private dialogRef: MatDialogRef<ModalChoixSousDocumentComponent>,
+    private donneeDocCatService: DonneesEchangeService, 
     public dialog: MatDialog,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
-    this.documentIds = this.data?.documentIds ?? [];
-    console.log('Document IDs received:', data);
+    (this.formeDocument = this.formBuilder.group({})),
+      (this.documentIds = this.data?.documentIds ?? []);
   }
 
+  // Méthode pour ouvrir le modal de choix d'état du document
   openModal(documentChoisi: IDocument) {
     const dialogRef = this.dialog.open(ModalChoixDocEtatComponent, {
       width: '600px',
@@ -67,20 +68,24 @@ export class ModalChoixSousDocumentComponent implements OnInit {
     });
   }
 
+  // Méthode d'initialisation
   ngOnInit(): void {
+    // Charger tous les documents
     this.getAllDocument().subscribe((valeurs) => {
       this.dataSourceDocument.data = valeurs;
       this.filteredOptions = valeurs;
     });
 
-    // Call a method to populate selectedEtatsMap after the data is available
+    // Appeler une méthode pour peupler selectedEtatsMap après que les données soient disponibles
     this.populateSelectedEtatsMap();
     if (this.documentIds.length > 0) {
-      this.dataSourceDocumentResultat.data =
-        this.donneeDocCatService.dataDocumentSousDocuments;
+      this.dataSourceDocumentResultat.data = this.donneeDocCatService.dataDocumentSousDocuments;
+      this.originalDocumentIds = [...this.dataSourceDocumentResultat.data];
       this.loadDocuments(this.documentIds);
     }
   }
+
+  // Charger les documents
   loadDocuments(documentIds: string[]) {
     const documentObservables: Observable<IDocument>[] = documentIds.map((id) =>
       this.serviceDocument.getDocumentById(id)
@@ -91,10 +96,10 @@ export class ModalChoixSousDocumentComponent implements OnInit {
         this.ELEMENTS_TABLE_DOCUMENTS.push(document);
         this.dataSourceDocumentResultat.data = this.ELEMENTS_TABLE_DOCUMENTS;
         this.populateSelectedEtatsMap();
-        console.log('sous-doc', this.dataSourceDocumentResultat.data);
       });
   }
 
+  // Peupler selectedEtatsMap
   private populateSelectedEtatsMap() {
     this.dataSourceDocumentResultat.data.forEach((element: IDocument) => {
       const etat = this.serviceDocument.getSelectedEtat(element.id);
@@ -105,6 +110,7 @@ export class ModalChoixSousDocumentComponent implements OnInit {
     });
   }
 
+  // Gérer le changement de vérification du document
   onCheckDocumentChange(event: any) {
     let listidDocumentTemp: string[] = [];
     let positionsDocument = new Map();
@@ -127,20 +133,23 @@ export class ModalChoixSousDocumentComponent implements OnInit {
     }
   }
 
+  // Obtenir l'identifiant du document
   getDocumentId(idDocument: string) {
     this.idDocument = idDocument;
   }
 
+  // Ajouter la sélection du document
   ajoutSelectionDocument(idDocument: string) {
     this.serviceDocument.getDocumentById(idDocument).subscribe((val) => {
       this.ELEMENTS_TABLE_DOCUMENTS = this.dataSourceDocumentResultat.data;
       this.ELEMENTS_TABLE_DOCUMENTS.push(val);
       this.dataSourceDocumentResultat.data = this.ELEMENTS_TABLE_DOCUMENTS;
-      this.donneeDocCatService.dataDocumentSousDocuments =
-        this.ELEMENTS_TABLE_DOCUMENTS;
+      this.donneeDocCatService.dataDocumentSousDocuments = this.ELEMENTS_TABLE_DOCUMENTS;
+      console.log('hello', this.donneeDocCatService.dataDocumentSousDocuments);
     });
   }
 
+  // Retirer la sélection du document
   retirerSelectionDocument(index: number) {
     this.ELEMENTS_TABLE_DOCUMENTS = this.dataSourceDocumentResultat.data;
     this.ELEMENTS_TABLE_DOCUMENTS.splice(index, 1);
@@ -176,5 +185,25 @@ export class ModalChoixSousDocumentComponent implements OnInit {
     } else {
       // Announce sorting cleared
     }
+  }
+  isDocumentSelected(documentId: string): boolean {
+    return this.ELEMENTS_TABLE_DOCUMENTS.some((doc) => doc.id === documentId);
+  }
+  onSave() {
+    this.dialogRef.close(this.ELEMENTS_TABLE_DOCUMENTS);
+    this.donneeDocCatService.dataDocumentSousDocuments =
+      this.ELEMENTS_TABLE_DOCUMENTS;
+  }
+  onCancel() {
+    if (this.documentIds.length > 0) {
+      //restaurer les documents existant pour les assigner a la donnees echange
+      this.ELEMENTS_TABLE_DOCUMENTS = [...this.originalDocumentIds]
+      this.donneeDocCatService.dataDocumentSousDocuments = [
+        ...this.ELEMENTS_TABLE_DOCUMENTS,
+      ];
+    } else {
+      this.donneeDocCatService.dataDocumentSousDocuments = [];
+    }
+    this.dialogRef.close();
   }
 }

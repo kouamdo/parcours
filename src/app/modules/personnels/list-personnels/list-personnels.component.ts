@@ -10,6 +10,7 @@ import { IPersonnel } from 'src/app/modele/personnel';
 import { PersonnelsService } from 'src/app/services/personnels/personnels.service';
 import { Observable } from 'rxjs';
 import { ModalCodebarreService } from '../../shared/modal-codebarre/modal-codebarre.service';
+import { ModalCodebarreScanContinueComponent } from '../../shared/modal-codebarre-scan-continue/modal-codebarre-scan-continue.component';
 
 @Component({
   selector: 'app-list-personnels',
@@ -17,6 +18,9 @@ import { ModalCodebarreService } from '../../shared/modal-codebarre/modal-codeba
   styleUrls: ['./list-personnels.component.scss'],
 })
 export class ListPersonnelsComponent implements OnInit, AfterViewInit {
+  @ViewChild('barcodeScanner', { static: false })
+  barcodeScanner!: ModalCodebarreScanContinueComponent;
+
   myControl = new FormControl<string | IPersonnel>('');
 
   ELEMENTS_TABLE: IPersonnel[] = [];
@@ -78,6 +82,16 @@ export class ListPersonnelsComponent implements OnInit, AfterViewInit {
   }
   scan_val: any | undefined;
 
+  openBarcodeScanner(): void {
+    console.log('Attempting to open barcode scanner');
+    if (this.barcodeScanner) {
+      console.log('barcodeScanner initialized');
+      this.barcodeScanner.createMediaStream(); // Make sure to use parentheses to call the function
+    } else {
+      console.log('barcodeScanner is undefined in AfterViewInit');
+    }
+  }
+
   ngOnInit(): void {
     this.barService.getCode().subscribe((dt) => {
       this.scan_val = dt;
@@ -102,7 +116,7 @@ export class ListPersonnelsComponent implements OnInit, AfterViewInit {
 
     this.getAllPersonnels().subscribe((valeurs) => {
       this.dataSource.data = valeurs;
-      this.filteredOptions = valeurs
+      this.filteredOptions = valeurs;
     });
 
     this.myControl.valueChanges.subscribe((value) => {

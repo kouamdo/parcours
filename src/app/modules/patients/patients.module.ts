@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
 import { NewPatientComponent } from './new-patient/new-patient.component';
-import { ListPatientsComponent} from './list-patients/list-patients.component';
+import { ListPatientsComponent } from './list-patients/list-patients.component';
 import { AppRoutingModule } from 'src/app/app-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -16,8 +16,9 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { SharedModule } from '../shared/shared.module';
-import { QRCodeModule } from 'angularx-qrcode';
 import { DetailPatientsComponent } from './detail-patients/detail-patients.component';
+import { QRCodeModule } from 'angularx-qrcode';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -34,12 +35,12 @@ import { DetailPatientsComponent } from './detail-patients/detail-patients.compo
     MatInputModule,
     MatFormFieldModule,
     MatPaginatorModule,
+    QRCodeModule,
     MatTableModule,
     MatSortModule,
+    MatDialogModule,
     TicketsModule,
     SharedModule,
-    QRCodeModule,
-
     TranslateModule.forChild({
       loader: {
         provide: TranslateLoader,

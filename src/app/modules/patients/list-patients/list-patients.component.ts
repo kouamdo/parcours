@@ -23,6 +23,7 @@ import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { NewTicketComponent } from '../../tickets/new-ticket/new-ticket.component';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalCodebarreService } from '../../shared/modal-codebarre/modal-codebarre.service';
+import { ModalCodebarreScanContinueComponent } from '../../shared/modal-codebarre-scan-continue/modal-codebarre-scan-continue.component';
 
 export interface User {
   nom: string;
@@ -34,6 +35,8 @@ export interface User {
   styleUrls: ['./list-patients.component.scss'],
 })
 export class ListPatientsComponent implements OnInit, AfterViewInit {
+  @ViewChild('barcodeScanner', { static: false })
+  barcodeScanner!: ModalCodebarreScanContinueComponent;
   patients$: Observable<IPatient[]> = EMPTY;
   services$: Observable<IService[]> = EMPTY;
   tickets$: Observable<ITicket[]> = EMPTY;
@@ -47,6 +50,7 @@ export class ListPatientsComponent implements OnInit, AfterViewInit {
   myControl = new FormControl<string | IPatient>('');
 
   ELEMENTS_TABLE: IPatient[] = [];
+  //filteredOptions: IPatient[] | undefined;
   filteredOptions: IPatient[] | undefined;
   displayedColumns: string[] = [
     'nom',
@@ -89,28 +93,27 @@ export class ListPatientsComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.barService.getCode().subscribe((dt) => {
       this.scan_val = dt;
-      this.myControl.setValue(this.scan_val); // Set the initial value in the search bar
-
-      this.handleScanValChange(); // Trigger the search when scan_val changes
+      this.myControl.setValue(this.scan_val); // Définit la valeur initiale dans la barre de recherche
+      this.handleScanValChange(); // Déclenche la recherche lorsque scan_val change
 
       this.myControl.valueChanges.subscribe(() => {
         this.handleScanValChange();
       });
 
       if (this.scan_val) {
-        // If scan_val is set, perform a search to get the corresponding libelle
+        // Si scan_val est défini, effectuez une recherche pour obtenir la libelle correspondante
         this.servicePatient
           .getPatientsByNameOrId(this.scan_val)
           .subscribe((response) => {
             this.filteredOptions = response;
 
-            // Manually set the selected option in filteredOptions
+            // Définit manuellement l'option sélectionnée dans filteredOptions
             const selectedOption = this.filteredOptions.find(
               (option) => option.id === this.scan_val
             );
             if (selectedOption) {
               this.filteredOptions = [selectedOption];
-              this.dataSource.data = [selectedOption]; // Update the dataSource with the selected option
+              this.dataSource.data = [selectedOption]; // Mise à jour du dataSource avec l'option sélectionnée
             }
           });
       }
@@ -121,7 +124,7 @@ export class ListPatientsComponent implements OnInit, AfterViewInit {
 
     this.getAllPatients().subscribe((valeurs) => {
       this.dataSource.data = valeurs;
-      this.filteredOptions =valeurs
+      this.filteredOptions = valeurs;
     });
 
     this.myControl.valueChanges.subscribe((value) => {
@@ -137,8 +140,18 @@ export class ListPatientsComponent implements OnInit, AfterViewInit {
         this.filteredOptions = [];
       }
     });
-    const defaultValue = 'YourDefaultSearchValue'; // Replace with your desired default value
+    const defaultValue = 'YourDefaultSearchValue'; // Remplacez par la valeur par défaut souhaitée
     this.myControl.setValue(defaultValue);
+  }
+
+  openBarcodeScanner(): void {
+    console.log('Attempting to open barcode scanner');
+    if (this.barcodeScanner) {
+      console.log('barcodeScanner initialized');
+      this.barcodeScanner.createMediaStream();
+    } else {
+      console.log('barcodeScanner is undefined in AfterViewInit');
+    }
   }
 
   setIdPersonne(id_personne: string, nom_patient: string) {
@@ -173,6 +186,11 @@ export class ListPatientsComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
+    if (this.barcodeScanner) {
+      console.log('barcodeScanner initialized');
+    } else {
+      console.log('barcodeScanner is undefined');
+    }
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
@@ -184,24 +202,22 @@ export class ListPatientsComponent implements OnInit, AfterViewInit {
         .subscribe((response) => {
           this.filteredOptions = response;
 
-          // Manually set the selected option in filteredOptions
+          // Définit manuellement l'option sélectionnée dans filteredOptions
           const selectedOption = this.filteredOptions.find(
             (option) => option.id === this.scan_val
           );
           if (selectedOption) {
             this.filteredOptions = [selectedOption];
-            this.dataSource.data = [selectedOption]; // Update the dataSource with the selected option
+            this.dataSource.data = [selectedOption]; // Mise à jour du dataSource avec l'option sélectionnée
           }
         });
     }
   }
 
-  public rechercherListingPersonne(option: IPatient) {
-    this.servicePatient
-      .getPatientsByName(option.nom.toLowerCase())
-      .subscribe((valeurs) => {
-        this.dataSource.data = valeurs;
-      });
+  public rechercherListingPersonne(option: IPatient){
+    this.servicePatient.getPatientsByName(option.nom.toLowerCase()).subscribe(
+        valeurs => {this.dataSource.data = valeurs;}
+    )
   }
 
   /** Announce the change in sort state for assistive technology. */
