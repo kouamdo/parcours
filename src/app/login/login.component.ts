@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthentificationService } from '../services/authentifications/authentification.service';
@@ -12,7 +12,7 @@ export class LoginComponent {
   forme: any;
   submitted: boolean | undefined;
 
-  constructor(private authService: AuthentificationService, private formBuilder: FormBuilder, private router: Router){
+  constructor(private authService: AuthentificationService, private formBuilder: FormBuilder, private cdRef: ChangeDetectorRef, private router: Router){
     this.forme = this.formBuilder.group({
       mail: [
         '',
@@ -29,18 +29,21 @@ export class LoginComponent {
     });
   }
   ngOnInit(): void {
-    throw new Error('Method not implemented.');
   }
 
   get f() {
     return this.forme.controls;
   }
 
-  login() {
+  login(): void {
     this.submitted = true;
     if (this.forme.invalid) return;
+    
     if (this.authService.login(this.forme)) {
-      this.router.navigate(['/']);
+      console.log(" Auth :", this.authService.login(this.forme));
+      this.router.navigate(['/dashboard']).then(() => {
+        this.cdRef.detectChanges();
+      });
     } else {
       // Affichez un message d'erreur
       alert('Invalid credentials');

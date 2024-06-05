@@ -1,0 +1,244 @@
+<div [ngClass]="{'light-mode': toggle, 'dark-mode': !toggle}" class="wrapper">
+
+    <!-- <div class="preloader flex-column justify-content-center align-items-center">
+      <img class="animation__wobble" src="assets/img/logo_camnafaw.jpg" alt="logo_camnafaw.jpg" height="60" width="60">
+    </div> -->
+  
+    <nav class="main-header navbar navbar-expand navbar-dark"  [ngClass]="{'navbar-light': toggle, 'navbar-dark': !toggle}">
+    <!-- menu horizontal du haut-->
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+        </li>
+        <li class="nav-item d-none d-sm-inline-block">
+          <a class="nav-link">
+            {{"accueil.header.nav-top.nav-link1" | translate}}
+          </a>
+        </li>
+        <li class="nav-item d-none d-sm-inline-block">
+          <a href="#" class="nav-link">
+            {{"accueil.header.nav-top.nav-link2" | translate}}
+          </a>
+        </li>
+      </ul>
+      <!-- recherche sur la barre horizontale du menu -->
+      <ul class="navbar-nav ml-auto">
+  
+        <li class="nav-item">
+          <a class="nav-link" data-widget="navbar-search" href="#" role="button">
+            <i class="fas fa-search"></i>
+          </a>
+          <div class="navbar-search-block">
+            <form class="form-inline mr-3">
+              <div class="input-group input-group-sm">
+                <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
+                <div class="input-group-append">
+                  <button class="btn btn-navbar" type="submit">
+                  <i class="fas fa-search"></i>
+                  </button>
+                  <button class="btn btn-navbar" type="button" data-widget="navbar-search">
+                  <i class="fas fa-times"></i>
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </li>
+          <!-- menu horizontal présentant les messages sur clic de l'image-->
+        <li class="nav-item dropdown">
+          <a class="nav-link" data-toggle="dropdown" href="#">
+            <i class="far fa-comments"></i>
+            <span class="badge badge-danger navbar-badge">4</span>
+          </a>
+          <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+          <a href="#" class="dropdown-item">
+  
+            <div class="media">
+              <img src="assets/img/avatar.png" alt="User Avatar" class="img-size-50 mr-3 img-circle">
+              <div class="media-body">
+                <h3 class="dropdown-item-title">
+                Brad Diesel
+                <span class="float-right text-sm text-danger"><i class="fas fa-star"></i></span>
+                </h3>
+                <p class="text-sm">Call me whenever you can...</p>
+                <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
+              </div>
+            </div>
+  
+          </a>
+          <div class="dropdown-divider"></div>
+          <a href="#" class="dropdown-item">
+  
+            <div class="media">
+              <img src="assets/img/avatar.png" alt="User Avatar" class="img-size-50 img-circle mr-3">
+              <div class="media-body">
+                <h3 class="dropdown-item-title">
+                  John Pierce
+                  <span class="float-right text-sm text-muted"><i class="fas fa-star"></i></span>
+                </h3>
+                <p class="text-sm">I got your message bro</p>
+                <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
+              </div>
+            </div>
+  
+          </a>
+          <div class="dropdown-divider"></div>
+          <a href="#" class="dropdown-item">
+  
+            <div class="media">
+              <img src="assets/img/avatar.png" alt="User Avatar" class="img-size-50 img-circle mr-3">
+              <div class="media-body">
+                <h3 class="dropdown-item-title">
+                Nora Silvester
+                <span class="float-right text-sm text-warning"><i class="fas fa-star"></i></span>
+                </h3>
+                <p class="text-sm">The subject goes here</p>
+                <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
+              </div>
+            </div>
+  
+          </a>
+          <div class="dropdown-divider"></div>
+          <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
+          </div>
+        </li>
+      <!-- notification dans la barre de menu horizontal-->
+        <li class="nav-item dropdown">
+          <a class="nav-link" data-toggle="dropdown" href="#">
+            <i class="far fa-bell"></i>
+            <span class="badge badge-warning navbar-badge">15</span>
+          </a>
+        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+          <span class="dropdown-item dropdown-header">15 Notifications</span>
+          <div class="dropdown-divider"></div>
+          <a href="#" class="dropdown-item">
+            <i class="fas fa-envelope mr-2"></i> 4 new messages
+            <span class="float-right text-muted text-sm">3 mins</span>
+          </a>
+          <div class="dropdown-divider"></div>
+          <a href="#" class="dropdown-item">
+            <i class="fas fa-users mr-2"></i> 8 friend requests
+            <span class="float-right text-muted text-sm">12 hours</span>
+          </a>
+          <div class="dropdown-divider"></div>
+          <a href="#" class="dropdown-item">
+            <i class="fas fa-file mr-2"></i> 3 new reports
+            <span class="float-right text-muted text-sm">2 days</span>
+          </a>
+          <div class="dropdown-divider"></div>
+          <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
+        </div>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-widget="fullscreen" href="#" role="button">
+            <i class="fas fa-expand-arrows-alt"></i>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
+          <i class="fas fa-th-large"></i>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  
+        <!-- menu vertical gauche-->
+  
+    <aside id="menuVerticalGauche" class="main-sidebar sidebar-dark-primary elevation-4">
+    
+      <a class="brand-link" id="logo">
+        <img src="../assets/img/logo_camnafaw.jpg" width="25px" alt="CAMNAFAW Logo" class="brand-image elevation-3" style="opacity: .8">
+        <span class="brand-text font-weight-light">CAMNAFAW</span>
+      </a>
+  
+  
+      <div class="sidebar" id="userActions" >
+        <!-- Identité du user en dessous du logo haut gauche-->
+        <div class="user" >
+          <div class="image text-center">
+            <img src="assets/img/avatar.png" class="img-circle elevation-2" alt="User Image">
+          </div>
+          <div class="info">
+            <a href="#" class="d-block">Philippe NGONGANG</a>
+          </div>
+          <p id="role" class="text-light"><small>Admin</small></p>
+        </div>
+        <!-- Menu gauche-->
+        <app-menu [langueParent]=langueChoisi></app-menu>
+      </div>
+  
+    </aside>
+  
+  
+      <!-- panneau central -->
+  <div class="content-wrapper">
+     <!-- barre en dessous du menu horizontal-->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item">
+              <a href="#">
+                {{"accueil.central-panel.list-item1-link1" | translate}}
+              </a>
+            </li>
+            <li class="breadcrumb-item active">
+              {{"accueil.central-panel.list-item2" | translate}}
+            </li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <!-- zone d'affichage principale-->
+    <section class="content">
+      <div class="container-fluid">
+  
+        <div class="row">
+          <div class="col-md-12">
+            <!-- premier encart détachable -->
+            <div class="card-body">
+              <router-outlet></router-outlet>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+  
+  <aside class="control-sidebar control-sidebar-dark" [ngClass]="{'control-sidebar-light': toggle, 'control-sidebar-dark': !toggle}">
+    <label class="m-2" for="language">{{"langue.libelle" | translate}}
+      <select name="language" id="language" (change)="valeurChange($event)">
+        <option *ngFor="let langue of langues" [value]="langue">{{ langue }}</option>
+      </select><br>
+    </label>
+    <p class="m-2">
+      <mat-toolbar class="bg-light">
+        {{"theme.libelle" | translate}}
+        <div ></div>
+        <mat-icon class="mr-2 ml-2">brightness_5</mat-icon>
+        <mat-slide-toggle (click)="change()" class="mr-2">
+        </mat-slide-toggle>
+        <mat-icon>bedtime</mat-icon>
+      </mat-toolbar>
+    </p>
+    <div id="ticketCourant">
+      <app-ticket-courant></app-ticket-courant>
+    </div>
+  </aside>
+  
+  
+  <footer class="main-footer">
+  <strong>Copyright &copy; 2022-2023 <a href="https://adminlte.io">AdminLTE.io</a>.</strong>
+  All rights reserved.
+  <div class="float-right d-none d-sm-inline-block">
+  <b>Version</b> 1.0.0
+  </div>
+  </footer>
+  </div>
+  

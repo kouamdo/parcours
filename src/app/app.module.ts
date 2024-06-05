@@ -38,9 +38,12 @@ import { ValidationModule } from './modules/validation/validation.module';
 import { EtapeModule } from './modules/etape/etape.module';
 import { ParoursModule } from './modules/parours/parours.module';
 import { LoginComponent } from './login/login.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { AuthGuard } from './auth/auth.guard';
+import { AuthentificationService } from './services/authentifications/authentification.service';
 
 @NgModule({
-  declarations: [LoginComponent, AppComponent, NotFoundComponent, MenuComponent],
+  declarations: [AppComponent, LoginComponent, DashboardComponent, NotFoundComponent, MenuComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -86,7 +89,7 @@ import { LoginComponent } from './login/login.component';
     SharedModule,
     EtatsModule
   ],
-  providers: [],
+  providers: [AuthGuard, AuthentificationService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
