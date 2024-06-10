@@ -1,4 +1,4 @@
-import { ModalCodebarreService } from "../modules/shared/modal-codebarre/modal-codebarre.service";
+import { ModalCodebarreService } from "../modules/components/shared/modal-codebarre/modal-codebarre.service";
 import { IAttributs } from "./attributs";
 import { IFamille } from "./famille";
 
