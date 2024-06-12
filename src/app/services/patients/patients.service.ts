@@ -22,6 +22,14 @@ export class PatientsService {
     );
   }
 
+  getPatientByMailMdp(mail: string, mdp: string): Observable<IPatient> {
+    return this.getAllPatients().pipe(
+      map((x) => {
+        return x.find((p) => p.mail == mail && p.mdp == mdp) as IPatient;
+      })
+    );
+  }
+
   getPatientsByName(nom: string): Observable<IPatient[]> {
     return this.http.get<IPatient[]>('api/patients').pipe(
       map((x) => {

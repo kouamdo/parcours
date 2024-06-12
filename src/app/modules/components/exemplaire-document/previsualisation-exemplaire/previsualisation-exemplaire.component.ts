@@ -43,7 +43,8 @@ export class PrevisualisationExemplaireComponent implements OnInit {
       adresse: '',
       mail: '',
       telephone: '',
-      qrCodeValue: ''
+      qrCodeValue: '',
+      mdp: ''
     }
   };
   titre:string='';

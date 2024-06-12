@@ -63,7 +63,8 @@ export class NewExemplaireComponent implements OnInit {
       adresse: '',
       mail: '',
       telephone: '',
-      qrCodeValue: ''
+      qrCodeValue: '',
+      mdp: ''
     }
   };
 

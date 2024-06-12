@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthentificationService } from '../services/authentifications/authentification.service';
 
 @Component({
@@ -9,10 +9,12 @@ import { AuthentificationService } from '../services/authentifications/authentif
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
+  returnUrl: string | undefined;
+  error: string | undefined;
   forme: any;
   submitted: boolean | undefined;
 
-  constructor(private authService: AuthentificationService, private formBuilder: FormBuilder, private cdRef: ChangeDetectorRef, private router: Router){
+  constructor(private authService: AuthentificationService, private formBuilder: FormBuilder, private cdRef: ChangeDetectorRef, private router: Router, private route: ActivatedRoute){
     this.forme = this.formBuilder.group({
       mail: [
         '',
@@ -27,27 +29,38 @@ export class LoginComponent {
         ],
       ]
     });
+    // rediriger vers la page d'accueil si déjà connecté
+    if (this.authService.currentUserValue) {
+      this.router.navigate(['/dashboard']);
+    }
   }
-  ngOnInit(): void {
+  ngOnInit() {
+    // obtenir l'URL de retour ou rediriger vers l'accueil
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/dashboard';
   }
 
   get f() {
     return this.forme.controls;
   }
 
-  login(): void {
+  login() {
     this.submitted = true;
     if (this.forme.invalid) return;
     
-    if (this.authService.login(this.forme)) {
-      console.log(" Auth :", this.authService.login(this.forme));
-      this.router.navigate(['/dashboard']).then(() => {
-        this.cdRef.detectChanges();
-      });
-    } else {
-      // Affichez un message d'erreur
-      alert('Invalid credentials');
-    }
+    console.log(this.forme.value);
+    
+    this.authService.login(this.forme.value.mail, this.forme.value.pwd)
+    .subscribe(
+        res => {
+          console.log("response :", res);
+          
+          this.router.navigate([this.returnUrl]);
+        },
+        error => {
+          this.error = error;
+          console.log("error :", error);
+          
+        });
   }
 
 }

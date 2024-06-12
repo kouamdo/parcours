@@ -6,7 +6,6 @@ import { IPersonnel } from 'src/app/modele/personnel';
 import { DonneesEchangeService } from 'src/app/services/donnees-echange/donnees-echange.service';
 import { PersonnelsService } from 'src/app/services/personnels/personnels.service';
 import { v4 as uuidv4 } from 'uuid';
-import * as QRCode from 'qrcode';
 
 @Component({
   selector: 'app-new-personnel',
@@ -29,6 +28,14 @@ export class NewPersonnelComponent implements OnInit {
        prenom: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
        sexe: ['', Validators.required],
        email: ['', [Validators.required, Validators.email, Validators.pattern(".+@.+\.{1}[a-z]{2,3}")]],
+       mdp: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(8),
+          Validators.pattern('/[A-Z]+/./[a-z]+/./[!@#$%^&*(),.?":{}|<>]+/'),
+        ],
+      ],
        //todo initialisation du composant à une date
        dateNaissance: ['1980-01-01', Validators.required],
        dateEntree: ['2023-01-01', Validators.required],
@@ -83,6 +90,7 @@ export class NewPersonnelComponent implements OnInit {
       dateEntree: personnelInput.dateEntree,
       dateSortie: personnelInput.dateSortie,
       qrCodeValue: personnelInput.qrCodeValue,
+      mdp: personnelInput.mpd
     };
 
     if (this.personnel != undefined) {

@@ -4,9 +4,6 @@ import {
   FormBuilder,
   FormControl,
   FormGroup,
-  MaxLengthValidator,
-  MinLengthValidator,
-  ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -133,6 +130,14 @@ export class NewPatientComponent implements OnInit {
           Validators.pattern('.+@.+.{1}[a-z]{2,3}'),
         ],
       ],
+      mdp: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(8),
+          Validators.pattern('/[A-Z]+/./[a-z]+/./[!@#$%^&*(),.?":{}|<>]+/'),
+        ],
+      ],
       //todo initialisation du composant à une date
       dateNaissance: ['1980-01-01', Validators.required],
       telephone: [''],
@@ -219,6 +224,7 @@ export class NewPatientComponent implements OnInit {
       dateNaissance: patientInput.dateNaissance,
       qrCodeValue: patientInput.qrCodeValue,
       personnesRatachees: this.personnesRatachees,
+      mdp: patientInput.mdp
     };
 
     patientTemp.dateNaissance = this.initialDate.value!;

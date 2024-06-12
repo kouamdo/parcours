@@ -6,6 +6,7 @@ export interface IPersonnel {
   prenom: string;
   sexe: string;
   dateNaissance: Date;
+  mdp: string;
   email: string;
   telephone: string;
   dateEntree?: Date;

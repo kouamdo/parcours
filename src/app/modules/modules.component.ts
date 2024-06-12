@@ -20,14 +20,14 @@ export class ModulesComponent {
     { flag: 'assets/images/flags/germany.svg'},
   ];
 
-  constructor(private translate: TranslateService, private authService: AuthentificationService, private overlay: OverlayContainer, private router: Router) {
+  constructor(private translate: TranslateService, public authService: AuthentificationService, private overlay: OverlayContainer, private router: Router) {
     translate.addLangs(this.langues);
     translate.setDefaultLang('fr'); 
     translate.use('fr');
   }
   
   ngOnInit(): void {
-    if (!this.authService.isAuthenticated()) {
+    if (!this.authService.currentUserValue) {
       this.router.navigate(['/login']);
     }
   }

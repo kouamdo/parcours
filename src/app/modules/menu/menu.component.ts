@@ -13,7 +13,7 @@ import { DonneesEchangeService } from '../../services/donnees-echange/donnees-ec
 export class MenuComponent implements OnInit, OnChanges {
   menuUser$:Observable<IMenus>=EMPTY;
   fonctionnalites!: IFonctionnalites[];
-  visible : number = 0;
+  visible: number = -1;
   @Input()
   langueParent :string = 'fr';
   userId !:any;

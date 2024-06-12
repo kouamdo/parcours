@@ -1,14 +1,14 @@
 <nav class="mt-2" >
     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="true">
-        <li *ngFor="let menu; let i = index of fonctionnalites"  class="nav-item {{ menu.actif }}" (click)="getElementMenu(menu.fonction)">
-            <div (click)="getSousMenu(i)" class="nav-link" style="cursor: pointer;">
+        <li *ngFor="let menu, let i = index of fonctionnalites"  class="nav-item {{ menu.actif }}" (click)="getElementMenu(menu.fonction)">
+            <a (click)="getSousMenu(i)" class="nav-link" style="cursor: pointer;">
                 <i class="nav-icon {{ menu.icone }}"></i>
                 <p>
                     {{ menu.fonction}}
                     <i class="right fas fa-angle-left"></i>
                 </p>
-            </div>
-            <ul *ngIf="i == visible" class=" ml-1" style="cursor: pointer;">
+            </a>
+            <ul *ngIf="i == visible" class="nav ml-1" style="cursor: pointer;">
                 <li class="nav-item" *ngFor="let elt of menu.elements">
                     <a class="nav-link" routerLink="{{ elt.lien }}" (click)="setUrlSource(elt.nom)" routerLinkActive="activeLinkCSS" >
                         <span><i class="far fa-circle fa-sm"></i></span>

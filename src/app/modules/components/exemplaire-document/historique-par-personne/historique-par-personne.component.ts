@@ -46,7 +46,8 @@ export class HistoriqueParPersonneComponent implements OnInit {
       adresse: '',
       mail: '',
       telephone: '',
-      qrCodeValue: ''
+      qrCodeValue: '',
+      mdp: ''
     }
   };
   titre:string='';
