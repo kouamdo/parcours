@@ -11,6 +11,7 @@ export class DonneesEchangeService {
   dataDocumentPrecoMvts: any;
   dataDocumentAttributs: any;
   dataDocumentCodebarre: any;
+  dataEtatSelectionner : any;
   dataDocumentSousDocuments: any;
   dataDocumentSousExemplaireDocuments: any;
   dataDocumentEtats: any;
@@ -40,6 +41,14 @@ export class DonneesEchangeService {
 
   getTypeMvt(): Observable<TypeMvt> {
     return this.http.get<TypeMvt>('api/typeMvt');
+  }
+
+  saveEtatModal(value: any) {
+    this.dataEtatSelectionner = value;
+  }
+
+  getsaveEtatModal(){
+    return this.dataEtatSelectionner;
   }
 
   /**
