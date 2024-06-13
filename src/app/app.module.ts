@@ -19,9 +19,11 @@ import { AuthGuard } from './auth/auth.guard';
 import { AuthentificationService } from './services/authentifications/authentification.service';
 import { ModulesModule } from './modules/modules.module';
 import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { RequestPasswordResetComponent } from './request-password-reset/request-password-reset.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, NotFoundComponent],
+  declarations: [AppComponent, LoginComponent, NotFoundComponent, RequestPasswordResetComponent, ResetPasswordComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

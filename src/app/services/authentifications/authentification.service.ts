@@ -38,6 +38,16 @@ export class AuthentificationService {
     }))
   }
 
+  requestPasswordReset(email: string) {
+    return this.personnel.getPersonnelByMail(email).pipe(map(user => {
+      return user;
+    }))
+  }
+
+  resetPassword(token: string, password: string): Observable<any> {
+    return this.http.post(`/reset-password`, { token, password });
+  }
+
   logout() {
     // supprimer l'utilisateur du stockage local pour déconnecter l'utilisateur
     localStorage.removeItem('currentUser');

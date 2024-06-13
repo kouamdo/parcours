@@ -4,12 +4,16 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { AuthGuard } from './auth/auth.guard';
 import { LoginComponent } from './login/login.component';
 import { ModulesRoutingModule } from './modules/modules-routing.module';
+import { RequestPasswordResetComponent } from './request-password-reset/request-password-reset.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
-  { path: 'dashboard', loadChildren: () => import('./modules/modules.module').then((m) => m.ModulesModule), canActivate: [AuthGuard] }, // Protège la route principale avec AuthGuard
+  { path: 'requestPassword', component: RequestPasswordResetComponent},
+  { path: 'resetPassword', component: ResetPasswordComponent},
+  { path: 'parcours', loadChildren: () => import('./modules/modules.module').then((m) => m.ModulesModule), canActivate: [AuthGuard] }, // Protège la route principale avec AuthGuard
   {
     path: '**',
     component: NotFoundComponent

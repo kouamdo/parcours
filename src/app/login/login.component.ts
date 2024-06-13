@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthentificationService } from '../services/authentifications/authentification.service';
 
@@ -11,7 +11,7 @@ import { AuthentificationService } from '../services/authentifications/authentif
 export class LoginComponent {
   returnUrl: string | undefined;
   error: string | undefined;
-  forme: any;
+  forme: FormGroup;
   submitted: boolean | undefined;
 
   constructor(private authService: AuthentificationService, private formBuilder: FormBuilder, private cdRef: ChangeDetectorRef, private router: Router, private route: ActivatedRoute){
@@ -31,12 +31,12 @@ export class LoginComponent {
     });
     // rediriger vers la page d'accueil si déjà connecté
     if (this.authService.currentUserValue) {
-      this.router.navigate(['/dashboard']);
+      this.router.navigate(['/parcours']);
     }
   }
   ngOnInit() {
     // obtenir l'URL de retour ou rediriger vers l'accueil
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/dashboard';
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/parcours';
   }
 
   get f() {
