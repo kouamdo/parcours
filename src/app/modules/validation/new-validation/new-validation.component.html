@@ -47,8 +47,7 @@
                             <div>
                                 <div class="champs">
                                     <label for="etat" class="label">
-                                        {{ "validation.form.label2" | translate
-                                        }}<span style="color: red" aria-label="required">*</span>
+                                        {{ "validation.form.label2" | translate}}
                                     </label>
                                     <p class="w-100 d-flex align-items-center choix">
                                         <input type="checkbox" [checked]="forme.get('etat')?.value"
@@ -63,6 +62,7 @@
                                     {{ "validation.form.label4" | translate }}<span style="color: red" aria-label="required">*</span>
                                 </label>
                                 <select class="form-control" formControlName="typeVote" name="typeVote" id="typeVote" required>
+                                    <option>Unitaire</option>
                                     <option>Unanime</option>
                                     <option>Majoritaire</option>
                                 </select>
@@ -90,21 +90,19 @@
                         <div class="form-group">
                             <div class="champs">
                                 <label  for="roleval"  class="label" >
-                                  {{'validation.form.label6' | translate}} <sup>*</sup>
+                                  {{'validation.form.label6' | translate}} <span style="color: red" aria-label="required">*</span>
                                 </label>
                                 <mat-form-field class="example-full-width w-100" appearance="fill">
-                                    <input  type="text" matInput [matAutocomplete]="auto"  aria-label="roleval" formControlName="roleval" name="roleval" id="roleval" placeholder="" class="w-100">
-                                    <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn" >
+                                    <input required type="text" matInput [matAutocomplete]="auto"  aria-label="roleval" formControlName="roleval" name="roleval" id="roleval" placeholder="" class="w-100">
+                                    <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
                                     <mat-option *ngFor="let option of roles" [value]="option">
                                         {{option.titre}}
                                     </mat-option>
                                     </mat-autocomplete>
                                 </mat-form-field>
                             </div>
-                            <div *ngIf="submitted && f['roleval'].errors" class="alert alert-danger">
-                                <div *ngIf="f['roleval'].errors['required']">
-                                    {{ "validation.form.text1" | translate }}
-                                </div>
+                            <div *ngIf="submitted && !f['roleval'].value" class="alert alert-danger">
+                                <div>{{ "validation.form.text1" | translate }}</div>
                             </div>
         
                           </div>

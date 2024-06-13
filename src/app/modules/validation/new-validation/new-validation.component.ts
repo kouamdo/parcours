@@ -96,7 +96,7 @@ export class NewValidationComponent implements OnInit {
   onSubmit(validationInput:any){
 
     this.submitted=true;
-    if(this.forme.invalid) return
+    if(this.forme.invalid || !validationInput.roleval) return;
 
     let validationTemp : IValidation={
       id: uuidv4(),
