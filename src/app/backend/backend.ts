@@ -23636,7 +23636,20 @@ export class InMemDBService implements InMemoryDbService {
         dateNaissance: new Date('10/04/2000'),
         dateEntree: new Date(),
         dateSortie: undefined,
-        roles: undefined,
+        roles: [
+          {
+            role: {
+              id: '1',
+              titre: 'vendeur',
+              description: 'personnel au contact du client',
+              etat: true,
+              dateCreation: new Date('07/03/2000'),
+            },
+            status : true,
+            dateDebut : new Date(),
+            dateFin : new Date()
+          }
+        ],
         qrCodeValue: 'hello',
       },
       {
@@ -23649,7 +23662,21 @@ export class InMemDBService implements InMemoryDbService {
         dateNaissance: new Date('10/08/2004'),
         dateEntree: new Date(),
         dateSortie: undefined,
-        roles: undefined,
+        roles: [
+          {
+            role: 
+            {
+              id: '2',
+              titre: 'traiteur',
+              description: 'Personnel administratif',
+              etat: true,
+              dateCreation: new Date('07/03/2000'),
+            },
+            status : true,
+            dateDebut : new Date(),
+            dateFin : new Date()
+          }
+        ],
         qrCodeValue: 'hello',
       },
       {
@@ -23662,7 +23689,20 @@ export class InMemDBService implements InMemoryDbService {
         dateNaissance: new Date('10/10/2002'),
         dateEntree: new Date(),
         dateSortie: undefined,
-        roles: undefined,
+        roles: [
+          {
+            role: {
+              id: '3',
+              titre: 'marcheur',
+              description: 'commercial sur le terrain',
+              etat: true,
+              dateCreation: new Date('07/03/2000'),
+            },
+            status : true,
+            dateDebut : new Date(),
+            dateFin : new Date()
+          }
+        ],
         qrCodeValue: 'hello',
       },
     ];

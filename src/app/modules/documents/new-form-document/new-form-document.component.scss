@@ -65,22 +65,6 @@
     border-radius: 5px;
     width: 100%;
 }
-.actionButton{
-    clear: both;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    button{
-        background-color: #28a745;
-        color: white;
-        height: 30px;
-        padding: 0 10px;
-        font-size: 15px;
-    }
-    .btnValidation{
-        background-color: #1473e6;
-    }
-}
 .note, sup{
     color: orangered;
 }

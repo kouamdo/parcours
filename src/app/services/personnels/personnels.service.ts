@@ -56,4 +56,13 @@ export class PersonnelsService {
   ajouterPersonnel(personnel: IPersonnel) {
     return this.http.post('api/personnels', personnel);
   }
+  
+  getPersonnelByRole(idRole:string): Observable<IPersonnel[]> {
+    return this.http.get<IPersonnel[]>('api/personnels').pipe(
+      map(x=>
+        {
+          return x.filter(e=> e.roles?.some(r=> r.role.id.includes(idRole.toLowerCase())))
+        })
+    );        
+  }
 }

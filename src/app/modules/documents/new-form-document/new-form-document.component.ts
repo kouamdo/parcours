@@ -32,7 +32,7 @@ import { IPrecoMvt } from 'src/app/modele/precomvt';
 import { ModalChoixSousDocumentComponent } from '../../shared/modal-choix-sous-document/modal-choix-sous-document.component';
 import { IAssociationCategorieAttributs } from 'src/app/modele/association-categorie-attributs';
 import { TypeMouvement } from 'src/app/modele/typeMouvement';
-import { ModalDocEtatsComponent } from '../../shared/modal-doc-etats/modal-doc-etats.component';
+import { ModalDocEtatsComponent } from '../../shared/modal-document-doc-etats/modal-document-doc-etats.component';
 import { IDocEtats } from 'src/app/modele/doc-etats';
 
 @Component({

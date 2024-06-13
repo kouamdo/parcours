@@ -18,9 +18,53 @@
             margin-right: 5px;
         }
     }
-    form{
-    }
 }
 .example-form{
     width: fit-content !important;
+}
+.valBtn button{
+    margin-top: 5px;
+    margin-right: 2px;
+    margin-left: 2px;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    opacity: 0.8;
+}
+.valBtn button:hover{
+    opacity: 1;
+    box-shadow: 0 0 2px #28a745;
+}
+.annuler{
+    background-color: #FFD700;
+}
+.affichePersonne{
+    margin: 20px auto 5px 8px;
+    width: 100%;
+}
+.libelle{
+    opacity: 0.8;
+}
+.resultat{
+    font-weight: 600;
+}
+.blockPersonnel{
+    width: 100%;
+    h4{
+        color: #28a746d4;
+        margin-top: 10px;
+        font-weight: normal;
+    }
+    span{
+        font-size: 12px;
+    }
+}
+.listAttr{
+    width: 100%;
+    padding: 2px 5px;
+    padding-right: 10px;
+    background-color: #b3b3b30f;
+    margin-bottom: 10px;
+    border-radius: 3px;
+    flex-wrap: wrap;
 }

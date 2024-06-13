@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ModalDocEtatsComponent } from './modal-doc-etats.component';
+import { ModalDocEtatsComponent } from './modal-document-doc-etats.component';
 
 describe('ModalDocEtatsComponent', () => {
   let component: ModalDocEtatsComponent;

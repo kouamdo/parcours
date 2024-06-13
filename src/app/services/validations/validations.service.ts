@@ -33,6 +33,15 @@ export class ValidationsService {
         })
     );        
   }
+  
+  getValidationByLibelle(libelle:string): Observable<IValidation[]> {
+    return this.http.get<IValidation[]>('api/validations').pipe(
+      map(x=>
+        {
+          return x.filter(m=> m.libelle.toLowerCase().startsWith(libelle))
+        })
+    );        
+  }
  
    ajouterValidation(validation:IValidation )
    {

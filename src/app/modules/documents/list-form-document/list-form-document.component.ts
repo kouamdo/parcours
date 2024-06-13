@@ -13,7 +13,7 @@ import { IAttributs } from 'src/app/modele/attributs';
 import { IDocument } from 'src/app/modele/document';
 import { TypeMvt } from 'src/app/modele/type-mvt';
 import { DocumentService } from 'src/app/services/documents/document.service';
-import { ModalDocEtatsComponent } from '../../shared/modal-doc-etats/modal-doc-etats.component';
+import { ModalDocEtatsComponent } from '../../shared/modal-document-doc-etats/modal-document-doc-etats.component';
 
 @Component({
   selector: 'app-list-form-document',

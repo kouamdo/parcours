@@ -25,7 +25,7 @@ import { EnteteComponent } from './entete/entete.component';
 import { ModalChoixSousDocumentComponent } from './modal-choix-sous-document/modal-choix-sous-document.component';
 import { ModalChoixSousExemplairesComponent } from './modal-choix-sous-exemplaires/modal-choix-sous-exemplaires.component';
 import { ModalChoixDocumentsComponent } from './modal-choix-documents/modal-choix-documents.component';
-import { ModalDocEtatsComponent } from './modal-doc-etats/modal-doc-etats.component';
+import { ModalDocEtatsComponent } from './modal-document-doc-etats/modal-document-doc-etats.component';
 import { ModalRessourceAttributsComponent } from './modal-ressource-attributs/modal-ressource-attributs.component';
 import { ModalRoleValidationComponent } from './modal-role-validation/modal-role-validation.component';
 import { ModalCodebarreComponent } from './modal-codebarre/modal-codebarre.component';
@@ -36,6 +36,7 @@ import { ModalChoixDocEtatComponent } from './modal-choix-doc-etat/modal-choix-d
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatRadioModule } from '@angular/material/radio';
 import { ModalChoixPersonneComponent } from './modal-choix-personne/modal-choix-personne.component';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -86,7 +87,7 @@ import { ModalChoixPersonneComponent } from './modal-choix-personne/modal-choix-
     MatIconModule,
     MatCheckboxModule,
     MatRadioModule,
-    //MatCheckboxModule,
+    MatSelectModule,
     TranslateModule.forChild({
       loader: {
         provide: TranslateLoader,
@@ -94,7 +95,7 @@ import { ModalChoixPersonneComponent } from './modal-choix-personne/modal-choix-
         deps: [HttpClient],
       },
       extend: true,
-    }),
+    })
   ],
   providers: [
     { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { hasBackdrop: false } },

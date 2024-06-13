@@ -1,4 +1,7 @@
-/* You can add global styles to this file, and also import other style files */
+/* les couleurs du site
+* #28a745 vert
+* #FFD700 jaune
+*/
 @font-face {
   font-family: AbrilFatface;
   src: url(assets/fonts/Abril_Fatface/AbrilFatface-Regular.ttf);
@@ -151,24 +154,38 @@ h2{
     //text-transform: uppercase;
 }
 }
+.example-full-width {
+  height: 42px !important;
+  border: 2px solid #28a745;
+  border-radius: 5px;
+  background-color: transparent;
+  padding: 0;
+  margin: 0;
+}
 .searchBlock{
-width: 100%;
-display: flex;
-justify-content: flex-end;
-padding-right: 10px;
-margin-right: 8px;
-button{
-    width: 7%;
-    background-color: #28a745;
-    color: white;
-}
-.inputSection{
-    width: 91%;
-    input{
-        border: none;
-        border: 1px solid #28a74521;
-    }
-}
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 10px;
+  margin-right: 8px;
+  button{
+      width: 7%;
+      background-color: #28a745;
+      color: white;
+  }
+  .inputSection{
+      width: 91%;
+      input{
+          border: none;
+          border: 1px solid #28a74521;
+      }
+  }
+  .form-control{
+      height: 0 !important;
+  }
+  .example-full-width {
+      height: 35px !important;
+  }
 }
 .tableTools{
 padding-bottom: 15px;
@@ -182,16 +199,16 @@ padding-bottom: 15px;
 }
 
 mat-form-field{
-padding: 0;
-margin: 0;
-color: #28a745;
-line-height: normal;
-box-sizing: initial;
-input{
-    padding: 0;
-    border: none;
-    margin: 0;
-}
+  padding: 0;
+  margin: 0;
+  color: #28a745;
+  line-height: normal;
+  box-sizing: initial;
+  input{
+      padding: 0;
+      border: none;
+      margin: 0;
+  }
 }
 mat-form-field:focus{
 border: none;
@@ -203,22 +220,6 @@ input{
     border: none;
     margin: 0;
 }
-}
-.example-full-width {
-height: 42px !important;
-border: 2px solid #28a745;
-border-radius: 5px;
-background-color: transparent;
-padding: 0;
-margin: 0;
-}
-.searchBar {
-position: relative;
-top: -2px;
-padding: 0;
-margin: 0;
-color: #28a74596;
-border: none;
 }
 .searchBar {
 position: relative;
@@ -260,15 +261,10 @@ margin-top: -70px;
 display: flex;
 }
 
-
 @media screen and (max-width: 1200px) {
 .title h2{
     font-size: 15px;
     text-transform: uppercase;
-}
-.example-full-width {
-    height: 42px !important;
-    border: 2px solid #28a745;
 }
 }
 @media screen and (max-width: 1100px) {

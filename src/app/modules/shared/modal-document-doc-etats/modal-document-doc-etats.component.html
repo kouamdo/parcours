@@ -1,16 +1,12 @@
-<div id="mainBlock" class="bg-light card modalCategorie">
-    <form class="w-100">
+<div id="mainBlock" class="bg-light card">
+    <form class="w-100" id="mainBlockDockEtat">
         <div class="form-group mt-5">
             <div class='card-hearder'>
                 <h2 class="modal-title">{{'document.title6' | translate}}</h2>
             </div>
             <div class="newAttSection">
-                <div class="sarchBlock">
+                <div class="searchBlock">
                     <form [formGroup]="formeDocEtats" *ngIf="formeDocEtats" class="example-form">
-                        <div class="ordreInput">
-                            <label for="ordreDocEtat">{{'doc-etats.form.text3' | translate}}</label>
-                            <input class="form-control" type="number" formControlName="ordreDocEtats" name="ordreDocEtat" id="">
-                        </div>
                         <div class="etatInput">
                             <label>{{'doc-etats.button1' | translate}}</label>
                             <mat-form-field class="example-full-width" appearance="fill">
@@ -24,16 +20,11 @@
                             </mat-form-field>
                         </div>
                     </form>
-                    <div *ngIf="selected && f['ordreDocEtats'].errors && !ordreExiste && !etatExiste" class="texteErreur">
-                        <p *ngIf="f['ordreDocEtats'].errors['required']">{{'lists.text1' | translate}}</p>
-                    </div>
-                    <div *ngIf="selected && f['ordreDocEtats'].errors && !etatExiste" class="texteErreur">
-                        <p *ngIf="ordreExiste">{{'doc-etats.form.text4' | translate}}</p>
-                    </div>
-                    <div *ngIf="selected && f['ordreDocEtats'].errors" class="texteErreur">
-                        <p *ngIf="etatExiste">{{'doc-etats.form.text5' | translate}}</p>
+                    <div *ngIf="selected && etatExiste" class="texteErreur">
+                        <p>{{'doc-etats.form.text5' | translate}}</p>
                     </div>
                 </div>
+
                 <!-- tableau listing des etats du document -->
 
                 <div class="card-body p-0 tableBlock" id="tableList">
@@ -46,23 +37,25 @@
                                 <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.etat.libelle}} </td>
                             </ng-container>
 
-                            <!-- ordre Column -->
-                            <ng-container matColumnDef="ordre">
-                                <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{'doc-etats.form.text3' | translate}} </th>
-                                <td class="text-dark containCell" mat-cell *matCellDef="let element, let cpt = index">
-                                    <div class="ordreInput2">
-                                        <p *ngIf="changeOrdreValeur && ordreExiste" class="texteErreurChange">
-                                            <span>{{'doc-etats.form.text4' | translate}}</span>
-                                        </p>
-                                        <input class="form-control w-25" type="number" name="" id="" [value]="element.ordre" (change)="verificationChangementOrdre(element, $event, cpt)">
-                                    </div>
-                                </td>
+                            <!-- validation Column -->
+                            <ng-container matColumnDef="validation">
+                                <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{'doc-etats.form.text6' | translate}} </th>
+                                <td class="text-dark containCell" mat-cell *matCellDef="let element">{{element.validation?.libelle}}</td>
                             </ng-container>
 
-                            <!-- role Column -->
-                            <ng-container matColumnDef="role">
-                                <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{'doc-etats.form.text6' | translate}} </th>
-                                <td class="text-dark containCell" mat-cell *matCellDef="let element">{{element.validation?.roleValidation.titre}}</td>
+                            <!-- EtatPrecedant Column -->
+                            <ng-container matColumnDef="EtatPrecedant">
+                                <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{'etats.table.title2' | translate}}</th>
+                                <td class="text-dark containCell choixCell" mat-cell *matCellDef="let element, let i = index">
+                                    <mat-form-field class="example-full-width-select" appearance="fill">
+                                        <mat-select [disabled]="i == 0" [(ngModel)]="element.etat.etatPrecedant" [ngModelOptions]="{standalone: true}" multiple>
+                                        <mat-option *ngFor="let etat of effaceEtatCourrant(element)" [value]="etat.etat">{{etat.etat.libelle}}</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                    <div class="coverFull" *ngIf="i == 0">
+                                        <span><i class="fa fa-times-circle" aria-hidden="true"></i></span>
+                                    </div>
+                                </td>
                             </ng-container>
 
                             <!-- Actions column -->
@@ -74,7 +67,7 @@
                                             <i class="fa fa-trash text-danger" aria-hidden="true"></i>
                                         </button>
                                         <span><i class="fa fa-info-circle text-info ml-1" aria-hidden="true" title="{{'preconisation.table.title4' | translate}}"></i></span>
-                                        <button mat-button class="btn btnAddValidation" title="{{'doc-etats.button2' | translate}}" (click)="openRoleValidationDialog(); getIdDocEtat(element.id)">
+                                        <button mat-button class="btn btnAddValidation" title="{{'doc-etats.button2' | translate}}" (click)="openRoleValidationDialog(); getIdDocEtat(element.id); initialiseValidationControl(element.validation)">
                                             <i class="fa fa-plus" aria-hidden="true"></i>
                                         </button>
                                     </div>

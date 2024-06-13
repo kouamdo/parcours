@@ -7,11 +7,14 @@
 .ordreInput{
     input{
         width: 100px;
+        border: 2px solid #28a745 !important;
+        background-color: #28a74614;
     }
 }
-.sarchBlock{
+.searchBlock{
     width: 100% !important;
     padding: 0 5px;
+    position: relative;
     div{
         display: flex;
         align-items: center;
@@ -22,7 +25,10 @@
     form{
         display: flex;
         align-items: center;
-        justify-content: space-between;
+        justify-content: flex-start;
+    }
+    .form-control{
+        height: 0 !important;
     }
 }
 .example-form{
@@ -35,26 +41,27 @@
         margin-right: 2px;
         width: fit-content;
     }
-    .example-full-width {
-        height: 42px !important;
-        border: 2px solid #28a745;
-        .form-control{
-            box-shadow: none !important;
-            border: none !important;
-            background-color: transparent;
-        }
-    }
     .mat-input{
         position: absolute;
         bottom: 100px;
         height: 20px !important;
     }
 }
+.example-full-width-select {
+    height: 40px !important;
+    width: 80%;
+    border: 2px solid #28a745;
+    position: absolute;
+    bottom: 2px;
+    left: 15px;
+}
 #tableList{
     margin-top: 50px !important;
 }
 .texteErreur{
     position: absolute;
+    right: 0;
+    bottom: 5%;
     p{
         font-size: small;
         font-style: italic;
@@ -85,8 +92,12 @@
         }
     }
 }
+.ordreInput2{
+    margin-left: 10%;
+}
 .ordreInput2 input{
     margin: auto;
+    width: 80px !important;
     height: 20px;
     position: absolute;
 }
@@ -96,6 +107,34 @@
     font-style: italic;
     position: relative;
     top: -2px;
+}
+select{
+    background-color: #d2d2d2;
+}
+.choixCell{
+    position: relative;
+}
+.coverFull{
+    display: none;
+}
+.choixCell:hover{
+    .coverFull{
+        display: block;
+        background-color: #d2d2d25f;
+        position: absolute;
+        top: 0;
+        height: 50px;
+        width: 100%;
+        display: flex;
+        span{
+            margin: auto;
+            i{
+                margin-top: 12px;
+                font-size: 18px;
+                color: #f571719d;
+            }
+        }
+    }
 }
 @media screen and (max-width: 950px ) {
     #mainBlock{
