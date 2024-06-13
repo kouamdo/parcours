@@ -103,43 +103,50 @@
                 <div *ngIf="f['libelle'].errors['required']">{{'ressource.form.text1' | translate}}</div>
               </div>
 
+            </div>
+            <div class="form-group">
+              <div class="champs">
+                <label for="" class="label">
+                  {{"document.table.title4" | translate}}
+                </label>
+                <div class="dropdown w-100">
+                  <!-- affichage list attributs selectiones -->
+                  <div class="listAttr">
+                    <button type="button" class="btn p-0"
+                      title="{{'lists.button9' | translate}} / {{'lists.button8' | translate}}"
+                      (click)="openAttributDialog()">
+                      <i class="fas fa-plus-square"></i>
+                    </button>
+                    <span *ngFor="let listeAttributs of ELEMENTS_TABLE_ATTRIBUTS_SELECT">
+                      {{listeAttributs.attributs!.titre! | lowercase}}<span>, </span>
+                    </span>
                   </div>
-                <div class="form-group">
-                  <div class="champs">
-                      <label for="" class="label">
-                          {{"document.table.title4" | translate}}
-                      </label>
-                      <div class="dropdown w-100">
-                          <!-- affichage list attributs selectiones -->
-                          <div class="listAttr">
-                              <button type="button" class="btn p-0" title="{{'lists.button9' | translate}} / {{'lists.button8' | translate}}" (click)="openAttributDialog()">
-                                  <i class="fas fa-plus-square"></i>
-                              </button>
-                              <span *ngFor="let listeAttributs of ELEMENTS_TABLE_ATTRIBUTS_SELECT">
-                                  {{listeAttributs.attributs!.titre! | lowercase}}<span>, </span>
-                              </span>
-                          </div>
-                      </div>
-                  </div>
+                </div>
               </div>
-                <div class="form-group">
-                  <div>
-                      <div class="champs">
-                        <label for="Scanner" class="label">
-                          {{'ressource.table.title10' | translate}}
-                        </label>
-                        <app-modal-codebarre-dialog  [multipleScan]="false"></app-modal-codebarre-dialog>
-                        <input type="text" readonly name="scanBarcode" formControlName="scanBarcode" [value]="scan_val" class="w-100 align-items-center form-control"> 
-                      </div>
-                  </div>
-              </div>
-              </div>
-              <div class="actionButton">
-                <button class="btn" routerLink="../list-ressources">{{'lists.button2' | translate}}</button>
-                <button type="submit" class="btn">{{btnLibelle}}</button>
+              <div *ngIf="submitted && ELEMENTS_TABLE_ATTRIBUTS_SELECT.length<1" class="alert alert-danger blockErreur">
+                <div>{{'document.form.text4' | translate}}</div>
               </div>
             </div>
-            </form>
-      </div>
+            <div class="form-group">
+              <div>
+                <div class="champs">
+                  <label for="Scanner" class="label">
+                    {{'ressource.table.title10' | translate}}
+                  </label>
+                  <app-modal-codebarre-dialog [multipleScan]="false"
+                    style="margin-right: 13px; margin-left: 21px; color: #28a745;"></app-modal-codebarre-dialog>
+                  <input type="text" readonly name="scanBarcode" formControlName="scanBarcode" [value]="scan_val"
+                    class="w-100 align-items-center form-control">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="actionButton">
+            <button class="btn" routerLink="../list-ressources">{{'lists.button2' | translate}}</button>
+            <button type="submit" class="btn">{{btnLibelle}}</button>
+          </div>
+        </div>
+      </form>
+    </div>
   </div>
 </div>
