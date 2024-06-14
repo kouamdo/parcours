@@ -68,7 +68,7 @@ import { AuthGuard } from '../auth/auth.guard';
 import { NotFoundComponent } from '../not-found/not-found.component';
 
 const routes: Routes = [
-  { path: 'dashboard', component: ModulesComponent, canActivate: [AuthGuard],
+  { path: 'parcours', component: ModulesComponent, canActivate: [AuthGuard],
     children: [
       {
         path: 'patient-nouveau',
@@ -396,7 +396,7 @@ const routes: Routes = [
       },
       {
         path: '',
-        redirectTo: '/dashboard',
+        redirectTo: '/parcours',
         pathMatch: 'full'
       },
       {
