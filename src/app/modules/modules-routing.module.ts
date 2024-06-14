@@ -69,7 +69,6 @@ import { NotFoundComponent } from '../not-found/not-found.component';
 import { CommonModule } from '@angular/common';
 
 const routes: Routes = [
-
   { path: 'parcours', component: ModulesComponent, canActivate: [AuthGuard],
     children: [
       {
