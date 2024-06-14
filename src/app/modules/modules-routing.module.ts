@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AttributsRoutingModule } from './components/attributs/attributs-routing.module';
+import { AttributsRoutingModule } from './attributs/attributs-routing.module';
 import { DistributeurRoutingModule } from './components/distributeur/distributeur-routing.module';
 import { DocumentsRoutingModule } from './components/documents/documents-routing.module';
 import { EtapeRoutingModule } from './components/etape/etape-routing.module';
@@ -21,8 +21,8 @@ import { ModulesComponent } from './modules.component';
 import { DetailPatientsComponent } from './components/patients/detail-patients/detail-patients.component';
 import { ListPatientsComponent } from './components/patients/list-patients/list-patients.component';
 import { NewPatientComponent } from './components/patients/new-patient/new-patient.component';
-import { ListAttributsComponent } from './components/attributs/list-attributs/list-attributs.component';
-import { NewAttributComponent } from './components/attributs/new-attribut/new-attribut.component';
+//import { ListAttributsComponent } from './components/attributs/list-attributs/list-attributs.component';
+//import { NewAttributComponent } from './components/attributs/new-attribut/new-attribut.component';
 import { ListDistributeursComponent } from './components/distributeur/list-distributeurs/list-distributeurs.component';
 import { NewDistributeurComponent } from './components/distributeur/new-distributeur/new-distributeur.component';
 import { ListFormDocumentComponent } from './components/documents/list-form-document/list-form-document.component';
@@ -66,11 +66,17 @@ import { ListValidationsComponent } from './components/validation/list-validatio
 import { NewValidationComponent } from './components/validation/new-validation/new-validation.component';
 import { AuthGuard } from '../auth/auth.guard';
 import { NotFoundComponent } from '../not-found/not-found.component';
+import { CommonModule } from '@angular/common';
 
 const routes: Routes = [
-  { path: 'dashboard', component: ModulesComponent, canActivate: [AuthGuard],
+
+  { path: 'parcours', component: ModulesComponent, canActivate: [AuthGuard],
     children: [
       {
+        path: 'attributs',
+        loadChildren: () => import('./attributs/attributs.module').then(m => m.AttributsModule) 
+      },
+     /* {
         path: 'patient-nouveau',
         title: 'Enregistrer un nouveau patient',
         component: NewPatientComponent,
@@ -393,10 +399,10 @@ const routes: Routes = [
         path: 'nouvelle-validation/:idValidation',
         title: 'Modifier une validation',
         component: NewValidationComponent
-      },
+      },*/
       {
         path: '',
-        redirectTo: '/dashboard',
+        redirectTo: '/parcours',
         pathMatch: 'full'
       },
       {
@@ -409,6 +415,8 @@ const routes: Routes = [
 
 @NgModule({
   imports: [
+    AttributsRoutingModule,
+    CommonModule,
     RouterModule.forChild(routes)
   ],
   exports: [RouterModule]

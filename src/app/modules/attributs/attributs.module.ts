@@ -15,8 +15,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { HttpLoaderFactory } from 'src/app/app.module';
 import { NewAttributComponent } from './new-attribut/new-attribut.component';
-import { SharedModule } from '../shared/shared.module';
-import { ModulesRoutingModule } from '../../modules-routing.module';
+import { SharedModule } from '../components/shared/shared.module';
+import { ModulesRoutingModule } from '../modules-routing.module';
 
 
 @NgModule({

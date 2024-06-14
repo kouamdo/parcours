@@ -11,7 +11,7 @@ import { MatSliderModule } from '@angular/material/slider';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { HttpLoaderFactory } from '../app.module';
-import { AttributsModule } from './components/attributs/attributs.module';
+import { AttributsModule } from './attributs/attributs.module';
 import { DistributeurModule } from './components/distributeur/distributeur.module';
 import { DocumentsModule } from './components/documents/documents.module';
 import { EtapeModule } from './components/etape/etape.module';

@@ -416,8 +416,8 @@ export class InMemDBService implements InMemoryDbService {
             icone: 'fas fa-user-cog',
             actif: '',
             elements: [
-              { nom: 'Créer', lien: './attribut-nouveau', bouton: 'false' },
-              { nom: 'Rechercher', lien: './list-attributs', bouton: 'false' },
+              { nom: 'Créer', lien: './attributs/attribut-nouveau', bouton: 'false' },
+              { nom: 'Rechercher', lien: './attributs/list-attributs', bouton: 'false' },
             ],
           },
           {
