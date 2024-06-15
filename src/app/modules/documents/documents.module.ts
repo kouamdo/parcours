@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
 
-import { AttributsRoutingModule } from './attributs-routing.module';
-import { ListAttributsComponent } from './list-attributs/list-attributs.component';
+import { DocumentsRoutingModule } from './documents-routing.module';
+import { NewFormDocumentComponent } from './new-form-document/new-form-document.component';
 import { HttpClient } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
@@ -11,21 +11,25 @@ import { MatInputModule } from '@angular/material/input';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
+import { BrowserModule } from '@angular/platform-browser';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { HttpLoaderFactory } from 'src/app/app.module';
-import { NewAttributComponent } from './new-attribut/new-attribut.component';
+import { ListFormDocumentComponent } from './list-form-document/list-form-document.component';
+import { ViewFormDocumentComponent } from './view-form-document/view-form-document.component';
 import { SharedModule } from '../shared/shared.module';
+import { MatSelectModule } from '@angular/material/select';
 import { ModulesRoutingModule } from '../modules-routing.module';
 
 
 @NgModule({
   declarations: [
-    ListAttributsComponent,
-    NewAttributComponent
+    NewFormDocumentComponent,
+    ListFormDocumentComponent,
+    ViewFormDocumentComponent
   ],
   imports: [
     CommonModule,
-    AttributsRoutingModule,
+    DocumentsRoutingModule,
     FormsModule,
     ModulesRoutingModule,
     ReactiveFormsModule,
@@ -35,6 +39,7 @@ import { ModulesRoutingModule } from '../modules-routing.module';
     MatPaginatorModule,
     MatTableModule,
     MatSortModule,
+    MatSelectModule,
     SharedModule,
     TranslateModule.forChild({
         loader: {
@@ -47,4 +52,4 @@ import { ModulesRoutingModule } from '../modules-routing.module';
   ],
   providers: [DatePipe],
 })
-export class AttributsModule { }
+export class DocumentsModule { }

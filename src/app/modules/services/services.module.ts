@@ -1,39 +1,39 @@
 import { NgModule } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
-
-import { AttributsRoutingModule } from './attributs-routing.module';
-import { ListAttributsComponent } from './list-attributs/list-attributs.component';
+import { ServicesRoutingModule } from './services-routing.module';
+import { ListServicesComponent } from './list-services/list-services.component';
+import { NewServicesComponent } from './new-services/new-services.component';
 import { HttpClient } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { HttpLoaderFactory } from 'src/app/app.module';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-import { HttpLoaderFactory } from 'src/app/app.module';
-import { NewAttributComponent } from './new-attribut/new-attribut.component';
 import { SharedModule } from '../shared/shared.module';
 import { ModulesRoutingModule } from '../modules-routing.module';
 
 
 @NgModule({
   declarations: [
-    ListAttributsComponent,
-    NewAttributComponent
+    ListServicesComponent,
+    NewServicesComponent
   ],
   imports: [
     CommonModule,
-    AttributsRoutingModule,
+    ServicesRoutingModule,
     FormsModule,
-    ModulesRoutingModule,
     ReactiveFormsModule,
     MatAutocompleteModule,
+    ModulesRoutingModule,
     MatInputModule,
     MatFormFieldModule,
     MatPaginatorModule,
     MatTableModule,
+    SharedModule,
     MatSortModule,
     SharedModule,
     TranslateModule.forChild({
@@ -47,4 +47,4 @@ import { ModulesRoutingModule } from '../modules-routing.module';
   ],
   providers: [DatePipe],
 })
-export class AttributsModule { }
+export class ServicesModule { }

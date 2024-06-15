@@ -13,7 +13,6 @@ import { DonneesEchangeService } from '../../services/donnees-echange/donnees-ec
 export class MenuComponent implements OnInit, OnChanges {
   menuUser$:Observable<IMenus>=EMPTY;
   fonctionnalites!: IFonctionnalites[];
-  visible: number = -1;
   @Input()
   langueParent :string = 'fr';
   userId !:any;
@@ -50,12 +49,6 @@ export class MenuComponent implements OnInit, OnChanges {
 
   private getMenus(){
     return  this.menuService.getMenuByUserAndLangue(this.userId,this.langueParent);
-  }
-
-  getSousMenu (index: number){
-    console.log("index :", index);
-    
-    this.visible = index;
   }
 
   getElementMenu(titre:string){
