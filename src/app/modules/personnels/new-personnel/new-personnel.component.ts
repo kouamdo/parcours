@@ -67,7 +67,6 @@ export class NewPersonnelComponent implements OnInit {
          })
        });
      }
-     this.titre=this.dataEnteteMenuService.dataEnteteMenu
    }
 
   get f() {

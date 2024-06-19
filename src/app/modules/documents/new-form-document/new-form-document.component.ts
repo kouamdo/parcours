@@ -2,7 +2,7 @@ import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, FormArray, FormBuilder, Validators } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatSort, Sort } from '@angular/material/sort';
+import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Observable, EMPTY } from 'rxjs';
@@ -28,7 +28,6 @@ import { IAssociationCategorieAttributs } from 'src/app/modele/association-categ
 import { TypeMouvement } from 'src/app/modele/typeMouvement';
 import { ModalDocEtatsComponent } from '../../shared/modal-doc-etats/modal-doc-etats.component';
 import { IDocEtats } from 'src/app/modele/doc-etats';
-
 
 @Component({
   selector: 'app-new-form-document',
@@ -58,7 +57,6 @@ export class NewFormDocumentComponent implements OnInit {
   submitted: boolean=false;
   validation: boolean=false;
   serviceDeMission!: IService;
-  titre:string='';
 
   // variables attributs, pour afficher le tableau d'attributs sur l'IHM
   ELEMENTS_TABLE_ATTRIBUTS: IAttributs[] = [];
@@ -114,7 +112,6 @@ export class NewFormDocumentComponent implements OnInit {
     let idDocument = this.infosPath.snapshot.paramMap.get('idDocument');
     if((idDocument != null) && idDocument!==''){
       this.btnLibelle="Modifier";
-      this.titre="Document à Modifier";
       this.serviceDocument.getDocumentById(idDocument).subscribe(x =>
       {
         this.document = x;
@@ -197,7 +194,6 @@ export class NewFormDocumentComponent implements OnInit {
       this.donneeDocCatService.dataDocumentSousDocuments = []
       this.donneeDocCatService.dataDocumentEtats = []
     }
-    this.titre=this.dataEnteteMenuService.dataEnteteMenu
   }
 
 

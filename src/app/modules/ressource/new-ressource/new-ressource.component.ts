@@ -42,7 +42,6 @@ export class NewRessourceComponent implements OnInit {
     description: '',
     etat: false,
   };
-  titre: string = '';
   scan_val: any | undefined;
   constructor(
     private formBuilder: FormBuilder,
@@ -126,7 +125,6 @@ export class NewRessourceComponent implements OnInit {
     this.familleService.getTypeUnite().subscribe((u) => {
       this.unites = u.type;
     });
-    this.titre = this.dataEnteteMenuService.dataEnteteMenu;
   }
 
   get f() {

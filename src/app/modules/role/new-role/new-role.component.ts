@@ -19,7 +19,6 @@ export class NewRoleComponent implements OnInit {
   forme: FormGroup;
   btnLibelle: string="Ajouter";
   submitted: boolean=false;
-  titre:string='';
   //TODO validation du formulaire. particulièrment les mail
   constructor(private formBuilder:FormBuilder, private roleService:RolesService,private dataEnteteMenuService:DonneesEchangeService,private router:Router, private infosPath:ActivatedRoute, private datePipe: DatePipe){
     this.forme = this.formBuilder.group({
@@ -47,7 +46,6 @@ export class NewRoleComponent implements OnInit {
         })
       });
     }
-    this.titre=this.dataEnteteMenuService.dataEnteteMenu
   }
 
 

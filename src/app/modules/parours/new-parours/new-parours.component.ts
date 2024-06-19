@@ -19,8 +19,6 @@ import { ServicesService } from 'src/app/services/services/services.service';
 import { v4 as uuidv4 } from 'uuid';
 import { MatDialog } from '@angular/material/dialog';
 import { NewEtapeComponent } from '../../etape/new-etape/new-etape.component';
-import { EtapeModule } from '../../etape/etape.module';
-import { IAfficheDocument } from 'src/app/modele/affiche-document';
 import { IAfficheEtape } from 'src/app/modele/affiche-etape';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 
@@ -80,7 +78,6 @@ export class NewParoursComponent implements OnInit {
   idService: string = '';
   //service : IService | undefined
   serviceDeEtape!: IService;
-  titre: string = '';
 
   constructor(
     private formBuilder: FormBuilder,
@@ -185,7 +182,6 @@ export class NewParoursComponent implements OnInit {
     let idParours = this.infosPath.snapshot.paramMap.get('idParours');
     if (idParours != null && idParours !== '') {
       this.btnLibelle = 'Modifier';
-      this.titre = 'service à Modifier';
       this.serviceParours.getParoursById(idParours).subscribe((x) => {
         this.parours = x;
         this.forme.setValue({
@@ -196,8 +192,6 @@ export class NewParoursComponent implements OnInit {
         this.forme.controls['_etape'].setValue(this.parours.etape);
       });
     }
-
-    this.titre = this.dataEnteteMenuService.dataEnteteMenu;
   }
 
   setIdEtape(id_etape: string, libelle_etape: string) {

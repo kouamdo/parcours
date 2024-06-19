@@ -2,7 +2,7 @@
   <div class="card block" id="top2" *ngIf="etape">
     <!--<div class="card-header pt-4 pb-4 entete" class="entete pt-4 pb-4 ">{{'distributeur.table.title' | translate}}</div>-->
     <div class="card-header" class="entete pt-4 pb-4">
-      {{'etape.table.title' | translate}} {{titre}}
+      {{'etape.table.title' | translate}}
     </div>
     <div class="card-body">
       <form [formGroup]="forme" (ngSubmit)="onSubmit()" *ngIf="forme">

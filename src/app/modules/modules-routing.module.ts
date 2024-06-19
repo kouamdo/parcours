@@ -82,7 +82,7 @@ const routes: Routes = [
         loadChildren: () => import('./etats/etats.module').then(m => m.EtatsModule) 
       },
       {
-        path: 'parcour',
+        path: 'parcours',
         loadChildren: () => import('./parours/parours.module').then(m => m.ParoursModule) 
       },
       {

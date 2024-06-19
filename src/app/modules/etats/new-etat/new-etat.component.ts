@@ -16,7 +16,6 @@ export class NewEtatComponent {
   formeEtat: FormGroup;
   btnLibelle: string="Ajouter";
   submitted: boolean=false;
-  titre:string='';
 
   constructor(private formBuilder:FormBuilder,private dataEnteteMenuService:DonneesEchangeService, private EtatService: EtatService,private router:Router, private infosPath:ActivatedRoute) {
     this.formeEtat = this.formBuilder.group({
@@ -29,7 +28,6 @@ export class NewEtatComponent {
     let idEtat = this.infosPath.snapshot.paramMap.get('idEtat');
     if((idEtat != null) && idEtat!==''){
       this.btnLibelle="Modifier";
-      this.titre = "etat à Modifier";
       this.EtatService.getEtatById(idEtat).subscribe(x =>
         {
           this.etats = x;
@@ -39,7 +37,6 @@ export class NewEtatComponent {
           })
       });
     }
-    this.titre = this.dataEnteteMenuService.dataEnteteMenu
   }
 
   get f(){

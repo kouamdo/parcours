@@ -18,7 +18,6 @@ export class NewValidationComponent implements OnInit {
   forme: FormGroup;
   btnLibelle: string="Ajouter";
   submitted: boolean=false;
-  titre:string='';
   roles: IRole[]|undefined;
   initialDateCreation = new FormControl(new Date());
   initialDateModification = new FormControl(new Date());
@@ -62,7 +61,6 @@ export class NewValidationComponent implements OnInit {
     );
     if((idValidation != null) && idValidation!==''){
       this.btnLibelle="Modifier";
-      this.titre="Modifier validation";
       this.validationservice.getValidationById(idValidation).subscribe(x =>
         {
           this.validation = x;

@@ -86,7 +86,6 @@ export class NewAttributComponent implements OnInit {
         this.inputValeur = this.attribut?.valeursParDefaut;
       });
     }
-    this.titre = this.dataEnteteMenuService.dataEnteteMenu;
   }
 
   get f() {

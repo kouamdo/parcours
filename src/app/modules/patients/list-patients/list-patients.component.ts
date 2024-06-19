@@ -10,8 +10,6 @@ import { ServicesService } from 'src/app/services/services/services.service';
 import { TicketsService } from 'src/app/services/tickets/tickets.service';
 import {
   FormControl,
-  FormsModule,
-  ReactiveFormsModule,
   FormBuilder,
   FormGroup,
   FormArray,

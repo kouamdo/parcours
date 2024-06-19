@@ -1,16 +1,13 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit, ViewChild, Inject } from '@angular/core';
 import {
-  FormArray,
   FormBuilder,
   FormGroup,
-  Validators,
-  FormControl,
+  Validators
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatSort, Sort } from '@angular/material/sort';
-import { Observable, EMPTY } from 'rxjs';
+import { MatSort } from '@angular/material/sort';
 import { IEtape } from 'src/app/modele/etape';
 import { DonneesEchangeService } from 'src/app/services/donnees-echange/donnees-echange.service';
 import { EtapesService } from 'src/app/services/etapes/etapes.service';
@@ -33,7 +30,6 @@ export class NewEtapeComponent implements OnInit {
   forme: FormGroup;
   btnLibelle: string = 'Ajouter';
   submitted: boolean = false;
-  titre: string = '';
   documents: IDocument[] = [];
   documentId: string[] = [];
 

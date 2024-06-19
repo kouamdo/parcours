@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule, DecimalPipe } from '@angular/common';
 
 import { ExemplaireDocumentRoutingModule } from './exemplaire-document-routing.module';
-import { NewExemplaireComponent } from './new-exemplaire/new-exemplaire.component';
 import { ViewExemplaireComponent } from './view-exemplaire/view-exemplaire.component';
 import { HttpClient } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -22,6 +21,7 @@ import { HistoriqueParPersonneComponent } from './historique-par-personne/histor
 import { PageIntermediaireComponent } from './page-intermediaire/page-intermediaire.component';
 import { NgxPrintModule } from 'ngx-print';
 import { ModulesRoutingModule } from '../modules-routing.module';
+import { NewExemplaireComponent } from './new-exemplaire/new-exemplaire.component';
 
 
 @NgModule({

@@ -42,7 +42,6 @@ export class NewTicketComponent implements OnInit {
     idPersonne: null,
     statut: ''
   };
-  titre:string='';
   constructor(private formBuilder:FormBuilder,private dataEnteteMenuService:DonneesEchangeService,private ticketsService:TicketsService,private router:Router, private infosPath:ActivatedRoute,
     private serviceService:ServicesService, private datePipe: DatePipe) {
     this.forme = this.formBuilder.group({})
@@ -54,7 +53,6 @@ export class NewTicketComponent implements OnInit {
     let idTicket = this.infosPath.snapshot.paramMap.get('idTicket');
     if((idTicket != null) && idTicket!==''){
       this.btnLibelle="Modifier";
-      this.titre="Ticket à Modifier";
       this.ticketsService.getTicketById(idTicket).subscribe(x =>
         {
           this.ticket = x;
@@ -67,7 +65,6 @@ export class NewTicketComponent implements OnInit {
           })
       });
     }
-    this.titre=this.dataEnteteMenuService.dataEnteteMenu
   }
   get f(){
     return this.forme.controls;

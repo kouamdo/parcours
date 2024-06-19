@@ -1,7 +1,7 @@
 <div id="mainSection">
   <div class="card block" id="top1">
       <div class="card-header" class="entete pt-4 pb-4">
-        {{'ressource.table.title' | translate}} {{titre}}
+        {{'ressource.table.title' | translate}}
       </div>
       <div class="card-body">
           <form [formGroup]="forme" (ngSubmit)="onSubmit(forme.value)" *ngIf="forme" >

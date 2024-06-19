@@ -25,7 +25,7 @@ export class NewPatientComponent implements OnInit {
   forme: FormGroup;
   btnLibelle: string = 'Ajouter';
   submitted: boolean = false;
-  titre: string = 'Ajouter un nouveau Patient';
+  titre: string = '';
   myControl = new FormControl<string | IPatient>('');
   initialDate = new FormControl(new Date());
   qrCodeValue: string = '';
@@ -165,7 +165,6 @@ export class NewPatientComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.titre = this.dataEnteteMenuService.dataEnteteMenu;
     let idPatient = this.infosPath.snapshot.paramMap.get('idPatient');
     if (idPatient != null && idPatient !== '') {
       this.btnLibelle = 'Modifier';
@@ -192,7 +191,6 @@ export class NewPatientComponent implements OnInit {
         });
       });
     }
-    this.titre = this.dataEnteteMenuService.dataEnteteMenu;
   }
 
   get f() {
