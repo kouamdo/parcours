@@ -3,219 +3,183 @@
         <div class="card-header pt-2 pb-2 entete">
             {{"personnel.table.title12" | translate}}
         </div>
-        <div class="card-body">
-            <div class='card-hearder'>
-                <h2 class="modal-title">Personnel: {{ nomPersonnel }}</h2>
-            </div>
-            <div *ngIf="verif" class="alert alert-danger">
-                <div>{{textError}}</div>
-            </div>
-            <form [formGroup]="forme" *ngIf="forme">
-                <div class="form-group mt-3">
-                    <div class="newAttSection">
-                        <div class="div-date">
-                            <div class="form-group">
-                                <div>
-                                    <div class="champs">
-                                        <label for="dateEntree" class="label">
-                                            {{"personnel.table.title6" | translate}}
-                                        </label>
-                                        <input type="date" formControlName="dateEntree" name="dateEntree"
-                                            id="dateEntree" placeholder="{{'personnel.table.title3' | translate}}"
-                                            value="" required class="form-control">
-                                    </div>
-                                </div>
-                                <div *ngIf="submitted && f['dateEntree'].errors" class="alert alert-danger">
-                                    <div *ngIf="f['dateEntree'].errors['required']">{{'personnel.form.text5' |
-                                        translate}}</div>
+    <div class="card-body">
+        <div class='card-hearder'>
+            <h2 class="modal-title">Personnel: {{ nomPersonnel }}</h2>
+        </div>
+        <div *ngIf="verif" class="alert alert-danger" >
+            <div>{{textError}}</div>
+        </div>
+        <form [formGroup]="forme" *ngIf="forme">
+            <div class="form-group mt-3">               
+                <div class="newAttSection">
+                    <div class="div-date">
+                        <div class="form-group">
+                            <div>
+                                <div class="champs">
+                                    <label for="dateEntree" class="label" >
+                                        {{"personnel.table.title6" | translate}}                                        
+                                    </label>
+                                    <input type="date" formControlName="dateEntree" name="dateEntree" id="dateEntree" placeholder="{{'personnel.table.title3' | translate}}" value="" required class="form-control">
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <div>
-                                    <div class="champs">
-                                        <label for="dateFin" class="label">
-                                            {{"personnel.table.title11" | translate}}
-                                        </label>
-                                        <input type="date" formControlName="dateFin" name="dateFin" id="dateSortie"
-                                            placeholder="{{'personnel.table.title3' | translate}}" value=""
-                                            class="form-control">
-                                    </div>
-                                </div>
-                                <div *ngIf=" forme.get('dateEntree')?.value >= forme.get('dateFin')?.value && forme.get('dateFin')?.value !== ''"
-                                    class="alert alert-danger">
-                                    <div>La date d'entrée doit etre inférieur à la date de fin</div>
-                                </div>
+                            <div *ngIf="submitted && f['dateEntree'].errors"  class="alert alert-danger" >
+                                <div *ngIf="f['dateEntree'].errors['required']">{{'personnel.form.text5' | translate}}</div>
                             </div>
                         </div>
                         <div class="form-group">
-                            <div class="form-inline mr-3">
-                                <form class="example-form label">
-                                    <label id="search">{{"personnel.table.title10" | translate}}</label>
-                                    <mat-form-field class="example-full-width" appearance="fill">
-                                        <mat-label class="searchBar">{{'personnel.search-bar' | translate}}</mat-label>
-                                        <input type="text" matInput placeholder="{{'personnel.search-bar' | translate}}"
-                                            aria-label="Rechercher" [formControl]="myControl" [matAutocomplete]="auto">
-                                        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
-                                            <mat-option *ngFor="let option of filteredOptions" [value]="option"
-                                                (onSelectionChange)="rechercherListingRole(option)">
-                                                {{option.titre}}
-                                            </mat-option>
-                                        </mat-autocomplete>
-                                    </mat-form-field>
-                                </form>
-                            </div>
-                        </div>
-
-                        <div class="tables">
-                            <!-- tableau listing des roles -->
-                            <div class="card-body p-0 tableBlock" id="tableList">
-                                <div class='table-responsive w-100'>
-                                    <table class='table table-sm table-centered table-striped table-bordered w-100'
-                                        mat-table [dataSource]="dataSource" matSort
-                                        (matSortChange)="announceSortChange($event)">
-
-
-                                        <!-- selection Column -->
-                                        <ng-container matColumnDef="selection">
-                                            <th class="text-dark containHead" mat-header-cell *matHeaderCellDef>
-                                                {{"personnel.table.title13" | translate}}</th>
-                                            <td class="text-dark containCell" mat-cell *matCellDef="let element">
-                                                <div id="actions" class="dropdown open">
-
-                                                    <label style="width: 2px;" for="role">
-                                                        <input type="checkbox" [value]="element" name="role" id="role"
-                                                            (change)="onCheckRoleChange($event, element)">
-                                                    </label>
-
-                                                </div>
-                                            </td>
-                                        </ng-container>
-
-                                        <!-- titre Column -->
-                                        <ng-container matColumnDef="titre">
-                                            <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef
-                                                mat-sort-header>{{"personnel.table.title14" | translate}}</th>
-                                            <td class="text-dark text-center containCell" mat-cell
-                                                *matCellDef="let element"> {{element.titre}} </td>
-                                        </ng-container>
-
-                                        <!-- description Column -->
-                                        <ng-container matColumnDef="description">
-                                            <th class="text-dark containHead" mat-header-cell *matHeaderCellDef>
-                                                {{"personnel.table.title15" | translate}}</th>
-                                            <td class="text-dark containCell" mat-cell *matCellDef="let element">
-                                                {{element.description}} </td>
-                                        </ng-container>
-
-                                        <!-- ete Column -->
-                                        <ng-container matColumnDef="etat">
-                                            <th class="text-dark containHead" mat-header-cell *matHeaderCellDef>
-                                                {{"personnel.table.title16" | translate}}</th>
-                                            <td class="text-dark containCell" mat-cell *matCellDef="let element">
-                                                {{element.etat}} </td>
-                                        </ng-container>
-
-                                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-                                    </table>
-
-                                    <mat-paginator style="background-color:  rgba(40, 167, 69, 0.79);"
-                                        [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons
-                                        aria-label="Select page of periodic elements">
-                                    </mat-paginator>
-                                </div>
-                                <div class="actionButton">
-                                    <button class="btn" (click)="annullerElement()">{{"personnel.table.actions.link6" |
-                                        translate}}</button>
-                                    <button type="submit" class="btn btnValidation"
-                                        (click)="validateElement()">{{"personnel.table.actions.link1" |
-                                        translate}}</button>
+                            <div>
+                                <div class="champs">
+                                    <label for="dateFin" class="label" >
+                                        {{"personnel.table.title11" | translate}}
+                                    </label>
+                                    <input type="date" formControlName="dateFin" name="dateFin" id="dateSortie" placeholder="{{'personnel.table.title3' | translate}}" value="" class="form-control">
                                 </div>
                             </div>
-
-                            <!-- tableau affichage des resultats -->
-                            <div class="result">
-                                <h2>
-                                    {{'document.title1' | translate}}
-                                </h2>
-                                <div class="card">
-                                    <div class="card-body p-0 tableBlock" id="tableResultats">
-                                        <div class='table-responsive w-100 m-0'>
-                                            <table class='table table-sm table-centered table-striped w-100' mat-table
-                                                [dataSource]="dataSourceRoleResultat" matSort
-                                                (matSortChange)="announceSortChange($event)">
-                                                <!-- titre Column -->
-                                                <ng-container matColumnDef="role">
-                                                    <th class="text-dark pl-5 containHead" mat-header-cell
-                                                        *matHeaderCellDef mat-sort-header>{{"personnel.table.title16" |
-                                                        translate}}</th>
-                                                    <td class="text-dark text-center containCell" mat-cell
-                                                        *matCellDef="let element"> {{element.role.titre}} </td>
-                                                </ng-container>
-                                                <!-- date entree Column -->
-                                                <ng-container matColumnDef="date debut">
-                                                    <th class="text-dark containHead" mat-header-cell *matHeaderCellDef>
-                                                        {{"personnel.table.title6" | translate}}</th>
-                                                    <td class="text-dark containCell" mat-cell
-                                                        *matCellDef="let element, let i = index">
-                                                        <input type="date"
-                                                            (change)="verificationModificationDansTableau(element, $event, i, 'debut')"
-                                                            [value]="element.dateDebut" name="dateEntreeM"
-                                                            id="dateEntreeM" class="form-control modifDate">
-
-                                                    </td>
-                                                </ng-container>
-
-                                                <!-- date fin Column -->
-                                                <ng-container matColumnDef="date fin">
-                                                    <th class="text-dark containHead" mat-header-cell *matHeaderCellDef>
-                                                        {{"personnel.table.title11" | translate}}</th>
-                                                    <td class="text-dark containCell" mat-cell
-                                                        *matCellDef="let element; let i = index">
-                                                        <input type="date"
-                                                            (change)="verificationModificationDansTableau(element, $event, i, 'fin')"
-                                                            [value]="element.dateFin" name="dateFinM" id="dateFinM"
-                                                            class="form-control modifDate">
-
-                                                    </td>
-                                                </ng-container>
-
-
-                                                <!-- actions Column -->
-                                                <ng-container matColumnDef="annuler">
-                                                    <th class="text-dark containHead" mat-header-cell *matHeaderCellDef>
-                                                        {{"personnel.table.actions.link6" | translate}}</th>
-                                                    <td class="text-dark containCell" mat-cell
-                                                        *matCellDef="let element; let i = index">
-                                                        <div class="actions">
-                                                            <button style="font-size: 10px;" class="btn p-0" name="role"
-                                                                id="role" title="clicker pour annuler la selection"
-                                                                (click)="retirerSelectionRole(i)">
-                                                                <i class="fa fa-trash text-danger"
-                                                                    aria-hidden="true"></i>
-                                                            </button>
-                                                        </div>
-                                                    </td>
-                                                </ng-container>
-                                                <tr mat-header-row *matHeaderRowDef="displayedrolesColumns"></tr>
-                                                <tr mat-row *matRowDef="let row; columns: displayedrolesColumns;"></tr>
-                                            </table>
-                                            <mat-paginator style="background-color: rgba(40, 167, 69, 0.79);"
-                                                [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons
-                                                aria-label="Select page of periodic elements">
-                                            </mat-paginator>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="actionButton">
-                                    <button type="submit" class="btn btnfinal btnValidation"
-                                        (click)="onSubmit(dataSourceRoleResultat)">Valider</button>
-                                </div>
+                            <div *ngIf=" forme.get('dateEntree')?.value >= forme.get('dateFin')?.value && forme.get('dateFin')?.value !== ''" class="alert alert-danger" >
+                                <div>La date d'entrée doit etre inférieur à la date de fin</div>
                             </div>
                         </div>
                     </div>
+                    <div class="form-group">
+                        <div class="form-inline mr-3">
+                            <form class="example-form label">
+                                <label id="search">{{"personnel.table.title10" | translate}}</label>
+                                <mat-form-field class="example-full-width" appearance="fill">
+                                  <mat-label class="searchBar">{{'personnel.search-bar' | translate}}</mat-label>
+                                  <input type="text" matInput placeholder="{{'personnel.search-bar' | translate}}" aria-label="Rechercher" [formControl]="myControl" [matAutocomplete]="auto">
+                                  <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+                                    <mat-option *ngFor="let option of filteredOptions" [value]="option" (onSelectionChange)="rechercherListingRole(option)">
+                                      {{option.titre}}
+                                    </mat-option>
+                                  </mat-autocomplete>
+                                </mat-form-field>
+                            </form>
+                        </div>
+                    </div>
+    
+                    <div class="tables">
+                        <!-- tableau listing des roles -->   
+                    <div class="card-body p-0 tableBlock" id="tableBlock">
+                        <div class='table-responsive w-100'>
+                            <table class='table table-sm table-centered table-striped table-bordered w-100' mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)">
+                    
+    
+                                 <!-- selection Column -->
+                                 <ng-container matColumnDef="selection">
+                                    <th class="text-dark containHead" mat-header-cell *matHeaderCellDef>{{"personnel.table.title13" | translate}}</th>
+                                    <td class="text-dark containCell" mat-cell *matCellDef="let element">
+                                        <div id="actions" class="dropdown open">
+                                            
+                                            <label style="width: 2px;" for="role">
+                                                <input type="checkbox" [value]="element" name="role" id="role" (change)="onCheckRoleChange($event, element)">
+                                            </label>
+                                            
+                                        </div>
+                                    </td>
+                                  </ng-container>
+    
+                              <!-- titre Column -->
+                              <ng-container matColumnDef="titre">
+                                <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header>{{"personnel.table.title14" | translate}}</th>
+                                <td class="text-dark text-center containCell" mat-cell *matCellDef="let element"> {{element.titre}} </td>
+                              </ng-container>
+              
+                              <!-- description Column -->
+                              <ng-container matColumnDef="description">
+                                <th class="text-dark containHead" mat-header-cell *matHeaderCellDef>{{"personnel.table.title15" | translate}}</th>
+                                <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.description}} </td>
+                              </ng-container>
+              
+                              <!-- ete Column -->
+                              <ng-container matColumnDef="etat">
+                                <th class="text-dark containHead" mat-header-cell *matHeaderCellDef>{{"personnel.table.title16" | translate}}</th>
+                                <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.etat}} </td>
+                              </ng-container>
+    
+                              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                            </table>
+                            
+                            <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+                                    showFirstLastButtons
+                                    aria-label="Select page of periodic elements">
+                            </mat-paginator>
+                        </div>
+                        <div class="actionButton valBtn" >
+                            <button class="btn reinitialiser" (click)="annullerElement()" title="{{'lists.button3' | translate}}">
+                                <i class="fa fa-undo" aria-hidden="true"></i>
+                            </button>
+                            <button type="submit" class="btn btnValidation" (click)="validateElement()" title="{{'lists.button9' | translate}}">
+                                <i class="fa fa-plus" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- tableau affichage des resultats -->
+                    <div class="result">
+                        <h2>
+                            {{'document.title1' | translate}}
+                        </h2>
+                        <div class="card" >
+                            <div class="card-body p-0 tableBlock" id="tableResultats">
+                                <div class='table-responsive w-100 m-0'>
+                                    <table class='table table-sm table-centered table-striped w-100' mat-table [dataSource]="dataSourceRoleResultat" matSort (matSortChange)="announceSortChange($event)">
+                                        <!-- titre Column -->
+                                        <ng-container matColumnDef="role">
+                                            <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header>{{"personnel.table.title16" | translate}}</th>
+                                            <td class="text-dark text-center containCell" mat-cell *matCellDef="let element"> {{element.role.titre}} </td>
+                                        </ng-container>
+                                            <!-- date entree Column -->
+                                        <ng-container matColumnDef="date debut">
+                                            <th class="text-dark containHead" mat-header-cell *matHeaderCellDef>{{"personnel.table.title6" | translate}}</th>
+                                            <td class="text-dark containCell" mat-cell *matCellDef="let element, let i = index">
+                                                <input type="date" (change)="verificationModificationDansTableau(element, $event, i, 'debut')"  [value]="element.dateDebut" name="dateEntreeM" id="dateEntreeM" class="form-control modifDate">
+                                                
+                                            </td>
+                                        </ng-container>
+                        
+                                        <!-- date fin Column -->
+                                        <ng-container matColumnDef="date fin">
+                                            <th class="text-dark containHead" mat-header-cell *matHeaderCellDef>{{"personnel.table.title11" | translate}}</th>
+                                            <td class="text-dark containCell" mat-cell *matCellDef="let element; let i = index">
+                                                <input type="date" (change)="verificationModificationDansTableau(element, $event, i, 'fin')"   [value]="element.dateFin" name="dateFinM" id="dateFinM" class="form-control modifDate">
+                                              
+                                            </td>
+                                        </ng-container>
+    
+                              
+                                        <!-- actions Column -->
+                                        <ng-container matColumnDef="annuler">
+                                            <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{"personnel.table.actions.link6" | translate}}</th>
+                                            <td class="text-dark containCell" mat-cell *matCellDef="let element; let i = index">
+                                                <div class="actions">
+                                                    <button style="font-size: 10px;"  class="btn p-0" name="role" id="role" title="clicker pour annuler la selection" (click)="retirerSelectionRole(i)">
+                                                        <i class="fa fa-trash text-danger" aria-hidden="true"></i>
+                                                    </button>
+                                                </div>
+                                            </td>
+                                        </ng-container>
+                                        <tr mat-header-row *matHeaderRowDef="displayedrolesColumns"></tr>
+                                        <tr mat-row *matRowDef="let row; columns: displayedrolesColumns;"></tr>
+                                    </table>
+                                    <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+                                                   showFirstLastButtons
+                                                   aria-label="Select page of periodic elements">
+                                    </mat-paginator>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="actionButton valBtn" >
+                            <button type="submit" class="btn btnfinal btnValidation" (click)="onSubmit(dataSourceRoleResultat)" title="{{'lists.button11' | translate}}">
+                                <i class="fa fa-check" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                    </div>
+                    </div>
                 </div>
-            </form>
-        </div>
+            </div>
+        </form>
+    </div>
     </div>
 </div>

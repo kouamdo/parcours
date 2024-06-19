@@ -14,9 +14,9 @@
                             </p> 
                         </div>
                         <div class="options pb-2">
-                            <button class="btn" (click)="ticketTraite()">traiter</button>
+                            <button class="btn retour" (click)="ticketTraite()">traiter</button>
                             <button class="btn boutonAppel" [ngClass]="{'boutonAppelEffet':ticketRecent?.statut === statutTicketAttente}" (click)="ticketAttente()">Appel</button>
-                            <button class="btn" (click)="ticketRenvoye()" title="Renvoyer dans la file">Renvoyer</button>
+                            <button class="btn retour" (click)="ticketRenvoye()" title="Renvoyer dans la file">Renvoyer</button>
                         </div>
                 </div>
             </div>

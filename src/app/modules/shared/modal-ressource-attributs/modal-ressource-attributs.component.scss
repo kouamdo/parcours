@@ -1,19 +1,8 @@
-*{
-    clear: both;
-}
 #mainSection{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
     padding: 10px;
     flex-direction: column;
     margin: auto;
     width: 70%;
-}
-.form-control{
-    box-shadow: 0 0 2px rgb(220, 220, 220);
-    height: 35px;
 }
 .champs{
     display: flex;
@@ -36,73 +25,28 @@
         }
     }
 }
-
-.actions button{
-    font-size: 10px;
-}
 .result{
     width: 100%;
 }
-.sarchBlock{
+.searchBlock{
     display: flex;
     justify-content: flex-end;
     width: 100%;
+    position: relative;
+    bottom: 20px;
 }
 .result h2{
     opacity: 0.6;
 }
 .example-full-width {
-    width: 100%;
     border: 2px solid #28a745;
 } 
 #tableList{
     margin: 10px 0 30px 0;
 }
-mat-form-field{
-    padding: 0;
-    margin: 0;
-    color: #28a745;
-    line-height: 0;
-    box-sizing: initial;
-    // width: 50px;
-    mat-label{
-        height: 20px;
-        padding: 0;
-        margin: 0;
-    }
-    input{
-        padding: 0;
-        border: none;
-        margin: 0;
-        // height: 25px;
-    }
-}
 .mat-header-cell {
     padding-top: 0;
     width: 20%;
-}
-.mat-cell {
-    height: 0;
-}
-.mat-row, .mat-cell {
-    padding: 2px 0 0 0;
-    margin: 0;
-}
-.mat-form-field-infix {
-    padding: 0;
-    border-top: none;
-}
-.mat-form-field-wrapper {
-    padding-bottom: 0 !important;
-}
-.containHead{
-    padding: 1% 0;
-}
-.containCell{
-    padding-top: 20px;
-}
-td{
-    font-size: 13px;
 }
 th{
     background-color: rgba(40, 167, 69, 0.2);
@@ -134,79 +78,6 @@ th{
     }
     label{
         font-weight: normal;
-    } 
-}
-.modal {
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* semi-transparent background */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: fixed;
-    overflow-y: scroll;
-}
-
-.modal-content {
-    background-color: white;
-    margin-top: 5px;
-    margin-bottom: 5px;
-    border-radius: 5px;
-    width: 70%;
-    height: auto;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* shadow effect */
-}
-
-.modal-header {
-    display: flex;
-    margin-bottom: 10px;
-    background-color: rgba(40, 167, 69, 0.2);
-    color: #28a745 !important;
-    width: 100%;
-    text-align: center;
-    align-items: center;
-}
-
-.modal-body {
-    margin-bottom: 10px;
-}
-
-.modal-footer {
-    display: flex;
-    justify-content: flex-end;
-}
-
-:host ::ng-deep .mat-radio-button.mat-accent.mat-radio-checked .mat-radio-inner-circle {
-    background-color: rgb(6, 88, 182) !important; /* Change this to your desired color */
-  }
-  
-:host ::ng-deep .mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle,
-:host ::ng-deep .mat-radio-button.mat-accent.mat-radio-checked .mat-radio-inner-circle {
-  border-color: rgb(6, 88, 182) !important; /* Change this to your desired color */
-}
-@media screen and (max-width: 1200px) {
-    .title h2{
-        font-size: 15px;
-    }  
-    .example-full-width {
-        border: 2px solid #28a745;
-    }
-}
-@media screen and (max-width: 1100px) {
-    .title h2{
-        font-size: 15px;
-    } 
-}
-@media screen and (max-width: 1060px) {
-    td{
-        font-size: 12px;
-    }
-}
-@media screen and (max-width: 910px) {
-    .listAttr{
-        width: 100%;
     }
 }
 @media screen and (max-width: 830px) {

@@ -52,7 +52,9 @@
     "button8": "Supprimer",
     "button9": "Ajouter",
     "button10": "Fermer",
-    "button11": "Enregistrer"
+    "button11": "Enregistrer",
+    "button12": "Suivant",
+    "button13": "Continuer"
   },
   "validation":{
     "header":"Ajouter Validation",
@@ -337,7 +339,7 @@
   "ressource": {
     "table": {
       "title": "Ajouter ",
-      "title1": " Libellé",
+      "title1": "Libellé",
       "title2": "Etat",
       "title3": "Quantité",
       "title4": "Unité",
@@ -535,6 +537,7 @@
     }
   },
 "etape":{
+  "title1":"Document",
   "table": {
     "title": "Ajouter ",
     "title1": "libelle",

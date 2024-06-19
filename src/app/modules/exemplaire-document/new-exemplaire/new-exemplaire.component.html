@@ -86,7 +86,7 @@
 
                 <!-- tableau listing des mouvements -->
 
-                <div class="card-body p-0 tableBlock" id="tableList">
+                <div class="card-body p-0 tableBlock" id="tableBlock">
                     <div class='table-responsive w-100'>
                         <table class='table table-sm table-centered table-striped table-bordered w-100' mat-table [dataSource]="dataSourceMouvements">
 
@@ -187,7 +187,7 @@
                             <input type="text" [value]="sommeMontants()" disabled>
                         </div>
 
-                        <mat-paginator style="background-color: rgba(40, 167, 69, 0.79);" [pageSizeOptions]="[2, 5, 10, 20]"
+                        <mat-paginator [pageSizeOptions]="[2, 5, 10, 20]"
                                        showFirstLastButtons
                                        aria-label="Select page of periodic elements">
                         </mat-paginator>
@@ -196,11 +196,15 @@
             </div>
         </div>
         
-        <div class="actionButton container">
-            <button class="btn" type="reset" routerLink="../../executer-missions"><i class="fa fa-reply mr-1"></i>{{'lists.button2' | translate}}</button>
+        <div class="actionButton valBtn container">
+            <button class="btn retour" type="reset" routerLink="../../executer-missions" title="{{'lists.button2' | translate}}">
+                <i class="fa fa-undo" aria-hidden="true"></i>
+            </button>
             <div *ngIf="document.contientRessources == true"><app-modal-codebarre-scan-continue></app-modal-codebarre-scan-continue></div>      
             
-            <button type="submit" class="btn btnValidation">{{btnLibelle}}</button>
+            <button type="submit" class="btn btnValidation" title="{{btnLibelle}}">
+                        <i class="fa fa-check" aria-hidden="true"></i>
+                    </button>
         </div>
     </form>
 </div>

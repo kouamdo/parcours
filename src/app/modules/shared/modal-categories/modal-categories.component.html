@@ -1,4 +1,4 @@
-<div id="mainSection" class="bg-light card modalCategorie">
+<div id="mainSection" class="bg-light card modalCategorie modalContentScroll">
     <form [formGroup]="formeCategorieAttribut" *ngIf="formeCategorieAttribut" class="w-100">
 
         <div class="form-group mt-5">
@@ -38,7 +38,7 @@
             </h2>
             <div class="card">
                 <div class="card-body p-0 tableBlock" id="tableResultats">
-                    <div class='table-responsive w-100 m-0'>
+                    <div class='table-responsive w-100 m-0 modaleTableConteneur'>
                         <table class='table w-100' mat-table [dataSource]="dataSourceAttributTemp" matSort (matSortChange)="announceSortChange($event)">
                             <!-- titre Column -->
                             <ng-container matColumnDef="titre">
@@ -91,15 +91,15 @@
                             <tr mat-header-row *matHeaderRowDef="displayedCategoriesColumns"></tr>
                             <tr mat-row *matRowDef="let row; columns: displayedCategoriesColumns;"></tr>
                         </table>
-                        <mat-paginator style="background-color: rgba(40, 167, 69, 0.79);" [pageSizeOptions]="[5, 10, 20]"
+                        <mat-paginator [pageSizeOptions]="[5, 10, 20]"
                                     showFirstLastButtons
                                     aria-label="Select page of periodic elements">
                         </mat-paginator>
                     </div>
                 </div>
             </div>
-            <div class="d-flex w-100 align-items-center justify-content-end">
-                <button type="btn" class="btn btn-success" (click)="AjouterCategorieTemp()"> <i class="fa fa-plus" aria-hidden="true"></i> {{'lists.button9' | translate}}</button>
+            <div class="d-flex w-100 align-items-center justify-content-end actionButton valBtn">
+                <button type="btn" class="btn btnValidation" (click)="AjouterCategorieTemp()" title="{{'lists.button9' | translate}}"><i class="fa fa-plus" aria-hidden="true"></i></button>
             </div>
         </div>
 
@@ -111,7 +111,7 @@
             </h2>
             <div class="card">
                 <div class="card-body p-0 tableBlock" id="tableResultats">
-                    <div class='table-responsive w-100 m-0'>
+                    <div class='table-responsive w-100 m-0 modaleTableConteneur'>
                         <table class='table table-sm table-centered table-striped w-100' mat-table [dataSource]="tableResultatsCategoriesAffichage" matSort (matSortChange)="announceSortChange($event)">
                             <!-- nomCategorie Column -->
                             <ng-container matColumnDef="nomCategorie">
@@ -157,8 +157,10 @@
                 </div>
             </div>
         </div>
-        <div class="actionButton">
-            <button mat-button [mat-dialog-close]="tableResultatsCategoriesAffichage.data" cdkFocusInitial class="btn btnValidation" (click)="ajouterCategorieParDefaut()">{{'lists.button6' | translate}}</button>
+        <div class="actionButton valBtn" >
+            <button mat-button [mat-dialog-close]="tableResultatsCategoriesAffichage.data" cdkFocusInitial class="btn btnValidation" (click)="ajouterCategorieParDefaut()" title="{{'lists.button11' | translate}}">
+                <i class="fa fa-check" aria-hidden="true"></i>
+            </button>
         </div>       
     </div>
 </div>

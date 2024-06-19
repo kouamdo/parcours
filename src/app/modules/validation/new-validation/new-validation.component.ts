@@ -16,7 +16,7 @@ import { RolesService } from 'src/app/services/roles/roles.service';
 export class NewValidationComponent implements OnInit {
   validation : IValidation|undefined;
   forme: FormGroup;
-  btnLibelle: string="Ajouter";
+  btnLibelle: string="Enregistrer";
   submitted: boolean=false;
   titre:string='';
   roles: IRole[]|undefined;

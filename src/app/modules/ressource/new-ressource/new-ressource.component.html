@@ -47,11 +47,11 @@
               </div>
             </div>
             <div class="form-group">
-              <div class="champs">
+              <div class="champs champsSelect">
                 <label for="unite" class="label">
                   {{'ressource.table.title4' | translate}}<sup>*</sup>
                 </label>
-                <mat-form-field class="example-full-width1" appearance="fill">
+                <mat-form-field class="example-full-width matSelectContainer" appearance="fill">
                   <mat-select formControlName="unite" name="unite" [compareWith]="compareItem">
                     <mat-option *ngFor="let membre of unites" [value]="membre">{{membre}}</mat-option>
                   </mat-select>
@@ -85,13 +85,13 @@
             </div>
 
             <div class="form-group">
-              <div class="champs">
+              <div class="champs champsSelect">
                 <label for="famille" class="label">
                   {{'ressource.table.title6' | translate}} <sup>*</sup>
                 </label>
                 <mat-form-field class="example-full-width w-100" appearance="fill">
                   <input type="text" matInput [matAutocomplete]="auto" aria-label="famille" formControlName="famille"
-                    name="famille" id="famille" placeholder="" class="w-100" style="color: white;">
+                    name="famille" id="famille" placeholder="" class="w-100">
                   <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
                     <mat-option *ngFor="let option of filteredOptions" [value]="option">
                       {{option.libelle}}
@@ -109,7 +109,7 @@
                 <label for="" class="label">
                   {{"document.table.title4" | translate}}
                 </label>
-                <div class="dropdown w-100">
+                <div class="w-100">
                   <!-- affichage list attributs selectiones -->
                   <div class="listAttr">
                     <button type="button" class="btn p-0"
@@ -117,9 +117,12 @@
                       (click)="openAttributDialog()">
                       <i class="fas fa-plus-square"></i>
                     </button>
-                    <span *ngFor="let listeAttributs of ELEMENTS_TABLE_ATTRIBUTS_SELECT">
+                              <p>
+                      <span *ngFor="let listeAttributs of ELEMENTS_TABLE_ATTRIBUTS_SELECT">
                       {{listeAttributs.attributs!.titre! | lowercase}}<span>, </span>
-                    </span>
+                      </span>
+                              </p>
+                              
                   </div>
                 </div>
               </div>
@@ -141,9 +144,13 @@
               </div>
             </div>
           </div>
-          <div class="actionButton">
-            <button class="btn" routerLink="../list-ressources">{{'lists.button2' | translate}}</button>
-            <button type="submit" class="btn">{{btnLibelle}}</button>
+          <div class="actionButton valBtn" >
+              <button class="btn retour" routerLink="../list-ressources" title="{{'lists.button2' | translate}}">
+                    <i class="fa fa-reply" aria-hidden="true"></i>
+                  </button>
+            <button type="submit" class="btn btnValidation" title="{{btnLibelle}}">
+                        <i class="fa fa-check" aria-hidden="true"></i>
+                    </button>
           </div>
         </div>
       </form>

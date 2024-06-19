@@ -193,14 +193,6 @@ h4{
 td{
     font-size: 13px;
 }
-th{
-    background-color: rgba(40, 167, 69, 0.2);
-    color: #28a745 !important;
-    text-align: center;
-}
-#tableList{
-    padding: 0 10px !important;
-}
 .tableBlock{
     width: 100%;
     div{
@@ -232,17 +224,6 @@ th{
         color: #28a745;
         position: relative;
         bottom: 8px;
-    }
-}
-.options {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    padding: 0 20px;
-    padding-bottom: 10px;
-    button{
-        margin: auto 2px;
-        border-radius: 50%;
     }
 }
 @media screen and (max-width: 1040px) {

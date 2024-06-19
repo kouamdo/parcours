@@ -29,7 +29,7 @@ import { ModalRessourceAttributsComponent } from '../../shared/modal-ressource-a
 export class NewRessourceComponent implements OnInit {
   ressource: IRessource | undefined;
   forme: FormGroup;
-  btnLibelle: string="Ajouter";
+  btnLibelle: string="Enregistrer";
   submitted: boolean=false;
   unites : String[] = [];
   IdRessource:string= ""

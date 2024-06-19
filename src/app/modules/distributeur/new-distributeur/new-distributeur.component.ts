@@ -17,7 +17,7 @@ export class NewDistributeurComponent implements OnInit {
 
   distributeur : IDistributeur |undefined;
   forme: FormGroup;
-  btnLibelle: string="Ajouter";
+  btnLibelle: string="Enregistrer";
   submitted: boolean=false;
   titre:string=''
   //TODO validation du formulaire. particulièrment les mail

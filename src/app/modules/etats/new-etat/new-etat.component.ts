@@ -14,7 +14,7 @@ import {v4 as uuidv4} from 'uuid';
 export class NewEtatComponent {
   etats : IEtats|undefined;
   formeEtat: FormGroup;
-  btnLibelle: string="Ajouter";
+  btnLibelle: string="Enregistrer";
   submitted: boolean=false;
   titre:string='';
 

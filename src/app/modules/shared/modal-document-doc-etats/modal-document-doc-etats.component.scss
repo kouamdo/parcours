@@ -1,15 +1,9 @@
+
 #mainBlock{
     background-color: #ffffff;
     padding: 5px;
     width: 50%;
     margin: auto;
-}
-.ordreInput{
-    input{
-        width: 100px;
-        border: 2px solid #28a745 !important;
-        background-color: #28a74614;
-    }
 }
 .searchBlock{
     width: 100% !important;
@@ -48,58 +42,25 @@
     }
 }
 .example-full-width-select {
-    height: 40px !important;
+    height: 28px !important;
     width: 80%;
     border: 2px solid #28a745;
     position: absolute;
     bottom: 2px;
     left: 15px;
 }
-#tableList{
-    margin-top: 50px !important;
+#tableBlock{
+    margin-top: 25px !important;
 }
 .texteErreur{
     position: absolute;
-    right: 0;
+    right: 2px;
     bottom: 5%;
     p{
         font-size: small;
         font-style: italic;
         color: rgba(255, 0, 0, 0.766);
     }
-}
-.valBtn{
-    justify-content: end;
-}
-.btnAddValidation{
-    color: #FFD700;
-    height: fit-content;
-    i{
-        font-size: 12px !important;
-    }
-}
-.actions{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    button{
-        width: fit-content;
-        padding: 0;
-        margin: 0 5px;
-        margin-bottom: 5px;
-        i{
-            font-size: 10px;
-        }
-    }
-}
-.ordreInput2{
-    margin-left: 10%;
-}
-.ordreInput2 input{
-    margin: auto;
-    width: 80px !important;
-    height: 20px;
-    position: absolute;
 }
 .texteErreurChange span{
     font-size: 8px;
@@ -160,7 +121,7 @@ select{
     #mainBlock{
         width: 100%;
     }
-    .sarchBlock{
+    .searchBlock{
         form{
             flex-wrap: wrap-reverse;
             div{
@@ -175,11 +136,6 @@ select{
         }
         .etatInput{
             margin-bottom: 5px;
-        }
-        .ordreInput{
-            input{
-                width: 50%;
-            }
         }
     }
 }

@@ -1,12 +1,10 @@
 <div id="mainSection">
   <div class="card block" id="top2">
     <div class="card-body p-0 m-0">
-      <form [formGroup]="forme" *ngIf="forme">
-        <!--<div *ngIf="steps != 2 && steps != 3" class="w-100 pt-4 pb-4 entete">{{'precomvt.header' | translate}}</div>-->
-        <div *ngIf="steps != 2 && steps != 3" class="w-100 pt-4 pb-4 entete">{{'precomvt.header' | translate}} {{titre}}
-        </div>
-        <div *ngIf="steps==2" class="w-100 pt-4 pb-4 entete1">{{'precomvt.header1' | translate}}</div>
-        <div *ngIf="steps==3" class="w-100 pt-4 pb-4 entete2">{{'precomvt.header2' | translate}}</div>
+      <form [formGroup]="forme" *ngIf="forme"  >
+        <div *ngIf="steps != 2 && steps != 3" class="w-100 pt-4 pb-4 entete">{{'precomvt.header' | translate}} {{titre}}</div>
+          <div *ngIf="steps==2" class="w-100 pt-4 pb-4 entete1" >{{'precomvt.header1' | translate}}</div>
+          <div *ngIf="steps==3" class="w-100 pt-4 pb-4 entete2">{{'precomvt.header2' | translate}}</div>
 
         <div class="w-100 mt-4 pt-0 pl-2 pr-2 pb-0">
           <div class="w-100">
@@ -65,16 +63,14 @@
         </div>
 
         <div *ngIf="steps == 2" class="form-group pt-0 pl-2 pr-2 pb-0">
-          <div class="champs">
+          <div class="champs champsSelect">
             <label for="famille" class="label">
               {{'precomvt.table.title4' | translate}}
             </label>
             <div class="w-100">
-              <mat-form-field style="background-color:#28a745;" class="example-full-width" appearance="fill">
-                <mat-select formControlName="famille" #familles multiple [compareWith]="compareItem"
-                  (ngModelChange)="tabError.delete('famille')">
-                  <mat-option style="color: black;" *ngFor="let membre of familles$ |async"
-                    [value]="membre">{{membre.libelle}}</mat-option>
+              <mat-form-field class="example-full-width matSelectContainer" appearance="fill">
+                <mat-select formControlName="famille"  #familles multiple [compareWith]="compareItem" (ngModelChange)="tabError.delete('famille')">
+                  <mat-option *ngFor="let membre of familles$ |async" [value]="membre" >{{membre.libelle}}</mat-option>
                 </mat-select>
               </mat-form-field>
               <p *ngIf="tabError.get('famille')" class="error">
@@ -83,20 +79,19 @@
             </div>
           </div>
         </div>
-        <div *ngIf="steps==3" class="form-group pt-0 pl-2 pr-2 pb-0">
+        <div  *ngIf="steps==3" class="form-group pt-0 pl-2 pr-2 pb-0">
           <div class="champs" id="ressource">
-            <label for="ressource" class="label" id="label3">
-              {{'precomvt.table.title5' | translate}}
-            </label>
-            <div class="w-100">
-              <mat-form-field class="example-full-width" appearance="fill">
-                <input type="text" matInput [matAutocomplete]="auto" aria-label="ressource" formControlName="ressource"
-                  ng-reflect-name="ressource" (ngModelChange)="tabError.delete('ressource')">
-                <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
-                  <mat-option style="color: black;" *ngFor="let option of filteredOptions" [value]="option">
-                    {{option.libelle}}
-                  </mat-option>
-                </mat-autocomplete>
+              <label  for="ressource"  class="label" id="label3">
+                {{'precomvt.table.title5' | translate}}
+              </label>
+              <div class="w-100">
+                <mat-form-field class="example-full-width matSelectContainer" appearance="fill">
+                  <input type="text" matInput [matAutocomplete]="auto" aria-label="ressource" formControlName="ressource"  ng-reflect-name="ressource" (ngModelChange)="tabError.delete('ressource')">
+                  <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn" >
+                    <mat-option *ngFor="let option of filteredOptions" [value]="option" >
+                        {{option.libelle}}
+                    </mat-option>
+                  </mat-autocomplete>
               </mat-form-field>
               <p *ngIf="tabError.get('ressource')" class="error">
                 <span *ngIf="tabError.get('ressource')">{{ tabError.get('ressource') }}</span>
@@ -147,7 +142,6 @@
             </div>
           </div>
 
-
           <div class="form-group">
             <div class="champs">
               <label for="montantMax" class="label">
@@ -187,39 +181,38 @@
           </div>
 
           <div class="form-group">
-            <div class="champs">
+            <div class="champs champsSelect">
               <label for="distributeur" class="label">
                 {{'precomvt.table.title14' | translate}}
               </label>
-              <mat-form-field style="background-color:#28a745;" class="example-full-width" appearance="fill">
-                <mat-select formControlName="distributeur" multiple [compareWith]="compareItem1">
-                  <mat-option style="color: black;" *ngFor="let membre of distributeurs$ |async"
-                    [value]="membre">{{membre.raisonSocial}}</mat-option>
-                </mat-select>
-              </mat-form-field>
+                <mat-form-field class="example-full-width matSelectContainer" appearance="fill" >
+                  <mat-select formControlName="distributeur" multiple [compareWith]="compareItem1">
+                    <mat-option *ngFor="let membre of distributeurs$ |async" [value]="membre">{{membre.raisonSocial}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
             </div>
           </div>
         </div>
 
-        <div class="actionButton">
-          <button class="btn" *ngIf="steps == 0">{{'lists.button2' | translate}}</button>
-          <button type="button" class="btn" (click)="onReturn()">{{'lists.button3' | translate}}</button>
-          <button type="button" class="btn" (click)="blocklibelle(2)">{{'precomvt.table.title4' | translate}}</button>
-          <button type="button" class="btn" (click)="blocklibelle(3)">{{'precomvt.table.title5' | translate}}</button>
-          <button type="button" class="btn" (click)="validerControleStep(2,forme.value); "><i
-              class="fa fa-arrow-right mr-1" aria-hidden="true"></i></button>
+        <div class="actionButton valBtn" >
+          <button type="button" class="btn retour" routerLink="../list-precomvts" title="{{'lists.button2' | translate}}">
+            <i class="fa fa-reply" aria-hidden="true"></i>
+          </button>
+          <button type="button" class="btn openformStep" (click)="blocklibelle(2)">{{'precomvt.table.title4' | translate}}</button>
+          <button type="button" class="btn openformStep" (click)="blocklibelle(3)">{{'precomvt.table.title5' | translate}}</button>
+          <button type="button" class="btn btnValidation" (click)="validerControleStep(2,forme.value);" title="{{'lists.button9' | translate}}"><i class="fa fa-arrow-right mr-1" aria-hidden="true"></i></button>
         </div>
       </form>
     </div>
   </div>
 
-  <div id="rigthSection" class="card">
-    <div class="titleBlock" id="titleBlock" class="w-200 pt-4 pb-4 entete0" id="top2">
+  <div id="rigthSection" class="card" >
+    <div class="titleBlock pt-4 pb-4" id="titleBlock" id="top2">
       <h2 class="rigth">{{'precomvt.table.title19' | translate}}</h2>
     </div>
     <div class="contentBlock">
-      <div *ngFor="let elt of eltsPreco let i=index " class="color">
-        <div class="infosBoitier" (click)="chargerValeurPrecoMvt(i)">
+      <div *ngFor="let elt of eltsPreco let i=index " class="coloredBlock" >
+        <div class="infosBoitier" (click)="chargerValeurPrecoMvt(i)" >
           <div class="boitier" id="boitierLibelle">
             <P>{{elt.libelle}}</P>
             <P><span>Type: </span>{{elt.type}}</P>
@@ -240,18 +233,19 @@
           </div>
         </div>
         <div class="suppression">
-          <button class="" id="left">
-            <i class="fa fa-pen text-light" aria-hidden="true" (click)="chargerValeurPrecoMvt(i)"></i>
+          <button class="" id="left"  [ngStyle]="{'width': (i == 0) ? '100%' : null}" (click)="chargerValeurPrecoMvt(i)">
+            <i class="fa fa-pen text-light" aria-hidden="true"></i>
           </button>
-          <button class="" id="right" *ngIf="i!=0" [ngStyle]="">
-            <i class="fa fa-trash text-danger" aria-hidden="true" (click)="supprimerElt(elt)"></i>
+          <button class=""  id="right" *ngIf="i!=0"  (click)="supprimerElt(elt)">
+            <i class="fa fa-trash text-danger" aria-hidden="true"></i>
           </button>
         </div>
       </div>
-      <div class="actionButtons">
-        <button type="button" (click)="enregistrerPreco()" class="btn">{{'precomvt.table.title25' | translate}}</button>
-
-      </div>
+    </div>
+    <div class="actionButton valBtn btnValSection" style="background-color:#28a746d0;">
+      <button type="button" (click)="enregistrerPreco()" class="btn btnValidation" title="{{'lists.button11' | translate}}">
+        <i class="fa fa-check" aria-hidden="true"></i>
+      </button>
     </div>
   </div>
 </div>

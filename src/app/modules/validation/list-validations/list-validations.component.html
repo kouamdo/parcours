@@ -1,6 +1,6 @@
 <div id="" class="d-flex flex-column justify-content-around">
     <div class="title" id="top1">
-        <h2>{{"validation.title" | translate}}</h2>
+        <h2>{{"validation.title0" | translate}}</h2>
   
     </div>
     <div class="card container-fluid" id="top">
@@ -95,7 +95,7 @@
                   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
                 </table>
-                <mat-paginator style="background-color:  rgba(40, 167, 69, 0.79);" [pageSizeOptions]="[5, 10, 20]"
+                <mat-paginator [pageSizeOptions]="[5, 10, 20]"
                 showFirstLastButtons
                 aria-label="Select page of periodic elements">
                 </mat-paginator>

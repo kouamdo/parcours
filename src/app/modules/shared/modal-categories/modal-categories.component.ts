@@ -26,7 +26,7 @@ import { IAssociationCategorieAttributs } from 'src/app/modele/association-categ
 export class ModalCategoriesComponent implements OnInit {
 
   formeCategorieAttribut: FormGroup;
-  btnLibelle: string="Ajouter";
+  btnLibelle: string="Enregistrer";
   titre: string="Ajouter une categorie";
   submitted: boolean=false;
   validation: boolean=false;

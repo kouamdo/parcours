@@ -45,9 +45,13 @@
                       </div>
                   </div>
               </div>
-              <div class="actionButton">
-                  <button class="btn" routerLink="../list-familles">{{'famille.lists.button1' | translate}}</button>
-                  <button type="submit" class="btn btnValidation">{{btnLibelle}}</button>
+              <div class="actionButton valBtn" >
+                  <button class="btn retour" routerLink="../list-familles" title="{{'lists.button3' | translate}}">
+                      <i class="fa fa-undo" aria-hidden="true"></i>
+                  </button>
+                  <button type="submit" class="btn btnValidation" title="{{btnLibelle}}">
+                      <i class="fa fa-check" aria-hidden="true"></i>
+                    </button>
               </div>
           </form>
       </div>

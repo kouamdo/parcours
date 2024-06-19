@@ -71,10 +71,10 @@
 
         <!-- tableau listing des mouvements -->
 
-        <div class="card-body p-0 tableBlock" id="tableList">
-            <div class="table-responsive w-100">
-                <table class="table table-sm table-centered table-striped table-bordered w-100" mat-table
-                    [dataSource]="dataSourceMouvements">
+        <div class="card-body p-0 tableBlock" id="tableBlock">
+            <div class='table-responsive w-100'>
+                <table class='table table-sm table-centered table-striped table-bordered w-100' mat-table [dataSource]="dataSourceMouvements">
+
                     <!-- libelle Column -->
                     <ng-container matColumnDef="libelle">
                         <th class="text-dark containHead" mat-header-cell *matHeaderCellDef>
@@ -188,26 +188,17 @@
                 </div>
             </div>
         </div>
-        <div class="options" style="justify-content: space-between; display: flex">
-            <div>
-                <button title="{{ 'lists.button7' | translate }}" type="button"
-                    [routerLink]="['/exemplaire-nouveau/modify/', exemplaire.id]" class="btn btn-outline-info">
-                    <i class="fas fa-pen"></i>
-                </button>
-                <button title="{{ 'lists.button1' | translate }}" class="btn btn-outline-warning" data-dismiss="modal"
-                    [useExistingCss]="true" styleSheetFile="assets/css/ticketPrint.scss" printSectionId="globalSection"
-                    ngxPrint>
-                    <i class="fas fa-print"></i>
-                </button>
-            </div>
-
-            <div style="justify-content: space-between; display: flex">
-                <p *ngIf="error" class="text-warning h5">{{ error }}</p>
-                <button *ngIf="req" (click)="openModal(exemplaire)" type="button"
-                    title="{{ 'lists.button6' | translate }}" class="btn btn-outline-success">
-                    <i class="fas fa-check"></i>
-                </button>
-            </div>
+        <div class="actionButton valBtn">
+            <button title="{{'lists.button7' | translate}}" type="button" [routerLink]="['/exemplaire-nouveau/modify/',exemplaire.id]" class="btn modifier">
+                <i class="fas fa-pen"></i>
+            </button>
+            <button title="{{'lists.button1' | translate}}" class="btn reinitialiser" data-dismiss="modal"
+                [useExistingCss]="true"
+                styleSheetFile="assets/css/ticketPrint.scss"
+                printSectionId="globalSection"
+                ngxPrint>
+                <i class="fas fa-print"></i>
+            </button>
         </div>
     </div>
 </div>

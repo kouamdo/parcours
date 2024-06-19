@@ -17,7 +17,7 @@ export class NewRoleComponent implements OnInit {
 
   role : IRole |undefined;
   forme: FormGroup;
-  btnLibelle: string="Ajouter";
+  btnLibelle: string="Enregistrer";
   submitted: boolean=false;
   titre:string='';
   //TODO validation du formulaire. particulièrment les mail

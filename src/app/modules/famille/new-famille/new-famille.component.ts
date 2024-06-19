@@ -21,7 +21,7 @@ export class NewFamilleComponent implements OnInit {
 
   famille : IFamille|undefined;
   forme: FormGroup;
-  btnLibelle: string="Ajouter";
+  btnLibelle: string="Enregistrer";
   submitted: boolean=false;
   titre:string='';
 

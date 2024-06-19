@@ -1,7 +1,4 @@
 #mainSection{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     justify-content: center;
     width: 100%;
 }
@@ -11,27 +8,33 @@
 .entete{
     background-color: #28a745;
     color: white;
-    text-align: center;
     font-size: 22px;
     font-weight: bold;
-}
-.actionButton{
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    width: 100%;
-    button{
-        background-color: #28a745;
-        color: white;
-        width: fit-content;
-        //white-space: nowrap;
+    box-shadow: 0 0 2px #28a745;
+    border-radius: 5px;
+    h2{
+        margin: auto; 
     }
 }
-.blockServices{
+.actionButton{
+    width: 100%;
+    button{
+        width: fit-content;
+    }
+}
+#top2 {
+    border: none !important;
+    box-shadow: none !important;
+}
+.blockServices div{
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     justify-content: space-between;
+    border: none !important;
+    box-shadow: none;
     label{
         padding: 10px 5px;
         color: #28a745;

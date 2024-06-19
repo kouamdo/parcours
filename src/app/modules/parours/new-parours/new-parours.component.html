@@ -11,11 +11,10 @@
               <div>
                 <div class="champs">
                   <label for="libelle" class="label">
-                    {{"parours.table.title1" | translate}}<span style="color: red;" aria-label="required">*</span>
+                    {{"parours.table.title1" | translate}}<span aria-label="required"><sup>*</sup></span>
                   </label>
                   <input type="text" formControlName="libelle" name="libelle" id="libelle" placeholder="libelle"
                     class="form-control" required>
-
                 </div>
                 <div *ngIf="submitted && f['libelle'].errors" class="alert alert-danger">
                   <div *ngIf="f['libelle'].errors['required']">{{"parours.form.text1" | translate}}</div>
@@ -25,18 +24,22 @@
             </div>
 
             <div class="form-group">
-              <div>
-                <div class="champs">
-                  <label for="_etape" class="label">
-                    {{"parours.table.title2" | translate}}<span style="color: red;" aria-label="required">*</span>
-                  </label>
-                  <input readonly type="text" [value]="getEtapeLibelles()" placeholder="etape" class="form-control"
-                    required>
+              <div class="champs">
+                <label for="_etape" class="label">
+                  {{"parours.table.title2" | translate}}<span aria-label="required"><sup>*</sup></span>
+                </label>
+                <div class="w-100">
 
+                  <!-- Ouvrir le formulair de creation des Etapes -->
+                  <div class="listAttr">
+                    <input readonly type="text" formControlName="_etape" [value]="getEtapeLibelles()" name="_etape"
+                      id="_etape" placeholder="etape" class="form-control" required>
 
-                  <button type="button" class="btn p-1" (click)="openNewEtape()">
-                    <i class="fas fa-plus-square fa-lg" style="color: rgba(40, 167, 69, 0.79);"></i>
-                  </button>
+                    <button type="button" class="btn p-0" (click)="openNewEtape()">
+                      <i class="fas fa-plus-square"></i>
+                    </button>
+                  </div>
+                  
                 </div>
               </div>
               <div *ngIf="submitted && f['_etape'].value.length<1" class="alert alert-danger blockErreur">
@@ -46,10 +49,13 @@
 
           </div>
         </div>
-        <div class="actionButton">
-          <button type="button" class="btn" (click)="onReturn()"><i class="fa fa-reply mr-1"
-              aria-hidden="true"></i>{{'lists.button2' | translate}}</button>
-          <button type="submit" class="btn btnValidation">{{btnLibelle}}</button>
+        <div class="actionButton valBtn" >
+          <button class="btn retour" routerLink="../list-missions" title="{{'lists.button2' | translate}}">
+            <i class="fa fa-undo" aria-hidden="true"></i>
+        </button>
+          <button type="submit" class="btn btnValidation" title="{{btnLibelle}}">
+            <i class="fa fa-check" aria-hidden="true"></i>
+          </button>
         </div>
 
       </form>
@@ -86,11 +92,6 @@
             </mat-form-field>
           </form>
         </div>
-        <!--<div role="button" id="addUserBotton" routerLink="../etape-nouvelle">
-          <span title="Ajouter une etape">
-            <i class="fa fa-user-plus" aria-hidden="true"></i>
-          </span>
-        </div>-->
       </div>
     </div>
     <div class="card-body p-0" id="tableBlock">
@@ -142,13 +143,10 @@
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
-        <mat-paginator style="background-color:  rgba(40, 167, 69, 0.79);" [pageSizeOptions]="[5, 10, 20]"
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]"
           showFirstLastButtons aria-label="Select page of periodic elements">
         </mat-paginator>
       </div>
-
     </div>
-
-
   </div>
 </div>

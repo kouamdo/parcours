@@ -1,7 +1,7 @@
-<div class="mainBlock card" id="top2">
-    <div class="entete">
-        <p><span routerLink="../../list-exemplaire" title="{{'lists.button2' | translate}}"><i class="fa fa-arrow-left lien" aria-hidden="true"></i></span></p>
+<div class="mainBlock pageView card" id="top2">
+    <div class="enteteViewPage">
         <h1>
+            <span routerLink="../../list-exemplaire" title="{{'lists.button2' | translate}}"><i class="fa fa-arrow-left lien" aria-hidden="true"></i></span>
             {{'document.exemplaire.title' | translate}} {{titre}}
         </h1>
         <div class="hoverBlock">
@@ -9,21 +9,23 @@
                 <i class="fa fa-info-circle text-info" aria-hidden="true"></i>
             </p>
             <div class="hoverElement" id="description">
-                <span class="titl"> {{'document.table.title2' | translate}} : </span>
-                <p>{{exemplaire.description}}</p>
+                <div>
+                    <span class="titl"> {{'document.table.title2' | translate}} : </span>
+                    <p>{{exemplaire.description}}</p>
+                </div>
             </div>
         </div>
     </div>
     <div class="infos">
         <p id="titre">
-            <span class="titl"> {{'document.table.title1' | translate}} : </span>
+            <span class="title1"> {{'document.table.title1' | translate}} : </span>
             {{exemplaire.titre}}
         </p>
         <p id="etat">
-            <span class="titl"> {{'document.title7' | translate}} : </span>
+            <span class="title1"> {{'document.title7' | translate}} : </span>
             {{courant}}
         </p>
-        <p class="titl">
+        <p class="title1">
             {{'document.exemplaire.text1' | translate}} :
         </p>
         <div class="tableMissions card table-responsive">
@@ -70,15 +72,14 @@
             </table>
         </div>
     </div>
-    <div class="options" style="justify-content: space-between; display: flex;">
-        <div>
-            <button type="button" [routerLink]="['/exemplaire-nouveau/modify/',exemplaire.id]" class="btn btn-outline-info">
+    <div class="actionButton valBtn">
+        
+        <div class="actionButton valBtn">
+            <button type="button" [routerLink]="['/exemplaire-nouveau/modify',exemplaire.id]" class="btn modifier" title="{{'lists.button7' | translate}}">
                 <i class="fas fa-pen"></i>
-                {{'lists.button7' | translate}}
             </button>
-            <button type="button" class="btn btn-outline-danger">
+            <button type="button" class="btn fermer" title="{{'lists.button8' | translate}}">
                 <i class="fas fa-trash"></i>
-                {{'lists.button8' | translate}}
             </button>
         </div>
     </div>

@@ -43,11 +43,10 @@
                     </div>
                     <div class="form-group">
                         <div class="form-inline mr-3">
-                            <form class="example-form label">
+                            <form class="example-form label champsSelect">
                                 <label id="search">{{"personnel.table.title10" | translate}}</label>
                                 <mat-form-field class="example-full-width" appearance="fill">
-                                  <mat-label class="searchBar">{{'personnel.search-bar' | translate}}</mat-label>
-                                  <input type="text" matInput placeholder="{{'personnel.search-bar' | translate}}" aria-label="Rechercher" [formControl]="myControl" [matAutocomplete]="auto">
+                                  <input type="text" matInput placeholder="{{'personnel.search-bar' | translate}}" [formControl]="myControl" [matAutocomplete]="auto">
                                   <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
                                     <mat-option *ngFor="let option of filteredOptions" [value]="option" (onSelectionChange)="rechercherListingMission(option)">
                                       {{option.libelle}}
@@ -60,7 +59,7 @@
     
                     <div class="tables">
                         <!-- tableau listing des roles -->   
-                    <div class="card-body p-0 tableBlock" id="tableList">
+                    <div class="card-body p-0 tableBlock" id="tableBlock">
                         <div class='table-responsive w-100'>
                             <table class='table table-sm table-centered table-striped table-bordered w-100' mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)">
                     
@@ -107,14 +106,18 @@
                               <tr mat-row *matRowDef="let row; columns: displayedmissionsColumns;"></tr>
                             </table>
                             
-                            <mat-paginator style="background-color:  rgba(40, 167, 69, 0.79);" [pageSizeOptions]="[5, 10, 20]"
+                            <mat-paginator [pageSizeOptions]="[5, 10, 20]"
                                     showFirstLastButtons
                                     aria-label="Select page of periodic elements">
                             </mat-paginator>
                         </div>
-                        <div class="actionButton">
-                            <button class="btn" (click)="annullerElement()">{{"personnel.table.actions.link6" | translate}}</button>
-                            <button type="submit" class="btn btnValidation" (click)="validateElement()">{{"personnel.table.actions.link1" | translate}}</button>
+                        <div class="actionButton valBtn">
+                            <button class="btn reinitialiser" (click)="annullerElement()" title="{{'lists.button3' | translate}}">
+                                <i class="fa fa-undo" aria-hidden="true"></i>
+                            </button>
+                            <button type="submit" class="btn btnValidation" (click)="validateElement()" title="{{'lists.button11' | translate}}">
+                                <i class="fa fa-check" aria-hidden="true"></i>
+                              </button>
                         </div>
                     </div>
 
@@ -215,15 +218,17 @@
                                         <tr mat-header-row *matHeaderRowDef="displayedmissionsselectColumns"></tr>
                                         <tr mat-row *matRowDef="let row; columns: displayedmissionsselectColumns;"></tr>
                                     </table>
-                                    <mat-paginator style="background-color: rgba(40, 167, 69, 0.79);" [pageSizeOptions]="[5, 10, 20]"
+                                    <mat-paginator [pageSizeOptions]="[5, 10, 20]"
                                                    showFirstLastButtons
                                                    aria-label="Select page of periodic elements">
                                     </mat-paginator>
                                 </div>
                             </div>
                         </div>
-                        <div class="actionButton">
-                            <button type="submit" class="btn btnfinal btnValidation" (click)="onSubmit(dataSourceMissionResultat)">Valider</button>
+                        <div class="actionButton valBtn" >
+                            <button type="submit" class="btn btnfinal btnValidation" (click)="onSubmit(dataSourceMissionResultat)" title="{{'lists.button11' | translate}}">
+                                <i class="fa fa-check" aria-hidden="true"></i>
+                            </button>
                         </div>
                     </div>
                     </div>
