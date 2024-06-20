@@ -9,7 +9,7 @@ export interface IPersonnel {
   dateNaissance: Date;
   mdp: string;
   email: string;
-  groupes: IGroupes,
+  groupes?: IGroupes,
   telephone: string;
   dateEntree?: Date;
   dateSortie?: Date;
