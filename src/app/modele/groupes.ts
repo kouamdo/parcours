@@ -4,5 +4,5 @@ export interface IGroupes {
     id: string;
     etat: string,
     libelle: string,
-    menu: IMenus
+    menu: IMenus[]
 }

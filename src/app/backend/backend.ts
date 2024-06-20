@@ -2,7 +2,6 @@ import { InMemoryDbService } from 'angular-in-memory-web-api';
 import { IAttributs } from '../modele/attributs';
 import { IDocument } from '../modele/document';
 import { IDocEtats } from '../modele/doc-etats';
-import { IFonctionnalites } from '../modele/fonctionnalites';
 import { IMenus } from '../modele/menus';
 import { IMission } from '../modele/mission';
 import { IPatient } from '../modele/Patient';
@@ -25,6 +24,7 @@ import { IEtats } from '../modele/etats';
 import { IValidation } from '../modele/validation';
 import { IEtape } from '../modele/etape';
 import { IParours } from '../modele/parours';
+import { IGroupes } from '../modele/groupes';
 
 export class InMemDBService implements InMemoryDbService {
   createDb() {
@@ -689,6 +689,403 @@ export class InMemDBService implements InMemoryDbService {
           },
         ],
       },
+    ];
+    let groupes: IGroupes[] = [
+      {
+        id: "1",
+        libelle: "admin",
+        etat: "ras",
+        menu: [
+          {
+            idUser: 'phil',
+            langue: 'fr',
+            fonctionnalites: [
+              {
+                fonction: 'Personne',
+                icone: 'fas fa-user-cog',
+                actif: 'menu-close',
+                elements: [
+                  { nom: 'Créer', lien: 'patients/patient-nouveau', bouton: 'false' },
+                  { nom: 'Rechercher', lien: 'patients/list-patients', bouton: 'false' },
+                ],
+              },
+              {
+                fonction: 'Personnel',
+                icone: 'fas fa-user-cog',
+                actif: '',
+                elements: [
+                  { nom: 'Créer', lien: './personnels/nouveau-personnel', bouton: 'false' },
+                  { nom: 'Rechercher', lien: './personnels/list-personnels', bouton: 'false' },
+                ],
+              },
+              {
+                fonction: 'Service',
+                icone: 'fas fa-user-cog',
+                actif: '',
+                elements: [
+                  { nom: 'Créer', lien: './services/service-nouveau', bouton: 'false' },
+                  { nom: 'Rechercher', lien: './services/list-services', bouton: 'false' },
+                ],
+              },
+              {
+                fonction: 'Validation',
+                icone: 'fas fa-user-cog',
+                actif: '',
+                elements: [
+                  { nom: 'Créer', lien: './validations/nouvelle-validation', bouton: 'false' },
+                  {
+                    nom: 'Rechercher',
+                    lien: './validations/list-validations',
+                    bouton: 'false',
+                  },
+                ],
+              },
+              {
+                fonction: 'Ticket',
+                icone: 'fas fa-chart-pie',
+                actif: '',
+                elements: [
+                  { nom: 'Rechercher', lien: 'tickets/list-tickets', bouton: 'false' },
+                  {
+                    nom: 'Afficher le panneau',
+                    lien: 'tickets/panneau-tickets',
+                    bouton: 'false',
+                  },
+                ],
+              },
+              {
+                fonction: 'Attribut',
+                icone: 'fas fa-user-cog',
+                actif: '',
+                elements: [
+                  { nom: 'Créer', lien: './attributs/attribut-nouveau', bouton: 'false' },
+                  { nom: 'Rechercher', lien: './attributs/list-attributs', bouton: 'false' },
+                ],
+              },
+              {
+                fonction: 'Mission',
+                icone: 'fas fa-user-cog',
+                actif: '',
+                elements: [
+                  { nom: 'Créer', lien: './missions/mission-nouveau', bouton: 'false' },
+                  { nom: 'Rechercher', lien: './missions/list-missions', bouton: 'false' },
+                  { nom: 'Exécuter', lien: './missions/page-intermedaire', bouton: 'false' },
+                  { nom: 'liste des exemplaires', lien: './missions/list-exemplaire', bouton: 'false'},
+                  { nom: 'Historique des documents', lien: './missions/page-intermedaire', bouton: 'false'}
+                ],
+              },
+              {
+                fonction: 'Documents',
+                icone: 'fas fa-user-cog',
+                actif: '',
+                elements: [
+                  {
+                    nom: 'Créer model documents',
+                    lien: './documents/document-nouveau',
+                    bouton: 'false',
+                  },
+                  { nom: 'Rechercher', lien: './documents/list-documents', bouton: 'false' },
+                ],
+              },
+              {
+                fonction: 'Famille',
+                icone: 'fas fa-user-cog',
+                actif: '',
+                elements: [
+                  { nom: 'Créer', lien: 'familles/famille-nouvelle', bouton: 'false' },
+                  { nom: 'Rechercher', lien: './familles/list-familles', bouton: 'false' },
+                ],
+              },
+              {
+                fonction: 'Role',
+                icone: 'fas fa-user-cog',
+                actif: '',
+                elements: [
+                  { nom: 'Créer', lien: 'roles/role-nouveau', bouton: 'false' },
+                  { nom: 'Rechercher', lien: './roles/list-roles', bouton: 'false' },
+                ],
+              },
+              {
+                fonction: 'Ressource',
+                icone: 'fas fa-user-cog',
+                actif: '',
+                elements: [
+                  { nom: 'Créer', lien: 'ressources/ressource-nouvelle', bouton: 'false' },
+                  { nom: 'Rechercher', lien: './ressources/list-ressources', bouton: 'false' },
+                ],
+              },
+              {
+                fonction: 'Préconisations',
+                icone: 'fas fa-user-cog',
+                actif: '',
+                elements: [
+                  { nom: 'Créer', lien: 'preconisations/precomvt-nouvelle', bouton: 'false' },
+                  { nom: 'Rechercher', lien: './preconisations/list-precomvts', bouton: 'false' },
+                ],
+              },
+              {
+                fonction: 'Distributeur',
+                icone: 'fas fa-user-cog',
+                actif: '',
+                elements: [
+                  { nom: 'Créer', lien: 'distributeurs/distributeur-nouveau', bouton: 'false' },
+                  {
+                    nom: 'Rechercher',
+                    lien: './distributeurs/list-distributeurs',
+                    bouton: 'false',
+                  },
+                ],
+              },
+              {
+                fonction: 'Etape',
+                icone: 'fas fa-user-cog',
+                actif: '',
+                elements: [
+                  {
+                    nom: 'Rechercher',
+                    lien: './etapes/list-etapes',
+                    bouton: 'false',
+                  },
+                ],
+              },
+              {
+                fonction: 'Parcours',
+                icone: 'fas fa-user-cog',
+                actif: '',
+                elements: [
+                  { nom: 'Créer', lien: 'parcours/nouveau-parours', bouton: 'false' },
+                  {
+                    nom: 'Rechercher',
+                    lien: './parcours/list-parours',
+                    bouton: 'false',
+                  },
+                ],
+              },
+              {
+                fonction: 'Etats',
+                icone: 'fas fa-user-cog',
+                actif: '',
+                elements: [
+                  { nom: 'Créer', lien: 'etats/etat-nouveau', bouton: 'false' },
+                  { nom: 'rechercher', lien: './etats/list-etats', bouton: 'false' },
+                ],
+              },
+            ],
+          },
+          {
+            idUser: 'phil',
+            langue: 'en',
+            fonctionnalites: [
+              {
+                fonction: 'People',
+                icone: 'fas fa-user-cog',
+                actif: 'menu-close',
+                elements: [
+                  { nom: 'New', lien: 'patients/patient-nouveau', bouton: 'false' },
+                  { nom: 'Search', lien: 'patients/list-patients', bouton: 'false' },
+                ],
+              },
+              {
+                fonction: 'Service',
+                icone: 'fas fa-user-cog',
+                actif: '',
+                elements: [
+                  { nom: 'New', lien: './services/service-nouveau', bouton: 'false' },
+                  { nom: 'Search', lien: './services/list-services', bouton: 'false' },
+                ],
+              },
+              {
+                fonction: 'Ticket',
+                icone: 'fas fa-chart-pie',
+                actif: '',
+                elements: [
+                  { nom: 'Search', lien: 'tickets/list-tickets', bouton: 'false' },
+                  { nom: 'View panel', lien: 'tickets/panneau-tickets', bouton: 'false' },
+                ],
+              },
+              {
+                fonction: 'Attribut',
+                icone: 'fas fa-user-cog',
+                actif: '',
+                elements: [
+                  { nom: 'New', lien: './attributs/attribut-nouveau', bouton: 'false' },
+                  { nom: 'Search', lien: './attributs/list-attributs', bouton: 'false' },
+                ],
+              },
+              {
+                fonction: 'Validation',
+                icone: 'fas fa-user-cog',
+                actif: '',
+                elements: [
+                  { nom: 'Créer', lien: './validations/nouvelle-validation', bouton: 'false' },
+                  {
+                    nom: 'Rechercher',
+                    lien: './validations/list-validations',
+                    bouton: 'false',
+                  },
+                ],
+              },
+              {
+                fonction: 'Mission',
+                icone: 'fas fa-user-cog',
+                actif: '',
+                elements: [
+                  { nom: 'New', lien: './missions/mission-nouveau', bouton: 'false' },
+                  { nom: 'Search', lien: './missions/list-missions', bouton: 'false' },
+                  { nom: 'Execute', lien: './missions/page-intermedaire', bouton: 'false' },
+                  { nom: 'list of exemplaires', lien: './missions/list-exemplaire', bouton: 'false'},
+                  { nom: "Documents history", lien: './missions/page-intermedaire', bouton: 'false'}
+                ],
+              },
+              {
+                fonction: 'Documents',
+                icone: 'fas fa-user-cog',
+                actif: '',
+                elements: [
+                  {
+                    nom: "New document's model",
+                    lien: './documents/document-nouveau',
+                    bouton: 'false',
+                  },
+                  { nom: 'Search', lien: './documents/list-documents', bouton: 'false' },
+                ],
+              },
+              {
+                fonction: 'Famille',
+                icone: 'fas fa-user-cog',
+                actif: '',
+                elements: [
+                  { nom: 'new', lien: 'familles/famille-nouvelle', bouton: 'false' },
+                  { nom: 'Search', lien: './familles/list-familles', bouton: 'false' },
+                ],
+              },
+              {
+                fonction: 'Role',
+                icone: 'fas fa-user-cog',
+                actif: '',
+                elements: [
+                  { nom: 'Créer', lien: 'roles/role-nouveau', bouton: 'false' },
+                  { nom: 'search', lien: './roles/list-roles', bouton: 'false' },
+                ],
+              },
+              {
+                fonction: 'Ressource',
+                icone: 'fas fa-user-cog',
+                actif: '',
+                elements: [
+                  { nom: 'New', lien: 'ressources/ressource-nouvelle', bouton: 'false' },
+                  { nom: 'Search', lien: './ressources/list-ressources', bouton: 'false' },
+                ],
+              },
+              {
+                fonction: 'Préconisations',
+                icone: 'fas fa-user-cog',
+                actif: '',
+                elements: [
+                  { nom: 'New', lien: 'preconisations/precomvt-nouvelle', bouton: 'false' },
+                  { nom: 'Search', lien: './preconisations/list-precomvts', bouton: 'false' },
+                ],
+              },
+              {
+                fonction: 'Distributeur',
+                icone: 'fas fa-user-cog',
+                actif: '',
+                elements: [
+                  { nom: 'New', lien: 'distributeurs/distributeur-nouveau', bouton: 'false' },
+                  { nom: 'search', lien: './distributeurs/list-distributeurs', bouton: 'false' },
+                ],
+              },
+              {
+                fonction: 'Stage',
+                icone: 'fas fa-user-cog',
+                actif: '',
+                elements: [
+                  {
+                    nom: 'search',
+                    lien: './etapes/list-etapes',
+                    bouton: 'false',
+                  },
+                ],
+              },
+              {
+                fonction: 'Parcours',
+                icone: 'fas fa-user-cog',
+                actif: '',
+                elements: [
+                  { nom: 'Créer', lien: 'parcours/nouveau-parours', bouton: 'false' },
+                  {
+                    nom: 'search',
+                    lien: './parcours/list-parours',
+                    bouton: 'false',
+                  },
+                ],
+              },
+              {
+                fonction: 'Statut',
+                icone: 'fas fa-user-cog',
+                actif: '',
+                elements: [
+                  { nom: 'New', lien: 'etats/etat-nouveau', bouton: 'false' },
+                  { nom: 'search', lien: './etats/list-etats', bouton: 'false' },
+                ],
+              },
+            ],
+          },
+        ]
+      },
+      {
+        id: "2",
+        libelle: "simple",
+        etat: "ras",
+        menu: [
+          {
+            idUser: 'phil',
+            langue: 'fr',
+            fonctionnalites: [
+              {
+                fonction: 'Personnel',
+                icone: 'fas fa-user-cog',
+                actif: '',
+                elements: [
+                  { nom: 'Créer', lien: './personnels/nouveau-personnel', bouton: 'false' },
+                  { nom: 'Rechercher', lien: './personnels/list-personnels', bouton: 'false' },
+                ],
+              },
+              {
+                fonction: 'Mission',
+                icone: 'fas fa-user-cog',
+                actif: '',
+                elements: [
+                  { nom: 'Exécuter', lien: './missions/page-intermedaire', bouton: 'false' }
+                ],
+              },
+            ],
+          },
+          {
+            idUser: 'phil',
+            langue: 'en',
+            fonctionnalites: [
+              {
+                fonction: 'People',
+                icone: 'fas fa-user-cog',
+                actif: '',
+                elements: [
+                  { nom: 'New', lien: './personnels/nouveau-personnel', bouton: 'false' },
+                  { nom: 'Search', lien: './personnels/list-personnels', bouton: 'false' },
+                ],
+              },
+              {
+                fonction: 'Mission',
+                icone: 'fas fa-user-cog',
+                actif: '',
+                elements: [
+                  { nom: 'Execute', lien: './missions/page-intermedaire', bouton: 'false' }
+                ],
+              },
+            ],
+          },
+        ]
+      }
     ];
     let validations: IValidation[] = [
       {
@@ -23380,6 +23777,59 @@ export class InMemDBService implements InMemoryDbService {
         dateSortie: undefined,
         roles: undefined,
         qrCodeValue: 'hello',
+        groupes: {
+        id: "2",
+        libelle: "simple",
+        etat: "ras",
+        menu: [
+          {
+            idUser: 'phil',
+            langue: 'fr',
+            fonctionnalites: [
+              {
+                fonction: 'Personnel',
+                icone: 'fas fa-user-cog',
+                actif: '',
+                elements: [
+                  { nom: 'Créer', lien: './personnels/nouveau-personnel', bouton: 'false' },
+                  { nom: 'Rechercher', lien: './personnels/list-personnels', bouton: 'false' },
+                ],
+              },
+              {
+                fonction: 'Mission',
+                icone: 'fas fa-user-cog',
+                actif: '',
+                elements: [
+                  { nom: 'Exécuter', lien: './missions/page-intermedaire', bouton: 'false' }
+                ],
+              },
+            ],
+          },
+          {
+            idUser: 'phil',
+            langue: 'en',
+            fonctionnalites: [
+              {
+                fonction: 'People',
+                icone: 'fas fa-user-cog',
+                actif: '',
+                elements: [
+                  { nom: 'New', lien: './personnels/nouveau-personnel', bouton: 'false' },
+                  { nom: 'Search', lien: './personnels/list-personnels', bouton: 'false' },
+                ],
+              },
+              {
+                fonction: 'Mission',
+                icone: 'fas fa-user-cog',
+                actif: '',
+                elements: [
+                  { nom: 'Execute', lien: './missions/page-intermedaire', bouton: 'false' }
+                ],
+              },
+            ],
+          },
+        ]
+      }
       },
       {
         id: '2',
@@ -23394,6 +23844,59 @@ export class InMemDBService implements InMemoryDbService {
         dateSortie: undefined,
         roles: undefined,
         qrCodeValue: 'hello',
+        groupes: {
+        id: "2",
+        libelle: "simple",
+        etat: "ras",
+        menu: [
+          {
+            idUser: 'phil',
+            langue: 'fr',
+            fonctionnalites: [
+              {
+                fonction: 'Personnel',
+                icone: 'fas fa-user-cog',
+                actif: '',
+                elements: [
+                  { nom: 'Créer', lien: './personnels/nouveau-personnel', bouton: 'false' },
+                  { nom: 'Rechercher', lien: './personnels/list-personnels', bouton: 'false' },
+                ],
+              },
+              {
+                fonction: 'Mission',
+                icone: 'fas fa-user-cog',
+                actif: '',
+                elements: [
+                  { nom: 'Exécuter', lien: './missions/page-intermedaire', bouton: 'false' }
+                ],
+              },
+            ],
+          },
+          {
+            idUser: 'phil',
+            langue: 'en',
+            fonctionnalites: [
+              {
+                fonction: 'People',
+                icone: 'fas fa-user-cog',
+                actif: '',
+                elements: [
+                  { nom: 'New', lien: './personnels/nouveau-personnel', bouton: 'false' },
+                  { nom: 'Search', lien: './personnels/list-personnels', bouton: 'false' },
+                ],
+              },
+              {
+                fonction: 'Mission',
+                icone: 'fas fa-user-cog',
+                actif: '',
+                elements: [
+                  { nom: 'Execute', lien: './missions/page-intermedaire', bouton: 'false' }
+                ],
+              },
+            ],
+          },
+        ]
+      }
       },
       {
         id: '3',
@@ -23407,7 +23910,60 @@ export class InMemDBService implements InMemoryDbService {
         dateSortie: undefined,
         roles: undefined,
         qrCodeValue: 'hello',
-        mdp: 'oijfsdv2fdg3f5'
+        mdp: 'oijfsdv2fdg3f5',
+        groupes: {
+          id: "2",
+          libelle: "simple",
+          etat: "ras",
+          menu: [
+            {
+              idUser: 'phil',
+              langue: 'fr',
+              fonctionnalites: [
+                {
+                  fonction: 'Personnel',
+                  icone: 'fas fa-user-cog',
+                  actif: '',
+                  elements: [
+                    { nom: 'Créer', lien: './personnels/nouveau-personnel', bouton: 'false' },
+                    { nom: 'Rechercher', lien: './personnels/list-personnels', bouton: 'false' },
+                  ],
+                },
+                {
+                  fonction: 'Mission',
+                  icone: 'fas fa-user-cog',
+                  actif: '',
+                  elements: [
+                    { nom: 'Exécuter', lien: './missions/page-intermedaire', bouton: 'false' }
+                  ],
+                },
+              ],
+            },
+            {
+              idUser: 'phil',
+              langue: 'en',
+              fonctionnalites: [
+                {
+                  fonction: 'People',
+                  icone: 'fas fa-user-cog',
+                  actif: '',
+                  elements: [
+                    { nom: 'New', lien: './personnels/nouveau-personnel', bouton: 'false' },
+                    { nom: 'Search', lien: './personnels/list-personnels', bouton: 'false' },
+                  ],
+                },
+                {
+                  fonction: 'Mission',
+                  icone: 'fas fa-user-cog',
+                  actif: '',
+                  elements: [
+                    { nom: 'Execute', lien: './missions/page-intermedaire', bouton: 'false' }
+                  ],
+                },
+              ],
+            },
+          ]
+        }
       },
     ];
     let typeAttribut: TypeAttribut = {
@@ -36224,7 +36780,8 @@ export class InMemDBService implements InMemoryDbService {
       typeMvt,
       etats,
       etape,
-      parours
+      parours,
+      groupes
     };
   }
 }
