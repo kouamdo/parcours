@@ -66,7 +66,7 @@ const routes: Routes = [
         path: 'missions',
         loadChildren: () => import('./missions/missions.module').then(m => m.MissionsModule),
         canActivate: [RoleAuthGuard],
-        data: { role: ['admin']} 
+        data: { role: ['admin', 'simple']} 
       },
       {
         path: 'documents',

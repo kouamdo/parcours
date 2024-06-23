@@ -4,27 +4,36 @@ import { ExecuterMissionComponent } from './executer-mission/executer-mission.co
 import { ListMissionComponent } from './list-mission/list-mission.component';
 import { NewMissionComponent } from './new-mission/new-mission.component';
 import { CommonModule } from '@angular/common';
+import { RoleAuthGuard } from 'src/app/verify-users/role-users/role-auth.guard';
 
 const routesMissions: Routes = [
   {
     path: 'mission-nouveau',
     title: 'Creer un nouvel mission',
-    component: NewMissionComponent
+    component: NewMissionComponent,
+    canActivate: [RoleAuthGuard],
+    data: { role: ['admin']}
   },
   {
     path: 'mission-nouveau/:idMission',
     title: 'Modifier un mission',
-    component: NewMissionComponent
+    component: NewMissionComponent,
+    canActivate: [RoleAuthGuard],
+    data: { role: ['admin']}
   },
   {
     path: 'list-missions',
     title: 'Recherche de missions',
-    component: ListMissionComponent
+    component: ListMissionComponent,
+    canActivate: [RoleAuthGuard],
+    data: { role: ['admin']}
   },
   {
     path: 'executer-missions',
     title: 'Exécuter vos missions',
-    component: ExecuterMissionComponent
+    component: ExecuterMissionComponent,
+    canActivate: [RoleAuthGuard],
+    data: { role: ['admin', 'simple']}
   }
 ];
 
