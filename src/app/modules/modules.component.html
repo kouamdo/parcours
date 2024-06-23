@@ -164,9 +164,9 @@
             <img src="assets/img/avatar.png" class="img-circle elevation-2" alt="User Image">
           </div>
           <div class="info">
-            <a href="#" class="d-block">Philippe NGONGANG</a>
+            <a href="#" class="d-block">{{user.nom}} {{ user.prenom}}</a>
           </div>
-          <p id="role" class="text-light"><small>Admin</small></p>
+          <p id="role" class="text-light"><small>{{groupe}}</small></p>
         </div>
         <!-- Menu gauche-->
         <app-menu [langueParent]=langueChoisi></app-menu>

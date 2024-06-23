@@ -22,22 +22,6 @@ export class PersonnelsService {
     );
   }
 
-  getPersonnelByMail(mail: string): Observable<IPersonnel> {
-    return this.getAllPersonnels().pipe(
-      map((x) => {
-        return x.find((p) => p.email == mail) as IPersonnel;
-      })
-    );
-  }
-
-  getPersonnelByMailMdp(mail: string, mdp: string): Observable<IPersonnel> {
-    return this.getAllPersonnels().pipe(
-      map((x) => {
-        return x.find((p) => p.email == mail && p.mdp == mdp) as IPersonnel;
-      })
-    );
-  }
-
   getPersonnelsByName(nom: string): Observable<IPersonnel[]> {
     return this.http.get<IPersonnel[]>('api/personnels').pipe(
       map((x) => {

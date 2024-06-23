@@ -28,14 +28,6 @@ export class NewPersonnelComponent implements OnInit {
        prenom: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
        sexe: ['', Validators.required],
        email: ['', [Validators.required, Validators.email, Validators.pattern(".+@.+\.{1}[a-z]{2,3}")]],
-       mdp: [
-        '',
-        [
-          Validators.required,
-          Validators.minLength(8),
-          Validators.pattern('/[A-Z]+/./[a-z]+/./[!@#$%^&*(),.?":{}|<>]+/'),
-        ],
-      ],
        //todo initialisation du composant à une date
        dateNaissance: ['1980-01-01', Validators.required],
        dateEntree: ['2023-01-01', Validators.required],
@@ -59,7 +51,6 @@ export class NewPersonnelComponent implements OnInit {
            nom: this.personnel?.nom,
            prenom: this.personnel?.prenom,
            sexe: this.personnel?.sexe,
-           email: this.personnel?.email,
            dateNaissance: this.datePipe.transform(this.personnel?.dateNaissance,'yyyy-MM-dd'),
            dateEntree: this.datePipe.transform(this.personnel?.dateEntree,'yyyy-MM-dd'),
            dateSortie: this.datePipe.transform(this.personnel?.dateSortie,'yyyy-MM-dd'),
@@ -88,8 +79,7 @@ export class NewPersonnelComponent implements OnInit {
       dateNaissance: personnelInput.dateNaissance,
       dateEntree: personnelInput.dateEntree,
       dateSortie: personnelInput.dateSortie,
-      qrCodeValue: personnelInput.qrCodeValue,
-      mdp: personnelInput.mpd
+      qrCodeValue: personnelInput.qrCodeValue
     };
 
     if (this.personnel != undefined) {

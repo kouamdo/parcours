@@ -15,12 +15,12 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { LoginComponent } from './login/login.component';
-import { AuthGuard } from './auth/auth.guard';
 import { AuthentificationService } from './services/authentifications/authentification.service';
 import { ModulesModule } from './modules/modules.module';
 import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { RequestPasswordResetComponent } from './request-password-reset/request-password-reset.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { AuthGuard } from './verify-users/auth/auth.guard';
 
 @NgModule({
   declarations: [AppComponent, LoginComponent, NotFoundComponent, RequestPasswordResetComponent, ResetPasswordComponent],

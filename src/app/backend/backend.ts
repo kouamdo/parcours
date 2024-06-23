@@ -25,6 +25,8 @@ import { IValidation } from '../modele/validation';
 import { IEtape } from '../modele/etape';
 import { IParours } from '../modele/parours';
 import { IGroupes } from '../modele/groupes';
+import { IMenu } from '../modele/menu';
+import { IUtilisateurs } from '../modele/utilisateurs';
 
 export class InMemDBService implements InMemoryDbService {
   createDb() {
@@ -690,6 +692,341 @@ export class InMemDBService implements InMemoryDbService {
         ],
       },
     ];
+    let menu: IMenu[] = [
+      {
+        langue: 'fr',
+        fonctionnalites: [
+          {
+            fonction: 'Personne',
+            icone: 'fas fa-user-cog',
+            actif: 'menu-close',
+            elements: [
+              { nom: 'Créer', lien: 'patients/patient-nouveau', bouton: 'false' },
+              { nom: 'Rechercher', lien: 'patients/list-patients', bouton: 'false' },
+            ],
+          },
+          {
+            fonction: 'Personnel',
+            icone: 'fas fa-user-cog',
+            actif: '',
+            elements: [
+              { nom: 'Créer', lien: './personnels/nouveau-personnel', bouton: 'false' },
+              { nom: 'Rechercher', lien: './personnels/list-personnels', bouton: 'false' },
+            ],
+          },
+          {
+            fonction: 'Service',
+            icone: 'fas fa-user-cog',
+            actif: '',
+            elements: [
+              { nom: 'Créer', lien: './services/service-nouveau', bouton: 'false' },
+              { nom: 'Rechercher', lien: './services/list-services', bouton: 'false' },
+            ],
+          },
+          {
+            fonction: 'Validation',
+            icone: 'fas fa-user-cog',
+            actif: '',
+            elements: [
+              { nom: 'Créer', lien: './validations/nouvelle-validation', bouton: 'false' },
+              {
+                nom: 'Rechercher',
+                lien: './validations/list-validations',
+                bouton: 'false',
+              },
+            ],
+          },
+          {
+            fonction: 'Ticket',
+            icone: 'fas fa-chart-pie',
+            actif: '',
+            elements: [
+              { nom: 'Rechercher', lien: 'tickets/list-tickets', bouton: 'false' },
+              {
+                nom: 'Afficher le panneau',
+                lien: 'tickets/panneau-tickets',
+                bouton: 'false',
+              },
+            ],
+          },
+          {
+            fonction: 'Attribut',
+            icone: 'fas fa-user-cog',
+            actif: '',
+            elements: [
+              { nom: 'Créer', lien: './attributs/attribut-nouveau', bouton: 'false' },
+              { nom: 'Rechercher', lien: './attributs/list-attributs', bouton: 'false' },
+            ],
+          },
+          {
+            fonction: 'Mission',
+            icone: 'fas fa-user-cog',
+            actif: '',
+            elements: [
+              { nom: 'Créer', lien: './missions/mission-nouveau', bouton: 'false' },
+              { nom: 'Rechercher', lien: './missions/list-missions', bouton: 'false' },
+              { nom: 'Exécuter', lien: './missions/page-intermedaire', bouton: 'false' },
+              { nom: 'liste des exemplaires', lien: './missions/list-exemplaire', bouton: 'false'},
+              { nom: 'Historique des documents', lien: './missions/page-intermedaire', bouton: 'false'}
+            ],
+          },
+          {
+            fonction: 'Documents',
+            icone: 'fas fa-user-cog',
+            actif: '',
+            elements: [
+              {
+                nom: 'Créer model documents',
+                lien: './documents/document-nouveau',
+                bouton: 'false',
+              },
+              { nom: 'Rechercher', lien: './documents/list-documents', bouton: 'false' },
+            ],
+          },
+          {
+            fonction: 'Famille',
+            icone: 'fas fa-user-cog',
+            actif: '',
+            elements: [
+              { nom: 'Créer', lien: 'familles/famille-nouvelle', bouton: 'false' },
+              { nom: 'Rechercher', lien: './familles/list-familles', bouton: 'false' },
+            ],
+          },
+          {
+            fonction: 'Role',
+            icone: 'fas fa-user-cog',
+            actif: '',
+            elements: [
+              { nom: 'Créer', lien: 'roles/role-nouveau', bouton: 'false' },
+              { nom: 'Rechercher', lien: './roles/list-roles', bouton: 'false' },
+            ],
+          },
+          {
+            fonction: 'Ressource',
+            icone: 'fas fa-user-cog',
+            actif: '',
+            elements: [
+              { nom: 'Créer', lien: 'ressources/ressource-nouvelle', bouton: 'false' },
+              { nom: 'Rechercher', lien: './ressources/list-ressources', bouton: 'false' },
+            ],
+          },
+          {
+            fonction: 'Préconisations',
+            icone: 'fas fa-user-cog',
+            actif: '',
+            elements: [
+              { nom: 'Créer', lien: 'preconisations/precomvt-nouvelle', bouton: 'false' },
+              { nom: 'Rechercher', lien: './preconisations/list-precomvts', bouton: 'false' },
+            ],
+          },
+          {
+            fonction: 'Distributeur',
+            icone: 'fas fa-user-cog',
+            actif: '',
+            elements: [
+              { nom: 'Créer', lien: 'distributeurs/distributeur-nouveau', bouton: 'false' },
+              {
+                nom: 'Rechercher',
+                lien: './distributeurs/list-distributeurs',
+                bouton: 'false',
+              },
+            ],
+          },
+          {
+            fonction: 'Etape',
+            icone: 'fas fa-user-cog',
+            actif: '',
+            elements: [
+              {
+                nom: 'Rechercher',
+                lien: './etapes/list-etapes',
+                bouton: 'false',
+              },
+            ],
+          },
+          {
+            fonction: 'Parcours',
+            icone: 'fas fa-user-cog',
+            actif: '',
+            elements: [
+              { nom: 'Créer', lien: 'parcours/nouveau-parours', bouton: 'false' },
+              {
+                nom: 'Rechercher',
+                lien: './parcours/list-parours',
+                bouton: 'false',
+              },
+            ],
+          },
+          {
+            fonction: 'Etats',
+            icone: 'fas fa-user-cog',
+            actif: '',
+            elements: [
+              { nom: 'Créer', lien: 'etats/etat-nouveau', bouton: 'false' },
+              { nom: 'rechercher', lien: './etats/list-etats', bouton: 'false' },
+            ],
+          },
+        ],
+      },
+      {
+        langue: 'en',
+        fonctionnalites: [
+          {
+            fonction: 'People',
+            icone: 'fas fa-user-cog',
+            actif: 'menu-close',
+            elements: [
+              { nom: 'New', lien: 'patients/patient-nouveau', bouton: 'false' },
+              { nom: 'Search', lien: 'patients/list-patients', bouton: 'false' },
+            ],
+          },
+          {
+            fonction: 'Service',
+            icone: 'fas fa-user-cog',
+            actif: '',
+            elements: [
+              { nom: 'New', lien: './services/service-nouveau', bouton: 'false' },
+              { nom: 'Search', lien: './services/list-services', bouton: 'false' },
+            ],
+          },
+          {
+            fonction: 'Ticket',
+            icone: 'fas fa-chart-pie',
+            actif: '',
+            elements: [
+              { nom: 'Search', lien: 'tickets/list-tickets', bouton: 'false' },
+              { nom: 'View panel', lien: 'tickets/panneau-tickets', bouton: 'false' },
+            ],
+          },
+          {
+            fonction: 'Attribut',
+            icone: 'fas fa-user-cog',
+            actif: '',
+            elements: [
+              { nom: 'New', lien: './attributs/attribut-nouveau', bouton: 'false' },
+              { nom: 'Search', lien: './attributs/list-attributs', bouton: 'false' },
+            ],
+          },
+          {
+            fonction: 'Validation',
+            icone: 'fas fa-user-cog',
+            actif: '',
+            elements: [
+              { nom: 'Créer', lien: './validations/nouvelle-validation', bouton: 'false' },
+              {
+                nom: 'Rechercher',
+                lien: './validations/list-validations',
+                bouton: 'false',
+              },
+            ],
+          },
+          {
+            fonction: 'Mission',
+            icone: 'fas fa-user-cog',
+            actif: '',
+            elements: [
+              { nom: 'New', lien: './missions/mission-nouveau', bouton: 'false' },
+              { nom: 'Search', lien: './missions/list-missions', bouton: 'false' },
+              { nom: 'Execute', lien: './missions/page-intermedaire', bouton: 'false' },
+              { nom: 'list of exemplaires', lien: './missions/list-exemplaire', bouton: 'false'},
+              { nom: "Documents history", lien: './missions/page-intermedaire', bouton: 'false'}
+            ],
+          },
+          {
+            fonction: 'Documents',
+            icone: 'fas fa-user-cog',
+            actif: '',
+            elements: [
+              {
+                nom: "New document's model",
+                lien: './documents/document-nouveau',
+                bouton: 'false',
+              },
+              { nom: 'Search', lien: './documents/list-documents', bouton: 'false' },
+            ],
+          },
+          {
+            fonction: 'Famille',
+            icone: 'fas fa-user-cog',
+            actif: '',
+            elements: [
+              { nom: 'new', lien: 'familles/famille-nouvelle', bouton: 'false' },
+              { nom: 'Search', lien: './familles/list-familles', bouton: 'false' },
+            ],
+          },
+          {
+            fonction: 'Role',
+            icone: 'fas fa-user-cog',
+            actif: '',
+            elements: [
+              { nom: 'Créer', lien: 'roles/role-nouveau', bouton: 'false' },
+              { nom: 'search', lien: './roles/list-roles', bouton: 'false' },
+            ],
+          },
+          {
+            fonction: 'Ressource',
+            icone: 'fas fa-user-cog',
+            actif: '',
+            elements: [
+              { nom: 'New', lien: 'ressources/ressource-nouvelle', bouton: 'false' },
+              { nom: 'Search', lien: './ressources/list-ressources', bouton: 'false' },
+            ],
+          },
+          {
+            fonction: 'Préconisations',
+            icone: 'fas fa-user-cog',
+            actif: '',
+            elements: [
+              { nom: 'New', lien: 'preconisations/precomvt-nouvelle', bouton: 'false' },
+              { nom: 'Search', lien: './preconisations/list-precomvts', bouton: 'false' },
+            ],
+          },
+          {
+            fonction: 'Distributeur',
+            icone: 'fas fa-user-cog',
+            actif: '',
+            elements: [
+              { nom: 'New', lien: 'distributeurs/distributeur-nouveau', bouton: 'false' },
+              { nom: 'search', lien: './distributeurs/list-distributeurs', bouton: 'false' },
+            ],
+          },
+          {
+            fonction: 'Stage',
+            icone: 'fas fa-user-cog',
+            actif: '',
+            elements: [
+              {
+                nom: 'search',
+                lien: './etapes/list-etapes',
+                bouton: 'false',
+              },
+            ],
+          },
+          {
+            fonction: 'Parcours',
+            icone: 'fas fa-user-cog',
+            actif: '',
+            elements: [
+              { nom: 'Créer', lien: 'parcours/nouveau-parours', bouton: 'false' },
+              {
+                nom: 'search',
+                lien: './parcours/list-parours',
+                bouton: 'false',
+              },
+            ],
+          },
+          {
+            fonction: 'Statut',
+            icone: 'fas fa-user-cog',
+            actif: '',
+            elements: [
+              { nom: 'New', lien: 'etats/etat-nouveau', bouton: 'false' },
+              { nom: 'search', lien: './etats/list-etats', bouton: 'false' },
+            ],
+          },
+        ],
+      },
+    ];
     let groupes: IGroupes[] = [
       {
         id: "1",
@@ -697,7 +1034,6 @@ export class InMemDBService implements InMemoryDbService {
         etat: "ras",
         menu: [
           {
-            idUser: 'phil',
             langue: 'fr',
             fonctionnalites: [
               {
@@ -873,7 +1209,6 @@ export class InMemDBService implements InMemoryDbService {
             ],
           },
           {
-            idUser: 'phil',
             langue: 'en',
             fonctionnalites: [
               {
@@ -1039,7 +1374,6 @@ export class InMemDBService implements InMemoryDbService {
         etat: "ras",
         menu: [
           {
-            idUser: 'phil',
             langue: 'fr',
             fonctionnalites: [
               {
@@ -1062,7 +1396,6 @@ export class InMemDBService implements InMemoryDbService {
             ],
           },
           {
-            idUser: 'phil',
             langue: 'en',
             fonctionnalites: [
               {
@@ -23768,156 +24101,66 @@ export class InMemDBService implements InMemoryDbService {
         id: '1',
         nom: 'Tagne',
         prenom: 'Willy',
-        mdp: 'Utilisateur000',
-        email: 'tagnewillie@gmail.com',
         telephone: '655455487',
+        email: 'tagnewillie@gmail.com',
         sexe: 'M',
         dateNaissance: new Date('10/04/2000'),
         dateEntree: new Date(),
         dateSortie: undefined,
         roles: undefined,
-        qrCodeValue: 'hello',
-        groupes: {
-        id: "2",
-        libelle: "simple",
-        etat: "ras",
-        menu: [
-          {
-            idUser: 'phil',
-            langue: 'fr',
-            fonctionnalites: [
-              {
-                fonction: 'Personnel',
-                icone: 'fas fa-user-cog',
-                actif: '',
-                elements: [
-                  { nom: 'Créer', lien: './personnels/nouveau-personnel', bouton: 'false' },
-                  { nom: 'Rechercher', lien: './personnels/list-personnels', bouton: 'false' },
-                ],
-              },
-              {
-                fonction: 'Mission',
-                icone: 'fas fa-user-cog',
-                actif: '',
-                elements: [
-                  { nom: 'Exécuter', lien: './missions/page-intermedaire', bouton: 'false' }
-                ],
-              },
-            ],
-          },
-          {
-            idUser: 'phil',
-            langue: 'en',
-            fonctionnalites: [
-              {
-                fonction: 'People',
-                icone: 'fas fa-user-cog',
-                actif: '',
-                elements: [
-                  { nom: 'New', lien: './personnels/nouveau-personnel', bouton: 'false' },
-                  { nom: 'Search', lien: './personnels/list-personnels', bouton: 'false' },
-                ],
-              },
-              {
-                fonction: 'Mission',
-                icone: 'fas fa-user-cog',
-                actif: '',
-                elements: [
-                  { nom: 'Execute', lien: './missions/page-intermedaire', bouton: 'false' }
-                ],
-              },
-            ],
-          },
-        ]
-      }
+        qrCodeValue: 'hello'
       },
       {
         id: '2',
         nom: 'Peter',
         prenom: 'Alan',
-        mdp: 'USER001',
-        email: 'peteralan@gmail.com',
         telephone: '655455487',
+        email: 'peteralan@gmail.com',
         sexe: 'M',
         dateNaissance: new Date('10/08/2004'),
         dateEntree: new Date(),
         dateSortie: undefined,
         roles: undefined,
-        qrCodeValue: 'hello',
-        groupes: {
-        id: "2",
-        libelle: "simple",
-        etat: "ras",
-        menu: [
-          {
-            idUser: 'phil',
-            langue: 'fr',
-            fonctionnalites: [
-              {
-                fonction: 'Personnel',
-                icone: 'fas fa-user-cog',
-                actif: '',
-                elements: [
-                  { nom: 'Créer', lien: './personnels/nouveau-personnel', bouton: 'false' },
-                  { nom: 'Rechercher', lien: './personnels/list-personnels', bouton: 'false' },
-                ],
-              },
-              {
-                fonction: 'Mission',
-                icone: 'fas fa-user-cog',
-                actif: '',
-                elements: [
-                  { nom: 'Exécuter', lien: './missions/page-intermedaire', bouton: 'false' }
-                ],
-              },
-            ],
-          },
-          {
-            idUser: 'phil',
-            langue: 'en',
-            fonctionnalites: [
-              {
-                fonction: 'People',
-                icone: 'fas fa-user-cog',
-                actif: '',
-                elements: [
-                  { nom: 'New', lien: './personnels/nouveau-personnel', bouton: 'false' },
-                  { nom: 'Search', lien: './personnels/list-personnels', bouton: 'false' },
-                ],
-              },
-              {
-                fonction: 'Mission',
-                icone: 'fas fa-user-cog',
-                actif: '',
-                elements: [
-                  { nom: 'Execute', lien: './missions/page-intermedaire', bouton: 'false' }
-                ],
-              },
-            ],
-          },
-        ]
-      }
+        qrCodeValue: 'hello'
       },
       {
         id: '3',
         nom: 'Dombo',
         prenom: 'Gilles',
-        email: 'dombogilles@gmail.com',
         telephone: '655455487',
+        email: 'dombogilles@gmail.com',
         sexe: 'M',
         dateNaissance: new Date('10/10/2002'),
         dateEntree: new Date(),
         dateSortie: undefined,
         roles: undefined,
-        qrCodeValue: 'hello',
-        mdp: 'oijfsdv2fdg3f5',
-        groupes: {
+        qrCodeValue: 'hello'
+      },
+    ];
+    let utilisateurs: IUtilisateurs[] = [
+      {
+        id: "1",
+        passWord: 'Utilisateur000',
+        login: 'tagnewillie@gmail.com',
+        user: {
+          id: '1',
+          nom: 'Tagne',
+          prenom: 'Willy',
+          telephone: '655455487',
+          email: 'tagnewillie@gmail.com',
+          sexe: 'M',
+          dateNaissance: new Date('10/04/2000'),
+          dateEntree: new Date(),
+          dateSortie: undefined,
+          roles: undefined,
+          qrCodeValue: 'hello'
+        },
+        groupe: {
           id: "2",
           libelle: "simple",
           etat: "ras",
           menu: [
             {
-              idUser: 'phil',
               langue: 'fr',
               fonctionnalites: [
                 {
@@ -23940,7 +24183,6 @@ export class InMemDBService implements InMemoryDbService {
               ],
             },
             {
-              idUser: 'phil',
               langue: 'en',
               fonctionnalites: [
                 {
@@ -23965,6 +24207,433 @@ export class InMemDBService implements InMemoryDbService {
           ]
         }
       },
+      {
+        id: "2",
+        passWord: 'USER001',
+        login: 'peteralan@gmail.com',
+        user: {
+          id: '2',
+          nom: 'Peter',
+          prenom: 'Alan',
+          telephone: '655455487',
+          email: 'peteralan@gmail.com',
+          sexe: 'M',
+          dateNaissance: new Date('10/08/2004'),
+          dateEntree: new Date(),
+          dateSortie: undefined,
+          roles: undefined,
+          qrCodeValue: 'hello'
+        },
+        groupe: {
+          id: "2",
+          libelle: "simple",
+          etat: "ras",
+          menu: [
+            {
+              langue: 'fr',
+              fonctionnalites: [
+                {
+                  fonction: 'Personnel',
+                  icone: 'fas fa-user-cog',
+                  actif: '',
+                  elements: [
+                    { nom: 'Créer', lien: './personnels/nouveau-personnel', bouton: 'false' },
+                    { nom: 'Rechercher', lien: './personnels/list-personnels', bouton: 'false' },
+                  ],
+                },
+                {
+                  fonction: 'Mission',
+                  icone: 'fas fa-user-cog',
+                  actif: '',
+                  elements: [
+                    { nom: 'Exécuter', lien: './missions/page-intermedaire', bouton: 'false' }
+                  ],
+                },
+              ],
+            },
+            {
+              langue: 'en',
+              fonctionnalites: [
+                {
+                  fonction: 'People',
+                  icone: 'fas fa-user-cog',
+                  actif: '',
+                  elements: [
+                    { nom: 'New', lien: './personnels/nouveau-personnel', bouton: 'false' },
+                    { nom: 'Search', lien: './personnels/list-personnels', bouton: 'false' },
+                  ],
+                },
+                {
+                  fonction: 'Mission',
+                  icone: 'fas fa-user-cog',
+                  actif: '',
+                  elements: [
+                    { nom: 'Execute', lien: './missions/page-intermedaire', bouton: 'false' }
+                  ],
+                },
+              ],
+            },
+          ]
+        }
+      },
+      {
+        id: "3",
+        passWord: 'oijfsdv2fdg3f5',
+        login: 'dombogilles@gmail.com',
+        user: {
+          id: '3',
+          nom: 'Dombo',
+          prenom: 'Gilles',
+          telephone: '655455487',
+          email: 'dombogilles@gmail.com',
+          sexe: 'M',
+          dateNaissance: new Date('10/10/2002'),
+          dateEntree: new Date(),
+          dateSortie: undefined,
+          roles: undefined,
+          qrCodeValue: 'hello',
+        },
+        groupe: {
+          id: "1",
+          libelle: "admin",
+          etat: "ras",
+          menu: [
+            {
+              langue: 'fr',
+              fonctionnalites: [
+                {
+                  fonction: 'Personne',
+                  icone: 'fas fa-user-cog',
+                  actif: 'menu-close',
+                  elements: [
+                    { nom: 'Créer', lien: 'patients/patient-nouveau', bouton: 'false' },
+                    { nom: 'Rechercher', lien: 'patients/list-patients', bouton: 'false' },
+                  ],
+                },
+                {
+                  fonction: 'Personnel',
+                  icone: 'fas fa-user-cog',
+                  actif: '',
+                  elements: [
+                    { nom: 'Créer', lien: './personnels/nouveau-personnel', bouton: 'false' },
+                    { nom: 'Rechercher', lien: './personnels/list-personnels', bouton: 'false' },
+                  ],
+                },
+                {
+                  fonction: 'Service',
+                  icone: 'fas fa-user-cog',
+                  actif: '',
+                  elements: [
+                    { nom: 'Créer', lien: './services/service-nouveau', bouton: 'false' },
+                    { nom: 'Rechercher', lien: './services/list-services', bouton: 'false' },
+                  ],
+                },
+                {
+                  fonction: 'Validation',
+                  icone: 'fas fa-user-cog',
+                  actif: '',
+                  elements: [
+                    { nom: 'Créer', lien: './validations/nouvelle-validation', bouton: 'false' },
+                    {
+                      nom: 'Rechercher',
+                      lien: './validations/list-validations',
+                      bouton: 'false',
+                    },
+                  ],
+                },
+                {
+                  fonction: 'Ticket',
+                  icone: 'fas fa-chart-pie',
+                  actif: '',
+                  elements: [
+                    { nom: 'Rechercher', lien: 'tickets/list-tickets', bouton: 'false' },
+                    {
+                      nom: 'Afficher le panneau',
+                      lien: 'tickets/panneau-tickets',
+                      bouton: 'false',
+                    },
+                  ],
+                },
+                {
+                  fonction: 'Attribut',
+                  icone: 'fas fa-user-cog',
+                  actif: '',
+                  elements: [
+                    { nom: 'Créer', lien: './attributs/attribut-nouveau', bouton: 'false' },
+                    { nom: 'Rechercher', lien: './attributs/list-attributs', bouton: 'false' },
+                  ],
+                },
+                {
+                  fonction: 'Mission',
+                  icone: 'fas fa-user-cog',
+                  actif: '',
+                  elements: [
+                    { nom: 'Créer', lien: './missions/mission-nouveau', bouton: 'false' },
+                    { nom: 'Rechercher', lien: './missions/list-missions', bouton: 'false' },
+                    { nom: 'Exécuter', lien: './missions/page-intermedaire', bouton: 'false' },
+                    { nom: 'liste des exemplaires', lien: './missions/list-exemplaire', bouton: 'false'},
+                    { nom: 'Historique des documents', lien: './missions/page-intermedaire', bouton: 'false'}
+                  ],
+                },
+                {
+                  fonction: 'Documents',
+                  icone: 'fas fa-user-cog',
+                  actif: '',
+                  elements: [
+                    {
+                      nom: 'Créer model documents',
+                      lien: './documents/document-nouveau',
+                      bouton: 'false',
+                    },
+                    { nom: 'Rechercher', lien: './documents/list-documents', bouton: 'false' },
+                  ],
+                },
+                {
+                  fonction: 'Famille',
+                  icone: 'fas fa-user-cog',
+                  actif: '',
+                  elements: [
+                    { nom: 'Créer', lien: 'familles/famille-nouvelle', bouton: 'false' },
+                    { nom: 'Rechercher', lien: './familles/list-familles', bouton: 'false' },
+                  ],
+                },
+                {
+                  fonction: 'Role',
+                  icone: 'fas fa-user-cog',
+                  actif: '',
+                  elements: [
+                    { nom: 'Créer', lien: 'roles/role-nouveau', bouton: 'false' },
+                    { nom: 'Rechercher', lien: './roles/list-roles', bouton: 'false' },
+                  ],
+                },
+                {
+                  fonction: 'Ressource',
+                  icone: 'fas fa-user-cog',
+                  actif: '',
+                  elements: [
+                    { nom: 'Créer', lien: 'ressources/ressource-nouvelle', bouton: 'false' },
+                    { nom: 'Rechercher', lien: './ressources/list-ressources', bouton: 'false' },
+                  ],
+                },
+                {
+                  fonction: 'Préconisations',
+                  icone: 'fas fa-user-cog',
+                  actif: '',
+                  elements: [
+                    { nom: 'Créer', lien: 'preconisations/precomvt-nouvelle', bouton: 'false' },
+                    { nom: 'Rechercher', lien: './preconisations/list-precomvts', bouton: 'false' },
+                  ],
+                },
+                {
+                  fonction: 'Distributeur',
+                  icone: 'fas fa-user-cog',
+                  actif: '',
+                  elements: [
+                    { nom: 'Créer', lien: 'distributeurs/distributeur-nouveau', bouton: 'false' },
+                    {
+                      nom: 'Rechercher',
+                      lien: './distributeurs/list-distributeurs',
+                      bouton: 'false',
+                    },
+                  ],
+                },
+                {
+                  fonction: 'Etape',
+                  icone: 'fas fa-user-cog',
+                  actif: '',
+                  elements: [
+                    {
+                      nom: 'Rechercher',
+                      lien: './etapes/list-etapes',
+                      bouton: 'false',
+                    },
+                  ],
+                },
+                {
+                  fonction: 'Parcours',
+                  icone: 'fas fa-user-cog',
+                  actif: '',
+                  elements: [
+                    { nom: 'Créer', lien: 'parcours/nouveau-parours', bouton: 'false' },
+                    {
+                      nom: 'Rechercher',
+                      lien: './parcours/list-parours',
+                      bouton: 'false',
+                    },
+                  ],
+                },
+                {
+                  fonction: 'Etats',
+                  icone: 'fas fa-user-cog',
+                  actif: '',
+                  elements: [
+                    { nom: 'Créer', lien: 'etats/etat-nouveau', bouton: 'false' },
+                    { nom: 'rechercher', lien: './etats/list-etats', bouton: 'false' },
+                  ],
+                },
+              ],
+            },
+            {
+              langue: 'en',
+              fonctionnalites: [
+                {
+                  fonction: 'People',
+                  icone: 'fas fa-user-cog',
+                  actif: 'menu-close',
+                  elements: [
+                    { nom: 'New', lien: 'patients/patient-nouveau', bouton: 'false' },
+                    { nom: 'Search', lien: 'patients/list-patients', bouton: 'false' },
+                  ],
+                },
+                {
+                  fonction: 'Service',
+                  icone: 'fas fa-user-cog',
+                  actif: '',
+                  elements: [
+                    { nom: 'New', lien: './services/service-nouveau', bouton: 'false' },
+                    { nom: 'Search', lien: './services/list-services', bouton: 'false' },
+                  ],
+                },
+                {
+                  fonction: 'Ticket',
+                  icone: 'fas fa-chart-pie',
+                  actif: '',
+                  elements: [
+                    { nom: 'Search', lien: 'tickets/list-tickets', bouton: 'false' },
+                    { nom: 'View panel', lien: 'tickets/panneau-tickets', bouton: 'false' },
+                  ],
+                },
+                {
+                  fonction: 'Attribut',
+                  icone: 'fas fa-user-cog',
+                  actif: '',
+                  elements: [
+                    { nom: 'New', lien: './attributs/attribut-nouveau', bouton: 'false' },
+                    { nom: 'Search', lien: './attributs/list-attributs', bouton: 'false' },
+                  ],
+                },
+                {
+                  fonction: 'Validation',
+                  icone: 'fas fa-user-cog',
+                  actif: '',
+                  elements: [
+                    { nom: 'Créer', lien: './validations/nouvelle-validation', bouton: 'false' },
+                    {
+                      nom: 'Rechercher',
+                      lien: './validations/list-validations',
+                      bouton: 'false',
+                    },
+                  ],
+                },
+                {
+                  fonction: 'Mission',
+                  icone: 'fas fa-user-cog',
+                  actif: '',
+                  elements: [
+                    { nom: 'New', lien: './missions/mission-nouveau', bouton: 'false' },
+                    { nom: 'Search', lien: './missions/list-missions', bouton: 'false' },
+                    { nom: 'Execute', lien: './missions/page-intermedaire', bouton: 'false' },
+                    { nom: 'list of exemplaires', lien: './missions/list-exemplaire', bouton: 'false'},
+                    { nom: "Documents history", lien: './missions/page-intermedaire', bouton: 'false'}
+                  ],
+                },
+                {
+                  fonction: 'Documents',
+                  icone: 'fas fa-user-cog',
+                  actif: '',
+                  elements: [
+                    {
+                      nom: "New document's model",
+                      lien: './documents/document-nouveau',
+                      bouton: 'false',
+                    },
+                    { nom: 'Search', lien: './documents/list-documents', bouton: 'false' },
+                  ],
+                },
+                {
+                  fonction: 'Famille',
+                  icone: 'fas fa-user-cog',
+                  actif: '',
+                  elements: [
+                    { nom: 'new', lien: 'familles/famille-nouvelle', bouton: 'false' },
+                    { nom: 'Search', lien: './familles/list-familles', bouton: 'false' },
+                  ],
+                },
+                {
+                  fonction: 'Role',
+                  icone: 'fas fa-user-cog',
+                  actif: '',
+                  elements: [
+                    { nom: 'Créer', lien: 'roles/role-nouveau', bouton: 'false' },
+                    { nom: 'search', lien: './roles/list-roles', bouton: 'false' },
+                  ],
+                },
+                {
+                  fonction: 'Ressource',
+                  icone: 'fas fa-user-cog',
+                  actif: '',
+                  elements: [
+                    { nom: 'New', lien: 'ressources/ressource-nouvelle', bouton: 'false' },
+                    { nom: 'Search', lien: './ressources/list-ressources', bouton: 'false' },
+                  ],
+                },
+                {
+                  fonction: 'Préconisations',
+                  icone: 'fas fa-user-cog',
+                  actif: '',
+                  elements: [
+                    { nom: 'New', lien: 'preconisations/precomvt-nouvelle', bouton: 'false' },
+                    { nom: 'Search', lien: './preconisations/list-precomvts', bouton: 'false' },
+                  ],
+                },
+                {
+                  fonction: 'Distributeur',
+                  icone: 'fas fa-user-cog',
+                  actif: '',
+                  elements: [
+                    { nom: 'New', lien: 'distributeurs/distributeur-nouveau', bouton: 'false' },
+                    { nom: 'search', lien: './distributeurs/list-distributeurs', bouton: 'false' },
+                  ],
+                },
+                {
+                  fonction: 'Stage',
+                  icone: 'fas fa-user-cog',
+                  actif: '',
+                  elements: [
+                    {
+                      nom: 'search',
+                      lien: './etapes/list-etapes',
+                      bouton: 'false',
+                    },
+                  ],
+                },
+                {
+                  fonction: 'Parcours',
+                  icone: 'fas fa-user-cog',
+                  actif: '',
+                  elements: [
+                    { nom: 'Créer', lien: 'parcours/nouveau-parours', bouton: 'false' },
+                    {
+                      nom: 'search',
+                      lien: './parcours/list-parours',
+                      bouton: 'false',
+                    },
+                  ],
+                },
+                {
+                  fonction: 'Statut',
+                  icone: 'fas fa-user-cog',
+                  actif: '',
+                  elements: [
+                    { nom: 'New', lien: 'etats/etat-nouveau', bouton: 'false' },
+                    { nom: 'search', lien: './etats/list-etats', bouton: 'false' },
+                  ],
+                },
+              ],
+            },
+          ]
+        }
+      }
     ];
     let typeAttribut: TypeAttribut = {
       type: [
@@ -36762,6 +37431,7 @@ export class InMemDBService implements InMemoryDbService {
     return {
       patients,
       services,
+      menu,
       menus,
       tickets,
       validations,
@@ -36781,7 +37451,8 @@ export class InMemDBService implements InMemoryDbService {
       etats,
       etape,
       parours,
-      groupes
+      groupes,
+      utilisateurs
     };
   }
 }

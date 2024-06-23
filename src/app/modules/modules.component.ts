@@ -3,6 +3,8 @@ import { TranslateService } from '@ngx-translate/core';
 import {OverlayContainer} from '@angular/cdk/overlay';
 import { AuthentificationService } from '../services/authentifications/authentification.service';
 import { Router } from '@angular/router';
+import { IUtilisateurs } from '../modele/utilisateurs';
+import { IPersonnel } from '../modele/personnel';
 
 @Component({
   selector: 'app-modules',
@@ -13,6 +15,8 @@ export class ModulesComponent {
   title = 'Parcours client - clinique de ...';
   langues : string[] = ['fr','en','sp','de'];
   langueChoisi: string = 'fr';
+  user!: IPersonnel;
+  groupe: string = "Simple";
   flags = [
     { flag: 'assets/images/flags/fr.svg'},
     { flag: 'assets/images/flags/us.svg'},
@@ -30,6 +34,11 @@ export class ModulesComponent {
     if (!this.authService.currentUserValue) {
       this.router.navigate(['/login']);
     }
+    this.user = this.authService.currentUserValue.user
+    this.groupe = this.authService.currentUserValue.groupe.libelle
+
+    console.log("user connect :", this.authService.currentUser);
+    
   }
 
   useLanguage(language: string): void {

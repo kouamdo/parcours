@@ -1,9 +1,10 @@
 import { Component, OnChanges, OnInit, Input, SimpleChanges } from '@angular/core';
-import { EMPTY, Observable, UnaryFunction } from 'rxjs';
+import { EMPTY, Observable, UnaryFunction, map } from 'rxjs';
 import { IFonctionnalites } from '../../modele/fonctionnalites';
-import { IMenus } from '../../modele/menus';
+import { IMenu } from '../../modele/menu';
 import { MenusService } from '../../services/menus/menus.service';
 import { DonneesEchangeService } from '../../services/donnees-echange/donnees-echange.service';
+import { AuthentificationService } from 'src/app/services/authentifications/authentification.service';
 
 @Component({
   selector: 'app-menu',
@@ -11,17 +12,16 @@ import { DonneesEchangeService } from '../../services/donnees-echange/donnees-ec
   styleUrls: ['./menu.component.scss']
 })
 export class MenuComponent implements OnInit, OnChanges {
-  menuUser$:Observable<IMenus>=EMPTY;
+  menuUser$:Observable<IMenu>=EMPTY;
   fonctionnalites!: IFonctionnalites[];
-  visible: number = -1;
   @Input()
   langueParent :string = 'fr';
   userId !:any;
-  constructor(private menuService:MenusService,private dataEnteteMenuService:DonneesEchangeService ) { }
+  constructor(private menuService:MenusService,private dataEnteteMenuService:DonneesEchangeService, private authService: AuthentificationService ) { }
 
   ngOnInit(): void {
-    if(localStorage.getItem("userId")!=null){
-      this.userId = localStorage.getItem("userId");
+    if(localStorage.getItem("currentUser")!=null){
+      this.userId = JSON.parse(localStorage.getItem("currentUser")!);
     }else{
       this.userId = "phil";
     }
@@ -39,23 +39,17 @@ export class MenuComponent implements OnInit, OnChanges {
     if(changes['langueParent'] && changes['langueParent'].currentValue){
       this.menuUser$ = this.getMenus();
       this.menuUser$.subscribe(x=>{
-        if(x!=null  && x.fonctionnalites!=null){
+        if(x!=null && x.fonctionnalites!=null){
           this.fonctionnalites = x.fonctionnalites;
         }
-
       })
     }
 
   }
 
   private getMenus(){
-    return  this.menuService.getMenuByUserAndLangue(this.userId,this.langueParent);
-  }
-
-  getSousMenu (index: number){
-    console.log("index :", index);
-    
-    this.visible = index;
+   // return this.menuService.getMenuByUserAndLangue(this.userId,this.langueParent);
+    return this.menuService.getMenuByUserAndLangue(this.authService.currentUserValue.login,this.langueParent);
   }
 
   getElementMenu(titre:string){

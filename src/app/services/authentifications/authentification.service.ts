@@ -1,12 +1,9 @@
 import { Injectable } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { PersonnelsService } from '../personnels/personnels.service';
-import { PatientsService } from '../patients/patients.service';
-import { IPersonnel } from 'src/app/modele/personnel';
+import { UtilisateurService } from '../utilisateurs/utilisateur.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +12,7 @@ export class AuthentificationService {
   private currentUserSubject: BehaviorSubject<any>;
   public currentUser: Observable<any>;
   
-  constructor(private http: HttpClient, private personnel: PersonnelsService, private patient: PatientsService, private router: Router) {
+  constructor(private http: HttpClient, private utilisateur: UtilisateurService, private router: Router) {
     this.currentUserSubject = new BehaviorSubject<any>(JSON.parse(localStorage.getItem('currentUser')!));
     this.currentUser = this.currentUserSubject.asObservable();
   }
@@ -29,17 +26,18 @@ export class AuthentificationService {
   login(username: string, password: string) {
     // Implémentez la logique de connexion ici
     // Si l'authentification est réussie, définissez authenticated à true
-    return this.personnel.getPersonnelByMailMdp(username, password).pipe(map(user => {
+    return this.utilisateur.getUtilisateurByMailMdp(username, password).pipe(map(user => {
       // stocker les détails de l'utilisateur et le jeton jwt dans le stockage local pour garder l'utilisateur connecté entre les rafraîchissements de la page
-      localStorage.setItem('currentUser', JSON.stringify(user));
-        this.currentUserSubject.next(user);
+      const { passWord, ...userSamme } = user;
+      localStorage.setItem('currentUser', JSON.stringify(userSamme));
+        this.currentUserSubject.next(userSamme);
         this.authenticated = user; // Exemple simplifié
       return user;
     }))
   }
 
   requestPasswordReset(email: string) {
-    return this.personnel.getPersonnelByMail(email).pipe(map(user => {
+    return this.utilisateur.getUtilisateurByMail(email).pipe(map(user => {
       return user;
     }))
   }
@@ -51,6 +49,7 @@ export class AuthentificationService {
   logout() {
     // supprimer l'utilisateur du stockage local pour déconnecter l'utilisateur
     localStorage.removeItem('currentUser');
+    localStorage.removeItem('menu');
     this.currentUserSubject.next(null);
     this.router.navigate(['/login']);
   }

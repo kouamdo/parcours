@@ -18,76 +18,109 @@ import { ServicesRoutingModule } from './services/services-routing.module';
 import { TicketsRoutingModule } from './tickets/tickets-routing.module';
 import { ValidationRoutingModule } from './validation/validation-routing.module';
 import { ModulesComponent } from './modules.component';
-import { AuthGuard } from '../auth/auth.guard';
 import { NotFoundComponent } from '../not-found/not-found.component';
 import { CommonModule } from '@angular/common';
+import { AuthGuard } from '../verify-users/auth/auth.guard';
+import { RoleAuthGuard } from '../verify-users/role-users/role-auth.guard';
 
 const routes: Routes = [
   { path: 'parcours', component: ModulesComponent, canActivate: [AuthGuard],
     children: [
       {
         path: 'attributs',
-        loadChildren: () => import('./attributs/attributs.module').then(m => m.AttributsModule) 
+        loadChildren: () => import('./attributs/attributs.module').then(m => m.AttributsModule),
+        canActivate: [RoleAuthGuard],
+        data: { role: ['admin']} 
       },
       {
         path: 'patients',
-        loadChildren: () => import('./patients/patients.module').then(m => m.PatientsModule) 
+        loadChildren: () => import('./patients/patients.module').then(m => m.PatientsModule),
+        canActivate: [RoleAuthGuard],
+        data: { role: ['admin']} 
       },
       {
         path: 'personnels',
-        loadChildren: () => import('./personnels/personnels.module').then(m => m.PersonnelsModule) 
+        loadChildren: () => import('./personnels/personnels.module').then(m => m.PersonnelsModule),
+        canActivate: [RoleAuthGuard],
+        data: { role: ['admin', 'simple']} 
       },
       {
         path: 'services',
-        loadChildren: () => import('./services/services.module').then(m => m.ServicesModule) 
+        loadChildren: () => import('./services/services.module').then(m => m.ServicesModule),
+        canActivate: [RoleAuthGuard],
+        data: { role: ['admin']} 
       },
       {
         path: 'validations',
-        loadChildren: () => import('./validation/validation.module').then(m => m.ValidationModule) 
+        loadChildren: () => import('./validation/validation.module').then(m => m.ValidationModule),
+        canActivate: [RoleAuthGuard],
+        data: { role: ['admin']} 
       },
       {
         path: 'tickets',
-        loadChildren: () => import('./tickets/tickets.module').then(m => m.TicketsModule) 
+        loadChildren: () => import('./tickets/tickets.module').then(m => m.TicketsModule),
+        canActivate: [RoleAuthGuard],
+        data: { role: ['admin']} 
       },
       {
         path: 'missions',
-        loadChildren: () => import('./missions/missions.module').then(m => m.MissionsModule) 
+        loadChildren: () => import('./missions/missions.module').then(m => m.MissionsModule),
+        canActivate: [RoleAuthGuard],
+        data: { role: ['admin']} 
       },
       {
         path: 'documents',
-        loadChildren: () => import('./documents/documents.module').then(m => m.DocumentsModule) 
+        loadChildren: () => import('./documents/documents.module').then(m => m.DocumentsModule),
+        canActivate: [RoleAuthGuard],
+        data: { role: ['admin']} 
       },
       {
         path: 'familles',
-        loadChildren: () => import('./famille/famille.module').then(m => m.FamilleModule) 
+        loadChildren: () => import('./famille/famille.module').then(m => m.FamilleModule),
+        canActivate: [RoleAuthGuard],
+        data: { role: ['admin']} 
       },
       {
         path: 'roles',
-        loadChildren: () => import('./role/role.module').then(m => m.RoleModule) 
+        loadChildren: () => import('./role/role.module').then(m => m.RoleModule),
+        canActivate: [RoleAuthGuard],
+        data: { role: ['admin']} 
       },
       {
         path: 'ressources',
-        loadChildren: () => import('./ressource/ressource.module').then(m => m.RessourceModule) 
+        loadChildren: () => import('./ressource/ressource.module').then(m => m.RessourceModule),
+        canActivate: [RoleAuthGuard],
+        data: { role: ['admin']} 
       },
       {
         path: 'preconisations',
-        loadChildren: () => import('./precomvt/precomvt.module').then(m => m.PrecomvtModule) 
+        loadChildren: () => import('./precomvt/precomvt.module').then(m => m.PrecomvtModule),
+        canActivate: [RoleAuthGuard],
+        data: { role: ['admin']} 
       },
       {
         path: 'distributeurs',
-        loadChildren: () => import('./distributeur/distributeur.module').then(m => m.DistributeurModule) 
+        loadChildren: () => import('./distributeur/distributeur.module').then(m => m.DistributeurModule),
+        canActivate: [RoleAuthGuard],
+        data: { role: ['admin']} 
       },
       {
         path: 'etats',
-        loadChildren: () => import('./etats/etats.module').then(m => m.EtatsModule) 
+        loadChildren: () => import('./etats/etats.module').then(m => m.EtatsModule),
+        canActivate: [RoleAuthGuard],
+        data: { role: ['admin']} 
       },
       {
         path: 'parcours',
-        loadChildren: () => import('./parours/parours.module').then(m => m.ParoursModule) 
+        loadChildren: () => import('./parours/parours.module').then(m => m.ParoursModule),
+        canActivate: [RoleAuthGuard],
+        data: { role: ['admin']} 
       },
       {
         path: 'etapes',
-        loadChildren: () => import('./etape/etape.module').then(m => m.EtapeModule) 
+        loadChildren: () => import('./etape/etape.module').then(m => m.EtapeModule),
+        canActivate: [RoleAuthGuard],
+        data: { role: ['admin']} 
       },
       {
         path: '',
