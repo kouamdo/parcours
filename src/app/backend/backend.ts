@@ -25,6 +25,7 @@ import { IEtats } from '../modele/etats';
 import { IValidation } from '../modele/validation';
 import { IEtape } from '../modele/etape';
 import { IParours } from '../modele/parours';
+import { Promo } from '../modele/promo-distributeur';
 
 export class InMemDBService implements InMemoryDbService {
   createDb() {
@@ -455,6 +456,19 @@ export class InMemDBService implements InMemoryDbService {
             ],
           },
           {
+            fonction: 'Promo',
+            icone: 'fas fa-user-cog',
+            actif: '',
+            elements: [
+              { nom: 'Créer', lien: 'promo-nouveau', bouton: 'false' },
+              {
+                nom: 'Rechercher',
+                lien: './list-promo',
+                bouton: 'false',
+              },
+            ],
+          },
+          {
             fonction: 'Parcours',
             icone: 'fas fa-user-cog',
             actif: '',
@@ -607,6 +621,19 @@ export class InMemDBService implements InMemoryDbService {
             elements: [
               { nom: 'New', lien: 'distributeur-nouveau', bouton: 'false' },
               { nom: 'search', lien: './list-distributeurs', bouton: 'false' },
+            ],
+          },
+          {
+            fonction: 'Promo',
+            icone: 'fas fa-user-cog',
+            actif: '',
+            elements: [
+              { nom: 'New', lien: 'promo-nouveau', bouton: 'false' },
+              {
+                nom: 'search',
+                lien: './list-promo',
+                bouton: 'false',
+              },
             ],
           },
           {
@@ -23248,6 +23275,29 @@ export class InMemDBService implements InMemoryDbService {
         ],
       },
     ];
+    let promo: Promo[] = [
+      {
+        id: '1',
+        emetteur: {
+          id: '1',
+          raisonSocial: 'Total Energie',
+          etat: true,
+          adresse: 'Dla',
+          telephone: '655554488',
+          mail: 'ngong@yad.fr',
+        },
+        codeUnique:"A01B",
+        dateDebut: new Date('07/03/2000'),
+        dateFin: new Date('07/03/2002'),
+        montantRemise: 100,
+        pourcentageRemise:0,
+        dateCreation: new Date(),
+      famille: [{
+        id: '1', libelle: 'Electronique', description: 'sang', etat: true
+      }]
+
+      }
+    ]
     let ressource: IRessource[] = [
       {
         id: '1',
@@ -36545,6 +36595,7 @@ export class InMemDBService implements InMemoryDbService {
       ressource,
       precomvt,
       distributeur,
+      promo,
       role,
       personnels,
       typeAttribut,

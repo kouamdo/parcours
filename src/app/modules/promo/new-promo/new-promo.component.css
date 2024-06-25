@@ -1,0 +1,55 @@
+.selected-beneficiaires {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.selected-beneficiaire {
+  display: flex;
+  align-items: center;
+  background-color: #ffffff;
+  border: 1px solid #4dd0e1;
+  border-radius: 5px;
+  padding: 0.2rem 0.2rem;
+  color: #00796b;
+  font-weight: 500;
+}
+
+.selected-beneficiaire .delete-button {
+  background: none;
+  border: none;
+  color: #e57373;
+  margin-left: 0.5rem;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.selected-beneficiaire .delete-button:hover {
+  color: #d32f2f;
+}
+
+.selected-beneficiaire.ressource { 
+  color: #007bff;
+}
+
+.color-circle {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 5px;
+}
+
+.color-circle.famille {
+  background-color: #00796b; /* or any color you want to represent famille */
+}
+
+.color-circle.ressource {
+  background-color: #007bff;
+}
+.beneficiaire-legend{
+  width: 100%;
+  gap: 10px;
+  display: flex;
+  justify-content: center;
+}

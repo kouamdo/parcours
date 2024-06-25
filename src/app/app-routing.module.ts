@@ -18,6 +18,7 @@ import { EtatsRoutingModule } from './modules/etats/etats-routing.module';
 import { ValidationRoutingModule } from './modules/validation/validation-routing.module';
 import { EtapeRoutingModule } from './modules/etape/etape-routing.module';
 import { ParoursRoutingModule } from './modules/parours/parours-routing.module';
+import { PromoRoutingModule } from './modules/promo/promo-routing.module';
 
 
 
@@ -40,6 +41,7 @@ const routes: Routes = [
     DocumentsRoutingModule,
     FamilleRoutingModule,
     RessourceRoutingModule,
+    PromoRoutingModule,
     PrecoMvtRoutingModule,
     ExemplaireDocumentRoutingModule,
     FamilleRoutingModule,

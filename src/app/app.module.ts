@@ -37,6 +37,7 @@ import { EtatsModule } from './modules/etats/etats.module';
 import { ValidationModule } from './modules/validation/validation.module';
 import { EtapeModule } from './modules/etape/etape.module';
 import { ParoursModule } from './modules/parours/parours.module';
+import { PromoModule } from './modules/promo/promo.module';
 
 @NgModule({
   declarations: [AppComponent, NotFoundComponent, MenuComponent],
@@ -60,6 +61,7 @@ import { ParoursModule } from './modules/parours/parours.module';
     FamilleModule,
     RessourceModule,
     PrecomvtModule,
+    PromoModule,
     CommonModule,
     DistributeurModule,
     RoleModule,
