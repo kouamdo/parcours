@@ -47,4 +47,8 @@ export class UtilisateurService {
     );
   }
 
+  ajouterUser(personne: IUtilisateurs) {
+    return this.http.post('api/utilisateurs', personne);
+  }
+
 }

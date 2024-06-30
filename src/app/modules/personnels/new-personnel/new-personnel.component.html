@@ -4,7 +4,7 @@
           {{"personnel.title1" | translate}} {{titre}}
         </div>
         <div class="card-body" >
-            <form [formGroup]="forme" (ngSubmit)="onSubmit(forme.value)" *ngIf="forme" >
+            <form [formGroup]="forme" *ngIf="forme" >
                 <div class="">
                     <div class="">
                         <div class="form-group">
@@ -106,7 +106,7 @@
                 </div>
                 <div class="actionButton">
                     <button class="btn" routerLink="../list-personnels"><i class="fa fa-reply mr-1" aria-hidden="true"></i>{{'lists.button2' | translate}}</button>
-                    <button type="submit" class="btn btnValidation">{{btnLibelle}}</button>
+                    <button type="submit" (click)="onSubmit(forme.value)" class="btn btnValidation">{{btnLibelle}}</button>
                 </div>
             </form>
         </div>
