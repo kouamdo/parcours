@@ -11,8 +11,7 @@
                             <div>
                                 <div class="champs">
                                     <label for="nom" class="label">
-                                        {{'patient.table.title1' | translate}} <span style="color: red;"
-                                            aria-label="required">*</span>
+                                        {{'patient.table.title1' | translate}}<sup>*</sup>
                                     </label>
                                     <input type="text" formControlName="nom" name="nom" id="nom"
                                         placeholder="{{'patient.table.title1' | translate}}" class="form-control"
@@ -28,8 +27,7 @@
                             <div>
                                 <div class="champs">
                                     <label for="prenom" class="label">
-                                        {{"patient.table.title2" | translate}} <span style="color: red;"
-                                            aria-label="required">*</span>
+                                        {{"patient.table.title2" | translate}}<sup>*</sup>
                                     </label>
                                     <input type="text" formControlName="prenom" name="prenom" id="prenom"
                                         placeholder="{{'patient.table.title2' | translate}}" class="form-control"
@@ -56,8 +54,7 @@
                             <div>
                                 <div class="champs">
                                     <label for="dateNaissance" class="label">
-                                        {{"patient.table.title3" | translate}}<span style="color: red;"
-                                            aria-label="required">*</span>
+                                        {{"patient.table.title3" | translate}}<sup>*</sup>
                                     </label>
                                     <input type="date" formControlName="dateNaissance" name="dateNaissance"
                                         id="dateNaissance" placeholder="{{'patient.table.title3' | translate}}" value=""
@@ -75,8 +72,7 @@
                             <div>
                                 <div class="champs">
                                     <label for="mail" class="label">
-                                        {{"patient.table.title5" | translate}}<span style="color: red;"
-                                            aria-label="required">*</span>
+                                        {{"patient.table.title5" | translate}}<sup>*</sup>
                                     </label>
                                     <input type="email" formControlName="mail" name="mail" id="mail"
                                         placeholder="{{'patient.table.title5' | translate}}" required
@@ -116,7 +112,7 @@
                                 </label>
                                 <input type="text" matInput [matAutocomplete]="auto" formControlName="myControl"
                                     [formControl]="myControl" aria-label="personne"
-                                    placeholder="Entrer le nom de la personne" class="w-100 form-control" />
+                                    placeholder="Entrer le nom de la personne" class="champsAutocomplate" />
                                 <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn"
                                     (optionSelected)="onSelectPersonne($event)">
                                     <mat-option *ngFor="let option of filteredOptions" [value]="option"
@@ -132,24 +128,15 @@
                     </div>
 
                     <!-- Display selected personnesRatachees as badges with a button to remove -->
-                    <div *ngIf="personnesRatachees.length === 1" class="display">
+                    <div class="display">
                         <div *ngFor="let personne of personnesRatachees; let i = index" class="badge-container">
                             <div class="badge-content">
-                                {{ personne.nom }} - {{ personne.prenom }} - {{ personne.sexe }} - {{
-                                personne.dateNaissance | date: 'dd/MM/yyyy' }}
-                                <button mat-button class="remove-button" (click)="removePersonne(i)">
-                                    <i class="fa fa-trash text-danger" aria-hidden="true"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div *ngIf="personnesRatachees.length > 1" class="display">
-                        <div *ngFor="let personne of personnesRatachees; let i = index" class="badge-container">
-                            <div class="badge-content">
-                                {{ personne.nom }} - {{ personne.prenom }} - {{ personne.sexe }} - {{
-                                personne.dateNaissance | date: 'dd/MM/yyyy' }}
-                                <button mat-button class="remove-button" (click)="removePersonne(i)">
-                                    <i class="fa fa-trash text-danger" aria-hidden="true"></i>
+                                <span>
+                                    {{ personne.nom }} - {{ personne.prenom }} - {{ personne.sexe }} - {{
+                                    personne.dateNaissance | date: 'dd/MM/yyyy' }}
+                                </span>
+                                <button mat-button class="btn remove-button" (click)="removePersonne(i)">
+                                    <i class="fa fa-trash" aria-hidden="true"></i>
                                 </button>
                             </div>
                         </div>

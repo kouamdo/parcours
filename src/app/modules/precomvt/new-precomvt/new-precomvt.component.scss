@@ -6,7 +6,7 @@
   justify-content: space-around;
 }
 #rigthSection{
-  height: 100% !important;
+  max-height: 72vh !important;
   width: 25%;
   position: relative;
   background-color: #fff;
@@ -14,18 +14,18 @@
   border-radius: none;
 }
 .titleBlock{
-  text-align: center;
-  font-size: 8px;
   font-weight: bold;
   background-color: #28a745;;
   color: white;
   text-align: center;
   font-size: 22px;
-  font-weight: bold;
   height: 65px;
   width: 100.95%;
   position: relative;
   right: 1px;
+  border: 2.1px solid #28a745;
+  border-bottom: none;
+  border-radius: 5px 5px 0 0;
 }
 .rigth{
    margin-top: -8px;
@@ -37,7 +37,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   .infosBoitier{
     display: flex;
     flex-direction: column;
@@ -179,15 +178,6 @@
   box-shadow: 0 0 2px rgb(220, 220, 220);
   height: 35px;
 }
-select{
-  border: none;
-  box-shadow: 0 0 2px rgb(220, 220, 220);
-  height: 24px;
-  background-color: #28a74632;
-  color: rgb(108, 108, 108);
-  padding: 0 10px;
-  border-radius: 5px;
-}
 .error{
   display: flex;
   font-style: italic;
@@ -221,26 +211,4 @@ margin-top: -8px;
 }
 #label3{
 margin-bottom: -10px;
-}
-.example-full-width {
-  height: 35px !important;
-  border: 1px solid #28a74653;
-  border-radius: 5px;
-  background-color: transparent;
-  padding: 0;
-  margin: 0;
-  margin-bottom: 10px;
-  width: 100%;
-  position: relative;
-  color: #28a745;
-  line-height: normal;
-  box-sizing: initial;
-  input{
-    position: absolute;
-    padding: 0;
-    border: 2px;
-    margin: 0;
-    top: -12px;
-
-  }
 }

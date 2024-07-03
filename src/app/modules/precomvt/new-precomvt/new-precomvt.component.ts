@@ -174,6 +174,8 @@ export class NewPrecomvtComponent implements OnInit {
             }
           });
         });
+        
+      this.steps = 2;
     }
     this.titre = this.dataEnteteMenuService.dataEnteteMenu;
   }

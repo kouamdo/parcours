@@ -436,6 +436,8 @@
   },
   "promo-distributeur":{
     "title": "Add Promotion",
+    "text1":"Issuer",
+    "text2":"Name of Resource or Family",
     "emetteur": "Issuer",
     "date_debut": "Start date",
     "date_fin": "End date",
@@ -444,7 +446,6 @@
     "Pourcentage": "Discount percentage",
     "remise": "Type of discount",
     "beneficiaire": "Beneficiary",
-    "ressource_ou_familles": "Name of Resource or Family",
     "emetteur_control": "Issuer is mandatory.",
     "date_debut_control": "The Promotion Start Date is mandatory.",
     "date_fin_control": "The Promotion End Date is mandatory.",
@@ -459,7 +460,7 @@
     "pourcentage_messgae":"Entrez the percentage",
     "rechercher":"Search",
     "modifier": "Edit",
-    "famille": "Family",
+    "famille": "Category",
     "ressource": "Resource",
     "action": "Actions"
   },

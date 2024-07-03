@@ -59,10 +59,9 @@
                             <ng-container matColumnDef="ordreAtrParCat">
                                 <th class="text-dark containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'document.table.title13' | translate}} </th>
                                 <td class="text-dark containCell" mat-cell *matCellDef="let element">
-                                    <mat-form-field class="blockOrdreAttribut p-0" appearance="fill">
-                                        <mat-label>ordre</mat-label>
-                                        <input matInput type="number" [(ngModel)]="element.ordre">
-                                    </mat-form-field>
+                                    <div class="blockOrdreAttribut p-0">
+                                        <input type="number" [(ngModel)]="element.ordre">
+                                    </div>
                                 </td>
                             </ng-container>
 
@@ -79,7 +78,7 @@
 
                             <!-- actions Column -->
                             <ng-container matColumnDef="actions">
-                                <th class="text-dark text-left containHead" mat-header-cell *matHeaderCellDef> {{"patient.table.title8" | translate}} </th>
+                                <th class="containHead" mat-header-cell *matHeaderCellDef> {{"patient.table.title8" | translate}} </th>
                                 <td class="text-dark containCell"  mat-cell *matCellDef="let element;  let i=index">
                                     <div class="actions">
                                         <button class="btn p-0" name=""  [value]="element.attribut.id" id="" title="clicker pour ajouter un attributs a la categorie"  (change)="selectionnerCategorieCheck(formeCategorieAttribut.value,this.element, i, $event);">

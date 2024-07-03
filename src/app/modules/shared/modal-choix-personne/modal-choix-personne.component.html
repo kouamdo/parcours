@@ -1,16 +1,13 @@
 <div id="mainBlock" class="bg-light card modalExemplairecDePersonne">
     <h2>{{'document.exemplaire.text8' | translate}}</h2>
-    <form class="example-form champsSelect">
-        <mat-form-field class="example-full-width" appearance="fill">
-          <mat-label class="searchBar">{{'patient.search-bar' | translate}}</mat-label>
-          <input type="text" matInput aria-label="Rechercher" autofocus [formControl]="myControl" [value]="scan_val" [matAutocomplete]="auto">
-          <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
-            <mat-option *ngFor="let option of filteredOptions" [value]="option" (onSelectionChange)="rechercherListingPersonnes(option)" title="{{option.nom}} {{option.prenom}} {{'patient.form.text5' | translate}} {{option.dateNaissance | date : 'dd-mm-yyyy'}}">
-              {{option.nom}} {{option.prenom}} {{'patient.form.text5' | translate}} {{option.dateNaissance | date : 'dd-mm-yyyy'}}
-            </mat-option>
-          </mat-autocomplete>
-        </mat-form-field>
-        <div class="cameraBlock"><app-modal-codebarre-scan-continue></app-modal-codebarre-scan-continue></div>      
+    <form class="example-form-entete champsSelect w-100">
+      <input class="w-100" placeholder="{{'patient.search-bar' | translate}}" type="text" matInput aria-label="Rechercher" autofocus [formControl]="myControl" [value]="scan_val" [matAutocomplete]="auto">
+      <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+        <mat-option *ngFor="let option of filteredOptions" [value]="option" (onSelectionChange)="rechercherListingPersonnes(option)" title="{{option.nom}} {{option.prenom}} {{'patient.form.text5' | translate}} {{option.dateNaissance | date : 'dd-mm-yyyy'}}">
+          {{option.nom}} {{option.prenom}} {{'patient.form.text5' | translate}} {{option.dateNaissance | date : 'dd-mm-yyyy'}}
+        </mat-option>
+      </mat-autocomplete>
+      <div class="cameraBlock"><app-modal-codebarre-scan-continue></app-modal-codebarre-scan-continue></div>      
     </form>
     <div *ngIf="this.personne != undefined" class="affichePersonne">
       <p>

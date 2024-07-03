@@ -6,17 +6,14 @@
   <div class="card container-fluid" id="top">
       <div class='card-hearder pt-3' >
           <div class="d-flex align-items-center justify-content-end tableTools">
-              <div class="form-inline mr-3">
-                  <form class="example-form">
-                      <mat-form-field class="example-full-width" appearance="fill">
-                        <mat-label class="searchBar">{{'patient.search-bar' | translate}}</mat-label>
-                        <input type="text" matInput aria-label="Rechercher" [formControl]="myControl" [matAutocomplete]="auto">
+              <div class="form-inline mr-2">
+                  <form class="example-form-entete">
+                        <input placeholder="{{'patient.search-bar' | translate}}" type="text" matInput aria-label="Rechercher" [formControl]="myControl" [matAutocomplete]="auto">
                         <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
                           <mat-option *ngFor="let option of filteredOptions" [value]="option" (onSelectionChange)="rechercherListingParours(option)">
                             {{option.libelle}}
                           </mat-option>
                         </mat-autocomplete>
-                      </mat-form-field>
                   </form>
               </div>
               <div role="button" id="addUserBotton" routerLink="../nouveau-parours">
@@ -31,21 +28,21 @@
               <table class='table table-sm table-centered table-striped table-bordered w-100' mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)">
                   <!-- libelle Column -->
                   <ng-container matColumnDef="libelle">
-                      <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header>{{"parours.table1.title1"| translate}}</th>
-                      <td class="text-dark text-center containCell" mat-cell *matCellDef="let element"> {{element.libelle}} </td>
+                      <th class="containHead" mat-header-cell *matHeaderCellDef mat-sort-header>{{"parours.table1.title1"| translate}}</th>
+                      <td class="containCell" mat-cell *matCellDef="let element"> {{element.libelle}} </td>
                   </ng-container>
 
                   <!-- etape Column -->
                   <ng-container matColumnDef="etape">
-                    <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header>{{"parours.table1.title2"| translate}}</th>
-                    <td class="text-dark text-center containCell" mat-cell *matCellDef="let element">
+                    <th class="containHead" mat-header-cell *matHeaderCellDef mat-sort-header>{{"parours.table1.title2"| translate}}</th>
+                    <td class="containCell" mat-cell *matCellDef="let element">
                         <span> {{element.listeEtape}} </span>
                     </td>
                 </ng-container>
 
                   <ng-container matColumnDef="actions">
                       <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{"patient.table.title8" | translate}} </th>
-                      <td class="text-dark text-center containCell" mat-cell *matCellDef="let element">
+                      <td class="containCell" mat-cell *matCellDef="let element">
                           <div id="actions" class="dropdown open">
                               <button class="btn dropdown-toggle" type="button" id="triggerId" data-toggle="dropdown" aria-haspopup="true"
                                       aria-expanded="false">

@@ -5,17 +5,14 @@
     <div class="card container-fluid" id="top">
         <div class='card-hearder pt-3' >
             <div class="d-flex align-items-center justify-content-end tableTools">
-                <div class="form-inline mr-3">
-                    <form class="example-form">
-                        <mat-form-field class="example-full-width" appearance="fill">
-                          <mat-label class="searchBar">{{'patient.search-bar' | translate}}</mat-label>
-                          <input type="text" matInput aria-label="Rechercher" [formControl]="myControl" [matAutocomplete]="auto">
-                          <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
-                            <mat-option *ngFor="let option of filteredOptions" [value]="option" (onSelectionChange)="rechercherListingTicket(option)">
-                              {{option.idUnique}}
-                            </mat-option>
-                          </mat-autocomplete>
-                        </mat-form-field>
+                <div class="form-inline mr-2">
+                    <form class="example-form-entete">
+                        <input placeholder="{{'patient.search-bar' | translate}}" type="text" matInput aria-label="Rechercher" [formControl]="myControl" [matAutocomplete]="auto">
+                        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+                          <mat-option *ngFor="let option of filteredOptions" [value]="option" (onSelectionChange)="rechercherListingTicket(option)">
+                            {{option.idUnique}}
+                          </mat-option>
+                        </mat-autocomplete>
                     </form>
                 </div>
             </div>
@@ -26,43 +23,43 @@
 
                   <!-- id Column -->
                   <ng-container matColumnDef="id">
-                    <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'tickets.table.title1' | translate}} </th>
+                    <th class="containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'tickets.table.title1' | translate}} </th>
                     <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.id}} </td>
                   </ng-container>
 
                   <!-- idUnique Column -->
                   <ng-container matColumnDef="idUnique">
-                    <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'tickets.table.title2' | translate}} </th>
+                    <th class="containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'tickets.table.title2' | translate}} </th>
                     <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.idUnique}} </td>
                   </ng-container>
 
                   <!-- date_heure Column -->
                   <!-- <ng-container matColumnDef="date_heure">
-                    <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'tickets.table.title3' | translate}} </th>
+                    <th class="containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'tickets.table.title3' | translate}} </th>
                     <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.date_heure}} </td>
                   </ng-container> -->
 
                   <!-- idFileAttente Column -->
                   <ng-container matColumnDef="idFileAttente">
-                    <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'tickets.table.title4' | translate}} </th>
+                    <th class="containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'tickets.table.title4' | translate}} </th>
                     <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.idFileAttente}} </td>
                   </ng-container>
 
                   <!-- idPersonne Column -->
                   <ng-container matColumnDef="idPersonne">
-                    <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'tickets.table.title5' | translate}} </th>
+                    <th class="containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'tickets.table.title5' | translate}} </th>
                     <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.idPersonne}} </td>
                   </ng-container>
 
                   <!-- statut Column -->
                   <ng-container matColumnDef="statut">
-                    <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'tickets.table.title6' | translate}} </th>
+                    <th class="containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'tickets.table.title6' | translate}} </th>
                     <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.statut}} </td>
                   </ng-container>
 
                     <!-- action Column -->
                     <ng-container matColumnDef="actions">
-                        <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef> {{"patient.table.title8" | translate}} </th>
+                        <th class="containHead" mat-header-cell *matHeaderCellDef> {{"patient.table.title8" | translate}} </th>
                         <td class="text-dark containCell" mat-cell *matCellDef="let element">
                             <div id="actions" class="dropdown open">
                                 <button class="btn dropdown-toggle" type="button" id="triggerId" data-toggle="dropdown" aria-haspopup="true"

@@ -65,7 +65,7 @@ h3{
 }
 .block1 .inputBlock input, .block1 .inputBlock textarea, .block1 .inputBlock select{
     width: 70%;
-    height: 35px;
+    height: 30px;
 }
 .titre{
     font-weight: 400 !important;
@@ -114,8 +114,7 @@ h3{
 .blockAutoRessources form{
     justify-content: end;
 }
-.example-form{
-    width: 100%;
+.example-form-entete{
     display: flex;
     align-items: flex-start;
     justify-content: flex-start;
@@ -124,42 +123,10 @@ h3{
         margin-right: 2px;
         width: fit-content;
     }
-    // .example-full-width {
-    // height: 42px !important;
-    // border: 2px solid #28a745;
-    // }
-    // .mat-input{
-    //     position: absolute;
-    //     bottom: 100px;
-    //     height: 20px !important;
-    // }
 }
 #tableBlock{
     margin: 10px 0 30px 0;
 }
-mat-form-field{
-    padding: 0;
-    margin: 0;
-    color: #28a745;
-    line-height: 0;
-    box-sizing: initial;
-    font-family: inherit;
-    input{
-        padding: 0;
-        border: none;
-        margin: 0;
-    }
-}
-// .searchBar {
-//     position: relative;
-//     top: 0;
-//     padding: 0;
-//     margin: 0;
-//     color: #28a74596;
-//     border: none;
-//     font-size: small;
-//     line-height: normal;
-// }
 .mat-header-cell {
     padding-top: 0;
     width: max-content;
@@ -172,16 +139,6 @@ mat-form-field{
 .mat-row, .mat-cell {
     padding: 0;
     margin: 0;
-}
-.mat-form-field-infix {
-    padding: 0;
-    border-top: none;
-}
-.mat-form-field-wrapper {
-    padding-bottom: 0 !important;
-}
-.mat-form-field-appearance-fill .mat-form-field-flex{
-    padding: 0;
 }
 .containCell{
     label{
@@ -225,24 +182,6 @@ th{
             align-items: center;
             justify-content: start;
         }
-    }
-}
-.total{
-    width: 100%;
-    text-align: right;
-    input{
-        width: 14%;
-        position: relative;
-        bottom: 8px;
-        background-color: #28a7464e;
-        border: none;
-        border-radius: 2px;
-        margin-right: 1px;
-    }
-    span{
-        color: #28a745;
-        position: relative;
-        bottom: 8px;
     }
 }
 .modifierDistributeurBlock{
@@ -292,10 +231,10 @@ th{
     h3{
         font-size: 15px;
     }
-    .example-form{
+    .example-form-entete{
         width: 50%;
     }
-    .example-form{
+    .example-form-entete{
         flex-wrap: wrap;
         width: 50%;
     }
@@ -360,7 +299,7 @@ th{
         flex-direction: column;
         align-items: flex-start;
         width: 100%;
-        .example-form{
+        .example-form-entete{
             width: 100%;
             justify-content: space-between;
             margin: 2px 0;

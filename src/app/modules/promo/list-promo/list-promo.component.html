@@ -3,34 +3,16 @@
     <app-entete class="title"></app-entete>
   </div>
   <div class="card container-fluid" id="top">
-    <div class="card-header pt-3">
+    <div class="pt-3">
       <div class="d-flex align-items-center justify-content-end tableTools">
-        <div class="form-inline mr-3">
-          <form class="example-form">
-            <mat-form-field class="example-full-width" appearance="fill">
-              <mat-label class="searchBar">{{
-                "promo-distributeur.rechercher" | translate
-              }}</mat-label>
-              <input
-                type="text"
-                matInput
-                aria-label="Rechercher"
-                [formControl]="myControl"
-                [matAutocomplete]="auto"
-              />
-              <mat-autocomplete
-                #auto="matAutocomplete"
-                [displayWith]="displayFn"
-              >
-                <mat-option
-                  *ngFor="let option of filteredOptions"
-                  [value]="option"
-                  (onSelectionChange)="rechercherListingPromo(option)"
-                >
-                  {{ option.codeUnique }}
-                </mat-option>
-              </mat-autocomplete>
-            </mat-form-field>
+        <div class="form-inline mr-2">
+          <form class="example-form-entete">
+            <input placeholder="{{'patient.search-bar' | translate}}" type="text" matInput aria-label="Rechercher" [formControl]="myControl" [matAutocomplete]="auto"/>
+            <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn" >
+              <mat-option *ngFor="let option of filteredOptions" [value]="option" (onSelectionChange)="rechercherListingPromo(option)" >
+                {{ option.codeUnique }}
+              </mat-option>
+            </mat-autocomplete>
           </form>
         </div>
         <div role="button" id="addUserBotton" routerLink="../promo-nouveau">
@@ -52,7 +34,7 @@
           <!-- Emetteur Column -->
           <ng-container matColumnDef="emetteur">
             <th
-              class="text-dark pl-5 containHead"
+              class="containHead"
               mat-header-cell
               *matHeaderCellDef
               mat-sort-header
@@ -60,7 +42,7 @@
               {{ "promo-distributeur.emetteur" | translate }}
             </th>
             <td
-              class="text-dark text-center containCell"
+              class="containCell"
               mat-cell
               *matCellDef="let element"
             >
@@ -71,7 +53,7 @@
           <!-- Date Debut Column -->
           <ng-container matColumnDef="dateDebut">
             <th
-              class="text-dark pl-5 containHead"
+              class="containHead"
               mat-header-cell
               *matHeaderCellDef
               mat-sort-header
@@ -79,7 +61,7 @@
               {{ "promo-distributeur.date_debut" | translate }}
             </th>
             <td
-              class="text-dark text-center containCell"
+              class="containCell"
               mat-cell
               *matCellDef="let element"
             >
@@ -90,7 +72,7 @@
           <!-- Date Fin Column -->
           <ng-container matColumnDef="dateFin">
             <th
-              class="text-dark pl-5 containHead"
+              class="containHead"
               mat-header-cell
               *matHeaderCellDef
               mat-sort-header
@@ -98,7 +80,7 @@
               {{ "promo-distributeur.date_fin" | translate }}
             </th>
             <td
-              class="text-dark text-center containCell"
+              class="containCell"
               mat-cell
               *matCellDef="let element"
             >
@@ -109,7 +91,7 @@
           <!-- Code Unique Column -->
           <ng-container matColumnDef="codeUnique">
             <th
-              class="text-dark pl-5 containHead"
+              class="containHead"
               mat-header-cell
               *matHeaderCellDef
               mat-sort-header
@@ -117,7 +99,7 @@
               {{ "promo-distributeur.code" | translate }}
             </th>
             <td
-              class="text-dark text-center containCell"
+              class="containCell"
               mat-cell
               *matCellDef="let element"
             >
@@ -128,7 +110,7 @@
           <!-- Montant Remise Column -->
           <ng-container matColumnDef="montantRemise">
             <th
-              class="text-dark pl-5 containHead"
+              class="containHead"
               mat-header-cell
               *matHeaderCellDef
               mat-sort-header
@@ -136,7 +118,7 @@
               {{ "promo-distributeur.montant" | translate }}
             </th>
             <td
-              class="text-dark text-center containCell"
+              class="containCell"
               mat-cell
               *matCellDef="let element"
             >
@@ -147,7 +129,7 @@
           <!-- Pourcentage Remise Column -->
           <ng-container matColumnDef="pourcentageRemise">
             <th
-              class="text-dark pl-5 containHead"
+              class="containHead"
               mat-header-cell
               *matHeaderCellDef
               mat-sort-header
@@ -155,7 +137,7 @@
               {{ "promo-distributeur.Pourcentage" | translate }}
             </th>
             <td
-              class="text-dark text-center containCell"
+              class="containCell"
               mat-cell
               *matCellDef="let element"
             >
@@ -166,14 +148,14 @@
           <!-- Famille Column -->
           <ng-container matColumnDef="famille">
             <th
-              class="text-dark pl-5 containHead"
+              class="containHead"
               mat-header-cell
               *matHeaderCellDef
             >
               {{ "promo-distributeur.famille" | translate }}
             </th>
             <td
-              class="text-dark text-center containCell"
+              class="containCell"
               mat-cell
               *matCellDef="let element"
             >
@@ -187,14 +169,14 @@
           <!-- Ressource Column -->
           <ng-container matColumnDef="ressource">
             <th
-              class="text-dark pl-5 containHead"
+              class="containHead"
               mat-header-cell
               *matHeaderCellDef
             >
               {{ "promo-distributeur.ressource" | translate }}
             </th>
             <td
-              class="text-dark text-center containCell"
+              class="containCell"
               mat-cell
               *matCellDef="let element"
             >

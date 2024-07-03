@@ -432,6 +432,8 @@
   "promo-distributeur":{
     "title": "Ajouter Promotion",
     "emetteur": "Émetteur",
+    "text1":"Émetteur",
+    "text2":"Nom de la ressource ou de la catégorie",
     "date_debut": "Date debut",
     "date_fin": "Date fin",
     "code": "Code unique",
@@ -439,7 +441,6 @@
     "Pourcentage": "Pourcentage remis",
     "remise": "Type de remise",
     "beneficiaire": "Bénéficiaire",
-    "ressource_ou_familles": "Name of Resource or Family",
     "emetteur_control": "L'emetteur est obligatoire.",
     "date_debut_control": "La Date de debut de promotion est obligatoire.",
     "date_fin_control": "La Date de fin de promotion est obligatoire.",
@@ -454,7 +455,7 @@
     "pourcentage_messgae":"Entrez le pourcentage",
     "rechercher":"Rechercher",
     "modifier": "Modifier",
-    "famille": "Famille",
+    "famille": "Catégorie",
     "ressource": "Ressources",
     "action": "Actions"
   },

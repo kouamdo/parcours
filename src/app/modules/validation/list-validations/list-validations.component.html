@@ -1,22 +1,18 @@
 <div id="" class="d-flex flex-column justify-content-around">
     <div class="title" id="top1">
         <h2>{{"validation.title0" | translate}}</h2>
-  
     </div>
     <div class="card container-fluid" id="top">
         <div class='card-hearder pt-3' >
-            <div class="d-flex align-items-center justify-content-end mr-4 tableTools">
-                <div class="form-inline mr-3">
-                    <form class="example-form">
-                        <mat-form-field class="example-full-width" appearance="fill">
-                          <mat-label class="searchBar">{{'patient.search-bar' | translate}}</mat-label>
-                          <input type="text" matInput aria-label="Rechercher" [formControl]="myControl" [matAutocomplete]="auto">
-                          <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
-                            <mat-option *ngFor="let option of filteredOptions" [value]="option" (onSelectionChange)="rechercherListingValidation(option)">
-                              {{option.code}}
-                            </mat-option>
-                          </mat-autocomplete>
-                        </mat-form-field>
+            <div class="d-flex align-items-center justify-content-end  tableTools">
+                <div class="form-inline mr-2">
+                    <form class="example-form-entete">
+                        <input placeholder="{{'patient.search-bar' | translate}}" type="text" matInput aria-label="Rechercher" [formControl]="myControl" [matAutocomplete]="auto">
+                        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+                          <mat-option *ngFor="let option of filteredOptions" [value]="option" (onSelectionChange)="rechercherListingValidation(option)">
+                            {{option.code}}
+                          </mat-option>
+                        </mat-autocomplete>
                     </form>
                 </div>
                 <div role="button" id="addUserBotton" routerLink="../nouvelle-validation">
@@ -32,32 +28,32 @@
   
                   <!-- code Column -->
                   <ng-container matColumnDef="code">
-                    <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header>{{"validation.form.label1" | translate}}</th>
-                    <td class="text-dark text-center containCell" mat-cell *matCellDef="let element"> {{element.code}} </td>
+                    <th class="containHead" mat-header-cell *matHeaderCellDef mat-sort-header>{{"validation.form.label1" | translate}}</th>
+                    <td class="containCell" mat-cell *matCellDef="let element"> {{element.code}} </td>
                   </ng-container>
 
                   <!-- libelle Column -->
                   <ng-container matColumnDef="libelle">
-                    <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header>{{"services.table.title1" | translate}}</th>
-                    <td class="text-dark text-center containCell" mat-cell *matCellDef="let element"> {{element.libelle}} </td>
+                    <th class="containHead" mat-header-cell *matHeaderCellDef mat-sort-header>{{"services.table.title1" | translate}}</th>
+                    <td class="containCell" mat-cell *matCellDef="let element"> {{element.libelle}} </td>
                   </ng-container>
 
                   <!-- type Column -->
                   <ng-container matColumnDef="type">
-                    <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header>{{"validation.form.label4" | translate}}</th>
-                    <td class="text-dark text-center containCell" mat-cell *matCellDef="let element"> {{element.typeVote}} </td>
+                    <th class="containHead" mat-header-cell *matHeaderCellDef mat-sort-header>{{"validation.form.label4" | translate}}</th>
+                    <td class="containCell" mat-cell *matCellDef="let element"> {{element.typeVote}} </td>
                   </ng-container>
 
                   <!-- duree Column -->
                   <ng-container matColumnDef="durée">
-                    <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header>{{"validation.form.label5" | translate}}</th>
-                    <td class="text-dark text-center containCell" mat-cell *matCellDef="let element"> {{element.dureeVote}} </td>
+                    <th class="containHead" mat-header-cell *matHeaderCellDef mat-sort-header>{{"validation.form.label5" | translate}}</th>
+                    <td class="containCell" mat-cell *matCellDef="let element"> {{element.dureeVote}} </td>
                   </ng-container>
 
                   <!-- role Column -->
                   <ng-container matColumnDef="role">
-                    <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header>{{"validation.form.label6" | translate}}</th>
-                    <td class="text-dark text-center containCell" mat-cell *matCellDef="let element"> {{element.role.titre}} </td>
+                    <th class="containHead" mat-header-cell *matHeaderCellDef mat-sort-header>{{"validation.form.label6" | translate}}</th>
+                    <td class="containCell" mat-cell *matCellDef="let element"> {{element.role.titre}} </td>
                   </ng-container>
   
                   <!-- etat Column -->

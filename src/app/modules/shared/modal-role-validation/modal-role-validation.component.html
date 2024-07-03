@@ -1,15 +1,12 @@
 <div id="mainBlock" class="bg-light card modalCategorie modalContentScroll">
     <h2>{{'doc-etats.form.text7' | translate}}</h2>
-    <form class="example-form">
-        <mat-form-field class="example-full-width" appearance="fill">
-          <mat-label class="searchBar">{{'patient.search-bar' | translate}}</mat-label>
-          <input type="text" matInput aria-label="Rechercher" [formControl]="myControl" [matAutocomplete]="auto">
-          <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
-            <mat-option *ngFor="let option of filteredOptions" [value]="option" (onSelectionChange)="rechercherListingRole(option)">
-              {{option.libelle}}
-            </mat-option>
-          </mat-autocomplete>
-        </mat-form-field>
+    <form class="example-form-entete">
+      <input placeholder="{{'patient.search-bar' | translate}}" class="w-100" type="text" matInput aria-label="Rechercher" [formControl]="myControl" [matAutocomplete]="auto">
+      <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+        <mat-option *ngFor="let option of filteredOptions" [value]="option" (onSelectionChange)="rechercherListingRole(option)">
+          {{option.libelle}}
+        </mat-option>
+      </mat-autocomplete>
     </form>
     <div *ngIf="this.validationCourente != undefined" class="affichePersonne">
       <p>

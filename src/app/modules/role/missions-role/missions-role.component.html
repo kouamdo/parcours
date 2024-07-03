@@ -42,17 +42,15 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <div class="form-inline mr-3">
-                            <form class="example-form label champsSelect">
+                        <div class="form-inline mr-2">
+                            <form class="example-form-entete label champsSelect">
                                 <label id="search">{{"personnel.table.title10" | translate}}</label>
-                                <mat-form-field class="example-full-width" appearance="fill">
-                                  <input type="text" matInput placeholder="{{'personnel.search-bar' | translate}}" [formControl]="myControl" [matAutocomplete]="auto">
-                                  <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
-                                    <mat-option *ngFor="let option of filteredOptions" [value]="option" (onSelectionChange)="rechercherListingMission(option)">
-                                      {{option.libelle}}
-                                    </mat-option>
-                                  </mat-autocomplete>
-                                </mat-form-field>
+                                <input type="text" matInput placeholder="{{'personnel.search-bar' | translate}}" [formControl]="myControl" [matAutocomplete]="auto">
+                                <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+                                <mat-option *ngFor="let option of filteredOptions" [value]="option" (onSelectionChange)="rechercherListingMission(option)">
+                                    {{option.libelle}}
+                                </mat-option>
+                                </mat-autocomplete>
                             </form>
                         </div>
                     </div>
@@ -80,8 +78,8 @@
     
                               <!-- titre Column -->
                               <ng-container matColumnDef="libelle">
-                                <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header>{{"personnel.table.title14" | translate}}</th>
-                                <td class="text-dark text-center containCell" mat-cell *matCellDef="let element"> {{element.libelle}} </td>
+                                <th class="containHead" mat-header-cell *matHeaderCellDef mat-sort-header>{{"personnel.table.title14" | translate}}</th>
+                                <td class="containCell" mat-cell *matCellDef="let element"> {{element.libelle}} </td>
                               </ng-container>
               
                               <!-- description Column -->
@@ -92,8 +90,8 @@
 
                                <!-- service Column -->
                                 <ng-container matColumnDef="service">
-                                    <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'missions.table.title6' | translate}} </th>
-                                    <td class="text-dark text-center containCell" mat-cell *matCellDef="let element"> {{element.service.libelle}} </td>
+                                    <th class="containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'missions.table.title6' | translate}} </th>
+                                    <td class="containCell" mat-cell *matCellDef="let element"> {{element.service.libelle}} </td>
                                 </ng-container>
               
                               <!-- ete Column -->
@@ -115,8 +113,8 @@
                             <button class="btn reinitialiser" (click)="annullerElement()" title="{{'lists.button3' | translate}}">
                                 <i class="fa fa-undo" aria-hidden="true"></i>
                             </button>
-                            <button type="submit" class="btn btnValidation" (click)="validateElement()" title="{{'lists.button11' | translate}}">
-                                <i class="fa fa-check" aria-hidden="true"></i>
+                            <button type="submit" class="btn btnValidation" (click)="validateElement()" title="{{'lists.button9' | translate}}">
+                                <i class="fa fa-plus" aria-hidden="true"></i>
                               </button>
                         </div>
                     </div>
@@ -132,8 +130,8 @@
                                     <table class='table table-sm table-centered table-striped w-100' mat-table [dataSource]="dataSourceMissionResultat" matSort (matSortChange)="announceSortChange($event)">
                                         <!-- titre Column -->
                                         <ng-container matColumnDef="mission">
-                                            <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header>Mission</th>
-                                            <td class="text-dark text-center containCell" mat-cell *matCellDef="let element"> {{element.mission.libelle}} </td>
+                                            <th class="containHead" mat-header-cell *matHeaderCellDef mat-sort-header>Mission</th>
+                                            <td class="containCell" mat-cell *matCellDef="let element"> {{element.mission.libelle}} </td>
                                         </ng-container>
                                             <!-- date entree Column -->
                                         <ng-container matColumnDef="date debut">

@@ -6,18 +6,15 @@
             </div>
             <div class="newAttSection">
                 <div class="searchBlock">
-                    <form [formGroup]="formeDocEtats" *ngIf="formeDocEtats" class="example-form">
+                    <form [formGroup]="formeDocEtats" *ngIf="formeDocEtats" class="example-form-entete">
                         <div class="etatInput">
                             <label>{{'doc-etats.button1' | translate}}</label>
-                            <mat-form-field class="example-full-width" appearance="fill">
-                                <mat-label class="searchBar">{{'patient.search-bar' | translate}}</mat-label>
-                                <input type="text" class="form-control inputMat" matInput aria-label="Rechercher" [formControl]="etatControl" [matAutocomplete]="auto">
-                                <mat-autocomplete class="blockAutocomplate" #auto="matAutocomplete" [displayWith]="displayFn">
-                                    <mat-option class="options" *ngFor="let option of filteredOptions" [value]="option" (click)="rechercherListingEtat(option); reinitialliseRessourceControl()">
-                                        {{option.libelle}}
-                                    </mat-option>
-                                </mat-autocomplete>
-                            </mat-form-field>
+                            <input placeholder="{{'patient.search-bar' | translate}}" type="text" class="form-control inputMat" matInput aria-label="Rechercher" [formControl]="etatControl" [matAutocomplete]="auto">
+                            <mat-autocomplete class="blockAutocomplate" #auto="matAutocomplete" [displayWith]="displayFn">
+                                <mat-option class="options" *ngFor="let option of filteredOptions" [value]="option" (click)="rechercherListingEtat(option); reinitialliseRessourceControl()">
+                                    {{option.libelle}}
+                                </mat-option>
+                            </mat-autocomplete>
                         </div>
                     </form>
                     <div *ngIf="selected && etatExiste" class="texteErreur">
@@ -47,11 +44,11 @@
                             <ng-container matColumnDef="EtatPrecedant">
                                 <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{'etats.table.title2' | translate}}</th>
                                 <td class="text-dark containCell choixCell champsSelect" mat-cell *matCellDef="let element, let i = index">
-                                    <mat-form-field class="example-full-width-select" appearance="fill">
+                                    <div class="matSelectElement selectInputTab">
                                         <mat-select [disabled]="i == 0" [(ngModel)]="element.etat.etatPrecedant" [ngModelOptions]="{standalone: true}" multiple>
-                                        <mat-option *ngFor="let etat of effaceEtatCourrant(element)" [value]="etat.etat">{{etat.etat.libelle}}</mat-option>
+                                            <mat-option *ngFor="let etat of effaceEtatCourrant(element)" [value]="etat.etat">{{etat.etat.libelle}}</mat-option>
                                         </mat-select>
-                                    </mat-form-field>
+                                    </div>
                                     <div class="coverFull" *ngIf="i == 0">
                                         <span><i class="fa fa-times-circle" aria-hidden="true"></i></span>
                                     </div>

@@ -1,16 +1,6 @@
 *{
     clear: both;
 }
-mat-form-field:focus{
-border: none;
-padding: 0;
-margin: 0;
-input{
-    padding: 0;
-    border: none;
-    margin: 0;
-}
-}
 .champs{
     display: flex;
     align-items: center;
@@ -25,9 +15,6 @@ input{
         font-size: 12px;
         position: relative;
         bottom: 5px;
-    }
-    .example-full-width{
-        width: 100%;
     }
 }
 .block{
@@ -48,14 +35,6 @@ input{
     text-align: center;
     font-size: 22px;
     font-weight: bold;
-}
-.select{
-    border: none;
-    box-shadow: 0 0 2px rgb(220, 220, 220);
-    background-color: #28a74563;
-    color: rgb(108, 108, 108);
-    border-radius: 5px;
-    width: 100%;
 }
 .ordreInput{
     width: 70px;

@@ -43,32 +43,21 @@ export class ListExemplaireComponent implements OnInit {
 
     this.myControl.valueChanges.subscribe(
       value => {
-        this.dataSource.data.forEach(
-          exemplaire =>{
-            if(exemplaire?.idDocument){
-              this.serviceDocument.getDocumentById(exemplaire?.idDocument).subscribe(
-                document =>{
-                  this.ELEMENTS_TABLE_DOCUMENT.push(document);
-                  const titre = typeof document === 'string' ? document : document?.titre;
-                  if(titre != undefined && titre?.length >0){
-                    this.serviceDocument.getDocumentByTitre(titre.toLowerCase() as string).subscribe(
-                      reponse => {
-                        this.filteredOptions = reponse;
-                      }
-                    )
-                  }
-                  else{
-                    this.serviceDocument.getAllDocuments().subscribe(
-                      (resultat) =>{
-                        this.filteredOptions = resultat
-                      }
-                    )
-                  }
-                }
-              );
+        const titre = typeof value === 'string' ? value : value?.titre;
+        if(titre != undefined && titre?.length >0){
+          this.serviceExemplaireDocument.getExemplaireDocumentByTitre(titre.toLowerCase() as string).subscribe(
+            reponse => {
+              this.filteredOptions = reponse;
             }
-          }
-        )
+          )
+        }
+        else{
+          this.serviceExemplaireDocument.getAllExemplaireDocuments().subscribe(
+            (resultat) =>{
+              this.filteredOptions = resultat
+            }
+          )
+        }
       }
     );
   }
@@ -80,8 +69,8 @@ export class ListExemplaireComponent implements OnInit {
     this.dataSource.sort = this.sort;
   }
   public rechercherListingDocument(option: IDocument){
-    this.serviceDocument.getDocumentByTitre(option.titre.toLowerCase()).subscribe(
-        valeurs => {this.dataSourceDocument.data = valeurs;}
+    this.serviceExemplaireDocument.getExemplaireDocumentByTitre(option.titre.toLowerCase()).subscribe(
+        valeurs => {this.dataSource.data = valeurs;}
     )
   }
   announceSortChange(sortState: Sort) {

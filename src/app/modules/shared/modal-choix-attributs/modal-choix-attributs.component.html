@@ -6,15 +6,13 @@
             </div>
             <div class="newAttSection">
                 <div class="searchBlock">
-                    <form class="example-form">
-                        <mat-form-field class="example-full-width" appearance="fill">
-                            <input type="text" matInput aria-label="Rechercher" [formControl]="myControl" [matAutocomplete]="auto">
-                            <mat-autocomplete class="blockAutocomplate" #auto="matAutocomplete" [displayWith]="displayFn">
-                                <mat-option class="options" *ngFor="let option of filteredOptions" [value]="option" (onSelectionChange)="rechercherListingAttribut(option)">
-                                    {{option.titre}}
-                                </mat-option>
-                            </mat-autocomplete>
-                        </mat-form-field>
+                    <form class="example-form-entete">
+                        <input placeholder="{{'patient.search-bar' | translate}}" type="text" matInput aria-label="Rechercher" [formControl]="myControl" [matAutocomplete]="auto">
+                        <mat-autocomplete class="blockAutocomplate" #auto="matAutocomplete" [displayWith]="displayFn">
+                            <mat-option class="options" *ngFor="let option of filteredOptions" [value]="option" (onSelectionChange)="rechercherListingAttribut(option)">
+                                {{option.titre}}
+                            </mat-option>
+                        </mat-autocomplete>
                     </form>
                 </div>
 

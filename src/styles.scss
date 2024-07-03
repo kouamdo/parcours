@@ -1,6 +1,9 @@
 /* les couleurs du site
 * #28a745 vert
 * #FFD700 jaune
+* #b3b3b3 gris
+* #ff0000 rouge
+* #31b1e3 cyan
 */
 @font-face {
   font-family: AbrilFatface;
@@ -38,7 +41,6 @@ body, table, .mat-table {
 display: flex;
 flex-direction: column;
 align-items: center;
-justify-content: center;
 }
 .block{
 width: 60%;
@@ -47,13 +49,7 @@ width: 60%;
   display: flex;
   align-items: center;
 }
-.mat-select-value {
-  overflow: visible;
-  text-overflow: ellipsis;
-  white-space: wrap;
-  position: relative;
-  bottom: 12px;
-}
+
 // les boites de dialogue material
 .cdk-overlay-pane {
   padding: 0;
@@ -63,10 +59,7 @@ width: 60%;
   z-index: 9999 !important;
   display: flex;
 }
-.modalCategorie .mat-form-field-infix {
-    padding: 0;
-    border-top: none;
-}
+
 .modalContentScroll {
   max-height: 100vh;
   overflow-y: auto;
@@ -109,9 +102,9 @@ font-weight: bold;
 }
 // le contenu des formulaires
 .form-control{
-border: none !important;
-box-shadow: 0 0 2px rgb(220, 220, 220) !important;
-height: 35px ;
+  border: none !important;
+  box-shadow: 0 0 2px rgb(220, 220, 220) !important;
+  height: 30px ;
 }
 .champs{
 display: flex;
@@ -131,6 +124,9 @@ sup{
 }
 .champs, select, input{
 font-size: 15px;
+}
+.champs input, .champs textarea, .champs select{
+    height: 30px;
 }
 select{
   border: none;
@@ -175,9 +171,9 @@ select{
     color: #ffffffad !important;
 }
 .fermer{
-    background-color: red !important;
+    background-color: #ff0000 !important;
 }
-.reinitialiser{
+.reinitialiser, .annuler{
     background-color: #FFD700 !important;
 }
 .retour{
@@ -233,23 +229,6 @@ h2{
 }
 
 // auto complate
-.example-full-width {
-  height: 35px !important;
-  border: 2px solid #28a745;
-  border-radius: 4px;
-  background-color: transparent;
-  padding: 0 !important;
-  margin: 0 !important;
-  .mat-form-field-infix {
-    padding-bottom: .70em !important;
-  }
-  .mat-form-field-appearance-fill .mat-form-field-flex {
-    padding: .70em !important;
-  }
-  .form-control{
-    height: 0 !important;
-  }
-}
 .matInput, mat-autocomplete{
   color: #787878 !important;
 }
@@ -263,21 +242,38 @@ h2{
 mat-option{
   color: #28a745 !important;
 }
-// conteneur de mat select
-.matSelectContainer{
+// conteneur de mat select et autocomplate comme champs du formulaire
+.matSelectElement{
   padding: 0 !important;
   background-color: #28a745 !important;
-}
-
-.champsSelect .mat-form-field-appearance-fill .mat-form-field-flex {
-  padding: 0 !important;
-}
-.champsSelect .mat-form-field-infix {
-  padding-bottom: 0 !important;
-  height: 0px !important;
-}
-.champsSelect .example-full-width{
+  border-radius: 3px;
   height: 30px !important;
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+.matSelectElement mat-select{
+  padding-left: 2px;
+  position: absolute;
+  top: 5px;
+}
+.selectInputTab{
+  background-color: #b3b3b344 !important;
+  color: #28a745 !important;
+  box-shadow: 0 0 2px #28a7467d !important;
+  margin-left: 12px !important;
+}
+.champsAutocomplate{
+  width: 100%;
+  height: 30px;
+  background-color: #b3b3b344;
+  border: 1px solid #28a745 !important;
+  box-shadow: 0 0 2px #28a745 !important;
+  color: #28a745;
+}
+.champsAutocomplate:focus-visible{
+  border: 1px solid #28a745 !important;
+  box-shadow: 0 0 2px #28a745 !important;
 }
 
 //entete des pages de listing
@@ -286,37 +282,31 @@ mat-option{
   #addUserBotton{
       background-color: #FFD700;
       color: white;
-      font-size: 20px;
-      padding: 10px;
-      border-radius: 5px;
-  }
-  .mat-form-field-appearance-fill .mat-form-field-flex {
-    padding: 0 !important;
+      font-size: 14px;
+      padding: 6px;
+      border-radius: 3px;
   }
 }
-mat-form-field{
-  padding: 0;
-  margin: 0;
-  color: #28a745;
-  line-height: normal;
-  box-sizing: initial;
+.example-form-entete{// aussi valable pour les autocomplate
   input{
-      padding: 0;
-      border: none;
-      margin: 0;
-      height: 0 !important;
+    background-color: #b3b3b33a;
+    color: #28a745;
+    border: 1px solid #28a745;
+    border-radius: 3px;
+    height: 30px;
+    padding-left: 2px;
   }
 }
 
 // les tableaux
+.table thead th {
+    vertical-align: middle !important;
+}
 .containHead{
-padding: 1% 10px !important;
-margin: auto !important;
-text-align: center !important;
+  padding: 1% 10px !important;
 }
 .containCell{
-padding-top: 20px !important;
-text-align: center !important;
+  vertical-align: middle !important;
 }
 td{
 font-size: 13px!important;
@@ -332,6 +322,10 @@ display: flex;
 }
 #tableBlock{
   height: fit-content !important;
+
+    .table{
+      margin-bottom: 0 !important;
+    }
     table{
         #actions{
             font-size: 12px;
@@ -372,16 +366,32 @@ display: flex;
     background-color: rgba(40, 167, 69, 0.2);
     color: #28a745 !important;
 }
+// block du montant total
+.total{
+  margin-top: 20px;
+    width: 100%;
+    text-align: right;
+    input{
+        width: 14%;
+        position: relative;
+        bottom: 8px;
+        background-color: #28a7464e;
+        border: none;
+        border-radius: 2px;
+        margin-right: 1px;
+    }
+    span{
+        color: #28a745;
+        position: relative;
+        bottom: 8px;
+    }
+}
 
 // pagination
 mat-paginator{
   align-self: flex-end !important;
   background-color: rgba(40, 167, 69, 0.79) !important;
   width: 100% !important;
-  .example-full-width, mat-form-field {
-    height: 0 !important;
-    border: none !important;
-  }
 }
 
 // style affecté aux tableaux pour qu'ils grandissent vers le bas - XX
@@ -517,22 +527,16 @@ mat-paginator{
 // bloc d'affichage des resultats venant d'une modale
 .listAttr{
     width: 100%;
-    height: 35px;
+    min-height: 30px;
     display: flex;
     align-items: center;
     padding-right: 15px !important;
     padding-left: 5px;
     background-color: #b3b3b344;
-    margin-bottom: 10px;
     border-radius: 3px;
     position: relative;
-    overflow: hidden;
     p{
-      width: 10vw;
-      height: 35px !important;
-      display: flex;
-      align-items: center;
-      white-space: nowrap;
+      width: 100%;
     }
     button{
         position: absolute;

@@ -112,11 +112,11 @@
                                 <label  for="_missions" class="label">
                                     {{"document.table.title3" | translate}} <sup>*</sup>
                                 </label>
-                                <mat-form-field class="example-full-width matSelectContainer" appearance="fill">
+                                <div class="matSelectElement">
                                     <mat-select formControlName="_missions" multiple [compareWith]="compareItem">
-                                    <mat-option *ngFor="let missionsDocument of mission$ |async" [value]="missionsDocument">{{missionsDocument.libelle}}</mat-option>
+                                        <mat-option *ngFor="let missionsDocument of mission$ |async" [value]="missionsDocument">{{missionsDocument.libelle}}</mat-option>
                                     </mat-select>
-                                </mat-form-field>
+                                </div>
                             </div>
                             <div  *ngIf="submitted && f['_missions'].value.length<1"  class="alert alert-danger blockErreur" >
                                 <div>{{'document.form.text3' | translate}}</div>

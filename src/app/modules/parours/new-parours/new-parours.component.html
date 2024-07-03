@@ -77,19 +77,16 @@
   </div>
   <div class="card container-fluid" id="top">
     <div class='card-hearder pt-3'>
-      <div class="d-flex align-items-center justify-content-end mr-4 tableTools">
-        <div class="form-inline mr-3">
-          <form class="example-form">
-            <mat-form-field class="example-full-width" appearance="fill">
-              <mat-label class="searchBar">{{'patient.search-bar' | translate}}</mat-label>
-              <input type="text" matInput aria-label="Rechercher" [formControl]="myControl" [matAutocomplete]="auto">
-              <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
-                <mat-option *ngFor="let option of filteredOptions" [value]="option"
-                  (onSelectionChange)="rechercherListingEtape(option)">
-                  {{option.libelle}}
-                </mat-option>
-              </mat-autocomplete>
-            </mat-form-field>
+      <div class="d-flex align-items-center justify-content-end  tableTools">
+        <div class="form-inline mr-2">
+          <form class="example-form-entete">
+            <input placeholder="{{'patient.search-bar' | translate}}" type="text" matInput aria-label="Rechercher" [formControl]="myControl" [matAutocomplete]="auto">
+            <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+              <mat-option *ngFor="let option of filteredOptions" [value]="option"
+                (onSelectionChange)="rechercherListingEtape(option)">
+                {{option.libelle}}
+              </mat-option>
+            </mat-autocomplete>
           </form>
         </div>
       </div>
@@ -101,20 +98,20 @@
 
           <!-- libelle Column -->
           <ng-container matColumnDef="libelle">
-            <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header>
+            <th class="containHead" mat-header-cell *matHeaderCellDef mat-sort-header>
               {{"etape.table1.title1"| translate}}</th>
-            <td class="text-dark text-center containCell" mat-cell *matCellDef="let element"> {{element.libelle}} </td>
+            <td class="containCell" mat-cell *matCellDef="let element"> {{element.libelle}} </td>
           </ng-container>
           <!-- etat Column -->
           <ng-container matColumnDef="etat">
-            <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header>
+            <th class="containHead" mat-header-cell *matHeaderCellDef mat-sort-header>
               {{"etape.table1.title2"| translate}}</th>
-            <td class="text-dark text-center containCell" mat-cell *matCellDef="let element"> {{element.etat}} </td>
+            <td class="containCell" mat-cell *matCellDef="let element"> {{element.etat}} </td>
           </ng-container>
           <!--Documents Column -->
           <ng-container matColumnDef="Document">
-            <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header>Document</th>
-            <td class="text-dark text-center containCell" mat-cell *matCellDef="let element">
+            <th class="containHead" mat-header-cell *matHeaderCellDef mat-sort-header>Document</th>
+            <td class="containCell" mat-cell *matCellDef="let element">
               <span> {{element.listSousDocuments}} </span>
             </td>
           </ng-container>

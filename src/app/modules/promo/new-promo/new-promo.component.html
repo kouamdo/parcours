@@ -21,9 +21,9 @@
                     name="emetteur"
                     id="emetteur"
                     placeholder="{{
-                      'promo-distributeur.emetteur' | translate
+                      'promo-distributeur.text1' | translate
                     }}"
-                    class="form-control"
+                    class="champsAutocomplate"
                     required
                     [matAutocomplete]="auto"
                   />
@@ -64,9 +64,9 @@
                     name="beneficiaire"
                     id="beneficiaire"
                     placeholder="{{
-                      'promo-distributeur.ressource_ou_familles' | translate
+                      'promo-distributeur.text2' | translate
                     }}"
-                    class="form-control"
+                    class="champsAutocomplate"
                     [matAutocomplete]="autoBeneficiaires"
                   />
                   <mat-autocomplete
@@ -94,35 +94,29 @@
             </div>
 
             <!-- Afficher les beneficiaires sélectionnés -->
-            <div
-              *ngIf="selectedBeneficiaires.length > 0"
-              class="selected-beneficiaires"
-            >
-              <span
-                *ngFor="let beneficiaire of selectedBeneficiaires"
-                class="selected-beneficiaire"
-                [ngClass]="{
-                  famille: isFamille(beneficiaire),
-                  ressource: isRessource(beneficiaire)
-                }"
-              >
-                {{ beneficiaire.libelle }}
-                <button
-                  type="button"
-                  class="delete-button"
-                  (click)="removeBeneficiaire(beneficiaire)"
-                >
-                  <i class="fa fa-times"></i>
+            <div *ngIf="selectedBeneficiaires.length > 0" class="selected-beneficiaires">
+              <div *ngFor="let beneficiaire of selectedBeneficiaires" class="selected-beneficiaire" [ngClass]="{famille: isFamille(beneficiaire), ressource: isRessource(beneficiaire) }">
+                <span>
+                  {{ beneficiaire.libelle }}
+                </span>
+                <button type="button" class="btn delete-button" (click)="removeBeneficiaire(beneficiaire)">
+                  <i class="fa fa-trash"></i>
                 </button>
-              </span>
-                            <!-- Indications de couleur -->
+              </div>
+              <!-- Indications de couleur -->
               <div class="beneficiaire-legend">
-                <span class="legend-item famille">
-                  <span class="color-circle famille"></span> Famille
-                </span>
-                <span class="legend-item ressource">
-                  <span class="color-circle ressource"></span> Ressource
-                </span>
+                <div class="color-circle-famille">
+                  <i class="fa fa-circle" aria-hidden="true"></i>
+                  <span>
+                    {{'promo-distributeur.famille' | translate}}
+                  </span>
+                </div>
+                <div class="color-circle-ressource">
+                  <i class="fa fa-circle" aria-hidden="true"></i>
+                  <span>
+                    {{'promo-distributeur.ressource' | translate}}
+                  </span>
+                </div>
               </div>
             </div>
 
@@ -288,13 +282,12 @@
             </div>
           </div>
         </div>
-        <div class="actionButton">
-          <button class="btn" (click)="return()" type="button">
-            <i class="fa fa-reply mr-1" aria-hidden="true"></i
-            >{{ "lists.button2" | translate }}
+        <div class="actionButton valBtn">
+          <button class="btn retour" (click)="return()" type="button" title="{{'lists.button3' | translate}}">
+            <i class="fa fa-undo" aria-hidden="true"></i>
           </button>
-          <button class="btn btnValidation" type="submit" >
-            {{ btnLibelle }}
+          <button class="btn btnValidation" type="submit" title="{{'lists.button11' | translate}}">
+            <i class="fa fa-check" aria-hidden="true"></i>
           </button>
         </div>
       </form>

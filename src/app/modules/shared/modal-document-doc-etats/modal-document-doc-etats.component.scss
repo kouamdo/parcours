@@ -21,11 +21,8 @@
         align-items: center;
         justify-content: flex-start;
     }
-    .form-control{
-        height: 0 !important;
-    }
 }
-.example-form{
+.example-form-entete{
     width: 100%;
     display: flex;
     align-items: flex-start;
@@ -35,19 +32,6 @@
         margin-right: 2px;
         width: fit-content;
     }
-    .mat-input{
-        position: absolute;
-        bottom: 100px;
-        height: 20px !important;
-    }
-}
-.example-full-width-select {
-    height: 28px !important;
-    width: 80%;
-    border: 2px solid #28a745;
-    position: absolute;
-    bottom: 2px;
-    left: 15px;
 }
 #tableBlock{
     margin-top: 25px !important;
@@ -69,9 +53,6 @@
     position: relative;
     top: -2px;
 }
-select{
-    background-color: #d2d2d2;
-}
 .choixCell{
     position: relative;
 }
@@ -90,7 +71,6 @@ select{
         span{
             margin: auto;
             i{
-                margin-top: 12px;
                 font-size: 18px;
                 color: #f571719d;
             }
@@ -129,9 +109,6 @@ select{
             }
             label{
                 width: 40%;
-            }
-            .example-full-width{
-                width: 50%;
             }
         }
         .etatInput{

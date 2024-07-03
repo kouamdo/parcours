@@ -1,22 +1,19 @@
 
-<div id="mainSection" class="d-flex flex-column justify-content-around">
+<div id="">
     <div class="title" id="top1">
         <app-entete class="title"></app-entete>
     </div>
     <div class="card container-fluid" id="cardBlock" id="top">
         <div class='card-hearder pt-3' >
             <div class="d-flex align-items-center justify-content-end tableTools">
-                <div class="form-inline mr-3">
-                    <form class="example-form">
-                        <mat-form-field class="example-full-width" appearance="fill">
-                          <mat-label class="searchBar">{{'patient.search-bar' | translate}}</mat-label>
-                          <input type="text" matInput aria-label="Rechercher" [formControl]="myControl" [matAutocomplete]="auto">
-                          <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
-                            <mat-option *ngFor="let option of filteredOptions" [value]="option" (onSelectionChange)="rechercherListingAttribut(option)">
-                              {{option.titre}}
-                            </mat-option>
-                          </mat-autocomplete>
-                        </mat-form-field>
+                <div class="form-inline mr-2">
+                    <form class="example-form-entete">
+                        <input placeholder="{{'patient.search-bar' | translate}}" type="text" matInput aria-label="Rechercher" [formControl]="myControl" [matAutocomplete]="auto">
+                        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+                        <mat-option *ngFor="let option of filteredOptions" [value]="option" (onSelectionChange)="rechercherListingAttribut(option)">
+                            {{option.titre}}
+                        </mat-option>
+                        </mat-autocomplete>
                     </form>
                 </div>
                 <div role="button" id="addUserBotton" routerLink="../attribut-nouveau">
@@ -31,37 +28,37 @@
                 <table class='table table-sm table-centered table-striped table-bordered w-100' mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)">
                     <!-- titre Column -->
                     <ng-container matColumnDef="titre">
-                        <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'attributs.table.title1' | translate}} </th>
-                        <td class="text-dark text-center containCell" mat-cell *matCellDef="let element"> {{element.titre}} </td>
+                        <th class="containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'attributs.table.title1' | translate}} </th>
+                        <td class="containCell" mat-cell *matCellDef="let element"> {{element.titre}} </td>
                     </ng-container>
 
                     <!-- description Column -->
                     <ng-container matColumnDef="description">
-                        <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'attributs.table.title2' | translate}} </th>
-                        <td class="text-dark text-center containCell" mat-cell *matCellDef="let element"> {{element.description}} </td>
+                        <th class="containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'attributs.table.title2' | translate}} </th>
+                        <td class="containCell" mat-cell *matCellDef="let element"> {{element.description}} </td>
                     </ng-container>
 
                     <!-- etat Column -->
                     <ng-container matColumnDef="etat">
-                        <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'attributs.table.title3' | translate}} </th>
-                        <td class="text-dark text-center containCell" mat-cell *matCellDef="let element"> {{element.etat}} </td>
+                        <th class="containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'attributs.table.title3' | translate}} </th>
+                        <td class="containCell" mat-cell *matCellDef="let element"> {{element.etat}} </td>
                     </ng-container>
 
                     <!-- valeursParDefaut Column -->
                     <ng-container matColumnDef="valeursParDefaut">
-                        <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'attributs.table.title9' | translate}} </th>
-                        <td class="text-dark text-center containCell" mat-cell *matCellDef="let element"> {{element.valeursParDefaut}} </td>
+                        <th class="containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'attributs.table.title9' | translate}} </th>
+                        <td class="containCell" mat-cell *matCellDef="let element"> {{element.valeursParDefaut}} </td>
                     </ng-container>
 
                     <!-- type Column -->
                     <ng-container matColumnDef="type">
-                        <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'attributs.table.title6' | translate}} </th>
-                        <td class="text-dark text-center containCell" mat-cell *matCellDef="let element"> {{element.type}} </td>
+                        <th class="containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'attributs.table.title6' | translate}} </th>
+                        <td class="containCell" mat-cell *matCellDef="let element"> {{element.type}} </td>
                     </ng-container>
 
                     <ng-container matColumnDef="actions">
                         <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{"patient.table.title8" | translate}} </th>
-                        <td class="text-dark text-center containCell" mat-cell *matCellDef="let element">
+                        <td class="containCell" mat-cell *matCellDef="let element">
                             <div id="actions" class="dropdown open">
                                 <button class="btn dropdown-toggle" type="button" id="triggerId" data-toggle="dropdown" aria-haspopup="true"
                                         aria-expanded="false">

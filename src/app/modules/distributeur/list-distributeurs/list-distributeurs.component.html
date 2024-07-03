@@ -1,22 +1,18 @@
 <div id="" class="d-flex flex-column justify-content-around">
   <div class="title" id="top1">
-    <!--<h2>{{"distributeur.title"| translate}}</h2>-->
       <app-entete class="title"></app-entete>
   </div>
   <div class="card container-fluid" id="top">
       <div class='card-hearder pt-3' >
-          <div class="d-flex align-items-center justify-content-end mr-4 tableTools">
-              <div class="form-inline mr-3">
-                  <form class="example-form">
-                      <mat-form-field class="example-full-width" appearance="fill">
-                        <mat-label class="searchBar">{{'patient.search-bar' | translate}}</mat-label>
-                        <input type="text" matInput aria-label="Rechercher" [formControl]="myControl" [matAutocomplete]="auto">
-                        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
-                          <mat-option *ngFor="let option of filteredOptions" [value]="option" (onSelectionChange)="rechercherListingDistributeur(option)">
-                            {{option.raisonSocial}}
-                          </mat-option>
-                        </mat-autocomplete>
-                      </mat-form-field>
+          <div class="d-flex align-items-center justify-content-end  tableTools">
+              <div class="form-inline mr-2">
+                  <form class="example-form-entete">
+                    <input placeholder="{{'patient.search-bar' | translate}}" type="text" matInput aria-label="Rechercher" [formControl]="myControl" [matAutocomplete]="auto">
+                    <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+                    <mat-option *ngFor="let option of filteredOptions" [value]="option" (onSelectionChange)="rechercherListingDistributeur(option)">
+                        {{option.raisonSocial}}
+                    </mat-option>
+                    </mat-autocomplete>
                   </form>
               </div>
               <div role="button" id="addUserBotton" routerLink="../distributeur-nouveau">
@@ -32,8 +28,8 @@
 
                 <!-- nom Column -->
                 <ng-container matColumnDef="raisonSocial">
-                  <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header>{{"distributeur.table2.title1"| translate}}</th>
-                  <td class="text-dark text-center containCell" mat-cell *matCellDef="let element"> {{element.raisonSocial}} </td>
+                  <th class="containHead" mat-header-cell *matHeaderCellDef mat-sort-header>{{"distributeur.table2.title1"| translate}}</th>
+                  <td class="containCell" mat-cell *matCellDef="let element"> {{element.raisonSocial}} </td>
                 </ng-container>
 
                 <!-- adresse Column -->
@@ -43,8 +39,8 @@
                 </ng-container>
                   <!-- libellé Column -->
                   <ng-container matColumnDef="etat">
-                    <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header>{{"distributeur.table2.title3"| translate}}</th>
-                    <td class="text-dark text-center containCell" mat-cell *matCellDef="let element"> {{element.etat}} </td>
+                    <th class="containHead" mat-header-cell *matHeaderCellDef mat-sort-header>{{"distributeur.table2.title3"| translate}}</th>
+                    <td class="containCell" mat-cell *matCellDef="let element"> {{element.etat}} </td>
                 </ng-container>
 
                 <!-- telephone Column -->

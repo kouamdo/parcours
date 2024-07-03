@@ -5,17 +5,14 @@
     <div class="card container-fluid" id="top" >
         <div class='card-hearder pt-3' >
             <div class="d-flex align-items-center justify-content-end tableTools">
-                <div class="form-inline mr-3">
-                    <form class="example-form">
-                        <mat-form-field class="example-full-width" appearance="fill">
-                          <mat-label class="searchBar">{{'patient.search-bar' | translate}}</mat-label>
-                          <input type="text" matInput aria-label="Rechercher" [formControl]="myControl" [matAutocomplete]="auto">
-                          <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
-                            <mat-option *ngFor="let option of filteredOptions" [value]="option" (onSelectionChange)="rechercherListingDocument(option)">
-                              {{option.titre}}
-                            </mat-option>
-                          </mat-autocomplete>
-                        </mat-form-field>
+                <div class="form-inline mr-2">
+                    <form class="example-form-entete">
+                        <input placeholder="{{'patient.search-bar' | translate}}" type="text" matInput aria-label="Rechercher" [formControl]="myControl" [matAutocomplete]="auto">
+                        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+                        <mat-option *ngFor="let option of filteredOptions" [value]="option" (onSelectionChange)="rechercherListingDocument(option)">
+                            {{option.titre}}
+                        </mat-option>
+                        </mat-autocomplete>
                     </form>
                 </div>
                 <div role="button" id="addUserBotton" routerLink="../document-nouveau">
@@ -32,46 +29,46 @@
 
                     <!-- titre Column -->
                     <ng-container matColumnDef="titre">
-                        <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'document.table.title1' | translate}} </th>
-                        <td class="text-dark text-center containCell" mat-cell *matCellDef="let element"> {{element.titre}} </td>
+                        <th class="containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'document.table.title1' | translate}} </th>
+                        <td class="containCell" mat-cell *matCellDef="let element"> {{element.titre}} </td>
                     </ng-container>
 
                     <!-- description Column -->
                     <ng-container matColumnDef="description">
-                        <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'document.table.title2' | translate}} </th>
-                        <td class="text-dark text-center containCell" mat-cell *matCellDef="let element"> {{element.description}} </td>
+                        <th class="containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'document.table.title2' | translate}} </th>
+                        <td class="containCell" mat-cell *matCellDef="let element"> {{element.description}} </td>
                     </ng-container>
                    <!-- typeMouvement Column -->
                     <ng-container matColumnDef="typeMouvement">
-                        <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'document.table.title22' | translate}} </th>
-                        <td class="text-dark text-center containCell" mat-cell *matCellDef="let element"> {{element.typeMouvement}} </td>
+                        <th class="containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'document.table.title22' | translate}} </th>
+                        <td class="containCell" mat-cell *matCellDef="let element"> {{element.typeMouvement}} </td>
                     </ng-container>
                     <!-- etat Column -->
                     <ng-container matColumnDef="etat">
-                        <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'services.form.label2' | translate}} </th>
-                        <td class="text-dark text-center containCell" mat-cell *matCellDef="let element"> {{element.etat}} </td>
+                        <th class="containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'services.form.label2' | translate}} </th>
+                        <td class="containCell" mat-cell *matCellDef="let element"> {{element.etat}} </td>
                     </ng-container>
 
                     <!-- missions Column -->
                     <ng-container matColumnDef="missions">
-                        <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'document.table.title3' | translate}} </th>
-                        <td class="text-dark text-center containCell" mat-cell *matCellDef="let element">
+                        <th class="containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'document.table.title3' | translate}} </th>
+                        <td class="containCell" mat-cell *matCellDef="let element">
                             <span> {{element.listeMissions}} </span>
                         </td>
                     </ng-container>
 
                     <!-- attributs Column -->
                     <ng-container matColumnDef="attributs">
-                        <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'document.table.title4' | translate}} </th>
-                        <td class="text-dark text-center containCell" mat-cell *matCellDef="let element">
+                        <th class="containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'document.table.title4' | translate}} </th>
+                        <td class="containCell" mat-cell *matCellDef="let element">
                             <span> {{element.listAttributs}} </span>
                         </td>
                     </ng-container>
 
                     <!-- categories Column -->
                     <ng-container matColumnDef="categories">
-                        <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'document.table.title15' | translate}} </th>
-                        <td class="text-dark text-center containCell" mat-cell *matCellDef="let element">
+                        <th class="containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'document.table.title15' | translate}} </th>
+                        <td class="containCell" mat-cell *matCellDef="let element">
                             <span> {{element.listCategories}} </span>
                         </td>
                     </ng-container>
@@ -79,7 +76,7 @@
                     <!-- action column -->
                     <ng-container matColumnDef="actions">
                         <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{"patient.table.title8" | translate}} </th>
-                        <td class="text-dark text-center containCell" mat-cell *matCellDef="let element">
+                        <td class="containCell" mat-cell *matCellDef="let element">
                             <div id="actions" class="dropdown open">
                                 <button class="btn dropdown-toggle" type="button" id="triggerId" data-toggle="dropdown" aria-haspopup="true"
                                         aria-expanded="false">

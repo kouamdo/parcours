@@ -117,6 +117,7 @@ export class ModalDocEtatsComponent implements OnInit{
   retirerSelectionEtat(index: number) {
     this.ELEMENTS_TABLE_DOC_ETATS = this.dataSourceDocEtats.data;
     this.ELEMENTS_TABLE_DOC_ETATS.splice(index, 1); // je supprime un seul element du tableau a la position 'index'
+    this.ELEMENTS_TABLE_DOC_ETATS[0].etat.etatPrecedant = undefined
     this.dataSourceDocEtats.data = this.ELEMENTS_TABLE_DOC_ETATS;
   }
 
