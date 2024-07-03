@@ -16,6 +16,7 @@ import { DistributeurModule } from './distributeur/distributeur.module';
 import { DocumentsModule } from './documents/documents.module';
 import { EtapeModule } from './etape/etape.module';
 import { EtatsModule } from './etats/etats.module';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { ExemplaireDocumentModule } from './exemplaire-document/exemplaire-document.module';
 import { FamilleModule } from './famille/famille.module';
 import { MissionsModule } from './missions/missions.module';
@@ -31,6 +32,8 @@ import { TicketsModule } from './tickets/tickets.module';
 import { ValidationModule } from './validation/validation.module';
 import { ModulesComponent } from './modules.component';
 import { MenuComponent } from './menu/menu.component';
+import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
+import { InMemDBService } from '../backend/backend';
 
 
 @NgModule({
@@ -39,6 +42,7 @@ import { MenuComponent } from './menu/menu.component';
     CommonModule,
     ModulesRoutingModule,
     ReactiveFormsModule,
+    MatSnackBarModule,
     FormsModule,
     MatCheckboxModule,
     PatientsModule,
@@ -57,6 +61,10 @@ import { MenuComponent } from './menu/menu.component';
     ValidationModule,
     EtapeModule,
     ParoursModule,
+    HttpClientInMemoryWebApiModule.forRoot(InMemDBService, {
+      dataEncapsulation: false,
+      passThruUnknownUrl: true,
+    }),
     // ngx-translate and the loader module
     HttpClientModule,
     TranslateModule.forChild({

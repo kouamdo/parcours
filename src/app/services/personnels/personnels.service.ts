@@ -1,13 +1,17 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
 import { IPersonnel } from 'src/app/modele/personnel';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PersonnelsService {
+  private httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  };
+  
   constructor(private http: HttpClient) {}
 
   getAllPersonnels(): Observable<IPersonnel[]> {
@@ -55,5 +59,18 @@ export class PersonnelsService {
 
   ajouterPersonnel(personnel: IPersonnel) {
     return this.http.post('api/personnels', personnel);
+  }
+
+  updatePersonnel(personnel: IPersonnel) {
+    return this.http.put('api/personnels', personnel, this.httpOptions).pipe(
+      catchError(this.handleError<any>('updateUser'))
+    );
+  }
+
+  private handleError<T>(operation = 'operation', result?: T) {
+    return (error: any): Observable<T> => {
+      console.error(error); // log to console instead
+      return of(result as T);
+    };
   }
 }

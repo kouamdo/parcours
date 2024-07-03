@@ -14,9 +14,9 @@
               <mat-label class="searchBar">{{'personnel.search-bar' | translate}}</mat-label>
               <input type="text" matInput aria-label="Rechercher" [formControl]="myControl" [matAutocomplete]="auto">
               <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
-                <mat-option *ngFor="let option of filteredOptions" [value]="option"
+                <mat-option *ngFor="let option of filteredOptions!" [value]="option.user"
                   (onSelectionChange)="rechercherListingPersonnel(option)">
-                  {{option.nom}}
+                  {{option.user.nom}}
                 </mat-option>
               </mat-autocomplete>
             </mat-form-field>
@@ -38,21 +38,21 @@
           <ng-container matColumnDef="nom">
             <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header>
               {{"personnel.table.title1" | translate}} </th>
-            <td class="text-dark text-center containCell" mat-cell *matCellDef="let element"> {{element.nom}} </td>
+            <td class="text-dark text-center containCell" mat-cell *matCellDef="let element"> {{element.user.nom}} </td>
           </ng-container>
 
           <!-- prenom Column -->
           <ng-container matColumnDef="prenom">
             <th class="text-dark pl-5 containHead" mat-header-cell *matHeaderCellDef mat-sort-header>
               {{"personnel.table.title2" | translate}} </th>
-            <td class="text-dark text-center containCell" mat-cell *matCellDef="let element"> {{element.prenom}} </td>
+            <td class="text-dark text-center containCell" mat-cell *matCellDef="let element"> {{element.user.prenom}} </td>
           </ng-container>
 
           <!-- birthday Column -->
           <ng-container matColumnDef="dateNaissance">
             <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{"personnel.table.title3" |
               translate}} </th>
-            <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.dateNaissance | date:
+            <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.user.dateNaissance | date:
               'dd/MM/yyyy'}} </td>
           </ng-container>
 
@@ -60,35 +60,41 @@
           <ng-container matColumnDef="sexe">
             <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{"personnel.table.title4" |
               translate}} </th>
-            <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.sexe}} </td>
+            <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.user.sexe}} </td>
           </ng-container>
 
           <!-- mail Column -->
           <ng-container matColumnDef="email">
             <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{"personnel.table.title5" |
               translate}} </th>
-            <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.email}} </td>
+            <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.user.email}} </td>
           </ng-container>
 
           <!-- telephone Column -->
           <ng-container matColumnDef="telephone">
             <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{"personnel.table.title7" |
               translate}} </th>
-            <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.telephone}} </td>
+            <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.user.telephone}} </td>
+          </ng-container>
+
+          <!-- groupe Column -->
+          <ng-container matColumnDef="groupe">
+            <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> Groupe </th>
+            <td class="text-dark containCell" mat-cell *matCellDef="let element">{{ element.groupe ? element.groupe.libelle : "Aucun" }}</td>
           </ng-container>
 
           <!-- dateEntree Column -->
           <ng-container matColumnDef="dateEntree">
             <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{"personnel.table.title6" |
               translate}} </th>
-            <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.dateEntree}} </td>
+            <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.user.dateEntree}} </td>
           </ng-container>
 
           <!-- dateSortie Column -->
           <ng-container matColumnDef="dateSortie">
             <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{"personnel.table.title8" |
               translate}} </th>
-            <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.dateSortie}} </td>
+            <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.user.dateSortie}} </td>
           </ng-container>
 
           <!-- action Column -->
@@ -102,17 +108,22 @@
                   <span>...</span>
                 </button>
                 <div class="dropdown-menu" aria-labelledby="triggerId">
-                  <button class="dropdown-item nav-link" [routerLink]="['/affecte-role-personnel',element.id]"
+                  <button class="dropdown-item nav-link" [routerLink]="['/affecte-role-personnel',element.user.id]"
                     title="{{'patient.table.actions.link3' | translate}}">
                     <i class="fa fa-eye text-secondary" aria-hidden="true"></i>
                     <span>{{'personnel.table.actions.link5' | translate}}</span>
                   </button>
-                  <button class="dropdown-item nav-link" [routerLink]="['/update-personnel',element.id]"
+                  <button class="dropdown-item nav-link" [routerLink]="['../update-personnel',element.user.id]"
                     title="{{'personnel.table.actions.link2' | translate}}">
                     <i class="fa fa-pen text-info" aria-hidden="true"></i>
                     <span>{{'personnel.table.actions.link2' | translate}}</span>
                   </button>
-                  <button class="dropdown-item nav-link" [routerLink]="['/detail-personnels',element.id]"
+                  <button class="dropdown-item nav-link" (click)="openChoixGroupDialog(element.user)"
+                    title="Affecter à un groupe">
+                    <i class="fa fa-pen text-info" aria-hidden="true"></i>
+                    <span>Group</span>
+                  </button>
+                  <button class="dropdown-item nav-link" [routerLink]="['/detail-personnels',element.user.id]"
                     title="{{'personnel.table.action.link3' | translate}}">
                     <i class="fa fa-eye text-secondary" aria-hidden="true"></i>
                     <span>{{'personnel.table.actions.link3' | translate}} </span>

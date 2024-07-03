@@ -11,6 +11,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSlideToggleModule,} from '@angular/material/slide-toggle';
 import { BrowserModule } from '@angular/platform-browser';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -30,6 +31,7 @@ import { AuthGuard } from './verify-users/auth/auth.guard';
     ReactiveFormsModule,
     FormsModule,
     MatCheckboxModule,
+    MatSnackBarModule,
     HttpClientInMemoryWebApiModule.forRoot(InMemDBService, {
       dataEncapsulation: false,
       passThruUnknownUrl: true,

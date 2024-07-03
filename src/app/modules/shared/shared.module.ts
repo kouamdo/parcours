@@ -36,6 +36,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { ModalChoixPersonneComponent } from './modal-choix-personne/modal-choix-personne.component';
 import { ModalResetPwdComponent } from './modal-reset-pwd/modal-reset-pwd.component';
 import { ModulesRoutingModule } from '../modules-routing.module';
+import { ModalChoixGroupsComponent } from './modal-choix-groups/modal-choix-groups.component';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import { ModulesRoutingModule } from '../modules-routing.module';
     ModalChoixDocEtatComponent,
     ModalChoixPersonneComponent,
     ModalResetPwdComponent,
+    ModalChoixGroupsComponent,
   ],
   exports: [
     ModalCategoriesComponent,

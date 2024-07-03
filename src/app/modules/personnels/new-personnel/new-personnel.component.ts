@@ -15,54 +15,87 @@ import { v4 as uuidv4 } from 'uuid';
   styleUrls: ['./new-personnel.component.scss'],
 })
 export class NewPersonnelComponent implements OnInit {
+  //personnel$:Observable<personnel>=EMPTY;
+  personnel: IPersonnel | undefined;
+  forme: FormGroup;
+  btnLibelle: string = 'Ajouter';
+  submitted: boolean = false;
+  // Import the QRCodeModule
+  qrCodeValue: string = '';
+  titre: string = '';
+  constructor(
+    private formBuilder: FormBuilder,
+    private dataEnteteMenuService: DonneesEchangeService,
+    private userService: UtilisateurService,
+    private personnelService: PersonnelsService,
+    private router: Router,
+    private infosPath: ActivatedRoute,
+    private datePipe: DatePipe
+  ) {
+    this.forme = this.formBuilder.group({
+      nom: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(2),
+          Validators.maxLength(50),
+        ],
+      ],
+      prenom: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(2),
+          Validators.maxLength(50),
+        ],
+      ],
+      sexe: ['', Validators.required],
+      email: [
+        '',
+        [
+          Validators.required,
+          Validators.email,
+          Validators.pattern('.+@.+.{1}[a-z]{2,3}'),
+        ],
+      ],
+      //todo initialisation du composant à une date
+      dateNaissance: ['1980-01-01', Validators.required],
+      dateEntree: ['2023-01-01', Validators.required],
+      dateSortie: ['0000-00-00'],
+      telephone: ['', Validators.required],
+    });
+  }
 
-   //personnel$:Observable<personnel>=EMPTY;
-   personnel : IPersonnel|undefined;
-   forme: FormGroup;
-   btnLibelle: string="Ajouter";
-   submitted: boolean=false;
-   // Import the QRCodeModule
-   qrCodeValue: string = '';
-   titre:string='';
-   constructor(private formBuilder:FormBuilder,private dataEnteteMenuService:DonneesEchangeService, private userService: UtilisateurService, private personnelService:PersonnelsService, private router:Router, private infosPath:ActivatedRoute, private datePipe: DatePipe) {
-     this.forme =  this.formBuilder.group({
-       nom: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
-       prenom: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
-       sexe: ['', Validators.required],
-       pwd: [''],
-       email: ['', [Validators.required, Validators.email, Validators.pattern(".+@.+\.{1}[a-z]{2,3}")]],
-       //todo initialisation du composant à une date
-       dateNaissance: ['1980-01-01', Validators.required],
-       dateEntree: ['2023-01-01', Validators.required],
-       dateSortie: ['0000-00-00'],
-       telephone: ['', Validators.required]
-     })
-   }
+  ngOnInit() {
+    let idPersonnel = this.infosPath.snapshot.paramMap.get('idPersonnel');
+    if (idPersonnel != null && idPersonnel !== '') {
+      this.btnLibelle = 'Modifier';
+      this.titre = 'Personnel à Modifier';
 
-   ngOnInit() {
-     let idPersonnel = this.infosPath.snapshot.paramMap.get('idPersonnel');
-     if((idPersonnel != null) && idPersonnel!==''){
-
-       this.btnLibelle="Modifier";
-       this.titre="Personnel à Modifier";
-
-
-       this.personnelService.getPersonnelById(idPersonnel).subscribe(x =>
-       {
-         this.personnel = x;
-         this.forme.setValue({
-           nom: this.personnel?.nom,
-           prenom: this.personnel?.prenom,
-           sexe: this.personnel?.sexe,
-           email: this.personnel.email,
-           dateNaissance: this.datePipe.transform(this.personnel?.dateNaissance,'yyyy-MM-dd'),
-           dateEntree: this.datePipe.transform(this.personnel?.dateEntree,'yyyy-MM-dd'),
-           dateSortie: this.datePipe.transform(this.personnel?.dateSortie,'yyyy-MM-dd'),
-           telephone: this.personnel?.telephone
-         })
-       });
-     }
-   }
+      this.personnelService.getPersonnelById(idPersonnel).subscribe((x) => {
+        this.personnel = x;
+        this.forme.setValue({
+          nom: this.personnel?.nom,
+          prenom: this.personnel?.prenom,
+          sexe: this.personnel?.sexe,
+          email: this.personnel.email,
+          dateNaissance: this.datePipe.transform(
+            this.personnel?.dateNaissance,
+            'yyyy-MM-dd'
+          ),
+          dateEntree: this.datePipe.transform(
+            this.personnel?.dateEntree,
+            'yyyy-MM-dd'
+          ),
+          dateSortie: this.datePipe.transform(
+            this.personnel?.dateSortie,
+            'yyyy-MM-dd'
+          ),
+          telephone: this.personnel?.telephone,
+        });
+      });
+    }
+  }
 
   get f() {
     return this.forme.controls;
@@ -70,11 +103,8 @@ export class NewPersonnelComponent implements OnInit {
 
   onSubmit(personnelInput: any) {
     this.submitted = true;
-    console.log("value form:", this.forme.value);
-    
+
     if (this.forme.invalid) return;
-
-
 
     let personnelTemp: IPersonnel = {
       id: uuidv4(),
@@ -86,27 +116,42 @@ export class NewPersonnelComponent implements OnInit {
       dateNaissance: personnelInput.dateNaissance,
       dateEntree: personnelInput.dateEntree,
       dateSortie: personnelInput.dateSortie,
-      qrCodeValue: personnelInput.qrCodeValue
+      qrCodeValue: personnelInput.qrCodeValue,
     };
-
-    let userTemp: IUtilisateurs = {
-      id: uuidv4(),
-      login: personnelTemp.email,
-      passWord: personnelTemp.nom+"_"+personnelTemp.id,
-      user: personnelTemp
-    }
 
     if (this.personnel != undefined) {
       personnelTemp.id = this.personnel.id;
+      this.personnelService
+        .updatePersonnel(personnelTemp)
+        .subscribe((object) => {
+          this.userService.getUserById(this.personnel!.id).subscribe((res) => {
+            let userTemp: IUtilisateurs = {
+              id: res.id,
+              login: res.login,
+              passWord: res.passWord,
+              groupe: res.groupe,
+              menu: res.menu,
+              user: personnelTemp,
+            };
+            this.userService.updateUser(userTemp).subscribe((obj) => {});
+            console.log('User update :', userTemp);
+          });
+        });
+    } else {
+      // Save personnel data
+      this.personnelService
+        .ajouterPersonnel(personnelTemp)
+        .subscribe((object) => {
+          let userTemp: IUtilisateurs = {
+            id: uuidv4(),
+            login: personnelTemp.email,
+            passWord: personnelTemp.nom + '_' + personnelTemp.id,
+            user: personnelTemp,
+          };
+          this.userService.ajouterUser(userTemp).subscribe((obj) => {});
+          console.log('User create :', userTemp);
+        });
     }
-
-    // Save personnel data
-    this.personnelService
-      .ajouterPersonnel(personnelTemp)
-      .subscribe((object) => {
-        this.userService.ajouterUser(userTemp);
-        console.log("User create :", userTemp);
-        this.router.navigate(['parcours/personnels/list-personnels']);
-      });
+    this.router.navigate(['parcours/personnels/list-personnels']);
   }
 }

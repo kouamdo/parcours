@@ -1,6 +1,6 @@
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { Component, Inject, OnInit, ViewChild } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
@@ -14,7 +14,6 @@ import { CategorieAttributService } from 'src/app/services/categorie-attribut/ca
 import { DocumentService } from 'src/app/services/documents/document.service';
 import { IType } from "src/app/modele/type";
 import {v4 as uuidv4} from 'uuid';
-import { map } from 'rxjs';
 import { DonneesEchangeService } from 'src/app/services/donnees-echange/donnees-echange.service';
 import { IAssociationCategorieAttributs } from 'src/app/modele/association-categorie-attributs';
 

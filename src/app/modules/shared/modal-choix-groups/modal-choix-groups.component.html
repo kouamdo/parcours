@@ -1,0 +1,45 @@
+<div id="mainSection">
+    <div class="card block">
+      <!--<div class="card-header" class="entete pt-4 pb-4">{{ titre }}</div>-->
+        <div class="card-header" class="entete pt-4 pb-4">
+          {{"attributs.title1" | translate}} {{titre}}
+        </div>
+        <div class="card-body">
+            <form [formGroup]="forme" *ngIf="forme" >
+                <div class="">
+                    <div class="">
+                        <div class="form-group">
+                            <div>
+                                <div class="champs">
+                                    <label for="nom" class="label">
+                                        {{'personnel.table.title1' | translate}}
+                                    </label>
+                                    <input type="text" [value]="person!.nom+' '+person!.prenom" disabled class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="champs">
+                                <label  for="groupe" class="label">
+                                    Group
+                                </label>
+                                <mat-form-field class="example-full-width w-100" appearance="fill">
+                                    <input  type="text" matInput [matAutocomplete]="auto"  aria-label="groupe" formControlName="groupe" name="groupe" id="famille" placeholder="" class="w-100" style="color: black;">
+                                    <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn" >
+                                    <mat-option *ngFor="let option of groupes" [value]="option">
+                                        {{option.libelle}}
+                                    </mat-option>
+                                    </mat-autocomplete>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="actionButton">
+                    <button class="btn" [mat-dialog-close]=""><i class="fa fa-reply mr-1" aria-hidden="true"></i>{{'lists.button2' | translate}}</button>
+                    <button type="submit" cdkFocusInitial (click)="onSubmit(forme.value)" class="btn btnValidation">{{btnLibelle}}</button>
+                </div>
+            </form>
+        </div>
+      </div>
+  </div>
