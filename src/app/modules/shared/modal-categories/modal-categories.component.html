@@ -157,7 +157,10 @@
             </div>
         </div>
         <div class="actionButton valBtn" >
-            <button mat-button [mat-dialog-close]="tableResultatsCategoriesAffichage.data" cdkFocusInitial class="btn btnValidation" (click)="ajouterCategorieParDefaut()" title="{{'lists.button11' | translate}}">
+            <button class="btn retour" type="button" [mat-dialog-close] title="{{'lists.button2' | translate}}">
+                <i class="fa fa-undo" aria-hidden="true"></i>
+            </button>
+            <button mat-button type="submit" [mat-dialog-close]="tableResultatsCategoriesAffichage.data" cdkFocusInitial class="btn btnValidation" (click)="ajouterCategorieParDefaut()" title="{{'lists.button11' | translate}}">
                 <i class="fa fa-check" aria-hidden="true"></i>
             </button>
         </div>       

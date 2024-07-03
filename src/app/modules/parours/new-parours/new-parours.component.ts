@@ -236,6 +236,9 @@ export class NewParoursComponent implements OnInit {
 
     return afficheEtape;
   }
+  return(){
+    this.router.navigate(['/list-parours']);
+  }
 
   onSubmit(paroursInput: any) {
     this.submitted = true;

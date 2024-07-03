@@ -193,6 +193,9 @@ export class NewPatientComponent implements OnInit {
   get f() {
     return this.forme.controls;
   }
+  return() {
+    this.router.navigate(['/list-patients']);
+  }
 
   onSubmit(patientInput: any) {
     this.submitted = true;

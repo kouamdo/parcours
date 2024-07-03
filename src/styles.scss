@@ -61,8 +61,7 @@ width: 60%;
 }
 
 .modalContentScroll {
-  max-height: 100vh;
-  overflow-y: auto;
+  opacity: 1;
 }
 mat-dialog-container {
   background-color: transparent !important;

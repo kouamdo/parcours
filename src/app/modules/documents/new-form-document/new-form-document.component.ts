@@ -20,7 +20,7 @@ import { IService } from 'src/app/modele/service';
 import { AttributService } from 'src/app/services/attributs/attribut.service';
 import { DocumentService } from 'src/app/services/documents/document.service';
 import { MissionsService } from 'src/app/services/missions/missions.service';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ModalCategoriesComponent } from '../../shared/modal-categories/modal-categories.component';
 import { v4 as uuidv4 } from 'uuid';
 import { ICategorieAffichage } from 'src/app/modele/categorie-affichage';
@@ -284,21 +284,29 @@ export class NewFormDocumentComponent implements OnInit {
    * Methode permettant d'ouvrir la modal permettant d'associer des sous documents au document
    */
   openSousDocumentDialog() {
-    const dialogRef = this.dialogDef.open(ModalChoixSousDocumentComponent, {
-      maxWidth: '100vw',
-      maxHeight: '100vh',
-      width: '100%',
-      height: '100%',
-      enterAnimationDuration: '1000ms',
-      exitAnimationDuration: '1000ms',
-      data: {},
-    });
-
+    const dialogConfig = new MatDialogConfig();
+    if (this.ELEMENTS_TABLE_SOUS_DOCUMENTS.length > 0) {
+      dialogConfig.data = { documentIds: this.ELEMENTS_TABLE_SOUS_DOCUMENTS.map(doc => doc.id) };
+    }
+  
+    dialogConfig.maxWidth = '100vw';
+    dialogConfig.maxHeight = '100vh';
+    dialogConfig.width = '100%';
+    dialogConfig.height = '100%';
+    dialogConfig.enterAnimationDuration = '1000ms';
+    dialogConfig.exitAnimationDuration = '1000ms';
+  
+    const dialogRef = this.dialogDef.open(ModalChoixSousDocumentComponent, dialogConfig);
+  
     dialogRef.afterClosed().subscribe((result) => {
-      this.ELEMENTS_TABLE_SOUS_DOCUMENTS =
-        this.donneeDocCatService.dataDocumentSousDocuments;
+      this.ELEMENTS_TABLE_SOUS_DOCUMENTS = this.donneeDocCatService.dataDocumentSousDocuments;
+  
+      if (this.ELEMENTS_TABLE_SOUS_DOCUMENTS.length > 0) {
+        this.document.sousDocuments = this.ELEMENTS_TABLE_SOUS_DOCUMENTS;
+      }
     });
   }
+  
 
   /**
    * Methode permettant d'ouvrir la modal de manipullation des etats du document
@@ -361,6 +369,9 @@ export class NewFormDocumentComponent implements OnInit {
       }
     });
     this.TABLE_CATEGORIE_AFFICHAGE_TEMP = categorieAttributsFinal;
+  }
+  return(){
+    this.router.navigate(['/list-documents']);
   }
   onSubmit(documentInput: any) {
     this.submitted = true;

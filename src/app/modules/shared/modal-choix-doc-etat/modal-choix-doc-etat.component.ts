@@ -21,7 +21,7 @@ export class ModalChoixDocEtatComponent {
   selectedEtatsMap: IDocEtats | undefined;
   formeEtat: FormGroup;
   selectedEtat: string | undefined;
-  previouslySelectedEtat: IDocEtats | undefined; // Input to receive the previously selected etat
+  previouslySelectedEtat: IDocEtats | undefined; // Input pour recevoir les etats pre-selectionees
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
@@ -56,7 +56,7 @@ export class ModalChoixDocEtatComponent {
   }
 
   ngOnInit(): void {
-    // Load previously selected etat from DocumentService
+    // Charge l'état précédemment sélectionné depuis DocumentService
     this.selectedEtat = this.documentService.getSelectedEtat(
       this.data.documentChoisi.id
     );

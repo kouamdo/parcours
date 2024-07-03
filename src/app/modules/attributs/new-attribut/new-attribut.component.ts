@@ -269,6 +269,10 @@ export class NewAttributComponent implements OnInit {
     }
   }
 
+  return(){
+    this.router.navigate(['/list-attributs']);
+  }
+
   onSubmit(attributInput: any) {
     this.submitted = true;
     if (this.forme.invalid) return;

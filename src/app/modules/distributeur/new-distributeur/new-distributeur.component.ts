@@ -59,6 +59,9 @@ export class NewDistributeurComponent implements OnInit {
   get f(){
     return this.forme.controls;
   }
+  return(){
+    this.router.navigate(['/list-distributeurs']);
+  }
 
   onSubmit(distributeurInput:any){
     this.submitted=true;

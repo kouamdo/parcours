@@ -61,6 +61,9 @@ export class NewFamilleComponent implements OnInit {
   get f(){
     return this.forme.controls;
   }
+  return() {
+    this.router.navigate(['/list-familles']);
+  }
 
   onSubmit(familleInput:any){
     this.submitted=true;

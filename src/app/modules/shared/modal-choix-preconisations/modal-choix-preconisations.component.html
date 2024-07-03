@@ -39,7 +39,7 @@
                                 <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{"patient.table.title8" | translate}} </th>
                                 <td class="text-dark containCell" mat-cell *matCellDef="let element">
                                     <div class="actions">
-                                        <input type="checkbox" [value]="element.libelle" name="PrecoMvts" id="PrecoMvts" (click)="getPrecoMvtId(element.id)" (change)="onCheckPrecoMvtChange($event)">
+                                        <input type="checkbox" [checked]="selectedIds.has(element.id)" (click)="getPrecoMvtId(element.id)" (change)="onCheckPrecoMvtChange($event, element)">
                                         <span role="button" (click)="getPrecoMvtId(element.id); openViewPrecoDialog()"><i class="fa fa-info-circle text-info" aria-hidden="true" title="{{'preconisation.table.title4' | translate}}"></i></span>
                                     </div>
                                 </td>
@@ -80,9 +80,9 @@
                                     <!-- actions Column -->
                                     <ng-container matColumnDef="actions">
                                         <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{"patient.table.title8" | translate}} </th>
-                                        <td class="text-dark containCell" mat-cell *matCellDef="let element;  let i=index">
+                                        <td class="text-dark containCell" mat-cell *matCellDef="let element; let i=index">
                                             <div class="actions">
-                                                <button class="btn p-0" name="PrecoMvts"  [value]="element.id" id="PrecoMvts" title="clicker pour annuler la selection" (click)="retirerSelectionPrecoMvt(i)">
+                                                <button class="btn p-0" name="PrecoMvts" [value]="element.id" id="PrecoMvts" title="clicker pour annuler la selection" (click)="retirerSelectionPrecoMvt(element.id)">
                                                     <i class="fa fa-trash text-danger" aria-hidden="true"></i>
                                                 </button>
                                                 <span><i class="fa fa-info-circle text-info" aria-hidden="true" title="{{'preconisation.table.title4' | translate}}"></i></span>
@@ -99,7 +99,10 @@
                                 </mat-paginator>
                             </div>
                             <div class="actionButton valBtn mt-2">
-                                <button mat-button [mat-dialog-close] cdkFocusInitial class="btn btnValidation" title="{{'lists.button6' | translate}}">
+                                <button class="btn retour" [mat-dialog-close] title="{{'lists.button2' | translate}}">
+                                    <i class="fa fa-undo" aria-hidden="true"></i>
+                                </button>
+                                <button mat-button (click)="onSave()" [mat-dialog-close] cdkFocusInitial class="btn btnValidation" title="{{'lists.button6' | translate}}">
                                     <i class="fa fa-check" aria-hidden="true"></i>
                                 </button>
                             </div>

@@ -46,6 +46,10 @@ export class NewEtatComponent {
     return this.formeEtat.controls;
   }
 
+  return(){
+    this.router.navigate(['/list-etats']);
+  }
+
   onSubmit(etatsInput:any){
     this.submitted=true;
     

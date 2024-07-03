@@ -55,6 +55,10 @@ export class NewRoleComponent implements OnInit {
     return this.forme.controls;
   }
 
+  return(){
+    this.router.navigate(['/list-roles']);
+  }
+
   onSubmit(roleInput:any){
     this.submitted=true;
     //Todo la validation d'element non conforme passe

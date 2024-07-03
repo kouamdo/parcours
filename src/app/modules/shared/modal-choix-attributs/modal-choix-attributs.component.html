@@ -58,7 +58,7 @@
                                 <td class="text-dark containCell" mat-cell *matCellDef="let element">
                                     <div class="actions" class="">
                                         <label style="width: 2px;" for="attributs">
-                                            <input type="checkbox" [value]="element.titre" name="attributs" id="attributs" (click)="getAttributId(element.id)" (change)="onCheckAttributChange($event)">
+                                            <input type="checkbox" [checked]="selectedAttributeIds.includes(element.id)" [value]="element.titre" name="attributs" id="attributs" (click)="getAttributId(element.id)" (change)="onCheckAttributChange($event)">
                                         </label>
                                     </div>
                                 </td>
@@ -119,7 +119,10 @@
                                 </mat-paginator>
                             </div>
                             <div class="actionButton valBtn mt-2">
-                                <button mat-button [mat-dialog-close] cdkFocusInitial class="btn btnValidation" title="{{'lists.button6' | translate}}">
+                                <button class="btn retour" [mat-dialog-close] title="{{'lists.button2' | translate}}">
+                                    <i class="fa fa-undo" aria-hidden="true"></i>
+                                </button>
+                                <button mat-button (click) = "onSave()" [mat-dialog-close] cdkFocusInitial class="btn btnValidation" title="{{'lists.button6' | translate}}">
                                     <i class="fa fa-check" aria-hidden="true"></i>
                                   </button>
                             </div>

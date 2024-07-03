@@ -21,6 +21,7 @@ export class ModalDocEtatsComponent implements OnInit{
   etatControl = new FormControl<string | IEtats>('');
   filteredOptions: IEtats[] | undefined;
   ELEMENTS_TABLE_DOC_ETATS: IDocEtats[] = [];
+  localElementTableDocEtats: IDocEtats[] = []; // Local variable to hold the changes
   dataSourceDocEtats = new MatTableDataSource<IDocEtats>(this.ELEMENTS_TABLE_DOC_ETATS);
   displayedDocEtatsColumns: string[] = [
     'actions',
@@ -28,30 +29,32 @@ export class ModalDocEtatsComponent implements OnInit{
     'validation',
     'EtatPrecedant'
   ]; // structure du tableau presentant les doc etats
-  selected: boolean=false;
-  etatExiste: boolean=false;
-  idDOCEtat : string = ""
-  
+  selected: boolean = false;
+  etatExiste: boolean = false;
+  idDOCEtat: string = "";
+
   constructor(
     private serviceEtat: EtatService,
     private _liveAnnouncer: LiveAnnouncer,
     private formBuilder: FormBuilder,
-    private donneeDocEtatService:DonneesEchangeService,
+    private donneeDocEtatService: DonneesEchangeService,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private router:Router, private dialogDef : MatDialog
+    private router: Router,
+    private dialogDef: MatDialog
   ) {
-      this.formeDocEtats = this.formBuilder.group({});
-    }
+    this.formeDocEtats = this.formBuilder.group({});
+  }
 
   ngOnInit(): void {
     this.serviceEtat.getAllEtats().subscribe(
-      (resultat) =>{
-        this.filteredOptions = resultat
+      (resultat) => {
+        this.filteredOptions = resultat;
       }
-    )
+    );
     this.ELEMENTS_TABLE_DOC_ETATS = this.donneeDocEtatService.dataDocumentEtats;
+    this.localElementTableDocEtats = [...this.ELEMENTS_TABLE_DOC_ETATS]; // Initialize the local variable with the existing data
     this.dataSourceDocEtats.data = this.ELEMENTS_TABLE_DOC_ETATS;
-    
+
     this.etatControl.valueChanges.subscribe((value) => {
       const libelle = typeof value === 'string' ? value : value?.libelle;
       if (libelle != undefined && libelle?.length > 0) {
@@ -63,10 +66,10 @@ export class ModalDocEtatsComponent implements OnInit{
       } else {
         this.filteredOptions = [];
         this.serviceEtat.getAllEtats().subscribe(
-          (resultat) =>{
-            this.filteredOptions = resultat
+          (resultat) => {
+            this.filteredOptions = resultat;
           }
-        )
+        );
       }
     });
   }
@@ -74,40 +77,41 @@ export class ModalDocEtatsComponent implements OnInit{
   public rechercherListingEtat(option: IEtats) {
     this.selected = true;
     this.etatExiste = false;
-    let tabIdEtats : string[] = []
-    this.ELEMENTS_TABLE_DOC_ETATS.forEach(
+    let tabIdEtats: string[] = [];
+    this.localElementTableDocEtats.forEach(
       docEtat => {
-        if ((docEtat.etat.id == option.id) ) {
-          tabIdEtats.push(docEtat.etat.id)
+        if ((docEtat.etat.id == option.id)) {
+          tabIdEtats.push(docEtat.etat.id);
         }
-    });
+      }
+    );
 
-    for (let index = 0; index < this.ELEMENTS_TABLE_DOC_ETATS.length; index++) {
-      const element = this.ELEMENTS_TABLE_DOC_ETATS[index];
+    for (let index = 0; index < this.localElementTableDocEtats.length; index++) {
+      const element = this.localElementTableDocEtats[index];
       if (element.etat.id == option.id) {
         this.etatExiste = true;
-        break
+        break;
       }
     }
     if (!tabIdEtats.includes(option.id)) {
-      let docEtat : IDocEtats = {
+      let docEtat: IDocEtats = {
         id: option.id,
         etat: option,
         ordre: 0,
         dateCreation: new Date()
-      }
-      this.ELEMENTS_TABLE_DOC_ETATS.push(docEtat)
-      this.dataSourceDocEtats.data = this.ELEMENTS_TABLE_DOC_ETATS
-      this.selected=false;
+      };
+      this.localElementTableDocEtats.push(docEtat);
+      this.dataSourceDocEtats.data = this.localElementTableDocEtats;
+      this.selected = false;
     }
   }
 
-  get f(){
+  get f() {
     return this.formeDocEtats.controls;
   }
 
-  getIdDocEtat(idDocEtat : string){
-    this.idDOCEtat = idDocEtat
+  getIdDocEtat(idDocEtat: string) {
+    this.idDOCEtat = idDocEtat;
   }
 
   displayFn(preco: IEtats): string {
@@ -115,75 +119,65 @@ export class ModalDocEtatsComponent implements OnInit{
   }
 
   retirerSelectionEtat(index: number) {
-    this.ELEMENTS_TABLE_DOC_ETATS = this.dataSourceDocEtats.data;
-    this.ELEMENTS_TABLE_DOC_ETATS.splice(index, 1); // je supprime un seul element du tableau a la position 'index'
-    this.ELEMENTS_TABLE_DOC_ETATS[0].etat.etatPrecedant = undefined
-    this.dataSourceDocEtats.data = this.ELEMENTS_TABLE_DOC_ETATS;
-  }
+    this.localElementTableDocEtats.splice(index, 1); // Remove the element from the local array
+    this.localElementTableDocEtats[0].etat.etatPrecedant = undefined
+    this.dataSourceDocEtats.data = this.localElementTableDocEtats; // Update the data source with the modified local array
+}
 
-  /**
-   * Methode qui permet d'effacer la valeur du control etat lorsqu'on a
-   * déjà choisi l'etat en cliquant dessus
-   */
-  reinitialliseRessourceControl(){
+
+  reinitialliseRessourceControl() {
     this.serviceEtat.getAllEtats().subscribe(
-      (resultat) =>{
-        this.filteredOptions = resultat
+      (resultat) => {
+        this.filteredOptions = resultat;
       }
-    )
-    this.etatControl.reset()
+    );
+    this.etatControl.reset();
   }
-  /**
-   * Methode permettant d'ouvrir la modal de manipullation des etats du document
-   */
-  openRoleValidationDialog(){
 
+  openRoleValidationDialog() {
     const dialogRef = this.dialogDef.open(ModalRoleValidationComponent,
-    {
-      maxWidth: '100vw',
-      maxHeight: '100vh',
-      height: '100%',
-      width: '100%',
-      enterAnimationDuration:'1000ms',
-      exitAnimationDuration:'1000ms',
-      data:{}
-    }
-    )
+      {
+        maxWidth: '100vw',
+        maxHeight: '100vh',
+        height: '100%',
+        width: '100%',
+        enterAnimationDuration: '1000ms',
+        exitAnimationDuration: '1000ms',
+        data: {}
+      }
+    );
 
     dialogRef.afterClosed().subscribe(result => {
-      for (let index = 0; index < this.ELEMENTS_TABLE_DOC_ETATS.length; index++) {
-        const element = this.ELEMENTS_TABLE_DOC_ETATS[index];
-        
+      for (let index = 0; index < this.localElementTableDocEtats.length; index++) {
+        const element = this.localElementTableDocEtats[index];
+
         if (element.id == this.idDOCEtat) {
-          element.validation = this.donneeDocEtatService.dataRoleValidation
-          this.dataSourceDocEtats.data = this.ELEMENTS_TABLE_DOC_ETATS
-          break
+          element.validation = this.donneeDocEtatService.dataRoleValidation;
+          this.dataSourceDocEtats.data = this.localElementTableDocEtats;
+          break;
         }
       }
     });
   }
-  /**
-   * Methode qui permet d'injecter une donnée du service de sorte à initialiser
-   * le control de choix de validation de la modale avec la valeur de la validation du docEtat
-   * sur lequel on clique
-   * @param validation valeur à injecter au service
-   */
-  initialiseValidationControl(validation : IValidation){
-    this.donneeDocEtatService.dataRoleValidation = validation
+
+  initialiseValidationControl(validation: IValidation) {
+    this.donneeDocEtatService.dataRoleValidation = validation;
   }
-  /**
-   * Methode permettant de ressportir le tableau des etats ayant supprimé l'etat courrant de sorte à ne pas le 
-   * choisir en tant que état précédant
-   * @param index index de l'etat courrant 
-   */
-  effaceEtatCourrant(etats : IDocEtats) : IDocEtats[] {
-    let etatsFinal : IDocEtats[] = []
-    this.ELEMENTS_TABLE_DOC_ETATS.forEach(
+
+  effaceEtatCourrant(etats: IDocEtats): IDocEtats[] {
+    let etatsFinal: IDocEtats[] = [];
+    this.localElementTableDocEtats.forEach(
       element => {
         if (etats.etat.libelle != element.etat.libelle) {
-          etatsFinal.push(element)
+          etatsFinal.push(element);
         }
-    });
-    return etatsFinal
+      }
+    );
+    return etatsFinal;
+  }
+
+  // The onSave function to send data to donneeDocEtatService
+  onSave() {
+    this.donneeDocEtatService.dataDocumentEtats = this.localElementTableDocEtats;
   }
 }

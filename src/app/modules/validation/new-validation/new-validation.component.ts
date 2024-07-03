@@ -92,6 +92,9 @@ export class NewValidationComponent implements OnInit {
   private getAllRoles() {
     return this.roleservices.getAllRoles();
   }
+  return(){
+    this.router.navigate(['/list-validations']); 
+  }
 
   onSubmit(validationInput:any){
 

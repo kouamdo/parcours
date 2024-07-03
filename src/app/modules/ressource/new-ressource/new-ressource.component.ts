@@ -152,6 +152,9 @@ export class NewRessourceComponent implements OnInit {
     });
     
   }
+  return(){
+    this.router.navigate(['list-ressources']);
+  }
 
   onSubmit(ressourceInput:IRessource){
     this.submitted=true;

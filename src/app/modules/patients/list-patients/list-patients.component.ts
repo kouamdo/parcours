@@ -102,20 +102,7 @@ export class ListPatientsComponent implements OnInit, AfterViewInit {
 
       if (this.scan_val) {
         // Si scan_val est défini, effectuez une recherche pour obtenir la libelle correspondante
-        this.servicePatient
-          .getPatientsByNameOrId(this.scan_val)
-          .subscribe((response) => {
-            this.filteredOptions = response;
-
-            // Définit manuellement l'option sélectionnée dans filteredOptions
-            const selectedOption = this.filteredOptions.find(
-              (option) => option.id === this.scan_val
-            );
-            if (selectedOption) {
-              this.filteredOptions = [selectedOption];
-              this.dataSource.data = [selectedOption]; // Mise à jour du dataSource avec l'option sélectionnée
-            }
-          });
+        this.handleScanValChange
       }
     });
 
@@ -132,7 +119,7 @@ export class ListPatientsComponent implements OnInit, AfterViewInit {
       if (query && query.length > 0) {
         // Search by name or ID
         this.servicePatient
-          .getPatientsByNameOrId(query)
+          .getPatientsByName(query)
           .subscribe((reponse) => {
             this.filteredOptions = reponse;
           });
@@ -197,22 +184,20 @@ export class ListPatientsComponent implements OnInit, AfterViewInit {
 
   private handleScanValChange() {
     if (this.scan_val) {
-      this.servicePatient
-        .getPatientsByNameOrId(this.scan_val)
-        .subscribe((response) => {
-          this.filteredOptions = response;
+      this.servicePatient.getPatientsByQrcode(this.scan_val).subscribe((response) => {
+        if (response && response.length > 0) {
+          const mainPatient = response[0];
+          const relatedPatients = response.slice(1); // Assuming related patients are included in the response
 
-          // Définit manuellement l'option sélectionnée dans filteredOptions
-          const selectedOption = this.filteredOptions.find(
-            (option) => option.id === this.scan_val
-          );
-          if (selectedOption) {
-            this.filteredOptions = [selectedOption];
-            this.dataSource.data = [selectedOption]; // Mise à jour du dataSource avec l'option sélectionnée
-          }
-        });
+          this.dataSource.data = [mainPatient, ...relatedPatients]; // Combine main patient and related patients
+          this.filteredOptions = this.dataSource.data; // Update filtered options
+        }
+      });
     }
   }
+  
+  
+  
 
   public rechercherListingPersonne(option: IPatient){
     this.servicePatient.getPatientsByName(option.nom.toLowerCase()).subscribe(

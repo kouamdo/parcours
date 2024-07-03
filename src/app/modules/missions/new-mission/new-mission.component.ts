@@ -72,6 +72,9 @@ export class NewMissionComponent implements OnInit {
   get f(){
     return this.forme.controls;
   }
+  return(){
+    this.router.navigate(['/list-missions']);
+  }
 
   onSubmit(missionInput:any){
 

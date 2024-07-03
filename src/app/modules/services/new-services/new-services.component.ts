@@ -55,6 +55,10 @@ export class NewServicesComponent implements OnInit {
     return this.forme.controls;
   }
 
+  return() {
+    this.router.navigate(['/list-services']);
+  }
+
   onSubmit(serviceInput:any){
     this.submitted=true;
     //Todo la validation d'element non conforme passe

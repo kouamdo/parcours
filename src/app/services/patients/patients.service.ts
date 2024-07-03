@@ -52,54 +52,84 @@ export class PatientsService {
     );
   }
 
-  // Ajouter un patient
-  ajouterPatient(patient: IPatient) {
-    return this.http.post('api/patients', patient);
+  getPatientsByQrcode(query: string): Observable<IPatient[]> {
+    return this.http.get<IPatient[]>('api/patients').pipe(
+      switchMap((patients) => {
+        const lowerCaseQuery = query.toLowerCase();
+        const matchingPatients = patients.filter((p) =>
+          p.qrCodeValue.toLowerCase().startsWith(lowerCaseQuery)
+        );
+
+        console.log("Matching patients by QR code:", matchingPatients);
+
+        // Get all patients who have matchingPatients in their personnesRatachees
+        const attachedPatients$ = matchingPatients.map((patient) =>
+          this.getPatientsWithPersonnesRatachees(patient.id)
+        );
+
+        return forkJoin([of(matchingPatients), ...attachedPatients$]).pipe(
+          map((results) => {
+            const allPatients = results.flat();
+            // Remove duplicates
+            const uniquePatients = allPatients.filter(
+              (patient, index, self) =>
+                index === self.findIndex((p) => p.id === patient.id)
+            );
+
+            console.log("All patients including related patients:", allPatients);
+            console.log("Unique patients:", uniquePatients);
+
+            return uniquePatients;
+          })
+        );
+      })
+    );
   }
 
-  // Récupérer un patient avec ses associés
-  findPatientBypersonnesRatacheesId(personnesRatacheesId: string): Observable<IPatient | null> {
+  // Helper method to get all patients who have a specific patient ID in their personnesRatachees
+  private getPatientsWithPersonnesRatachees(personId: string): Observable<IPatient[]> {
     return this.getAllPatients().pipe(
       map((patients) => {
-        for (let patient of patients) {
-          if (patient.personnesRatachees) {
-            const found = patient.personnesRatachees.find(person => person.id === personnesRatacheesId);
-            if (found) {
-              console.log("personnesRatacheesd patient found in:", patient);
-              return patient;
-            }
-          }
-        }
-        return null;
+        const relatedPatients = patients.filter((patient) =>
+          patient.personnesRatachees?.some((p) => p.id === personId)
+        );
+        console.log(`Patients with personnesRatachees ID ${personId}:`, relatedPatients);
+        return relatedPatients;
       })
     );
   }
 
-  getPatientpersonnesRatacheess(id: string): Observable<IPatient[]> {
-    return this.getPatientById(id).pipe(
-      switchMap(patient => {
-        if (patient.personnesRatachees && patient.personnesRatachees.length > 0) {
-          const personnesRatacheessRequests = patient.personnesRatachees.map(person =>
-            this.getPatientById(person.id)
-          );
-          return forkJoin(personnesRatacheessRequests);
-        } else {
-          return of([]);
-        }
-      })
-    );
-  }
-  addSelectedpersonnesRatachees(personnesRatachees: IPatient) {
-    // Check if the personnesRatachees is already in the array
-    const index = this.selectedpersonnesRatacheess.findIndex(a => a.id === personnesRatachees.id);
-    if (index === -1) {
-      this.selectedpersonnesRatacheess.push(personnesRatachees); // Add personnesRatachees if not already present
-    }
-    
-  }
 
-  // Method to remove selected personnesRatachees
-  removeSelectedpersonnesRatachees(personnesRatachees: IPatient) {
-    this.selectedpersonnesRatacheess = this.selectedpersonnesRatacheess.filter(a => a.id !== personnesRatachees.id);
+// Ajouter un patient
+ajouterPatient(patient: IPatient) {
+  return this.http.post('api/patients', patient);
+}
+
+getPatientpersonnesRatacheess(id: string): Observable<IPatient[]> {
+  return this.getPatientById(id).pipe(
+    switchMap((patient) => {
+      if (patient.personnesRatachees && patient.personnesRatachees.length > 0) {
+        const personnesRatacheessRequests = patient.personnesRatachees.map((person) =>
+          this.getPatientById(person.id)
+        );
+        return forkJoin(personnesRatacheessRequests);
+      } else {
+        return of([]);
+      }
+    })
+  );
+}
+
+addSelectedpersonnesRatachees(personnesRatachees: IPatient) {
+  // Check if the personnesRatachees is already in the array
+  const index = this.selectedpersonnesRatacheess.findIndex((a) => a.id === personnesRatachees.id);
+  if (index === -1) {
+    this.selectedpersonnesRatacheess.push(personnesRatachees); // Add personnesRatachees if not already present
   }
+}
+
+// Method to remove selected personnesRatachees
+removeSelectedpersonnesRatachees(personnesRatachees: IPatient) {
+  this.selectedpersonnesRatacheess = this.selectedpersonnesRatacheess.filter((a) => a.id !== personnesRatachees.id);
+}
 }

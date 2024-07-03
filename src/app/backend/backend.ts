@@ -31,7 +31,7 @@ export class InMemDBService implements InMemoryDbService {
   createDb() {
     let patients: IPatient[] = [
       {
-        id: '6911989109209',
+        id: '1',
         nom: 'NGONGANG',
         prenom: 'Philippe',
         sexe: 'M',
@@ -63,7 +63,7 @@ export class InMemDBService implements InMemoryDbService {
         telephone: '090999091',
         mail: 'ouang@yad.fr',
         dateNaissance: new Date('07/03/1990'),
-        qrCodeValue: '99874',
+        qrCodeValue: '6911989109209',
       },
       {
         id: '78',
@@ -99,15 +99,15 @@ export class InMemDBService implements InMemoryDbService {
         qrCodeValue: '',
         personnesRatachees: [
           {
-            id: '78',
-            nom: 'Tchakounte',
-            prenom: 'Simpice',
-            sexe: 'm',
-            dateNaissance: new Date('07/07/1989'),
-            adresse: 'Yaoundé',
-            telephone: '090999090',
-            mail: 'ngong@yad.fr',
-            qrCodeValue: '78',
+            id: '99874',
+            nom: 'Ouandji',
+            prenom: 'tre',
+            sexe: 'F',
+            adresse: 'Douala',
+            telephone: '090999091',
+            mail: 'ouang@yad.fr',
+            dateNaissance: new Date('07/03/1990'),
+            qrCodeValue: '6911989109209',
           },
         ],
       },

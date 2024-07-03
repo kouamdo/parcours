@@ -329,27 +329,6 @@ export class ModalRessourceAttributsComponent implements OnInit {
     if (this.valid) return;
 
     this.valid = false;
-
-    /* let personnelTemp : IPersonnel={
-      id: uuidv4(),
-      nom:personnelInput.nom,
-      prenom:personnelInput.prenom,
-      sexe:personnelInput.sexe,
-      email:personnelInput.email,
-      telephone:personnelInput.telephone,
-      dateNaissance:personnelInput.dateNaissance,
-      dateEntree: personnelInput.dateEntree,
-      dateSortie: personnelInput.dateSortie
-    }
-
-    if(this.personnel != undefined){
-      personnelTemp.id = this.personnel.id
-    }
-    this.personnelService.ajouterPersonnel(personnelTemp).subscribe(
-      object => {
-        this.router.navigate(['/list-personnels']);
-      }
-    ) */
   }
 
   retirerSelectionAttribut(index: number) {
