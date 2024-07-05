@@ -21,7 +21,7 @@ h3{
 }
 .contentBlock{
     display: flex;
-    align-items: start;
+    align-items: flex-start;
     width: 100%;
     flex-wrap: wrap;
     padding: 0 0 10px 10px;
@@ -94,7 +94,7 @@ h3{
         width: 100%;
     }
     .blockAutoRessources form{
-        justify-content: start;
+        justify-content: flex-start;
     }
 }
 .searchBlockUnique h4{
@@ -180,7 +180,7 @@ th{
             font-size: 12px;
             display: flex;
             align-items: center;
-            justify-content: start;
+            justify-content: flex-start;
         }
     }
 }
@@ -239,7 +239,7 @@ th{
         width: 50%;
     }
     .blockAutoRessources form{
-        justify-content: start;
+        justify-content: flex-start;
     }
 }
 @media screen and (max-width: 800px) {
