@@ -4,6 +4,7 @@ import { NewPersonnelComponent } from './new-personnel/new-personnel.component';
 import { ListPersonnelsComponent } from './list-personnels/list-personnels.component';
 import { RolesPersonnelComponent } from './roles-personnel/roles-personnel.component';
 import { DetailPersonnelsComponent } from './detail-personnels/detail-personnels.component';
+import { DetailUserComponent } from './detail-user/detail-user.component';
 
 const routes = [
   {
@@ -31,6 +32,11 @@ const routes = [
     title: 'Details du personnel ',
     component: DetailPersonnelsComponent,
   },
+  {
+    path: 'detail-user',
+    title: 'Afficher les informations de l\'utilisateur connecté.',
+    component: DetailUserComponent,
+  }
 ];
 
 @NgModule({

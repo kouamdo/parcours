@@ -101,6 +101,8 @@
             "title14":"Title",
             "title15":"Description",
             "title16":"Status",
+            "title17": "Nouveau mot de passe",
+            "title18": "ancien mot de passe",
             "actions":{
                 "link2":"Update",
                 "link3":"View",

@@ -108,7 +108,7 @@
                   <span>...</span>
                 </button>
                 <div class="dropdown-menu" aria-labelledby="triggerId">
-                  <button class="dropdown-item nav-link" [routerLink]="['/affecte-role-personnel',element.user.id]"
+                  <button class="dropdown-item nav-link" [routerLink]="['../affecte-role-personnel',element.user.id]"
                     title="{{'patient.table.actions.link3' | translate}}">
                     <i class="fa fa-eye text-secondary" aria-hidden="true"></i>
                     <span>{{'personnel.table.actions.link5' | translate}}</span>
@@ -123,7 +123,7 @@
                     <i class="fa fa-pen text-info" aria-hidden="true"></i>
                     <span>Group</span>
                   </button>
-                  <button class="dropdown-item nav-link" [routerLink]="['/detail-personnels',element.user.id]"
+                  <button class="dropdown-item nav-link" [routerLink]="['../detail-personnels',element.user.id]"
                     title="{{'personnel.table.action.link3' | translate}}">
                     <i class="fa fa-eye text-secondary" aria-hidden="true"></i>
                     <span>{{'personnel.table.actions.link3' | translate}} </span>

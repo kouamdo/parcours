@@ -26,7 +26,7 @@
                                     <label for="prenom" class="label" >
                                         {{"personnel.table.title2" | translate}}<span style="color: red;" aria-label="required">*</span>
                                     </label>
-                                    <input  type="text" formControlName="prenom" name="prenom" id="prenom" placeholder="{{'personnel.table.title2' | translate}}" class="form-control"  required  >
+                                    <input type="text" formControlName="prenom" name="prenom" id="prenom" placeholder="{{'personnel.table.title2' | translate}}" class="form-control"  required  >
                                 </div>
                                 <div  *ngIf="submitted && f['prenom'].errors"  class="alert alert-danger" >
                                     <div *ngIf="f['prenom'].errors['required']">{{'personnel.form.text2' | translate}}</div>
@@ -50,7 +50,7 @@
                                     <label for="dateNaissance" class="label" >
                                         {{"personnel.table.title3" | translate}}
                                     </label>
-                                    <input  type="date" formControlName="dateNaissance"  name="dateNaissance" id="dateNaissance" placeholder="{{'personnel.table.title3' | translate}}" value="" required class="form-control">
+                                    <input type="date" formControlName="dateNaissance"  name="dateNaissance" id="dateNaissance" placeholder="{{'personnel.table.title3' | translate}}" value="" required class="form-control">
                                 </div>
                                 <div  *ngIf="submitted && f['dateNaissance'].errors"  class="alert alert-danger" >
                                     <div *ngIf="f['dateNaissance'].errors['required']">{{'personnel.form.text3' | translate}}</div>
@@ -63,7 +63,7 @@
                                     <label for="dateEntree" class="label" >
                                         {{"personnel.table.title6" | translate}}
                                     </label>
-                                    <input  type="date" formControlName="dateEntree"  name="dateEntree" id="dateEntree" placeholder="{{'personnel.table.title3' | translate}}" value="" required class="form-control">
+                                    <input type="date" formControlName="dateEntree"  name="dateEntree" id="dateEntree" placeholder="{{'personnel.table.title3' | translate}}" value="" required class="form-control">
                                 </div>
                                 <div  *ngIf="submitted && f['dateEntree'].errors"  class="alert alert-danger" >
                                     <div *ngIf="f['dateEntree'].errors['required']">{{'personnel.form.text5' | translate}}</div>
@@ -76,7 +76,7 @@
                                     <label for="dateSortie" class="label" >
                                         {{"personnel.table.title8" | translate}}
                                     </label>
-                                    <input  type="date" formControlName="dateSortie"  name="dateSortie" id="dateSortie" placeholder="{{'personnel.table.title3' | translate}}" value="" class="form-control">
+                                    <input type="date" formControlName="dateSortie"  name="dateSortie" id="dateSortie" placeholder="{{'personnel.table.title3' | translate}}" value="" class="form-control">
                                 </div>
                             </div>
                         </div>

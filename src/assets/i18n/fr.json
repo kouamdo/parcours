@@ -118,6 +118,8 @@
       "title14": "Titre",
       "title15": "Déscription",
       "title16": "Etat",
+      "title17": "Nouveau mot de passe",
+      "title18": "ancien mot de passe",
       "actions": {
         "link1": "Ajouter",
         "link2": "Modifier",

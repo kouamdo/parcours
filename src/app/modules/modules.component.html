@@ -159,12 +159,12 @@
   
       <div class="sidebar" id="userActions" >
         <!-- Identité du user en dessous du logo haut gauche-->
-        <div class="user" >
+        <div routerLink="/parcours/personnels/detail-user" class="user" >
           <div class="image text-center">
             <img src="assets/img/avatar.png" class="img-circle elevation-2" alt="User Image">
           </div>
           <div class="info">
-            <a href="#" class="d-block">{{user.nom}} {{ user.prenom}}</a>
+            <p class="d-block text-light">{{user.nom}} {{ user.prenom}}</p>
           </div>
           <p id="role" class="text-light"><small>{{groupe}}</small></p>
         </div>

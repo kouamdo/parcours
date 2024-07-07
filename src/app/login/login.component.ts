@@ -47,8 +47,6 @@ export class LoginComponent {
     this.submitted = true;
     if (this.forme.invalid) return;
     
-    console.log(this.forme.value);
-    
     this.authService.login(this.forme.value.mail, this.forme.value.pwd)
     .subscribe(
         res => {

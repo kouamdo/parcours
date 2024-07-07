@@ -20,13 +20,15 @@ import { SharedModule } from '../shared/shared.module';
 import { QRCodeModule } from 'angularx-qrcode';
 import { DetailPersonnelsComponent } from './detail-personnels/detail-personnels.component';
 import { ModulesRoutingModule } from '../modules-routing.module';
+import { DetailUserComponent } from './detail-user/detail-user.component';
 
 @NgModule({
   declarations: [
     NewPersonnelComponent, 
     ListPersonnelsComponent,
     RolesPersonnelComponent,
-    DetailPersonnelsComponent
+    DetailPersonnelsComponent,
+    DetailUserComponent
   ],
   imports: [
     CommonModule,
