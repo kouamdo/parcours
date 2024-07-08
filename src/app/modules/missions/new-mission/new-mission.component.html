@@ -27,26 +27,26 @@
                                         {{'missions.table.title3' | translate}}
                                     </label>
                                     <p class="w-100 d-flex align-items-center choix" >
-                                    <input  type="checkbox" checked value="true" formControlName="etat"  name="etat" id="etat"  class="form-control">
+                                    <input  type="checkbox" checked value="true" formControlName="etat"  name="etat" id="etat" class="form-control">
                                   </p>
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
-                                <div class="champs">
-                                    <label for="service" class="label" >
-                                        {{'missions.table.title6' | translate}}<span style="color: red;" aria-label="required">*</span>
-                                    </label>
-                                    <mat-form-field class="example-full-width" appearance="fill">
-                                      <mat-select  formControlName="service"  name="service" [compareWith]="compareItem">
+                            <div class="champs champsSelect">
+                                <label for="service" class="label" >
+                                    {{'missions.table.title6' | translate}}<span style="color: red;" aria-label="required">*</span>
+                                </label>
+                                <div class="matSelectElement">
+                                    <mat-select formControlName="service" name="service" [compareWith]="compareItem">
                                         <mat-option  *ngFor="let membre of services$ |async" [value]="membre">{{membre.libelle}}</mat-option>
-                                      </mat-select>
-                                    </mat-form-field>
+                                    </mat-select>
                                 </div>
-                                <div  *ngIf="submitted && f['service'].errors"  class="alert alert-danger" >
-                                    <div *ngIf="f['service'].errors['required']">{{'missions.form.text6' | translate}}</div>
-                                </div>
-                             </div>
+                            </div>
+                            <div  *ngIf="submitted && f['service'].errors"  class="alert alert-danger" >
+                                <div *ngIf="f['service'].errors['required']">{{'missions.form.text6' | translate}}</div>
+                            </div>
+                        </div>
                         <div class="form-group">
                           <div>
                               <div class="champs">
@@ -62,9 +62,13 @@
                       </div>
                     </div>
                 </div>
-                <div class="actionButton">
-                    <button class="btn" routerLink="../list-missions"><i class="fa fa-reply mr-1" aria-hidden="true"></i>{{'lists.button2' | translate}}</button>
-                    <button type="submit" class="btn btnValidation">{{btnLibelle}}</button>
+                <div class="actionButton valBtn" >
+                    <button class="btn retour" (click)="return()" title="{{'lists.button2' | translate}}">
+                        <i class="fa fa-reply mr-1" aria-hidden="true"></i>
+                    </button>
+                    <button type="submit" class="btn btnValidation" title="{{btnLibelle}}">
+                        <i class="fa fa-check" aria-hidden="true"></i>
+                    </button>
                 </div>
             </form>
         </div>

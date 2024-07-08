@@ -3,4 +3,6 @@ export interface IEtats {
     libelle : string,
     description : string,
     dateCreation: Date
+    etatPrecedant?: IEtats[]
+    etatSuivant?: IEtats[]
 }

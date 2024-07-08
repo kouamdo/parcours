@@ -2,28 +2,45 @@
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
-  align-items: start;
+  align-items: flex-start;
   justify-content: space-around;
 }
 #rigthSection{
-  height: max-content !important;
+  max-height: 72vh !important;
   width: 25%;
+  position: relative;
+  background-color: #fff;
+  border: 2px solid #28a745;
+  border-radius: none;
 }
-
 .titleBlock{
-  text-align: center;
-  font-size:8px;
   font-weight: bold;
+  background-color: #28a745;;
+  color: white;
+  text-align: center;
+  font-size: 22px;
+  height: 65px;
+  width: 100.95%;
+  position: relative;
+  right: 1px;
+  border: 2.1px solid #28a745;
+  border-bottom: none;
+  border-radius: 5px 5px 0 0;
+}
+.rigth{
+   margin-top: -8px;
 }
 .contentBlock{
+  overflow-y: scroll;
+  // padding-top: 330px;
+  padding-bottom: 5px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   .infosBoitier{
     display: flex;
     flex-direction: column;
-    padding: 5px;
+    padding: 0;
     #boitierLibelle{
       display: flex;
       flex-direction: column;
@@ -45,70 +62,73 @@
         }
     }
   }
-.info{
+  .info{
+    font-size: 12px;
+    color: #212529;
+    padding-left: 8px;
+  }
+  .coloredBlock{
+    border-radius: 5px;
+    background-color:#17a2b8e1;
+    width: 98%;
+    height: fit-content;
+    box-shadow: 0 0 6px #28a74616;
+    color: #fffefee4;
+    position:relative;
+    margin-top: 5px;
+  }
+  .suppression{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    background-color:#17a3b8;
+    width: 100%;
+    padding: 2px;
+    align-items: center;
+    justify-content: center;
+  }
+  .suppression button{
+    border: none;
+    background: transparent;
+    width: 50%;
+    text-align: center;
+    &:first-child{
+      border-right: 2px solid rgba(255, 255, 255, 0.123);
+    }
+  }
+  .essai{
+  text-decoration: none;
+  background-color: none;
   font-size: 12px;
-  color: #212529;
-  padding-left: 8px;
-}
- .color{
-   border-radius: 5px;
-   background-color:#17a2b8e1;
-   width: 98%;
-   height: fit-content;
-   box-shadow: 0 0 6px #7ea97e82;
-   color: #fffefee4;
-   position:relative;
-   margin-top: 5px;
-}
-.suppression{
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
-  background-color:#17a3b8;
-  width: 100%;
-  padding: 2px;
-  align-items: center;
-  justify-content: center;
-}
-.suppression button{
-  border: none;
-  background: transparent;
-  width: 50%;
-  text-align: center;
-  &:first-child{
-     border-right: 2px solid rgba(255, 255, 255, 0.123);
+  }
+  h4{
+    font-size: 10px;
+  }
+  .actionButtons{
+    justify-content: center;
+    margin: 10px auto;
+    flex-wrap: wrap;
+    button{
+        margin: 5px;
+        font-size: 14px;
+    }
+  }
+  .btnValSection{
+    width: 100%;
+    margin-top: 2px;
+    margin-bottom: 5px;
+    position: absolute !important;
+    bottom: 0 !important;
+    button{
+      margin: auto;
+    }
   }
 }
-
-.essai{
- text-decoration: none;
- background-color: none;
- font-size: 12px;
-}
-h4{
-  font-size: 10px;
-}
-.actionButtons{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 10px auto;
-  flex-wrap: wrap;
-  button{
-      background-color: #28a745;
-      color: white;
-      height: 30px;
-      padding: 0 10px;
-      margin: 5px;
-      font-size: 14px;
-      //opacity: 0.8;
-  }
-  button:hover{
-      opacity: 1;
-  }
-}
-
-
+.openformStep{
+  background-color: #FFD700;
+  border-radius: 5px !important;
+  width: 80px !important;
+  height: 32px !important;
 }
 .block{
   width: 60%;
@@ -119,21 +139,11 @@ h4{
   text-align: center;
   font-size: 22px;
   font-weight: bold;
-}.form-control{
+}
+.form-control{
   border: none;
   box-shadow: 0 0 2px rgb(220, 220, 220);
   height: 35px;
-}
-.rigth{
-   margin-top: -8px;
-}
-.entete0{
-  background-color: #28a745;;
-  color: white;
-  text-align: center;
-  font-size: 22px;
-  font-weight: bold;
-  height: 65px;
 }
 .entete1{
   background-color: #28a745;;
@@ -168,15 +178,6 @@ h4{
   box-shadow: 0 0 2px rgb(220, 220, 220);
   height: 35px;
 }
-select{
-  border: none;
-  box-shadow: 0 0 2px rgb(220, 220, 220);
-  height: 24px;
-  background-color: #7ea97e63;
-  color: rgb(108, 108, 108);
-  padding: 0 10px;
-  border-radius: 5px;
-}
 .error{
   display: flex;
   font-style: italic;
@@ -189,55 +190,6 @@ select{
 .mat-option {
   color: #fff;
 }
-.actionButton{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 10px auto;
-  flex-wrap: wrap;
-  button{
-    background-color: #28a745;
-      color: white;
-      height: 30px;
-      padding: 0 10px;
-      margin: 5px;
-      font-size: 14px;
-  }
-  button:hover{
-      opacity: 1;
-  }
-}
-
-.precoMvtQteButton{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 10px auto;
-  padding-top: 20px ;
-  padding-bottom: 10px ;
-  border-bottom: 2px solid #7ea97e22;
-  button{
-      background-color: #28a745;
-      color: white;
-      height: 30px;
-      padding: 0 10px;
-      margin: 5px;
-      font-size: 14px;
-      opacity: 0.8;
-  }
-  button:hover{
-      opacity: 1;
-  }
-  .circleBtn{
-    height: 30px;
-    width: 30px;
-    font-size: 18px;
-    border: none;
-    border-radius: none;
-    border-radius: 100%;
-  }
-}
-
 input, #famille{
   border:none;
   box-shadow:none;
@@ -245,15 +197,6 @@ input, #famille{
 input, #etat{
   border: none;
   box-shadow: none;
-}
-a{
-  background-color: #7ea97e;
-  width: 62px;
-  height:12px;
-  color: #fff;
-  padding-bottom: 25px;
-  font-size: 16px;
-
 }
 #next{
  display:flex;
@@ -269,42 +212,3 @@ margin-top: -8px;
 #label3{
 margin-bottom: -10px;
 }
-mat-form-field:focus{
-  border: none;
-  padding: 0;
-  margin: 0;
-  border-top: none;
-  input{
-      padding: 0;
-      color: #7ea97e;
-      border: none;
-      margin: 0;
-      top: -10px;
-
-  }
-}
-
-.example-full-width {
-  height: 35px !important;
-  border: 1px solid #28a745;
-  border-radius: 5px;
-  background-color: transparent;
-  padding: 0;
-  margin: 0;
-  margin-bottom: 10px;
-
-  width: 100%;
-  position: relative;
-  color: #7ea97e;
-  line-height: normal;
-  box-sizing: initial;
-  input{
-    position: absolute;
-    padding: 0;
-    border: 2px;
-    margin: 0;
-    top: -12px;
-
-  }
-}
-

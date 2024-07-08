@@ -1,30 +1,27 @@
-<div id="mainSection" class="bg-light card modalCategorie">
+<div id="mainSection" class="bg-light card modalCategorie modalContentScroll">
     <form class="w-100">
         <div class="form-group mt-5">
             <div class='card-hearder'>
                 <h2 class="modal-title">{{"document.title5" | translate}}</h2>
             </div>
             <div class="newAttSection">
-                <div class="sarchBlock">
-                    <form class="example-form">
-                        <mat-form-field class="example-full-width" appearance="fill">
-                            <mat-label class="searchBar">{{'patient.search-bar' | translate}}</mat-label>
-                            <input type="text" matInput aria-label="Rechercher" [formControl]="myControl"
-                                [matAutocomplete]="auto">
-                            <mat-autocomplete class="blockAutocomplate" #auto="matAutocomplete"
-                                [displayWith]="displayFn">
-                                <mat-option class="options" *ngFor="let option of filteredOptions" [value]="option"
-                                    (onSelectionChange)="rechercherListingDocuments(option)">
-                                    {{option.titre}}
-                                </mat-option>
-                            </mat-autocomplete>
-                        </mat-form-field>
+                <div class="searchBlock">
+                    <form class="example-form-entete">
+                        <input placeholder="{{'patient.search-bar' | translate}}" type="text" matInput aria-label="Rechercher" [formControl]="myControl"
+                            [matAutocomplete]="auto">
+                        <mat-autocomplete class="blockAutocomplate" #auto="matAutocomplete"
+                            [displayWith]="displayFn">
+                            <mat-option class="options" *ngFor="let option of filteredOptions" [value]="option"
+                                (onSelectionChange)="rechercherListingDocuments(option)">
+                                {{option.titre}}
+                            </mat-option>
+                        </mat-autocomplete>
                     </form>
                 </div>
 
                 <!-- tableau listing des PrecoMvts -->
 
-                <div class="card-body p-0 tableBlock" id="tableList">
+                <div class="card-body p-0 tableBlock" id="tableBlock">
                     <div class='table-responsive w-100'>
                         <table class='table table-sm table-centered table-striped table-bordered w-100' mat-table
                             [dataSource]="dataSourceDocument" matSort (matSortChange)="announceSortChange($event)">
@@ -51,7 +48,7 @@
                                     {{"patient.table.title8" | translate}} </th>
                                 <td class="text-dark containCell" mat-cell *matCellDef="let element">
                                     <div class="actions">
-                                        <input type="checkbox" [value]="element.titre"
+                                        <input type="checkbox" [checked]="isDocumentSelected(element.id)"
                                             (click)="getDocumentId(element.id)"
                                             (change)="onCheckDocumentChange($event)">
                                         <span role="button" (click)="getDocumentId(element.id)"><i
@@ -71,7 +68,7 @@
                 </div>
 
                 <!-- tableau affichage des resultats -->
-                <div class="result">
+                <div class="result mt-3">
                     <h2>
                         {{'document.title1' | translate}}
                     </h2>
@@ -101,14 +98,11 @@
                                     <!-- etat Column -->
                                     <ng-container matColumnDef="etat">
                                         <th class="text-dark containHead" mat-header-cell *matHeaderCellDef>
-                                            {{ 'document.table.title3' | translate }}
+                                            {{ 'document.table.title24' | translate }}
                                         </th>
                                         <td class="text-dark containCell" mat-cell *matCellDef="let element">
                                             <div class="actions">
-                                                <button type="button" class="btn p-1" (click)="openModal(element)">
-                                                    <i class="fas fa-plus-square fa-lg"
-                                                        style="color: rgba(40, 167, 69, 0.79);"></i>
-                                                </button>
+
                                                 <span style="font-size: small; min-width: 67px;">{{
                                                     selectedEtatsMap[element.id] }}</span>
                                             </div>
@@ -130,6 +124,11 @@
                                                 </button>
                                                 <span><i class="fa fa-info-circle text-info" aria-hidden="true"
                                                         title="{{'preconisation.table.title4' | translate}}"></i></span>
+                                                <button type="button" title="Ajouter un etat" class="btn p-1"
+                                                    (click)="openModal(element)">
+                                                    <i class="fas fa-plus-square fa-lg"
+                                                        style="color: rgba(40, 167, 69, 0.79);"></i>
+                                                </button>
                                             </div>
                                         </td>
                                     </ng-container>
@@ -142,11 +141,16 @@
                                     aria-label="Select page of periodic elements">
                                 </mat-paginator>
                             </div>
-                            <div class="actionButton mt-2">
-                                <button mat-button [mat-dialog-close] cdkFocusInitial
-                                    class="btn btnValidation">{{'lists.button6' | translate}}
-                                </button>
-                            </div>
+
+                                <div class="actionButton valBtn mt-2" style="justify-content: center;">
+                                    <button class="btn retour" (click)="onCancel()" title="{{'lists.button2' | translate}}">
+                                        <i class="fa fa-undo" aria-hidden="true"></i>
+                                    </button>
+                                    <button mat-button (click)="onSave()" [mat-dialog-close] cdkFocusInitial class="btn btnValidation" title="{{'lists.button6' | translate}}">
+                                        <i class="fa fa-check" aria-hidden="true"></i>
+                                    </button>
+                                </div>
+                                
                         </div>
                     </div>
                 </div>

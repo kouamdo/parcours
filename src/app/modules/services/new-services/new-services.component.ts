@@ -16,7 +16,7 @@ export class NewServicesComponent implements OnInit {
 
   service : IService|undefined;
   forme: FormGroup;
-  btnLibelle: string="Ajouter";
+  btnLibelle: string="Enregistrer";
   submitted: boolean=false;
 
   initialDateDerniereModification = new FormControl(new Date());
@@ -50,6 +50,10 @@ export class NewServicesComponent implements OnInit {
 
   get f(){
     return this.forme.controls;
+  }
+
+  return() {
+    this.router.navigate(['/list-services']);
   }
 
   onSubmit(serviceInput:any){

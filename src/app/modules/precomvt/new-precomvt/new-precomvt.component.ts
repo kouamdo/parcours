@@ -5,10 +5,14 @@ import {
   FormControl,
   FormGroup,
   FormGroupDirective,
+  FormsModule,
+  NgForm,
+  ReactiveFormsModule,
+  Validators,
 } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { v4 as uuidv4 } from 'uuid';
-import { EMPTY, Observable } from 'rxjs';
+import { elementAt, EMPTY, map, Observable, single } from 'rxjs';
 
 import { PrecoMvtsService } from 'src/app/services/precomvts/precomvts.service';
 import { IPrecoMvt } from 'src/app/modele/precomvt';
@@ -52,6 +56,7 @@ export class NewPrecomvtComponent implements OnInit {
   passStep3: boolean = false;
   @ViewChild(FormGroupDirective)
   formDirective!: FormGroupDirective;
+  titre: string = '';
   btnLibelle: string = 'Ajouter';
   constructor(
     private formBuilder: FormBuilder,
@@ -64,6 +69,14 @@ export class NewPrecomvtComponent implements OnInit {
     private infosPath: ActivatedRoute,
     private datePipe: DatePipe
   ) {
+    const storedStep = sessionStorage.getItem('Etape courante');
+    if (storedStep) {
+      this.steps = parseInt(storedStep);
+    }
+    const storedEltPreco = sessionStorage.getItem('Preco');
+    if (storedEltPreco) {
+      this.eltsPreco = JSON.parse(storedEltPreco);
+    }
     this.forme = this.formBuilder.group({
       id: new FormControl(),
       libelle: new FormControl(),
@@ -131,6 +144,7 @@ export class NewPrecomvtComponent implements OnInit {
 
           precoMvtTemp.precomvtqte.push(premvtqte);
           this.eltsPreco.push(precoMvtTemp);
+          this.saveToSessionStorage();
 
           PrecoMvtCourant.precomvtqte.forEach((element) => {
             let precoMvtTemp: IPrecoMvt = {
@@ -149,15 +163,20 @@ export class NewPrecomvtComponent implements OnInit {
 
               precoMvtTemp.libelle = rsrce;
               this.eltsPreco.push(precoMvtTemp);
+              this.saveToSessionStorage();
             } else if (element.famille != null && element.famille.length > 0) {
               precoMvtTemp.libelle = this.mettre3PointsdeSuspension(
                 element.famille
               );
               this.eltsPreco.push(precoMvtTemp);
+              this.saveToSessionStorage();
             }
           });
         });
+        
+      this.steps = 2;
     }
+    this.titre = this.dataEnteteMenuService.dataEnteteMenu;
   }
 
   get formeControls(): any {
@@ -186,6 +205,7 @@ export class NewPrecomvtComponent implements OnInit {
     if (this.steps != 1) {
       this.steps = numbre;
     }
+    this.saveStepToSession();
   }
   /**
    *
@@ -203,6 +223,8 @@ export class NewPrecomvtComponent implements OnInit {
       type: this.eltsPreco[0].type,
       precomvtqte: [],
     };
+    this.saveToSessionStorage();
+
     if (this.eltsPreco[0].id != null && this.eltsPreco[0].id != '')
       precomvtTemp.id = this.eltsPreco[0].id;
     this.eltsPreco.forEach((valeur) => {
@@ -236,6 +258,7 @@ export class NewPrecomvtComponent implements OnInit {
         controleVerif = false;
         this.tabError.set('type', 'Le type doit avoir une valeur');
       }
+      this.saveToSessionStorage();
     } else {
       if (this.steps == 2) {
         let valFamille: string[] = this.forme.controls['famille'].value;
@@ -246,6 +269,7 @@ export class NewPrecomvtComponent implements OnInit {
             'Une famille au moins doit être selectionnée'
           );
         }
+        this.saveToSessionStorage();
       } else if (this.steps == 3) {
         let valRessource: string = this.forme.controls['ressource'].value;
 
@@ -257,6 +281,7 @@ export class NewPrecomvtComponent implements OnInit {
           controleVerif = false;
           this.tabError.set('ressource', 'Une ressource est obligatoire');
         }
+        this.saveToSessionStorage();
       }
       //controle commun ie montantMin et MontantMax
       if (this.steps == 2 || this.steps == 3) {
@@ -306,6 +331,7 @@ export class NewPrecomvtComponent implements OnInit {
       this.steps = etape;
       this.enregistrerValeurPrecomvtqte(valeurs);
     }
+    this.saveStepToSession();
   }
   //début fonction afficher message d'erreur
 
@@ -314,6 +340,7 @@ export class NewPrecomvtComponent implements OnInit {
     this.eltsPreco.forEach((value, index) => {
       if (value == element) this.eltsPreco.splice(index, 1);
     });
+    this.saveToSessionStorage();
   }
   //Suppression d'un element dans le boitier fin
 
@@ -363,6 +390,7 @@ export class NewPrecomvtComponent implements OnInit {
     }
 
     this.reset();
+    this.saveToSessionStorage();
   } //fonction valPrecomvtqte fin
 
   /**
@@ -436,6 +464,7 @@ export class NewPrecomvtComponent implements OnInit {
         precoTmp.precomvtqte[0].distributeur
       );
     }
+    this.saveToSessionStorage();
   }
 
   /**
@@ -469,6 +498,7 @@ export class NewPrecomvtComponent implements OnInit {
    * pour le libelle de la famille, sil est trop long mettre 3 point de suspension
    */
   mettre3PointsdeSuspension(tableauFamille: any): string {
+    this.saveToSessionStorage();
     let libel = 'Familles : ';
     for (let index = 0; index < tableauFamille!.length; index++) {
       libel += tableauFamille![index].libelle + ', ';
@@ -479,6 +509,13 @@ export class NewPrecomvtComponent implements OnInit {
       libel = libel + '...';
     }
     return libel;
+  }
+  saveToSessionStorage(): void {
+    // stocker eltsPreco dans sessionStorage
+    sessionStorage.setItem('Preco', JSON.stringify(this.eltsPreco));
+  }
+  saveStepToSession(): void {
+    sessionStorage.setItem('Etape courante', this.steps.toString());
   }
 
   /**
@@ -545,5 +582,13 @@ export class NewPrecomvtComponent implements OnInit {
     return distributeur2 && distributeur1
       ? distributeur2.id === distributeur1.id
       : distributeur2 === distributeur1;
+  }
+  ngOnDestroy(): void {
+    // Reset le sessionStorage
+    sessionStorage.removeItem('Preco');
+    sessionStorage.removeItem('Etape courante');
+  }
+  onReturn() {
+    this.router.navigate(['/list-precomvts']);
   }
 }

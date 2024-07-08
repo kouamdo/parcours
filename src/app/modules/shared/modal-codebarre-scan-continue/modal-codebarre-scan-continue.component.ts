@@ -18,15 +18,17 @@ export class ModalCodebarreScanContinueComponent
   implements AfterViewInit, OnDestroy
 {
   @ViewChild('video', { static: false }) video!: ElementRef;
-  scannedData: string | undefined = 'Scan';
-  isCameraOpen: boolean = false;
+  isCameraOpen = false;
   mediaStream: MediaStream | undefined;
   scannerSubscription: Subscription | undefined;
 
   constructor(private barService: ModalCodebarreService) {}
 
-  ngAfterViewInit(): void {}
+  ngAfterViewInit(): void {
+    // Initially, the camera is not opened. You can call createMediaStream() externally to open it.
+  }
 
+  // Make this method public so it can be called from outside
   createMediaStream(): void {
     if (!this.isCameraOpen) {
       if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
@@ -50,50 +52,45 @@ export class ModalCodebarreScanContinueComponent
   scanMultipleCodes(): void {
     const codeReader = new BrowserMultiFormatReader(undefined, 500);
     const hints = new Map<DecodeHintType, any[]>();
-    hints.set(DecodeHintType.TRY_HARDER, [true]); // Add the tryHarder option
+    hints.set(DecodeHintType.TRY_HARDER, [true]);
     codeReader.hints = hints;
 
     codeReader
       .decodeFromInputVideoDevice(undefined, this.video.nativeElement)
       .then((result) => {
+        // Handle successful scan
         this.handleScanResult(result.getText());
         this.playBeep();
-        setTimeout(() => {
-          this.scanMultipleCodes();
-        }, 3000);
       })
       .catch((err) => {
-        console.error('Error while scanning: ', err);
-        setTimeout(() => {
-          this.scanMultipleCodes();
-        }, 3000);
+        console.error('Error while scanning:', err);
       });
   }
 
   stopScanner(): void {
     this.isCameraOpen = false;
+    const tracks: MediaStreamTrack[] | null =
+      this.video.nativeElement.srcObject?.getTracks();
+    if (tracks) {
+      tracks.forEach((track: MediaStreamTrack) => track.stop()); // Stop all tracks in the stream
+    }
   }
 
   ngOnDestroy(): void {
-    // Unsubscribe from the scanner when the component is destroyed
     this.stopScanner();
   }
 
-  handleScanResult(data: string): void {
-    this.scannedData = data;
-    // You can use this.scannedData as needed in your application
-
-    this.barService.setCode(this.scannedData);
+  private handleScanResult(data: string): void {
+    // Process the scanned result
+    this.barService.setCode(data);
   }
 
-  playBeep(): void {
+  private playBeep(): void {
     const audioContext = new (window.AudioContext ||
       (window as any).webkitAudioContext)();
-
     const oscillator = audioContext.createOscillator();
     oscillator.connect(audioContext.destination);
     oscillator.start();
-
     setTimeout(() => {
       oscillator.stop();
     }, 200);

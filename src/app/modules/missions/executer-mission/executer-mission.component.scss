@@ -38,8 +38,8 @@ h3{
 }
 .block{
     display: flex;
-    align-items: start;
-    justify-content: start;
+    align-items: flex-start;
+    justify-content: flex-start;
     width: 100%;
     background-color: #28a7452b;
     flex-wrap: wrap;

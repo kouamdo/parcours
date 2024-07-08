@@ -16,7 +16,7 @@ export class NewDistributeurComponent implements OnInit {
 
   distributeur : IDistributeur |undefined;
   forme: FormGroup;
-  btnLibelle: string="Ajouter";
+  btnLibelle: string="Enregistrer";
   submitted: boolean=false;
   //TODO validation du formulaire. particulièrment les mail
   constructor(private formBuilder:FormBuilder, private distributeurService:DistributeursService,private dataEnteteMenuService:DonneesEchangeService,private router:Router, private infosPath:ActivatedRoute, private datePipe: DatePipe){
@@ -54,6 +54,9 @@ export class NewDistributeurComponent implements OnInit {
 
   get f(){
     return this.forme.controls;
+  }
+  return(){
+    this.router.navigate(['/list-distributeurs']);
   }
 
   onSubmit(distributeurInput:any){

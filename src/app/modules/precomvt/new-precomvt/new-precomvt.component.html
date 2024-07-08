@@ -2,99 +2,98 @@
   <div class="card block" id="top2">
     <div class="card-body p-0 m-0">
       <form [formGroup]="forme" *ngIf="forme"  >
-        <!--<div *ngIf="steps != 2 && steps != 3" class="w-100 pt-4 pb-4 entete">{{'precomvt.header' | translate}}</div>-->
-        <div *ngIf="steps != 2 && steps != 3" class="w-100 pt-4 pb-4 entete">{{'precomvt.header' | translate}}</div>
+        <div *ngIf="steps != 2 && steps != 3" class="w-100 pt-4 pb-4 entete">{{'precomvt.header' | translate}} {{titre}}</div>
           <div *ngIf="steps==2" class="w-100 pt-4 pb-4 entete1" >{{'precomvt.header1' | translate}}</div>
           <div *ngIf="steps==3" class="w-100 pt-4 pb-4 entete2">{{'precomvt.header2' | translate}}</div>
 
-          <div class="w-100 mt-4 pt-0 pl-2 pr-2 pb-0" >
-            <div class="w-100">
-              <div  *ngIf="steps==1" class="w-100">
-                <div class="form-group">
-                  <div>
-                    <div class="champs">
-                      <label for="libelle" class="label" class="libe">
-                        {{'precomvt.table.title1' | translate}} <sup>*</sup>
-                      </label>
-                      <div class="w-100">
-                        <input type="text" formControlName="libelle" name="libelle" id="libelle"  placeholder="{{'precomvt.table.title1' | translate}}"  class="form-control"
-                        (ngModelChange)="tabError.delete('libelle')" >
-                        <p  *ngIf="tabError.get('libelle')"  class="error" >
-                          <span *ngIf="tabError.get('libelle')">{{ tabError.get('libelle') }}</span>
-                        </p>
-
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="form-group" id="eta">
-                  <div>
-                      <div class="champs">
-                        <label for="etat" class="label" >
-                          {{'precomvt.table.title2' | translate}}
-                        </label>
-                        <p class="w-100 d-flex align-items-center w-100 choix" >
-                        <input  type="checkbox" checked value="true" formControlName="etat" name="etat" id="etat">
-                      </p>
-                      </div>
-                  </div>
-                </div>
-                <div class="form-group">
+        <div class="w-100 mt-4 pt-0 pl-2 pr-2 pb-0">
+          <div class="w-100">
+            <div *ngIf="steps==1" class="w-100">
+              <div class="form-group">
+                <div>
                   <div class="champs">
-                    <label  for="type"  class="label" >
-                      {{'precomvt.table.title3' | translate}} <sup>*</sup>
+                    <label for="libelle" class="label" class="libe">
+                      {{'precomvt.table.title1' | translate}} <sup>*</sup>
                     </label>
-                    <div class="errorPls w-100">
-                      <select class="form-control" formControlName="type" (ngModelChange)="tabError.delete('type')" (ngModelChange)="tabError.delete('typeo')">
-                        <option class="label" *ngFor="let typeM of typeMvt" value="{{ typeM }}" >
-                          {{ typeM }}
-                        </option>
-                      </select>
-                      <p  *ngIf="tabError.get('type')"  class="error" >
-                        <span *ngIf="tabError.get('type')">{{ tabError.get('type') }}</span>
+                    <div class="w-100">
+                      <input type="text" formControlName="libelle" name="libelle" id="libelle"
+                        placeholder="{{'precomvt.table.title1' | translate}}" class="form-control"
+                        (ngModelChange)="tabError.delete('libelle')">
+                      <p *ngIf="tabError.get('libelle')" class="error">
+                        <span *ngIf="tabError.get('libelle')">{{ tabError.get('libelle') }}</span>
                       </p>
 
                     </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group" id="eta">
+                <div>
+                  <div class="champs">
+                    <label for="etat" class="label">
+                      {{'precomvt.table.title2' | translate}}
+                    </label>
+                    <p class="w-100 d-flex align-items-center w-100 choix">
+                      <input type="checkbox" checked value="true" formControlName="etat" name="etat" id="etat">
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="champs">
+                  <label for="type" class="label">
+                    {{'precomvt.table.title3' | translate}} <sup>*</sup>
+                  </label>
+                  <div class="errorPls w-100">
+                    <select class="form-control" formControlName="type" (ngModelChange)="tabError.delete('type')"
+                      (ngModelChange)="tabError.delete('typeo')">
+                      <option class="label" *ngFor="let typeM of typeMvt" value="{{ typeM }}">
+                        {{ typeM }}
+                      </option>
+                    </select>
+                    <p *ngIf="tabError.get('type')" class="error">
+                      <span *ngIf="tabError.get('type')">{{ tabError.get('type') }}</span>
+                    </p>
+
+                  </div>
                 </div>
               </div>
             </div>
-            </div>
           </div>
+        </div>
 
         <div *ngIf="steps == 2" class="form-group pt-0 pl-2 pr-2 pb-0">
-          <div class="champs">
+          <div class="champs champsSelect">
             <label for="famille" class="label">
               {{'precomvt.table.title4' | translate}}
             </label>
             <div class="w-100">
-              <mat-form-field  style="background-color:#28a745;" class="example-full-width" appearance="fill" >
+              <div class="matSelectElement">
                 <mat-select formControlName="famille"  #familles multiple [compareWith]="compareItem" (ngModelChange)="tabError.delete('famille')">
                   <mat-option *ngFor="let membre of familles$ |async" [value]="membre" >{{membre.libelle}}</mat-option>
                 </mat-select>
-              </mat-form-field>
-              <p  *ngIf="tabError.get('famille')"  class="error" >
+              </div>
+              <p *ngIf="tabError.get('famille')" class="error">
                 <span *ngIf="tabError.get('famille')">{{ tabError.get('famille') }}</span>
               </p>
             </div>
           </div>
         </div>
         <div  *ngIf="steps==3" class="form-group pt-0 pl-2 pr-2 pb-0">
-          <div class="champs"  id="ressource">
-              <label  for="ressource"  class="label" id="label3">
-                {{'precomvt.table.title5' | translate}}
-              </label>
-              <div class="w-100">
-                <mat-form-field class="example-full-width" appearance="fill">
-                  <input  type="text" matInput [matAutocomplete]="auto" aria-label="ressource" formControlName="ressource"  ng-reflect-name="ressource" (ngModelChange)="tabError.delete('ressource')">
-                  <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn" >
-                  <mat-option *ngFor="let option of filteredOptions" [value]="option" >
-                      {{option.libelle}}
-                  </mat-option>
-                  </mat-autocomplete>
-              </mat-form-field>
-              <p  *ngIf="tabError.get('ressource')"  class="error" >
-                <span *ngIf="tabError.get('ressource')">{{ tabError.get('ressource') }}</span >
-                </p>
+          <div class="champs" id="ressource">
+            <label  for="ressource"  class="label" id="label3">
+              {{'precomvt.table.title5' | translate}}
+            </label>
+            <div class="w-100">
+              <input type="text" matInput [matAutocomplete]="auto" aria-label="ressource" class="champsAutocomplate" formControlName="ressource"  ng-reflect-name="ressource" (ngModelChange)="tabError.delete('ressource')">
+              <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn" >
+                <mat-option *ngFor="let option of filteredOptions" [value]="option" >
+                  {{option.libelle}}
+                </mat-option>
+              </mat-autocomplete>
+              <p *ngIf="tabError.get('ressource')" class="error">
+                <span *ngIf="tabError.get('ressource')">{{ tabError.get('ressource') }}</span>
+              </p>
             </div>
           </div>
         </div>
@@ -103,53 +102,56 @@
 
           <div class="form-group">
             <div class="champs">
-                <label  for="quantiteMax"  class="label" >
-                  {{'precomvt.table.title6' | translate}}
-                </label>
-                <div class="w-100">
-                  <input type="number"  formControlName="quantiteMax" name="quantiteMax" class="form-control" id="quantiteMax" placeholder="{{'precomvt.table.title7' | translate}}"
-                  (ngModelChange)="tabError.delete('quantiteMinMax')"  (ngModelChange)="tabError.delete('quantiteMax')">
-                    <p *ngIf="tabError.get('quantiteMax')"  class="error" >
-                     <span *ngIf="tabError.get('quantiteMax')">{{ tabError.get('quantiteMax') }}</span>
-                    </p>
-                    <span  *ngIf="tabError.get('quantiteMinMax')"  class="error" >
-                     <span *ngIf="tabError.get('quantiteMinMax')">{{ tabError.get('quantiteMinMax') }}</span>
-                    </span>
+              <label for="quantiteMax" class="label">
+                {{'precomvt.table.title6' | translate}}
+              </label>
+              <div class="w-100">
+                <input type="number" formControlName="quantiteMax" name="quantiteMax" class="form-control"
+                  id="quantiteMax" placeholder="{{'precomvt.table.title7' | translate}}"
+                  (ngModelChange)="tabError.delete('quantiteMinMax')" (ngModelChange)="tabError.delete('quantiteMax')">
+                <p *ngIf="tabError.get('quantiteMax')" class="error">
+                  <span *ngIf="tabError.get('quantiteMax')">{{ tabError.get('quantiteMax') }}</span>
+                </p>
+                <span *ngIf="tabError.get('quantiteMinMax')" class="error">
+                  <span *ngIf="tabError.get('quantiteMinMax')">{{ tabError.get('quantiteMinMax') }}</span>
+                </span>
 
-                </div>
-            </div>
-        </div>
-
-          <div class="form-group">
-            <div class="champs">
-                <label  for="quantiteMin"  class="label" >
-                  {{'precomvt.table.title8' | translate}}
-                </label>
-                <div class="w-100">
-                  <input  type="number" formControlName="quantiteMin" name="quantiteMin" class="form-control" id="quantiteMin" placeholder="{{'precomvt.table.title9' | translate}}"
-                   (ngModelChange)="tabError.delete('quantiteMinMax')" (ngModelChange)="tabError.delete('quantiteMin')">
-                  <p *ngIf="tabError.get('quantiteMin')"  class="error" >
-                    <span *ngIf="tabError.get('quantiteMin')">{{ tabError.get('quantiteMin') }}</span> </p>
-                    <span  *ngIf="tabError.get('quantiteMinMax')"  class="error" >
-                     <span *ngIf="tabError.get('quantiteMinMax')">{{ tabError.get('quantiteMinMax') }}</span>
-                    </span>
-
-                </div>
+              </div>
             </div>
           </div>
 
+          <div class="form-group">
+            <div class="champs">
+              <label for="quantiteMin" class="label">
+                {{'precomvt.table.title8' | translate}}
+              </label>
+              <div class="w-100">
+                <input type="number" formControlName="quantiteMin" name="quantiteMin" class="form-control"
+                  id="quantiteMin" placeholder="{{'precomvt.table.title9' | translate}}"
+                  (ngModelChange)="tabError.delete('quantiteMinMax')" (ngModelChange)="tabError.delete('quantiteMin')">
+                <p *ngIf="tabError.get('quantiteMin')" class="error">
+                  <span *ngIf="tabError.get('quantiteMin')">{{ tabError.get('quantiteMin') }}</span>
+                </p>
+                <span *ngIf="tabError.get('quantiteMinMax')" class="error">
+                  <span *ngIf="tabError.get('quantiteMinMax')">{{ tabError.get('quantiteMinMax') }}</span>
+                </span>
+
+              </div>
+            </div>
+          </div>
 
           <div class="form-group">
             <div class="champs">
-              <label  for="montantMax"  class="label" >
+              <label for="montantMax" class="label">
                 {{'precomvt.table.title10' | translate}}
               </label>
-              <div class="w-100"><input  type="number"  formControlName="montantMax" name="montantMax" id="montantMax" placeholder="{{'precomvt.table.title13' | translate}}" class="form-control"
-                (ngModelChange)="tabError.delete('montantMinMax')" (ngModelChange)="tabError.delete('montantMax')">
-                <p  *ngIf="tabError.get('montantMax')"  class="error" >
+              <div class="w-100"><input type="number" formControlName="montantMax" name="montantMax" id="montantMax"
+                  placeholder="{{'precomvt.table.title13' | translate}}" class="form-control"
+                  (ngModelChange)="tabError.delete('montantMinMax')" (ngModelChange)="tabError.delete('montantMax')">
+                <p *ngIf="tabError.get('montantMax')" class="error">
                   <span *ngIf="tabError.get('montantMax')">{{ tabError.get('montantMax') }}</span>
                 </p>
-                <span  *ngIf="tabError.get('montantMinMax')"  class="error" >
+                <span *ngIf="tabError.get('montantMinMax')" class="error">
                   <span *ngIf="tabError.get('montantMinMax')">{{ tabError.get('montantMinMax') }}</span>
                 </span>
               </div>
@@ -159,82 +161,89 @@
 
           <div class="form-group">
             <div class="champs">
-                <label  for="montantMin"  class="label" >
-                  {{'precomvt.table.title12' | translate}}
-                </label>
-                <div class="w-100">
-                  <input type="number" formControlName="montantMin" name="montantMin" class="form-control" id="montantMin" placeholder="{{'precomvt.table.title13' | translate}}"
+              <label for="montantMin" class="label">
+                {{'precomvt.table.title12' | translate}}
+              </label>
+              <div class="w-100">
+                <input type="number" formControlName="montantMin" name="montantMin" class="form-control" id="montantMin"
+                  placeholder="{{'precomvt.table.title13' | translate}}"
                   (ngModelChange)="tabError.delete('montantMinMax')" (ngModelChange)="tabError.delete('montantMin')">
-                  <p  *ngIf="tabError.get('montantMin')"  class="error" >
-                    <span *ngIf="tabError.get('montantMin')">{{ tabError.get('montantMin') }}</span>
-                  </p>
-                  <span  *ngIf="tabError.get('montantMinMax')"  class="error" >
-                    <span *ngIf="tabError.get('montantMinMax')">{{ tabError.get('montantMinMax') }}</span>
-                  </span>
-                </div>
+                <p *ngIf="tabError.get('montantMin')" class="error">
+                  <span *ngIf="tabError.get('montantMin')">{{ tabError.get('montantMin') }}</span>
+                </p>
+                <span *ngIf="tabError.get('montantMinMax')" class="error">
+                  <span *ngIf="tabError.get('montantMinMax')">{{ tabError.get('montantMinMax') }}</span>
+                </span>
+              </div>
             </div>
           </div>
 
           <div class="form-group">
-            <div class="champs">
+            <div class="champs champsSelect">
               <label for="distributeur" class="label">
                 {{'precomvt.table.title14' | translate}}
               </label>
-                <mat-form-field  style="background-color:#28a745;" class="example-full-width" appearance="fill" >
+              <div class="matSelectElement">
                   <mat-select formControlName="distributeur" multiple [compareWith]="compareItem1">
-                    <mat-option  *ngFor="let membre of distributeurs$ |async" [value]="membre">{{membre.raisonSocial}}</mat-option>
+                    <mat-option *ngFor="let membre of distributeurs$ |async" [value]="membre">{{membre.raisonSocial}}</mat-option>
                   </mat-select>
-                </mat-form-field>
+              </div>
             </div>
-        </div>
+          </div>
         </div>
 
-        <div class="actionButton">
-          <button class="btn" *ngIf="steps == 0">{{'lists.button2' | translate}}</button>
-          <button type="button" class="btn" routerLink="../list-precomvts">{{'lists.button3' | translate}}</button>
-          <button type="button" class="btn" (click)="blocklibelle(2)">{{'precomvt.table.title4' | translate}}</button>
-          <button type="button" class="btn" (click)="blocklibelle(3)">{{'precomvt.table.title5' | translate}}</button>
-          <button type="button" class="btn" (click)="validerControleStep(2,forme.value); "><i class="fa fa-arrow-right mr-1" aria-hidden="true"></i></button>
+        <div class="actionButton valBtn" >
+          <button type="button" class="btn retour" routerLink="../list-precomvts" title="{{'lists.button2' | translate}}">
+            <i class="fa fa-reply" aria-hidden="true"></i>
+          </button>
+          <button type="button" class="btn openformStep" (click)="blocklibelle(2)">{{'precomvt.table.title4' | translate}}</button>
+          <button type="button" class="btn openformStep" (click)="blocklibelle(3)">{{'precomvt.table.title5' | translate}}</button>
+          <button type="button" class="btn btnValidation" (click)="validerControleStep(2,forme.value);" title="{{'lists.button9' | translate}}"><i class="fa fa-arrow-right mr-1" aria-hidden="true"></i></button>
         </div>
       </form>
     </div>
   </div>
 
   <div id="rigthSection" class="card" >
-    <div class="titleBlock" id="titleBlock" class="w-200 pt-4 pb-4 entete0" id="top2">
+    <div class="titleBlock pt-4 pb-4" id="titleBlock" id="top2">
       <h2 class="rigth">{{'precomvt.table.title19' | translate}}</h2>
     </div>
     <div class="contentBlock">
-      <div *ngFor="let elt of eltsPreco let i=index "  class="color" >
+      <div *ngFor="let elt of eltsPreco let i=index " class="coloredBlock" >
         <div class="infosBoitier" (click)="chargerValeurPrecoMvt(i)" >
           <div class="boitier" id="boitierLibelle">
             <P>{{elt.libelle}}</P>
             <P><span>Type: </span>{{elt.type}}</P>
           </div>
           <div class="boitier">
-            <div  class="blockQuantite">
-              <P title="Quantité maximale"><span>{{'precomvt.table.title21' | translate}} : </span>{{elt.precomvtqte[0].quantiteMax}}</P>
-              <P title="Quantité minimale"><span>{{'precomvt.table.title22' | translate}} : </span>{{elt.precomvtqte[0].quantiteMin}}</P>
+            <div class="blockQuantite">
+              <P title="Quantité maximale"><span>{{'precomvt.table.title21' | translate}} :
+                </span>{{elt.precomvtqte[0].quantiteMax}}</P>
+              <P title="Quantité minimale"><span>{{'precomvt.table.title22' | translate}} :
+                </span>{{elt.precomvtqte[0].quantiteMin}}</P>
             </div>
-            <div  class="blockQuantite">
-              <P title="Montant maximal"><span>{{'precomvt.table.title23' | translate}} : </span>{{elt.precomvtqte[0].montantMax}}</P>
-              <P title="Montant minimal"><span>{{'precomvt.table.title24' | translate}} : </span>{{elt.precomvtqte[0].montantMin}}</P>
+            <div class="blockQuantite">
+              <P title="Montant maximal"><span>{{'precomvt.table.title23' | translate}} :
+                </span>{{elt.precomvtqte[0].montantMax}}</P>
+              <P title="Montant minimal"><span>{{'precomvt.table.title24' | translate}} :
+                </span>{{elt.precomvtqte[0].montantMin}}</P>
             </div>
           </div>
         </div>
         <div class="suppression">
-          <button class="" id="left" >
-            <i class="fa fa-pen text-light" aria-hidden="true" (click)="chargerValeurPrecoMvt(i)"></i>
+          <button class="" id="left"  [ngStyle]="{'width': (i == 0) ? '100%' : null}" (click)="chargerValeurPrecoMvt(i)">
+            <i class="fa fa-pen text-light" aria-hidden="true"></i>
           </button>
-          <button class=""  id="right" *ngIf="i!=0"  [ngStyle]=""  >
-            <i class="fa fa-trash text-danger" aria-hidden="true" (click)="supprimerElt(elt)"  ></i>
+          <button class=""  id="right" *ngIf="i!=0"  (click)="supprimerElt(elt)">
+            <i class="fa fa-trash text-danger" aria-hidden="true"></i>
           </button>
         </div>
       </div>
-      <div class="actionButtons">
-        <button type="button" (click)="enregistrerPreco()" class="btn">{{'precomvt.table.title25' | translate}}</button>
-
-      </div>
+    </div>
+    <div class="actionButton valBtn btnValSection" style="background-color:#28a746d0;">
+      <button type="button" (click)="enregistrerPreco()" class="btn btnValidation" title="{{'lists.button11' | translate}}">
+        <i class="fa fa-check" aria-hidden="true"></i>
+      </button>
     </div>
   </div>
 </div>

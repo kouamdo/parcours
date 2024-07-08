@@ -1,3 +1,4 @@
+// document.service.ts
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
@@ -8,6 +9,7 @@ import { IDocument } from 'src/app/modele/document';
 })
 export class DocumentService {
   private selectedEtats: { [documentId: string]: string } = {};
+  private selectedDocuments: Set<string> = new Set();
 
   constructor(private http: HttpClient) {}
 
@@ -17,18 +19,16 @@ export class DocumentService {
 
   getDocumentById(id: string): Observable<IDocument> {
     return this.getAllDocuments().pipe(
-      map((x) => {
-        return x.find((d) => d.id == id) as IDocument;
-      })
+      map((x) => x.find((d) => d.id === id) as IDocument)
     );
   }
 
   getDocumentByTitre(titre: string): Observable<IDocument[]> {
-    return this.http.get<IDocument[]>('api/documents').pipe(
-      map((x) => {
-        return x.filter((d) => d.titre.toLowerCase().startsWith(titre));
-      })
-    );
+    return this.http
+      .get<IDocument[]>('api/documents')
+      .pipe(
+        map((x) => x.filter((d) => d.titre.toLowerCase().startsWith(titre)))
+      );
   }
 
   ajouterDocument(document: IDocument) {
@@ -36,25 +36,30 @@ export class DocumentService {
   }
 
   getDocumentByMission(idMission: string): Observable<IDocument[]> {
-    return this.http.get<IDocument[]>('api/documents').pipe(
-      map((x) => {
-        return x.filter((d) => {
-          let b: boolean = false;
-          d.missions.forEach((m) => {
-            if (m.id == idMission) b = true;
-          });
-          if (b) return d;
-          else return;
-        });
-      })
-    );
+    return this.http
+      .get<IDocument[]>('api/documents')
+      .pipe(
+        map((x) => x.filter((d) => d.missions.some((m) => m.id === idMission)))
+      );
   }
+
   setSelectedEtat(documentId: string, etat: string) {
     this.selectedEtats[documentId] = etat;
-    console.log('ete', etat);
   }
 
   getSelectedEtat(documentId: string): string {
     return this.selectedEtats[documentId] || '';
+  }
+
+  selectDocument(documentId: string) {
+    this.selectedDocuments.add(documentId);
+  }
+
+  unselectDocument(documentId: string) {
+    this.selectedDocuments.delete(documentId);
+  }
+
+  isSelected(documentId: string): boolean {
+    return this.selectedDocuments.has(documentId);
   }
 }

@@ -1,6 +1,5 @@
 <div id="mainSection">
   <div class="card block" id="top2">
-    <!--<div class="card-header" class="entete pt-4 pb-4">{{'role.header' | translate}}</div>-->
       <div class="card-header" class="entete pt-4 pb-4">
         {{'role.header' | translate}}
       </div>
@@ -28,7 +27,7 @@
                                 {{'role.table.title3' | translate}}
                               </label>
                               <p class="w-100 d-flex align-items-center choix" >
-                                <input  type="checkbox" checked value="true" formControlName="etat" name="etat" class="form-control" id="etat" placeholder="" >
+                                <input  type="checkbox" checked value="true" formControlName="etat" name="etat" class="form-control" id="etat" >
                               </p>
                             </div>
                         </div>
@@ -45,9 +44,13 @@
                     </div>
                   </div>
               </div>
-              <div class="actionButton">
-                <button class="btn" routerLink="../list-roles">{{'lists.button2' | translate}}</button>
-                <button type="submit" class="btn">{{btnLibelle}}</button>
+              <div class="actionButton valBtn" >
+                <button class="btn retour" (click)="return()" title="{{'lists.button2' | translate}}">
+                    <i class="fa fa-undo" aria-hidden="true"></i>
+                </button>
+                <button type="submit" class="btn btnValidation" title="{{btnLibelle}}">
+                    <i class="fa fa-check" aria-hidden="true"></i>
+                </button>
               </div>
           </form>
       </div>

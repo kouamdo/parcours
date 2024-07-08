@@ -33,7 +33,7 @@
 
         <!-- tableau listing des mouvements -->
 
-        <div *ngIf="(this.exemplairesDePersonne.length > 0) || (this.exemplaire.mouvements == undefined)" class="card-body p-0 tableBlock" id="tableList">
+        <div *ngIf="(this.exemplairesDePersonne.length > 0) || (this.exemplaire.mouvements == undefined)" class="card-body p-0 tableBlock" id="tableBlock">
             <div class='table-responsive w-100'>
                 <table class='table table-sm table-centered table-striped table-bordered w-100' mat-table [dataSource]="dataSourceMouvements">
 
@@ -112,8 +112,8 @@
                 </div>
             </div>
         </div>
-        <div *ngIf="this.exemplairesDePersonne.length > 0" class="options">
-            <button title="{{'lists.button1' | translate}}" class="btn btn-outline-warning" data-dismiss="modal"
+        <div *ngIf="this.exemplairesDePersonne.length > 0" class="actionButton valBtn">
+            <button title="{{'lists.button1' | translate}}" class="btn reinitialiser" data-dismiss="modal"
                 [useExistingCss]="true"
                 styleSheetFile="assets/css/ticketPrint.scss"
                 printSectionId="globalSection"

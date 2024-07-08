@@ -78,7 +78,7 @@ export class NewPersonnelComponent implements OnInit {
           nom: this.personnel?.nom,
           prenom: this.personnel?.prenom,
           sexe: this.personnel?.sexe,
-          email: this.personnel.email,
+          email: this.personnel?.email,
           dateNaissance: this.datePipe.transform(
             this.personnel?.dateNaissance,
             'yyyy-MM-dd'
@@ -95,10 +95,14 @@ export class NewPersonnelComponent implements OnInit {
         });
       });
     }
+    this.titre = this.dataEnteteMenuService.dataEnteteMenu;
   }
 
   get f() {
     return this.forme.controls;
+  }
+  return() {
+    this.router.navigate(['/list-personnels']);
   }
 
   onSubmit(personnelInput: any) {

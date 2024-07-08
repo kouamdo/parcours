@@ -1,5 +1,5 @@
-<div class="mainBlock card" id="top2">
-    <div class="entete">
+<div class="mainBlock pageView card" id="top2">
+    <div class="enteteViewPage">
         <h1>
             <span routerLink="../../list-documents" title="{{'lists.button2' | translate}}"><i class="fa fa-arrow-left lien" aria-hidden="true"></i></span>
             {{document.titre}}
@@ -141,14 +141,12 @@
             </table>
         </div>
     </div>
-    <div class="options">
-        <button type="button" [routerLink]="['/document-nouveau',document.id]" class="btn btn-outline-info">
+    <div class="actionButton valBtn">
+        <button type="button" [routerLink]="['/document-nouveau',document.id]" class="btn modifier" title="{{'lists.button7' | translate}}">
             <i class="fas fa-pen"></i>
-            {{'lists.button7' | translate}}
         </button>
-        <button type="button" class="btn btn-outline-danger">
+        <button type="button" class="btn fermer" title="{{'lists.button8' | translate}}">
             <i class="fas fa-trash"></i>
-            {{'lists.button8' | translate}}
         </button>
     </div>
 </div>

@@ -1,5 +1,5 @@
-<div class="mainBlock card">
-  <div class="entete">
+<div class="mainBlock pageView card">
+  <div class="enteteViewPage">
       <h1>
           <span routerLink="../../list-precomvts" title=""><i class="fa fa-arrow-left lien" aria-hidden="true"></i></span>
          Tableau Des opérations effectuées
@@ -77,8 +77,10 @@
             </tbody>
         </table>
     </div>
-        <div class="actionButton mt-2">
-            <button mat-button [mat-dialog-close] cdkFocusInitial class="btn btnValidation">{{'lists.button10' | translate}}</button>
+        <div class="actionButton valBtn mt-2">
+            <button mat-button [mat-dialog-close] cdkFocusInitial class="btn btnValidation fermer" title="{{'lists.button10' | translate}}">
+                <i class="fa fa-times" aria-hidden="true"></i>
+            </button>
         </div>
   </div>
 </div>

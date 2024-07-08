@@ -1,3 +1,5 @@
+<!-- Original template with camera icon -->
+<!--
 <div class="video-wrapper">
   <div class="video-container">
     <div class="button-container">
@@ -6,6 +8,15 @@
     <div class="video-content">
       <video #video [width]="isCameraOpen ? 300 : 0" [height]="isCameraOpen ? 70 : 0"></video>
     </div>
-      <div *ngIf="isCameraOpen" class="close-button" (click)="stopScanner()">✕</div>
+    <div *ngIf="isCameraOpen" class="close-button" (click)="stopScanner()">✕</div>
   </div>
+</div>
+-->
+
+
+<div class="video-container">
+  <div class="video-content">
+    <video #video [width]="isCameraOpen ? 300 : 0" [height]="isCameraOpen ? 70 : 0"></video>
+  </div>
+  <div *ngIf="isCameraOpen" class="close-button" (click)="stopScanner()">✕</div>
 </div>

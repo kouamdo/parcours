@@ -1,4 +1,10 @@
-/* You can add global styles to this file, and also import other style files */
+/* les couleurs du site
+* #28a745 vert
+* #FFD700 jaune
+* #b3b3b3 gris
+* #ff0000 rouge
+* #31b1e3 cyan
+*/
 @font-face {
   font-family: AbrilFatface;
   src: url(assets/fonts/Abril_Fatface/AbrilFatface-Regular.ttf);
@@ -30,20 +36,32 @@ body, table, .mat-table {
 #menuVerticalGauche #logo, #menuVerticalGauche #userActions .user{
   font-family: AbrilFatface !important;
 }
-.cdk-overlay-container, .cdk-overlay-pane {
-  z-index: 9999 !important;
-  display: flex;
+// le conteneur principal des pages
+#mainSection{
+display: flex;
+flex-direction: column;
+align-items: center;
 }
+.block{
+width: 60%;
+}
+.container {
+  display: flex;
+  align-items: center;
+}
+
+// les boites de dialogue material
 .cdk-overlay-pane {
   padding: 0;
   border-top: none;
 }
-.mat-select-value {
-  overflow: visible;
-  text-overflow: ellipsis;
-  white-space: wrap;
-  position: relative;
-  bottom: 12px;
+.cdk-overlay-container, .cdk-overlay-pane {
+  z-index: 9999 !important;
+  display: flex;
+}
+
+.modalContentScroll {
+  opacity: 1;
 }
 mat-dialog-container {
   background-color: transparent !important;
@@ -57,15 +75,6 @@ mat-dialog-container {
   border-radius: none;
   box-shadow: none;
 }
-#mainSection{
-display: flex;
-flex-direction: column;
-align-items: center;
-justify-content: center;
-}
-.block{
-width: 60%;
-}
 .entete{
 background-color: #28a745;
 color: white;
@@ -73,10 +82,28 @@ text-align: center;
 font-size: 22px;
 font-weight: bold;
 }
+.enteteViewPage{
+    text-align: center;
+    font-size: 22px;
+    font-weight: bold;
+    background-color: #28a745;
+    border-radius: 5px;
+    box-shadow: 0 0 2px #28a745;
+    margin: 0 5px;
+    padding: 10px 0;
+    h1{
+        margin: auto;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.7);
+        position: relative;
+        width: 100%;
+    }
+}
+// le contenu des formulaires
 .form-control{
-border: none !important;
-box-shadow: 0 0 2px rgb(220, 220, 220) !important;
-height: 35px ;
+  border: none !important;
+  box-shadow: 0 0 2px rgb(220, 220, 220) !important;
+  height: 30px ;
 }
 .champs{
 display: flex;
@@ -97,36 +124,65 @@ sup{
 .champs, select, input{
 font-size: 15px;
 }
-select{
-border: none;
-box-shadow: 0 0 2px rgb(220, 220, 220)!important;
-height: 24px;
-background-color: #28a74563;
-color: rgb(108, 108, 108)!important;
-padding: 0 10px;
-border-radius: 5px;
-}
-.actionButton{
-display: flex;
-align-items: center;
-justify-content: space-between;
-button{
-    background-color: #28a745;
-    color: white;
+.champs input, .champs textarea, .champs select{
     height: 30px;
-    padding: 0 10px;
+}
+select{
+  border: none;
+  box-shadow: 0 0 2px rgb(220, 220, 220)!important;
+  height: 24px;
+  background-color: #28a74563;
+  color: rgb(108, 108, 108)!important;
+  padding: 0 10px;
+  border-radius: 5px;
+}
+
+//conteneur des boutons
+.actionButton{
+  clear: both;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .btnValidation{
+    background-color:#28a745;
+    color: #ffffff !important;
+  }
+}
+.valBtn button{
+    border: none;
+    margin-top: 5px;
+    margin-right: 2px;
+    margin-left: 2px;
+    border-radius: 50% !important;
+    width: 40px !important;
+    height: 40px !important;
+    opacity: 0.8 !important;
+    padding: 0 !important;
     font-size: 15px;
+    transition: ease 0.2s;
+    color: #ffffff !important;
 }
-.btnValidation{
-  background-color:#28a745;// #1473e6;
+.valBtn button:hover{
+    opacity: 1 !important;
+    box-shadow: 0 0 2px #28a745 !important;
+    transition: ease 0.2s;
+    transform: scale(1.1);
+    color: #ffffffad !important;
 }
+.fermer{
+    background-color: #ff0000 !important;
+}
+.reinitialiser, .annuler{
+    background-color: #FFD700 !important;
+}
+.retour{
+    background-color: #b3b3b3 !important;
+}
+.modifier{
+    background-color: #31b1e3 !important;
 }
 .button-right {
 margin-left: auto;
-}
-.container {
-display: flex;
-align-items: center;
 }
 .choix{
 color: #28a745;
@@ -148,103 +204,108 @@ margin-top: -40px;
 height: 100px;
 h2{
     color: #28a745;
-    //text-transform: uppercase;
 }
 }
+// conteneur des barres de recherche
 .searchBlock{
-width: 100%;
-display: flex;
-justify-content: flex-end;
-padding-right: 10px;
-margin-right: 8px;
-button{
-    width: 7%;
-    background-color: #28a745;
-    color: white;
-}
-.inputSection{
-    width: 91%;
-    input{
-        border: none;
-        border: 1px solid #28a74521;
-    }
-}
-}
-.tableTools{
-padding-bottom: 15px;
-#addUserBotton{
-    background-color: #FFD700;
-    color: white;
-    font-size: 20px;
-    padding: 10px;
-    border-radius: 5px;
-}
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 10px;
+  margin-right: 8px;
+  button{
+      width: 7%;
+      background-color: #28a745;
+      color: white;
+  }
+  .inputSection{
+      width: 91%;
+      input{
+          border: none;
+          border: 1px solid #28a74521;
+      }
+  }
 }
 
-mat-form-field{
-padding: 0;
-margin: 0;
-color: #28a745;
-line-height: normal;
-box-sizing: initial;
-input{
-    padding: 0;
-    border: none;
-    margin: 0;
+// auto complate
+.matInput, mat-autocomplete{
+  color: #787878 !important;
 }
+.searchBar {
+  padding: 0;
+  margin: 0;
+  color: #28a74596;
+  border: none;
+  font-size: small;
 }
-mat-form-field:focus{
-border: none;
-padding: 0;
-margin: 0;
-input{
-    padding: 0;
+mat-option{
+  color: #28a745 !important;
+}
+// conteneur de mat select et autocomplate comme champs du formulaire
+.matSelectElement{
+  padding: 0 !important;
+  background-color: #28a745 !important;
+  border-radius: 3px;
+  height: 30px !important;
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+.matSelectElement mat-select{
+  padding-left: 2px;
+  position: absolute;
+  top: 5px;
+}
+.selectInputTab{
+  background-color: #b3b3b344 !important;
+  color: #28a745 !important;
+  box-shadow: 0 0 2px #28a7467d !important;
+  margin-left: 12px !important;
+}
+.champsAutocomplate{
+  width: 100%;
+  height: 30px;
+  background-color: #b3b3b344;
+  border: 1px solid #28a745 !important;
+  box-shadow: 0 0 2px #28a745 !important;
+  color: #28a745;
+}
+.champsAutocomplate:focus-visible{
+  border: 1px solid #28a745 !important;
+  box-shadow: 0 0 2px #28a745 !important;
+}
+
+//entete des pages de listing
+.tableTools{
+  padding-bottom: 15px;
+  #addUserBotton{
+      background-color: #FFD700;
+      color: white;
+      font-size: 14px;
+      padding: 6px;
+      border-radius: 3px;
+  }
+}
+.example-form-entete{// aussi valable pour les autocomplate
+  input{
+    background-color: #b3b3b33a;
     color: #28a745;
-    border: none;
-    margin: 0;
+    border: 1px solid #28a745;
+    border-radius: 3px;
+    height: 30px;
+    padding-left: 2px;
+  }
 }
-}
-.example-full-width {
-height: 42px !important;
-border: 2px solid #28a745;
-border-radius: 5px;
-background-color: transparent;
-padding: 0;
-margin: 0;
-}
-.searchBar {
-position: relative;
-top: -2px;
-padding: 0;
-margin: 0;
-color: #28a74596;
-border: none;
-}
-.searchBar {
-position: relative;
-top: -2px;
-padding: 0;
-margin: 0;
-color: #28a74596;
-border: none;
-font-size: small;
-}
-.searchBar:focus, .searchBar:active {
-position: relative;
-top: -2px;
-padding: 0;
-margin: 0;
-color: #28a74596;
-border: none;
+
+// les tableaux
+.table thead th {
+    vertical-align: middle !important;
 }
 .containHead{
-padding: 1% 10px !important;
-margin: auto !important;
-text-align: center !important;
+  padding: 1% 10px !important;
 }
 .containCell{
-padding-top: 20px !important;
-text-align: center !important;
+  vertical-align: middle !important;
 }
 td{
 font-size: 13px!important;
@@ -255,30 +316,263 @@ margin-top: -45px;
 #top{
 margin-top: -70px;
 }
-
 .align-items{
 display: flex;
 }
+#tableBlock{
+  height: fit-content !important;
 
+    .table{
+      margin-bottom: 0 !important;
+    }
+    table{
+        #actions{
+            font-size: 12px;
+            .dropdown-toggle{
+                padding: 0;
+                margin-left: 10px;
+                color: #28a745;
+                span{
+                    position: relative;
+                    bottom: 6px;
+                    font-size: 28px;
+                    margin-right: 5px;
+                }
+            }
+            div{
+                button{
+                    color: #28a745;
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    span{
+                        width: 70%;
+                        text-align: left;
+                    }
+                }
+            }
+        }
+    }
+}
+.actions button{
+    font-size: 10px !important;
+    padding: 2px !important;
+}
+.actions span{
+    font-size: 10px !important;
+}
+#tableBlock th, .pageView th {
+    background-color: rgba(40, 167, 69, 0.2);
+    color: #28a745 !important;
+}
+// block du montant total
+.total{
+  margin-top: 20px;
+    width: 100%;
+    text-align: right;
+    input{
+        width: 14%;
+        position: relative;
+        bottom: 8px;
+        background-color: #28a7464e;
+        border: none;
+        border-radius: 2px;
+        margin-right: 1px;
+    }
+    span{
+        color: #28a745;
+        position: relative;
+        bottom: 8px;
+    }
+}
 
-@media screen and (max-width: 1200px) {
-.title h2{
-    font-size: 15px;
+// pagination
+mat-paginator{
+  align-self: flex-end !important;
+  background-color: rgba(40, 167, 69, 0.79) !important;
+  width: 100% !important;
+}
+
+// style affecté aux tableaux pour qu'ils grandissent vers le bas - XX
+.modaleTableConteneur{
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: stretch !important;
+}
+.mat-table{
+  flex: 1 1 auto !important;
+}
+
+// les pages de details
+.pageView{
+  padding-bottom: 20px;
+  .lien{
+    color: rgba(255, 255, 255, 0.7);
+    transition: ease 0.2s;
+    font-size: 18px;
+    margin-top: 10px;
+  }
+  .lien:hover{
+    color: rgba(255, 255, 255, 0.8);
+    transition: ease-in-out 0.2s;
+    transform: scale(1.1);
+  }
+  #titre{
+    margin: 20px 0;
+  }
+  .entete{
+    display: flex;
+    align-items: center;
+  }
+  .hoverBlock{
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    right: 40px;
+  }
+  .hoverBlock:hover{
+    color: #787878;
+    #description{
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        right: 0px;
+        top: 50px;
+        width: 400px;
+        padding: 10px;
+        padding-top: 0;
+        div{
+            display: flex;
+            align-items: flex-start;
+            justify-content: flex-start;
+            font-size: 12px;
+            background-color: #28a7450e;
+        }
+        p{
+            margin: 0;
+            margin-left: 5px;
+            border-radius: 5px;
+        }
+        .title1{
+            font-weight: normal;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+    }
+  }
+  .hoverBlock .infoBuble{
+    width: fit-content;
+    height: fit-content;
+    border-radius: 50%;
+    background-color: #ffffff;
+    position: absolute;
+    bottom: 0px;
+  }
+  .hoverBlock .infoBuble i{
+    font-size: 20px;
+  }
+  #description{
+    display: none;
+  }
+  .infos{
+    padding: 0 20px;
+    padding-bottom: 10px;
+  }
+  .infos p{
+    margin: 40px 0;
+    font-weight: 300;
+  }
+  .infos .title1{
+    font-weight: normal;
     text-transform: uppercase;
+  }
+  #blockCat{
+    .infosCat{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        p{
+            margin: 10px 0;
+            padding: 0;
+            width: fit-content;
+            font-weight: bold;
+            text-transform: capitalize;
+            span{
+                font-weight: normal;
+                font-style: italic;
+                text-transform: none;
+                margin-right: 4px;
+            }
+        }
+    }
+    .titre{
+        width: 15%;
+    }
+    .description{
+        width: fit-content;
+    }
+    .etat{
+        width: 10%;
+    }
+    .ordre{
+        width: 8%;
+    }
+    .type{
+        width: 10%;
+    }
+  }
 }
-.example-full-width {
-    height: 42px !important;
-    border: 2px solid #28a745;
+
+// bloc d'affichage des resultats venant d'une modale
+.listAttr{
+    width: 100%;
+    min-height: 30px;
+    display: flex;
+    align-items: center;
+    padding-right: 15px !important;
+    padding-left: 5px;
+    background-color: #b3b3b344;
+    border-radius: 3px;
+    position: relative;
+    p{
+      width: 100%;
+    }
+    button{
+        position: absolute;
+        right: 0;
+        bottom: -5px;
+        font-size: 18px;
+        border: none;
+        border-radius: 5px;
+        i{
+            box-shadow: 0 0 2px rgb(220, 220, 220);
+            color: #FFD700;
+            opacity: 0.8;
+
+        }
+    }
 }
+
+//reglage des ecrans
+@media screen and (max-width: 1200px) {
+  .title h2{
+      font-size: 15px;
+      text-transform: uppercase;
+  }
 }
 @media screen and (max-width: 1100px) {
-.title h2{
-    font-size: 15px;
-    text-transform: uppercase;
-}
+  .title h2{
+      font-size: 15px;
+      text-transform: uppercase;
+  }
 }
 @media screen and (max-width: 1060px) {
-td{
-    font-size: 12px;
+  td{
+      font-size: 12px;
+  }
 }
+@media screen and (max-width: 910px) {
+    .listAttr{
+        width: 100%;
+    }
 }
