@@ -51,34 +51,27 @@
                     <h3>{{'document.exemplaire.title3' | translate}} :</h3>
                     <div class="searchBlock" [ngClass]="{'searchBlock': document.contientDistributeurs, 'searchBlockUnique': !document.contientDistributeurs}">
                         <div *ngIf="document.contientDistributeurs == true" class="blockAutoDistributeurs">
-                            <form class="example-form">
+                            <form class="example-form-entete">
                                 <h4>{{'preconisation.table.title6' | translate}}</h4>
-                                <mat-form-field class="example-full-width" appearance="fill">
-                                    <mat-label class="searchBar"></mat-label>
-                                    <input type="text" matInput [formControl]="distributeurControl" [matAutocomplete]="autoDistributeur">
-                                    <mat-autocomplete class="blockAutocomplate" #autoDistributeur="matAutocomplete" [displayWith]="displayDistributeurFn">
-                                        <mat-option class="options" *ngFor="let optionDistributeur of filteredDistributeurOptions" [value]="optionDistributeur" (click)="associerDistributeur(optionDistributeur)">
-                                            {{optionDistributeur.raisonSocial}}
-                                        </mat-option>
-                                    </mat-autocomplete>
-                                </mat-form-field>
+                                <input type="text" matInput [formControl]="distributeurControl" [matAutocomplete]="autoDistributeur">
+                                <mat-autocomplete class="blockAutocomplate" #autoDistributeur="matAutocomplete" [displayWith]="displayDistributeurFn">
+                                    <mat-option class="options" *ngFor="let optionDistributeur of filteredDistributeurOptions" [value]="optionDistributeur" (click)="associerDistributeur(optionDistributeur)">
+                                        {{optionDistributeur.raisonSocial}}
+                                    </mat-option>
+                                </mat-autocomplete>
                                 <button *ngIf="modificationDistributeurActive == true" class="btn btnModifierDistributeurBlock" type="button" (click)="modifierDistributeur()">{{'lists.button6' | translate}}</button>
                                 
                             </form>
                         </div>
                         <div class="blockAutoRessources">
-                            <form class="example-form">
+                            <form class="example-form-entete">
                                 <h4>{{'ressource.form.text16' | translate}}</h4>
-                                <mat-form-field class="example-full-width" appearance="fill">
-                                    <mat-label class="searchBar"></mat-label>
-                                    <input type="text" matInput [formControl]="ressourceControl" [(ngModel)]="scan_val" [value]="scan_val" [matAutocomplete]="auto">
-                                    <mat-autocomplete class="blockAutocomplate" #auto="matAutocomplete" [displayWith]="displayFn">
-                                        <mat-option class="options" *ngFor="let option of filteredOptionsRessource" [value]="option" (click)="rechercherListingRessources(option); reinitialliseRessourceControl()">
-                                            {{option.libelle}}
-                                        </mat-option>
-                                    </mat-autocomplete>
-                                    
-                                </mat-form-field>
+                                <input type="text" matInput [formControl]="ressourceControl" [(ngModel)]="scan_val" [value]="scan_val" [matAutocomplete]="auto">
+                                <mat-autocomplete class="blockAutocomplate" #auto="matAutocomplete" [displayWith]="displayFn">
+                                    <mat-option class="options" *ngFor="let option of filteredOptionsRessource" [value]="option" (click)="rechercherListingRessources(option); reinitialliseRessourceControl()">
+                                        {{option.libelle}}
+                                    </mat-option>
+                                </mat-autocomplete>
                             </form>
                         </div>
                     </div>
@@ -86,7 +79,7 @@
 
                 <!-- tableau listing des mouvements -->
 
-                <div class="card-body p-0 tableBlock" id="tableList">
+                <div class="card-body p-0 tableBlock" id="tableBlock">
                     <div class='table-responsive w-100'>
                         <table class='table table-sm table-centered table-striped table-bordered w-100' mat-table [dataSource]="dataSourceMouvements">
 
@@ -187,7 +180,7 @@
                             <input type="text" [value]="sommeMontants()" disabled>
                         </div>
 
-                        <mat-paginator style="background-color: rgba(40, 167, 69, 0.79);" [pageSizeOptions]="[2, 5, 10, 20]"
+                        <mat-paginator [pageSizeOptions]="[2, 5, 10, 20]"
                                        showFirstLastButtons
                                        aria-label="Select page of periodic elements">
                         </mat-paginator>
@@ -196,11 +189,15 @@
             </div>
         </div>
         
-        <div class="actionButton container">
-            <button class="btn" type="reset" routerLink="../../executer-missions"><i class="fa fa-reply mr-1"></i>{{'lists.button2' | translate}}</button>
+        <div class="actionButton valBtn">
+            <button class="btn retour" type="reset" routerLink="../../executer-missions" title="{{'lists.button2' | translate}}">
+                <i class="fa fa-undo" aria-hidden="true"></i>
+            </button>
             <div *ngIf="document.contientRessources == true"><app-modal-codebarre-scan-continue></app-modal-codebarre-scan-continue></div>      
             
-            <button type="submit" class="btn btnValidation">{{btnLibelle}}</button>
+            <button type="submit" class="btn btnValidation" title="{{btnLibelle}}">
+                <i class="fa fa-check" aria-hidden="true"></i>
+            </button>
         </div>
     </form>
 </div>

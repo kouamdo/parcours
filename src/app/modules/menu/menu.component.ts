@@ -9,7 +9,7 @@ import { AuthentificationService } from 'src/app/services/authentifications/auth
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
-  styleUrls: ['./menu.component.scss']
+  styleUrls: ['./menu.component.scss'],
 })
 export class MenuComponent implements OnInit, OnChanges {
   menuUser$:Observable<IMenu>=EMPTY;
@@ -32,11 +32,11 @@ export class MenuComponent implements OnInit, OnChanges {
       if(x!=null && x.fonctionnalites!=null){
         this.fonctionnalites = x.fonctionnalites;
       }
-    })
+    });
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if(changes['langueParent'] && changes['langueParent'].currentValue){
+    if (changes['langueParent'] && changes['langueParent'].currentValue) {
       this.menuUser$ = this.getMenus();
       this.menuUser$.subscribe(x=>{
         if(x!=null && x.fonctionnalites!=null){
@@ -44,7 +44,6 @@ export class MenuComponent implements OnInit, OnChanges {
         }
       })
     }
-
   }
 
   private getMenus(){
@@ -52,11 +51,11 @@ export class MenuComponent implements OnInit, OnChanges {
     return this.menuService.getMenuByUserAndLangue(this.authService.currentUserValue.login,this.langueParent);
   }
 
-  getElementMenu(titre:string){
-    this.dataEnteteMenuService.dataEnteteMenu=titre
+  getElementMenu(titre: string) {
+    this.dataEnteteMenuService.dataEnteteMenu = titre; // This will automatically save to sessionStorage
   }
 
-  setUrlSource(urlSource:string){
-    this.dataEnteteMenuService.setUrlSource(urlSource)
+  setUrlSource(urlSource: string) {
+    this.dataEnteteMenuService.setUrlSource(urlSource);
   }
 }

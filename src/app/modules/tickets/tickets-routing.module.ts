@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { ListTicketsComponent } from './list-tickets/list-tickets.component';
 import { NewTicketComponent } from './new-ticket/new-ticket.component';
 import { PanneauTicketComponent } from './panneau-ticket/panneau-ticket.component';
+import { ListPatientsComponent } from '../patients/list-patients/list-patients.component';
 
 const routes: Routes = [
   {
@@ -23,6 +24,10 @@ const routes: Routes = [
   {
     path: 'panneau-tickets',
     component: PanneauTicketComponent
+  },
+  {
+    path: 'list-patient',
+    component: ListPatientsComponent
   }
 ];
 

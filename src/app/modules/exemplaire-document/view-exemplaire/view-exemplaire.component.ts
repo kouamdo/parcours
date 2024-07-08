@@ -91,6 +91,8 @@ export class ViewExemplaireComponent implements OnInit {
           if (this.exemplaire.ordreEtats != undefined) {
             this.TabOrdre = this.exemplaire.ordreEtats;
           }
+          this.courant = x.ordreEtats![x.ordreEtats!.length - 1].etat.libelle;
+
           if (this.exemplaire.mouvements != undefined) {
             this.mouvements = this.exemplaire.mouvements;
           }

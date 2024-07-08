@@ -1,3 +1,4 @@
+import { QRCodeModule } from 'angularx-qrcode';
 import { NgModule } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
 import { NewPersonnelComponent } from './new-personnel/new-personnel.component';
@@ -13,20 +14,19 @@ import { MatInputModule } from '@angular/material/input';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
-import {MatRadioModule} from '@angular/material/radio';
+import { MatRadioModule } from '@angular/material/radio';
 import { ListPersonnelsComponent } from './list-personnels/list-personnels.component';
 import { RolesPersonnelComponent } from './roles-personnel/roles-personnel.component';
 import { SharedModule } from '../shared/shared.module';
-import { QRCodeModule } from 'angularx-qrcode';
 import { DetailPersonnelsComponent } from './detail-personnels/detail-personnels.component';
 import { ModulesRoutingModule } from '../modules-routing.module';
 
 @NgModule({
   declarations: [
-    NewPersonnelComponent, 
+    NewPersonnelComponent,
     ListPersonnelsComponent,
     RolesPersonnelComponent,
-    DetailPersonnelsComponent
+    DetailPersonnelsComponent,
   ],
   imports: [
     CommonModule,
@@ -39,8 +39,8 @@ import { ModulesRoutingModule } from '../modules-routing.module';
     MatPaginatorModule,
     MatTableModule,
     MatSortModule,
-    QRCodeModule,
     TicketsModule,
+    QRCodeModule,
     MatRadioModule,
     SharedModule,
     TranslateModule.forChild({

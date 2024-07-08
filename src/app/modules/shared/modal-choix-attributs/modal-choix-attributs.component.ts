@@ -1,5 +1,5 @@
 import { LiveAnnouncer } from '@angular/cdk/a11y';
-import { FormControl, FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { FormControl, FormBuilder, FormGroup } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -16,7 +16,7 @@ import { DonneesEchangeService } from 'src/app/services/donnees-echange/donnees-
   styleUrls: ['./modal-choix-attributs.component.scss'],
 })
 export class ModalChoixAttributsComponent implements OnInit {
-  // variables attributs, pour afficher le tableau d'attributs sur l'IHM
+  selectedAttributeIds: string[] = [];
   formeAttribut: FormGroup;
   myControl = new FormControl<string | IAttributs>('');
   ELEMENTS_TABLE_ATTRIBUTS: IAttributs[] = [];
@@ -26,11 +26,13 @@ export class ModalChoixAttributsComponent implements OnInit {
     'titre',
     'description',
     'type'
-  ]; // structure du tableau presentant les attributs
+  ];
   dataSourceAttribut = new MatTableDataSource<IAttributs>(
     this.ELEMENTS_TABLE_ATTRIBUTS
   );
   dataSourceAttributResultat = new MatTableDataSource<IAttributs>();
+  initialDataDocumentAttributs: IAttributs[] = [];
+  localSelectedAttributes: IAttributs[] = [];
   idAttribut: string = '';
 
   @ViewChild(MatPaginator)
@@ -43,7 +45,7 @@ export class ModalChoixAttributsComponent implements OnInit {
     private infosPath: ActivatedRoute,
     private serviceAttribut: AttributService,
     private _liveAnnouncer: LiveAnnouncer,
-    private donneeDocCatService:DonneesEchangeService,
+    private donneeDocCatService: DonneesEchangeService,
     private dialogDef: MatDialog,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
@@ -51,37 +53,37 @@ export class ModalChoixAttributsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.initialDataDocumentAttributs = JSON.parse(JSON.stringify(this.donneeDocCatService.dataDocumentAttributs));
+    this.localSelectedAttributes = [...this.initialDataDocumentAttributs];
+    this.loadSelectedAttributes();
     this.getAllAttributs().subscribe((valeurs) => {
       this.dataSourceAttribut.data = valeurs;
-      this.filteredOptions = valeurs
+      this.filteredOptions = valeurs;
     });
-    this.dataSourceAttributResultat.data = this.donneeDocCatService.dataDocumentAttributs
+    this.dataSourceAttributResultat.data = this.localSelectedAttributes;
     this.myControl.valueChanges.subscribe((value) => {
       const titre = typeof value === 'string' ? value : value?.titre;
-      if (titre != undefined && titre?.length > 0) {
+      if (titre !== undefined && titre?.length > 0) {
         this.serviceAttribut
           .getAttributsByTitre(titre.toLowerCase() as string)
           .subscribe((reponse) => {
             this.filteredOptions = reponse;
           });
       } else {
-        this.serviceAttribut.getAllAttributs().subscribe(
-          (reponse) =>{
-            this.filteredOptions=reponse
-          }
-        )
+        this.serviceAttribut.getAllAttributs().subscribe((reponse) => {
+          this.filteredOptions = reponse;
+        });
       }
     });
   }
 
   onCheckAttributChange(event: any) {
-    let listIdAttTemp : string[] = []
-    let positionsAttr = new Map()
-    let indexAttrCourant : number = 0
-    this.donneeDocCatService.dataDocumentAttributs.forEach(
-      (element: IAttributs) => {
-        listIdAttTemp.push(element.id)
-        positionsAttr.set(element.id, indexAttrCourant++)
+    let listIdAttTemp: string[] = [];
+    let positionsAttr = new Map();
+    let indexAttrCourant: number = 0;
+    this.localSelectedAttributes.forEach((element: IAttributs) => {
+      listIdAttTemp.push(element.id);
+      positionsAttr.set(element.id, indexAttrCourant++);
     });
     if (event.target.checked) {
       if (!listIdAttTemp.includes(this.idAttribut)) {
@@ -89,7 +91,7 @@ export class ModalChoixAttributsComponent implements OnInit {
       }
     } else {
       if (listIdAttTemp.includes(this.idAttribut)) {
-        const index = positionsAttr.get(this.idAttribut)
+        const index = positionsAttr.get(this.idAttribut);
         this.retirerSelectionAttribut(index);
       }
     }
@@ -101,22 +103,20 @@ export class ModalChoixAttributsComponent implements OnInit {
 
   ajoutSelectionAttribut(idAttribut: string) {
     this.serviceAttribut.getAttributById(idAttribut).subscribe((val) => {
-      this.ELEMENTS_TABLE_ATTRIBUTS = this.dataSourceAttributResultat.data;
-      this.ELEMENTS_TABLE_ATTRIBUTS.push(val);
-      this.dataSourceAttributResultat.data = this.ELEMENTS_TABLE_ATTRIBUTS;
-      this.donneeDocCatService.dataDocumentAttributs = this.ELEMENTS_TABLE_ATTRIBUTS;
+      this.localSelectedAttributes.push(val);
+      this.dataSourceAttributResultat.data = this.localSelectedAttributes;
     });
   }
 
   retirerSelectionAttribut(index: number) {
-    this.ELEMENTS_TABLE_ATTRIBUTS = this.dataSourceAttributResultat.data;
-    this.ELEMENTS_TABLE_ATTRIBUTS.splice(index, 1); // je supprime un seul element du tableau a la position 'index'
-    this.dataSourceAttributResultat.data = this.ELEMENTS_TABLE_ATTRIBUTS;
-    this.donneeDocCatService.dataDocumentAttributs = this.ELEMENTS_TABLE_ATTRIBUTS;
+    this.localSelectedAttributes.splice(index, 1);
+    this.dataSourceAttributResultat.data = this.localSelectedAttributes;
   }
+
   private getAllAttributs() {
     return this.serviceAttribut.getAllAttributs();
   }
+
   displayFn(attribue: IAttributs): string {
     return attribue && attribue.titre ? attribue.titre : '';
   }
@@ -134,11 +134,22 @@ export class ModalChoixAttributsComponent implements OnInit {
       });
   }
 
+  loadSelectedAttributes() {
+    this.selectedAttributeIds = this.localSelectedAttributes.map(
+      (attr: IAttributs) => attr.id
+    );
+  }
+
   announceSortChange(sortState: Sort) {
     if (sortState.direction) {
       this._liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);
     } else {
       this._liveAnnouncer.announce('Sorting cleared');
     }
+  }
+
+  onSave() {
+    this.donneeDocCatService.dataDocumentAttributs = [...this.localSelectedAttributes];
+    this.dialogDef.closeAll();
   }
 }

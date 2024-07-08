@@ -1,42 +1,42 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import {  map } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { IParours } from 'src/app/modele/parours';
+import { IEtape } from 'src/app/modele/etape';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ParoursService {
+  constructor(private http: HttpClient) {}
 
-  constructor(private http:HttpClient) { }
-
-
-  getAllParours():Observable<IParours[]>
-  {
-    return this.http.get<IParours[]>('api/parours').pipe(map(x=>x));
+  getAllParours(): Observable<IParours[]> {
+    return this.http.get<IParours[]>('api/parours').pipe(map((x) => x));
   }
 
-  getParoursById(id:string):Observable<IParours>{
+  getParoursById(id: string): Observable<IParours> {
     return this.getAllParours().pipe(
-      map(x=>
-        {
-          return x.find(p=>p.id==id) as IParours
-        })
+      map((x) => {
+        return x.find((p) => p.id == id) as IParours;
+      })
     );
   }
 
-   getParoursBylibelle(libelle:string): Observable<IParours[]> {
+  getParoursBylibelle(libelle: string): Observable<IParours[]> {
     return this.http.get<IParours[]>('api/parours').pipe(
-      map(x=>
-        {
-          return x.filter(p=> p.libelle.toLowerCase().startsWith(libelle))
-        })
+      map((x) => {
+        return x.filter((p) => p.libelle.toLowerCase().startsWith(libelle));
+      })
     );
   }
 
-  ajouterParours(parours:IParours)
-  {
-    return this.http.post("api/parours",parours);
+  ajouterParours(parours: IParours) {
+    return this.http.post('api/parours', parours);
+  }
+  getEtapesByParoursId(paroursId: string): Observable<IEtape[]> {
+    return this.http
+      .get<IEtape[]>(`api/parours/${paroursId}/etapes`)
+      .pipe(map((x) => x));
   }
 }

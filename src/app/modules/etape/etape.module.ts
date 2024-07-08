@@ -3,7 +3,6 @@ import { CommonModule, DatePipe } from '@angular/common';
 
 //import { EtapeRoutingModule } from './etape-routing.module';
 import { NewEtapeComponent } from './new-etape/new-etape.component';
-import { ListEtapesComponent } from './list-etapes/list-etapes.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatInputModule } from '@angular/material/input';
@@ -20,7 +19,7 @@ import { HttpClient } from '@angular/common/http';
 import { ModulesRoutingModule } from '../modules-routing.module';
 
 @NgModule({
-  declarations: [NewEtapeComponent, ListEtapesComponent],
+  declarations: [NewEtapeComponent],
   imports: [
     CommonModule,
     //EtapeRoutingModule,
@@ -44,7 +43,7 @@ import { ModulesRoutingModule } from '../modules-routing.module';
       extend: true,
     })
   ],
-  exports: [ListEtapesComponent],
+  exports: [],
   providers: [DatePipe],
 })
 export class EtapeModule {}

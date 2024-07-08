@@ -52,12 +52,14 @@
     "button8": "Supprimer",
     "button9": "Ajouter",
     "button10": "Fermer",
-    "button11": "Enregistrer"
+    "button11": "Enregistrer",
+    "button12": "Suivant",
+    "button13": "Continuer"
   },
   "validation":{
     "header":"Ajouter Validation",
     "title0": "liste validation",
-    "title":"listing Validation",
+    "title1":"Personnel autorisé",
     "table":{
       "title0":"validation"
     },
@@ -258,7 +260,9 @@
       "title20": "visibilité du distributeur ?",
       "title21": "Sous documents",
       "title22": "type des mouvements",
-      "title23": "Etats du document"
+      "title23": "Etats du document",
+      "title24": "Etat"
+
     },
     "form": {
       "text1": "Le Titre est obligatoire.",
@@ -335,7 +339,7 @@
   "ressource": {
     "table": {
       "title": "Ajouter ",
-      "title1": " Libellé",
+      "title1": "Libellé",
       "title2": "Etat",
       "title3": "Quantité",
       "title4": "Unité",
@@ -425,6 +429,36 @@
       "title9": "Actions "
     }
   },
+  "promo-distributeur":{
+    "title": "Ajouter Promotion",
+    "emetteur": "Émetteur",
+    "text1":"Émetteur",
+    "text2":"Nom de la ressource ou de la catégorie",
+    "date_debut": "Date debut",
+    "date_fin": "Date fin",
+    "code": "Code unique",
+    "montant": "Montant remis",
+    "Pourcentage": "Pourcentage remis",
+    "remise": "Type de remise",
+    "beneficiaire": "Bénéficiaire",
+    "emetteur_control": "L'emetteur est obligatoire.",
+    "date_debut_control": "La Date de debut de promotion est obligatoire.",
+    "date_fin_control": "La Date de fin de promotion est obligatoire.",
+    "code_control": "Le code unique de promotion est obligatoire.",
+    "beneficiaire_control": "Veuillez sélectionner au moins un bénéficiaire.",
+    "remise_control": "La remise est obligatoire.",
+    "Pourcentage_control": "Le pourcentage ne doit pas être supérieur à 100",
+    "montant1": "Montant",
+    "pourcentage1": "Pourcentage",
+    "date_error": "La date de fin doit être postérieure à la date de début. ",
+    "montant_message": "Entrez le montant",
+    "pourcentage_messgae":"Entrez le pourcentage",
+    "rechercher":"Rechercher",
+    "modifier": "Modifier",
+    "famille": "Catégorie",
+    "ressource": "Ressources",
+    "action": "Actions"
+  },
   "precomvt": {
     "header": "Nouvelle ",
     "header1": "Assigner Familles",
@@ -513,7 +547,9 @@
   },
   "etats": {
     "table": {
-      "title1": "Ajouter un etat"
+      "title1": "Ajouter un etat",
+      "title2": "Etat précédant",
+      "title3": "Etat suivant"
     }
   },
   "doc-etats": {
@@ -525,10 +561,13 @@
       "text2": "Status suivant",
       "text3": "Ordre de l'état",
        "text4": "Cet ordre existe déjà",
-      "text5": "Cet etat existe déjà"
+       "text5": "Cet etat existe déjà",
+       "text6": "Validation associée",
+       "text7": "Recherchez une validation"
     }
   },
 "etape":{
+  "title1":"Document",
   "table": {
     "title": "Ajouter ",
     "title1": "libelle",
@@ -536,13 +575,13 @@
   },
   "form":{
     "text1":"Champ Obligatoire"
-},
-"lists":{
-  "button1":"Annuler"
-},
-"title":"listing ",
-"search-bar":"Rechercher",
-"table1":{
+  },
+  "lists":{
+    "button1":"Annuler"
+  },
+  "title":"listing ",
+  "search-bar":"Rechercher",
+  "table1":{
     "title1":"libellé",
     "title2":"Etat",
     "title4":"Actions",
@@ -559,19 +598,19 @@
   },
   "form":{
     "text1":"Champ Obligatoire"
-},
-"lists":{
-  "button1":"Annuler"
-},
-"title":"listing ",
-"search-bar":"Rechercher",
-"table1":{
+  },
+  "lists":{
+    "button1":"Annuler"
+  },
+  "title":"listing ",
+  "search-bar":"Rechercher",
+  "table1":{
     "title1":"libellé",
     "title2":"etape",
     "title4":"Actions",
     "actions":{
         "link2":"Modifier"
-    }
+  }
 }
 }
 }

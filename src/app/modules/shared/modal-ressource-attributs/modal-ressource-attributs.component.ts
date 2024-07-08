@@ -1,12 +1,11 @@
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import {
   FormControl,
-  FormArray,
   FormBuilder,
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router, ActivatedRoute } from '@angular/router';
 import { IAttributs } from 'src/app/modele/attributs';
@@ -15,7 +14,6 @@ import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { DonneesEchangeService } from 'src/app/services/donnees-echange/donnees-echange.service';
-import { log } from 'console';
 import { IRessource } from 'src/app/modele/ressource';
 import { IType } from 'src/app/modele/type';
 
@@ -26,9 +24,12 @@ import { IType } from 'src/app/modele/type';
 })
 export class ModalRessourceAttributsComponent implements OnInit {
   // variables attributs, pour afficher le tableau d'attributs sur l'IHM
+  selectedAttributeIds: string[] = [];
   formeAttribut: FormGroup;
-  submitted: boolean = false;
-  valid: boolean = true;
+  valid: boolean = false;
+  textError : string = "";
+  stockDonnee: any;
+  initialDataDocumentAttributs: any[] = [];
   datas: any[] = [];
   verif: boolean = false;
   ressources: IRessource = {
@@ -62,9 +63,7 @@ export class ModalRessourceAttributsComponent implements OnInit {
     'type',
     'valeur',
   ];
-  dataSourceAttribut = new MatTableDataSource<IAttributs>(
-    this.ELEMENTS_TABLE_ATTRIBUTS
-  );
+  dataSourceAttribut = new MatTableDataSource<IAttributs>();
   dataSourceAttributResultat = new MatTableDataSource<any>();
   idAttribut: string = '';
   attRes : IAttributs = {
@@ -92,9 +91,9 @@ export class ModalRessourceAttributsComponent implements OnInit {
     private infosPath: ActivatedRoute,
     private serviceAttribut: AttributService,
     private _liveAnnouncer: LiveAnnouncer,
+    private dialogRef: MatDialogRef<ModalRessourceAttributsComponent>,
     private donneeDocCatService: DonneesEchangeService,
-    private dialogDef: MatDialog,
-    @Inject(MAT_DIALOG_DATA) public data: any
+    public dialog: MatDialog
   ) {
     this.formeAttribut = this.formBuilder.group({
       res: ['', Validators.required],
@@ -106,15 +105,15 @@ export class ModalRessourceAttributsComponent implements OnInit {
       this.dataSourceAttribut.data = valeurs;
       this.filteredOptions = valeurs;
     });
+    this.loadSelectedAttributes();
 
-    if (this.donneeDocCatService.dataDocumentAttributs.length > 0) {
-      this.ELEMENTS_TABLE_ATTRIBUTS = this.donneeDocCatService.dataDocumentAttributs;
+    if (this.donneeDocCatService.dataDocumentRessourcesAttributs.length > 0) {
+      this.ELEMENTS_TABLE_ATTRIBUTS = JSON.parse(
+        JSON.stringify(this.donneeDocCatService.dataDocumentRessourcesAttributs)
+      );
       this.dataSourceAttributResultat.data = this.ELEMENTS_TABLE_ATTRIBUTS;
-      this.STORE_ELEMENTS_ATTRIBUTS = this.ELEMENTS_TABLE_ATTRIBUTS;
-      this.valid = false;
       console.log(
-        'resultats tb :',
-        this.STORE_ELEMENTS_ATTRIBUTS, this.donneeDocCatService.dataDocumentAttributs, this.valid
+        'resultats tb :', this.donneeDocCatService.dataDocumentRessourcesAttributs
       );
     }
 
@@ -134,21 +133,22 @@ export class ModalRessourceAttributsComponent implements OnInit {
     });
   }
 
+  loadSelectedAttributes() {
+    this.selectedAttributeIds =
+      this.donneeDocCatService.dataDocumentRessourcesAttributs.map(
+        (attr: { attributs: IAttributs; valeur: string }) => attr.attributs.id
+      );
+  }
+
   onCheckAttributChange(event: any, element: IAttributs) {
     let listIdAttTemp: string[] = [];
-    let positionsAttr = new Map();
-    let indexAttrCourant: number = 0;
-    this.donneeDocCatService.dataDocumentAttributs =
-      this.ELEMENTS_TABLE_ATTRIBUTS;
     this.ELEMENTS_TABLE_ATTRIBUTS.forEach((ele: any) => {
       console.log('element :', ele.attributs.id);
       listIdAttTemp.push(ele.attributs.id);
-      positionsAttr.set(ele.attributs.id, indexAttrCourant++);
     });
 
     if (event.target.checked) {
       console.log('listtemp :', listIdAttTemp, element.id);
-      console.log(this.donneeDocCatService.dataDocumentAttributs);
 
       if (!listIdAttTemp.includes(element.id)) {
         this.ajoutSelectionAttribut(element);
@@ -179,51 +179,32 @@ export class ModalRessourceAttributsComponent implements OnInit {
     this.idAttribut = idAttribut;
   }
 
-  ajoutSelectionAttribut(attribut: IAttributs) {
-    let listIdAttTemp: string[] = [];
-    let positionsAttr = new Map();
-    let indexAttrCourant: number = 0;
-    this.donneeDocCatService.dataDocumentAttributs.forEach(
-      (ele: IAttributs) => {
-        listIdAttTemp.push(ele.id);
-        positionsAttr.set(ele.id, indexAttrCourant++);
+  saveModal(){
+    let count = 0;
+    this.dataSourceAttributResultat.data.forEach((attribut) => {
+      if (attribut.valeur == null || attribut.valeur == "") {
+        count++;
       }
-    );
+    });
+    if (count > 0) {
+      this.valid = true;
+      this.textError = "La colonne valeur de chaque ligne est obligatoire";
+    } else {
+      this.valid = false;
+      this.donneeDocCatService.dataDocumentRessourcesAttributs = this.ELEMENTS_TABLE_ATTRIBUTS;
+      console.log("element final :", this.donneeDocCatService.dataDocumentRessourcesAttributs, this.valid);
+      this.dialogRef.close();
+    }
+  }
+
+  ajoutSelectionAttribut(attribut: IAttributs) {
     this.ELEMENTS_TABLE_ATTRIBUTS = this.dataSourceAttributResultat.data;
     this.ELEMENTS_TABLE_ATTRIBUTS.push({
       attributs: attribut,
       valeur: '',
     });
     this.dataSourceAttributResultat.data = this.ELEMENTS_TABLE_ATTRIBUTS;
-    this.donneeDocCatService.dataDocumentAttributs =
-      this.ELEMENTS_TABLE_ATTRIBUTS;
-    console.log(
-      'attributs selectionnés :',
-      this.donneeDocCatService.dataDocumentAttributs
-    );
     return true;
-  }
-
-  viderselection() {
-    this.datas.forEach((c) => (c.event.target.checked = false));
-    this.datas = [];
-    this.ELEMENTS_TABLE_ATTRIBUTS = [];
-    this.dataSourceAttributResultat.data = this.ELEMENTS_TABLE_ATTRIBUTS;
-    this.donneeDocCatService.dataDocumentAttributs =
-      this.ELEMENTS_TABLE_ATTRIBUTS;
-  }
-
-  lastElementModal() {
-    // this.donneeDocCatService.dataDocumentAttributs = this.STORE_ELEMENTS_ATTRIBUTS;
-    // this.datas.forEach((c) => (c.event.target.checked = false));
-    // this.datas = [];
-    this.ELEMENTS_TABLE_ATTRIBUTS = [];
-    this.donneeDocCatService.dataDocumentAttributs = []
-    //this.donneeDocCatService.dataDocumentAttributs = this.STORE_ELEMENTS_ATTRIBUTS
-    this.datas.forEach((c) => (c.event.target.checked = false));
-    this.datas = [];
-    console.log("ele store :", this.STORE_ELEMENTS_ATTRIBUTS, this.donneeDocCatService.dataDocumentAttributs);
-    
   }
 
   verifierURL(url: string): boolean {
@@ -263,38 +244,38 @@ export class ModalRessourceAttributsComponent implements OnInit {
     );
   }
 
-  verificationModificationDansTableau(
-    element: any,
-    event: any,
-    indexElement: number
-  ) {
-    console.log('element sélectionné :', element, event.target.value);
-    this.ELEMENTS_TABLE_ATTRIBUTS = this.dataSourceAttributResultat.data;
-    this.ELEMENTS_TABLE_ATTRIBUTS[indexElement].valeur = event.target.value;
+  verificationModificationDansTableau(element: any, event: any, indexElement: number) 
+  {
+    console.log('element select : ', element);
 
-    let faux: number = 0;
-    for (let index = 0; index < this.ELEMENTS_TABLE_ATTRIBUTS.length; index++) {
-      let element = this.ELEMENTS_TABLE_ATTRIBUTS[index];
-      if (element.attributs.type == 'Number') {
-        faux = 0;
-        // Test si la valeur est un nombre
-        if (!isNaN(parseFloat(element.valeur))) {
-          console.log('La valeur saisie est un nombre.', element);
+      if (element.attributs.type == 'Text') {
+        if (event.target.value) {
+          this.valid = false;
         } else {
-          faux++;
-          console.log("La valeur saisie n'est pas un nombre.", element);
+          this.valid = true;
+        }   
+      }
+    
+      if (element.attributs.type == 'Number') {
+        // Test si la valeur est un nombre
+        if (!isNaN(parseFloat(event.target.value))) {
+          this.valid = false;
+          console.log('La valeur saisie est un nombre.', event.target.value);
+        } else {
+          this.valid = true;
+          this.textError = "La valeur saisie n'est pas un nombre.";
         }
-        console.log(' index', index);
       }
 
       //----------- cas du type date --------//
       if (element.attributs.type == 'Date') {
-        if (this.isValidDate(element.valeur)) {
+        if (this.isValidDate(event.target.value)) {
           // Si la conversion en date réussie, la validation réussie
-          console.log('La valeur saisie est une date.', element.valeur);
+          this.valid = false;
+          console.log('La valeur saisie est une date.', event.target.value);
         } else {
-          faux++;
-          console.log("La valeur saisie n'est pas une date.", element.valeur);
+          this.valid = true;
+          this.textError = "La valeur saisie n'est pas une date.";
         }
       }
 
@@ -303,41 +284,38 @@ export class ModalRessourceAttributsComponent implements OnInit {
         element.attributs.type == 'Checkbox' ||
         element.attributs.type == 'Radio'
       ) {
-        if (element.valeur == null || element.valeur == '') {
-          faux++;
+        if (event.target.value == null || event.target.value == '') {
+          this.valid = true;
+        } else {
+          this.valid = false;
         }
       }
 
       //----------- cas de type Email ---------------//
       if (element.attributs.type == 'Email') {
-        if (this.verifierEmail(element.valeur)) {
-          console.log('La valeur saisie est une address mail.', element.valeur);
+        if (this.verifierEmail(event.target.value)) {
+          this.valid = false;
+          console.log('La valeur saisie est une address mail.', event.target.value);
         } else {
-          faux++;
-          console.log("La valeur saisie n'est pas un email.", element.valeur);
+          this.valid = true;
+          this.textError = "La valeur saisie n'est pas un email.";
         }
       }
 
       //----------- cas de type URL ---------------//
       if (element.attributs.type == 'Url') {
-        if (this.verifierURL(element.valeur)) {
-          console.log('La valeur saisie est une Url valide.', element.valeur);
+        if (this.verifierURL(event.target.value)) {
+          this.valid = false;
+          console.log('La valeur saisie est une Url valide.', event.target.value);
         } else {
-          faux++;
-          console.log("La valeur saisie n'est pas une url.", element.valeur);
+          this.valid = true;
+          this.textError = "La valeur saisie n'est pas une url.";
         }
       }
-      if (element.valeur == null || element.valeur == '') {
-        faux++;
-      }
-    }
-    if (faux <= 0) {
-      this.valid = false;
-    } else {
-      this.valid = true;
-    }
 
-    console.log('valeurs :', this.ELEMENTS_TABLE_ATTRIBUTS);
+      if (this.valid == false) {
+        this.ELEMENTS_TABLE_ATTRIBUTS[indexElement].valeur = event.target.value;
+      }
 
     return this.valid;
   }
@@ -347,33 +325,10 @@ export class ModalRessourceAttributsComponent implements OnInit {
   }
 
   onSubmit(personnelInput: any) {
-    this.submitted = true;
     //Todo la validation d'element non conforme passe
-    if (this.formeAttribut.invalid) return;
+    if (this.valid) return;
 
     this.valid = false;
-
-    /* let personnelTemp : IPersonnel={
-      id: uuidv4(),
-      nom:personnelInput.nom,
-      prenom:personnelInput.prenom,
-      sexe:personnelInput.sexe,
-      email:personnelInput.email,
-      telephone:personnelInput.telephone,
-      dateNaissance:personnelInput.dateNaissance,
-      dateEntree: personnelInput.dateEntree,
-      dateSortie: personnelInput.dateSortie
-    }
-
-    if(this.personnel != undefined){
-      personnelTemp.id = this.personnel.id
-    }
-    this.personnelService.ajouterPersonnel(personnelTemp).subscribe(
-      object => {
-        this.router.navigate(['/list-personnels']);
-      }
-    ) */
-    this.datas.forEach((c) => (c.event.target.checked = false));
   }
 
   retirerSelectionAttribut(index: number) {
@@ -398,8 +353,6 @@ export class ModalRessourceAttributsComponent implements OnInit {
       this.ELEMENTS_TABLE_ATTRIBUTS.splice(index, 1); // je supprime un seul element du tableau a la position 'index'
     }
     this.dataSourceAttributResultat.data = this.ELEMENTS_TABLE_ATTRIBUTS;
-    this.donneeDocCatService.dataDocumentAttributs =
-      this.ELEMENTS_TABLE_ATTRIBUTS;
   }
   private getAllAttributs() {
     return this.serviceAttribut.getAllAttributs();

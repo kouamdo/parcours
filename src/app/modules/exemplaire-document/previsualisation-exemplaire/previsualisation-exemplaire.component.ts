@@ -1,4 +1,5 @@
 import { LiveAnnouncer } from '@angular/cdk/a11y';
+import { v4 as uuidv4 } from 'uuid';
 import { DatePipe, DecimalPipe } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSort, Sort } from '@angular/material/sort';
@@ -10,6 +11,10 @@ import { IType } from 'src/app/modele/type';
 import { TypeMouvement } from 'src/app/modele/typeMouvement';
 import { DonneesEchangeService } from 'src/app/services/donnees-echange/donnees-echange.service';
 import { ExemplaireDocumentService } from 'src/app/services/exemplaire-document/exemplaire-document.service';
+import { ModalChoixDocEtatComponent } from '../../shared/modal-choix-doc-etat/modal-choix-doc-etat.component';
+import { IDocument } from 'src/app/modele/document';
+import { DocumentService } from 'src/app/services/documents/document.service';
+import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-previsualisation-exemplaire',
@@ -64,13 +69,24 @@ export class PrevisualisationExemplaireComponent implements OnInit {
   filteredOptions: IExemplaireDocument[] | undefined;
   displayedColumns: string[] = ['titre'];
   @ViewChild(MatSort) sort!: MatSort;
+  reponse: any;
+  EtatsSuivant: any;
+  selectedEtatsMap: any;
+  TabOrdre: any;
+  NextEtats: { id: any; ordre: number; etat: any; dateCreation: Date; } | undefined;
+  ExempleOrdre: any;
+  error!: string;
+  courant: string = '';
+  req: boolean = false;
 
   constructor(
     private router:Router, 
+    public dialog: MatDialog,
     private infosPath:ActivatedRoute,
     private dataEnteteMenuService:DonneesEchangeService, 
     private serviceExemplaire:ExemplaireDocumentService,
     private datePipe: DatePipe,
+    private serviceDocument: DocumentService,
     private serviceExemplaireDocument: ExemplaireDocumentService,
     private _liveAnnouncer: LiveAnnouncer,
     private decimalPipe : DecimalPipe
@@ -84,8 +100,9 @@ export class PrevisualisationExemplaireComponent implements OnInit {
 
     let idExemplaire = this.infosPath.snapshot.paramMap.get('idExemplaire');
     if((idExemplaire != null) && idExemplaire!==''){
-      this.serviceExemplaire.getExemplaireDocumentById(idExemplaire).subscribe(
-        x =>{
+      this.serviceExemplaire
+        .getExemplaireDocumentById(idExemplaire)
+        .subscribe((x) => {
           this.exemplaire = x;
           if (this.exemplaire.mouvements != undefined) {
             this.mouvements = this.exemplaire.mouvements
@@ -94,6 +111,23 @@ export class PrevisualisationExemplaireComponent implements OnInit {
             this.dataSourceMouvements.data = this.exemplaire.mouvements
           }
           this.formerEnteteTableauMissions();
+          this.serviceDocument.getDocumentById(x.idDocument).subscribe(
+            (y) => {
+              this.reponse = this.serviceExemplaire.getExemplaireDocumentByOrder(x, y);
+              if (this.reponse) {
+                this.req = this.reponse.sol;
+                this.courant = this.reponse.ele.etat.libelle;
+              }
+              console.log('element response :', this.serviceExemplaire.getExemplaireDocumentByOrder(x, y));
+            }
+          )
+
+          if (this.exemplaire.ordreEtats != undefined) {
+            this.TabOrdre = this.exemplaire.ordreEtats;
+          }
+          if (this.exemplaire.mouvements != undefined) {
+            this.mouvements = this.exemplaire.mouvements;
+          }
         });
     }
     this.titre=this.dataEnteteMenuService.dataEnteteMenu
@@ -226,6 +260,115 @@ export class PrevisualisationExemplaireComponent implements OnInit {
     }
     this.titre=this.dataEnteteMenuService.dataEnteteMenu
     this.nomPatientCourant = sessionStorage.getItem('nomPatientCourant');
+  }
 
+  openModal(documentChoisi: IDocument) {
+    let selectedEtat = {};
+
+    if (this.reponse!.in != documentChoisi.docEtats.length - 1) {
+      this.EtatsSuivant = documentChoisi.docEtats.slice(this.reponse!.in + 1);
+      const dialogRef = this.dialog.open(ModalChoixDocEtatComponent, {
+        width: '600px',
+        data: {
+          documentChoisi: documentChoisi,
+          EtatsChoisi: this.EtatsSuivant,
+          selectedEtat: selectedEtat,
+        },
+      });
+
+      dialogRef.afterClosed().subscribe(
+        () => {
+          this.selectedEtatsMap = this.dataEnteteMenuService.dataEtatSelectionner;
+          console.log('modal response :', this.selectedEtatsMap);
+          let ordre = 0;
+          if (this.TabOrdre.length > 0) {
+            ordre = this.TabOrdre[this.TabOrdre.length - 1].ordre;
+            console.log('taille tab :', this.TabOrdre.length);
+          }
+
+          this.NextEtats = {
+            id: uuidv4(),
+            ordre: ordre + 1,
+            etat: this.selectedEtatsMap!.etat,
+            dateCreation: new Date(),
+          };
+          console.log('nouvelle ordre:', this.NextEtats);
+
+          this.TabOrdre.push(this.NextEtats);
+          this.ExempleOrdre = this.TabOrdre;
+
+          let exemplaireTemp: IExemplaireDocument = {
+            id: uuidv4(),
+            idDocument: this.exemplaire.id,
+            titre: this.exemplaire.titre,
+            description: this.exemplaire.description,
+            missions: this.exemplaire.missions,
+            attributs: this.exemplaire.attributs,
+            objetEnregistre: this.exemplaire.objetEnregistre,
+            categories: this.exemplaire.categories,
+            preconisations: this.exemplaire.preconisations,
+            mouvements: this.exemplaire.mouvements,
+            etat: this.exemplaire.etat,
+            affichagePrix: this.exemplaire.affichagePrix,
+            contientRessources: this.exemplaire.contientRessources,
+            contientDistributeurs: this.exemplaire.contientDistributeurs,
+            typeMouvement: this.exemplaire.typeMouvement,
+            ordreEtats: this.ExempleOrdre,
+            docEtats: [],
+            dateCreation: new Date(),
+            personneRattachee: this.exemplaire.personneRattachee
+          };
+      
+          if (this.exemplaire.id != '') {
+            exemplaireTemp.id = this.exemplaire.id;
+          }
+      
+          this.serviceExemplaire
+            .ajouterExemplaireDocument(exemplaireTemp)
+            .subscribe((object) => {
+              this.ngOnInit();
+              this.router.navigateByUrl(this.router.url);
+            });
+        }
+      );
+    } else {
+      this.error = 'état final aucune action possible !!';
+    }
+  }
+
+  orderSuivant() {
+    let exemplaireTemp: IExemplaireDocument = {
+      id: uuidv4(),
+      idDocument: this.exemplaire.id,
+      titre: this.exemplaire.titre,
+      description: this.exemplaire.description,
+      missions: this.exemplaire.missions,
+      attributs: this.exemplaire.attributs,
+      objetEnregistre: this.exemplaire.objetEnregistre,
+      categories: this.exemplaire.categories,
+      preconisations: this.exemplaire.preconisations,
+      mouvements: this.exemplaire.mouvements,
+      etat: this.exemplaire.etat,
+      affichagePrix: this.exemplaire.affichagePrix,
+      contientRessources: this.exemplaire.contientRessources,
+      contientDistributeurs: this.exemplaire.contientDistributeurs,
+      typeMouvement: this.exemplaire.typeMouvement,
+      ordreEtats: this.ExempleOrdre,
+      docEtats: [],
+      dateCreation: new Date(),
+      personneRattachee: this.exemplaire.personneRattachee
+    };
+
+    if (this.exemplaire.id != '') {
+      exemplaireTemp.id = this.exemplaire.id;
+    }
+
+    this.serviceExemplaire
+      .ajouterExemplaireDocument(exemplaireTemp)
+      .subscribe((object) => {
+        this.router.navigateByUrl(this.router.url);
+      });
+
+    console.log('ordre etat :', exemplaireTemp);
   }
 }

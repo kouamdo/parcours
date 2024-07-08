@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { IEtape } from 'src/app/modele/etape';
 import { IDocument } from 'src/app/modele/document';
 import { IDocEtats } from 'src/app/modele/doc-etats';
+import { IParours } from 'src/app/modele/parours';
 
 @Injectable({
   providedIn: 'root',
@@ -48,18 +49,24 @@ export class EtapesService {
     });
   }
 
+  getEtapesByParours(paroursId: string): Observable<IEtape[]> {
+    return this.http
+      .get<IParours>(`api/parours/${paroursId}`)
+      .pipe(map((parours) => parours.etape));
+  }
+
   getDocumentsByEtapeId(etapeId: string): Observable<IDocument[]> {
-    // Perform a search in the iEtat table to find etapes associated with the given etape ID
-    // Then return the documents associated with those etapes
+    // Perform a search in the iEtat table to find etapes personnesRatacheesd with the given etape ID
+    // Then return the documents personnesRatacheesd with those etapes
     return this.http.get<IDocEtats[]>('api/iEtat').pipe(
       map((docEtats) => {
-        const associatedDocuments: IDocument[] = [];
+        const personnesRatacheesdDocuments: IDocument[] = [];
         docEtats.forEach((docEtat) => {
           if (docEtat.etape!.id === etapeId && docEtat.etape?.document) {
-            associatedDocuments.push(...docEtat.etape.document);
+            personnesRatacheesdDocuments.push(...docEtat.etape.document);
           }
         });
-        return associatedDocuments;
+        return personnesRatacheesdDocuments;
       })
     );
   }

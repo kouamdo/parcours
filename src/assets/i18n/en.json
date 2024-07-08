@@ -52,7 +52,9 @@
     "button8": "Delete",
     "button9": "Add",
     "button10": "Close",
-    "button11": "Registrer"
+    "button11": "Registrer",
+    "button12": "Next",
+    "button13": "Next"
   },
   "patient": {
     "title1": "Add patient",
@@ -213,7 +215,7 @@
     "title2": "Select attributs of this category",
     "title4": "Pair other documents",
     "title5": "Select documents to pair",
-    "title6": "Creat document's statuts",
+    "title6": "Creat document's Status",
     "title7": "Current state",
     "title8": "Documents not found",
     "table": {
@@ -240,7 +242,7 @@
       "title20": "Distributor visibility ?",
       "title21": "Paired documents",
       "title22": "Mouvement's nature",
-      "title23": "Document's statut"
+      "title23": "Document's Status"
     },
     "form": {
       "text1": "Title is required.",
@@ -258,7 +260,7 @@
       "text1": "missions's list of document",
       "text2": "attributs's list of document",
       "text3": "attributs's list by categories",
-      "text4": "Statut's list of document"
+      "text4": "Status's list of document"
     },
     "exemplaire": {
       "title": "Document's instance ",
@@ -432,6 +434,36 @@
       "title9": "Actions "
     }
   },
+  "promo-distributeur":{
+    "title": "Add Promotion",
+    "text1":"Issuer",
+    "text2":"Name of Resource or Family",
+    "emetteur": "Issuer",
+    "date_debut": "Start date",
+    "date_fin": "End date",
+    "code": "Unique Code",
+    "montant": "Discount amount",
+    "Pourcentage": "Discount percentage",
+    "remise": "Type of discount",
+    "beneficiaire": "Beneficiary",
+    "emetteur_control": "Issuer is mandatory.",
+    "date_debut_control": "The Promotion Start Date is mandatory.",
+    "date_fin_control": "The Promotion End Date is mandatory.",
+    "code_control": "The unique promotion code is mandatory.",
+    "beneficiaire_control": "Please select at least one beneficiary.",
+    "remise_control": "The discount is compulsory.",
+    "Pourcentage_control": "Percentage should not be more than 100",
+     "montant1": "Amount",
+    "pourcentage1": "Percentage",
+    "date_error": "The end date must be later than the start date. ",
+    "montant_message": "Enter the amount",
+    "pourcentage_messgae":"Entrez the percentage",
+    "rechercher":"Search",
+    "modifier": "Edit",
+    "famille": "Category",
+    "ressource": "Resource",
+    "action": "Actions"
+  },
   "precomvt": {
     "header": "New Préconisation",
     "header1": "Assign Families",
@@ -493,36 +525,42 @@
   "validation":{
     "header":"Add Validation",
     "title0": "listing validation",
-        "table":{
+    "title1":"Allowed staff",
+    "table":{
       "title0":"validation"
-        },
-        "form":{
-          "label1":"code",
-          "label2":"etat",
-          "label3":"Creation day",
-          "label4": "Voting Type",
-          "label5": "Duration vote",
-          "label6": "role"
-        }
-      },
+    },
+    "form":{
+      "label1":"code",
+      "label2":"etat",
+      "label3":"Creation day",
+      "label4": "Voting Type",
+      "label5": "Duration vote",
+      "label6": "role"
+    }
+  },
   "etats": {
     "table": {
-      "title1": "Add Status"
+      "title1": "Add Status",
+      "title2": "Previous status",
+      "title3": "Next status"
     }
   },
   "doc-etats": {
-    "button1": "Statut",
+    "button1": "Status",
     "button2": "Add validation ?",
-    "text1": "Update the statut of this document",
+    "text1": "Update the Status of this document",
     "form": {
-      "text1": "Current statut",
-      "text2": "next statut",
-      "text3": "Statut's position",
+      "text1": "Current Status",
+      "text2": "next Status",
+      "text3": "Status's position",
       "text4": "This order already existed",
-      "text5": "This statut already existed"
+      "text5": "This Status already existed",
+      "text6": "Paired validation",
+      "text7": "Search validatuion"
     }
   },
   "etape":{
+    "title1":"Document",
     "table": {
       "title": "Add",
       "title1": "Libel",

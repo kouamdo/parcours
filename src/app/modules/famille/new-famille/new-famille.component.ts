@@ -16,7 +16,7 @@ export class NewFamilleComponent implements OnInit {
 
   famille : IFamille|undefined;
   forme: FormGroup;
-  btnLibelle: string="Ajouter";
+  btnLibelle: string="Enregistrer";
   submitted: boolean=false;
 
   constructor(private formBuilder:FormBuilder, private familleService:FamillesService,private dataEnteteMenuService:DonneesEchangeService,private router:Router, private infosPath:ActivatedRoute, private datePipe: DatePipe) {
@@ -50,6 +50,9 @@ export class NewFamilleComponent implements OnInit {
 
   get f(){
     return this.forme.controls;
+  }
+  return() {
+    this.router.navigate(['/list-familles']);
   }
 
   onSubmit(familleInput:any){

@@ -1,17 +1,14 @@
+
 #mainBlock{
     background-color: #ffffff;
     padding: 5px;
     width: 50%;
     margin: auto;
 }
-.ordreInput{
-    input{
-        width: 100px;
-    }
-}
-.sarchBlock{
+.searchBlock{
     width: 100% !important;
     padding: 0 5px;
+    position: relative;
     div{
         display: flex;
         align-items: center;
@@ -22,10 +19,10 @@
     form{
         display: flex;
         align-items: center;
-        justify-content: space-between;
+        justify-content: flex-start;
     }
 }
-.example-form{
+.example-form-entete{
     width: 100%;
     display: flex;
     align-items: flex-start;
@@ -35,60 +32,19 @@
         margin-right: 2px;
         width: fit-content;
     }
-    .example-full-width {
-        height: 42px !important;
-        border: 2px solid #28a745;
-        .form-control{
-            box-shadow: none !important;
-            border: none !important;
-            background-color: transparent;
-        }
-    }
-    .mat-input{
-        position: absolute;
-        bottom: 100px;
-        height: 20px !important;
-    }
 }
-#tableList{
-    margin-top: 50px !important;
+#tableBlock{
+    margin-top: 25px !important;
 }
 .texteErreur{
     position: absolute;
+    right: 2px;
+    bottom: 5%;
     p{
         font-size: small;
         font-style: italic;
         color: rgba(255, 0, 0, 0.766);
     }
-}
-.valBtn{
-    justify-content: end;
-}
-.btnAddValidation{
-    color: #FFD700;
-    height: fit-content;
-    i{
-        font-size: 12px !important;
-    }
-}
-.actions{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    button{
-        width: fit-content;
-        padding: 0;
-        margin: 0 5px;
-        margin-bottom: 5px;
-        i{
-            font-size: 10px;
-        }
-    }
-}
-.ordreInput2 input{
-    margin: auto;
-    height: 20px;
-    position: absolute;
 }
 .texteErreurChange span{
     font-size: 8px;
@@ -96,6 +52,30 @@
     font-style: italic;
     position: relative;
     top: -2px;
+}
+.choixCell{
+    position: relative;
+}
+.coverFull{
+    display: none;
+}
+.choixCell:hover{
+    .coverFull{
+        display: block;
+        background-color: #d2d2d25f;
+        position: absolute;
+        top: 0;
+        height: 50px;
+        width: 100%;
+        display: flex;
+        span{
+            margin: auto;
+            i{
+                font-size: 18px;
+                color: #f571719d;
+            }
+        }
+    }
 }
 @media screen and (max-width: 950px ) {
     #mainBlock{
@@ -121,7 +101,7 @@
     #mainBlock{
         width: 100%;
     }
-    .sarchBlock{
+    .searchBlock{
         form{
             flex-wrap: wrap-reverse;
             div{
@@ -130,17 +110,9 @@
             label{
                 width: 40%;
             }
-            .example-full-width{
-                width: 50%;
-            }
         }
         .etatInput{
             margin-bottom: 5px;
-        }
-        .ordreInput{
-            input{
-                width: 50%;
-            }
         }
     }
 }

@@ -29,11 +29,11 @@ import { ModalRessourceAttributsComponent } from '../../shared/modal-ressource-a
 export class NewRessourceComponent implements OnInit {
   ressource: IRessource | undefined;
   forme: FormGroup;
-  btnLibelle: string="Ajouter";
+  btnLibelle: string="Enregistrer";
   submitted: boolean=false;
   unites : String[] = [];
   IdRessource:string= ""
-  ELEMENTS_TABLE_ATTRIBUTS: any[] = [];
+  ELEMENTS_TABLE_ATTRIBUTS_SELECT: any[] = [];
   filteredOptions: IFamille[] | undefined;
   dataSource = new MatTableDataSource<IFamille>();
   familleDeRessource: IFamille = {
@@ -46,7 +46,6 @@ export class NewRessourceComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private dataEnteteMenuService: DonneesEchangeService,
-    private dataDocumentCodebarre: DonneesEchangeService,
     private barService: ModalCodebarreService,
     private familleService: FamillesService,
     private ressourceService: RessourcesService,
@@ -115,12 +114,12 @@ export class NewRessourceComponent implements OnInit {
             scanBarcode: this.ressource?.scanBarCode,
           });
           if (this.ressource.caracteristiques != undefined) {
-            this.ELEMENTS_TABLE_ATTRIBUTS = this.ressource.caracteristiques
+            this.ELEMENTS_TABLE_ATTRIBUTS_SELECT = this.ressource.caracteristiques
           }
-          this.dataEnteteMenuService.dataDocumentAttributs = this.ELEMENTS_TABLE_ATTRIBUTS
+          this.dataEnteteMenuService.dataDocumentRessourcesAttributs = this.ELEMENTS_TABLE_ATTRIBUTS_SELECT;
       });
     } else {
-      this.dataEnteteMenuService.dataDocumentAttributs = []
+      this.dataEnteteMenuService.dataDocumentRessourcesAttributs = []
     }
     this.familleService.getTypeUnite().subscribe((u) => {
       this.unites = u.type;
@@ -135,29 +134,31 @@ export class NewRessourceComponent implements OnInit {
    * Methode permettant d'ouvrir la modal de selection des attributs de la ressource
    */
   openAttributDialog(){
+    this.dataEnteteMenuService.dataDocumentRessourcesAttributs = this.ELEMENTS_TABLE_ATTRIBUTS_SELECT;
+
     const dialogRef = this.dialogDef.open(ModalRessourceAttributsComponent,
     {
-      maxWidth: '100vw',
-      maxHeight: '100vh',
       width:'100%',
       height:'100%',
       enterAnimationDuration:'1000ms',
-      exitAnimationDuration:'1000ms',
-      data:{}
+      exitAnimationDuration:'1000ms'
     }
     )
 
     dialogRef.afterClosed().subscribe(result => {
-      this.ELEMENTS_TABLE_ATTRIBUTS =  this.dataEnteteMenuService.dataDocumentAttributs      
+      this.ELEMENTS_TABLE_ATTRIBUTS_SELECT =  this.dataEnteteMenuService.dataDocumentRessourcesAttributs      
     });
     
+  }
+  return(){
+    this.router.navigate(['list-ressources']);
   }
 
   onSubmit(ressourceInput:IRessource){
     this.submitted=true;
-    if(this.forme.invalid || this.ELEMENTS_TABLE_ATTRIBUTS.length<1) return console.log("error azertyuiop", this.forme.invalid);
+    if(this.forme.invalid) return console.log("error azertyuiop", this.forme.invalid);
 
-    let styleAtt : any = this.ELEMENTS_TABLE_ATTRIBUTS;
+    let styleAtt : any = this.ELEMENTS_TABLE_ATTRIBUTS_SELECT;
 
     let ressourceTemp : IRessource={
       id: uuidv4(),
@@ -181,7 +182,7 @@ export class NewRessourceComponent implements OnInit {
         this.router.navigate(['list-ressources']);
       }
     )
-    this.dataEnteteMenuService.dataDocumentAttributs = []
+    this.dataEnteteMenuService.dataDocumentRessourcesAttributs = []
 
   }
 

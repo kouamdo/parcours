@@ -1,0 +1,296 @@
+<div id="mainSection">
+  <div class="card block" id="top2">
+    <div class="card-header" class="entete pt-4 pb-4">
+      {{titre}}
+    </div>
+    <div class="card-body">
+      <form [formGroup]="promoForm" (ngSubmit)="submitForm()" *ngIf="promoForm">
+        <div class="">
+          <div class="">
+            <!-- Emetteur field with matAutocomplete -->
+            <div class="form-group">
+              <div>
+                <div class="champs">
+                  <label for="emetteur" class="label">
+                    {{ "promo-distributeur.emetteur" | translate
+                    }}<span style="color: red" aria-label="required">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    formControlName="emetteur"
+                    name="emetteur"
+                    id="emetteur"
+                    placeholder="{{
+                      'promo-distributeur.text1' | translate
+                    }}"
+                    class="champsAutocomplate"
+                    required
+                    [matAutocomplete]="auto"
+                  />
+                  <mat-autocomplete
+                    #auto="matAutocomplete"
+                    [displayWith]="displayDistributeur"
+                  >
+                    <mat-option
+                      *ngFor="let distributeur of filteredDistributeurs | async"
+                      [value]="distributeur"
+                    >
+                      {{ distributeur.raisonSocial }}
+                    </mat-option>
+                  </mat-autocomplete>
+                </div>
+                <div
+                  *ngIf="submitted && f['emetteur'].errors"
+                  class="alert alert-danger"
+                >
+                  <div *ngIf="f['emetteur'].errors['required']">
+                    {{ "promo-distributeur.emetteur_control" | translate }}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Beneficiaires field -->
+            <div class="form-group">
+              <div>
+                <div class="champs">
+                  <label for="beneficiaires" class="label">
+                    {{ "promo-distributeur.beneficiaire" | translate
+                    }}<span style="color: red" aria-label="required">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    formControlName="beneficiaire"
+                    name="beneficiaire"
+                    id="beneficiaire"
+                    placeholder="{{
+                      'promo-distributeur.text2' | translate
+                    }}"
+                    class="champsAutocomplate"
+                    [matAutocomplete]="autoBeneficiaires"
+                  />
+                  <mat-autocomplete
+                    #autoBeneficiaires="matAutocomplete"
+                    [displayWith]="displayBeneficiaire"
+                    (optionSelected)="onBeneficiaireSelected($event)"
+                  >
+                    <mat-option
+                      *ngFor="let beneficiaire of filteredBeneficiaires | async"
+                      [value]="beneficiaire"
+                    >
+                      {{ beneficiaire.libelle }}
+                    </mat-option>
+                  </mat-autocomplete>
+                </div>
+                <div
+                  *ngIf="selectedBeneficiaires.length === 0 && submitted"
+                  class="alert alert-danger"
+                >
+                  <div>
+                    {{ "promo-distributeur.beneficiaire_control" | translate }}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Afficher les beneficiaires sélectionnés -->
+            <div *ngIf="selectedBeneficiaires.length > 0" class="selected-beneficiaires">
+              <div *ngFor="let beneficiaire of selectedBeneficiaires" class="selected-beneficiaire" [ngClass]="{famille: isFamille(beneficiaire), ressource: isRessource(beneficiaire) }">
+                <span>
+                  {{ beneficiaire.libelle }}
+                </span>
+                <button type="button" class="btn delete-button" (click)="removeBeneficiaire(beneficiaire)">
+                  <i class="fa fa-trash"></i>
+                </button>
+              </div>
+              <!-- Indications de couleur -->
+              <div class="beneficiaire-legend">
+                <div class="color-circle-famille">
+                  <i class="fa fa-circle" aria-hidden="true"></i>
+                  <span>
+                    {{'promo-distributeur.famille' | translate}}
+                  </span>
+                </div>
+                <div class="color-circle-ressource">
+                  <i class="fa fa-circle" aria-hidden="true"></i>
+                  <span>
+                    {{'promo-distributeur.ressource' | translate}}
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Date fields -->
+            <div>
+              <div class="champs">
+                <label for="dateDebut" class="label">
+                  {{ "promo-distributeur.date_debut" | translate
+                  }}<span style="color: red" aria-label="required">*</span>
+                </label>
+                <input
+                  type="date"
+                  formControlName="dateDebut"
+                  name="dateDebut"
+                  id="dateDebut"
+                  placeholder="{{
+                    'promo-distributeur.date_debut' | translate
+                  }}"
+                  value=""
+                  required
+                  class="form-control"
+                />
+              </div>
+              <div
+                *ngIf="submitted && f['dateDebut'].errors"
+                class="alert alert-danger"
+              >
+                <div *ngIf="f['dateDebut'].errors['required']">
+                  {{ "promo-distributeur.date_debut_control" | translate }}
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <div class="champs">
+                <label for="dateFin" class="label">
+                  {{ "promo-distributeur.date_fin" | translate
+                  }}
+                </label>
+                <input
+                  type="date"
+                  formControlName="dateFin"
+                  name="dateFin"
+                  id="dateFin"
+                  placeholder="{{ 'promo-distributeur.date_fin' | translate }}"
+                  value=""
+                  class="form-control"
+                />
+              </div>
+            </div>
+            <div
+              *ngIf="f['dateFin'].errors?.['dateInvalid']"
+              class="alert alert-danger"
+            >
+              <div>
+                {{ "promo-distributeur.date_error" | translate }}
+              </div>
+            </div>
+
+            <!-- Code field -->
+            <div class="form-group">
+              <div>
+                <div class="champs">
+                  <label for="code" class="label">
+                    {{ "promo-distributeur.code" | translate
+                    }}<span style="color: red" aria-label="required">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    formControlName="code"
+                    name="code"
+                    id="code"
+                    placeholder="{{ 'promo-distributeur.code' | translate }}"
+                    class="form-control"
+                    required
+                  />
+                </div>
+
+                <div
+                  *ngIf="submitted && f['code'].errors"
+                  class="alert alert-danger"
+                >
+                  <div *ngIf="f['code'].errors['required']">
+                    {{ "promo-distributeur.code_control" | translate }}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- remise field -->
+            <div class="form-group">
+              <div class="champs">
+                <label for="type" class="label">
+                  {{ "promo-distributeur.remise" | translate }}<span style="color: red" aria-label="required">*</span>
+                </label>
+                <select
+                  formControlName="type"
+                  class="form-control"
+                  (change)="onOptionChange($event)"
+                >
+                  <option value="Montant" selected="selected">
+                    {{ "promo-distributeur.montant1" | translate }}
+                  </option>
+                  <option value="Pourcentage">
+                    {{ "promo-distributeur.pourcentage1" | translate }}
+                  </option>
+                </select>
+              </div>
+            </div>
+
+            <!--selectedOption -->
+            <div *ngIf="selectedOption === 'Montant'" class="form-group">
+              <div class="champs">
+                <label for="montant" class="label">
+                  {{ "promo-distributeur.montant_message" | translate }}
+                </label>
+                <input
+                  type="number"
+                  formControlName="montant"
+                  name="montant"
+                  id="montant"
+                  required
+                  placeholder="Enter the amount"
+                  class="form-control"
+                />
+              </div>
+            </div>
+            <div
+                *ngIf="submitted && f['montant'].errors"
+                class="alert alert-danger"
+              >
+                <div *ngIf="f['montant'].errors['required']">
+                  {{ "promo-distributeur.remise_control" | translate }}
+                </div>
+              </div>
+
+            <div *ngIf="selectedOption === 'Pourcentage'" class="form-group">
+              <div class="champs">
+                <label for="pourcentage" class="label">
+                  {{ "promo-distributeur.pourcentage_messgae" | translate }}
+                </label>
+                <input
+                  type="number"
+                  formControlName="pourcentage"
+                  name="pourcentage"
+                  id="pourcentage"
+                  placeholder="Entrez le Pourcentage"
+                  class="form-control"
+                />
+              </div>
+              <div
+                *ngIf="
+                  promoForm.get('pourcentage')?.hasError('max') &&
+                  promoForm.get('pourcentage')?.dirty
+                "
+                class="text-danger"
+                class="alert alert-danger"
+              >
+                <div>
+                  {{ "promo-distributeur.Pourcentage_control" | translate }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="actionButton valBtn">
+          <button class="btn retour" (click)="return()" type="button" title="{{'lists.button3' | translate}}">
+            <i class="fa fa-undo" aria-hidden="true"></i>
+          </button>
+          <button class="btn btnValidation" type="submit" title="{{'lists.button11' | translate}}">
+            <i class="fa fa-check" aria-hidden="true"></i>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

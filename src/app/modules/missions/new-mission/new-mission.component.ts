@@ -18,7 +18,7 @@ import {v4 as uuidv4} from 'uuid';
 export class NewMissionComponent implements OnInit {
   mission : IMission|undefined;
   forme: FormGroup;
-  btnLibelle: string="Ajouter";
+  btnLibelle: string="Enregistrer";
   submitted: boolean=false;
   services$: Observable<IService[]>=EMPTY;
   idService: string = ""
@@ -68,6 +68,9 @@ export class NewMissionComponent implements OnInit {
   }*/
   get f(){
     return this.forme.controls;
+  }
+  return(){
+    this.router.navigate(['/list-missions']);
   }
 
   onSubmit(missionInput:any){

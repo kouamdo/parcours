@@ -79,7 +79,7 @@ export class ListPrecomvtsComponent implements OnInit {
 
     public rechercherListingPrecomvt(option: IPrecoMvt){
       this.servicePrecoMvt.getPrecomvtsByLibelle(option.libelle.toLowerCase()).subscribe(
-        //  valeurs => {this.dataSource.data = valeurs;}
+        valeurs => {this.dataSource.data = valeurs;}
       )
     }
 

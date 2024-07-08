@@ -17,7 +17,7 @@ export class NewRoleComponent implements OnInit {
 
   role : IRole |undefined;
   forme: FormGroup;
-  btnLibelle: string="Ajouter";
+  btnLibelle: string="Enregistrer";
   submitted: boolean=false;
   //TODO validation du formulaire. particulièrment les mail
   constructor(private formBuilder:FormBuilder, private roleService:RolesService,private dataEnteteMenuService:DonneesEchangeService,private router:Router, private infosPath:ActivatedRoute, private datePipe: DatePipe){
@@ -51,6 +51,10 @@ export class NewRoleComponent implements OnInit {
 
   get f(){
     return this.forme.controls;
+  }
+
+  return(){
+    this.router.navigate(['/list-roles']);
   }
 
   onSubmit(roleInput:any){

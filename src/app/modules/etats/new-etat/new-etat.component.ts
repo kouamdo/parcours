@@ -14,7 +14,7 @@ import {v4 as uuidv4} from 'uuid';
 export class NewEtatComponent {
   etats : IEtats|undefined;
   formeEtat: FormGroup;
-  btnLibelle: string="Ajouter";
+  btnLibelle: string="Enregistrer";
   submitted: boolean=false;
 
   constructor(private formBuilder:FormBuilder,private dataEnteteMenuService:DonneesEchangeService, private EtatService: EtatService,private router:Router, private infosPath:ActivatedRoute) {
@@ -41,6 +41,10 @@ export class NewEtatComponent {
 
   get f(){
     return this.formeEtat.controls;
+  }
+
+  return(){
+    this.router.navigate(['/list-etats']);
   }
 
   onSubmit(etatsInput:any){

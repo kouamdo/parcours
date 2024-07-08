@@ -8,60 +8,42 @@ select {
     border-radius: 5px;
   }
   
-  .badge-container {
-    margin-top: 8px;
+  .display {
+    width: 100%;
     display: flex;
+    align-items: center;
+    justify-content: flex-end;
     flex-wrap: wrap;
+  }
+
+  .badge-container {
+    margin: 8px auto;
+    width: 50%;
   }
   
   .badge-content {
-    background-color: #e0e0e0;
-    border-radius: 4px;
-    margin-right: 8px;
-    margin-bottom: 8px;
-    min-width: 48vw; /* Default min-width */
+    height: 40px;
+    background-color: #28a7463c;
+    border-radius: 3px;
+    margin-left: 3px;
+    padding-left: 2px;
     display: flex;
+    align-items: center;
     justify-content: space-between;
-  }
-  
-  @media screen and (min-width: 1024px) {
-    /* Adjust min-width for larger screens */
-    .badge-content {
-      min-width: 44.7vw; /* Set min-width for each badge when there are two badges per row */
+    font-size: 12px !important;
+    span{
+      margin-left: 1px;
     }
-
-    .badge-content {   
-      background-color: #e0e0e0;
-      min-width: 21.9vw; /* Set min-width for each badge when there are two badges per row */
-      border-radius: 4px;
-      margin-right: 8px;
-      margin-bottom: 8px;
-      display: flex;
-      justify-content: space-between;
-
-    }
-    .badge-container {
-      margin-top: 8px;
-      display: flex;
+    .remove-button{
+      height: 40px;
+      background-color: #28a74563;
+      color: red;
+      font-size: 10px !important;
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
     }
   }
-  
 
-  .display{
-    display: flex;
-    flex-wrap: wrap;
-  }
-  
-  .remove-button {
-    margin-left: 8px;
-    cursor: pointer;
-    color: white; 
-    border: none; 
-    padding: 4px 6px; 
-    border-radius: 4px;
-  }
-  
-  
   @media screen and (max-width: 600px) {
     .badge-content {
         flex-basis: 100%; 

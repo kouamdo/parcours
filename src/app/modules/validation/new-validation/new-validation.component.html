@@ -47,8 +47,7 @@
                             <div>
                                 <div class="champs">
                                     <label for="etat" class="label">
-                                        {{ "validation.form.label2" | translate
-                                        }}<span style="color: red" aria-label="required">*</span>
+                                        {{ "validation.form.label2" | translate}}
                                     </label>
                                     <p class="w-100 d-flex align-items-center choix">
                                         <input type="checkbox" [checked]="forme.get('etat')?.value"
@@ -63,6 +62,7 @@
                                     {{ "validation.form.label4" | translate }}<span style="color: red" aria-label="required">*</span>
                                 </label>
                                 <select class="form-control" formControlName="typeVote" name="typeVote" id="typeVote" required>
+                                    <option>Unitaire</option>
                                     <option>Unanime</option>
                                     <option>Majoritaire</option>
                                 </select>
@@ -90,32 +90,28 @@
                         <div class="form-group">
                             <div class="champs">
                                 <label  for="roleval"  class="label" >
-                                  {{'validation.form.label6' | translate}} <sup>*</sup>
+                                  {{'validation.form.label6' | translate}} <span style="color: red" aria-label="required">*</span>
                                 </label>
-                                <mat-form-field class="example-full-width w-100" appearance="fill">
-                                    <input  type="text" matInput [matAutocomplete]="auto"  aria-label="roleval" formControlName="roleval" name="roleval" id="roleval" placeholder="" class="w-100">
-                                    <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn" >
+                                <input required type="text" matInput [matAutocomplete]="auto"  aria-label="roleval" formControlName="roleval" name="roleval" id="roleval" class="champsAutocomplate">
+                                <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
                                     <mat-option *ngFor="let option of roles" [value]="option">
                                         {{option.titre}}
                                     </mat-option>
-                                    </mat-autocomplete>
-                                </mat-form-field>
+                                </mat-autocomplete>
                             </div>
-                            <div *ngIf="submitted && f['roleval'].errors" class="alert alert-danger">
-                                <div *ngIf="f['roleval'].errors['required']">
-                                    {{ "validation.form.text1" | translate }}
-                                </div>
+                            <div *ngIf="submitted && !f['roleval'].value" class="alert alert-danger">
+                                <div>{{ "validation.form.text1" | translate }}</div>
                             </div>
         
                           </div>
                     </div>
                 </div>
-                <div class="actionButton">
-                    <button class="btn" routerLink="../list-validations">
-                        <i class="fa fa-reply mr-1" aria-hidden="true"></i>{{ "lists.button2" | translate }}
+                <div class="actionButton valBtn" >
+                    <button class="btn retour" (click)="return()" title="{{'lists.button3' | translate}}">
+                        <i class="fa fa-undo" aria-hidden="true"></i>
                     </button>
-                    <button type="submit" class="btn btnValidation">
-                        {{ btnLibelle }}
+                    <button type="submit" class="btn btnValidation" title="{{'lists.button11' | translate}}">
+                        <i class="fa fa-check" aria-hidden="true"></i>
                     </button>
                 </div>
             </form>

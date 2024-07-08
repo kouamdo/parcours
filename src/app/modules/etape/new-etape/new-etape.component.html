@@ -1,6 +1,5 @@
 <div id="mainSection">
   <div class="card block" id="top2" *ngIf="etape">
-    <!--<div class="card-header pt-4 pb-4 entete" class="entete pt-4 pb-4 ">{{'distributeur.table.title' | translate}}</div>-->
     <div class="card-header" class="entete pt-4 pb-4">
       {{'etape.table.title' | translate}}
     </div>
@@ -30,44 +29,43 @@
                   </label>
                   <p class="w-100 d-flex align-items-center choix">
                     <input type="checkbox" checked value="true" formControlName="etat" name="etat" class="form-control"
-                      id="etat" placeholder="">
+                      id="etat">
                   </p>
                 </div>
               </div>
             </div>
-            <!-- documents ------------------------------------------------- -->
 
+            <!-- documents ------------------------------------------------- -->
             <div class="form-group">
               <div class="champs">
                 <label for="" class="label">
-                  Document <span style="color: red;" aria-label="required">*</span>
+                  {{'etape.title1' | translate}} <span aria-label="required"><sup>*</sup></span>
                 </label>
                 <div class="w-100">
 
                   <!-- Ouvrir le formulair de selection des documents -->
-                  <div class="listAttr">
-                    <span *ngFor="let document of documents">
-                      {{ document.titre }} <span>, </span>
-                    </span>
+                  <div class="listAttr pr-5">
                     <button type="button" class="btn p-0" (click)="openSousDocumentDialog()">
                       <i class="fas fa-plus-square"></i>
                     </button>
-                    <span *ngFor="let listeSousDocuments of ELEMENTS_TABLE_SOUS_DOCUMENTS">
-                      {{listeSousDocuments.titre | lowercase}}<span>, </span>
-                    </span>
+                    <p class="pt-3">
+                      <span *ngFor="let document of documents">
+                        {{ document.titre }} <span>, </span>
+                      </span>
+                    </p>
                   </div>
                 </div>
               </div>
             </div>
-
-
-
           </div>
         </div>
-        <div class="actionButton">
-          <button class="btn" (click)="closeModal()">{{'lists.button2' |
-            translate}}</button>
-          <button type="submit" class="btn">{{btnLibelle}}</button>
+        <div class="actionButton valBtn" >
+          <button class="btn retour" type="button" (click)="closeModal()" title="{{'lists.button2' | translate}}">
+              <i class="fa fa-undo" aria-hidden="true"></i>
+          </button>
+          <button type="submit" class="btn btnValidation" title="{{btnLibelle}}">
+              <i class="fa fa-check" aria-hidden="true"></i>
+          </button>
         </div>
       </form>
     </div>

@@ -16,7 +16,7 @@ import { RolesService } from 'src/app/services/roles/roles.service';
 export class NewValidationComponent implements OnInit {
   validation : IValidation|undefined;
   forme: FormGroup;
-  btnLibelle: string="Ajouter";
+  btnLibelle: string="Enregistrer";
   submitted: boolean=false;
   roles: IRole[]|undefined;
   initialDateCreation = new FormControl(new Date());
@@ -90,11 +90,14 @@ export class NewValidationComponent implements OnInit {
   private getAllRoles() {
     return this.roleservices.getAllRoles();
   }
+  return(){
+    this.router.navigate(['/list-validations']); 
+  }
 
   onSubmit(validationInput:any){
 
     this.submitted=true;
-    if(this.forme.invalid) return
+    if(this.forme.invalid || !validationInput.roleval) return;
 
     let validationTemp : IValidation={
       id: uuidv4(),

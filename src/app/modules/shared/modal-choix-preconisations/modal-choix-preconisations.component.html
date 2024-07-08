@@ -1,26 +1,24 @@
-<div id="mainSection" class="bg-light card modalCategorie">
+<div id="mainSection" class="bg-light card modalCategorie modalContentScroll">
     <form [formGroup]="formePrecoMvt" *ngIf="formePrecoMvt" class="w-100">
         <div class="form-group mt-5">
             <div class='card-hearder'>
                 <h2 class="modal-title">{{'preconisation.form.title1' | translate}}</h2>
             </div>
             <div class="newAttSection">
-                <div class="sarchBlock">
-                    <form class="example-form">
-                        <mat-form-field class="example-full-width" appearance="fill">
-                            <input type="text" matInput aria-label="Rechercher" [formControl]="myControl" [matAutocomplete]="auto">
-                            <mat-autocomplete class="blockAutocomplate" #auto="matAutocomplete" [displayWith]="displayFn">
-                                <mat-option class="options" *ngFor="let option of filteredOptions" [value]="option" (onSelectionChange)="rechercherListingPreco(option)">
-                                    {{option.libelle}}
-                                </mat-option>
-                            </mat-autocomplete>
-                        </mat-form-field>
+                <div class="searchBlock">
+                    <form class="example-form-entete">
+                        <input placeholder="{{'patient.search-bar' | translate}}" type="text" matInput aria-label="Rechercher" [formControl]="myControl" [matAutocomplete]="auto">
+                        <mat-autocomplete class="blockAutocomplate" #auto="matAutocomplete" [displayWith]="displayFn">
+                            <mat-option class="options" *ngFor="let option of filteredOptions" [value]="option" (onSelectionChange)="rechercherListingPreco(option)">
+                                {{option.libelle}}
+                            </mat-option>
+                        </mat-autocomplete>
                     </form>
                 </div>
 
                 <!-- tableau listing des PrecoMvts -->
 
-                <div class="card-body p-0 tableBlock" id="tableList">
+                <div class="card-body p-0 tableBlock" id="tableBlock">
                     <div class='table-responsive w-100'>
                         <table class='table table-sm table-centered table-striped table-bordered w-100' mat-table [dataSource]="dataSourcePreco" matSort (matSortChange)="announceSortChange($event)">
 
@@ -41,7 +39,7 @@
                                 <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{"patient.table.title8" | translate}} </th>
                                 <td class="text-dark containCell" mat-cell *matCellDef="let element">
                                     <div class="actions">
-                                        <input type="checkbox" [value]="element.libelle" name="PrecoMvts" id="PrecoMvts" (click)="getPrecoMvtId(element.id)" (change)="onCheckPrecoMvtChange($event)">
+                                        <input type="checkbox" [checked]="selectedIds.has(element.id)" (click)="getPrecoMvtId(element.id)" (change)="onCheckPrecoMvtChange($event, element)">
                                         <span role="button" (click)="getPrecoMvtId(element.id); openViewPrecoDialog()"><i class="fa fa-info-circle text-info" aria-hidden="true" title="{{'preconisation.table.title4' | translate}}"></i></span>
                                     </div>
                                 </td>
@@ -49,7 +47,7 @@
                             <tr mat-header-row *matHeaderRowDef="displayedPrecoMvtsColumns"></tr>
                             <tr mat-row *matRowDef="let row; columns: displayedPrecoMvtsColumns;"></tr>
                         </table>
-                        <mat-paginator style="background-color: rgba(40, 167, 69, 0.79);" [pageSizeOptions]="[2, 5, 10, 20]"
+                        <mat-paginator [pageSizeOptions]="[2, 5, 10, 20]"
                                        showFirstLastButtons
                                        aria-label="Select page of periodic elements">
                         </mat-paginator>
@@ -62,7 +60,7 @@
                     </h2>
                     <div class="card" >
                         <div class="card-body p-0 tableBlock" id="tableResultats">
-                            <div class='table-responsive w-100 m-0'>
+                            <div class='table-responsive w-100 m-0 modaleTableConteneur'>
                                 <table class='table table-sm table-centered table-striped w-100' mat-table [dataSource]="dataSourcePrecoResultat" matSort (matSortChange)="announceSortChange($event)">
                                     <!-- libelle Column -->
                                     <ng-container matColumnDef="libelle">
@@ -82,9 +80,9 @@
                                     <!-- actions Column -->
                                     <ng-container matColumnDef="actions">
                                         <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{"patient.table.title8" | translate}} </th>
-                                        <td class="text-dark containCell" mat-cell *matCellDef="let element;  let i=index">
+                                        <td class="text-dark containCell" mat-cell *matCellDef="let element; let i=index">
                                             <div class="actions">
-                                                <button class="btn p-0" name="PrecoMvts"  [value]="element.id" id="PrecoMvts" title="clicker pour annuler la selection" (click)="retirerSelectionPrecoMvt(i)">
+                                                <button class="btn p-0" name="PrecoMvts" [value]="element.id" id="PrecoMvts" title="clicker pour annuler la selection" (click)="retirerSelectionPrecoMvt(element.id)">
                                                     <i class="fa fa-trash text-danger" aria-hidden="true"></i>
                                                 </button>
                                                 <span><i class="fa fa-info-circle text-info" aria-hidden="true" title="{{'preconisation.table.title4' | translate}}"></i></span>
@@ -95,13 +93,18 @@
                                     <tr mat-header-row *matHeaderRowDef="displayedPrecoMvtsColumns"></tr>
                                     <tr mat-row *matRowDef="let row; columns: displayedPrecoMvtsColumns;"></tr>
                                 </table>
-                                <mat-paginator style="background-color: rgba(40, 167, 69, 0.79);" [pageSizeOptions]="[5, 10, 20]"
+                                <mat-paginator [pageSizeOptions]="[5, 10, 20]"
                                                showFirstLastButtons
                                                aria-label="Select page of periodic elements">
                                 </mat-paginator>
                             </div>
-                            <div class="actionButton mt-2">
-                                <button mat-button [mat-dialog-close] cdkFocusInitial class="btn btnValidation">{{'lists.button6' | translate}}</button>
+                            <div class="actionButton valBtn mt-2">
+                                <button class="btn retour" [mat-dialog-close] title="{{'lists.button2' | translate}}">
+                                    <i class="fa fa-undo" aria-hidden="true"></i>
+                                </button>
+                                <button mat-button (click)="onSave()" [mat-dialog-close] cdkFocusInitial class="btn btnValidation" title="{{'lists.button6' | translate}}">
+                                    <i class="fa fa-check" aria-hidden="true"></i>
+                                </button>
                             </div>
                         </div>
                     </div>

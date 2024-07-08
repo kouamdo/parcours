@@ -108,15 +108,15 @@
                         </div>
 
                         <div class="form-group">
-                            <div class="champs">
+                            <div class="champs champsSelect">
                                 <label  for="_missions" class="label">
                                     {{"document.table.title3" | translate}} <sup>*</sup>
                                 </label>
-                                <mat-form-field class="example-full-width" appearance="fill">
+                                <div class="matSelectElement">
                                     <mat-select formControlName="_missions" multiple [compareWith]="compareItem">
-                                    <mat-option *ngFor="let missionsDocument of mission$ |async" [value]="missionsDocument">{{missionsDocument.libelle}}</mat-option>
+                                        <mat-option *ngFor="let missionsDocument of mission$ |async" [value]="missionsDocument">{{missionsDocument.libelle}}</mat-option>
                                     </mat-select>
-                                </mat-form-field>
+                                </div>
                             </div>
                             <div  *ngIf="submitted && f['_missions'].value.length<1"  class="alert alert-danger blockErreur" >
                                 <div>{{'document.form.text3' | translate}}</div>
@@ -128,15 +128,18 @@
                                 <label for="" class="label">
                                     {{"document.table.title4" | translate}} <sup>*</sup>
                                 </label>
-                                <div class="dropdown w-100">
+                                <div class="w-100">
                                     <!-- affichage list attributs selectiones -->
                                     <div class="listAttr">
                                         <button type="button" class="btn p-0" title="{{'lists.button9' | translate}} / {{'lists.button8' | translate}}" (click)="openAttributDialog()">
                                             <i class="fas fa-plus-square"></i>
                                         </button>
-                                        <span *ngFor="let listeAttributs of ELEMENTS_TABLE_ATTRIBUTS">
-                                            {{listeAttributs.titre | lowercase}}<span>, </span>
-                                        </span>
+                                        <p>
+                                            <span *ngFor="let listeAttributs of ELEMENTS_TABLE_ATTRIBUTS">
+                                                {{listeAttributs.titre | lowercase}}<span>, </span>
+                                            </span>
+                                        </p>
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -159,9 +162,11 @@
                                         <button type="button" class="btn p-0" title="{{'lists.button9' | translate}} / {{'lists.button8' | translate}}" (click)="openCategorieDialog();">
                                             <i class="fas fa-plus-square"></i>
                                         </button>
-                                        <span *ngFor="let listeCategories of TABLE_CATEGORIE_AFFICHAGE_TEMP">
-                                            {{listeCategories.nom | lowercase}}<span>, </span>
-                                        </span>
+                                        <p>
+                                            <span *ngFor="let listeCategories of TABLE_CATEGORIE_AFFICHAGE_TEMP">
+                                                {{listeCategories.nom | lowercase}}<span>, </span>
+                                            </span> 
+                                        </p>
                                     </div>
                                 </div>
                             </div>
@@ -181,9 +186,12 @@
                                         <button type="button" class="btn p-0" title="{{'lists.button9' | translate}} / {{'lists.button8' | translate}}" (click)="openPrecoMvtDialog()">
                                             <i class="fas fa-plus-square"></i>
                                         </button>
-                                        <span *ngFor="let listePreconisations of ELEMENTS_TABLE_PRECONISATIONS">
-                                            {{listePreconisations.libelle | lowercase}}<span>, </span>
-                                        </span>
+                                        <p>
+                                            <span *ngFor="let listePreconisations of ELEMENTS_TABLE_PRECONISATIONS">
+                                                {{listePreconisations.libelle | lowercase}}<span>, </span>
+                                            </span>   
+                                        </p>
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -203,9 +211,12 @@
                                         <button type="button" class="btn p-0" title="{{'lists.button9' | translate}} / {{'lists.button8' | translate}}" (click)="openSousDocumentDialog()">
                                             <i class="fas fa-plus-square"></i>
                                         </button>
-                                        <span *ngFor="let listeSousDocuments of ELEMENTS_TABLE_SOUS_DOCUMENTS">
-                                            {{listeSousDocuments.titre | lowercase}}<span>, </span>
-                                        </span>
+                                        <p>
+                                            <span *ngFor="let listeSousDocuments of ELEMENTS_TABLE_SOUS_DOCUMENTS">
+                                                {{listeSousDocuments.titre | lowercase}}<span>, </span>
+                                            </span>  
+                                        </p>
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -225,18 +236,25 @@
                                         <button type="button" class="btn p-0" title="{{'lists.button9' | translate}} / {{'lists.button8' | translate}}" (click)="openDocEtatDialog()">
                                             <i class="fas fa-plus-square"></i>
                                         </button>
-                                        <span *ngFor="let listeDocEtats of ELEMENTS_TABLE_DOC_ETATS">
-                                            {{listeDocEtats.etat.libelle | lowercase}}<span>, </span>
-                                        </span>
+                                        <p>
+                                            <span *ngFor="let listeDocEtats of ELEMENTS_TABLE_DOC_ETATS">
+                                                {{listeDocEtats.etat.libelle | lowercase}}<span>, </span>
+                                            </span> 
+                                        </p>
+                                        
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="actionButton">
-                    <button class="btn" routerLink="../../list-documents"><i class="fa fa-reply mr-1" aria-hidden="true"></i>{{'lists.button2' | translate}}</button>
-                    <button type="submit" class="btn btnValidation">{{btnLibelle}}</button>
+                <div class="actionButton valBtn">
+                    <button class="retour" (click)="return()" title="{{'lists.button2' | translate}}">
+                        <i class="fa fa-reply mr-1" aria-hidden="true"></i>
+                    </button>
+                    <button type="submit" class="btnValidation" title="{{btnLibelle}}">
+                        <i class="fa fa-check" aria-hidden="true"></i>
+                    </button>
                 </div>
                 <div class="mt-2 note">
                     <p>* : {{"lists.text1" | translate}}</p>
