@@ -42,6 +42,15 @@ export class PersonnelsService {
     );
   }
 
+  getPersonnelByRole(idRole:string): Observable<IPersonnel[]> {
+    return this.http.get<IPersonnel[]>('api/personnels').pipe(
+      map(x=>
+        {
+          return x.filter(e=> e.roles?.some(r=> r.role.id.includes(idRole.toLowerCase())))
+        })
+    );        
+  }
+  
   getPersonelsByNameOrId(query: string): Observable<IPersonnel[]> {
     return this.http.get<IPersonnel[]>('api/personnels').pipe(
       map((patients) => {

@@ -43,6 +43,7 @@ export class NewRessourceComponent implements OnInit {
     etat: false,
   };
   scan_val: any | undefined;
+  titre: string = '';
   constructor(
     private formBuilder: FormBuilder,
     private dataEnteteMenuService: DonneesEchangeService,
@@ -124,6 +125,7 @@ export class NewRessourceComponent implements OnInit {
     this.familleService.getTypeUnite().subscribe((u) => {
       this.unites = u.type;
     });
+    this.titre = this.dataEnteteMenuService.dataEnteteMenu;
   }
 
   get f() {
