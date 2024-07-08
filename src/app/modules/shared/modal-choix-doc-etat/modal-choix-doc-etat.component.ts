@@ -21,7 +21,8 @@ export class ModalChoixDocEtatComponent {
   selectedEtatsMap: IDocEtats | undefined;
   formeEtat: FormGroup;
   selectedEtat: string | undefined;
-  previouslySelectedEtat: IDocEtats | undefined; // Input pour recevoir les etats pre-selectionees
+  @Output() saveChanges: EventEmitter<IDocEtats> = new EventEmitter<IDocEtats>();
+  @Input() previouslySelectedEtat: IDocEtats | undefined; // Input to receive the previously selected etat
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
