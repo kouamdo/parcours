@@ -1,89 +1,79 @@
-<div class="container-xl px-4 mt-4">
-    <div class="row">
-        <!-- <div class="col-xl-4">
-            <div class="card mb-4 mb-xl-0">
-                <div class="card-header">Profile Picture</div>
-                <div class="card-body text-center">
-                    <img class="img-account-profile rounded-circle mb-2" src="http://bootdey.com/img/Content/avatar/avatar1.png" alt="">
-                    
-                    <div class="small font-italic text-muted mb-4">JPG or PNG no larger than 5 MB</div>
-                    
-                    <button class="btn btn-success" type="button">Upload new image</button>
-                </div>
-            </div>
-        </div> -->
-        <div class="col-xl-8 detail">
-            <!-- Account details card-->
-            <div class="card mb-4">
-                <div class="card-header">Account Details</div>
-                <div class="card-body">
-                    <form [formGroup]="forme" *ngIf="forme">
-                        <!-- Form Group (sexe)-->
-                        <div class="mb-3">
-                            <label class="small mb-1" for="sexe">{{"personnel.table.title4" | translate}}</label>
-                            <select  class="form-control" formControlName="sexe" name="sexe" id="sexe" required>
-                                <option value="M" >Homme</option>
-                                <option value="F">Femme</option>
-                            </select>
+<div id="mainSection">
+    <div class="card block" id="top2">
+        <div class="card-header" class="entete pt-4 pb-4">
+          {{"personnel.table.actions.link7" | translate}}
+        </div>
+        <div class="card-body" >
+            <form [formGroup]="forme" *ngIf="forme" >
+                <div class="">
+                    <div class="">
+                        <p style="margin-top: 10px; font-size: medium;" class="label"><strong>{{'personnel.table.title1' |
+                            translate}}:</strong> {{
+                        personnel!.nom }} {{
+                        personnel!.prenom }}
+                    </p>
+                    <hr>
+                    <p style="font-size: medium;"><strong>{{"personnel.table.title4" | translate}}:</strong> {{
+                        personnel!.sexe }}</p>
+                    <hr>
+                    <p style="font-size: medium;"><strong>{{"personnel.table.title5" | translate}}:</strong> {{
+                        personnel!.email }}</p>
+                    <hr>
+                    <p style="font-size: medium;"><strong>{{"personnel.table.title3" | translate}}:</strong> {{
+                        personnel!.dateNaissance | date: 'dd/MM/yyyy' }}</p>
+                    <hr>
+                    <p style="font-size: medium;"><strong>{{"personnel.table.title6" | translate}}:</strong> {{
+                        personnel!.dateEntree | date: 'dd/MM/yyyy' }}</p>
+                    <hr>
+                    <p style="font-size: medium;"><strong>{{"personnel.table.title8" | translate}}:</strong> {{
+                        personnel!.dateSortie | date | date: 'dd/MM/yyyy' }}</p>
+                    <hr>
+                    <p style="font-size: medium;"><strong>{{"personnel.table.title7" | translate}}:</strong> {{
+                        personnel!.telephone }}</p>
+                       <div style="display: flex;">
+                        <hr style="width: 200px; background-color: gray;">
+                        <div>
+                            <p style="color: grey;">
+                                Modifier mot de passe
+                            </p>
                         </div>
-                        <!-- Form Row-->
-                        <div class="row gx-3 mb-3">
-                            <!-- Form Group (first name)-->
-                            <div class="col-md-6">
-                                <label class="small mb-1" for="nom">{{'personnel.table.title1' | translate}}</label>
-                            <input type="text" formControlName="nom" name="nom" id="nom"  placeholder="{{'personnel.table.title1' | translate}}"  class="form-control" style="border-width: 4px;" required>
-                            </div>
-                            <!-- Form Group (last name)-->
-                            <div class="col-md-6">
-                                <label class="small mb-1" for="prenom">{{"personnel.table.title2" | translate}}</label>
-                                <input type="text" formControlName="prenom" name="prenom" id="prenom" placeholder="{{'personnel.table.title2' | translate}}" class="form-control"  required>
-                            </div>
-                        </div>
-                        <!-- Form Row        -->
-                        <div class="row gx-3 mb-3">
-                            <!-- Form Group (date entree)-->
-                            <div class="col-md-6">
-                                <label class="small mb-1" for="dateEntree">{{"personnel.table.title6" | translate}}</label>
-                                <input type="date" formControlName="dateEntree"  name="dateEntree" id="dateEntree" placeholder="{{'personnel.table.title3' | translate}}" value="" required class="form-control">
-                            </div>
-                            <!-- Form Group (date sortie)-->
-                            <div class="col-md-6">
-                                <label class="small mb-1" for="dateSortie">{{"personnel.table.title8" | translate}}</label>
-                                <input type="date" formControlName="dateSortie"  name="dateSortie" id="dateSortie" placeholder="{{'personnel.table.title3' | translate}}" value="" class="form-control">
-                            </div>
-                        </div>
-                        <!-- Form Group (email address)-->
-                        <div class="mb-3">
-                            <label class="small mb-1" for="email">{{"personnel.table.title5" | translate}}</label>
-                            <input type="email" formControlName="email" name="email" id="email" placeholder="{{'personnel.table.title5' | translate}}" required  class="form-control">
-                        </div>
-                        <!-- Form Row-->
-                        <div class="row gx-3 mb-3">
-                            <!-- Form Group (phone number)-->
-                            <div class="col-md-6">
-                                <label class="small mb-1" for="telephone">{{"personnel.table.title7" | translate}}</label>
-                                <input type="text" formControlName="telephone" name="telephone" id="telephone" placeholder="{{'personnel.table.title7' | translate}}" class="form-control" required>
-                            </div>
-                            <!-- Form Group (birthday)-->
-                            <div class="col-md-6">
-                                <label class="small mb-1" for="dateNaissance">{{"personnel.table.title3" | translate}}</label>
-                                <input type="date" formControlName="dateNaissance"  name="dateNaissance" id="dateNaissance" placeholder="{{'personnel.table.title3' | translate}}" value="" required class="form-control">
-                            </div>
-                        </div>
+                        <hr style="width: 200px; background-color: gray;">
+                       </div>
                         <!-- Form Group (passWord)-->
                         <div class="mb-3">
                             <label class="small mb-1" for="lastPwd">{{"personnel.table.title18" | translate}}</label>
                             <input type="password" formControlName="lastPwd"  name="lastPwd" id="lastPwd" placeholder="*********************" class="form-control">
+                            <div *ngIf="submitted && f['lastPwd'].errors" class="alert alert-danger">
+                                <div *ngIf="f['lastPwd'].errors['required']">Le mot de passe est requis.</div>
+                              </div>
                         </div>
                         <div class="mb-3">
                             <label class="small mb-1" for="newPwd">{{"personnel.table.title17" | translate}}</label>
-                            <input type="password" formControlName="newPwd"  name="newPwd" id="newPwd" placeholder="*********************" class="form-control">
+                            <input type="password" formControlName="newPwd" name="newPwd" id="newPwd" placeholder="*********************" class="form-control">
+                            <div *ngIf="submitted && f['newPwd'].errors" class="alert alert-danger">
+                                <div *ngIf="f['newPwd'].errors['required']">Le mot de passe est requis.</div>
+                                <div *ngIf="f['newPwd'].errors['invalidPassword']">Le mot de passe ne respecte pas le motif requis.</div>
+                            </div>
                         </div>
-                        <!-- Save changes button-->
-                        <button class="btn btn-success" type="button">Save changes</button>
-                    </form>
+                        <div class="mb-3">
+                            <label class="small mb-1" for="nextPwd">{{"personnel.table.title19" | translate}}</label>
+                            <input type="password" formControlName="nextPwd"  name="nextPwd" id="nextPwd" placeholder="*********************" class="form-control">
+                            <div *ngIf="submitted && f['nextPwd'].errors" class="alert alert-danger">
+                                <div *ngIf="f['nextPwd'].errors['required']">Le mot de passe est requis.</div>
+                                <div *ngIf="f['nextPwd'].errors['invalidPassword']">Le mot de passe ne respecte pas le motif requis.</div>
+                              </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
+                <div class="actionButton valBtn" >
+                    <button class="btn retour" (click)="return()" title="{{'lists.button2' | translate}}">
+                        <i class="fa fa-reply mr-1" aria-hidden="true"></i>
+                    </button>
+                    <button type="submit" (click)="onSubmit(forme.value)" class="btn btnValidation" title="{{btnLibelle}}">
+                        <i class="fa fa-check" aria-hidden="true"></i>
+                    </button>
+                </div>
+            </form>
         </div>
     </div>
 </div>

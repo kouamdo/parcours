@@ -49,7 +49,6 @@ export class AuthentificationService {
   logout() {
     // supprimer l'utilisateur du stockage local pour déconnecter l'utilisateur
     localStorage.removeItem('currentUser');
-    localStorage.removeItem('menu');
     this.currentUserSubject.next(null);
     this.router.navigate(['/login']);
   }

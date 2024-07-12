@@ -27,7 +27,7 @@ export class MenusService {
     return this.getMenu().pipe(
       map(x=>
         {
-          user = x.find(p => p.user?.email == login);
+          user = x.find(p => p.login == login);
           if (user.menu != null) {
             return user.menu.find((p: { langue: string; }) => p.langue == langue) as unknown as IMenu;
           } else {

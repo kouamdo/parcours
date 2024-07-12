@@ -7,13 +7,13 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { IPersonnel } from 'src/app/modele/personnel';
-import { PersonnelsService } from 'src/app/services/personnels/personnels.service';
 import { ModalCodebarreService } from '../../shared/modal-codebarre/modal-codebarre.service';
 import { ModalCodebarreScanContinueComponent } from '../../shared/modal-codebarre-scan-continue/modal-codebarre-scan-continue.component';
 import { UtilisateurService } from 'src/app/services/utilisateurs/utilisateur.service';
 import { IUtilisateurs } from 'src/app/modele/utilisateurs';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalChoixGroupsComponent } from '../../shared/modal-choix-groups/modal-choix-groups.component';
+import { AuthentificationService } from 'src/app/services/authentifications/authentification.service';
 
 @Component({
   selector: 'app-list-personnels',
@@ -55,9 +55,9 @@ export class ListPersonnelsComponent implements OnInit, AfterViewInit {
   constructor(
     private translate: TranslateService,
     private router: Router,
-    private servicePersonnel: PersonnelsService,
     private formBuilder: FormBuilder,
     private dialogDef : MatDialog,
+    public authService: AuthentificationService,
     private _liveAnnouncer: LiveAnnouncer,
     private barService: ModalCodebarreService,
     private userService: UtilisateurService

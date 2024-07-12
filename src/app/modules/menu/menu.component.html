@@ -1,6 +1,6 @@
 <nav class="mt-2" >
     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="true">
-        <li *ngFor="let menu of fonctionnalites"  class="nav-item {{ menu.actif }}" (click)="getElementMenu(menu.fonction)">
+        <li *ngFor="let menu; let i = index of fonctionnalites"  class="nav-item {{ i ? '' : 'menu-open' }}" (click)="getElementMenu(menu.fonction)">
             <a href="#" class="nav-link">
                 <i class="nav-icon {{ menu.icone }}"></i>
                 <p>
