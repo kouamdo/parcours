@@ -3,7 +3,6 @@ import { ICategoriesAttributs } from "./categories-attributs";
 import { IDocEtats } from "./doc-etats";
 import { IMission } from "./mission";
 import { IPrecoMvt } from "./precomvt";
-import { TypeMvt } from "./type-mvt";
 
 export interface IDocument {
     id:string,

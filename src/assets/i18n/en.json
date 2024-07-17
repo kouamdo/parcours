@@ -535,7 +535,8 @@
       "label3":"Creation day",
       "label4": "Voting Type",
       "label5": "Duration vote",
-      "label6": "role"
+      "label6": "role",
+      "label7": "Type de validation"
     }
   },
   "etats": {

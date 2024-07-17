@@ -26,6 +26,7 @@ import { IValidation } from '../modele/validation';
 import { IEtape } from '../modele/etape';
 import { IParours } from '../modele/parours';
 import { Promo } from '../modele/promo-distributeur';
+import { TypeValidation } from '../modele/type-validation';
 
 export class InMemDBService implements InMemoryDbService {
   createDb() {
@@ -681,6 +682,7 @@ export class InMemDBService implements InMemoryDbService {
         libelle: 'bon',
         typeVote: 'Unanime',
         dureeVote: 5,
+        typeValidation: 'Simple',
         role: {
           id: '1',
           titre: 'vendeur',
@@ -696,6 +698,7 @@ export class InMemDBService implements InMemoryDbService {
         etat: true,
         libelle: 'passable',
         typeVote: 'Majoritaire',
+        typeValidation: 'Transmission',
         dureeVote: 10,
         role: {
           id: '2',
@@ -712,6 +715,7 @@ export class InMemDBService implements InMemoryDbService {
         etat: true,
         libelle: 'RAS',
         typeVote: 'Unanime',
+        typeValidation: 'Traitement',
         dureeVote: 5,
         role: {
           id: '3',
@@ -9814,6 +9818,7 @@ export class InMemDBService implements InMemoryDbService {
               etat: true,
               libelle: 'passable',
               typeVote: 'Majoritaire',
+              typeValidation: 'Transmission',
               dureeVote: 10,
               role: {
                 id: '2',
@@ -14054,6 +14059,7 @@ export class InMemDBService implements InMemoryDbService {
               etat: true,
               libelle: 'passable',
               typeVote: 'Majoritaire',
+              typeValidation: 'Transmission',
               dureeVote: 10,
               role: {
                 id: '2',
@@ -23770,6 +23776,7 @@ export class InMemDBService implements InMemoryDbService {
     };
     let typeUnite: TypeUnite = { type: ['Litre', 'Kg', 'Packs', 'Boite'] };
     let typeMvt: TypeMvt = { type: ['Neutre', 'Ajout', 'Reduire'] };
+    let typeValidation: TypeValidation = { type: ['Simple', 'Transmission', 'Traitement'] };
     let etats: IEtats[] = [
       {
         id: '1',
@@ -36604,6 +36611,7 @@ export class InMemDBService implements InMemoryDbService {
       etats,
       etape,
       parours,
+      typeValidation
     };
   }
 }

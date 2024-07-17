@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { TypeMvt } from 'src/app/modele/type-mvt';
+import { TypeValidation } from 'src/app/modele/type-validation';
 
 @Injectable({
   providedIn: 'root',
@@ -42,6 +43,10 @@ export class DonneesEchangeService {
 
   getTypeMvt(): Observable<TypeMvt> {
     return this.http.get<TypeMvt>('api/typeMvt');
+  }
+
+  getTypeValidation(): Observable<TypeValidation> {
+    return this.http.get<TypeValidation>('api/typeValidation');
   }
 
   saveEtatModal(value: any) {

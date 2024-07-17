@@ -89,6 +89,23 @@
                         </div>
                         <div class="form-group">
                             <div class="champs">
+                                <label for="typeValidation" class="label">
+                                    {{ "validation.form.label7" | translate }}<span style="color: red" aria-label="required">*</span>
+                                </label>
+                                <select class="form-control" formControlName="typeValidation" name="typeValidation" id="typeValidation" required>
+                                    <option class="label" *ngFor="let typeValidation of typeValidations" value="{{ typeValidation }}" >
+                                        {{ typeValidation }}
+                                      </option>
+                                </select>
+                            </div>
+                            <div *ngIf="submitted && f['typeValidation'].errors" class="alert alert-danger">
+                                <div *ngIf="f['typeValidation'].errors['required']">
+                                    {{ "validation.form.text1" | translate }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="champs">
                                 <label  for="roleval"  class="label" >
                                   {{'validation.form.label6' | translate}} <span style="color: red" aria-label="required">*</span>
                                 </label>
