@@ -278,7 +278,8 @@
       "text7": "at ",
       "text8": "Select people",
       "text9": "Customer's name",
-      "text10": "Order by "
+      "text10": "Order by ",
+      "text11": "Code"
     }
   },
   "theme": {
@@ -514,12 +515,7 @@
       "title7": "Amount Max",
       "title8": "Min Amount",
       "title9": "Distributor",
-      "title10": "families",
-      "title11": "Max Quantity",
-      "title12": "Min Quantity",
-      "title13": "Amount Max",
-      "title14": "Min Amount",
-      "title15": "Distributor"
+      "title10": "families"
     }
   },
   "validation":{

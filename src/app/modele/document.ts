@@ -18,5 +18,6 @@ export interface IDocument {
     categories : ICategoriesAttributs[]
     preconisations : IPrecoMvt[]
     sousDocuments? : IDocument[]
-    docEtats : IDocEtats[]
+    docEtats : IDocEtats[],
+    formatCode : string
 }

@@ -1,18 +1,16 @@
 <div class="mainBlock pageView card">
   <div class="enteteViewPage">
       <h1>
-          <span routerLink="../../list-precomvts" title=""><i class="fa fa-arrow-left lien" aria-hidden="true"></i></span>
-         Tableau Des opérations effectuées
+        {{'precomvt.title0' | translate}}
       </h1>
-
   </div>
   <div class="infos">
     <div class="tableMissions card table-responsive mt-3">
         <table class="table table-striped text-dark table-sm table-inverse table-bordered">
             <thead class="thead-inverse">
                 <tr>
-                    <th>Libellé</th>
-                    <th>Type</th>
+                    <th>{{'precomvt.table3.title1' | translate}}</th>
+                    <th>{{'precomvt.table3.title3' | translate}}</th>
                 </tr>
             </thead>
             <tbody>
@@ -25,18 +23,18 @@
 
     </div>
         <p class="title">
-            Tableau recaputilatif d'une préconisation
+            {{'precomvt.title0' | translate}}
         </p>
         <div *ngIf="eltRessource.length>0" class="tableAttributs card table-responsive">
             <table class="table table-striped table-sm table-inverse text-dark table-bordered">
                 <thead class="thead-inverse">
                     <tr>
-                        <th>Ressource</th>
-                        <th>Quantité Max</th>
-                        <th>Quantité Min</th>
-                        <th>Montant Max</th>
-                        <th>Montant Min</th>
-                        <th>Distributeur</th>
+                        <th>{{'precomvt.table3.title4' | translate}}</th>
+                        <th>{{'precomvt.table3.title5' | translate}}</th>
+                        <th>{{'precomvt.table3.title6' | translate}}</th>
+                        <th>{{'precomvt.table3.title7' | translate}}</th>
+                        <th>{{'precomvt.table3.title8' | translate}}</th>
+                        <th>{{'precomvt.table3.title9' | translate}}</th>
 
                     </tr>
                 </thead>
@@ -56,12 +54,12 @@
         <table class="table table-striped table-sm table-inverse text-dark table-bordered">
             <thead class="thead-inverse">
                 <tr>
-                    <th>familles</th>
-                    <th>Quantité Max</th>
-                    <th>Quantité Min</th>
-                    <th>Montant Max</th>
-                    <th>Montant Min</th>
-                    <th>Distributeur</th>
+                    <th>{{'precomvt.table3.title10' | translate}}</th>
+                    <th>{{'precomvt.table3.title5' | translate}}</th>
+                    <th>{{'precomvt.table3.title6' | translate}}</th>
+                    <th>{{'precomvt.table3.title7' | translate}}</th>
+                    <th>{{'precomvt.table3.title8' | translate}}</th>
+                    <th>{{'precomvt.table3.title9' | translate}}</th>
 
                 </tr>
             </thead>

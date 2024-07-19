@@ -1,4 +1,3 @@
-import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import {
   FormGroup,
@@ -8,7 +7,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatSort, Sort } from '@angular/material/sort';
+import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Observable, EMPTY } from 'rxjs';
@@ -17,7 +16,6 @@ import { ICategoriesAttributs } from 'src/app/modele/categories-attributs';
 import { IDocument } from 'src/app/modele/document';
 import { IMission } from 'src/app/modele/mission';
 import { IService } from 'src/app/modele/service';
-import { AttributService } from 'src/app/services/attributs/attribut.service';
 import { DocumentService } from 'src/app/services/documents/document.service';
 import { MissionsService } from 'src/app/services/missions/missions.service';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
@@ -54,7 +52,8 @@ export class NewFormDocumentComponent implements OnInit {
     contientRessources: false,
     contientDistributeurs: false,
     typeMouvement: TypeMouvement.Neutre,
-    docEtats: []
+    docEtats: [],
+    formatCode: ''
   };
   mission$: Observable<IMission[]> = EMPTY;
   forme: FormGroup;
@@ -97,6 +96,7 @@ export class NewFormDocumentComponent implements OnInit {
   @ViewChild(MatSort) sort!: MatSort;
 
   typeMvt: string[] = [];
+  formatsCode: string[] = [];
 
   constructor(
     private router: Router,
@@ -105,35 +105,27 @@ export class NewFormDocumentComponent implements OnInit {
     private dataEnteteMenuService: DonneesEchangeService,
     private serviceDocument: DocumentService,
     private serviceMission: MissionsService,
-    private serviceAttribut: AttributService,
-    private _liveAnnouncer: LiveAnnouncer,
     private donneeDocCatService: DonneesEchangeService,
     private dialogDef: MatDialog
   ) {
     this.forme = this.formBuilder.group({
       _missions: new FormControl<string | IMission[]>(''),
       _attributs: new FormArray([]),
-      titre: [
-        '',
-        [
-          Validators.required,
-          Validators.minLength(2),
-          Validators.maxLength(50),
-        ],
-      ],
+      titre: [ '', [ Validators.required]],
       description: [''],
       typeMouvement: ['', [Validators.required]],
       etat: new FormControl(true),
       affichagePrix: new FormControl(true),
       contientRessources: new FormControl(true),
       contientDistributeurs: new FormControl(true),
+      formatCode: [ '', [ Validators.required]]
     });
   }
   ngOnInit(): void {
     this.mission$ = this.getAllMissions();
-    this.donneeDocCatService
-      .getTypeMvt()
-      .subscribe((x) => (this.typeMvt = x.type));
+    this.donneeDocCatService.getTypeMvt().subscribe((x) => (this.typeMvt = x.type));
+    this.donneeDocCatService.getFormatCode().subscribe((f) => (this.formatsCode = f.type));
+
     // chargement de la page a partir d'un Id pour la modification d'un document
     let idDocument = this.infosPath.snapshot.paramMap.get('idDocument');
     if (idDocument != null && idDocument !== '') {
@@ -151,6 +143,7 @@ export class NewFormDocumentComponent implements OnInit {
           contientDistributeurs: this.document.contientDistributeurs,
           _missions: this.document.missions,
           _attributs: [],
+          formatsCode : this.document.formatCode
         });
         this.forme.controls['_missions'].setValue(this.document.missions);
 
@@ -395,7 +388,8 @@ export class NewFormDocumentComponent implements OnInit {
       affichagePrix: documentInput.affichagePrix,
       contientRessources: documentInput.contientRessources,
       contientDistributeurs: documentInput.contientDistributeurs,
-      docEtats: []
+      docEtats: [],
+      formatCode: documentInput.formatCode
     }
 
     if (this.document.id != '') {

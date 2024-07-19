@@ -38,7 +38,7 @@
                           <div>
                               <div class="champs">
                                 <label for="typeMouvement" class="label" >
-                                    {{"document.table.title22" | translate}}
+                                    {{"document.table.title22" | translate}} <sup>*</sup>
                                 </label>
                                 <select class="form-control" formControlName="typeMouvement" title="{{'document.form.text8' | translate}}">
                                   <option class="label" *ngFor="let typeMouvement of typeMvt" value="{{ typeMouvement }}" >
@@ -246,6 +246,26 @@
                                 </div>
                             </div>
                         </div>
+
+                        <!-- format de code -->
+                        <div class="form-group">
+                          <div>
+                              <div class="champs">
+                                <label for="formatCode" class="label" >
+                                    {{"document.table.title25" | translate}} <sup>*</sup>
+                                </label>
+                                <select class="form-control" formControlName="formatCode" title="{{'document.form.text10' | translate}}">
+                                  <option class="label" *ngFor="let formatCode of formatsCode" value="{{ formatCode }}" >
+                                    {{ formatCode }}
+                                  </option>
+                                </select>
+                              </div>
+                          </div>
+                          <div  *ngIf="submitted && f['formatCode'].errors"  class="alert alert-danger blockErreur" >
+                              <div *ngIf="f['formatCode'].errors['required']">{{'document.form.text11' | translate}}</div>
+                          </div>
+                        </div>
+
                     </div>
                 </div>
                 <div class="actionButton valBtn">

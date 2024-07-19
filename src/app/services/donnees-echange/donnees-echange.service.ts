@@ -3,6 +3,7 @@ import { Observable, map } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { TypeMvt } from 'src/app/modele/type-mvt';
 import { TypeValidation } from 'src/app/modele/type-validation';
+import { FormatCode } from 'src/app/modele/format-code';
 
 @Injectable({
   providedIn: 'root',
@@ -47,6 +48,10 @@ export class DonneesEchangeService {
 
   getTypeValidation(): Observable<TypeValidation> {
     return this.http.get<TypeValidation>('api/typeValidation');
+  }
+
+  getFormatCode(): Observable<FormatCode> {
+    return this.http.get<FormatCode>('api/formatCode');
   }
 
   saveEtatModal(value: any) {

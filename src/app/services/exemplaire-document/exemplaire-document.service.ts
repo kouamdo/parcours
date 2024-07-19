@@ -32,7 +32,8 @@ export class ExemplaireDocumentService {
   }
 
   getExemplaireDocumentByOrder(exemplaire: IExemplaireDocument, doc: IDocument) {
-
+    if (exemplaire.ordreEtats != undefined) {
+      
     this.ordreEtat = exemplaire.ordreEtats![exemplaire.ordreEtats!.length - 1];
     
       console.log("doc :", doc, " exemplaire :", exemplaire);
@@ -47,6 +48,7 @@ export class ExemplaireDocumentService {
       } else {
         this.res = false;
       }
+    }
       return { ele: this.ordreEtat, sol: this.res, in: this.i };
   }
   

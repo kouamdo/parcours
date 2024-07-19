@@ -83,20 +83,18 @@ font-size: 22px;
 font-weight: bold;
 }
 .enteteViewPage{
-    text-align: center;
-    font-size: 22px;
-    font-weight: bold;
-    background-color: #28a745;
-    border-radius: 5px;
-    box-shadow: 0 0 2px #28a745;
-    margin: 0 5px;
-    padding: 10px 0;
+  background-color: #28a745;
+  box-shadow: 0 0 2px #28a745;
+  margin: 0 5px;
+  padding: 10px 5px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
     h1{
-        margin: auto;
-        text-transform: uppercase;
-        color: rgba(255, 255, 255, 0.7);
-        position: relative;
-        width: 100%;
+      margin: auto;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.7);
+      width: fit-content;
     }
 }
 // le contenu des formulaires
@@ -410,7 +408,6 @@ mat-paginator{
     color: rgba(255, 255, 255, 0.7);
     transition: ease 0.2s;
     font-size: 18px;
-    margin-top: 10px;
   }
   .lien:hover{
     color: rgba(255, 255, 255, 0.8);
@@ -465,8 +462,6 @@ mat-paginator{
     height: fit-content;
     border-radius: 50%;
     background-color: #ffffff;
-    position: absolute;
-    bottom: 0px;
   }
   .hoverBlock .infoBuble i{
     font-size: 20px;

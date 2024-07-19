@@ -49,7 +49,9 @@ export class PrevisualisationExemplaireComponent implements OnInit {
       mail: '',
       telephone: '',
       qrCodeValue: ''
-    }
+    },
+    formatCode: '',
+    code: ''
   };
   titre:string='';
   mouvements : IMouvement[] = []
@@ -105,8 +107,6 @@ export class PrevisualisationExemplaireComponent implements OnInit {
           this.exemplaire = x;
           if (this.exemplaire.mouvements != undefined) {
             this.mouvements = this.exemplaire.mouvements
-          }
-          if (this.exemplaire.mouvements != undefined) {
             this.dataSourceMouvements.data = this.exemplaire.mouvements
           }
           this.formerEnteteTableauMissions();
@@ -298,6 +298,7 @@ export class PrevisualisationExemplaireComponent implements OnInit {
 
           let exemplaireTemp: IExemplaireDocument = {
             id: uuidv4(),
+            code: this.exemplaire.code,
             idDocument: this.exemplaire.id,
             titre: this.exemplaire.titre,
             description: this.exemplaire.description,
@@ -315,7 +316,8 @@ export class PrevisualisationExemplaireComponent implements OnInit {
             ordreEtats: this.ExempleOrdre,
             docEtats: [],
             dateCreation: new Date(),
-            personneRattachee: this.exemplaire.personneRattachee
+            personneRattachee: this.exemplaire.personneRattachee,
+            formatCode: this.exemplaire.formatCode
           };
       
           if (this.exemplaire.id != '') {
@@ -338,6 +340,7 @@ export class PrevisualisationExemplaireComponent implements OnInit {
   orderSuivant() {
     let exemplaireTemp: IExemplaireDocument = {
       id: uuidv4(),
+      code: this.exemplaire.code,
       idDocument: this.exemplaire.id,
       titre: this.exemplaire.titre,
       description: this.exemplaire.description,
@@ -355,7 +358,8 @@ export class PrevisualisationExemplaireComponent implements OnInit {
       ordreEtats: this.ExempleOrdre,
       docEtats: [],
       dateCreation: new Date(),
-      personneRattachee: this.exemplaire.personneRattachee
+      personneRattachee: this.exemplaire.personneRattachee,
+      formatCode: this.exemplaire.formatCode
     };
 
     if (this.exemplaire.id != '') {

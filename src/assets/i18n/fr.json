@@ -262,7 +262,8 @@
       "title21": "Sous documents",
       "title22": "type des mouvements",
       "title23": "Etats du document",
-      "title24": "Etat"
+      "title24": "Etat",
+      "title25": "format de code"
 
     },
     "form": {
@@ -274,7 +275,9 @@
       "text6": "Si cette case est décochée, il n'y aura pas la possibilité de creer des mouvement lors de la creation d'un exemplaire du document",
       "text7": "Si cette case est cochée, la colone du distributeur sera visible lors de la creation des mouvement d'un exemplaire de ce document",
       "text8": "Le type des mouvements effectués sur ce document",
-      "text9": "Le type des mouvements effectués sur ce document est obligatoire"
+      "text9": "Le type des mouvements effectués sur ce document est obligatoire",
+      "text10": "Le Format de code",
+      "text11": "Le Format de code est obligatoire"
     },
     "view": {
       "title": "Modele ",
@@ -299,7 +302,8 @@
       "text7": "à ",
       "text8": "Selectionner la personne",
       "text9": "Nom du bénéficiaire",
-      "text10": "Trier par "
+      "text10": "Trier par ",
+      "text11": "Code"
     }
   },
   "theme": {
@@ -510,12 +514,7 @@
       "title7": "Montant Max",
       "title8": "Montant Min",
       "title9": "Distributeur",
-      "title10": "familles",
-      "title11": "Quantité Max",
-      "title12": "Quantité Min",
-      "title13": "Montant Max",
-      "title14": "Montant Min",
-      "title15": "Distributeur"
+      "title10": "familles"
     }
   },
   "role": {

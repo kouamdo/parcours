@@ -6,6 +6,7 @@ import { IOrdreEtat } from "./ordreEtat";
 
 export interface IExemplaireDocument extends IDocument{
     id : string,
+    code : string
     idDocument : string,
     ordreEtats?: IOrdreEtat[],
     mouvements?: IMouvement[],

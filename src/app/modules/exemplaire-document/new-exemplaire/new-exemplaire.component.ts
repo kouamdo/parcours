@@ -64,7 +64,9 @@ export class NewExemplaireComponent implements OnInit {
       mail: '',
       telephone: '',
       qrCodeValue: ''
-    }
+    },
+    formatCode: '',
+    code: ''
   };
 
   document: IDocument = {
@@ -80,7 +82,8 @@ export class NewExemplaireComponent implements OnInit {
     contientRessources: false,
     contientDistributeurs: false,
     typeMouvement: 'Neutre',
-    docEtats: []
+    docEtats: [],
+    formatCode: ''
   };
 
   attribut: IAttributs = {
@@ -152,6 +155,7 @@ export class NewExemplaireComponent implements OnInit {
   typeAjout : string = TypeMouvement.Ajout
   typeReduire : string = TypeMouvement.Reduire
   laPersonneRattachee : IPatient | undefined 
+  codeControl = new FormControl()
 
   constructor(
     private router: Router,
@@ -176,6 +180,7 @@ export class NewExemplaireComponent implements OnInit {
 
   ngOnInit(): void {
     
+    this.codeControl.disable()
     let idPersonne : string = this.donneeEchangeService.getExemplairePersonneRatachee()
     this.servicePatient.getPatientById(idPersonne).subscribe(
       patientTrouve =>{
@@ -328,6 +333,7 @@ export class NewExemplaireComponent implements OnInit {
          //pour avoir la donnée fraiche on refait un appel à document
          //à supprimer lorsqu'on aura un vrai back connecté
           this.modifierMouvementExemplaire(x.idDocument)
+          this.codeControl.setValue(this.exemplaire.code)
         });
     }
     if (this.idDocument != null && this.idDocument !== '') {
@@ -561,7 +567,6 @@ export class NewExemplaireComponent implements OnInit {
    * methode de validation du formulaire (enregistrement des donnees du formulaire)
    */
   onSubmit() {
-    const exemplaireDocument = this._exemplaireDocument;
     this.submitted = true;
     this.enregistrerObjet();
     this.evaluation();
@@ -586,7 +591,9 @@ export class NewExemplaireComponent implements OnInit {
       docEtats: this.document.docEtats,
       ordreEtats: this.exemplaire.ordreEtats,
       dateCreation: new Date,
-      personneRattachee: this.laPersonneRattachee!
+      personneRattachee: this.laPersonneRattachee!,
+      formatCode: this.document.formatCode,
+      code: this.exemplaire.code
     };
 
     if (this.exemplaire.id != '') {

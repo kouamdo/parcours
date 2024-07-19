@@ -16,8 +16,14 @@ h3{
     opacity: 0.8;
     font-weight: bold;
 }
-#titre{
+.titre{
     margin: 20px 0;
+}
+.codeInput{
+    display: flex;
+    label{
+        margin-right: 5px;
+    }
 }
 .contentBlock{
     display: flex;
@@ -66,10 +72,6 @@ h3{
 .block1 .inputBlock input, .block1 .inputBlock textarea, .block1 .inputBlock select{
     width: 70%;
     height: 30px;
-}
-.titre{
-    font-weight: 400 !important;
-    padding: 20px 0 2px 0 !important;
 }
 .inputSpecial{
     width: fit-content !important;

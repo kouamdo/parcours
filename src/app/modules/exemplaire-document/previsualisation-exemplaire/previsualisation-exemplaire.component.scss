@@ -24,9 +24,12 @@
     transform: scale(1.1);
 }
 #titre{
-    margin: 20px 0;
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
+    div{
+        margin: 20px 0;
+    }
 }
 .hoverBlock{
     display: flex;

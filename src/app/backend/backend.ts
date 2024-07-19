@@ -27,6 +27,7 @@ import { IEtape } from '../modele/etape';
 import { IParours } from '../modele/parours';
 import { Promo } from '../modele/promo-distributeur';
 import { TypeValidation } from '../modele/type-validation';
+import { FormatCode } from '../modele/format-code';
 
 export class InMemDBService implements InMemoryDbService {
   createDb() {
@@ -1095,6 +1096,7 @@ export class InMemDBService implements InMemoryDbService {
         affichagePrix: true,
         contientRessources: true,
         contientDistributeurs: true,
+            formatCode: 'FACT',
         missions: [
           {
             id: '1',
@@ -1601,6 +1603,7 @@ export class InMemDBService implements InMemoryDbService {
             affichagePrix: true,
             contientRessources: true,
             contientDistributeurs: true,
+            formatCode: 'FACT',
             missions: [
               {
                 id: '1',
@@ -2095,6 +2098,7 @@ export class InMemDBService implements InMemoryDbService {
             affichagePrix: true,
             contientRessources: true,
             contientDistributeurs: true,
+            formatCode: 'FACT',
             missions: [
               {
                 id: '1',
@@ -2555,6 +2559,7 @@ export class InMemDBService implements InMemoryDbService {
             affichagePrix: true,
             contientRessources: true,
             contientDistributeurs: true,
+            formatCode: 'FACT',
             docEtats: [
               {
                 id: '1',
@@ -2997,6 +3002,7 @@ export class InMemDBService implements InMemoryDbService {
             affichagePrix: true,
             contientRessources: true,
             contientDistributeurs: true,
+            formatCode: 'FACT',
             docEtats: [
               {
                 id: '2',
@@ -3440,6 +3446,7 @@ export class InMemDBService implements InMemoryDbService {
             affichagePrix: true,
             contientRessources: true,
             contientDistributeurs: true,
+            formatCode: 'FACT',
             docEtats: [
               {
                 id: '2',
@@ -4050,6 +4057,7 @@ export class InMemDBService implements InMemoryDbService {
             affichagePrix: true,
             contientRessources: true,
             contientDistributeurs: true,
+            formatCode: 'FACT',
             docEtats: [
               {
                 id: '2',
@@ -4491,6 +4499,7 @@ export class InMemDBService implements InMemoryDbService {
             affichagePrix: true,
             contientRessources: true,
             contientDistributeurs: true,
+            formatCode: 'FACT',
             typeMouvement: 'Ajout',
             docEtats: [
               {
@@ -5131,6 +5140,7 @@ export class InMemDBService implements InMemoryDbService {
             affichagePrix: true,
             contientRessources: true,
             contientDistributeurs: true,
+            formatCode: 'FACT',
             docEtats: [
               {
                 id: '1',
@@ -5675,6 +5685,7 @@ export class InMemDBService implements InMemoryDbService {
         affichagePrix: true,
         contientRessources: false,
         contientDistributeurs: false,
+        formatCode: 'FACT',
         missions: [
           {
             id: '1',
@@ -6136,6 +6147,7 @@ export class InMemDBService implements InMemoryDbService {
         affichagePrix: false,
         contientRessources: true,
         contientDistributeurs: false,
+        formatCode: 'FACT',
         docEtats: [
           {
             id: '1',
@@ -6627,6 +6639,7 @@ export class InMemDBService implements InMemoryDbService {
             affichagePrix: true,
             contientRessources: true,
             contientDistributeurs: true,
+            formatCode: 'FACT',
             missions: [
               {
                 id: '1',
@@ -7121,6 +7134,7 @@ export class InMemDBService implements InMemoryDbService {
             affichagePrix: true,
             contientRessources: true,
             contientDistributeurs: true,
+            formatCode: 'FACT',
             missions: [
               {
                 id: '1',
@@ -7582,6 +7596,7 @@ export class InMemDBService implements InMemoryDbService {
             affichagePrix: true,
             contientRessources: true,
             contientDistributeurs: true,
+            formatCode: 'FACT',
             docEtats: [
               {
                 id: '1',
@@ -8026,6 +8041,7 @@ export class InMemDBService implements InMemoryDbService {
             affichagePrix: true,
             contientRessources: true,
             contientDistributeurs: true,
+            formatCode: 'FACT',
             docEtats: [
               {
                 id: '2',
@@ -8647,13 +8663,13 @@ export class InMemDBService implements InMemoryDbService {
           {
             id: '5',
             titre: 'ordonnance',
-            description:
-              "Document delivre par le medecin ou un infirmier de l'etablissement",
+            description: "Document delivre par le medecin ou un infirmier de l'etablissement",
             typeMouvement: 'Neutre',
             etat: true,
             affichagePrix: true,
             contientRessources: true,
             contientDistributeurs: true,
+            formatCode: 'FACT',
             docEtats: [
               {
                 id: '1',
@@ -8811,8 +8827,7 @@ export class InMemDBService implements InMemoryDbService {
                 dateCreation: new Date('07/03/2000'),
                 dateModification: new Date('07/03/1990'),
                 type: IType.Boolean,
-                valeursParDefaut:
-                  'A, A+, A-, B, B+, B-, AB, AB+, AB-, O, O+, O-',
+                valeursParDefaut: 'A, A+, A-, B, B+, B-, AB, AB+, AB-, O, O+, O-',
               },
               {
                 id: '5',
@@ -8912,8 +8927,7 @@ export class InMemDBService implements InMemoryDbService {
                       dateCreation: new Date('07/03/2000'),
                       dateModification: new Date('07/03/1990'),
                       type: IType.Boolean,
-                      valeursParDefaut:
-                        'A, A+, A-, B, B+, B-, AB, AB+, AB-, O, O+, O-',
+                      valeursParDefaut: 'A, A+, A-, B, B+, B-, AB, AB+, AB-, O, O+, O-',
                     },
                   },
                   {
@@ -9163,6 +9177,7 @@ export class InMemDBService implements InMemoryDbService {
         affichagePrix: true,
         contientRessources: true,
         contientDistributeurs: false,
+        formatCode: 'FACT',
         docEtats: [
           {
             id: '2',
@@ -9790,6 +9805,7 @@ export class InMemDBService implements InMemoryDbService {
         affichagePrix: false,
         contientRessources: true,
         contientDistributeurs: true,
+            formatCode: 'FACT',
         docEtats: [
           {
             id: '1',
@@ -10314,6 +10330,7 @@ export class InMemDBService implements InMemoryDbService {
             affichagePrix: true,
             contientRessources: true,
             contientDistributeurs: true,
+            formatCode: 'FACT',
             docEtats: [
               {
                 id: '1',
@@ -10758,6 +10775,7 @@ export class InMemDBService implements InMemoryDbService {
             affichagePrix: true,
             contientRessources: true,
             contientDistributeurs: true,
+            formatCode: 'FACT',
             docEtats: [
               {
                 id: '2',
@@ -11386,6 +11404,7 @@ export class InMemDBService implements InMemoryDbService {
             affichagePrix: true,
             contientRessources: true,
             contientDistributeurs: true,
+            formatCode: 'FACT',
             docEtats: [
               {
                 id: '1',
@@ -11889,6 +11908,7 @@ export class InMemDBService implements InMemoryDbService {
     let exemplaires: IExemplaireDocument[] = [
       {
         id: '1',
+        code: '03072024-120000-123',
         idDocument: '4',
         personneRattachee: {
           id: '6911989109209',
@@ -11916,13 +11936,13 @@ export class InMemDBService implements InMemoryDbService {
         },
         dateCreation: new Date('07/03/2024'),
         titre: 'Formulaire de sortie',
-        description:
-          "Document 1 delivre par le medecin ou un infirmier de l'etablissement",
+        description: "Document 1 delivre par le medecin ou un infirmier de l'etablissement",
         typeMouvement: 'Reduire',
         etat: false,
         affichagePrix: true,
         contientRessources: true,
         contientDistributeurs: false,
+        formatCode: 'FACT',
         docEtats: [
           {
             id: '2',
@@ -12218,8 +12238,7 @@ export class InMemDBService implements InMemoryDbService {
                   dateCreation: new Date('07/03/2000'),
                   dateModification: new Date('07/03/1990'),
                   type: IType.Boolean,
-                  valeursParDefaut:
-                    'A, A+, A-, B, B+, B-, AB, AB+, AB-, O, O+, O-',
+                  valeursParDefaut: 'A, A+, A-, B, B+, B-, AB, AB+, AB-, O, O+, O-',
                 },
               },
               {
@@ -12742,8 +12761,7 @@ export class InMemDBService implements InMemoryDbService {
           {
             id: '1',
             titre: 'Note intervention',
-            description:
-              "Document delivre par le medecin ou un infirmier de l'etablissement",
+            description: "Document delivre par le medecin ou un infirmier de l'etablissement",
             docEtats: [
               {
                 id: '1',
@@ -12795,6 +12813,7 @@ export class InMemDBService implements InMemoryDbService {
             affichagePrix: true,
             contientRessources: true,
             contientDistributeurs: true,
+            formatCode: 'FACT',
             missions: [
               {
                 id: '1',
@@ -12906,8 +12925,7 @@ export class InMemDBService implements InMemoryDbService {
                 dateCreation: new Date('07/03/2000'),
                 dateModification: new Date('07/03/1990'),
                 type: IType.Boolean,
-                valeursParDefaut:
-                  'A, A+, A-, B, B+, B-, AB, AB+, AB-, O, O+, O-',
+                valeursParDefaut: 'A, A+, A-, B, B+, B-, AB, AB+, AB-, O, O+, O-',
               },
               {
                 id: '8',
@@ -13005,8 +13023,7 @@ export class InMemDBService implements InMemoryDbService {
                       dateCreation: new Date('07/03/2000'),
                       dateModification: new Date('07/03/1990'),
                       type: IType.Boolean,
-                      valeursParDefaut:
-                        'A, A+, A-, B, B+, B-, AB, AB+, AB-, O, O+, O-',
+                      valeursParDefaut: 'A, A+, A-, B, B+, B-, AB, AB+, AB-, O, O+, O-',
                     },
                   },
                   {
@@ -13247,13 +13264,13 @@ export class InMemDBService implements InMemoryDbService {
           {
             id: '4',
             titre: 'Formulaire de sortie',
-            description:
-              "Document delivre par le medecin ou un infirmier de l'etablissement",
+            description: "Document delivre par le medecin ou un infirmier de l'etablissement",
             typeMouvement: 'Reduire',
             etat: true,
             affichagePrix: true,
             contientRessources: true,
             contientDistributeurs: true,
+            formatCode: 'FACT',
             docEtats: [
               {
                 id: '2',
@@ -13400,8 +13417,7 @@ export class InMemDBService implements InMemoryDbService {
                 dateCreation: new Date('07/03/2000'),
                 dateModification: new Date('07/03/1990'),
                 type: IType.Boolean,
-                valeursParDefaut:
-                  'A, A+, A-, B, B+, B-, AB, AB+, AB-, O, O+, O-',
+                valeursParDefaut: 'A, A+, A-, B, B+, B-, AB, AB+, AB-, O, O+, O-',
               },
               {
                 id: '8',
@@ -13551,8 +13567,7 @@ export class InMemDBService implements InMemoryDbService {
                       dateCreation: new Date('07/03/2000'),
                       dateModification: new Date('07/03/1990'),
                       type: IType.Boolean,
-                      valeursParDefaut:
-                        'A, A+, A-, B, B+, B-, AB, AB+, AB-, O, O+, O-',
+                      valeursParDefaut: 'A, A+, A-, B, B+, B-, AB, AB+, AB-, O, O+, O-',
                     },
                   },
                   {
@@ -13993,10 +14008,11 @@ export class InMemDBService implements InMemoryDbService {
               mail: 'ngong@yad.fr',
             },
           },
-        ],
+        ]
       },
       {
         id: '2',
+        code: '21052021-120000-123',
         idDocument: '5',
         personneRattachee: {
           id: '6911989109209',
@@ -14031,6 +14047,7 @@ export class InMemDBService implements InMemoryDbService {
         affichagePrix: true,
         contientRessources: true,
         contientDistributeurs: true,
+            formatCode: 'FACT',
         docEtats: [
           {
             id: '1',
@@ -14673,6 +14690,7 @@ export class InMemDBService implements InMemoryDbService {
             affichagePrix: true,
             contientRessources: true,
             contientDistributeurs: true,
+            formatCode: 'FACT',
             docEtats: [
               {
                 id: '1',
@@ -15117,6 +15135,7 @@ export class InMemDBService implements InMemoryDbService {
             affichagePrix: true,
             contientRessources: true,
             contientDistributeurs: true,
+            formatCode: 'FACT',
             docEtats: [
               {
                 id: '2',
@@ -15745,6 +15764,7 @@ export class InMemDBService implements InMemoryDbService {
             affichagePrix: true,
             contientRessources: true,
             contientDistributeurs: true,
+            formatCode: 'FACT',
             docEtats: [
               {
                 id: '1',
@@ -16336,6 +16356,7 @@ export class InMemDBService implements InMemoryDbService {
       },
       {
         id: '3',
+        code: '05072021-120000-123',
         idDocument: '4',
         personneRattachee: {
           id: '6911989109209',
@@ -16370,6 +16391,7 @@ export class InMemDBService implements InMemoryDbService {
         affichagePrix: true,
         contientRessources: true,
         contientDistributeurs: false,
+        formatCode: 'FACT',
         docEtats:  [
           {
             id: '3',
@@ -17233,6 +17255,7 @@ export class InMemDBService implements InMemoryDbService {
             affichagePrix: true,
             contientRessources: true,
             contientDistributeurs: true,
+            formatCode: 'FACT',
             missions: [
               {
                 id: '1',
@@ -17693,6 +17716,7 @@ export class InMemDBService implements InMemoryDbService {
             affichagePrix: true,
             contientRessources: true,
             contientDistributeurs: true,
+            formatCode: 'FACT',
             docEtats:  [
               {
                 id: '2',
@@ -18437,6 +18461,7 @@ export class InMemDBService implements InMemoryDbService {
       },
       {
         id: '4',
+        code: '03072013-120000-123',
         idDocument: '5',
         personneRattachee: {
           id: '6911989109209',
@@ -18471,6 +18496,7 @@ export class InMemDBService implements InMemoryDbService {
         affichagePrix: true,
         contientRessources: true,
         contientDistributeurs: true,
+            formatCode: 'FACT',
         docEtats:  [
           {
             id: '1',
@@ -19062,6 +19088,7 @@ export class InMemDBService implements InMemoryDbService {
             affichagePrix: true,
             contientRessources: true,
             contientDistributeurs: true,
+            formatCode: 'FACT',
             docEtats:  [
               {
                 id: '1',
@@ -19507,6 +19534,7 @@ export class InMemDBService implements InMemoryDbService {
             affichagePrix: true,
             contientRessources: true,
             contientDistributeurs: true,
+            formatCode: 'FACT',
             docEtats:  [
               {
                 id: '1',
@@ -20099,6 +20127,7 @@ export class InMemDBService implements InMemoryDbService {
       },
       {
         id: '5',
+        code: '03072023-120000-123',
         idDocument: '1',
         personneRattachee: {
           id: '290',
@@ -20133,6 +20162,7 @@ export class InMemDBService implements InMemoryDbService {
         affichagePrix: true,
         contientRessources: true,
         contientDistributeurs: true,
+            formatCode: 'FACT',
         docEtats:  [
           {
             id: '2',
@@ -20611,6 +20641,7 @@ export class InMemDBService implements InMemoryDbService {
             affichagePrix: true,
             contientRessources: true,
             contientDistributeurs: true,
+            formatCode: 'FACT',
             docEtats:  [
               {
                 id: '1',
@@ -21170,7 +21201,8 @@ export class InMemDBService implements InMemoryDbService {
         ],
       },
       {
-        id: '1',
+        id: '6',
+        code: '03072010-120000-123',
         idDocument: '4',
         personneRattachee: {
           id: '290',
@@ -21205,6 +21237,7 @@ export class InMemDBService implements InMemoryDbService {
         affichagePrix: true,
         contientRessources: true,
         contientDistributeurs: false,
+        formatCode: 'FACT',
         docEtats: [
           {
             id: '2',
@@ -22078,6 +22111,7 @@ export class InMemDBService implements InMemoryDbService {
             affichagePrix: true,
             contientRessources: true,
             contientDistributeurs: true,
+            formatCode: 'FACT',
             missions: [
               {
                 id: '1',
@@ -22538,6 +22572,7 @@ export class InMemDBService implements InMemoryDbService {
             affichagePrix: true,
             contientRessources: true,
             contientDistributeurs: true,
+            formatCode: 'FACT',
             docEtats: [
               {
                 id: '2',
@@ -23777,6 +23812,7 @@ export class InMemDBService implements InMemoryDbService {
     let typeUnite: TypeUnite = { type: ['Litre', 'Kg', 'Packs', 'Boite'] };
     let typeMvt: TypeMvt = { type: ['Neutre', 'Ajout', 'Reduire'] };
     let typeValidation: TypeValidation = { type: ['Simple', 'Transmission', 'Traitement'] };
+    let formatCode: FormatCode = { type: ['FACT', 'ALPHA', 'ASCII'] };
     let etats: IEtats[] = [
       {
         id: '1',
@@ -23865,6 +23901,7 @@ export class InMemDBService implements InMemoryDbService {
             affichagePrix: true,
             contientRessources: true,
             contientDistributeurs: true,
+            formatCode: 'FACT',
             missions: [
               {
                 id: '1',
@@ -24374,6 +24411,7 @@ export class InMemDBService implements InMemoryDbService {
                 affichagePrix: true,
                 contientRessources: true,
                 contientDistributeurs: true,
+            formatCode: 'FACT',
                 missions: [
                   {
                     id: '1',
@@ -24869,6 +24907,7 @@ export class InMemDBService implements InMemoryDbService {
                 affichagePrix: true,
                 contientRessources: true,
                 contientDistributeurs: true,
+            formatCode: 'FACT',
                 missions: [
                   {
                     id: '1',
@@ -25330,6 +25369,7 @@ export class InMemDBService implements InMemoryDbService {
                 affichagePrix: true,
                 contientRessources: true,
                 contientDistributeurs: true,
+            formatCode: 'FACT',
                 docEtats: [
                   {
                     id: '1',
@@ -25772,6 +25812,7 @@ export class InMemDBService implements InMemoryDbService {
                 affichagePrix: true,
                 contientRessources: true,
                 contientDistributeurs: true,
+            formatCode: 'FACT',
                 docEtats: [
                   {
                     id: '2',
@@ -26216,6 +26257,7 @@ export class InMemDBService implements InMemoryDbService {
                 affichagePrix: true,
                 contientRessources: true,
                 contientDistributeurs: true,
+            formatCode: 'FACT',
                 docEtats: [
                   {
                     id: '2',
@@ -26829,6 +26871,7 @@ export class InMemDBService implements InMemoryDbService {
                 affichagePrix: true,
                 contientRessources: true,
                 contientDistributeurs: true,
+            formatCode: 'FACT',
                 docEtats: [
                   {
                     id: '2',
@@ -27271,6 +27314,7 @@ export class InMemDBService implements InMemoryDbService {
                 affichagePrix: true,
                 contientRessources: true,
                 contientDistributeurs: true,
+            formatCode: 'FACT',
                 typeMouvement: 'Ajout',
                 docEtats: [
                   {
@@ -27913,6 +27957,7 @@ export class InMemDBService implements InMemoryDbService {
                 affichagePrix: true,
                 contientRessources: true,
                 contientDistributeurs: true,
+            formatCode: 'FACT',
                 docEtats: [
                   {
                     id: '1',
@@ -28460,6 +28505,7 @@ export class InMemDBService implements InMemoryDbService {
             affichagePrix: true,
             contientRessources: false,
             contientDistributeurs: false,
+        formatCode: 'FACT',
             missions: [
               {
                 id: '1',
@@ -28983,6 +29029,7 @@ export class InMemDBService implements InMemoryDbService {
                 affichagePrix: true,
                 contientRessources: true,
                 contientDistributeurs: true,
+            formatCode: 'FACT',
                 missions: [
                   {
                     id: '1',
@@ -29492,6 +29539,7 @@ export class InMemDBService implements InMemoryDbService {
                     affichagePrix: true,
                     contientRessources: true,
                     contientDistributeurs: true,
+            formatCode: 'FACT',
                     missions: [
                       {
                         id: '1',
@@ -29987,6 +30035,7 @@ export class InMemDBService implements InMemoryDbService {
                     affichagePrix: true,
                     contientRessources: true,
                     contientDistributeurs: true,
+            formatCode: 'FACT',
                     missions: [
                       {
                         id: '1',
@@ -30448,6 +30497,7 @@ export class InMemDBService implements InMemoryDbService {
                     affichagePrix: true,
                     contientRessources: true,
                     contientDistributeurs: true,
+            formatCode: 'FACT',
                     docEtats: [
                       {
                         id: '1',
@@ -30890,6 +30940,7 @@ export class InMemDBService implements InMemoryDbService {
                     affichagePrix: true,
                     contientRessources: true,
                     contientDistributeurs: true,
+            formatCode: 'FACT',
                     docEtats: [
                       {
                         id: '2',
@@ -31334,6 +31385,7 @@ export class InMemDBService implements InMemoryDbService {
                     affichagePrix: true,
                     contientRessources: true,
                     contientDistributeurs: true,
+            formatCode: 'FACT',
                     docEtats: [
                       {
                         id: '2',
@@ -31947,6 +31999,7 @@ export class InMemDBService implements InMemoryDbService {
                     affichagePrix: true,
                     contientRessources: true,
                     contientDistributeurs: true,
+            formatCode: 'FACT',
                     docEtats: [
                       {
                         id: '2',
@@ -32389,6 +32442,7 @@ export class InMemDBService implements InMemoryDbService {
                     affichagePrix: true,
                     contientRessources: true,
                     contientDistributeurs: true,
+            formatCode: 'FACT',
                     typeMouvement: 'Ajout',
                     docEtats: [
                       {
@@ -33031,6 +33085,7 @@ export class InMemDBService implements InMemoryDbService {
                     affichagePrix: true,
                     contientRessources: true,
                     contientDistributeurs: true,
+            formatCode: 'FACT',
                     docEtats: [
                       {
                         id: '1',
@@ -33558,6 +33613,7 @@ export class InMemDBService implements InMemoryDbService {
                 affichagePrix: false,
                 contientRessources: true,
                 contientDistributeurs: false,
+        formatCode: 'FACT',
                 docEtats: [
                   {
                     id: '1',
@@ -34050,6 +34106,7 @@ export class InMemDBService implements InMemoryDbService {
                     affichagePrix: true,
                     contientRessources: true,
                     contientDistributeurs: true,
+            formatCode: 'FACT',
                     missions: [
                       {
                         id: '1',
@@ -34545,6 +34602,7 @@ export class InMemDBService implements InMemoryDbService {
                     affichagePrix: true,
                     contientRessources: true,
                     contientDistributeurs: true,
+            formatCode: 'FACT',
                     missions: [
                       {
                         id: '1',
@@ -35007,6 +35065,7 @@ export class InMemDBService implements InMemoryDbService {
                     affichagePrix: true,
                     contientRessources: true,
                     contientDistributeurs: true,
+            formatCode: 'FACT',
                     docEtats: [
                       {
                         id: '1',
@@ -35452,6 +35511,7 @@ export class InMemDBService implements InMemoryDbService {
                     affichagePrix: true,
                     contientRessources: true,
                     contientDistributeurs: true,
+            formatCode: 'FACT',
                     docEtats: [
                       {
                         id: '2',
@@ -36082,6 +36142,7 @@ export class InMemDBService implements InMemoryDbService {
                     affichagePrix: true,
                     contientRessources: true,
                     contientDistributeurs: true,
+            formatCode: 'FACT',
                     docEtats: [
                       {
                         id: '1',
@@ -36611,7 +36672,8 @@ export class InMemDBService implements InMemoryDbService {
       etats,
       etape,
       parours,
-      typeValidation
+      typeValidation,
+      formatCode
     };
   }
 }

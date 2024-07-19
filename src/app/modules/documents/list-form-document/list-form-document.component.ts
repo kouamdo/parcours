@@ -55,7 +55,8 @@ export class ListFormDocumentComponent implements OnInit, AfterViewInit {
     contientRessources: false,
     contientDistributeurs: false,
     listDocEtats: '',
-    docEtats: []
+    docEtats: [],
+    formatCode: ''
   }
 
   constructor(private translate: TranslateService, private router:Router,
@@ -148,7 +149,8 @@ export class ListFormDocumentComponent implements OnInit, AfterViewInit {
      attributs: [],
      categories: [],
      preconisations: [],
-     docEtats: []
+     docEtats: [],
+     formatCode: ''
    }
     afficheDocument.id = x.id;
     afficheDocument.titre = x.titre;

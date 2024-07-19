@@ -47,7 +47,9 @@ export class HistoriqueParPersonneComponent implements OnInit {
       mail: '',
       telephone: '',
       qrCodeValue: ''
-    }
+    },
+    formatCode: '',
+    code: ''
   };
   titre:string='';
   mouvements : IMouvement[] = []
