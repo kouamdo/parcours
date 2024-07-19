@@ -53,7 +53,7 @@ export class NewServicesComponent implements OnInit {
   }
 
   return() {
-    this.router.navigate(['/list-services']);
+    this.router.navigate(['parcours/services/list-services']);
   }
 
   onSubmit(serviceInput:any){
@@ -79,7 +79,7 @@ export class NewServicesComponent implements OnInit {
 
     this.serviceService.ajouterService(serviceTemp).subscribe(
       object => {
-        this.router.navigate(['/list-services']);
+        this.router.navigate(['parcours/services/list-services']);
       }
     )
   }

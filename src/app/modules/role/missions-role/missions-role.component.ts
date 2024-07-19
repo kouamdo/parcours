@@ -349,7 +349,7 @@ export class MissionsRoleComponent {
     this.rolesServices
       .ajouterRole(this.role)
       .subscribe((object) => {
-        this.router.navigate(['/list-roles']);
+        this.router.navigate(['parcours/roles/list-roles']);
       });
   }
 }

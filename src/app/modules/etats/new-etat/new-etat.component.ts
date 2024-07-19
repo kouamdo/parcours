@@ -44,7 +44,7 @@ export class NewEtatComponent {
   }
 
   return(){
-    this.router.navigate(['/list-etats']);
+    this.router.navigate(['parcours/etats/list-etats']);
   }
 
   onSubmit(etatsInput:any){
@@ -65,7 +65,7 @@ export class NewEtatComponent {
 
     this.EtatService.ajouterEtat(etatTemp).subscribe(
       object => {
-        this.router.navigate(['/list-etats']);
+        this.router.navigate(['parcours/etats/list-etats']);
       }
     )
   }

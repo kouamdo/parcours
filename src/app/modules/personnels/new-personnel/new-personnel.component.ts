@@ -102,7 +102,7 @@ export class NewPersonnelComponent implements OnInit {
     return this.forme.controls;
   }
   return() {
-    this.router.navigate(['/list-personnels']);
+    this.router.navigate(['parcours/personnels/list-personnels']);
   }
 
   onSubmit(personnelInput: any) {

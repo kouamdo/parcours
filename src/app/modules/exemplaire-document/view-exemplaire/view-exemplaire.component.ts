@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { v4 as uuidv4 } from 'uuid';
 import { Router, ActivatedRoute } from '@angular/router';
-import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { IDocEtats } from 'src/app/modele/doc-etats';
-import { IEtats } from 'src/app/modele/etats';
 import { IExemplaireDocument } from 'src/app/modele/exemplaire-document';
 import { IMouvement } from 'src/app/modele/mouvement';
 import { TypeMouvement } from 'src/app/modele/typeMouvement';
@@ -13,7 +12,6 @@ import { ExemplaireDocumentService } from 'src/app/services/exemplaire-document/
 import { IOrdreEtat } from 'src/app/modele/ordreEtat';
 import { IDocument } from 'src/app/modele/document';
 import { ModalChoixDocEtatComponent } from '../../shared/modal-choix-doc-etat/modal-choix-doc-etat.component';
-import { log } from 'console';
 
 @Component({
   selector: 'app-view-exemplaire',

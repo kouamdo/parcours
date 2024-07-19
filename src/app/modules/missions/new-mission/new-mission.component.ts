@@ -70,7 +70,7 @@ export class NewMissionComponent implements OnInit {
     return this.forme.controls;
   }
   return(){
-    this.router.navigate(['/list-missions']);
+    this.router.navigate(['parcours/missions/list-missions']);
   }
 
   onSubmit(missionInput:any){
@@ -94,7 +94,7 @@ export class NewMissionComponent implements OnInit {
     }
     this.missionService.ajouterMission(missionTemp).subscribe(
       object => {
-        this.router.navigate(['/list-missions']);
+        this.router.navigate(['parcours/missions/list-missions']);
       }
     )
   }

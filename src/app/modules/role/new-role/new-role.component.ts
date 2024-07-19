@@ -54,7 +54,7 @@ export class NewRoleComponent implements OnInit {
   }
 
   return(){
-    this.router.navigate(['/list-roles']);
+    this.router.navigate(['parcours/roles/list-roles']);
   }
 
   onSubmit(roleInput:any){
@@ -74,7 +74,7 @@ export class NewRoleComponent implements OnInit {
     }
     this.roleService.ajouterRole(roleTemp).subscribe(
       object => {
-        this.router.navigate(['/list-roles']);
+        this.router.navigate(['parcours/roles/list-roles']);
       }
     )
   }

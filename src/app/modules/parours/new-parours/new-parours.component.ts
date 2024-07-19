@@ -10,17 +10,14 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Observable, EMPTY } from 'rxjs';
 import { IEtape } from 'src/app/modele/etape';
 import { IParours } from 'src/app/modele/parours';
-import { IService } from 'src/app/modele/service';
 import { DonneesEchangeService } from 'src/app/services/donnees-echange/donnees-echange.service';
 import { EtapesService } from 'src/app/services/etapes/etapes.service';
 import { ParoursService } from 'src/app/services/parours/parours.service';
 import { v4 as uuidv4 } from 'uuid';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { NewEtapeComponent } from '../../etape/new-etape/new-etape.component';
-import { IAfficheDocument } from 'src/app/modele/affiche-document';
 import { IAfficheEtape } from 'src/app/modele/affiche-etape';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
-
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -235,7 +232,7 @@ export class NewParoursComponent implements OnInit {
     return afficheEtape;
   }
   return(){
-    this.router.navigate(['/list-parours']);
+    this.router.navigate(['parcours/parcours/list-parours']);
   }
 
   onSubmit(paroursInput: any) {
@@ -261,7 +258,7 @@ export class NewParoursComponent implements OnInit {
   }
 
   onReturn() {
-    this.router.navigate(['/list-parours']);
+    this.router.navigate(['parcours/parcours/list-parours']);
   }
 
   compareItem(etape1: IEtape, etape2: IEtape) {

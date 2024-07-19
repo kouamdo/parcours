@@ -1,6 +1,6 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router, ActivatedRoute } from '@angular/router';
 import { IPersonnel } from 'src/app/modele/personnel';
@@ -300,7 +300,7 @@ export class RolesPersonnelComponent implements OnInit {
     this.personnelService
       .ajouterPersonnel(this.personnel)
       .subscribe((object) => {
-        this.router.navigate(['/list-personnels']);
+        this.router.navigate(['parcours/personnels/list-personnels']);
       });
   }
 }

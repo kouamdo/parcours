@@ -1,9 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { EMPTY, Observable } from 'rxjs';
-import { IService } from 'src/app/modele/service';
-import { ITicket } from 'src/app/modele/ticket';
 import { ServicesService } from 'src/app/services/services/services.service';
 import { TicketsService } from 'src/app/services/tickets/tickets.service';
 import {FormControl} from '@angular/forms';

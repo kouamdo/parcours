@@ -1,5 +1,5 @@
 import { LiveAnnouncer } from '@angular/cdk/a11y';
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, Input, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, FormArray } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
@@ -14,6 +14,8 @@ import { IUtilisateurs } from 'src/app/modele/utilisateurs';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalChoixGroupsComponent } from '../../shared/modal-choix-groups/modal-choix-groups.component';
 import { AuthentificationService } from 'src/app/services/authentifications/authentification.service';
+import { IElements } from 'src/app/modele/elements';
+import { PassActionService } from 'src/app/services/actions-view/pass-action.service';
 
 @Component({
   selector: 'app-list-personnels',
@@ -25,10 +27,13 @@ export class ListPersonnelsComponent implements OnInit, AfterViewInit {
   barcodeScanner!: ModalCodebarreScanContinueComponent;
 
   myControl = new FormControl<string | IPersonnel>('');
+  @Input()
+  langue :string = localStorage.getItem('langue')!;
 
   ELEMENTS_TABLE: IUtilisateurs[] = [];
   filteredOptions: IUtilisateurs[] | undefined;
   user : IUtilisateurs | undefined;
+  receivedActions: IElements[] = [];
 
   displayedColumns: string[] = [
     'nom',
@@ -60,7 +65,8 @@ export class ListPersonnelsComponent implements OnInit, AfterViewInit {
     public authService: AuthentificationService,
     private _liveAnnouncer: LiveAnnouncer,
     private barService: ModalCodebarreService,
-    private userService: UtilisateurService
+    private userService: UtilisateurService,
+    private actionsview: PassActionService
   ) {
     this.formPersonnel = this.formBuilder.group({
       _listPersonnels: new FormArray([]),
@@ -101,6 +107,9 @@ export class ListPersonnelsComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
+    this.receivedActions = this.actionsview.getActions();
+    console.log("Actions view :", this.receivedActions);
+    
     this.barService.getCode().subscribe((dt) => {
       this.scan_val = dt;
       this.myControl.setValue(this.scan_val); // Set the initial value in the search bar
@@ -140,6 +149,14 @@ export class ListPersonnelsComponent implements OnInit, AfterViewInit {
         this.filteredOptions = [];
       }
     });
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['langue']) {
+      this.receivedActions = this.actionsview.getActions();
+      console.log("Actions view yes:", this.receivedActions);
+    }
+    console.log("Actions view  not:", this.receivedActions);
   }
 
   openChoixGroupDialog(personnel: IPersonnel){

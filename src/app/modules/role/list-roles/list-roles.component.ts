@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { IRole } from 'src/app/modele/role';
-
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { EMPTY, Observable } from 'rxjs';
@@ -14,7 +13,6 @@ import {MatTableDataSource} from '@angular/material/table';
 import {MatSort, Sort} from '@angular/material/sort';
 import {LiveAnnouncer} from '@angular/cdk/a11y';
 import { RolesService } from 'src/app/services/roles/roles.service';
-import { log } from 'console';
 
 @Component({
   selector: 'app-list-roles',

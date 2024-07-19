@@ -3,7 +3,6 @@ import { TranslateService } from '@ngx-translate/core';
 import {OverlayContainer} from '@angular/cdk/overlay';
 import { AuthentificationService } from '../services/authentifications/authentification.service';
 import { Router } from '@angular/router';
-import { IUtilisateurs } from '../modele/utilisateurs';
 import { IPersonnel } from '../modele/personnel';
 
 @Component({
@@ -34,6 +33,7 @@ export class ModulesComponent {
     if (!this.authService.currentUserValue) {
       this.router.navigate(['/login']);
     }
+    localStorage.setItem('langue', this.langueChoisi);
     this.user = this.authService.currentUserValue.user
     this.groupe = this.authService.currentUserValue.groupe.libelle
 
@@ -43,7 +43,8 @@ export class ModulesComponent {
 
   useLanguage(language: string): void {
     this.translate.use(language);
-    this.langueChoisi = language;    
+    this.langueChoisi = language;   
+    localStorage.setItem('langue', this.langueChoisi);
   }
 
   valeurChange(event:any):void{

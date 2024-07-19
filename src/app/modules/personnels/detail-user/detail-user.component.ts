@@ -5,9 +5,6 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { IPersonnel } from 'src/app/modele/personnel';
 import { IUtilisateurs } from 'src/app/modele/utilisateurs';
 import { AuthentificationService } from 'src/app/services/authentifications/authentification.service';
-import { DonneesEchangeService } from 'src/app/services/donnees-echange/donnees-echange.service';
-import { PersonnelsService } from 'src/app/services/personnels/personnels.service';
-import { UtilisateurService } from 'src/app/services/utilisateurs/utilisateur.service';
 import { v4 as uuidv4 } from 'uuid';
 
 @Component({
@@ -27,10 +24,7 @@ export class DetailUserComponent implements OnInit {
   qrCodeValue: string = '';
   constructor(
     private formBuilder: FormBuilder,
-    private dataEnteteMenuService: DonneesEchangeService,
-    private userService: UtilisateurService,
     private authService: AuthentificationService,
-    private personnelService: PersonnelsService,
     private router: Router,
     private infosPath: ActivatedRoute,
     private datePipe: DatePipe

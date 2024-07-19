@@ -105,7 +105,6 @@ export class NewFormDocumentComponent implements OnInit {
     private dataEnteteMenuService: DonneesEchangeService,
     private serviceDocument: DocumentService,
     private serviceMission: MissionsService,
-    private serviceAttribut: AttributService,
     private _liveAnnouncer: LiveAnnouncer,
     private donneeDocCatService: DonneesEchangeService,
     private dialogDef: MatDialog
@@ -371,7 +370,7 @@ export class NewFormDocumentComponent implements OnInit {
     this.TABLE_CATEGORIE_AFFICHAGE_TEMP = categorieAttributsFinal;
   }
   return(){
-    this.router.navigate(['/list-documents']);
+    this.router.navigate(['parcours/documents/list-documents']);
   }
   onSubmit(documentInput: any) {
     this.submitted = true;
@@ -444,7 +443,7 @@ export class NewFormDocumentComponent implements OnInit {
     }
 
     this.serviceDocument.ajouterDocument(documentTemp).subscribe((object) => {
-      this.router.navigate(['/list-documents']);
+      this.router.navigate(['parcours/documents/list-documents']);
     });
     this.donneeDocCatService.dataDocumentAttributs = [];
     this.donneeDocCatService.dataDocumentCategorie = [];

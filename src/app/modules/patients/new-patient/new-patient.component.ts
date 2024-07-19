@@ -13,6 +13,8 @@ import { v4 as uuidv4 } from 'uuid';
 import { DonneesEchangeService } from 'src/app/services/donnees-echange/donnees-echange.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
+import { PassActionService } from 'src/app/services/actions-view/pass-action.service';
+import { IElements } from 'src/app/modele/elements';
 
 @Component({
   selector: 'app-new-patient',
@@ -29,6 +31,7 @@ export class NewPatientComponent implements OnInit {
   myControl = new FormControl<string | IPatient>('');
   initialDate = new FormControl(new Date());
   qrCodeValue: string = '';
+  receivedActions: IElements[] = [];
 
   ELEMENTS_TABLE: IPatient[] = [];
   personnesRatachees: IPatient[] = [];
@@ -102,7 +105,8 @@ export class NewPatientComponent implements OnInit {
     private patientService: PatientsService,
     private router: Router,
     private infosPath: ActivatedRoute,
-    private datePipe: DatePipe
+    private datePipe: DatePipe,
+    private actionsview: PassActionService
   ) {
     this.forme = this.formBuilder.group({
       nom: [
@@ -165,6 +169,8 @@ export class NewPatientComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.receivedActions = this.actionsview.getActions();
+    console.log("Actions view :", this.receivedActions);
     let idPatient = this.infosPath.snapshot.paramMap.get('idPatient');
     if (idPatient != null && idPatient !== '') {
       this.btnLibelle = 'Modifier';
@@ -196,8 +202,14 @@ export class NewPatientComponent implements OnInit {
   get f() {
     return this.forme.controls;
   }
+
+  public get isButton() : string {
+    let res = this.receivedActions.find((a) => a.bouton == 'true' && a.type == 'global');
+    return  res ? 'true': 'false';
+  }
+  
   return() {
-    this.router.navigate(['/list-patients']);
+    this.router.navigate(['parcours/patients/list-patients']);
   }
 
   onSubmit(patientInput: any) {
@@ -234,7 +246,7 @@ export class NewPatientComponent implements OnInit {
       patientTemp.id = this.patient.id;
     }
     this.patientService.ajouterPatient(patientTemp).subscribe((object) => {
-      this.router.navigate(['/list-patients']);
+      this.router.navigate(['parcours/patients/list-patients']);
     });
   }
 }

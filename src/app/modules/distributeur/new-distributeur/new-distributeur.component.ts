@@ -56,7 +56,7 @@ export class NewDistributeurComponent implements OnInit {
     return this.forme.controls;
   }
   return(){
-    this.router.navigate(['/list-distributeurs']);
+    this.router.navigate(['parcours/distributeurs/list-distributeurs']);
   }
 
   onSubmit(distributeurInput:any){
@@ -79,7 +79,7 @@ export class NewDistributeurComponent implements OnInit {
     }
     this.distributeurService.ajouterDistributeur(distributeurTemp).subscribe(
       object => {
-        this.router.navigate(['/list-distributeurs']);
+        this.router.navigate(['parcours/distributeurs/list-distributeurs']);
       }
     )
   }

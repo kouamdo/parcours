@@ -153,7 +153,7 @@ export class NewRessourceComponent implements OnInit {
     
   }
   return(){
-    this.router.navigate(['list-ressources']);
+    this.router.navigate(['parcours/ressources/list-ressources']);
   }
 
   onSubmit(ressourceInput:IRessource){
@@ -181,7 +181,7 @@ export class NewRessourceComponent implements OnInit {
     this.ressourceService
       .ajouterRessource(ressourceTemp)
       .subscribe((object) => {
-        this.router.navigate(['list-ressources']);
+        this.router.navigate(['parcours /ressources/list-ressources']);
       }
     )
     this.dataEnteteMenuService.dataDocumentRessourcesAttributs = []

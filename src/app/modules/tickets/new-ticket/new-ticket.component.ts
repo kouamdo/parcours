@@ -1,6 +1,6 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit, Inject, Optional, Input } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { EMPTY, Observable } from 'rxjs';
 import { IService } from 'src/app/modele/service';
@@ -130,7 +130,7 @@ export class NewTicketComponent implements OnInit {
     if (this.data?.step === 1) {
       console.log("hello", this.data.step);
       
-      this.router.navigate(['/list-patient']);
+      this.router.navigate(['parcours/patients/list-patient']);
       this.dialogRef?.close();
     }
   }

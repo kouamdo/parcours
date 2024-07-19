@@ -52,7 +52,7 @@ export class NewFamilleComponent implements OnInit {
     return this.forme.controls;
   }
   return() {
-    this.router.navigate(['/list-familles']);
+    this.router.navigate(['parcours/familles/list-familles']);
   }
 
   onSubmit(familleInput:any){
@@ -74,7 +74,7 @@ export class NewFamilleComponent implements OnInit {
     }
     this.familleService.ajouterFamille(familleTemp).subscribe(
       object => {
-        this.router.navigate(['/list-familles']);
+        this.router.navigate(['parcours/familles/list-familles']);
       }
     )
 

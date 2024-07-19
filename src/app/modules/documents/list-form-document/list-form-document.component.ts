@@ -7,13 +7,9 @@ import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { Observable, EMPTY } from 'rxjs';
 import { IAfficheDocument } from 'src/app/modele/affiche-document';
-import { IAttributs } from 'src/app/modele/attributs';
 import { IDocument } from 'src/app/modele/document';
-import { TypeMvt } from 'src/app/modele/type-mvt';
 import { DocumentService } from 'src/app/services/documents/document.service';
-import { ModalDocEtatsComponent } from '../../shared/modal-document-doc-etats/modal-document-doc-etats.component';
 
 @Component({
   selector: 'app-list-form-document',

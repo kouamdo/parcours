@@ -4,16 +4,11 @@ import {
   FormBuilder,
   FormControl,
   FormGroup,
-  FormGroupDirective,
-  FormsModule,
-  NgForm,
-  ReactiveFormsModule,
-  Validators,
+  FormGroupDirective
 } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { v4 as uuidv4 } from 'uuid';
-import { elementAt, EMPTY, map, Observable, single } from 'rxjs';
-
+import { EMPTY, Observable } from 'rxjs';
 import { PrecoMvtsService } from 'src/app/services/precomvts/precomvts.service';
 import { IPrecoMvt } from 'src/app/modele/precomvt';
 import { IRessource } from 'src/app/modele/ressource';
@@ -589,6 +584,6 @@ export class NewPrecomvtComponent implements OnInit {
     sessionStorage.removeItem('Etape courante');
   }
   onReturn() {
-    this.router.navigate(['/list-precomvts']);
+    this.router.navigate(['parcours/preconisations/list-precomvts']);
   }
 }

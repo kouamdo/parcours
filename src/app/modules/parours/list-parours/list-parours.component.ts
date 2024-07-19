@@ -4,8 +4,6 @@ import { FormControl } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { Router } from '@angular/router';
-import { Observable, EMPTY } from 'rxjs';
 import { IParours } from 'src/app/modele/parours';
 import { ParoursService } from 'src/app/services/parours/parours.service';
 import { IAfficheParours } from 'src/app/modele/affiche-parours';
@@ -42,7 +40,6 @@ export class ListParoursComponent implements OnInit {
   };
   constructor(
     private translate: TranslateService,
-    private router: Router,
     private _liveAnnouncer: LiveAnnouncer,
     private serviceParour: ParoursService
   ) {}

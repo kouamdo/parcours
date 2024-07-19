@@ -599,7 +599,7 @@ export class NewExemplaireComponent implements OnInit {
       .subscribe((object) => {
         console.log(" new exemplaire :", exemplaireTemp);
         
-        this.router.navigate(['/list-exemplaire']);
+        this.router.navigate(['parcours/exemplaires/list-exemplaire']);
       });
   }
 

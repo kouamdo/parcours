@@ -91,7 +91,7 @@ export class NewValidationComponent implements OnInit {
     return this.roleservices.getAllRoles();
   }
   return(){
-    this.router.navigate(['/list-validations']); 
+    this.router.navigate(['parcours/validations/list-validations']); 
   }
 
   onSubmit(validationInput:any){
@@ -116,7 +116,7 @@ export class NewValidationComponent implements OnInit {
     }
     this.validationservice.ajouterValidation(validationTemp).subscribe(
       object => {
-        this.router.navigate(['/list-validations']);
+        this.router.navigate(['parcours/validations/list-validations']);
       }
     )
   }

@@ -23,7 +23,7 @@
           </form>
 
         </div>
-        <div role="button" id="addUserBotton" routerLink="../patient-nouveau">
+        <div *ngIf="isButton == 'true'" role="button" id="addUserBotton" routerLink="../patient-nouveau">
           <span title="Ajouter un patient">
             <i class="fa fa-user-plus" aria-hidden="true"></i>
           </span>
@@ -96,24 +96,14 @@
                   <span>...</span>
                 </button>
                 <div class="dropdown-menu" aria-labelledby="triggerId">
-
-                  <button class="dropdown-item nav-link" title="{{'patient.table.actions.link1' | translate}}"
-                    (click)="setIdPersonne(element.id, element.nom); openNewTicketDialog()">
-                    <i class="fa fa-map-pin" aria-hidden="true"></i>
-                    <span>{{'patient.table.actions.link1' | translate}}</span>
+                  <div *ngFor="let action of receivedActions">
+                    <button *ngIf="action.bouton == 'false'" class="dropdown-item nav-link" [routerLink]="[action.lien,element.id]">
+                      <span>{{action.nom}}</span>
+                    </button>
+                    <button *ngIf="action.bouton == 'true'" class="dropdown-item nav-link" (click)="setIdPersonne(element.id, element.nom); openNewTicketDialog()">
+                    <span>{{action.nom}}</span>
                   </button>
-
-                  <button class="dropdown-item nav-link" [routerLink]="['/detail-patients', element.id]"
-                    title="{{'patient.table.actions.link3' | translate}}">
-                    <i class="fa fa-eye text-secondary" aria-hidden="true"></i>
-                    <span>{{'patient.table.actions.link3' | translate}}</span>
-                  </button>
-                  <button class="dropdown-item nav-link" [routerLink]="['/patient-nouveau',element.id]"
-                    title="{{'patient.table.actions.link2' | translate}}">
-                    <i class="fa fa-pen text-info" aria-hidden="true"></i>
-                    <span>{{'patient.table.actions.link2' | translate}}</span>
-                  </button>
-
+                  </div>
                 </div>
               </div>
             </td>

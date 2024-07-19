@@ -10,7 +10,7 @@
             </a>
             <ul class="nav nav-treeview ml-1">
                 <li class="nav-item" *ngFor="let elt of menu.elements">
-                    <a class="nav-link" routerLink="{{ elt.lien }}" (click)="setUrlSource(elt.nom)" routerLinkActive="activeLinkCSS" >
+                    <a class="nav-link" routerLink="{{ elt.lien }}" (click)="setUrlSource(elt.nom); sendAction(elt.action!, elt.lien)" routerLinkActive="activeLinkCSS" >
                         <span><i class="far fa-circle fa-sm"></i></span>
                         <p>
                             {{elt.nom}}
