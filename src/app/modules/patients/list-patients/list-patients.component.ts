@@ -46,7 +46,8 @@ export class ListPatientsComponent implements OnInit, AfterViewInit {
   nom_patient: string = '';
   libelle_service: string = '';
   currentDate: Date = new Date();
-  receivedActions: IElements[] = [];
+  receivedActions$: Observable<IElements[]>=EMPTY;
+  actions : IElements[] | undefined;
 
   myControl = new FormControl<string | IPatient>('');
 
@@ -93,8 +94,13 @@ export class ListPatientsComponent implements OnInit, AfterViewInit {
   scan_val: any | undefined;
 
   ngOnInit(): void {
-    this.receivedActions = this.actionsview.getActions();
-    console.log("Actions view :", this.receivedActions);
+    this.receivedActions$ = this.actionsview.getActions();
+    this.receivedActions$.subscribe(a => {
+      if (a != null) {
+        this.actions = a;
+        console.log("Actions view :", a, this.receivedActions$);
+      }
+    })
     this.barService.getCode().subscribe((dt) => {
       this.scan_val = dt;
       this.myControl.setValue(this.scan_val); // Définit la valeur initiale dans la barre de recherche
@@ -165,7 +171,7 @@ export class ListPatientsComponent implements OnInit, AfterViewInit {
 
   
   public get isButton() : string {
-    let res = this.receivedActions.find((a) => a.bouton == 'true' && a.type == 'global');
+    let res = this.actions!.find((a) => a.bouton == 'true' && a.type == 'global');
     return  res ? 'true': 'false';
   }
   

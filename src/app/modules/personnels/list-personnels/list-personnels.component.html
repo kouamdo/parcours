@@ -107,7 +107,7 @@
                   <span>...</span>
                 </button>
                 <div class="dropdown-menu" aria-labelledby="triggerId">
-                  <div *ngFor="let action of receivedActions">
+                  <div *ngFor="let action of actions">
                     <button *ngIf="action.bouton == 'false'" class="dropdown-item nav-link" [routerLink]="[action.lien,element.user.id]">
                       <span>{{action.nom}}</span>
                     </button>

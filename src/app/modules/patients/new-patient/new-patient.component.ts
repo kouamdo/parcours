@@ -15,6 +15,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { PassActionService } from 'src/app/services/actions-view/pass-action.service';
 import { IElements } from 'src/app/modele/elements';
+import { Observable, EMPTY } from 'rxjs';
 
 @Component({
   selector: 'app-new-patient',
@@ -31,7 +32,8 @@ export class NewPatientComponent implements OnInit {
   myControl = new FormControl<string | IPatient>('');
   initialDate = new FormControl(new Date());
   qrCodeValue: string = '';
-  receivedActions: IElements[] = [];
+  receivedActions$: Observable<IElements[]>=EMPTY;
+  actions : IElements[] | undefined;
 
   ELEMENTS_TABLE: IPatient[] = [];
   personnesRatachees: IPatient[] = [];
@@ -169,8 +171,13 @@ export class NewPatientComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.receivedActions = this.actionsview.getActions();
-    console.log("Actions view :", this.receivedActions);
+    this.receivedActions$ = this.actionsview.getActions();
+    this.receivedActions$.subscribe(a => {
+      if (a != null) {
+        this.actions = a;
+        console.log("Actions view :", a, this.receivedActions$);
+      }
+    })
     let idPatient = this.infosPath.snapshot.paramMap.get('idPatient');
     if (idPatient != null && idPatient !== '') {
       this.btnLibelle = 'Modifier';
@@ -204,7 +211,7 @@ export class NewPatientComponent implements OnInit {
   }
 
   public get isButton() : string {
-    let res = this.receivedActions.find((a) => a.bouton == 'true' && a.type == 'global');
+    let res = this.actions!.find((a) => a.bouton == 'true' && a.type == 'global');
     return  res ? 'true': 'false';
   }
   

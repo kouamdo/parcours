@@ -16,6 +16,7 @@ import { ModalChoixGroupsComponent } from '../../shared/modal-choix-groups/modal
 import { AuthentificationService } from 'src/app/services/authentifications/authentification.service';
 import { IElements } from 'src/app/modele/elements';
 import { PassActionService } from 'src/app/services/actions-view/pass-action.service';
+import { Observable, EMPTY } from 'rxjs';
 
 @Component({
   selector: 'app-list-personnels',
@@ -33,7 +34,8 @@ export class ListPersonnelsComponent implements OnInit, AfterViewInit {
   ELEMENTS_TABLE: IUtilisateurs[] = [];
   filteredOptions: IUtilisateurs[] | undefined;
   user : IUtilisateurs | undefined;
-  receivedActions: IElements[] = [];
+  receivedActions$: Observable<IElements[]>=EMPTY;
+  actions : IElements[] | undefined;
 
   displayedColumns: string[] = [
     'nom',
@@ -107,8 +109,15 @@ export class ListPersonnelsComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    this.receivedActions = this.actionsview.getActions();
-    console.log("Actions view :", this.receivedActions);
+    this.actionsview.langueData$.subscribe(data => {
+      this.receivedActions$ = this.actionsview.getActions();
+      this.receivedActions$.subscribe(a => {
+        if (a != null) {
+          this.actions = a;
+          console.log("Actions view :", a, this.receivedActions$);
+        }
+      });
+    })
     
     this.barService.getCode().subscribe((dt) => {
       this.scan_val = dt;
@@ -152,11 +161,12 @@ export class ListPersonnelsComponent implements OnInit, AfterViewInit {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['langue']) {
-      this.receivedActions = this.actionsview.getActions();
-      console.log("Actions view yes:", this.receivedActions);
+    console.log("Actions view  not:", this.receivedActions$);
+
+    if (changes['langueParent']) {
+      this.receivedActions$ = this.actionsview.getActions();
+      console.log("Actions view yes:", this.receivedActions$);
     }
-    console.log("Actions view  not:", this.receivedActions);
   }
 
   openChoixGroupDialog(personnel: IPersonnel){

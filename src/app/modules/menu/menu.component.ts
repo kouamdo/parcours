@@ -30,6 +30,7 @@ export class MenuComponent implements OnInit, OnChanges {
     }
     this.menuUser$ = this.getMenus();
     this.langueParent = localStorage.getItem('langue')!;
+    this.actionView.updateLangueData(this.langueParent);
     this.menuUser$.subscribe(x=>{
       console.log("x donnee:", x);
       
@@ -48,7 +49,8 @@ export class MenuComponent implements OnInit, OnChanges {
           let act : IElements | undefined;
           x.fonctionnalites.find((m) => act = m.elements.find((l) => l.lien == localStorage.getItem('lien')));
           this.sendAction(act?.action!, act?.lien!);
-          localStorage.setItem('langue', this.langueParent);  
+          localStorage.setItem('langue', this.langueParent); 
+          this.actionView.updateLangueData(this.langueParent);
         }
       })
     }
