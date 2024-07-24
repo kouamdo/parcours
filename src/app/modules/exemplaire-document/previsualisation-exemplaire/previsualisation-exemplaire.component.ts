@@ -105,6 +105,7 @@ export class PrevisualisationExemplaireComponent implements OnInit {
         .getExemplaireDocumentById(idExemplaire)
         .subscribe((x) => {
           this.exemplaire = x;
+          this.nomPatientCourant = this.exemplaire.personneRattachee.nom + " " + this.exemplaire.personneRattachee.prenom!;
           if (this.exemplaire.mouvements != undefined) {
             this.mouvements = this.exemplaire.mouvements
             this.dataSourceMouvements.data = this.exemplaire.mouvements
@@ -115,7 +116,9 @@ export class PrevisualisationExemplaireComponent implements OnInit {
               this.reponse = this.serviceExemplaire.getExemplaireDocumentByOrder(x, y);
               if (this.reponse) {
                 this.req = this.reponse.sol;
-                this.courant = this.reponse.ele.etat.libelle;
+                if (this.reponse.ele != undefined) {
+                  this.courant = this.reponse.ele.etat.libelle;
+                }
               }
               console.log('element response :', this.serviceExemplaire.getExemplaireDocumentByOrder(x, y));
             }
@@ -130,7 +133,6 @@ export class PrevisualisationExemplaireComponent implements OnInit {
         });
     }
     this.titre=this.dataEnteteMenuService.dataEnteteMenu
-    this.nomPatientCourant = sessionStorage.getItem('nomPatientCourant');
   }
 /**
  * Methode permettant de formater les nombres afin d'y inserer un separateur de millers

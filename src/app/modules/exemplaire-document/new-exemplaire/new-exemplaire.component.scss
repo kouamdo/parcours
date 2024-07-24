@@ -16,8 +16,12 @@ h3{
     opacity: 0.8;
     font-weight: bold;
 }
-.titre{
-    margin: 20px 0;
+.groupe{
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 5px;
 }
 .codeInput{
     display: flex;

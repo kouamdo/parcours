@@ -4,23 +4,27 @@
             {{this.document.titre}} {{titre}}
         </h1>
         <div class="infos">
-            div 
-            <p class="titre">
-                {{'document.exemplaire.text9' | translate}} :
-                <span class="title">{{this.nomPatientCourant}}</span>
-            </p>
-            <p class="titre">
-                {{'document.exemplaire.text6' | translate}} :
-                <span class="title">{{this.exemplaire.dateCreation | date: 'dd/MM/yyyy'}}</span>
-                {{'document.exemplaire.text7' | translate}} 
-                <span class="title">{{this.exemplaire.dateCreation | date: 'hh:mm:ss'}}</span>
-            </p>
-            <div class="codeInput">
-                <label for="">{{'document.exemplaire.text11' | translate}}</label>
-                <p>
-                    <input [formControl]="codeControl" type="text" name="code" id="code">
+            <div class="groupe">
+                <p class="titre">
+                    {{'document.exemplaire.text9' | translate}} :
+                    <span class="title">{{this.nomPatientCourant}}</span>
+                </p>
+                <div class="codeInput">
+                    <label for="">{{'document.exemplaire.text11' | translate}}</label>
+                    <p>
+                        <input [formControl]="codeControl" type="text" name="code" id="code">
+                    </p>
+                </div>
+            </div>
+            <div class="groupe pb-2">
+                <p class="titre">
+                    {{'document.exemplaire.text6' | translate}} :
+                    <span class="title">{{this.exemplaire.dateCreation | date: 'dd/MM/yyyy'}}</span>
+                    {{'document.exemplaire.text7' | translate}} 
+                    <span class="title">{{this.exemplaire.dateCreation | date: 'hh:mm:ss'}}</span>
                 </p>
             </div>
+           
             <div  *ngIf="submitted && estValide == false" class="alert alert-danger">
                 <div >{{eValvalide}} {{'lists.text3' | translate}}</div>
             </div>

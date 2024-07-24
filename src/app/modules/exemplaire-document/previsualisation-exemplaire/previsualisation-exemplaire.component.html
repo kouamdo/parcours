@@ -21,31 +21,32 @@
         <div class="infos">
             <div id="titre">
                 <div>
-                    <span class="title">
+                    <span class="label">
                         {{ "tickets.table.title5" | translate }} :
                     </span>
-                    <span class="title">{{ this.exemplaire.personneRattachee.nom }}
+                    <span class="title">{{ this.exemplaire.personneRattachee.nom + " " }}
+                        <span class="capitaliseTitle"> {{ this.exemplaire.personneRattachee.prenom! }} </span>
                     </span>
                 </div>
                 <div>
-                    <span class="title">
+                    <span class="label">
                         {{ "document.exemplaire.text6" | translate }} :
                     </span>
                     <span class="title">{{
                         this.exemplaire.dateCreation | date : "dd/MM/yyyy"}}
                     </span>
-                    <span class="title">
+                    <span class="label">
                         {{ "document.exemplaire.text7" | translate }}
                     </span>
                     <span class="title">{{ this.exemplaire.dateCreation | date : "hh:mm:ss" }}
                     </span>
                 </div>
                 <div>
-                    <span class="title"> {{ "document.title7" | translate }} : </span>
+                    <span class="label"> {{ "document.title7" | translate }} : </span>
                     {{ courant }}
                 </div>
                 <div>
-                    <span class="title"> {{ "document.exemplaire.text11" | translate }} : </span>
+                    <span class="label"> {{ "document.exemplaire.text11" | translate }} : </span>
                     {{ exemplaire.code }}
                 </div>
             </div>

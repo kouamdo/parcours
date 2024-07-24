@@ -47,7 +47,9 @@
         right: 0px;
         top: 60px;
         font-size: 12px;
-        background-color: #28a7450e;
+        background-color: #ffffff;
+        border: 1px solid #28a7450e;
+        box-shadow: 0 1px 2px;
         padding: 10px;
         padding-top: 0;
         p{
@@ -133,6 +135,13 @@ h4{
 .infos .title{
     font-weight: normal;
     text-transform: uppercase;
+    .capitaliseTitle{
+        text-transform: capitalize;
+    }
+}
+.infos .label{
+    font-weight: bold;
+    text-transform: capitalize;
 }
 .contentBlock{
     display: flex;

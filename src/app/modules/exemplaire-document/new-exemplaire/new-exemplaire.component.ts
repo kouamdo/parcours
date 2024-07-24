@@ -333,6 +333,7 @@ export class NewExemplaireComponent implements OnInit {
          //pour avoir la donnée fraiche on refait un appel à document
          //à supprimer lorsqu'on aura un vrai back connecté
           this.modifierMouvementExemplaire(x.idDocument)
+          this.laPersonneRattachee = this.exemplaire.personneRattachee
           this.codeControl.setValue(this.exemplaire.code)
         });
     }
