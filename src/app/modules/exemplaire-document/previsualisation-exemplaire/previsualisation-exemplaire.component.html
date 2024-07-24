@@ -204,6 +204,10 @@
                 ngxPrint>
                 <i class="fas fa-print"></i>
             </button>
+            <button *ngIf="req" (click)="openModal(exemplaire)" type="button"
+                title="{{ 'lists.button6' | translate }}" class="btn btnValidation">
+                <i class="fas fa-cog"></i>
+            </button>
         </div>
     </div>
 </div>
