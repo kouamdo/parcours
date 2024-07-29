@@ -9,6 +9,8 @@ import { TranslateService } from '@ngx-translate/core';
 import { Observable, EMPTY } from 'rxjs';
 import { RessourcesService } from 'src/app/services/ressources/ressources.service';
 import { IRessource } from 'src/app/modele/ressource';
+import { IElements } from 'src/app/modele/elements';
+import { PassActionService } from 'src/app/services/actions-view/pass-action.service';
 
 @Component({
   selector: 'app-list-ressources',
@@ -17,6 +19,8 @@ import { IRessource } from 'src/app/modele/ressource';
 })
 export class ListRessourcesComponent implements OnInit {
   ressources$: Observable<IRessource> = EMPTY;
+  receivedActions$: Observable<IElements[]>=EMPTY;
+  actions : IElements[] | undefined;
 
   myControl = new FormControl<string | IRessource>('');
 
@@ -45,7 +49,8 @@ export class ListRessourcesComponent implements OnInit {
     private translate: TranslateService,
     private router: Router,
     private serviceRessource: RessourcesService,
-    private _liveAnnouncer: LiveAnnouncer
+    private _liveAnnouncer: LiveAnnouncer,
+    private actionsview: PassActionService
   ) {}
 
   ngOnInit(): void {
@@ -53,6 +58,15 @@ export class ListRessourcesComponent implements OnInit {
       this.dataSource.data = valeurs;
       this.filteredOptions = valeurs;
     });
+    this.actionsview.langueData$.subscribe(data => {
+      this.receivedActions$ = this.actionsview.getActions();
+      this.receivedActions$.subscribe(a => {
+        if (a != null) {
+          this.actions = a;
+          console.log("Actions view :", a, this.receivedActions$);
+        }
+      });
+    })
 
     this.myControl.valueChanges.subscribe((value) => {
       const libelle = typeof value === 'string' ? value : value?.libelle;

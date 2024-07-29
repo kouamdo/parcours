@@ -7,8 +7,11 @@ import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { Observable, EMPTY } from 'rxjs';
 import { IAfficheDocument } from 'src/app/modele/affiche-document';
 import { IDocument } from 'src/app/modele/document';
+import { IElements } from 'src/app/modele/elements';
+import { PassActionService } from 'src/app/services/actions-view/pass-action.service';
 import { DocumentService } from 'src/app/services/documents/document.service';
 
 @Component({
@@ -19,6 +22,8 @@ import { DocumentService } from 'src/app/services/documents/document.service';
 export class ListFormDocumentComponent implements OnInit, AfterViewInit {
 
   myControl = new FormControl<string | IDocument>('');
+  receivedActions$: Observable<IElements[]>=EMPTY;
+  actions : IElements[] | undefined;
 
   ELEMENTS_TABLE: IAfficheDocument[] = [];
   filteredOptions: IDocument[] | undefined;
@@ -60,10 +65,19 @@ export class ListFormDocumentComponent implements OnInit, AfterViewInit {
 
   constructor(private translate: TranslateService, private router:Router,
     private serviceDocument: DocumentService,  private _liveAnnouncer: LiveAnnouncer,
-    private dialogDef : MatDialog
+    private actionsview: PassActionService
   ) { }
 
   ngOnInit(): void {
+    this.actionsview.langueData$.subscribe(data => {
+      this.receivedActions$ = this.actionsview.getActions();
+      this.receivedActions$.subscribe(a => {
+        if (a != null) {
+          this.actions = a;
+          console.log("Actions view :", a, this.receivedActions$);
+        }
+      });
+    })
     this.getAllDocuments().subscribe(valeurs => {
      const tableDocuments : IAfficheDocument[] = [];
 

@@ -8,6 +8,9 @@ import { IParours } from 'src/app/modele/parours';
 import { ParoursService } from 'src/app/services/parours/parours.service';
 import { IAfficheParours } from 'src/app/modele/affiche-parours';
 import { TranslateService } from '@ngx-translate/core';
+import { IElements } from 'src/app/modele/elements';
+import { EMPTY, Observable } from 'rxjs';
+import { PassActionService } from 'src/app/services/actions-view/pass-action.service';
 
 @Component({
   selector: 'app-list-parours',
@@ -17,6 +20,8 @@ import { TranslateService } from '@ngx-translate/core';
 export class ListParoursComponent implements OnInit {
   //parours$:Observable<IParours[]>=EMPTY;
   myControl = new FormControl<string | IParours>('');
+  receivedActions$: Observable<IElements[]>=EMPTY;
+  actions : IElements[] | undefined;
 
   //ELEMENTS_TABLE: IParours[] = [];
   ELEMENTS_TABLE: IAfficheParours[] = [];
@@ -41,13 +46,22 @@ export class ListParoursComponent implements OnInit {
   constructor(
     private translate: TranslateService,
     private _liveAnnouncer: LiveAnnouncer,
-    private serviceParour: ParoursService
+    private serviceParour: ParoursService,
+    private actionsview: PassActionService
   ) {}
 
   ngOnInit(): void {
+    this.actionsview.langueData$.subscribe(data => {
+      this.receivedActions$ = this.actionsview.getActions();
+      this.receivedActions$.subscribe(a => {
+        if (a != null) {
+          this.actions = a;
+          console.log("Actions view :", a, this.receivedActions$);
+        }
+      });
+    })
     this.getAllParours().subscribe((valeurs) => {
       const tableParours: IAfficheParours[] = [];
-
       valeurs.forEach((x) => {
         tableParours.push(this.convertParToParAffiche(x));
       });

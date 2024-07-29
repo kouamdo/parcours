@@ -8,7 +8,9 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { EMPTY, Observable } from 'rxjs';
+import { IElements } from 'src/app/modele/elements';
 import { IValidation } from 'src/app/modele/validation';
+import { PassActionService } from 'src/app/services/actions-view/pass-action.service';
 import { ValidationsService } from 'src/app/services/validations/validations.service';
 
 @Component({
@@ -18,8 +20,9 @@ import { ValidationsService } from 'src/app/services/validations/validations.ser
 })
 export class ListValidationsComponent implements OnInit {
 
-
   validations$:Observable<IValidation[]>=EMPTY;
+  receivedActions$: Observable<IElements[]>=EMPTY;
+  actions : IElements[] | undefined;
 
   id_validation : string = "0";
   code : string = "";
@@ -38,12 +41,22 @@ export class ListValidationsComponent implements OnInit {
   paginator!: MatPaginator;
 
   @ViewChild(MatSort) sort!: MatSort;
-  constructor(private translate: TranslateService,private router:Router, private serviceValidation:ValidationsService, private _liveAnnouncer: LiveAnnouncer, public datePipe: DatePipe){ }
+  constructor(private translate: TranslateService,private router:Router, private serviceValidation:ValidationsService, private _liveAnnouncer: LiveAnnouncer, public datePipe: DatePipe, private actionsview: PassActionService
+  ){ }
 
   ngOnInit(): void {
     this.getAllValidations().subscribe(valeurs => {
       this.dataSource.data = valeurs;
     });
+    this.actionsview.langueData$.subscribe(data => {
+      this.receivedActions$ = this.actionsview.getActions();
+      this.receivedActions$.subscribe(a => {
+        if (a != null) {
+          this.actions = a;
+          console.log("Actions view :", a, this.receivedActions$);
+        }
+      });
+    })
 
     this.myControl.valueChanges.subscribe(
       value => {

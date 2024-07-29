@@ -11,6 +11,8 @@ import { IPrecoMvt } from 'src/app/modele/precomvt';
 import { PrecoMvtsService } from 'src/app/services/precomvts/precomvts.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ViewPrecomvtComponent } from '../view-precomvt/view-precomvt.component';
+import { IElements } from 'src/app/modele/elements';
+import { PassActionService } from 'src/app/services/actions-view/pass-action.service';
 
 @Component({
   selector: 'app-list-precomvts',
@@ -20,6 +22,8 @@ import { ViewPrecomvtComponent } from '../view-precomvt/view-precomvt.component'
 export class ListPrecomvtsComponent implements OnInit {
 
     precomvt$:Observable<IPrecoMvt>=EMPTY;
+    receivedActions$: Observable<IElements[]>=EMPTY;
+    actions : IElements[] | undefined;
 
     myControl = new FormControl<string | IPrecoMvt>('');
 
@@ -36,9 +40,19 @@ export class ListPrecomvtsComponent implements OnInit {
     idPrecoMvt: string = '';
 
     constructor(private translate: TranslateService,private router:Router, private servicePrecoMvt:PrecoMvtsService, private _liveAnnouncer: LiveAnnouncer,
+    private actionsview: PassActionService,
       private dialogDef: MatDialog) { }
 
     ngOnInit(): void {
+      this.actionsview.langueData$.subscribe(data => {
+        this.receivedActions$ = this.actionsview.getActions();
+        this.receivedActions$.subscribe(a => {
+          if (a != null) {
+            this.actions = a;
+            console.log("Actions view :", a, this.receivedActions$);
+          }
+        });
+      })
       this.getAllPrecomvts().subscribe((valeurs: IPrecoMvt[]) => {
         this.dataSource.data = valeurs;
         this.filteredOptions = valeurs

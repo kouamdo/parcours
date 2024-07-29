@@ -24797,7 +24797,9 @@ export class InMemDBService implements InMemoryDbService {
                   icone: 'fas fa-user-cog',
                   actif: '',
                   elements: [
-                    { nom: 'Créer', lien: './attributs/attribut-nouveau', bouton: 'false' },
+                    { nom: 'Créer', lien: './attributs/attribut-nouveau', bouton: 'false', action: [
+                      {nom: 'Creer', lien: '', bouton: 'true', type: 'global'}
+                    ] },
                     { nom: 'Rechercher', lien: './attributs/list-attributs', bouton: 'false' },
                   ],
                 },
@@ -24806,7 +24808,9 @@ export class InMemDBService implements InMemoryDbService {
                   icone: 'fas fa-user-cog',
                   actif: '',
                   elements: [
-                    { nom: 'Créer', lien: './missions/mission-nouveau', bouton: 'false' },
+                    { nom: 'Créer', lien: './missions/mission-nouveau', bouton: 'false', action: [
+                      {nom: 'Creer', lien: '', bouton: 'true', type: 'global'}
+                    ] },
                     { nom: 'Rechercher', lien: './missions/list-missions', bouton: 'false' },
                     { nom: 'Exécuter', lien: './missions/page-intermedaire', bouton: 'false' },
                     { nom: 'liste des exemplaires', lien: './missions/list-exemplaire', bouton: 'false'},
@@ -24821,7 +24825,9 @@ export class InMemDBService implements InMemoryDbService {
                     {
                       nom: 'Créer model documents',
                       lien: './documents/document-nouveau',
-                      bouton: 'false',
+                      bouton: 'false', action: [
+                      {nom: 'Creer', lien: '', bouton: 'true', type: 'global'}
+                    ]
                     },
                     { nom: 'Rechercher', lien: './documents/list-documents', bouton: 'false' },
                   ],
@@ -24831,7 +24837,9 @@ export class InMemDBService implements InMemoryDbService {
                   icone: 'fas fa-user-cog',
                   actif: '',
                   elements: [
-                    { nom: 'Créer', lien: 'familles/famille-nouvelle', bouton: 'false' },
+                    { nom: 'Créer', lien: 'familles/famille-nouvelle', bouton: 'false', action: [
+                      {nom: 'Creer', lien: '', bouton: 'true', type: 'global'}
+                    ] },
                     { nom: 'Rechercher', lien: './familles/list-familles', bouton: 'false' },
                   ],
                 },
@@ -24840,7 +24848,9 @@ export class InMemDBService implements InMemoryDbService {
                   icone: 'fas fa-user-cog',
                   actif: '',
                   elements: [
-                    { nom: 'Créer', lien: 'roles/role-nouveau', bouton: 'false' },
+                    { nom: 'Créer', lien: 'roles/role-nouveau', bouton: 'false', action: [
+                      {nom: 'Creer', lien: '', bouton: 'true', type: 'global'}
+                    ] },
                     { nom: 'Rechercher', lien: './roles/list-roles', bouton: 'false' },
                   ],
                 },
@@ -24849,7 +24859,9 @@ export class InMemDBService implements InMemoryDbService {
                   icone: 'fas fa-user-cog',
                   actif: '',
                   elements: [
-                    { nom: 'Créer', lien: 'ressources/ressource-nouvelle', bouton: 'false' },
+                    { nom: 'Créer', lien: 'ressources/ressource-nouvelle', bouton: 'false', action: [
+                      {nom: 'Creer', lien: '', bouton: 'true', type: 'global'}
+                    ] },
                     { nom: 'Rechercher', lien: './ressources/list-ressources', bouton: 'false' },
                   ],
                 },
@@ -24858,7 +24870,9 @@ export class InMemDBService implements InMemoryDbService {
                   icone: 'fas fa-user-cog',
                   actif: '',
                   elements: [
-                    { nom: 'Créer', lien: 'preconisations/precomvt-nouvelle', bouton: 'false' },
+                    { nom: 'Créer', lien: 'preconisations/precomvt-nouvelle', bouton: 'false', action: [
+                      {nom: 'Creer', lien: '', bouton: 'true', type: 'global'}
+                    ] },
                     { nom: 'Rechercher', lien: './preconisations/list-precomvts', bouton: 'false' },
                   ],
                 },
@@ -24867,7 +24881,9 @@ export class InMemDBService implements InMemoryDbService {
                   icone: 'fas fa-user-cog',
                   actif: '',
                   elements: [
-                    { nom: 'Créer', lien: 'distributeurs/distributeur-nouveau', bouton: 'false' },
+                    { nom: 'Créer', lien: 'distributeurs/distributeur-nouveau', bouton: 'false', action: [
+                      {nom: 'Creer', lien: '', bouton: 'true', type: 'global'}
+                    ] },
                     {
                       nom: 'Rechercher',
                       lien: './distributeurs/list-distributeurs',
@@ -24892,7 +24908,9 @@ export class InMemDBService implements InMemoryDbService {
                   icone: 'fas fa-user-cog',
                   actif: '',
                   elements: [
-                    { nom: 'Créer', lien: 'parcours/nouveau-parours', bouton: 'false' },
+                    { nom: 'Créer', lien: 'parcours/nouveau-parours', bouton: 'false', action: [
+                      {nom: 'Creer', lien: '', bouton: 'true', type: 'global'}
+                    ] },
                     {
                       nom: 'Rechercher',
                       lien: './parcours/list-parours',
@@ -24905,7 +24923,9 @@ export class InMemDBService implements InMemoryDbService {
                   icone: 'fas fa-user-cog',
                   actif: '',
                   elements: [
-                    { nom: 'Créer', lien: 'etats/etat-nouveau', bouton: 'false' },
+                    { nom: 'Créer', lien: 'etats/etat-nouveau', bouton: 'false', action: [
+                      {nom: 'Creer', lien: '', bouton: 'true', type: 'global'}
+                    ] },
                     { nom: 'rechercher', lien: './etats/list-etats', bouton: 'false' },
                   ],
                 },
@@ -24930,11 +24950,30 @@ export class InMemDBService implements InMemoryDbService {
                   ],
                 },
                 {
+                  fonction: 'Personnel',
+                  icone: 'fas fa-user-cog',
+                  actif: '',
+                  elements: [
+                    { nom: 'Create', lien: './personnels/nouveau-personnel', bouton: 'false', action: [
+                      {nom: 'Create', lien: '', bouton: 'true', type: 'global'}
+                    ] },
+                    { nom: 'Search', lien: './personnels/list-personnels', bouton: 'false', action: [
+                      {nom: 'Update', lien: '../update-personnel', bouton: 'false'},
+                      {nom: 'Roles', lien: '../affecte-role-personnel', bouton: 'false'},
+                      {nom: 'Group', lien: '', bouton: 'true', type: 'global'},
+                      {nom: 'Detail', lien: '../detail-personnels', bouton: 'false'},
+                      {nom: 'Create', lien: '', bouton: 'true', type: 'global'}
+                    ] },
+                  ],
+                },
+                {
                   fonction: 'Service',
                   icone: 'fas fa-user-cog',
                   actif: '',
                   elements: [
-                    { nom: 'New', lien: './services/service-nouveau', bouton: 'false' },
+                    { nom: 'New', lien: './services/service-nouveau', bouton: 'false', action: [
+                      {nom: 'New', lien: '', bouton: 'true', type: 'global'}
+                    ] },
                     { nom: 'Search', lien: './services/list-services', bouton: 'false' },
                   ],
                 },
@@ -24952,7 +24991,9 @@ export class InMemDBService implements InMemoryDbService {
                   icone: 'fas fa-user-cog',
                   actif: '',
                   elements: [
-                    { nom: 'New', lien: './attributs/attribut-nouveau', bouton: 'false' },
+                    { nom: 'New', lien: './attributs/attribut-nouveau', bouton: 'false', action: [
+                      {nom: 'New', lien: '', bouton: 'true', type: 'global'}
+                    ] },
                     { nom: 'Search', lien: './attributs/list-attributs', bouton: 'false' },
                   ],
                 },
@@ -24961,9 +25002,11 @@ export class InMemDBService implements InMemoryDbService {
                   icone: 'fas fa-user-cog',
                   actif: '',
                   elements: [
-                    { nom: 'Créer', lien: './validations/nouvelle-validation', bouton: 'false' },
+                    { nom: 'New', lien: './validations/nouvelle-validation', bouton: 'false', action: [
+                      {nom: 'New', lien: '', bouton: 'true', type: 'global'}
+                    ] },
                     {
-                      nom: 'Rechercher',
+                      nom: 'Search',
                       lien: './validations/list-validations',
                       bouton: 'false',
                     },
@@ -24974,7 +25017,9 @@ export class InMemDBService implements InMemoryDbService {
                   icone: 'fas fa-user-cog',
                   actif: '',
                   elements: [
-                    { nom: 'New', lien: './missions/mission-nouveau', bouton: 'false' },
+                    { nom: 'New', lien: './missions/mission-nouveau', bouton: 'false', action: [
+                      {nom: 'New', lien: '', bouton: 'true', type: 'global'}
+                    ] },
                     { nom: 'Search', lien: './missions/list-missions', bouton: 'false' },
                     { nom: 'Execute', lien: './missions/page-intermedaire', bouton: 'false' },
                     { nom: 'list of exemplaires', lien: './missions/list-exemplaire', bouton: 'false'},
@@ -24989,7 +25034,9 @@ export class InMemDBService implements InMemoryDbService {
                     {
                       nom: "New document's model",
                       lien: './documents/document-nouveau',
-                      bouton: 'false',
+                      bouton: 'false', action: [
+                      {nom: 'New', lien: '', bouton: 'true', type: 'global'}
+                    ]
                     },
                     { nom: 'Search', lien: './documents/list-documents', bouton: 'false' },
                   ],
@@ -24999,7 +25046,9 @@ export class InMemDBService implements InMemoryDbService {
                   icone: 'fas fa-user-cog',
                   actif: '',
                   elements: [
-                    { nom: 'new', lien: 'familles/famille-nouvelle', bouton: 'false' },
+                    { nom: 'new', lien: 'familles/famille-nouvelle', bouton: 'false', action: [
+                      {nom: 'New', lien: '', bouton: 'true', type: 'global'}
+                    ] },
                     { nom: 'Search', lien: './familles/list-familles', bouton: 'false' },
                   ],
                 },
@@ -25008,7 +25057,9 @@ export class InMemDBService implements InMemoryDbService {
                   icone: 'fas fa-user-cog',
                   actif: '',
                   elements: [
-                    { nom: 'Créer', lien: 'roles/role-nouveau', bouton: 'false' },
+                    { nom: 'New', lien: 'roles/role-nouveau', bouton: 'false', action: [
+                      {nom: 'New', lien: '', bouton: 'true', type: 'global'}
+                    ] },
                     { nom: 'search', lien: './roles/list-roles', bouton: 'false' },
                   ],
                 },
@@ -25017,7 +25068,9 @@ export class InMemDBService implements InMemoryDbService {
                   icone: 'fas fa-user-cog',
                   actif: '',
                   elements: [
-                    { nom: 'New', lien: 'ressources/ressource-nouvelle', bouton: 'false' },
+                    { nom: 'New', lien: 'ressources/ressource-nouvelle', bouton: 'false', action: [
+                      {nom: 'New', lien: '', bouton: 'true', type: 'global'}
+                    ] },
                     { nom: 'Search', lien: './ressources/list-ressources', bouton: 'false' },
                   ],
                 },
@@ -25026,7 +25079,9 @@ export class InMemDBService implements InMemoryDbService {
                   icone: 'fas fa-user-cog',
                   actif: '',
                   elements: [
-                    { nom: 'New', lien: 'preconisations/precomvt-nouvelle', bouton: 'false' },
+                    { nom: 'New', lien: 'preconisations/precomvt-nouvelle', bouton: 'false', action: [
+                      {nom: 'New', lien: '', bouton: 'true', type: 'global'}
+                    ] },
                     { nom: 'Search', lien: './preconisations/list-precomvts', bouton: 'false' },
                   ],
                 },
@@ -25035,7 +25090,9 @@ export class InMemDBService implements InMemoryDbService {
                   icone: 'fas fa-user-cog',
                   actif: '',
                   elements: [
-                    { nom: 'New', lien: 'distributeurs/distributeur-nouveau', bouton: 'false' },
+                    { nom: 'New', lien: 'distributeurs/distributeur-nouveau', bouton: 'false', action: [
+                      {nom: 'New', lien: '', bouton: 'true', type: 'global'}
+                    ] },
                     { nom: 'search', lien: './distributeurs/list-distributeurs', bouton: 'false' },
                   ],
                 },
@@ -25056,7 +25113,9 @@ export class InMemDBService implements InMemoryDbService {
                   icone: 'fas fa-user-cog',
                   actif: '',
                   elements: [
-                    { nom: 'Créer', lien: 'parcours/nouveau-parours', bouton: 'false' },
+                    { nom: 'New', lien: 'parcours/nouveau-parours', bouton: 'false', action: [
+                      {nom: 'New', lien: '', bouton: 'true', type: 'global'}
+                    ] },
                     {
                       nom: 'search',
                       lien: './parcours/list-parours',
@@ -25069,7 +25128,9 @@ export class InMemDBService implements InMemoryDbService {
                   icone: 'fas fa-user-cog',
                   actif: '',
                   elements: [
-                    { nom: 'New', lien: 'etats/etat-nouveau', bouton: 'false' },
+                    { nom: 'New', lien: 'etats/etat-nouveau', bouton: 'false', action: [
+                      {nom: 'New', lien: '', bouton: 'true', type: 'global'}
+                    ] },
                     { nom: 'search', lien: './etats/list-etats', bouton: 'false' },
                   ],
                 },

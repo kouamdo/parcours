@@ -7,9 +7,11 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { Observable, EMPTY } from 'rxjs';
+import { IElements } from 'src/app/modele/elements';
 import { IPatient } from 'src/app/modele/Patient';
 import { StatutTicket } from 'src/app/modele/statut-ticket';
 import { ITicket } from 'src/app/modele/ticket';
+import { PassActionService } from 'src/app/services/actions-view/pass-action.service';
 import { PatientsService } from 'src/app/services/patients/patients.service';
 import { TicketsService } from 'src/app/services/tickets/tickets.service';
 
@@ -20,6 +22,8 @@ import { TicketsService } from 'src/app/services/tickets/tickets.service';
 })
 export class ListTicketsComponent implements OnInit, AfterViewInit {
   tickets$: Observable<ITicket[]> = EMPTY;
+  receivedActions$: Observable<IElements[]>=EMPTY;
+  actions : IElements[] | undefined;
   ticketImpression: ITicket | undefined;
   patientCorrespondant: IPatient = {
     id: '',
@@ -60,7 +64,8 @@ export class ListTicketsComponent implements OnInit, AfterViewInit {
     private router: Router,
     private serviceTicket: TicketsService,
     private _liveAnnouncer: LiveAnnouncer,
-    private servicePatient: PatientsService
+    private servicePatient: PatientsService, 
+    private actionsview: PassActionService
   ) {}
 
   ngOnInit(): void {
@@ -77,6 +82,15 @@ export class ListTicketsComponent implements OnInit, AfterViewInit {
     this.serviceTicket.getAllTickets().subscribe((reponse) => {
       this.filteredOptions = reponse;
     });
+    this.actionsview.langueData$.subscribe(data => {
+      this.receivedActions$ = this.actionsview.getActions();
+      this.receivedActions$.subscribe(a => {
+        if (a != null) {
+          this.actions = a;
+          console.log("Actions view :", a, this.receivedActions$);
+        }
+      });
+    })
 
     this.getAllTickets().subscribe((valeurs) => {
       this.dataSource.data = valeurs;

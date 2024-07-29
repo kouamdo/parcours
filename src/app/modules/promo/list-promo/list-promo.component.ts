@@ -9,6 +9,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort, Sort } from '@angular/material/sort';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
+import { PassActionService } from 'src/app/services/actions-view/pass-action.service';
+import { IElements } from 'src/app/modele/elements';
 
 @Component({
   selector: 'app-list-promo',
@@ -21,6 +23,8 @@ export class ListPromoComponent implements OnInit, AfterViewInit {
   myControl = new FormControl<string | Promo>('');
   ELEMENTS_TABLE: Promo[] = [];
   filteredOptions: Promo[] | undefined;
+  receivedActions$: Observable<IElements[]>=EMPTY;
+  actions : IElements[] | undefined;
 
   displayedColumns: string[] = ['emetteur', 'dateDebut', 'dateFin', 'codeUnique', 'montantRemise', 'pourcentageRemise', 'famille', 'ressource', 'actions'];
   dataSource = new MatTableDataSource<Promo>(this.ELEMENTS_TABLE);
@@ -32,7 +36,8 @@ export class ListPromoComponent implements OnInit, AfterViewInit {
     private translate: TranslateService,
     private router: Router,
     private promoService: PromoService,
-    private _liveAnnouncer: LiveAnnouncer
+    private _liveAnnouncer: LiveAnnouncer,
+    private actionsview: PassActionService
   ) {}
 
   ngOnInit(): void {
@@ -40,6 +45,15 @@ export class ListPromoComponent implements OnInit, AfterViewInit {
       this.dataSource.data = valeurs;
       this.filteredOptions = valeurs;
     });
+    this.actionsview.langueData$.subscribe(data => {
+      this.receivedActions$ = this.actionsview.getActions();
+      this.receivedActions$.subscribe(a => {
+        if (a != null) {
+          this.actions = a;
+          console.log("Actions view :", a, this.receivedActions$);
+        }
+      });
+    })
 
     this.myControl.valueChanges.subscribe(value => {
       const codeUnique = typeof value === 'string' ? value : value?.codeUnique;

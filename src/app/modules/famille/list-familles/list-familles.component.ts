@@ -13,6 +13,8 @@ import {MatSort, Sort} from '@angular/material/sort';
 import {LiveAnnouncer} from '@angular/cdk/a11y';
 import { IFamille } from 'src/app/modele/famille';
 import { FamillesService } from 'src/app/services/familles/familles.service';
+import { PassActionService } from 'src/app/services/actions-view/pass-action.service';
+import { IElements } from 'src/app/modele/elements';
 
 export interface User {
   libelle: string;
@@ -36,8 +38,9 @@ export class ListFamillesComponent implements OnInit, AfterViewInit {
   libelle_famille : string = "";
   libelle_service : string = "";
 
-
   myControl = new FormControl<string | IFamille>('');
+  receivedActions$: Observable<IElements[]>=EMPTY;
+  actions : IElements[] | undefined;
 
   ELEMENTS_TABLE: IFamille[] = [];
   filteredOptions: IFamille[] | undefined;
@@ -51,13 +54,24 @@ export class ListFamillesComponent implements OnInit, AfterViewInit {
 
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private translate: TranslateService,private router:Router, private serviceFamille:FamillesService, private _liveAnnouncer: LiveAnnouncer, private serviceService:ServicesService, private serviceTicket:TicketsService) {
+  constructor(private translate: TranslateService,private router:Router, private serviceFamille:FamillesService, private _liveAnnouncer: LiveAnnouncer, private serviceService:ServicesService, private serviceTicket:TicketsService, 
+    private actionsview: PassActionService
+  ) {
 
   }
 
   ngOnInit(): void {
     this.services$ = this.getAllServices();
     this.tickets$ = this.getAllTickets();
+    this.actionsview.langueData$.subscribe(data => {
+      this.receivedActions$ = this.actionsview.getActions();
+      this.receivedActions$.subscribe(a => {
+        if (a != null) {
+          this.actions = a;
+          console.log("Actions view :", a, this.receivedActions$);
+        }
+      });
+    })
 
     this.getAllFamilles().subscribe(valeurs => {
       this.dataSource.data = valeurs;

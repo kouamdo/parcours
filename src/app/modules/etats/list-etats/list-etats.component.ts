@@ -7,7 +7,9 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { Observable, EMPTY } from 'rxjs';
+import { IElements } from 'src/app/modele/elements';
 import { IEtats } from 'src/app/modele/etats';
+import { PassActionService } from 'src/app/services/actions-view/pass-action.service';
 import { EtatService } from 'src/app/services/etats/etats.service';
 
 @Component({
@@ -18,6 +20,8 @@ import { EtatService } from 'src/app/services/etats/etats.service';
 export class ListEtatsComponent implements OnInit, AfterViewInit {
 
   services$:Observable<IEtats[]>=EMPTY;
+  receivedActions$: Observable<IElements[]>=EMPTY;
+  actions : IElements[] | undefined;
 
   etatControl = new FormControl<string | IEtats>('');
 
@@ -33,10 +37,21 @@ export class ListEtatsComponent implements OnInit, AfterViewInit {
 
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private translate: TranslateService, private router:Router, private serviceEtat:EtatService,  private _liveAnnouncer: LiveAnnouncer) { }
+  constructor(private translate: TranslateService, private router:Router, private serviceEtat:EtatService,  private _liveAnnouncer: LiveAnnouncer, 
+    private actionsview: PassActionService
+  ) { }
 
   ngOnInit(): void {
     this.services$ = this.getAllEtats();
+    this.actionsview.langueData$.subscribe(data => {
+      this.receivedActions$ = this.actionsview.getActions();
+      this.receivedActions$.subscribe(a => {
+        if (a != null) {
+          this.actions = a;
+          console.log("Actions view :", a, this.receivedActions$);
+        }
+      });
+    })
 
     this.getAllEtats().subscribe(valeurs => {
       this.dataSource.data = valeurs;

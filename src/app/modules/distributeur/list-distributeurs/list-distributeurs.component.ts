@@ -10,6 +10,9 @@ import {MatSort, Sort} from '@angular/material/sort';
 import {LiveAnnouncer} from '@angular/cdk/a11y';
 import { IDistributeur } from 'src/app/modele/distributeur';
 import { DistributeursService } from 'src/app/services/distributeurs/distributeurs.service';
+import { PassActionService } from 'src/app/services/actions-view/pass-action.service';
+import { Observable, EMPTY } from 'rxjs';
+import { IElements } from 'src/app/modele/elements';
 
 
 export interface User {
@@ -31,6 +34,8 @@ export class ListDistributeursComponent implements OnInit {
 
 
   myControl = new FormControl<string | IDistributeur>('');
+  receivedActions$: Observable<IElements[]>=EMPTY;
+  actions : IElements[] | undefined;
 
   ELEMENTS_TABLE: IDistributeur[] = [];
   filteredOptions: IDistributeur[] | undefined;
@@ -43,9 +48,20 @@ export class ListDistributeursComponent implements OnInit {
   paginator!: MatPaginator;
 
   @ViewChild(MatSort) sort!: MatSort;
-  constructor(private translate: TranslateService,private router:Router, private serviceDistributeur:DistributeursService, private _liveAnnouncer: LiveAnnouncer, private serviceService:ServicesService, private serviceTicket:TicketsService){ }
+  constructor(private translate: TranslateService,private router:Router, private serviceDistributeur:DistributeursService, private _liveAnnouncer: LiveAnnouncer, private serviceService:ServicesService, private serviceTicket:TicketsService,
+    private actionsview: PassActionService
+  ){ }
 
   ngOnInit(): void {
+    this.actionsview.langueData$.subscribe(data => {
+      this.receivedActions$ = this.actionsview.getActions();
+      this.receivedActions$.subscribe(a => {
+        if (a != null) {
+          this.actions = a;
+          console.log("Actions view :", a, this.receivedActions$);
+        }
+      });
+    })
 
     this.getAllDistributeurs().subscribe(valeurs => {
       this.dataSource.data = valeurs;
