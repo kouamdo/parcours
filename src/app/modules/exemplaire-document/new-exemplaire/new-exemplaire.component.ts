@@ -344,7 +344,11 @@ export class NewExemplaireComponent implements OnInit {
           this.document = document;
           this.totalAttribut = document.attributs.length - 1;
           this.formerEnteteTableauMissions()
-          this.concatMouvementsSousExemplaireDocument()
+          let dateExemplaire = new Date()
+          this.codeControl.setValue(this.setCode(dateExemplaire))
+          if ( this.donneeEchangeService.dataDocumentSousDocuments != undefined) {
+            this.concatMouvementsSousExemplaireDocument()
+          }
         });
     }
   }
@@ -594,20 +598,47 @@ export class NewExemplaireComponent implements OnInit {
       dateCreation: new Date,
       personneRattachee: this.laPersonneRattachee!,
       formatCode: this.document.formatCode,
-      code: this.exemplaire.code
+      code: this.codeControl.value
     };
+    let tableauIdsDistributeurs = new Map();
 
     if (this.exemplaire.id != '') {
       exemplaireTemp.id = this.exemplaire.id;
     }
-
     this.serviceExemplaire
       .ajouterExemplaireDocument(exemplaireTemp)
       .subscribe((object) => {
-        console.log(" new exemplaire :", exemplaireTemp);
-        
-        this.router.navigate(['/list-exemplaire']);
       });
+
+      let exemplaireDuplique : IExemplaireDocument = exemplaireTemp
+      let tableauExemplairesDupliques : IExemplaireDocument[] = []
+      exemplaireDuplique.mouvements = []
+
+      if (exemplaireTemp.mouvements != undefined) {
+        exemplaireTemp.mouvements.forEach(
+          mouvement => {
+            if (mouvement.distributeur != undefined) {
+              if (tableauIdsDistributeurs.get(mouvement.distributeur.id) == null) {
+                //si la map ne contient pas le distributeur du mouvement courant
+                exemplaireDuplique.id = exemplaireTemp.code +"_"+ mouvement.distributeur.raisonSocial.replace(" ", '')
+                exemplaireDuplique.titre = exemplaireTemp.titre + '_' + mouvement.distributeur.raisonSocial
+                exemplaireDuplique.mouvements?.push(mouvement)
+                let index: number = tableauExemplairesDupliques.push(exemplaireDuplique)
+                tableauIdsDistributeurs.set(mouvement.distributeur.id, index - 1)
+              }
+              else{ //si la map contient le distributeur du mouvement courant
+                let index = tableauIdsDistributeurs.get(mouvement.distributeur.id)
+                tableauExemplairesDupliques[index].mouvements?.push(mouvement)
+              }
+              console.log('ex : ', tableauExemplairesDupliques)
+            }
+        });
+
+        tableauExemplairesDupliques.forEach(element => {
+          this.serviceExemplaire.ajouterExemplaireDocument(element).subscribe((object) => {});
+        });
+      }
+        this.router.navigate(['/list-exemplaire']);
   }
 
   /**
@@ -725,5 +756,10 @@ export class NewExemplaireComponent implements OnInit {
     this.ELEMENTS_TABLE_MOUVEMENTS = this.dataSourceMouvements.data;
     this.ELEMENTS_TABLE_MOUVEMENTS.splice(index, 1); // je supprime un seul element du tableau a la position 'index'
     this.dataSourceMouvements.data = this.ELEMENTS_TABLE_MOUVEMENTS;
+  }
+
+  setCode(date : Date){
+    console.log('codde', date)
+    return this.serviceExemplaire.formatCode(date)
   }
 }

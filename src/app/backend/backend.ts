@@ -13969,7 +13969,7 @@ export class InMemDBService implements InMemoryDbService {
             },
             distributeur: {
               id: '3',
-              raisonSocial: 'Total Distribution',
+              raisonSocial: 'Total Energie',
               etat: true,
               adresse: 'Buéa',
               telephone: '655554486',
@@ -14001,7 +14001,7 @@ export class InMemDBService implements InMemoryDbService {
             },
             distributeur: {
               id: '2',
-              raisonSocial: 'ENEO',
+              raisonSocial: 'Eneo',
               etat: true,
               adresse: 'Ydé',
               telephone: '655554481',
@@ -18418,7 +18418,7 @@ export class InMemDBService implements InMemoryDbService {
             },
             distributeur: {
               id: '3',
-              raisonSocial: 'Total Distribution',
+              raisonSocial: 'Total Energie',
               etat: true,
               adresse: 'Buéa',
               telephone: '655554486',
@@ -18450,7 +18450,7 @@ export class InMemDBService implements InMemoryDbService {
             },
             distributeur: {
               id: '2',
-              raisonSocial: 'ENEO',
+              raisonSocial: 'Eneo',
               etat: true,
               adresse: 'Ydé',
               telephone: '655554481',
@@ -23274,7 +23274,7 @@ export class InMemDBService implements InMemoryDbService {
             },
             distributeur: {
               id: '3',
-              raisonSocial: 'Total Distribution',
+              raisonSocial: 'Total Energie',
               etat: true,
               adresse: 'Buéa',
               telephone: '655554486',
@@ -23306,7 +23306,7 @@ export class InMemDBService implements InMemoryDbService {
             },
             distributeur: {
               id: '2',
-              raisonSocial: 'ENEO',
+              raisonSocial: 'Eneo',
               etat: true,
               adresse: 'Ydé',
               telephone: '655554481',
