@@ -116,8 +116,8 @@ export class PrevisualisationExemplaireComponent implements OnInit {
               this.reponse = this.serviceExemplaire.getExemplaireDocumentByOrder(x, y);
               if (this.reponse) {
                 this.req = this.reponse.sol;
-                if (this.reponse.ele != undefined) {
-                  this.courant = this.reponse.ele.etat!.libelle;
+                if (this.reponse.ele != undefined && this.reponse.ele.etat != undefined) {
+                  this.courant = this.reponse.ele.etat.libelle;
                 }
               }
               console.log('element response :', this.serviceExemplaire.getExemplaireDocumentByOrder(x, y));

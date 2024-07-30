@@ -600,7 +600,6 @@ export class NewExemplaireComponent implements OnInit {
       formatCode: this.document.formatCode,
       code: this.codeControl.value
     };
-    let tableauIdsDistributeurs = new Map();
 
     if (this.exemplaire.id != '') {
       exemplaireTemp.id = this.exemplaire.id;
@@ -608,37 +607,8 @@ export class NewExemplaireComponent implements OnInit {
     this.serviceExemplaire
       .ajouterExemplaireDocument(exemplaireTemp)
       .subscribe((object) => {
-      });
-
-      let exemplaireDuplique : IExemplaireDocument = exemplaireTemp
-      let tableauExemplairesDupliques : IExemplaireDocument[] = []
-      exemplaireDuplique.mouvements = []
-
-      if (exemplaireTemp.mouvements != undefined) {
-        exemplaireTemp.mouvements.forEach(
-          mouvement => {
-            if (mouvement.distributeur != undefined) {
-              if (tableauIdsDistributeurs.get(mouvement.distributeur.id) == null) {
-                //si la map ne contient pas le distributeur du mouvement courant
-                exemplaireDuplique.id = exemplaireTemp.code +"_"+ mouvement.distributeur.raisonSocial.replace(" ", '')
-                exemplaireDuplique.titre = exemplaireTemp.titre + '_' + mouvement.distributeur.raisonSocial
-                exemplaireDuplique.mouvements?.push(mouvement)
-                let index: number = tableauExemplairesDupliques.push(exemplaireDuplique)
-                tableauIdsDistributeurs.set(mouvement.distributeur.id, index - 1)
-              }
-              else{ //si la map contient le distributeur du mouvement courant
-                let index = tableauIdsDistributeurs.get(mouvement.distributeur.id)
-                tableauExemplairesDupliques[index].mouvements?.push(mouvement)
-              }
-              console.log('ex : ', tableauExemplairesDupliques)
-            }
-        });
-
-        tableauExemplairesDupliques.forEach(element => {
-          this.serviceExemplaire.ajouterExemplaireDocument(element).subscribe((object) => {});
-        });
-      }
         this.router.navigate(['/list-exemplaire']);
+      });
   }
 
   /**
