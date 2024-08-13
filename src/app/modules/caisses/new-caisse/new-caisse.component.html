@@ -1,0 +1,75 @@
+<div id="mainSection">
+    <div class="card block" id="top2">
+        <div class="card-header" class="entete pt-4 pb-4">
+          {{"personnel.title1" | translate}} {{titre}}
+        </div>
+        <div class="card-body" >
+            <form [formGroup]="forme" (ngSubmit)="onSubmit(forme.value)" *ngIf="forme" >
+                <div class="">
+                    <div class="">
+                        <div class="form-group">
+                            <div>
+                                <div class="champs">
+                                    <label for="libelle" class="label">
+                                        {{'caisse.table.title1' | translate}}<span style="color: red;" aria-label="required">*</span>
+                                    </label>
+                                    <input type="text" formControlName="libelle" name="nom" id="libelle"  placeholder="{{'caisse.table.title1' | translate}}"  class="form-control" required>
+                                </div>
+                                <div  *ngIf="submitted && f['libelle'].errors"  class="alert alert-danger" >
+                                    <div *ngIf="f['libelle'].errors['required']">{{'caisse.form.text2' | translate}}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div>
+                                <div class="champs">
+                                    <label for="solde" class="label" >
+                                        {{"caisse.table.title0" | translate}}<span style="color: red;" aria-label="required">*</span>
+                                    </label>
+                                    <input  type="text" formControlName="solde" name="solde" id="solde" placeholder="{{'caisse.table.title0' | translate}}" class="form-control"  required  >
+                                </div>
+                                <div  *ngIf="submitted && f['solde'].errors"  class="alert alert-danger" >
+                                    <div *ngIf="f['solde'].errors['required']">{{'caisse.form.text1' | translate}}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div>
+                                <div class="champs">
+                                    <label for="type" class="label" >
+                                        {{"caisse.table.title2" | translate}}
+                                    </label>
+                                    <input  type="text" formControlName="type"  name="type" id="type" placeholder="{{'caisse.table.title2' | translate}}" value="" required class="form-control">
+                                </div>
+                                <div  *ngIf="submitted && f['type'].errors"  class="alert alert-danger" >
+                                    <div *ngIf="f['type'].errors['required']">{{'caisse.form.text3' | translate}}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div>
+                                <div class="champs">
+                                    <label for="detailsJson" class="label" >
+                                        {{"caisse.table.title3" | translate}}
+                                    </label>
+                                    <input  type="text" formControlName="detailsJson"  name="detailsJson" id="detailsJson" placeholder="{{'caisse.table.title3' | translate}}" value="" class="form-control">
+                                </div><!-- 
+                                <div  *ngIf="submitted && f['detailsJson'].errors"  class="alert alert-danger" >
+                                    <div *ngIf="f['detailsJson'].errors['required']">{{'personnel.form.text5' | translate}}</div>
+                                </div> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="actionButton valBtn" >
+                    <button class="btn retour" (click)="return()" title="{{'lists.button2' | translate}}">
+                        <i class="fa fa-reply mr-1" aria-hidden="true"></i>
+                    </button>
+                    <button type="submit" class="btn btnValidation" title="{{btnLibelle}}">
+                        <i class="fa fa-check" aria-hidden="true"></i>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -19,6 +19,8 @@ import { ValidationRoutingModule } from './modules/validation/validation-routing
 import { EtapeRoutingModule } from './modules/etape/etape-routing.module';
 import { ParoursRoutingModule } from './modules/parours/parours-routing.module';
 import { PromoRoutingModule } from './modules/promo/promo-routing.module';
+import { CaissesRoutingModule } from './modules/caisses/caisses-routing.module';
+import { ComptesRoutingModule } from './modules/comptes/comptes-routing.module';
 
 
 
@@ -50,7 +52,9 @@ const routes: Routes = [
     EtatsRoutingModule,
     ValidationRoutingModule,
     EtapeRoutingModule,
-    ParoursRoutingModule
+    ParoursRoutingModule,
+    CaissesRoutingModule,
+    ComptesRoutingModule
   ],
   exports: [RouterModule]
 })

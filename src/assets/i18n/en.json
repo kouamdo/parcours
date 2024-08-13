@@ -11,7 +11,6 @@
         "nav-link1-item1": "Search",
         "nav-link1-item2": "Creat",
         "nav-link1-item3": "Update",
-
         "nav-link2": "Tickets",
         "nav-link2-item1": "Give a ticket",
         "nav-link2-item2": "Creat queue",
@@ -55,6 +54,48 @@
     "button11": "Registrer",
     "button12": "Next",
     "button13": "Next"
+  },
+  "caisse": {
+    "title1": "Add ",
+    "search-bar": "Search",
+    "table": {
+      "title0": "Solde",
+      "title1": "libellé",
+      "title2": "type",
+      "title3": "detailJson",
+      "actions": {
+        "link1": "Add",
+        "link2": "Update",
+        "link3": "Détails"
+      }
+    },
+    "form": {
+      "text1": "solde is required",
+      "text2": "libelle is required",
+      "text3": "type is required"
+    }
+  },
+  "compte": {
+    "title1": "Add ",
+    "search-bar": "Search",
+    "table": {
+      "title0": "Solde",
+      "title1": "libellé",
+      "title2": "Date création",
+      "title3": "Montant Decouvert Max",
+      "title4": "personnel",
+      "actions": {
+        "link1": "Add",
+        "link2": "Update",
+        "link3": "Détails",
+        "link4": "Delete",
+        "link5": "Affecter"
+      }
+    },
+    "form": {
+      "text1": "solde is required",
+      "text2": "libelle is required"
+    }
   },
   "patient": {
     "title1": "Add patient",
@@ -364,7 +405,6 @@
       "title11": "Total amont"
     }
   },
-
   "role": {
     "header": "Add Role",
     "table": {
@@ -434,10 +474,10 @@
       "title9": "Actions "
     }
   },
-  "promo-distributeur":{
+  "promo-distributeur": {
     "title": "Add Promotion",
-    "text1":"Issuer",
-    "text2":"Name of Resource or Family",
+    "text1": "Issuer",
+    "text2": "Name of Resource or Family",
     "emetteur": "Issuer",
     "date_debut": "Start date",
     "date_fin": "End date",
@@ -453,12 +493,12 @@
     "beneficiaire_control": "Please select at least one beneficiary.",
     "remise_control": "The discount is compulsory.",
     "Pourcentage_control": "Percentage should not be more than 100",
-     "montant1": "Amount",
+    "montant1": "Amount",
     "pourcentage1": "Percentage",
     "date_error": "The end date must be later than the start date. ",
     "montant_message": "Enter the amount",
-    "pourcentage_messgae":"Entrez the percentage",
-    "rechercher":"Search",
+    "pourcentage_messgae": "Entrez the percentage",
+    "rechercher": "Search",
     "modifier": "Edit",
     "famille": "Category",
     "ressource": "Resource",
@@ -522,17 +562,17 @@
       "title15": "Distributor"
     }
   },
-  "validation":{
-    "header":"Add Validation",
+  "validation": {
+    "header": "Add Validation",
     "title0": "listing validation",
-    "title1":"Allowed staff",
-    "table":{
-      "title0":"validation"
+    "title1": "Allowed staff",
+    "table": {
+      "title0": "validation"
     },
-    "form":{
-      "label1":"code",
-      "label2":"etat",
-      "label3":"Creation day",
+    "form": {
+      "label1": "code",
+      "label2": "etat",
+      "label3": "Creation day",
       "label4": "Voting Type",
       "label5": "Duration vote",
       "label6": "role"
@@ -559,51 +599,51 @@
       "text7": "Search validatuion"
     }
   },
-  "etape":{
-    "title1":"Document",
+  "etape": {
+    "title1": "Document",
     "table": {
       "title": "Add",
       "title1": "Libel",
       "title2": "State"
     },
-    "form":{
-      "text1":"Field Required"
-  },
-  "lists":{
-    "button1":"Cancel"
-  },
-  "title":"listing ",
-  "search-bar":"Research",
-  "table1":{
-      "title1":"Libel",
-      "title2":"State",
-      "title4":"Actions",
-      "actions":{
-          "link2":"Modified"
+    "form": {
+      "text1": "Field Required"
+    },
+    "lists": {
+      "button1": "Cancel"
+    },
+    "title": "listing ",
+    "search-bar": "Research",
+    "table1": {
+      "title1": "Libel",
+      "title2": "State",
+      "title4": "Actions",
+      "actions": {
+        "link2": "Modified"
       }
-  }
+    }
   },
-"parours":{
-"table": {
-  "title": "Add ",
-  "title1": "libel",
-  "title2": "stage"
-},
-"form":{
-  "text1":"Field Required"
-},
-"lists":{
-"button1":"Cancel"
-},
-"title":"listing ",
-"search-bar":"Research",
-"table1":{
-  "title1":"libel",
-  "title2":"stage",
-  "title4":"Actions",
-  "actions":{
-      "link2":"Modified"
+  "parours": {
+    "table": {
+      "title": "Add ",
+      "title1": "libel",
+      "title2": "stage"
+    },
+    "form": {
+      "text1": "Field Required"
+    },
+    "lists": {
+      "button1": "Cancel"
+    },
+    "title": "listing ",
+    "search-bar": "Research",
+    "table1": {
+      "title1": "libel",
+      "title2": "stage",
+      "title4": "Actions",
+      "actions": {
+        "link2": "Modified"
+      }
+    }
   }
-}
-}
 }

@@ -37,6 +37,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatRadioModule } from '@angular/material/radio';
 import { ModalChoixPersonneComponent } from './modal-choix-personne/modal-choix-personne.component';
 import { MatSelectModule } from '@angular/material/select';
+import { ModalAffecterComptePersonnelComponent } from './modal-affecter-compte-personnel/modal-affecter-compte-personnel.component';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import { MatSelectModule } from '@angular/material/select';
     ModalChoixDocumentsComponent,
     ModalChoixDocEtatComponent,
     ModalChoixPersonneComponent,
+    ModalAffecterComptePersonnelComponent,
   ],
   exports: [
     ModalCategoriesComponent,

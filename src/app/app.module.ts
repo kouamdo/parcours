@@ -38,6 +38,8 @@ import { ValidationModule } from './modules/validation/validation.module';
 import { EtapeModule } from './modules/etape/etape.module';
 import { ParoursModule } from './modules/parours/parours.module';
 import { PromoModule } from './modules/promo/promo.module';
+import { CaissesModule } from './modules/caisses/caisses.module';
+import { ComptesModule } from './modules/comptes/comptes.module';
 
 @NgModule({
   declarations: [AppComponent, NotFoundComponent, MenuComponent],
@@ -66,6 +68,8 @@ import { PromoModule } from './modules/promo/promo.module';
     DistributeurModule,
     RoleModule,
     ValidationModule,
+    CaissesModule,
+    ComptesModule,
 
     EtapeModule,
     ParoursModule,
