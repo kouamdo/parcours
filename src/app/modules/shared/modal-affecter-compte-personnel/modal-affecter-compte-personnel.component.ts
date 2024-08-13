@@ -5,9 +5,9 @@ import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSort, Sort } from '@angular/material/sort';
 import { IComptes } from 'src/app/modele/comptes';
-import { IPersonnel } from 'src/app/modele/personnel';
+import { IPatient } from 'src/app/modele/Patient';
 import { ComptesService } from 'src/app/services/comptes/comptes.service';
-import { PersonnelsService } from 'src/app/services/personnels/personnels.service';
+import { PatientsService } from 'src/app/services/patients/patients.service';
 
 @Component({
   selector: 'app-modal-affecter-compte-personnel',
@@ -20,7 +20,7 @@ export class ModalAffecterComptePersonnelComponent {
   //titre: string="Ajouter attribut";
   submitted: boolean = false;
   titre: string = '';
-  personnels: IPersonnel[] = []
+  personnels: IPatient[] = []
   compte: IComptes | undefined;
 
   @ViewChild(MatSort) sort!: MatSort;
@@ -30,17 +30,17 @@ export class ModalAffecterComptePersonnelComponent {
     private formBuilder: FormBuilder,
     private compteService: ComptesService,
     private _liveAnnouncer: LiveAnnouncer,
-    private userService: PersonnelsService,
+    private userService: PatientsService,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     this.forme = this.formBuilder.group({
-      personnel: new FormControl<string | IPersonnel>('')
+      personnel: new FormControl<string | IPatient>('')
     });
   }
 
   ngOnInit(): void {
     this.compte = this.data.compte;
-    this.userService.getAllPersonnels().subscribe(
+    this.userService.getAllPatients().subscribe(
       (reponse) =>{
         this.personnels=reponse
       }
@@ -59,8 +59,8 @@ export class ModalAffecterComptePersonnelComponent {
     return this.forme.controls;
   }
 
-  displayFn(peronne: IPersonnel): string {
-    return peronne && peronne.nom ? peronne.nom : '';
+  displayFn(personne: IPatient): string {
+    return personne && personne.nom ? personne.nom : '';
   }
 
   onSubmit(selectItem: any) {

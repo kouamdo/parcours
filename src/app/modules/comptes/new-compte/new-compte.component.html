@@ -52,13 +52,16 @@
                                     personnel
                                 </label>
                                 <mat-form-field class="example-full-width w-100" appearance="fill">
-                                    <input  type="text" matInput [matAutocomplete]="auto"  aria-label="personnel" formControlName="personnel" name="personnel" id="famille" placeholder="" class="w-100" style="color: black;">
+                                    <input  type="text" matInput [matAutocomplete]="auto"  aria-label="personnel" formControlName="personnel" required name="personnel" id="famille" placeholder="" class="w-100" style="color: black;">
                                     <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn" >
                                     <mat-option *ngFor="let option of personnels" [value]="option">
                                         {{option.nom}}
                                     </mat-option>
                                     </mat-autocomplete>
                                 </mat-form-field>
+                            </div>
+                            <div  *ngIf="submitted && f['personnel'].errors"  class="alert alert-danger" >
+                                <div *ngIf="f['personnel'].errors['required']">{{'personnel.form.text3' | translate}}</div>
                             </div>
                         </div>
                     </div>

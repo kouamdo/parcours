@@ -13,6 +13,8 @@ import { ComptesService } from 'src/app/services/comptes/comptes.service';
 import { DonneesEchangeService } from 'src/app/services/donnees-echange/donnees-echange.service';
 import { IPersonnel } from 'src/app/modele/personnel';
 import { PersonnelsService } from 'src/app/services/personnels/personnels.service';
+import { IPatient } from 'src/app/modele/Patient';
+import { PatientsService } from 'src/app/services/patients/patients.service';
 
 @Component({
   selector: 'app-new-compte',
@@ -26,7 +28,7 @@ export class NewCompteComponent {
   btnLibelle: string = 'Ajouter';
   //titre: string="Ajouter Caisse";
   submitted: boolean = false;
-  personnels: IPersonnel[] = [];
+  personnels: IPatient[] = [];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -35,19 +37,19 @@ export class NewCompteComponent {
     private router: Router,
     private infosPath: ActivatedRoute,
     private datePipe: DatePipe,
-    private userService: PersonnelsService
+    private userService: PatientsService
   ) {
     this.forme = this.formBuilder.group({
       libelle: ['', [Validators.required]],
       solde: [''],
       montantDecouvert: [''],
-      personnel: new FormControl<string | IPersonnel>(''),
+      personnel: new FormControl<string | IPatient>(''),
     });
   }
 
   ngOnInit(): void {
     let idCompte = this.infosPath.snapshot.paramMap.get('idCompte');
-    this.userService.getAllPersonnels().subscribe((reponse) => {
+    this.userService.getAllPatients().subscribe((reponse) => {
       this.personnels = reponse;
     });
     if (idCompte != null && idCompte !== '') {
@@ -70,7 +72,7 @@ export class NewCompteComponent {
     return this.forme.controls;
   }
 
-  displayFn(peronne: IPersonnel): string {
+  displayFn(peronne: IPatient): string {
     return peronne && peronne.nom ? peronne.nom : '';
   }
 
