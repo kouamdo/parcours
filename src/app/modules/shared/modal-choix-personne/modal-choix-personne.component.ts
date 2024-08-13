@@ -103,8 +103,10 @@ export class ModalChoixPersonneComponent  implements OnInit{
    */
   navigate() : string{
     
+    let valeurIdDocument  = sessionStorage.getItem("idDocumentPourExemplaire")
+
     if (this.donneeExemplairePersonneRatacheeService.getUrlSource() == "Exécuter") {
-      this.url= "../executer-missions"
+      this.url= "exemplaire-nouveau/".concat(valeurIdDocument!)
     }else if (this.donneeExemplairePersonneRatacheeService.getUrlSource() == "Historique des documents") {
       this.url= "../historique-par-personne"
     }

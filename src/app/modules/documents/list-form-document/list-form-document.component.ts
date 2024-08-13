@@ -56,7 +56,8 @@ export class ListFormDocumentComponent implements OnInit, AfterViewInit {
     contientDistributeurs: false,
     listDocEtats: '',
     docEtats: [],
-    formatCode: ''
+    formatCode: '',
+    beneficiaireObligatoire: false
   }
 
   constructor(private translate: TranslateService, private router:Router,
@@ -137,44 +138,39 @@ export class ListFormDocumentComponent implements OnInit, AfterViewInit {
      listPreconisations: '',
      listSousDocuments: '',
      listDocEtats: '',
-     id: '',
-     titre: '',
-     description: '',
-     etat: false,
-     typeMouvement: "Neutre",
-     affichagePrix: false,
-     contientRessources: false,
-     contientDistributeurs: false,
-     missions: [],
-     attributs: [],
-     categories: [],
-     preconisations: [],
-     docEtats: [],
-     formatCode: ''
+     id: x.id,
+     titre: x.titre,
+     description: x.description,
+     etat: x.etat,
+     typeMouvement: x.typeMouvement,
+     affichagePrix:  x.affichagePrix,
+     contientRessources:  x.contientRessources,
+     contientDistributeurs:  x.contientDistributeurs,
+     missions:  x.missions,
+     attributs:  x.attributs,
+     categories:  x.categories,
+     preconisations:  x.preconisations,
+     docEtats:  x.docEtats,
+     formatCode:  x.formatCode,
+     beneficiaireObligatoire:  x.beneficiaireObligatoire
    }
-    afficheDocument.id = x.id;
-    afficheDocument.titre = x.titre;
-    afficheDocument.description = x.description;
-    afficheDocument.etat = x.etat;
-    afficheDocument.missions = x.missions;
-    afficheDocument.attributs = x.attributs;
-      x.missions.forEach(
-        m => {
-          afficheDocument.listeMissions += m.libelle + ", ";
-        }
-      )
-      x.attributs.forEach(
-        a => afficheDocument.listAttributs += a.titre + ", "
-      )
-      x.categories.forEach(
-        c => afficheDocument.listCategories += c.nom + ", "
-      )
-      x.preconisations.forEach(
-        p => afficheDocument.listPreconisations += p.libelle + ", "
-      )
-      x.docEtats.forEach(
-        de => afficheDocument.listDocEtats += de.etat.libelle + ", "
-      )
-      return afficheDocument;
+    x.missions.forEach(
+      m => {
+        afficheDocument.listeMissions += m.libelle + ", ";
+      }
+    )
+    x.attributs.forEach(
+      a => afficheDocument.listAttributs += a.titre + ", "
+    )
+    x.categories.forEach(
+      c => afficheDocument.listCategories += c.nom + ", "
+    )
+    x.preconisations.forEach(
+      p => afficheDocument.listPreconisations += p.libelle + ", "
+    )
+    x.docEtats.forEach(
+      de => afficheDocument.listDocEtats += de.etat.libelle + ", "
+    )
+    return afficheDocument;
   }
 }

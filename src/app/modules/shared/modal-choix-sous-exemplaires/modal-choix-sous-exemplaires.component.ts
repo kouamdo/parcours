@@ -6,7 +6,9 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { IDocument } from 'src/app/modele/document';
 import { IExemplaireDocument } from 'src/app/modele/exemplaire-document';
+import { DocumentService } from 'src/app/services/documents/document.service';
 import { DonneesEchangeService } from 'src/app/services/donnees-echange/donnees-echange.service';
 import { ExemplaireDocumentService } from 'src/app/services/exemplaire-document/exemplaire-document.service';
 
@@ -37,6 +39,7 @@ export class ModalChoixSousExemplairesComponent implements OnInit {
 
   constructor(
     private serviceExemplaire: ExemplaireDocumentService,
+    private serviceDocument: DocumentService,
     private _liveAnnouncer: LiveAnnouncer,
     private donneeExemplaireDocService:DonneesEchangeService,
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -92,7 +95,19 @@ export class ModalChoixSousExemplairesComponent implements OnInit {
 
   choisirDocument(){
     let valeurIdDocument  = sessionStorage.getItem("idDocumentPourExemplaire")
-    this.router.navigate(['exemplaire-nouveau/'.concat(valeurIdDocument!)]);
+    let documentSource : IDocument | undefined
+    this.serviceDocument.getDocumentById(valeurIdDocument!).subscribe(
+      x =>{
+        documentSource = x
+        console.log('doc : ', documentSource)
+    if (documentSource != undefined) {
+      if (documentSource.beneficiaireObligatoire == true) {
+        this.router.navigate(['page-intermedaire']);
+      }else{
+        this.router.navigate(['exemplaire-nouveau/'.concat(valeurIdDocument!)]);
+      }
+    }
+    })
   }
 
   ajoutSelectionDocument(idDocument: string) {
@@ -138,4 +153,7 @@ export class ModalChoixSousExemplairesComponent implements OnInit {
     }
   }
 
+  cancel(){
+    this.donneeExemplaireDocService.dataDocumentSousDocuments = []
+  }
 }

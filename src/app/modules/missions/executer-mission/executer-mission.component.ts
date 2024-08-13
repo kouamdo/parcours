@@ -8,8 +8,6 @@ import { DocumentService } from 'src/app/services/documents/document.service';
 import { MissionsService } from 'src/app/services/missions/missions.service';
 import { ModalChoixSousExemplairesComponent } from '../../shared/modal-choix-sous-exemplaires/modal-choix-sous-exemplaires.component';
 import { MatDialog } from '@angular/material/dialog';
-import { DonneesEchangeService } from 'src/app/services/donnees-echange/donnees-echange.service';
-import { PatientsService } from 'src/app/services/patients/patients.service';
 import { IPatient } from 'src/app/modele/Patient';
 
 @Component({
@@ -26,27 +24,16 @@ export class ExecuterMissionComponent implements OnInit {
   missionChoisieLibelle: string="";
   estClique : boolean = false;
   idDocumentPourExemplaire : string = ""
-  nomPersonne : string = ""
   laPersonneRattachee : IPatient | undefined
 
   constructor(private formBuilder:FormBuilder, private missionService:MissionsService,private router:Router, private infosPath:ActivatedRoute,
-     private documentService:DocumentService, private donneeExemplaireDePersonneService:DonneesEchangeService, private dialogDef : MatDialog,
-     private servicePatient: PatientsService ) {
+     private documentService:DocumentService, private dialogDef : MatDialog ) {
     this.formeMissionExec = this.formBuilder.group({
      
     });
    }
 
-  ngOnInit(): void { 
-    let idPersonne : string = this.donneeExemplaireDePersonneService.getExemplairePersonneRatachee()
-    this.servicePatient.getPatientById(idPersonne).subscribe(
-      patientTrouve =>{
-        this.laPersonneRattachee =  patientTrouve;
-        if (patientTrouve != undefined) {
-          this.nomPersonne = this.laPersonneRattachee.nom + " " + this.laPersonneRattachee.prenom
-        }
-      }
-    )
+  ngOnInit(): void {
     this.missions$ = this.missionService.getMissionByUser("admin");
   }
 

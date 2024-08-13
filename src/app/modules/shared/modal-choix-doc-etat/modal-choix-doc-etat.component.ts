@@ -43,7 +43,6 @@ export class ModalChoixDocEtatComponent {
 
     if (selectedEtat) {
       this.servicedonneechange.saveEtatModal(selectedEtat);
-      console.log("etat :", selectedEtat);
       
     }
     this.dialogRef.close();
@@ -52,7 +51,6 @@ export class ModalChoixDocEtatComponent {
   onRadioChange(etat: IDocEtats): void {
 
     this.selectedEtatsMap = etat;
-    console.log("change etat :", this.selectedEtatsMap);
   }
 
   ngOnInit(): void {

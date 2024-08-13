@@ -66,7 +66,8 @@ export class NewExemplaireComponent implements OnInit {
       qrCodeValue: ''
     },
     formatCode: '',
-    code: ''
+    code: '',
+    beneficiaireObligatoire: true
   };
 
   document: IDocument = {
@@ -83,7 +84,8 @@ export class NewExemplaireComponent implements OnInit {
     contientDistributeurs: false,
     typeMouvement: 'Neutre',
     docEtats: [],
-    formatCode: ''
+    formatCode: '',
+    beneficiaireObligatoire: false
   };
 
   attribut: IAttributs = {
@@ -598,7 +600,8 @@ export class NewExemplaireComponent implements OnInit {
       dateCreation: new Date,
       personneRattachee: this.laPersonneRattachee!,
       formatCode: this.document.formatCode,
-      code: this.codeControl.value
+      code: this.codeControl.value,
+      beneficiaireObligatoire: true
     };
 
     if (this.exemplaire.id != '') {

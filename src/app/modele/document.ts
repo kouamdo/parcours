@@ -13,6 +13,7 @@ export interface IDocument {
     affichagePrix:boolean,
     contientRessources:boolean,
     contientDistributeurs:boolean,
+    beneficiaireObligatoire:boolean,
     missions : IMission[],
     attributs : IAttributs[],
     categories : ICategoriesAttributs[]

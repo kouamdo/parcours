@@ -13,5 +13,5 @@ export interface IExemplaireDocument extends IDocument{
     objetEnregistre : ObjetCleValeur[],
     idSousExelplaires? : string[]
     dateCreation : Date
-    personneRattachee : IPatient
+    personneRattachee? : IPatient
 }

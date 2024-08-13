@@ -54,7 +54,8 @@
     "button10": "Close",
     "button11": "Registrer",
     "button12": "Next",
-    "button13": "Next"
+    "button13": "Next",
+    "button14": "Send"
   },
   "patient": {
     "title1": "Add patient",
@@ -242,7 +243,10 @@
       "title20": "Distributor visibility ?",
       "title21": "Paired documents",
       "title22": "Mouvement's nature",
-      "title23": "Document's Status"
+      "title23": "Document's Status",
+      "title24": "Status",
+      "title25": "Code format",
+      "title26": "Associate people ?"
     },
     "form": {
       "text1": "Title is required.",
@@ -253,7 +257,8 @@
       "text6": "If this box is unchecked, there will be no possibility of creating movements when creating a copy of the document",
       "text7": "If this box is checked, the distributor column will be visible when creating the movement of a copy of this document",
       "text8": "Mouvement's nature applied to thid document",
-      "text9": "Mouvement's nature to apply to this document is required"
+      "text9": "Mouvement's nature to apply to this document is required",
+      "text12": "If this box is checked, people would be asked when we create document"
     },
     "view": {
       "title": "Document's Model",
@@ -279,7 +284,10 @@
       "text8": "Select people",
       "text9": "Customer's name",
       "text10": "Order by ",
-      "text11": "Code"
+      "text11": "Code",
+      "text12": "Transmission mode",
+      "text13": "Transmission",
+      "text14": "Document's history is not available for dose who don't be associate to people"
     }
   },
   "theme": {

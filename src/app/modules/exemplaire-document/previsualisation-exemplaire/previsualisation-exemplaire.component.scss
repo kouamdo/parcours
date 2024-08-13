@@ -29,6 +29,7 @@
     flex-wrap: wrap;
     div{
         margin: 20px 0;
+        margin-right: 20px;
     }
 }
 .hoverBlock{
@@ -217,6 +218,23 @@ td{
             display: flex;
             align-items: center;
             justify-content: flex-start;
+        }
+    }
+}
+.collapseForm{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: flex-end;
+    padding: 8px;
+    form{
+        background-color: #78787831;
+        box-shadow: 0 0 6px #78787849;
+        width: 40%;
+        padding: 8px;
+        font-size: 14px;
+        i{
+            margin: 0 5px;
         }
     }
 }

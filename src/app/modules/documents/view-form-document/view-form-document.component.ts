@@ -26,7 +26,8 @@ export class ViewFormDocumentComponent implements OnInit {
     contientDistributeurs: false,
     typeMouvement: TypeMouvement.Neutre,
     docEtats: [],
-    formatCode: ''
+    formatCode: '',
+    beneficiaireObligatoire: false
   };
   titre:string='';
   constructor(private router:Router,private dataEnteteMenuService:DonneesEchangeService, private infosPath:ActivatedRoute, private serviceDocument:DocumentService) {}

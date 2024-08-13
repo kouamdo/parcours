@@ -119,6 +119,11 @@ sup{
 .note, sup{
   color: orangered;
 }
+.note{
+    font-size: 10px;
+    padding-top: 8px;
+    opacity: 0.7;
+}
 .champs, select, input{
 font-size: 15px;
 }

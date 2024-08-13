@@ -36,9 +36,7 @@ export class ExemplaireDocumentService {
     if (exemplaire.ordreEtats != undefined) {
       
     this.ordreEtat = exemplaire.ordreEtats![exemplaire.ordreEtats!.length - 1];
-    
-      console.log("doc :", doc, " exemplaire :", exemplaire);
-      
+          
       for (let index = 0; index < doc.docEtats.length; index++) {
         if (doc.docEtats[index].etat.id == this.ordreEtat.etat.id) {
           this.i = index;
@@ -57,7 +55,7 @@ export class ExemplaireDocumentService {
     return this.http.get<IExemplaireDocument[]>('api/exemplaires').pipe(
       map(x=>
         {
-          return x.filter(e=> e.personneRattachee.id.toLowerCase() == idPersonne)
+          return x.filter(e=> e.personneRattachee?.id.toLowerCase() == idPersonne)
         })
     );        
   }

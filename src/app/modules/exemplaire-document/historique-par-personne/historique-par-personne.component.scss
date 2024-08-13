@@ -267,6 +267,13 @@ th{
 #my-dropdownFiltre::after{
     display: none;
 }
+.emptySection{
+    background-color: #7878780c;
+    box-shadow: 0 0 6px #7878782d;
+    color: #787878;
+    width: 100% !important;
+    padding: 5px;
+}
 @media screen and (max-width: 1040px) {
     #my-dropdownFiltre{
         i{

@@ -382,7 +382,7 @@ export class InMemDBService implements InMemoryDbService {
             elements: [
               { nom: 'Créer', lien: './mission-nouveau', bouton: 'false' },
               { nom: 'Rechercher', lien: './list-missions', bouton: 'false' },
-              { nom: 'Exécuter', lien: './page-intermedaire', bouton: 'false' },
+              { nom: 'Exécuter', lien: './executer-missions', bouton: 'false' },
               {
                 nom: 'liste des exemplaires',
                 lien: './list-exemplaire',
@@ -554,7 +554,7 @@ export class InMemDBService implements InMemoryDbService {
             elements: [
               { nom: 'New', lien: './mission-nouveau', bouton: 'false' },
               { nom: 'Search', lien: './list-missions', bouton: 'false' },
-              { nom: 'Execute', lien: './page-intermedaire', bouton: 'false' },
+              { nom: 'Execute', lien: './executer-missions', bouton: 'false' },
               {
                 nom: 'list of exemplaires',
                 lien: './list-exemplaire',
@@ -1045,6 +1045,7 @@ export class InMemDBService implements InMemoryDbService {
         titre: 'Note intervention',
         description:
           "Document delivre par le medecin ou un infirmier de l'etablissement",
+                beneficiaireObligatoire: true,
         docEtats: [
           {
             id: '1',
@@ -1550,8 +1551,8 @@ export class InMemDBService implements InMemoryDbService {
           {
             id: '1',
             titre: 'Note intervention',
-            description:
-              "Document delivre par le medecin ou un infirmier de l'etablissement",
+            description: "Document delivre par le medecin ou un infirmier de l'etablissement",
+            beneficiaireObligatoire: true,
             docEtats: [
               {
                 id: '1',
@@ -1715,8 +1716,7 @@ export class InMemDBService implements InMemoryDbService {
                 dateCreation: new Date('07/03/2000'),
                 dateModification: new Date('07/03/1990'),
                 type: IType.Boolean,
-                valeursParDefaut:
-                  'A, A+, A-, B, B+, B-, AB, AB+, AB-, O, O+, O-',
+                valeursParDefaut: 'A, A+, A-, B, B+, B-, AB, AB+, AB-, O, O+, O-',
               },
               {
                 id: '8',
@@ -1814,8 +1814,7 @@ export class InMemDBService implements InMemoryDbService {
                       dateCreation: new Date('07/03/2000'),
                       dateModification: new Date('07/03/1990'),
                       type: IType.Boolean,
-                      valeursParDefaut:
-                        'A, A+, A-, B, B+, B-, AB, AB+, AB-, O, O+, O-',
+                      valeursParDefaut: 'A, A+, A-, B, B+, B-, AB, AB+, AB-, O, O+, O-',
                     },
                   },
                   {
@@ -2058,6 +2057,7 @@ export class InMemDBService implements InMemoryDbService {
             titre: 'Fiche de suivi',
             description:
               "Document delivre par le medecin ou un infirmier de l'etablissement",
+                beneficiaireObligatoire: true,
             docEtats: [
               {
                 id: '1',
@@ -2554,6 +2554,7 @@ export class InMemDBService implements InMemoryDbService {
             titre: 'Fiche de soin',
             description:
               "Document delivre par le medecin ou un infirmier de l'etablissement",
+                beneficiaireObligatoire: true,
             typeMouvement: 'Neutre',
             etat: true,
             affichagePrix: true,
@@ -2998,6 +2999,7 @@ export class InMemDBService implements InMemoryDbService {
             typeMouvement: 'Ajout',
             description:
               "Document delivre par le medecin ou un infirmier de l'etablissement",
+                beneficiaireObligatoire: true,
             etat: true,
             affichagePrix: true,
             contientRessources: true,
@@ -3441,6 +3443,7 @@ export class InMemDBService implements InMemoryDbService {
             titre: 'Formulaire de sortie',
             description:
               "Document delivre par le medecin ou un infirmier de l'etablissement",
+                beneficiaireObligatoire: true,
             etat: true,
             typeMouvement: TypeMouvement.Ajout,
             affichagePrix: true,
@@ -4052,6 +4055,7 @@ export class InMemDBService implements InMemoryDbService {
             titre: 'Formulaire de sortie',
             description:
               "Document delivre par le medecin ou un infirmier de l'etablissement",
+                beneficiaireObligatoire: true,
             typeMouvement: 'Reduire',
             etat: true,
             affichagePrix: true,
@@ -4495,6 +4499,7 @@ export class InMemDBService implements InMemoryDbService {
             titre: 'Formulaire de sortie',
             description:
               "Document delivre par le medecin ou un infirmier de l'etablissement",
+                beneficiaireObligatoire: true,
             etat: true,
             affichagePrix: true,
             contientRessources: true,
@@ -5135,6 +5140,7 @@ export class InMemDBService implements InMemoryDbService {
             titre: 'ordonnance',
             description:
               "Document delivre par le medecin ou un infirmier de l'etablissement",
+                beneficiaireObligatoire: true,
             typeMouvement: 'Neutre',
             etat: true,
             affichagePrix: true,
@@ -5645,6 +5651,7 @@ export class InMemDBService implements InMemoryDbService {
         titre: 'Fiche de suivi',
         description:
           "Document delivre par le medecin ou un infirmier de l'etablissement",
+                beneficiaireObligatoire: true,
         docEtats: [
           {
             id: '1',
@@ -6142,6 +6149,7 @@ export class InMemDBService implements InMemoryDbService {
         titre: 'Fiche de soin',
         description:
           "Document delivre par le medecin ou un infirmier de l'etablissement",
+                beneficiaireObligatoire: true,
         typeMouvement: 'Neutre',
         etat: true,
         affichagePrix: false,
@@ -6588,6 +6596,7 @@ export class InMemDBService implements InMemoryDbService {
             titre: 'Note intervention',
             description:
               "Document delivre par le medecin ou un infirmier de l'etablissement",
+                beneficiaireObligatoire: true,
             docEtats: [
               {
                 id: '1',
@@ -7094,6 +7103,7 @@ export class InMemDBService implements InMemoryDbService {
             titre: 'Fiche de suivi',
             description:
               "Document delivre par le medecin ou un infirmier de l'etablissement",
+                beneficiaireObligatoire: true,
             docEtats: [
               {
                 id: '1',
@@ -7591,6 +7601,7 @@ export class InMemDBService implements InMemoryDbService {
             titre: 'Fiche de soin',
             description:
               "Document delivre par le medecin ou un infirmier de l'etablissement",
+                beneficiaireObligatoire: true,
             typeMouvement: 'Neutre',
             etat: true,
             affichagePrix: true,
@@ -8036,6 +8047,7 @@ export class InMemDBService implements InMemoryDbService {
             titre: 'Formulaire de sortie',
             description:
               "Document delivre par le medecin ou un infirmier de l'etablissement",
+                beneficiaireObligatoire: true,
             typeMouvement: 'Reduire',
             etat: true,
             affichagePrix: true,
@@ -8664,6 +8676,7 @@ export class InMemDBService implements InMemoryDbService {
             id: '5',
             titre: 'ordonnance',
             description: "Document delivre par le medecin ou un infirmier de l'etablissement",
+            beneficiaireObligatoire: true,
             typeMouvement: 'Neutre',
             etat: true,
             affichagePrix: true,
@@ -9172,6 +9185,7 @@ export class InMemDBService implements InMemoryDbService {
         titre: 'Formulaire de sortie',
         description:
           "Document delivre par le medecin ou un infirmier de l'etablissement",
+                beneficiaireObligatoire: true,
         typeMouvement: 'Reduire',
         etat: true,
         affichagePrix: true,
@@ -9800,6 +9814,7 @@ export class InMemDBService implements InMemoryDbService {
         titre: 'ordonnance',
         description:
           "Document delivre par le medecin ou un infirmier de l'etablissement",
+                beneficiaireObligatoire: true,
         typeMouvement: 'Neutre',
         etat: true,
         affichagePrix: false,
@@ -10325,6 +10340,7 @@ export class InMemDBService implements InMemoryDbService {
             titre: 'Fiche de soin',
             description:
               "Document delivre par le medecin ou un infirmier de l'etablissement",
+                beneficiaireObligatoire: true,
             typeMouvement: 'Neutre',
             etat: true,
             affichagePrix: true,
@@ -10770,6 +10786,7 @@ export class InMemDBService implements InMemoryDbService {
             titre: 'Formulaire de sortie',
             description:
               "Document delivre par le medecin ou un infirmier de l'etablissement",
+                beneficiaireObligatoire: true,
             typeMouvement: 'Reduire',
             etat: true,
             affichagePrix: true,
@@ -11399,6 +11416,7 @@ export class InMemDBService implements InMemoryDbService {
             titre: 'ordonnance',
             description:
               "Document delivre par le medecin ou un infirmier de l'etablissement",
+                beneficiaireObligatoire: true,
             typeMouvement: 'Neutre',
             etat: true,
             affichagePrix: true,
@@ -12762,6 +12780,7 @@ export class InMemDBService implements InMemoryDbService {
             id: '1',
             titre: 'Note intervention',
             description: "Document delivre par le medecin ou un infirmier de l'etablissement",
+            beneficiaireObligatoire: true,
             docEtats: [
               {
                 id: '1',
@@ -13265,6 +13284,7 @@ export class InMemDBService implements InMemoryDbService {
             id: '4',
             titre: 'Formulaire de sortie',
             description: "Document delivre par le medecin ou un infirmier de l'etablissement",
+            beneficiaireObligatoire: true,
             typeMouvement: 'Reduire',
             etat: true,
             affichagePrix: true,
@@ -14008,7 +14028,8 @@ export class InMemDBService implements InMemoryDbService {
               mail: 'ngong@yad.fr',
             },
           },
-        ]
+        ],
+        beneficiaireObligatoire: true
       },
       {
         id: '2',
@@ -14040,14 +14061,13 @@ export class InMemDBService implements InMemoryDbService {
         },
         dateCreation: new Date('05/21/2021'),
         titre: 'ordonnance',
-        description:
-          "Document 2 delivre par le medecin ou un infirmier de l'etablissement",
+        description: "Document 2 delivre par le medecin ou un infirmier de l'etablissement",
         typeMouvement: 'Neutre',
         etat: false,
         affichagePrix: true,
         contientRessources: true,
         contientDistributeurs: true,
-            formatCode: 'FACT',
+        formatCode: 'FACT',
         docEtats: [
           {
             id: '1',
@@ -14346,8 +14366,7 @@ export class InMemDBService implements InMemoryDbService {
                   dateCreation: new Date('07/03/2000'),
                   dateModification: new Date('07/03/1990'),
                   type: IType.Boolean,
-                  valeursParDefaut:
-                    'A, A+, A-, B, B+, B-, AB, AB+, AB-, O, O+, O-',
+                  valeursParDefaut: 'A, A+, A-, B, B+, B-, AB, AB+, AB-, O, O+, O-',
                 },
               },
               {
@@ -14683,8 +14702,8 @@ export class InMemDBService implements InMemoryDbService {
           {
             id: '3',
             titre: 'Fiche de soin',
-            description:
-              "Document delivre par le medecin ou un infirmier de l'etablissement",
+            description: "Document delivre par le medecin ou un infirmier de l'etablissement",
+            beneficiaireObligatoire: true,
             typeMouvement: 'Neutre',
             etat: true,
             affichagePrix: true,
@@ -15128,8 +15147,8 @@ export class InMemDBService implements InMemoryDbService {
           {
             id: '4',
             titre: 'Formulaire de sortie',
-            description:
-              "Document delivre par le medecin ou un infirmier de l'etablissement",
+            description: "Document delivre par le medecin ou un infirmier de l'etablissement",
+            beneficiaireObligatoire: true,
             typeMouvement: 'Reduire',
             etat: true,
             affichagePrix: true,
@@ -15282,8 +15301,7 @@ export class InMemDBService implements InMemoryDbService {
                 dateCreation: new Date('07/03/2000'),
                 dateModification: new Date('07/03/1990'),
                 type: IType.Boolean,
-                valeursParDefaut:
-                  'A, A+, A-, B, B+, B-, AB, AB+, AB-, O, O+, O-',
+                valeursParDefaut: 'A, A+, A-, B, B+, B-, AB, AB+, AB-, O, O+, O-',
               },
               {
                 id: '8',
@@ -15433,8 +15451,7 @@ export class InMemDBService implements InMemoryDbService {
                       dateCreation: new Date('07/03/2000'),
                       dateModification: new Date('07/03/1990'),
                       type: IType.Boolean,
-                      valeursParDefaut:
-                        'A, A+, A-, B, B+, B-, AB, AB+, AB-, O, O+, O-',
+                      valeursParDefaut: 'A, A+, A-, B, B+, B-, AB, AB+, AB-, O, O+, O-',
                     },
                   },
                   {
@@ -15757,8 +15774,8 @@ export class InMemDBService implements InMemoryDbService {
           {
             id: '5',
             titre: 'ordonnance',
-            description:
-              "Document delivre par le medecin ou un infirmier de l'etablissement",
+            description: "Document delivre par le medecin ou un infirmier de l'etablissement",
+            beneficiaireObligatoire: true,
             typeMouvement: 'Neutre',
             etat: true,
             affichagePrix: true,
@@ -15922,8 +15939,7 @@ export class InMemDBService implements InMemoryDbService {
                 dateCreation: new Date('07/03/2000'),
                 dateModification: new Date('07/03/1990'),
                 type: IType.Boolean,
-                valeursParDefaut:
-                  'A, A+, A-, B, B+, B-, AB, AB+, AB-, O, O+, O-',
+                valeursParDefaut: 'A, A+, A-, B, B+, B-, AB, AB+, AB-, O, O+, O-',
               },
               {
                 id: '5',
@@ -16023,8 +16039,7 @@ export class InMemDBService implements InMemoryDbService {
                       dateCreation: new Date('07/03/2000'),
                       dateModification: new Date('07/03/1990'),
                       type: IType.Boolean,
-                      valeursParDefaut:
-                        'A, A+, A-, B, B+, B-, AB, AB+, AB-, O, O+, O-',
+                      valeursParDefaut: 'A, A+, A-, B, B+, B-, AB, AB+, AB-, O, O+, O-',
                     },
                   },
                   {
@@ -16353,6 +16368,7 @@ export class InMemDBService implements InMemoryDbService {
             },
           },
         ],
+        beneficiaireObligatoire: true
       },
       {
         id: '3',
@@ -16384,15 +16400,14 @@ export class InMemDBService implements InMemoryDbService {
         },
         dateCreation: new Date('07/05/2021'),
         titre: 'Formulaire de sortie',
-        description:
-          "Document 3 delivre par le medecin ou un infirmier de l'etablissement",
+        description: "Document 3 delivre par le medecin ou un infirmier de l'etablissement",
         typeMouvement: 'Reduire',
         etat: false,
         affichagePrix: true,
         contientRessources: true,
         contientDistributeurs: false,
         formatCode: 'FACT',
-        docEtats:  [
+        docEtats: [
           {
             id: '3',
             ordre: 3,
@@ -16676,8 +16691,7 @@ export class InMemDBService implements InMemoryDbService {
                   dateCreation: new Date('07/03/2000'),
                   dateModification: new Date('07/03/1990'),
                   type: IType.Boolean,
-                  valeursParDefaut:
-                    'A, A+, A-, B, B+, B-, AB, AB+, AB-, O, O+, O-',
+                  valeursParDefaut: 'A, A+, A-, B, B+, B-, AB, AB+, AB-, O, O+, O-',
                 },
               },
               {
@@ -17149,8 +17163,7 @@ export class InMemDBService implements InMemoryDbService {
               obligatoire: false,
               valeursParDefaut: '',
             },
-            value:
-              'Suspension du traitement pour intolérance aux medicamants contenant du paracétamol',
+            value: 'Suspension du traitement pour intolérance aux medicamants contenant du paracétamol',
           },
           {
             key: {
@@ -17202,9 +17215,9 @@ export class InMemDBService implements InMemoryDbService {
           {
             id: '1',
             titre: 'Note intervention',
-            description:
-              "Document delivre par le medecin ou un infirmier de l'etablissement",
-            docEtats:  [
+            description: "Document delivre par le medecin ou un infirmier de l'etablissement",
+            beneficiaireObligatoire: true,
+            docEtats: [
               {
                 id: '1',
                 ordre: 1,
@@ -17367,8 +17380,7 @@ export class InMemDBService implements InMemoryDbService {
                 dateCreation: new Date('07/03/2000'),
                 dateModification: new Date('07/03/1990'),
                 type: IType.Boolean,
-                valeursParDefaut:
-                  'A, A+, A-, B, B+, B-, AB, AB+, AB-, O, O+, O-',
+                valeursParDefaut: 'A, A+, A-, B, B+, B-, AB, AB+, AB-, O, O+, O-',
               },
               {
                 id: '8',
@@ -17466,8 +17478,7 @@ export class InMemDBService implements InMemoryDbService {
                       dateCreation: new Date('07/03/2000'),
                       dateModification: new Date('07/03/1990'),
                       type: IType.Boolean,
-                      valeursParDefaut:
-                        'A, A+, A-, B, B+, B-, AB, AB+, AB-, O, O+, O-',
+                      valeursParDefaut: 'A, A+, A-, B, B+, B-, AB, AB+, AB-, O, O+, O-',
                     },
                   },
                   {
@@ -17709,15 +17720,15 @@ export class InMemDBService implements InMemoryDbService {
           {
             id: '4',
             titre: 'Formulaire de sortie',
-            description:
-              "Document delivre par le medecin ou un infirmier de l'etablissement",
+            description: "Document delivre par le medecin ou un infirmier de l'etablissement",
+            beneficiaireObligatoire: true,
             typeMouvement: 'Reduire',
             etat: true,
             affichagePrix: true,
             contientRessources: true,
             contientDistributeurs: true,
             formatCode: 'FACT',
-            docEtats:  [
+            docEtats: [
               {
                 id: '2',
                 ordre: 2,
@@ -17863,8 +17874,7 @@ export class InMemDBService implements InMemoryDbService {
                 dateCreation: new Date('07/03/2000'),
                 dateModification: new Date('07/03/1990'),
                 type: IType.Boolean,
-                valeursParDefaut:
-                  'A, A+, A-, B, B+, B-, AB, AB+, AB-, O, O+, O-',
+                valeursParDefaut: 'A, A+, A-, B, B+, B-, AB, AB+, AB-, O, O+, O-',
               },
               {
                 id: '8',
@@ -18014,8 +18024,7 @@ export class InMemDBService implements InMemoryDbService {
                       dateCreation: new Date('07/03/2000'),
                       dateModification: new Date('07/03/1990'),
                       type: IType.Boolean,
-                      valeursParDefaut:
-                        'A, A+, A-, B, B+, B-, AB, AB+, AB-, O, O+, O-',
+                      valeursParDefaut: 'A, A+, A-, B, B+, B-, AB, AB+, AB-, O, O+, O-',
                     },
                   },
                   {
@@ -18458,6 +18467,7 @@ export class InMemDBService implements InMemoryDbService {
             },
           },
         ],
+        beneficiaireObligatoire: true
       },
       {
         id: '4',
@@ -18489,15 +18499,14 @@ export class InMemDBService implements InMemoryDbService {
         },
         dateCreation: new Date('07/03/2013'),
         titre: 'ordonnance',
-        description:
-          "Document 4 delivre par le medecin ou un infirmier de l'etablissement",
+        description: "Document 4 delivre par le medecin ou un infirmier de l'etablissement",
         typeMouvement: 'Neutre',
         etat: false,
         affichagePrix: true,
         contientRessources: true,
         contientDistributeurs: true,
-            formatCode: 'FACT',
-        docEtats:  [
+        formatCode: 'FACT',
+        docEtats: [
           {
             id: '1',
             ordre: 1,
@@ -18743,8 +18752,7 @@ export class InMemDBService implements InMemoryDbService {
                   dateCreation: new Date('07/03/2000'),
                   dateModification: new Date('07/03/1990'),
                   type: IType.Boolean,
-                  valeursParDefaut:
-                    'A, A+, A-, B, B+, B-, AB, AB+, AB-, O, O+, O-',
+                  valeursParDefaut: 'A, A+, A-, B, B+, B-, AB, AB+, AB-, O, O+, O-',
                 },
               },
               {
@@ -19081,15 +19089,15 @@ export class InMemDBService implements InMemoryDbService {
           {
             id: '3',
             titre: 'Fiche de soin',
-            description:
-              "Document delivre par le medecin ou un infirmier de l'etablissement",
+            description: "Document delivre par le medecin ou un infirmier de l'etablissement",
+            beneficiaireObligatoire: true,
             typeMouvement: 'Neutre',
             etat: true,
             affichagePrix: true,
             contientRessources: true,
             contientDistributeurs: true,
             formatCode: 'FACT',
-            docEtats:  [
+            docEtats: [
               {
                 id: '1',
                 ordre: 1,
@@ -19527,15 +19535,15 @@ export class InMemDBService implements InMemoryDbService {
           {
             id: '5',
             titre: 'ordonnance',
-            description:
-              "Document delivre par le medecin ou un infirmier de l'etablissement",
+            description: "Document delivre par le medecin ou un infirmier de l'etablissement",
+            beneficiaireObligatoire: true,
             typeMouvement: 'Neutre',
             etat: true,
             affichagePrix: true,
             contientRessources: true,
             contientDistributeurs: true,
             formatCode: 'FACT',
-            docEtats:  [
+            docEtats: [
               {
                 id: '1',
                 ordre: 1,
@@ -19692,8 +19700,7 @@ export class InMemDBService implements InMemoryDbService {
                 dateCreation: new Date('07/03/2000'),
                 dateModification: new Date('07/03/1990'),
                 type: IType.Boolean,
-                valeursParDefaut:
-                  'A, A+, A-, B, B+, B-, AB, AB+, AB-, O, O+, O-',
+                valeursParDefaut: 'A, A+, A-, B, B+, B-, AB, AB+, AB-, O, O+, O-',
               },
               {
                 id: '5',
@@ -19793,8 +19800,7 @@ export class InMemDBService implements InMemoryDbService {
                       dateCreation: new Date('07/03/2000'),
                       dateModification: new Date('07/03/1990'),
                       type: IType.Boolean,
-                      valeursParDefaut:
-                        'A, A+, A-, B, B+, B-, AB, AB+, AB-, O, O+, O-',
+                      valeursParDefaut: 'A, A+, A-, B, B+, B-, AB, AB+, AB-, O, O+, O-',
                     },
                   },
                   {
@@ -20124,6 +20130,7 @@ export class InMemDBService implements InMemoryDbService {
             },
           },
         ],
+        beneficiaireObligatoire: true
       },
       {
         id: '5',
@@ -20155,15 +20162,14 @@ export class InMemDBService implements InMemoryDbService {
         },
         dateCreation: new Date('07/03/2023'),
         titre: 'Note intervention',
-        description:
-          "Document 5 delivre par le medecin ou un infirmier de l'etablissement",
+        description: "Document 5 delivre par le medecin ou un infirmier de l'etablissement",
         typeMouvement: 'Neutre',
         etat: false,
         affichagePrix: true,
         contientRessources: true,
         contientDistributeurs: true,
-            formatCode: 'FACT',
-        docEtats:  [
+        formatCode: 'FACT',
+        docEtats: [
           {
             id: '2',
             ordre: 2,
@@ -20378,8 +20384,7 @@ export class InMemDBService implements InMemoryDbService {
                   dateCreation: new Date('07/03/2000'),
                   dateModification: new Date('07/03/1990'),
                   type: IType.Boolean,
-                  valeursParDefaut:
-                    'A, A+, A-, B, B+, B-, AB, AB+, AB-, O, O+, O-',
+                  valeursParDefaut: 'A, A+, A-, B, B+, B-, AB, AB+, AB-, O, O+, O-',
                 },
               },
               {
@@ -20634,15 +20639,15 @@ export class InMemDBService implements InMemoryDbService {
           {
             id: '5',
             titre: 'ordonnance',
-            description:
-              "Document delivre par le medecin ou un infirmier de l'etablissement",
+            description: "Document delivre par le medecin ou un infirmier de l'etablissement",
+            beneficiaireObligatoire: true,
             typeMouvement: 'Neutre',
             etat: true,
             affichagePrix: true,
             contientRessources: true,
             contientDistributeurs: true,
             formatCode: 'FACT',
-            docEtats:  [
+            docEtats: [
               {
                 id: '1',
                 ordre: 1,
@@ -20799,8 +20804,7 @@ export class InMemDBService implements InMemoryDbService {
                 dateCreation: new Date('07/03/2000'),
                 dateModification: new Date('07/03/1990'),
                 type: IType.Boolean,
-                valeursParDefaut:
-                  'A, A+, A-, B, B+, B-, AB, AB+, AB-, O, O+, O-',
+                valeursParDefaut: 'A, A+, A-, B, B+, B-, AB, AB+, AB-, O, O+, O-',
               },
               {
                 id: '5',
@@ -20900,8 +20904,7 @@ export class InMemDBService implements InMemoryDbService {
                       dateCreation: new Date('07/03/2000'),
                       dateModification: new Date('07/03/1990'),
                       type: IType.Boolean,
-                      valeursParDefaut:
-                        'A, A+, A-, B, B+, B-, AB, AB+, AB-, O, O+, O-',
+                      valeursParDefaut: 'A, A+, A-, B, B+, B-, AB, AB+, AB-, O, O+, O-',
                     },
                   },
                   {
@@ -21199,6 +21202,7 @@ export class InMemDBService implements InMemoryDbService {
             },
           },
         ],
+        beneficiaireObligatoire: true
       },
       {
         id: '6',
@@ -21230,8 +21234,7 @@ export class InMemDBService implements InMemoryDbService {
         },
         dateCreation: new Date('07/03/2010'),
         titre: 'Note intervention',
-        description:
-          "Document 1 delivre par le medecin ou un infirmier de l'etablissement",
+        description: "Document 1 delivre par le medecin ou un infirmier de l'etablissement",
         typeMouvement: 'Reduire',
         etat: false,
         affichagePrix: true,
@@ -21533,8 +21536,7 @@ export class InMemDBService implements InMemoryDbService {
                   dateCreation: new Date('07/03/2000'),
                   dateModification: new Date('07/03/1990'),
                   type: IType.Boolean,
-                  valeursParDefaut:
-                    'A, A+, A-, B, B+, B-, AB, AB+, AB-, O, O+, O-',
+                  valeursParDefaut: 'A, A+, A-, B, B+, B-, AB, AB+, AB-, O, O+, O-',
                 },
               },
               {
@@ -22058,8 +22060,8 @@ export class InMemDBService implements InMemoryDbService {
           {
             id: '1',
             titre: 'Note intervention',
-            description:
-              "Document delivre par le medecin ou un infirmier de l'etablissement",
+            description: "Document delivre par le medecin ou un infirmier de l'etablissement",
+            beneficiaireObligatoire: true,
             docEtats: [
               {
                 id: '1',
@@ -22223,8 +22225,7 @@ export class InMemDBService implements InMemoryDbService {
                 dateCreation: new Date('07/03/2000'),
                 dateModification: new Date('07/03/1990'),
                 type: IType.Boolean,
-                valeursParDefaut:
-                  'A, A+, A-, B, B+, B-, AB, AB+, AB-, O, O+, O-',
+                valeursParDefaut: 'A, A+, A-, B, B+, B-, AB, AB+, AB-, O, O+, O-',
               },
               {
                 id: '8',
@@ -22322,8 +22323,7 @@ export class InMemDBService implements InMemoryDbService {
                       dateCreation: new Date('07/03/2000'),
                       dateModification: new Date('07/03/1990'),
                       type: IType.Boolean,
-                      valeursParDefaut:
-                        'A, A+, A-, B, B+, B-, AB, AB+, AB-, O, O+, O-',
+                      valeursParDefaut: 'A, A+, A-, B, B+, B-, AB, AB+, AB-, O, O+, O-',
                     },
                   },
                   {
@@ -22565,8 +22565,8 @@ export class InMemDBService implements InMemoryDbService {
           {
             id: '4',
             titre: 'Formulaire de sortie',
-            description:
-              "Document delivre par le medecin ou un infirmier de l'etablissement",
+            description: "Document delivre par le medecin ou un infirmier de l'etablissement",
+            beneficiaireObligatoire: true,
             typeMouvement: 'Reduire',
             etat: true,
             affichagePrix: true,
@@ -22719,8 +22719,7 @@ export class InMemDBService implements InMemoryDbService {
                 dateCreation: new Date('07/03/2000'),
                 dateModification: new Date('07/03/1990'),
                 type: IType.Boolean,
-                valeursParDefaut:
-                  'A, A+, A-, B, B+, B-, AB, AB+, AB-, O, O+, O-',
+                valeursParDefaut: 'A, A+, A-, B, B+, B-, AB, AB+, AB-, O, O+, O-',
               },
               {
                 id: '8',
@@ -22870,8 +22869,7 @@ export class InMemDBService implements InMemoryDbService {
                       dateCreation: new Date('07/03/2000'),
                       dateModification: new Date('07/03/1990'),
                       type: IType.Boolean,
-                      valeursParDefaut:
-                        'A, A+, A-, B, B+, B-, AB, AB+, AB-, O, O+, O-',
+                      valeursParDefaut: 'A, A+, A-, B, B+, B-, AB, AB+, AB-, O, O+, O-',
                     },
                   },
                   {
@@ -23314,6 +23312,7 @@ export class InMemDBService implements InMemoryDbService {
             },
           },
         ],
+        beneficiaireObligatoire: true
       },
     ];
     let promo: Promo[] = [
@@ -23850,6 +23849,7 @@ export class InMemDBService implements InMemoryDbService {
             titre: 'Note intervention',
             description:
               "Document delivre par le medecin ou un infirmier de l'etablissement",
+                beneficiaireObligatoire: true,
             docEtats: [
               {
                 id: '1',
@@ -24360,6 +24360,7 @@ export class InMemDBService implements InMemoryDbService {
                 titre: 'Note intervention',
                 description:
                   "Document delivre par le medecin ou un infirmier de l'etablissement",
+                beneficiaireObligatoire: true,
                 docEtats: [
                   {
                     id: '1',
@@ -24867,6 +24868,7 @@ export class InMemDBService implements InMemoryDbService {
                 titre: 'Fiche de suivi',
                 description:
                   "Document delivre par le medecin ou un infirmier de l'etablissement",
+                beneficiaireObligatoire: true,
                 docEtats: [
                   {
                     id: '1',
@@ -25364,6 +25366,7 @@ export class InMemDBService implements InMemoryDbService {
                 titre: 'Fiche de soin',
                 description:
                   "Document delivre par le medecin ou un infirmier de l'etablissement",
+                beneficiaireObligatoire: true,
                 typeMouvement: 'Neutre',
                 etat: true,
                 affichagePrix: true,
@@ -25808,6 +25811,7 @@ export class InMemDBService implements InMemoryDbService {
                 typeMouvement: 'Ajout',
                 description:
                   "Document delivre par le medecin ou un infirmier de l'etablissement",
+                beneficiaireObligatoire: true,
                 etat: true,
                 affichagePrix: true,
                 contientRessources: true,
@@ -26252,6 +26256,7 @@ export class InMemDBService implements InMemoryDbService {
                 titre: 'Formulaire de sortie',
                 description:
                   "Document delivre par le medecin ou un infirmier de l'etablissement",
+                beneficiaireObligatoire: true,
                 etat: true,
                 typeMouvement: TypeMouvement.Ajout,
                 affichagePrix: true,
@@ -26866,6 +26871,7 @@ export class InMemDBService implements InMemoryDbService {
                 titre: 'Formulaire de sortie',
                 description:
                   "Document delivre par le medecin ou un infirmier de l'etablissement",
+                beneficiaireObligatoire: true,
                 typeMouvement: 'Reduire',
                 etat: true,
                 affichagePrix: true,
@@ -27310,6 +27316,7 @@ export class InMemDBService implements InMemoryDbService {
                 titre: 'Formulaire de sortie',
                 description:
                   "Document delivre par le medecin ou un infirmier de l'etablissement",
+                beneficiaireObligatoire: true,
                 etat: true,
                 affichagePrix: true,
                 contientRessources: true,
@@ -27952,6 +27959,7 @@ export class InMemDBService implements InMemoryDbService {
                 titre: 'ordonnance',
                 description:
                   "Document delivre par le medecin ou un infirmier de l'etablissement",
+                beneficiaireObligatoire: true,
                 typeMouvement: 'Neutre',
                 etat: true,
                 affichagePrix: true,
@@ -28465,6 +28473,7 @@ export class InMemDBService implements InMemoryDbService {
             titre: 'Fiche de suivi',
             description:
               "Document delivre par le medecin ou un infirmier de l'etablissement",
+                beneficiaireObligatoire: true,
             docEtats: [
               {
                 id: '1',
@@ -28978,6 +28987,7 @@ export class InMemDBService implements InMemoryDbService {
                 titre: 'Note intervention',
                 description:
                   "Document delivre par le medecin ou un infirmier de l'etablissement",
+                beneficiaireObligatoire: true,
                 docEtats: [
                   {
                     id: '1',
@@ -29488,6 +29498,7 @@ export class InMemDBService implements InMemoryDbService {
                     titre: 'Note intervention',
                     description:
                       "Document delivre par le medecin ou un infirmier de l'etablissement",
+                beneficiaireObligatoire: true,
                     docEtats: [
                       {
                         id: '1',
@@ -29995,6 +30006,7 @@ export class InMemDBService implements InMemoryDbService {
                     titre: 'Fiche de suivi',
                     description:
                       "Document delivre par le medecin ou un infirmier de l'etablissement",
+                beneficiaireObligatoire: true,
                     docEtats: [
                       {
                         id: '1',
@@ -30492,6 +30504,7 @@ export class InMemDBService implements InMemoryDbService {
                     titre: 'Fiche de soin',
                     description:
                       "Document delivre par le medecin ou un infirmier de l'etablissement",
+                beneficiaireObligatoire: true,
                     typeMouvement: 'Neutre',
                     etat: true,
                     affichagePrix: true,
@@ -30936,6 +30949,7 @@ export class InMemDBService implements InMemoryDbService {
                     typeMouvement: 'Ajout',
                     description:
                       "Document delivre par le medecin ou un infirmier de l'etablissement",
+                beneficiaireObligatoire: true,
                     etat: true,
                     affichagePrix: true,
                     contientRessources: true,
@@ -31380,6 +31394,7 @@ export class InMemDBService implements InMemoryDbService {
                     titre: 'Formulaire de sortie',
                     description:
                       "Document delivre par le medecin ou un infirmier de l'etablissement",
+                beneficiaireObligatoire: true,
                     etat: true,
                     typeMouvement: TypeMouvement.Ajout,
                     affichagePrix: true,
@@ -31994,6 +32009,7 @@ export class InMemDBService implements InMemoryDbService {
                     titre: 'Formulaire de sortie',
                     description:
                       "Document delivre par le medecin ou un infirmier de l'etablissement",
+                beneficiaireObligatoire: true,
                     typeMouvement: 'Reduire',
                     etat: true,
                     affichagePrix: true,
@@ -32438,6 +32454,7 @@ export class InMemDBService implements InMemoryDbService {
                     titre: 'Formulaire de sortie',
                     description:
                       "Document delivre par le medecin ou un infirmier de l'etablissement",
+                beneficiaireObligatoire: true,
                     etat: true,
                     affichagePrix: true,
                     contientRessources: true,
@@ -33080,6 +33097,7 @@ export class InMemDBService implements InMemoryDbService {
                     titre: 'ordonnance',
                     description:
                       "Document delivre par le medecin ou un infirmier de l'etablissement",
+                beneficiaireObligatoire: true,
                     typeMouvement: 'Neutre',
                     etat: true,
                     affichagePrix: true,
@@ -33608,6 +33626,7 @@ export class InMemDBService implements InMemoryDbService {
                 titre: 'Fiche de soin',
                 description:
                   "Document delivre par le medecin ou un infirmier de l'etablissement",
+                beneficiaireObligatoire: true,
                 typeMouvement: 'Neutre',
                 etat: true,
                 affichagePrix: false,
@@ -34055,6 +34074,7 @@ export class InMemDBService implements InMemoryDbService {
                     titre: 'Note intervention',
                     description:
                       "Document delivre par le medecin ou un infirmier de l'etablissement",
+                beneficiaireObligatoire: true,
                     docEtats: [
                       {
                         id: '1',
@@ -34562,6 +34582,7 @@ export class InMemDBService implements InMemoryDbService {
                     titre: 'Fiche de suivi',
                     description:
                       "Document delivre par le medecin ou un infirmier de l'etablissement",
+                beneficiaireObligatoire: true,
                     docEtats: [
                       {
                         id: '1',
@@ -35060,6 +35081,7 @@ export class InMemDBService implements InMemoryDbService {
                     titre: 'Fiche de soin',
                     description:
                       "Document delivre par le medecin ou un infirmier de l'etablissement",
+                beneficiaireObligatoire: true,
                     typeMouvement: 'Neutre',
                     etat: true,
                     affichagePrix: true,
@@ -35506,6 +35528,7 @@ export class InMemDBService implements InMemoryDbService {
                     titre: 'Formulaire de sortie',
                     description:
                       "Document delivre par le medecin ou un infirmier de l'etablissement",
+                beneficiaireObligatoire: true,
                     typeMouvement: 'Reduire',
                     etat: true,
                     affichagePrix: true,
@@ -36137,6 +36160,7 @@ export class InMemDBService implements InMemoryDbService {
                     titre: 'ordonnance',
                     description:
                       "Document delivre par le medecin ou un infirmier de l'etablissement",
+                beneficiaireObligatoire: true,
                     typeMouvement: 'Neutre',
                     etat: true,
                     affichagePrix: true,

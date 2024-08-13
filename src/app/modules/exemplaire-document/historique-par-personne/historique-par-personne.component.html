@@ -1,11 +1,11 @@
-<div class="mainBlock" id="top2">
+<div *ngIf="this.exemplaire.personneRattachee != undefined" class="mainBlock" id="top2">
     <div id="globalSection">
        <h3 *ngIf="this.exemplairesDePersonne.length > 0">
            {{this.exemplaire.titre}}
        </h3>
        <h3 *ngIf="this.exemplairesDePersonne.length == 0">{{'document.title8' | translate}}</h3>
        <div class="infos">
-        <p id="titre">
+        <p *ngIf="this.exemplaire.personneRattachee != undefined" id="titre">
             {{'document.exemplaire.text9' | translate}} :
             <span class="title">{{this.exemplaire.personneRattachee.nom}}</span>
             <span class="title"> {{this.exemplaire.personneRattachee.prenom}}</span>
@@ -16,19 +16,19 @@
             {{'document.exemplaire.text7' | translate}}
             <span class="title">{{this.exemplaire.dateCreation | date: 'hh:mm:ss'}}</span>
         </p>
-           <div class="block1" *ngFor="let attributParCategorie of exemplaire.categories">
-               <div class="pb-3" *ngIf="attributParCategorie.nom">
-                   <h4>{{attributParCategorie.nom}}</h4>
-                   <div class="contentBlock">
-                       <div class="inputBlock" *ngFor="let attributParCategorie of attributParCategorie.listAttributsParCategories; let i = index">
-                           <label>{{attributParCategorie.attribut.titre}} : </label>
-                           <div class="valAttribut">
-                            <span>{{rechercherValeurParIdAttribut(attributParCategorie.attribut.id,attributParCategorie.attribut.type)}}</span>
-                           </div>
-                       </div>
-                   </div>
-               </div>
-           </div>
+        <div class="block1" *ngFor="let attributParCategorie of exemplaire.categories">
+            <div class="pb-3" *ngIf="attributParCategorie.nom">
+                <h4>{{attributParCategorie.nom}}</h4>
+                <div class="contentBlock">
+                    <div class="inputBlock" *ngFor="let attributParCategorie of attributParCategorie.listAttributsParCategories; let i = index">
+                        <label>{{attributParCategorie.attribut.titre}} : </label>
+                        <div class="valAttribut">
+                        <span>{{rechercherValeurParIdAttribut(attributParCategorie.attribut.id,attributParCategorie.attribut.type)}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         </div>
 
         <!-- tableau listing des mouvements -->
@@ -181,4 +181,7 @@
             </div>
         </div>
     </div>
+</div>
+<div class="emptySection" *ngIf="this.exemplaire.personneRattachee == undefined" id="globalSection">
+    <h1>{{ "document.exemplaire.text14" | translate }}</h1>
 </div>

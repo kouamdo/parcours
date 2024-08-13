@@ -53,7 +53,8 @@ export class NewFormDocumentComponent implements OnInit {
     contientDistributeurs: false,
     typeMouvement: TypeMouvement.Neutre,
     docEtats: [],
-    formatCode: ''
+    formatCode: '',
+    beneficiaireObligatoire: false
   };
   mission$: Observable<IMission[]> = EMPTY;
   forme: FormGroup;
@@ -118,6 +119,7 @@ export class NewFormDocumentComponent implements OnInit {
       affichagePrix: new FormControl(true),
       contientRessources: new FormControl(true),
       contientDistributeurs: new FormControl(true),
+      beneficiaireObligatoire: new FormControl(true),
       formatCode: [ '', [ Validators.required]]
     });
   }
@@ -141,6 +143,7 @@ export class NewFormDocumentComponent implements OnInit {
           affichagePrix: this.document.affichagePrix,
           contientRessources: this.document.contientRessources,
           contientDistributeurs: this.document.contientDistributeurs,
+          beneficiaireObligatoire: this.document.beneficiaireObligatoire,
           _missions: this.document.missions,
           _attributs: [],
           formatsCode : this.document.formatCode
@@ -388,6 +391,7 @@ export class NewFormDocumentComponent implements OnInit {
       affichagePrix: documentInput.affichagePrix,
       contientRessources: documentInput.contientRessources,
       contientDistributeurs: documentInput.contientDistributeurs,
+      beneficiaireObligatoire: documentInput.beneficiaireObligatoire,
       docEtats: [],
       formatCode: documentInput.formatCode
     }

@@ -1,199 +1,201 @@
 <div class="mainBlock" id="top2">
     <div id="globalSection">
-        <div class="entete">
-            <p>
-                <span routerLink="../../list-exemplaire" title="{{ 'lists.button2' | translate }}"><i
-                        class="fa fa-arrow-left lien" aria-hidden="true"></i></span>
-            </p>
-            <h3>{{ this.exemplaire.titre }} {{ titre }}</h3>
-            <div class="hoverBlock">
-                <p class="infoBuble">
-                    <i class="fa fa-info-circle text-info" aria-hidden="true"></i>
+        <div id="contentToPrint">
+            <div class="entete">
+                <p>
+                    <span routerLink="../../list-exemplaire" title="{{ 'lists.button2' | translate }}"><i
+                            class="fa fa-arrow-left lien" aria-hidden="true"></i></span>
                 </p>
-                <div class="hoverElement" id="description">
-                    <span class="titl">
-                        {{ "document.table.title2" | translate }} :
-                    </span>
-                    <p>{{ exemplaire.description }}</p>
+                <h3>{{ this.exemplaire.titre }} {{ titre }}</h3>
+                <div class="hoverBlock">
+                    <p class="infoBuble">
+                        <i class="fa fa-info-circle text-info" aria-hidden="true"></i>
+                    </p>
+                    <div class="hoverElement" id="description">
+                        <span class="titl">
+                            {{ "document.table.title2" | translate }} :
+                        </span>
+                        <p>{{ exemplaire.description }}</p>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="infos">
-            <div id="titre">
-                <div>
-                    <span class="label">
-                        {{ "document.exemplaire.text9" | translate }} :
-                    </span>
-                    <span class="title">{{ this.exemplaire.personneRattachee.nom + " " }}
-                        <span class="capitaliseTitle"> {{ this.exemplaire.personneRattachee.prenom! }} </span>
-                    </span>
+            <div class="infos">
+                <div id="titre">
+                    <div *ngIf="this.exemplaire.personneRattachee != undefined">
+                        <span class="label">
+                            {{ "document.exemplaire.text9" | translate }} :
+                        </span>
+                        <span class="title">{{ this.exemplaire.personneRattachee.nom + " " }}
+                            <span class="capitaliseTitle"> {{ this.exemplaire.personneRattachee.prenom! }} </span>
+                        </span>
+                    </div>
+                    <div>
+                        <span class="label">
+                            {{ "document.exemplaire.text6" | translate }} :
+                        </span>
+                        <span class="title">{{
+                            this.exemplaire.dateCreation | date : "dd/MM/yyyy"}}
+                        </span>
+                        <span class="label">
+                            {{ "document.exemplaire.text7" | translate }}
+                        </span>
+                        <span class="title">{{ this.exemplaire.dateCreation | date : "hh:mm:ss" }}
+                        </span>
+                    </div>
+                    <div>
+                        <span class="label"> {{ "document.title7" | translate }} : </span>
+                        {{ courant }}
+                    </div>
+                    <div>
+                        <span class="label"> {{ "document.exemplaire.text11" | translate }} : </span>
+                        {{ exemplaire.code }}
+                    </div>
                 </div>
-                <div>
-                    <span class="label">
-                        {{ "document.exemplaire.text6" | translate }} :
-                    </span>
-                    <span class="title">{{
-                        this.exemplaire.dateCreation | date : "dd/MM/yyyy"}}
-                    </span>
-                    <span class="label">
-                        {{ "document.exemplaire.text7" | translate }}
-                    </span>
-                    <span class="title">{{ this.exemplaire.dateCreation | date : "hh:mm:ss" }}
-                    </span>
-                </div>
-                <div>
-                    <span class="label"> {{ "document.title7" | translate }} : </span>
-                    {{ courant }}
-                </div>
-                <div>
-                    <span class="label"> {{ "document.exemplaire.text11" | translate }} : </span>
-                    {{ exemplaire.code }}
-                </div>
-            </div>
-            <div class="block1" *ngFor="let attributParCategorie of exemplaire.categories">
-                <div class="pb-3" *ngIf="attributParCategorie.nom">
-                    <h4>{{ attributParCategorie.nom }}</h4>
-                    <div class="contentBlock">
-                        <div class="inputBlock" *ngFor="
-                let attributParCategorie of attributParCategorie.listAttributsParCategories
-                let i = index
-              ">
-                            <label class="">{{ attributParCategorie.attribut.titre }} :
-                            </label>
-                            <div class="valAttribut">
-                                <span>{{
-                                    rechercherValeurParIdAttribut(
-                                    attributParCategorie.attribut.id,
-                                    attributParCategorie.attribut.type
-                                    )
-                                    }}</span>
+                <div class="block1" *ngFor="let attributParCategorie of exemplaire.categories">
+                    <div class="pb-3" *ngIf="attributParCategorie.nom">
+                        <h4>{{ attributParCategorie.nom }}</h4>
+                        <div class="contentBlock">
+                            <div class="inputBlock" *ngFor="
+                    let attributParCategorie of attributParCategorie.listAttributsParCategories
+                    let i = index
+                ">
+                                <label class="">{{ attributParCategorie.attribut.titre }} :
+                                </label>
+                                <div class="valAttribut">
+                                    <span>{{
+                                        rechercherValeurParIdAttribut(
+                                        attributParCategorie.attribut.id,
+                                        attributParCategorie.attribut.type
+                                        )
+                                        }}</span>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <!-- tableau listing des mouvements -->
+            <!-- tableau listing des mouvements -->
 
-        <div class="card-body p-0 tableBlock" id="tableBlock">
-            <div class='table-responsive w-100'>
-                <table class='table table-sm table-centered table-striped table-bordered w-100' mat-table [dataSource]="dataSourceMouvements">
+            <div class="card-body p-0 tableBlock" id="tableBlock">
+                <div class='table-responsive w-100'>
+                    <table class='table table-sm table-centered table-striped table-bordered w-100' mat-table [dataSource]="dataSourceMouvements">
 
-                    <!-- libelle Column -->
-                    <ng-container matColumnDef="libelle">
-                        <th class="text-dark containHead" mat-header-cell *matHeaderCellDef>
-                            {{ "preconisation.table.title1" | translate }}
-                        </th>
-                        <td class="text-dark containCell" mat-cell *matCellDef="let element">
-                            {{ element.ressource.libelle }}
-                        </td>
-                    </ng-container>
+                        <!-- libelle Column -->
+                        <ng-container matColumnDef="libelle">
+                            <th class="text-dark containHead" mat-header-cell *matHeaderCellDef>
+                                {{ "preconisation.table.title1" | translate }}
+                            </th>
+                            <td class="text-dark containCell" mat-cell *matCellDef="let element">
+                                {{ element.ressource.libelle }}
+                            </td>
+                        </ng-container>
 
-                    <!-- quantite Column -->
-                    <ng-container matColumnDef="quantite">
-                        <th class="text-dark containHead" mat-header-cell *matHeaderCellDef>
-                            {{ "ressource.table2.title5" | translate }}
-                        </th>
-                        <td class="text-dark containCell" mat-cell *matCellDef="let element">
-                            {{ separateurDeMilliers(element.quantite) }}
-                        </td>
-                    </ng-container>
+                        <!-- quantite Column -->
+                        <ng-container matColumnDef="quantite">
+                            <th class="text-dark containHead" mat-header-cell *matHeaderCellDef>
+                                {{ "ressource.table2.title5" | translate }}
+                            </th>
+                            <td class="text-dark containCell" mat-cell *matCellDef="let element">
+                                {{ separateurDeMilliers(element.quantite) }}
+                            </td>
+                        </ng-container>
 
-                    <!-- unite Column -->
-                    <ng-container matColumnDef="unite">
-                        <th class="text-dark containHead" mat-header-cell *matHeaderCellDef>
-                            {{ "ressource.table.title4" | translate }}
-                        </th>
-                        <td class="text-dark containCell" mat-cell *matCellDef="let element">
-                            {{ element.ressource.unite }}
-                        </td>
-                    </ng-container>
+                        <!-- unite Column -->
+                        <ng-container matColumnDef="unite">
+                            <th class="text-dark containHead" mat-header-cell *matHeaderCellDef>
+                                {{ "ressource.table.title4" | translate }}
+                            </th>
+                            <td class="text-dark containCell" mat-cell *matCellDef="let element">
+                                {{ element.ressource.unite }}
+                            </td>
+                        </ng-container>
 
-                    <!-- description Column -->
-                    <ng-container matColumnDef="description">
-                        <th class="text-dark containHead" mat-header-cell *matHeaderCellDef>
-                            {{ "attributs.table.title2" | translate }}
-                        </th>
-                        <td class="text-dark containCell" mat-cell *matCellDef="let element">
-                            {{ element.description }}
-                        </td>
-                    </ng-container>
+                        <!-- description Column -->
+                        <ng-container matColumnDef="description">
+                            <th class="text-dark containHead" mat-header-cell *matHeaderCellDef>
+                                {{ "attributs.table.title2" | translate }}
+                            </th>
+                            <td class="text-dark containCell" mat-cell *matCellDef="let element">
+                                {{ element.description }}
+                            </td>
+                        </ng-container>
 
-                    <!-- prix Column -->
-                    <ng-container *ngIf="
-              exemplaire.affichagePrix == true &&
-              exemplaire.typeMouvement == typeNeutre
-            " matColumnDef="prix">
-                        <th class="text-dark containHead" mat-header-cell *matHeaderCellDef>
-                            {{ "ressource.table2.title7" | translate }}
-                        </th>
-                        <td class="text-dark containCell" mat-cell *matCellDef="let element">
-                            {{ separateurDeMilliers(element.prix) }}
-                        </td>
-                    </ng-container>
+                        <!-- prix Column -->
+                        <ng-container *ngIf="
+                exemplaire.affichagePrix == true &&
+                exemplaire.typeMouvement == typeNeutre
+                " matColumnDef="prix">
+                            <th class="text-dark containHead" mat-header-cell *matHeaderCellDef>
+                                {{ "ressource.table2.title7" | translate }}
+                            </th>
+                            <td class="text-dark containCell" mat-cell *matCellDef="let element">
+                                {{ separateurDeMilliers(element.prix) }}
+                            </td>
+                        </ng-container>
 
-                    <!-- prixEntrée Column -->
-                    <ng-container *ngIf="
-              exemplaire.affichagePrix == true &&
-              exemplaire.typeMouvement == typeAjout
-            " matColumnDef="prixEntrée">
-                        <th class="text-dark containHead" mat-header-cell *matHeaderCellDef>
-                            {{ "ressource.table.title5" | translate }}
-                        </th>
-                        <td class="text-dark containCell" mat-cell *matCellDef="let element">
-                            {{ separateurDeMilliers(element.prix) }}
-                        </td>
-                    </ng-container>
+                        <!-- prixEntrée Column -->
+                        <ng-container *ngIf="
+                exemplaire.affichagePrix == true &&
+                exemplaire.typeMouvement == typeAjout
+                " matColumnDef="prixEntrée">
+                            <th class="text-dark containHead" mat-header-cell *matHeaderCellDef>
+                                {{ "ressource.table.title5" | translate }}
+                            </th>
+                            <td class="text-dark containCell" mat-cell *matCellDef="let element">
+                                {{ separateurDeMilliers(element.prix) }}
+                            </td>
+                        </ng-container>
 
-                    <!-- prixDeSortie Column -->
-                    <ng-container *ngIf="
-              exemplaire.affichagePrix == true &&
-              exemplaire.typeMouvement == typeReduire
-            " matColumnDef="prixDeSortie">
-                        <th class="text-dark containHead" mat-header-cell *matHeaderCellDef>
-                            {{ "ressource.table.title9" | translate }}
-                        </th>
-                        <td class="text-dark containCell" mat-cell *matCellDef="let element">
-                            {{ separateurDeMilliers(element.prix) }}
-                        </td>
-                    </ng-container>
+                        <!-- prixDeSortie Column -->
+                        <ng-container *ngIf="
+                exemplaire.affichagePrix == true &&
+                exemplaire.typeMouvement == typeReduire
+                " matColumnDef="prixDeSortie">
+                            <th class="text-dark containHead" mat-header-cell *matHeaderCellDef>
+                                {{ "ressource.table.title9" | translate }}
+                            </th>
+                            <td class="text-dark containCell" mat-cell *matCellDef="let element">
+                                {{ separateurDeMilliers(element.prix) }}
+                            </td>
+                        </ng-container>
 
-                    <!-- montant total Column -->
-                    <ng-container *ngIf="exemplaire.affichagePrix == true" matColumnDef="montant total">
-                        <th class="text-dark containHead" mat-header-cell *matHeaderCellDef>
-                            {{ "ressource.table2.title10" | translate }}
-                        </th>
-                        <td class="text-dark containCell" mat-cell *matCellDef="let element">
-                            {{ separateurDeMilliers(element.quantite * element.prix) }}
-                        </td>
-                    </ng-container>
+                        <!-- montant total Column -->
+                        <ng-container *ngIf="exemplaire.affichagePrix == true" matColumnDef="montant total">
+                            <th class="text-dark containHead" mat-header-cell *matHeaderCellDef>
+                                {{ "ressource.table2.title10" | translate }}
+                            </th>
+                            <td class="text-dark containCell" mat-cell *matCellDef="let element">
+                                {{ separateurDeMilliers(element.quantite * element.prix) }}
+                            </td>
+                        </ng-container>
 
-                    <!-- distributeur Column -->
-                    <ng-container *ngIf="exemplaire.contientDistributeurs == true" matColumnDef="distributeur">
-                        <th class="text-dark containHead" mat-header-cell *matHeaderCellDef>
-                            {{ "preconisation.table.title5" | translate }}
-                        </th>
-                        <td class="text-dark containCell" mat-cell *matCellDef="let element; let i = index">
-                            <div class="modifierDistributeurBlock">
-                                {{ element.distributeur?.raisonSocial }}
-                            </div>
-                        </td>
-                    </ng-container>
-                    <tr mat-header-row *matHeaderRowDef="displayedRessourcesColumns"></tr>
-                    <tr mat-row *matRowDef="let row; columns: displayedRessourcesColumns"></tr>
-                </table>
+                        <!-- distributeur Column -->
+                        <ng-container *ngIf="exemplaire.contientDistributeurs == true" matColumnDef="distributeur">
+                            <th class="text-dark containHead" mat-header-cell *matHeaderCellDef>
+                                {{ "preconisation.table.title5" | translate }}
+                            </th>
+                            <td class="text-dark containCell" mat-cell *matCellDef="let element; let i = index">
+                                <div class="modifierDistributeurBlock">
+                                    {{ element.distributeur?.raisonSocial }}
+                                </div>
+                            </td>
+                        </ng-container>
+                        <tr mat-header-row *matHeaderRowDef="displayedRessourcesColumns"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedRessourcesColumns"></tr>
+                    </table>
 
-                <!-- montant total -->
-                <div class="total" *ngIf="
-            exemplaire.affichagePrix == true && exemplaire.mouvements?.length
-          ">
-                    <span class="mr-2">{{ "ressource.table2.title11" | translate }}</span>
-                    <input type="text" [value]="separateurDeMilliers(sommeMontants())" disabled />
+                    <!-- montant total -->
+                    <div class="total" *ngIf="
+                exemplaire.affichagePrix == true && exemplaire.mouvements?.length
+            ">
+                        <span class="mr-2">{{ "ressource.table2.title11" | translate }}</span>
+                        <input type="text" [value]="separateurDeMilliers(sommeMontants())" disabled />
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="actionButton valBtn">
+        <div class="actionButton valBtn mb-2">
             <button title="{{'lists.button7' | translate}}" type="button" [routerLink]="['/exemplaire-nouveau/modify/',exemplaire.id]" class="btn modifier">
                 <i class="fas fa-pen"></i>
             </button>
@@ -208,6 +210,33 @@
                 title="{{ 'lists.button6' | translate }}" class="btn btnValidation">
                 <i class="fas fa-cog"></i>
             </button>
+            <button *ngIf="docEtatCourant?.validation?.typeValidation == 'Transmission'"  class="btn modifier" (click)="pdfExemplaireGenerator('contentToPrint')">
+                pdf
+            </button>
+            <button *ngIf="docEtatCourant?.validation?.typeValidation == 'Transmission'" data-toggle="collapse" href="#formContentId" aria-expanded="false" aria-controls="formContentId"
+                title="{{ 'document.exemplaire.text13' | translate }}" class="btn btnValidation">
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </div>
+        <div class="collapse w-100" id="formContentId">
+            <div class="collapseForm w-100">
+                <form action="">
+                    <label class="mb-2" for="modeEnvoi">{{ 'document.exemplaire.text12' | translate }}</label>
+                    <div class="collapseFormInputBlock">
+                        <div class="collapseFormInput">
+                            <input type="radio" name="modeEnvoi" id="" value="email"><i class="fas fa-mail-bulk"></i>{{ 'patient.table.title5' | translate }}
+                        </div>
+                        <div class="collapseFormInput">
+                            <input type="radio" name="modeEnvoi" id="" value="telephone"><i class="fa fa-phone" aria-hidden="true"></i>{{ 'patient.table.title7' | translate }}
+                        </div>
+                    </div>
+                    <div class="actionButton valBtn">
+                        <button class="btn btnValidation" title="{{ 'lists.button14' | translate }}">
+                            <i class="fas fa-check"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </div>

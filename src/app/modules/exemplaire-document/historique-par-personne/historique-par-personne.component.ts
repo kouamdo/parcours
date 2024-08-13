@@ -49,7 +49,8 @@ export class HistoriqueParPersonneComponent implements OnInit {
       qrCodeValue: ''
     },
     formatCode: '',
-    code: ''
+    code: '',
+    beneficiaireObligatoire: false
   };
   titre:string='';
   mouvements : IMouvement[] = []

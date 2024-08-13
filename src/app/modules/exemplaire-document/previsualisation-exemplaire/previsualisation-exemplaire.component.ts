@@ -15,6 +15,8 @@ import { ModalChoixDocEtatComponent } from '../../shared/modal-choix-doc-etat/mo
 import { IDocument } from 'src/app/modele/document';
 import { DocumentService } from 'src/app/services/documents/document.service';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { IDocEtats } from 'src/app/modele/doc-etats';
+import { PdfExemplaireGeneratorService } from 'src/app/services/pdfExemplaireGenerator/pdf-exemplaire-generator.service';
 
 @Component({
   selector: 'app-previsualisation-exemplaire',
@@ -51,7 +53,8 @@ export class PrevisualisationExemplaireComponent implements OnInit {
       qrCodeValue: ''
     },
     formatCode: '',
-    code: ''
+    code: '',
+    beneficiaireObligatoire: true
   };
   titre:string='';
   mouvements : IMouvement[] = []
@@ -79,6 +82,8 @@ export class PrevisualisationExemplaireComponent implements OnInit {
   error!: string;
   courant: string = '';
   req: boolean = false;
+  docEtatCourant : IDocEtats | undefined
+  content : HTMLElement | undefined
 
   constructor(
     private router:Router, 
@@ -90,7 +95,8 @@ export class PrevisualisationExemplaireComponent implements OnInit {
     private serviceDocument: DocumentService,
     private serviceExemplaireDocument: ExemplaireDocumentService,
     private _liveAnnouncer: LiveAnnouncer,
-    private decimalPipe : DecimalPipe
+    private decimalPipe : DecimalPipe,
+    private servicePdfExemplaireGenerator : PdfExemplaireGeneratorService
     ) {}
 
   ngOnInit(): void {
@@ -105,7 +111,9 @@ export class PrevisualisationExemplaireComponent implements OnInit {
         .getExemplaireDocumentById(idExemplaire)
         .subscribe((x) => {
           this.exemplaire = x;
-          this.nomPatientCourant = this.exemplaire.personneRattachee.nom + " " + this.exemplaire.personneRattachee.prenom!;
+          if (this.exemplaire.personneRattachee != undefined) {
+            this.nomPatientCourant = this.exemplaire.personneRattachee.nom + " " + this.exemplaire.personneRattachee.prenom!;
+          }
           if (this.exemplaire.mouvements != undefined) {
             this.mouvements = this.exemplaire.mouvements
             this.dataSourceMouvements.data = this.exemplaire.mouvements
@@ -118,9 +126,9 @@ export class PrevisualisationExemplaireComponent implements OnInit {
                 this.req = this.reponse.sol;
                 if (this.reponse.ele != undefined && this.reponse.ele.etat != undefined) {
                   this.courant = this.reponse.ele.etat.libelle;
+                  this.rechercheDocEtatCourant(this.reponse.ele.etat.id)
                 }
               }
-              console.log('element response :', this.serviceExemplaire.getExemplaireDocumentByOrder(x, y));
             }
           )
 
@@ -236,33 +244,6 @@ export class PrevisualisationExemplaireComponent implements OnInit {
       this._liveAnnouncer.announce('Sorting cleared');
     }
   }
-
-  /**
-   * Methode permettant de rafraîchir la section de la page presentant l'emplaire et de 
-   * remplacer ce dernier par le document de la personne sur lequel on clique pour le visualiser
-   * @param exemplaire : document recupéré pour etre visualisé
-   */
-  switchExemplaires(exemplaire : IExemplaireDocument){
-    this.displayedRessourcesColumns = [
-      'libelle',
-      'quantite',
-      'unite',
-      'description'
-    ];
-    this.exemplaire = exemplaire
-    
-    this.formerEnteteTableauMissions();
-
-    if (this.exemplaire.mouvements != undefined) {
-      this.mouvements = this.exemplaire.mouvements
-    }
-    if (this.exemplaire.mouvements != undefined) {
-      this.dataSourceMouvements.data = this.exemplaire.mouvements
-    }
-    this.titre=this.dataEnteteMenuService.dataEnteteMenu
-    this.nomPatientCourant = sessionStorage.getItem('nomPatientCourant');
-  }
-
   openModal(documentChoisi: IDocument) {
     let selectedEtat = {};
 
@@ -280,11 +261,9 @@ export class PrevisualisationExemplaireComponent implements OnInit {
       dialogRef.afterClosed().subscribe(
         () => {
           this.selectedEtatsMap = this.dataEnteteMenuService.dataEtatSelectionner;
-          console.log('modal response :', this.selectedEtatsMap);
           let ordre = 0;
           if (this.TabOrdre.length > 0) {
             ordre = this.TabOrdre[this.TabOrdre.length - 1].ordre;
-            console.log('taille tab :', this.TabOrdre.length);
           }
 
           this.NextEtats = {
@@ -293,7 +272,6 @@ export class PrevisualisationExemplaireComponent implements OnInit {
             etat: this.selectedEtatsMap!.etat,
             dateCreation: new Date(),
           };
-          console.log('nouvelle ordre:', this.NextEtats);
 
           this.TabOrdre.push(this.NextEtats);
           this.ExempleOrdre = this.TabOrdre;
@@ -319,9 +297,12 @@ export class PrevisualisationExemplaireComponent implements OnInit {
             docEtats: [],
             dateCreation: new Date(),
             personneRattachee: this.exemplaire.personneRattachee,
-            formatCode: this.exemplaire.formatCode
+            formatCode: this.exemplaire.formatCode,
+            beneficiaireObligatoire:  this.exemplaire.beneficiaireObligatoire
           };
-      
+          this.rechercheDocEtatCourant(this.NextEtats.etat.id)
+          
+          
           if (this.exemplaire.id != '') {
             exemplaireTemp.id = this.exemplaire.id;
           }
@@ -337,6 +318,20 @@ export class PrevisualisationExemplaireComponent implements OnInit {
     } else {
       this.error = 'état final aucune action possible !!';
     }
+  }
+
+  rechercheDocEtatCourant(idEtatCourant : string){
+    this.exemplaire.docEtats.forEach(
+      element => {
+      
+    });
+    for (let index = 0; index < this.exemplaire.docEtats.length; index++) {
+      const element = this.exemplaire.docEtats[index];
+
+      if (element.etat.id == idEtatCourant) {
+        this.docEtatCourant = element
+      }
+    }    
   }
 
   orderSuivant() {
@@ -361,7 +356,8 @@ export class PrevisualisationExemplaireComponent implements OnInit {
       docEtats: [],
       dateCreation: new Date(),
       personneRattachee: this.exemplaire.personneRattachee,
-      formatCode: this.exemplaire.formatCode
+      formatCode: this.exemplaire.formatCode,
+      beneficiaireObligatoire: true
     };
 
     if (this.exemplaire.id != '') {
@@ -373,7 +369,9 @@ export class PrevisualisationExemplaireComponent implements OnInit {
       .subscribe((object) => {
         this.router.navigateByUrl(this.router.url);
       });
-
-    console.log('ordre etat :', exemplaireTemp);
+  }
+  pdfExemplaireGenerator(eltId: string){
+    this.content = document.getElementById(eltId)!
+    return this.servicePdfExemplaireGenerator.generatePdf(this.content)
   }
 }

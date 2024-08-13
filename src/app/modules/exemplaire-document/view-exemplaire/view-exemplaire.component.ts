@@ -49,7 +49,8 @@ export class ViewExemplaireComponent implements OnInit {
       qrCodeValue: ''
     },
     formatCode: '',
-    code: ''
+    code: '',
+    beneficiaireObligatoire: true
   };
   titre: string = '';
   courant: string = '';
