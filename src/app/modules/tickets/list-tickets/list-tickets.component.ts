@@ -22,8 +22,6 @@ import { TicketsService } from 'src/app/services/tickets/tickets.service';
 })
 export class ListTicketsComponent implements OnInit, AfterViewInit {
   tickets$: Observable<ITicket[]> = EMPTY;
-  receivedActions$: Observable<IElements[]>=EMPTY;
-  actions : IElements[] | undefined;
   ticketImpression: ITicket | undefined;
   patientCorrespondant: IPatient = {
     id: '',
@@ -82,15 +80,6 @@ export class ListTicketsComponent implements OnInit, AfterViewInit {
     this.serviceTicket.getAllTickets().subscribe((reponse) => {
       this.filteredOptions = reponse;
     });
-    this.actionsview.langueData$.subscribe(data => {
-      this.receivedActions$ = this.actionsview.getActions();
-      this.receivedActions$.subscribe(a => {
-        if (a != null) {
-          this.actions = a;
-          console.log("Actions view :", a, this.receivedActions$);
-        }
-      });
-    })
 
     this.getAllTickets().subscribe((valeurs) => {
       this.dataSource.data = valeurs;

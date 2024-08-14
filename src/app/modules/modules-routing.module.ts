@@ -29,50 +29,42 @@ const routes: Routes = [
       {
         path: 'attributs',
         loadChildren: () => import('./attributs/attributs.module').then(m => m.AttributsModule),
-        canActivate: [RoleAuthGuard],
-        data: { role: ['admin']} 
+        canActivate: [RoleAuthGuard]
       },
       {
         path: 'patients',
         loadChildren: () => import('./patients/patients.module').then(m => m.PatientsModule),
-        canActivate: [RoleAuthGuard],
-        data: { role: ['admin']} 
+        canActivate: [RoleAuthGuard]
       },
       {
         path: 'personnels',
         loadChildren: () => import('./personnels/personnels.module').then(m => m.PersonnelsModule),
-        canActivate: [RoleAuthGuard],
-        data: { role: ['admin', 'simple']} 
+        canActivate: [RoleAuthGuard]
       },
       {
         path: 'services',
         loadChildren: () => import('./services/services.module').then(m => m.ServicesModule),
-        canActivate: [RoleAuthGuard],
-        data: { role: ['admin']} 
+        canActivate: [RoleAuthGuard]
       },
       {
         path: 'validations',
         loadChildren: () => import('./validation/validation.module').then(m => m.ValidationModule),
-        canActivate: [RoleAuthGuard],
-        data: { role: ['admin']} 
+        canActivate: [RoleAuthGuard]
       },
       {
         path: 'tickets',
         loadChildren: () => import('./tickets/tickets.module').then(m => m.TicketsModule),
-        canActivate: [RoleAuthGuard],
-        data: { role: ['admin']} 
+        canActivate: [RoleAuthGuard]
       },
       {
         path: 'missions',
         loadChildren: () => import('./missions/missions.module').then(m => m.MissionsModule),
-        canActivate: [RoleAuthGuard],
-        data: { role: ['admin', 'simple']} 
+        canActivate: [RoleAuthGuard]
       },
       {
         path: 'documents',
         loadChildren: () => import('./documents/documents.module').then(m => m.DocumentsModule),
-        canActivate: [RoleAuthGuard],
-        data: { role: ['admin']} 
+        canActivate: [RoleAuthGuard] 
       },
       {
         path: 'familles',
@@ -83,44 +75,37 @@ const routes: Routes = [
       {
         path: 'roles',
         loadChildren: () => import('./role/role.module').then(m => m.RoleModule),
-        canActivate: [RoleAuthGuard],
-        data: { role: ['admin']} 
+        canActivate: [RoleAuthGuard] 
       },
       {
         path: 'ressources',
         loadChildren: () => import('./ressource/ressource.module').then(m => m.RessourceModule),
-        canActivate: [RoleAuthGuard],
-        data: { role: ['admin']} 
+        canActivate: [RoleAuthGuard]
       },
       {
         path: 'preconisations',
         loadChildren: () => import('./precomvt/precomvt.module').then(m => m.PrecomvtModule),
-        canActivate: [RoleAuthGuard],
-        data: { role: ['admin']} 
+        canActivate: [RoleAuthGuard]
       },
       {
         path: 'distributeurs',
         loadChildren: () => import('./distributeur/distributeur.module').then(m => m.DistributeurModule),
-        canActivate: [RoleAuthGuard],
-        data: { role: ['admin']} 
+        canActivate: [RoleAuthGuard] 
       },
       {
         path: 'etats',
         loadChildren: () => import('./etats/etats.module').then(m => m.EtatsModule),
-        canActivate: [RoleAuthGuard],
-        data: { role: ['admin']} 
+        canActivate: [RoleAuthGuard] 
       },
       {
         path: 'parcours',
         loadChildren: () => import('./parours/parours.module').then(m => m.ParoursModule),
-        canActivate: [RoleAuthGuard],
-        data: { role: ['admin']} 
+        canActivate: [RoleAuthGuard]
       },
       {
         path: 'etapes',
         loadChildren: () => import('./etape/etape.module').then(m => m.EtapeModule),
-        canActivate: [RoleAuthGuard],
-        data: { role: ['admin']} 
+        canActivate: [RoleAuthGuard] 
       },
       {
         path: '',

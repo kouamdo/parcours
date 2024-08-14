@@ -24755,7 +24755,7 @@ export class InMemDBService implements InMemoryDbService {
                       {nom: 'Créer', lien: '', bouton: 'true', type: 'global'}
                     ] },
                     { nom: 'Rechercher', lien: './services/list-services', bouton: 'false', action: [
-                      {nom: 'Modifier', lien: '/service-nouveau', bouton: 'false'},
+                      {nom: 'Modifier', lien: '../service-nouveau', bouton: 'false'},
                       {nom: 'Créer', lien: '', bouton: 'true', type: 'global'}
                     ] },
                   ],
@@ -24773,7 +24773,7 @@ export class InMemDBService implements InMemoryDbService {
                       lien: './validations/list-validations',
                       bouton: 'false',
                       action: [
-                        {nom: 'Modifier', lien: '/nouvelle-validation', bouton: 'false'},
+                        {nom: 'Modifier', lien: '../nouvelle-validation', bouton: 'false'},
                         {nom: 'Créer', lien: '', bouton: 'true', type: 'global'}
                       ]
                     },
@@ -24787,7 +24787,7 @@ export class InMemDBService implements InMemoryDbService {
                     { nom: 'Rechercher', lien: 'tickets/list-tickets', bouton: 'false' },
                     {
                       nom: 'Afficher le panneau',
-                      lien: 'tickets/panneau-tickets',
+                      lien: '/panneau-tickets',
                       bouton: 'false',
                     },
                   ],
@@ -24800,7 +24800,9 @@ export class InMemDBService implements InMemoryDbService {
                     { nom: 'Créer', lien: './attributs/attribut-nouveau', bouton: 'false', action: [
                       {nom: 'Creer', lien: '', bouton: 'true', type: 'global'}
                     ] },
-                    { nom: 'Rechercher', lien: './attributs/list-attributs', bouton: 'false' },
+                    { nom: 'Rechercher', lien: './attributs/list-attributs', bouton: 'false', action: [
+                      { nom: 'Modifier', lien: '../attribut-nouveau', bouton: 'false' }
+                    ] },
                   ],
                 },
                 {
@@ -24811,7 +24813,9 @@ export class InMemDBService implements InMemoryDbService {
                     { nom: 'Créer', lien: './missions/mission-nouveau', bouton: 'false', action: [
                       {nom: 'Creer', lien: '', bouton: 'true', type: 'global'}
                     ] },
-                    { nom: 'Rechercher', lien: './missions/list-missions', bouton: 'false' },
+                    { nom: 'Rechercher', lien: './missions/list-missions', bouton: 'false', action : [
+                      { nom: 'Modifier', lien: '../mission-nouveau', bouton: 'false'}
+                    ] },
                     { nom: 'Exécuter', lien: './missions/page-intermedaire', bouton: 'false' },
                     { nom: 'liste des exemplaires', lien: './missions/list-exemplaire', bouton: 'false'},
                     { nom: 'Historique des documents', lien: './missions/page-intermedaire', bouton: 'false'}
@@ -24829,7 +24833,9 @@ export class InMemDBService implements InMemoryDbService {
                       {nom: 'Creer', lien: '', bouton: 'true', type: 'global'}
                     ]
                     },
-                    { nom: 'Rechercher', lien: './documents/list-documents', bouton: 'false' },
+                    { nom: 'Rechercher', lien: './documents/list-documents', bouton: 'false', action: [
+                      { nom: 'Modifier', lien: '../document-nouveau', bouton: 'false'}
+                    ] },
                   ],
                 },
                 {
@@ -24840,7 +24846,9 @@ export class InMemDBService implements InMemoryDbService {
                     { nom: 'Créer', lien: 'familles/famille-nouvelle', bouton: 'false', action: [
                       {nom: 'Creer', lien: '', bouton: 'true', type: 'global'}
                     ] },
-                    { nom: 'Rechercher', lien: './familles/list-familles', bouton: 'false' },
+                    { nom: 'Rechercher', lien: './familles/list-familles', bouton: 'false', action: [
+                      { nom: 'Modifier', lien: '../famille-nouvelle', bouton: 'false'}
+                    ] },
                   ],
                 },
                 {
@@ -24851,7 +24859,9 @@ export class InMemDBService implements InMemoryDbService {
                     { nom: 'Créer', lien: 'roles/role-nouveau', bouton: 'false', action: [
                       {nom: 'Creer', lien: '', bouton: 'true', type: 'global'}
                     ] },
-                    { nom: 'Rechercher', lien: './roles/list-roles', bouton: 'false' },
+                    { nom: 'Rechercher', lien: './roles/list-roles', bouton: 'false', action: [
+                      { nom: 'Modifier', lien: '../role-nouveau', bouton: 'false'}
+                    ] },
                   ],
                 },
                 {
@@ -24862,7 +24872,9 @@ export class InMemDBService implements InMemoryDbService {
                     { nom: 'Créer', lien: 'ressources/ressource-nouvelle', bouton: 'false', action: [
                       {nom: 'Creer', lien: '', bouton: 'true', type: 'global'}
                     ] },
-                    { nom: 'Rechercher', lien: './ressources/list-ressources', bouton: 'false' },
+                    { nom: 'Rechercher', lien: './ressources/list-ressources', bouton: 'false', action: [
+                      { nom: 'Modifier', lien: '../ressource-nouvelle', bouton: 'false'}
+                    ] },
                   ],
                 },
                 {
@@ -24873,7 +24885,9 @@ export class InMemDBService implements InMemoryDbService {
                     { nom: 'Créer', lien: 'preconisations/precomvt-nouvelle', bouton: 'false', action: [
                       {nom: 'Creer', lien: '', bouton: 'true', type: 'global'}
                     ] },
-                    { nom: 'Rechercher', lien: './preconisations/list-precomvts', bouton: 'false' },
+                    { nom: 'Rechercher', lien: './preconisations/list-precomvts', bouton: 'false', action: [
+                      { nom: 'Modifier', lien: '../precomvt-nouvelle', bouton: 'false'}
+                    ] },
                   ],
                 },
                 {
@@ -24888,6 +24902,9 @@ export class InMemDBService implements InMemoryDbService {
                       nom: 'Rechercher',
                       lien: './distributeurs/list-distributeurs',
                       bouton: 'false',
+                      action: [
+                        { nom: 'Modifier', lien: '../distributeur-nouveau', bouton: 'false'}
+                      ]
                     },
                   ],
                 },
@@ -24915,6 +24932,9 @@ export class InMemDBService implements InMemoryDbService {
                       nom: 'Rechercher',
                       lien: './parcours/list-parours',
                       bouton: 'false',
+                      action: [
+                        { nom: 'Modifier', lien: '../nouveau-parcours', bouton: 'false'}
+                      ]
                     },
                   ],
                 },
@@ -24926,7 +24946,9 @@ export class InMemDBService implements InMemoryDbService {
                     { nom: 'Créer', lien: 'etats/etat-nouveau', bouton: 'false', action: [
                       {nom: 'Creer', lien: '', bouton: 'true', type: 'global'}
                     ] },
-                    { nom: 'rechercher', lien: './etats/list-etats', bouton: 'false' },
+                    { nom: 'rechercher', lien: './etats/list-etats', bouton: 'false', action: [
+                      { nom: 'Modifier', lien: '../etat-nouveau', bouton: 'false'}
+                    ] },
                   ],
                 },
               ],
@@ -24974,7 +24996,9 @@ export class InMemDBService implements InMemoryDbService {
                     { nom: 'New', lien: './services/service-nouveau', bouton: 'false', action: [
                       {nom: 'New', lien: '', bouton: 'true', type: 'global'}
                     ] },
-                    { nom: 'Search', lien: './services/list-services', bouton: 'false' },
+                    { nom: 'Search', lien: './services/list-services', bouton: 'false', action: [
+                      { nom: 'New', lien: './services/service-nouveau', bouton: 'false' }
+                    ] },
                   ],
                 },
                 {
@@ -24994,7 +25018,9 @@ export class InMemDBService implements InMemoryDbService {
                     { nom: 'New', lien: './attributs/attribut-nouveau', bouton: 'false', action: [
                       {nom: 'New', lien: '', bouton: 'true', type: 'global'}
                     ] },
-                    { nom: 'Search', lien: './attributs/list-attributs', bouton: 'false' },
+                    { nom: 'Search', lien: './attributs/list-attributs', bouton: 'false', action: [
+                      { nom: 'Update', lien: '../attribut-nouveau', bouton: 'false' }
+                    ] },
                   ],
                 },
                 {
@@ -25008,7 +25034,9 @@ export class InMemDBService implements InMemoryDbService {
                     {
                       nom: 'Search',
                       lien: './validations/list-validations',
-                      bouton: 'false',
+                      bouton: 'false', action: [
+                        { nom: 'Update', lien: '../nouvelle-validation', bouton: 'false' }
+                      ]
                     },
                   ],
                 },
@@ -25020,7 +25048,9 @@ export class InMemDBService implements InMemoryDbService {
                     { nom: 'New', lien: './missions/mission-nouveau', bouton: 'false', action: [
                       {nom: 'New', lien: '', bouton: 'true', type: 'global'}
                     ] },
-                    { nom: 'Search', lien: './missions/list-missions', bouton: 'false' },
+                    { nom: 'Search', lien: './missions/list-missions', bouton: 'false', action: [
+                      { nom: 'Update', lien: '../mission-nouveau', bouton: 'false' }
+                    ] },
                     { nom: 'Execute', lien: './missions/page-intermedaire', bouton: 'false' },
                     { nom: 'list of exemplaires', lien: './missions/list-exemplaire', bouton: 'false'},
                     { nom: "Documents history", lien: './missions/page-intermedaire', bouton: 'false'}
@@ -25038,7 +25068,9 @@ export class InMemDBService implements InMemoryDbService {
                       {nom: 'New', lien: '', bouton: 'true', type: 'global'}
                     ]
                     },
-                    { nom: 'Search', lien: './documents/list-documents', bouton: 'false' },
+                    { nom: 'Search', lien: './documents/list-documents', bouton: 'false', action: [
+                      { nom: 'Update', lien: '../document-nouveau', bouton: 'false' }
+                    ] },
                   ],
                 },
                 {
@@ -25049,7 +25081,9 @@ export class InMemDBService implements InMemoryDbService {
                     { nom: 'new', lien: 'familles/famille-nouvelle', bouton: 'false', action: [
                       {nom: 'New', lien: '', bouton: 'true', type: 'global'}
                     ] },
-                    { nom: 'Search', lien: './familles/list-familles', bouton: 'false' },
+                    { nom: 'Search', lien: './familles/list-familles', bouton: 'false', action: [
+                      { nom: 'Update', lien: '../famille-nouvelle', bouton: 'false' }
+                    ] },
                   ],
                 },
                 {
@@ -25060,7 +25094,9 @@ export class InMemDBService implements InMemoryDbService {
                     { nom: 'New', lien: 'roles/role-nouveau', bouton: 'false', action: [
                       {nom: 'New', lien: '', bouton: 'true', type: 'global'}
                     ] },
-                    { nom: 'search', lien: './roles/list-roles', bouton: 'false' },
+                    { nom: 'search', lien: './roles/list-roles', bouton: 'false', action: [
+                      { nom: 'Update', lien: '../role-nouveau', bouton: 'false' }
+                    ] },
                   ],
                 },
                 {
@@ -25071,7 +25107,9 @@ export class InMemDBService implements InMemoryDbService {
                     { nom: 'New', lien: 'ressources/ressource-nouvelle', bouton: 'false', action: [
                       {nom: 'New', lien: '', bouton: 'true', type: 'global'}
                     ] },
-                    { nom: 'Search', lien: './ressources/list-ressources', bouton: 'false' },
+                    { nom: 'Search', lien: './ressources/list-ressources', bouton: 'false', action: [
+                      { nom: 'Update', lien: '../ressource-nouvelle', bouton: 'false' }
+                    ] },
                   ],
                 },
                 {
@@ -25082,7 +25120,9 @@ export class InMemDBService implements InMemoryDbService {
                     { nom: 'New', lien: 'preconisations/precomvt-nouvelle', bouton: 'false', action: [
                       {nom: 'New', lien: '', bouton: 'true', type: 'global'}
                     ] },
-                    { nom: 'Search', lien: './preconisations/list-precomvts', bouton: 'false' },
+                    { nom: 'Search', lien: './preconisations/list-precomvts', bouton: 'false', action: [
+                      { nom: 'Update', lien: '../precomvt-nouvelle', bouton: 'false' }
+                    ] },
                   ],
                 },
                 {
@@ -25093,7 +25133,9 @@ export class InMemDBService implements InMemoryDbService {
                     { nom: 'New', lien: 'distributeurs/distributeur-nouveau', bouton: 'false', action: [
                       {nom: 'New', lien: '', bouton: 'true', type: 'global'}
                     ] },
-                    { nom: 'search', lien: './distributeurs/list-distributeurs', bouton: 'false' },
+                    { nom: 'search', lien: './distributeurs/list-distributeurs', bouton: 'false', action: [
+                      { nom: 'Update', lien: '../distributeur-nouveau', bouton: 'false' }
+                    ] },
                   ],
                 },
                 {
@@ -25119,7 +25161,9 @@ export class InMemDBService implements InMemoryDbService {
                     {
                       nom: 'search',
                       lien: './parcours/list-parours',
-                      bouton: 'false',
+                      bouton: 'false', action: [
+                        { nom: 'Update', lien: '../nouveau-parcours', bouton: 'false' }
+                      ]
                     },
                   ],
                 },
@@ -25131,7 +25175,9 @@ export class InMemDBService implements InMemoryDbService {
                     { nom: 'New', lien: 'etats/etat-nouveau', bouton: 'false', action: [
                       {nom: 'New', lien: '', bouton: 'true', type: 'global'}
                     ] },
-                    { nom: 'search', lien: './etats/list-etats', bouton: 'false' },
+                    { nom: 'search', lien: './etats/list-etats', bouton: 'false', action: [
+                      { nom: 'Update', lien: '../etat-nouveau', bouton: 'false' }
+                    ] },
                   ],
                 },
               ],
