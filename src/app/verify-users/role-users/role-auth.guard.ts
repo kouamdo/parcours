@@ -15,8 +15,8 @@ export class RoleAuthGuard implements CanActivate {
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
     let lienUse!: IElements;
     let menu : IMenu = this.authService.currentUserValue.groupe.menu.find((m: IMenu) => m.langue == localStorage.getItem('langue')!)
-    menu.fonctionnalites.find((m) => lienUse = m.elements.find((l) => l.lien == './'+route.routeConfig?.path+'/'+route.children[0].routeConfig?.path || l.lien == route.routeConfig?.path+'/'+route.children[0].routeConfig?.path)!)
-    console.log("ele du user :", this.authService.currentUserValue, lienUse, route.children[0].routeConfig?.path);
+    menu.fonctionnalites.find((m) => lienUse = m.elements.find((l) => l.lien == './'+route.routeConfig?.path+'/'+route.children[0]!.routeConfig?.path || l.lien == route.routeConfig?.path+'/'+route.children[0].routeConfig?.path)!)
+    console.log("ele du user :", lienUse, route.routeConfig?.path+'/'+route.children[0].routeConfig?.path, route);
     
     if (lienUse || 'personnels/detail-user' == route.routeConfig?.path+'/'+route.children[0].routeConfig?.path) {
       return true;

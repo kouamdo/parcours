@@ -14,7 +14,6 @@ import { TicketsModule } from '../tickets/tickets.module';
 import { SharedModule } from '../shared/shared.module';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { HttpLoaderFactory } from 'src/app/app.module';
-import { BrowserModule } from '@angular/platform-browser';
 import { HttpClient } from '@angular/common/http';
 import { ModulesRoutingModule } from '../modules-routing.module';
 

@@ -59,10 +59,10 @@
                                     <span>...</span>
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="triggerId">
-                                    <button class="dropdown-item nav-link" [routerLink]="['/mission-nouveau',element.id]" title="{{'patient.table.actions.link2' | translate}}">
+                                    <!-- <button class="dropdown-item nav-link" [routerLink]="['/mission-nouveau',element.id]" title="{{'patient.table.actions.link2' | translate}}">
                                         <i class="fa fa-pen text-info" aria-hidden="true"></i>
                                         <span>{{'patient.table.actions.link2' | translate}}</span>
-                                    </button>
+                                    </button> -->
                                     <div *ngFor="let action of actions">
                                         <button *ngIf="action.bouton == 'false'" class="dropdown-item nav-link" [routerLink]="[action.lien,element.id]">
                                           <span>{{action.nom}}</span>

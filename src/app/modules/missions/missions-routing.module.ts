@@ -10,30 +10,22 @@ const routesMissions: Routes = [
   {
     path: 'mission-nouveau',
     title: 'Creer un nouvel mission',
-    component: NewMissionComponent,
-    canActivate: [RoleAuthGuard],
-    data: { role: ['admin']}
+    component: NewMissionComponent
   },
   {
     path: 'mission-nouveau/:idMission',
     title: 'Modifier un mission',
-    component: NewMissionComponent,
-    canActivate: [RoleAuthGuard],
-    data: { role: ['admin']}
+    component: NewMissionComponent
   },
   {
     path: 'list-missions',
     title: 'Recherche de missions',
-    component: ListMissionComponent,
-    canActivate: [RoleAuthGuard],
-    data: { role: ['admin']}
+    component: ListMissionComponent
   },
   {
     path: 'executer-missions',
     title: 'Exécuter vos missions',
-    component: ExecuterMissionComponent,
-    canActivate: [RoleAuthGuard],
-    data: { role: ['admin', 'simple']}
+    component: ExecuterMissionComponent
   }
 ];
 
