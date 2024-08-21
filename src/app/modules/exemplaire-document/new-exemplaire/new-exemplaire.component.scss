@@ -106,11 +106,12 @@ h3{
 .searchBlockUnique h4{
     white-space: noWrap;
 }
-.blockAutoRessources, .blockAutoDistributeurs{
+.blockAutoRessources, .blockAutoDistributeurs, .blockAutoPromos{
     width: 48%;
     display: flex;
     align-items: center;
     margin: 2px;
+    flex-wrap: wrap;
     h4{
         width: fit-content;
         margin: auto 0;

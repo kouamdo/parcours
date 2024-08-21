@@ -31,6 +31,9 @@ import { TypeMouvement } from 'src/app/modele/typeMouvement';
 import { ModalCodebarreService } from '../../shared/modal-codebarre/modal-codebarre.service';
 import { PatientsService } from 'src/app/services/patients/patients.service';
 import { IPatient } from 'src/app/modele/Patient';
+import { IPromo } from 'src/app/modele/promo-distributeur';
+import { PromoService } from 'src/app/services/promo/promo.service';
+import { transform } from 'html2canvas/dist/types/css/property-descriptors/transform';
 
 @Component({
   selector: 'app-new-exemplaire',
@@ -133,13 +136,16 @@ export class NewExemplaireComponent implements OnInit {
   titre:string='';  
   ressourceControl = new FormControl<string | IRessource>('');
   distributeurControl = new FormControl<string | IDistributeur>('');
+  assuranceControl = new FormControl<string | IDistributeur>('');
   idRessource: string = '';
   ELEMENTS_TABLE_MOUVEMENTS: IMouvement[] = [];
+  ELEMENTS_TABLE_MOUVEMENTS_AVEC_PROMO: IMouvement[] = [];
   dataSourceMouvements = new MatTableDataSource<IMouvement>(
     this.ELEMENTS_TABLE_MOUVEMENTS
   );
   filteredOptionsRessource: IRessource[] | undefined;
   filteredDistributeurOptions: IDistributeur[] | undefined;
+  filteredAssuranceOptions: IDistributeur[] | undefined;
   displayedRessourcesColumns: string[] = [
     'actions',
     'libelle',
@@ -149,6 +155,7 @@ export class NewExemplaireComponent implements OnInit {
   ]; // structure du tableau presentant les Ressources
   TABLE_PRECONISATION_RESSOURCES: IPrecoMvt[] = [];
   montantTotal : number = 0;
+  // montantTotalPromo : number = 0;
   soustotal : number = 0;
   distributeur : IDistributeur | undefined;
   modificationDistributeurActive : boolean = false
@@ -158,6 +165,19 @@ export class NewExemplaireComponent implements OnInit {
   typeReduire : string = TypeMouvement.Reduire
   laPersonneRattachee : IPatient | undefined 
   codeControl = new FormControl()
+  promotion : IPromo | undefined
+  // appliquerPromo : boolean = false
+  // promoExiste : boolean = false
+  toggle:boolean = false;
+  // tabIdsRessoucesPromo : string[] = []
+  // tabIdsFamillesPromo : string[] = []
+  valeurPromo : string = ""
+  distributeurR: string = '';
+  ressource: string = '';
+  mouvements: IMouvement[] = [];
+  promotions: IPromo[] = []; // Ceci devrait contenir les promotions existantes
+  promoApplicable?: IPromo; // La promotion qui est applicable si le distributeur correspond
+
 
   constructor(
     private router: Router,
@@ -171,7 +191,8 @@ export class NewExemplaireComponent implements OnInit {
     private serviceExemplaire: ExemplaireDocumentService,
     private datePipe: DatePipe,
     private barService: ModalCodebarreService,
-    private servicePatient: PatientsService
+    private servicePatient: PatientsService,
+    private servicePromo: PromoService
   ) {
     this.formeExemplaire = this.formBuilder.group({
       _exemplaireDocument: new FormArray([]),
@@ -189,6 +210,7 @@ export class NewExemplaireComponent implements OnInit {
         this.laPersonneRattachee =  patientTrouve;
         if (patientTrouve != undefined) {
           this.nomPatientCourant = this.laPersonneRattachee.nom + " " + this.laPersonneRattachee.prenom
+          
         }
       }
     )
@@ -249,6 +271,17 @@ export class NewExemplaireComponent implements OnInit {
         this.serviceDistributeur.getAllDistributeurs().subscribe((reponse) => {
           this.filteredDistributeurOptions = reponse;
         });
+      }
+    });
+
+    this.assuranceControl.valueChanges.subscribe((value) => {
+      const raisonSocial =
+        typeof value === 'string' ? value : value?.raisonSocial;
+      if (raisonSocial != undefined && raisonSocial?.length > 0) {
+        this.serviceDistributeur.getDistributeursByraisonSocial(raisonSocial.toLowerCase() as string)
+          .subscribe((reponse) => {
+            this.filteredAssuranceOptions = reponse;
+          });
       }
     });
   }
@@ -336,6 +369,9 @@ export class NewExemplaireComponent implements OnInit {
          //à supprimer lorsqu'on aura un vrai back connecté
           this.modifierMouvementExemplaire(x.idDocument)
           this.laPersonneRattachee = this.exemplaire.personneRattachee
+          if (this.laPersonneRattachee != undefined) {
+            this.nomPatientCourant = this.laPersonneRattachee.nom + " " + this.laPersonneRattachee.prenom
+          }
           this.codeControl.setValue(this.exemplaire.code)
         });
     }
@@ -666,6 +702,101 @@ export class NewExemplaireComponent implements OnInit {
     }
   }
 
+  parseDateMMddyyyy(dateString : string) {
+    const month = parseInt(dateString.substring(0, 2)) - 1; // Les mois commencent à 0 en JavaScript
+    const day = parseInt(dateString.substring(2, 4));
+    const year = parseInt(dateString.substring(4, 8));
+
+    return new Date(year, month, day);
+}
+
+  /**
+   * Méthode permettant de déterminer si une assurance pocède une promotion en cours
+   * @param option assurance
+   */
+  public rechercherListingAssurance(option: IDistributeur){
+    this.servicePromo.getPromoByIdAssurance(option.id).subscribe((promo) =>{
+      const today = new Date();
+      const dateDebut = this.datePipe.transform(promo.dateDebut, "mmddyyyy") 
+      const dateFin = this.datePipe.transform(promo.dateFin, "mmddyyyy") 
+  
+      // Vérification des Dates : La promotion n'est appliquée que si la date actuelle se situe entre la date de début et la date de fin de la promotion.
+      if (!(today < this.parseDateMMddyyyy(dateDebut!) || today > this.parseDateMMddyyyy(dateFin!))) {
+        console.log("La promotion est active.");
+        this.promotion = promo
+        console.log('promo :  ', this.promotion);
+      }
+    })
+  }
+
+// méthode permettant d'activer/désactiver l'application de promotion
+  change(){
+    this.toggle = !this.toggle;
+    console.log("toggle", this.toggle);    
+  }
+
+  /**
+   * Ce code permet d'appliquer les promotions en tenant compte des ressources et des familles de ressources concernées dans les mouvements.
+   * @param mouvements tableau de mouvements sur lequel on applique la promo
+   * @param promo promotion à apliquer
+   * @returns le tableau de mouvements soldés et le montant total de la remise
+   */
+  appliquerPromotion(mouvements: IMouvement[], promo: IPromo): { mouvementsPromo: IMouvement[], totalRemise: number } {
+    let totalRemise = 0;
+    if (promo == undefined) {
+      return {
+        mouvementsPromo: [],
+        totalRemise
+      }
+    }
+
+    // Appliquer la promotion aux mouvements éligibles
+    const mouvementsApresPromotion = mouvements.map(mouvement => {
+        const { ressource, quantite, prix } = mouvement;
+        let ressourceCouverte : boolean = false;
+        let familleCouverte : boolean = false;
+
+        // Vérification des Ressources et Familles : La promotion est appliquée si la ressource ou la famille de la ressource est couverte par la promotion.
+        if (promo.ressource) {
+          ressourceCouverte = promo.ressource?.some(r => r.id === ressource.id);
+        }
+        if (promo.famille) {
+          familleCouverte = promo.famille?.some(f => f.id === ressource.famille.id);
+        }
+
+        // Calcul de la Remise : La remise est calculée soit en pourcentage soit en montant fixe. Si les deux sont présents, seul le pourcentage est utilisé.
+        if (ressourceCouverte == true || familleCouverte == true) {
+            let remise = 0;
+
+            if (promo.pourcentageRemise > 0) {
+                remise = prix * (promo.pourcentageRemise / 100);
+            } else if (promo.montantRemise > 0) {
+                remise = promo.montantRemise;
+            }
+
+            remise = Math.min(remise, prix); // S'assurer que la remise n'excède pas le prix
+
+            const prixReduit = prix - remise;
+            totalRemise += remise * quantite;
+            mouvement.prix = prixReduit
+
+            // Retour des Mouvements : La fonction retourne les mouvements avec le prix réduit et le total des remises appliquées.
+            return {
+                ...mouvement,
+                prix: prixReduit
+            };
+        }
+
+        return mouvement;
+    });
+    console.log('mvt : ', mouvements);
+    
+    return {
+      mouvementsPromo: mouvementsApresPromotion,
+        totalRemise
+    };
+}
+
   /**
    * Methode qui permet d'effacer la valeur du control ressource lorsqu'on a
    * déjà choisi la ressource en cliquant dessus
@@ -692,6 +823,9 @@ export class NewExemplaireComponent implements OnInit {
       let mouvement =
         this.ELEMENTS_TABLE_MOUVEMENTS[this.indexmodificationDistributeur];
       mouvement.distributeur = this.distributeur;
+      if (this.distributeur == undefined) {
+        mouvement.distributeur = this.distributeur;
+      }
       this.dataSourceMouvements.data = this.ELEMENTS_TABLE_MOUVEMENTS;
     }
     this.modificationDistributeurActive = false;
@@ -710,6 +844,12 @@ export class NewExemplaireComponent implements OnInit {
   displayDistributeurFn(distributeur: IDistributeur): string {
     return distributeur && distributeur.raisonSocial
       ? distributeur.raisonSocial
+      : '';
+  }
+
+  displayAssuranceFn(assurance: IDistributeur): string {
+    return assurance && assurance.raisonSocial
+      ? assurance.raisonSocial
       : '';
   }
 

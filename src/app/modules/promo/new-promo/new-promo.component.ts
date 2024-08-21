@@ -10,7 +10,7 @@ import { PromoService } from 'src/app/services/promo/promo.service';
 import { DistributeursService } from 'src/app/services/distributeurs/distributeurs.service';
 import { FamillesService } from 'src/app/services/familles/familles.service';
 import { RessourcesService } from 'src/app/services/ressources/ressources.service';
-import { Promo } from 'src/app/modele/promo-distributeur';
+import { IPromo } from 'src/app/modele/promo-distributeur';
 import { IDistributeur } from 'src/app/modele/distributeur';
 import { IFamille } from 'src/app/modele/famille';
 import { IRessource } from 'src/app/modele/ressource';
@@ -19,6 +19,7 @@ import { Observable, forkJoin, of } from 'rxjs';
 import { map, startWith, switchMap } from 'rxjs/operators';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { DonneesEchangeService } from 'src/app/services/donnees-echange/donnees-echange.service';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-new-promo',
@@ -27,7 +28,7 @@ import { DonneesEchangeService } from 'src/app/services/donnees-echange/donnees-
 })
 export class NewPromoComponent implements OnInit {
   titre:string='Ajouter Promotion';
-  promo: Promo | undefined;
+  promo: IPromo | undefined;
   promoForm: FormGroup;
   selectedOption: string = '';
   btnLibelle: string = 'Ajouter';
@@ -44,7 +45,8 @@ export class NewPromoComponent implements OnInit {
     private famillesService: FamillesService,
     private ressourcesService: RessourcesService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private datePipe: DatePipe
   ) {
     this.promoForm = this.formBuilder.group(
       {
@@ -90,8 +92,14 @@ export class NewPromoComponent implements OnInit {
           montant: promo.montantRemise,
           pourcentage: promo.pourcentageRemise,
           emetteur: promo.emetteur,
-          dateDebut: promo.dateDebut,
-          dateFin: promo.dateFin,
+          dateDebut: this.datePipe.transform(
+            this.promo.dateDebut,
+            'yyyy-MM-dd'
+          ), // je change le format de la date pour pouvoir l'afficher dans mon input type date
+          dateFin: this.datePipe.transform(
+            this.promo.dateFin,
+            'yyyy-MM-dd'
+          ),
           code: promo.codeUnique,
         });
 
@@ -225,7 +233,7 @@ export class NewPromoComponent implements OnInit {
 
     const emetteur = this.promoForm.value.emetteur as IDistributeur;
 
-    const promoTemp: Promo = {
+    const promoTemp: IPromo = {
       id: this.promo ? this.promo.id : uuidv4(),
       emetteur: emetteur,
       dateDebut: this.promoForm.value.dateDebut,
@@ -253,9 +261,6 @@ export class NewPromoComponent implements OnInit {
     this.promoService.ajouterPromo(promoTemp).subscribe(
       () => {
         this.router.navigate(['/list-promo']);
-      },
-      (error) => {
-        console.error('Error saving promo:', error);
       }
     );
   }
