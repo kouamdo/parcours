@@ -17,6 +17,8 @@ import { DocumentService } from 'src/app/services/documents/document.service';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { IDocEtats } from 'src/app/modele/doc-etats';
 import { PdfExemplaireGeneratorService } from 'src/app/services/pdfExemplaireGenerator/pdf-exemplaire-generator.service';
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
 
 @Component({
   selector: 'app-previsualisation-exemplaire',
@@ -199,9 +201,9 @@ export class PrevisualisationExemplaireComponent implements OnInit {
    * Methodr qui permet de faire la somme des montants du tableau de mouvements
    * pour afficher le resultat dans la case montant total
    */
-  sommeMontants(): number {
+  sommeMontants(mouvements: IMouvement[]): number {
     this.montantTotal = 0;
-    this.exemplaire.mouvements?.forEach((mouvement) => {
+    mouvements?.forEach((mouvement) => {
       if (
         mouvement.ressource != undefined &&
         mouvement.quantite != null &&
@@ -370,8 +372,176 @@ export class PrevisualisationExemplaireComponent implements OnInit {
         this.router.navigateByUrl(this.router.url);
       });
   }
-  pdfExemplaireGenerator(eltId: string){
-    this.content = document.getElementById(eltId)!
-    return this.servicePdfExemplaireGenerator.generatePdf(this.content)
+  
+  /**
+   * Méthode pour générer des instances de PDF où chaque PDF contient 
+   * un sous-tableau de mouvements regroupés par distributeur existant
+   */
+  generatePDFsByDistributeur() {
+    // Filtrer les mouvements pour ne conserver que ceux avec un distributeur
+    const mouvementsAvecDistributeur = this.mouvements.filter(
+      (mouvement) => mouvement.distributeur !== undefined
+    );
+
+    // Grouper les mouvements par distributeur
+    const mouvementsParDistributeur = this.groupMouvementsByDistributeur(mouvementsAvecDistributeur);
+
+    // Itérer sur chaque distributeur et générer un PDF
+    Object.keys(mouvementsParDistributeur).forEach((distributeurId, index) => {
+      const mouvements = mouvementsParDistributeur[distributeurId];
+      const distributeurName = mouvements[0]?.distributeur?.raisonSocial || '';
+
+      // Créez un conteneur temporaire pour le contenu de chaque PDF
+      const container = document.createElement('div');
+      container.innerHTML = `
+        <div class="mainBlock" id="top2">
+          <div id="globalSection">
+            <div id="contentToPrint">
+              <div class="entete">
+                  <h3>Mouvements pour Distributeur : ${distributeurName}</h3>
+              </div>
+              <div class="infos">
+                  <div id="titre">
+                    <div *ngIf="this.exemplaire.personneRattachee != undefined">
+                      <span class="label">
+                        Nom du destinataire : 
+                      </span>
+                      <span class="title"> 
+                        ${distributeurName}
+                      </span>
+                    </div>
+                    <div>
+                      <span class="label">
+                           Fait le :
+                      </span>
+                      <span class="title"> ${this.formatDate(this.exemplaire.dateCreation)}
+                      </span>
+                      <span class="label">
+                           à :
+                      </span>
+                      <span class="title"> ${this.formatDateTime(this.exemplaire.dateCreation)}
+                      </span>
+                    </div>
+                    <div>
+                        <span class="label"> Etat courant : </span>
+                         ${ this.courant }
+                    </div>
+                    <div>
+                        <span class="label"> code : </span>
+                         ${ this.exemplaire.code }
+                    </div>
+                  </div>
+                  <div class="block1" *ngFor="let attributParCategorie of exemplaire.categories">
+                  
+                    ${this.exemplaire.categories.map(attributParCategorie => `
+                      <div class="pb-3" *ngIf="attributParCategorie.nom">
+                        <h4> ${ attributParCategorie.nom }</h4>
+                        <div class="contentBlock">
+                          <div class="inputBlock" *ngFor="let attributParCategorie of attributParCategorie.listAttributsParCategories">
+                          
+                            ${attributParCategorie.listAttributsParCategories.map(attributParCategorie => `
+
+                              <label class=""> ${ attributParCategorie.attribut.titre } :
+                              </label>
+                              <div class="valAttribut">
+                                <span> ${
+                                  this.rechercherValeurParIdAttribut(
+                                  attributParCategorie.attribut.id,
+                                  attributParCategorie.attribut.type
+                                  )
+                                  }
+                                </span>
+                              </div>
+                            `).join('')}
+                          </div>
+                        </div>
+                      </div>
+                    `).join('')}
+                  </div>
+              </div>
+
+              <!-- tableau listing des mouvements -->
+              <div class="card-body p-0 tableBlock" id="tableBlock">
+                  <div class='table-responsive w-100'>
+                      <table class='table table-sm table-centered table-striped table-bordered w-100'>
+                          <thead>
+                              <tr>
+                                  <th class="text-dark containHead">Libellé</th>
+                                  <th class="text-dark containHead">Quantité</th>
+                                  <th class="text-dark containHead">Unité</th>
+                                  <th class="text-dark containHead">Description</th>
+                                  <th class="text-dark containHead">Prix</th>
+                                  <th class="text-dark containHead">Montant total</th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                            ${mouvements.map(mouvement => `
+                              <tr>
+                                  <td>${mouvement.ressource.libelle}</td>
+                                  <td>${this.separateurDeMilliers(mouvement.quantite)}</td>
+                                  <td>${mouvement.ressource.unite}</td>
+                                  <td>${mouvement.description}</td>
+                                  <td>${this.separateurDeMilliers(mouvement.prix)}</td>
+                                  <td>${this.separateurDeMilliers(mouvement.quantite * mouvement.prix)}</td>
+                              </tr>
+                            `).join('')}
+                          </tbody>
+                      </table>
+
+                      <!-- montant total -->
+                      <div class="total" *ngIf="mouvements.length">
+                          <span class="mr-2">Montant Total : </span>
+                          <input type="text" value="${this.separateurDeMilliers(this.sommeMontants(mouvements))}" disabled />
+                      </div>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+
+      // Ajoutez le conteneur au DOM pour permettre à `html2canvas` de capturer son contenu
+      document.body.appendChild(container);
+
+      // Génération du PDF à partir du contenu du conteneur
+      html2canvas(container).then(canvas => {
+        const imgWidth = 208;
+        const pageHeight = 295;
+        const imgHeight = canvas.height * imgWidth / canvas.width;
+        const contentDataURL = canvas.toDataURL('image/png');
+        let pdf = new jsPDF('p', 'mm', 'a4');
+        pdf.addImage(contentDataURL, 'PNG', 0, 0, imgWidth, imgHeight);
+
+        // Enregistrer le PDF avec un nom unique pour chaque distributeur
+        pdf.save(`mouvements_distributeur_${distributeurName}_${index + 1}.pdf`);
+
+        // Supprimez le conteneur temporaire du DOM
+        document.body.removeChild(container);
+      });
+    });
   }
+
+  /**
+   * Méthode pour grouper les mouvements par distributeur
+   */
+  groupMouvementsByDistributeur(mouvements: IMouvement[]) {
+    return mouvements.reduce((acc, mouvement) => {
+      const distributeurId = mouvement.distributeur?.id || 'sans_distributeur';
+      if (!acc[distributeurId]) {
+        acc[distributeurId] = [];
+      }
+      acc[distributeurId].push(mouvement);
+      return acc;
+    }, {} as { [key: string]: IMouvement[] });
+  }
+
+  /**
+   * Méthode pour formater les dates
+   */
+  formatDate(date: Date): string {
+    return this.datePipe.transform(date, 'dd-MM-yyyy') || '';
+  } 
+  formatDateTime(date: Date): string {
+    return this.datePipe.transform(date, 'hh:mm:ss') || '';
+  }  
 }

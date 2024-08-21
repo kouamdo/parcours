@@ -592,9 +592,9 @@ export class NewExemplaireComponent implements OnInit {
    * Methodr qui permet de faire la somme des montants du tableau de mouvements
    * pour afficher le resultat dans la case montant total
    */
-  sommeMontants(): number {
+  sommeMontants(mouvements: IMouvement[]): number {
     this.montantTotal = 0;
-    this.ELEMENTS_TABLE_MOUVEMENTS.forEach((mouvement) => {
+    mouvements.forEach((mouvement) => {
       if (
         mouvement.ressource != undefined &&
         mouvement.quantite != null &&
@@ -725,6 +725,8 @@ export class NewExemplaireComponent implements OnInit {
         console.log("La promotion est active.");
         this.promotion = promo
         console.log('promo :  ', this.promotion);
+        this.ELEMENTS_TABLE_MOUVEMENTS_AVEC_PROMO = this.ELEMENTS_TABLE_MOUVEMENTS
+        this.appliquerPromotion(this.ELEMENTS_TABLE_MOUVEMENTS_AVEC_PROMO, this.promotion)
       }
     })
   }

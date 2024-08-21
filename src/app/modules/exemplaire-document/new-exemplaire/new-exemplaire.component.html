@@ -89,7 +89,7 @@
                                 <h4>{{'document.exemplaire.text15' | translate}}</h4>
                                 <input type="text" matInput [formControl]="assuranceControl" [matAutocomplete]="autoAssurance">
                                 <mat-autocomplete class="blockAutocomplate" #autoAssurance="matAutocomplete" [displayWith]="displayAssuranceFn">
-                                    <mat-option class="options" *ngFor="let option of filteredAssuranceOptions" [value]="option" (click)="rechercherListingAssurance(option); appliquerPromotion(ELEMENTS_TABLE_MOUVEMENTS, promotion!)">
+                                    <mat-option class="options" *ngFor="let option of filteredAssuranceOptions" [value]="option" (click)="rechercherListingAssurance(option); ">
                                         {{option.raisonSocial}}
                                     </mat-option>
                                 </mat-autocomplete>
@@ -217,15 +217,15 @@
                          <div class="blockMontantsTotaux" *ngIf="document.affichagePrix == true && ELEMENTS_TABLE_MOUVEMENTS.length > 0">
                             <div class="total">
                                 <span class="mr-2">{{'ressource.table2.title11' | translate}}</span>
-                                <input type="text" [value]="sommeMontants()" disabled>
+                                <input type="text" [value]="sommeMontants(this.ELEMENTS_TABLE_MOUVEMENTS)" disabled>
                             </div>
                             <div class="total">
-                                <span class="mr-2">{{'ressource.table2.title11' | translate}}</span>
-                                <input type="text" [value]="sommeMontants()" disabled>
+                                <span class="mr-2">{{'ressource.table2.title12' | translate}}</span>
+                                <input type="text" [value]="sommeMontants(this.ELEMENTS_TABLE_MOUVEMENTS_AVEC_PROMO)" disabled>
                             </div>
                             <div class="total">
-                                <span class="mr-2">{{'ressource.table2.title11' | translate}}</span>
-                                <input type="text" [value]="sommeMontants()-sommeMontants()" disabled>
+                                <span class="mr-2">{{'ressource.table2.title13' | translate}}</span>
+                                <input type="text" [value]="sommeMontants(this.ELEMENTS_TABLE_MOUVEMENTS)-sommeMontants(this.ELEMENTS_TABLE_MOUVEMENTS_AVEC_PROMO)" disabled>
                             </div>
                          </div>
 

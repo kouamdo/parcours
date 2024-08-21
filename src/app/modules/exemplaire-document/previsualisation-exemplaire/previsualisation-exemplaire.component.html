@@ -37,7 +37,7 @@
                             this.exemplaire.dateCreation | date : "dd/MM/yyyy"}}
                         </span>
                         <span class="label">
-                            {{ "document.exemplaire.text7" | translate }}
+                            {{ "document.exemplaire.text7" | translate }} : 
                         </span>
                         <span class="title">{{ this.exemplaire.dateCreation | date : "hh:mm:ss" }}
                         </span>
@@ -56,9 +56,7 @@
                         <h4>{{ attributParCategorie.nom }}</h4>
                         <div class="contentBlock">
                             <div class="inputBlock" *ngFor="
-                    let attributParCategorie of attributParCategorie.listAttributsParCategories
-                    let i = index
-                ">
+                                let attributParCategorie of attributParCategorie.listAttributsParCategories">
                                 <label class="">{{ attributParCategorie.attribut.titre }} :
                                 </label>
                                 <div class="valAttribut">
@@ -190,7 +188,7 @@
                 exemplaire.affichagePrix == true && exemplaire.mouvements?.length
             ">
                         <span class="mr-2">{{ "ressource.table2.title11" | translate }}</span>
-                        <input type="text" [value]="separateurDeMilliers(sommeMontants())" disabled />
+                        <input type="text" [value]="separateurDeMilliers(sommeMontants(this.exemplaire.mouvements!))" disabled />
                     </div>
                 </div>
             </div>
@@ -210,7 +208,7 @@
                 title="{{ 'lists.button6' | translate }}" class="btn btnValidation">
                 <i class="fas fa-cog"></i>
             </button>
-            <button *ngIf="docEtatCourant?.validation?.typeValidation == 'Transmission'"  class="btn modifier" (click)="pdfExemplaireGenerator('contentToPrint')">
+            <button *ngIf="docEtatCourant?.validation?.typeValidation == 'Transmission'"  class="btn modifier" (click)="generatePDFsByDistributeur()">
                 pdf
             </button>
             <button *ngIf="docEtatCourant?.validation?.typeValidation == 'Transmission'" data-toggle="collapse" href="#formContentId" aria-expanded="false" aria-controls="formContentId"
