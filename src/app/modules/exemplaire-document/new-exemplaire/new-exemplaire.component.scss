@@ -212,6 +212,24 @@ th{
         font-size: 100%;
     }
 }
+.promo{
+    position: relative;
+    div{
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: fit-content !important;
+        height: 20px;
+        background-color: inherit;
+        color: red;
+        border-radius: 50%;
+        padding: 0 1px;
+        span{
+            margin: auto;
+            font-size: 10px;
+        }
+    }
+}
 @media screen and (max-width: 1040px) {
     .block1 .inputBlock{
         width: 31% !important;

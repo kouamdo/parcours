@@ -155,7 +155,6 @@ export class NewExemplaireComponent implements OnInit {
   ]; // structure du tableau presentant les Ressources
   TABLE_PRECONISATION_RESSOURCES: IPrecoMvt[] = [];
   montantTotal : number = 0;
-  // montantTotalPromo : number = 0;
   soustotal : number = 0;
   distributeur : IDistributeur | undefined;
   modificationDistributeurActive : boolean = false
@@ -166,17 +165,14 @@ export class NewExemplaireComponent implements OnInit {
   laPersonneRattachee : IPatient | undefined 
   codeControl = new FormControl()
   promotion : IPromo | undefined
-  // appliquerPromo : boolean = false
-  // promoExiste : boolean = false
   toggle:boolean = false;
-  // tabIdsRessoucesPromo : string[] = []
-  // tabIdsFamillesPromo : string[] = []
-  valeurPromo : string = ""
   distributeurR: string = '';
   ressource: string = '';
   mouvements: IMouvement[] = [];
   promotions: IPromo[] = []; // Ceci devrait contenir les promotions existantes
   promoApplicable?: IPromo; // La promotion qui est applicable si le distributeur correspond
+  private storageKey = 'mouvements'; // La variable qui sera stockée dans le session storage
+  remisePromo : string = "" // laveur de la promotion
 
 
   constructor(
@@ -715,6 +711,7 @@ export class NewExemplaireComponent implements OnInit {
    * @param option assurance
    */
   public rechercherListingAssurance(option: IDistributeur){
+    this.saveMouvements(this.ELEMENTS_TABLE_MOUVEMENTS)
     this.servicePromo.getPromoByIdAssurance(option.id).subscribe((promo) =>{
       const today = new Date();
       const dateDebut = this.datePipe.transform(promo.dateDebut, "mmddyyyy") 
@@ -722,19 +719,19 @@ export class NewExemplaireComponent implements OnInit {
   
       // Vérification des Dates : La promotion n'est appliquée que si la date actuelle se situe entre la date de début et la date de fin de la promotion.
       if (!(today < this.parseDateMMddyyyy(dateDebut!) || today > this.parseDateMMddyyyy(dateFin!))) {
-        console.log("La promotion est active.");
         this.promotion = promo
-        console.log('promo :  ', this.promotion);
-        this.ELEMENTS_TABLE_MOUVEMENTS_AVEC_PROMO = this.ELEMENTS_TABLE_MOUVEMENTS
-        this.appliquerPromotion(this.ELEMENTS_TABLE_MOUVEMENTS_AVEC_PROMO, this.promotion)
+        this.appliquerPromotion(this.promotion)
       }
     })
   }
 
 // méthode permettant d'activer/désactiver l'application de promotion
   change(){
-    this.toggle = !this.toggle;
-    console.log("toggle", this.toggle);    
+    this.toggle = !this.toggle;    
+  }
+
+  verifieSiPromoAppliquable(){
+    
   }
 
   /**
@@ -743,7 +740,7 @@ export class NewExemplaireComponent implements OnInit {
    * @param promo promotion à apliquer
    * @returns le tableau de mouvements soldés et le montant total de la remise
    */
-  appliquerPromotion(mouvements: IMouvement[], promo: IPromo): { mouvementsPromo: IMouvement[], totalRemise: number } {
+  appliquerPromotion(promo: IPromo): { mouvementsPromo: IMouvement[], totalRemise: number } {
     let totalRemise = 0;
     if (promo == undefined) {
       return {
@@ -753,7 +750,8 @@ export class NewExemplaireComponent implements OnInit {
     }
 
     // Appliquer la promotion aux mouvements éligibles
-    const mouvementsApresPromotion = mouvements.map(mouvement => {
+    this.ELEMENTS_TABLE_MOUVEMENTS_AVEC_PROMO = this.getMouvements()!
+    const mouvementsApresPromotion = this.ELEMENTS_TABLE_MOUVEMENTS_AVEC_PROMO.map(mouvement => {
         const { ressource, quantite, prix } = mouvement;
         let ressourceCouverte : boolean = false;
         let familleCouverte : boolean = false;
@@ -772,8 +770,10 @@ export class NewExemplaireComponent implements OnInit {
 
             if (promo.pourcentageRemise > 0) {
                 remise = prix * (promo.pourcentageRemise / 100);
+                this.remisePromo = "- " + promo.pourcentageRemise + " %"
             } else if (promo.montantRemise > 0) {
                 remise = promo.montantRemise;
+                this.remisePromo = "- " + promo.montantRemise + " uc"
             }
 
             remise = Math.min(remise, prix); // S'assurer que la remise n'excède pas le prix
@@ -791,7 +791,6 @@ export class NewExemplaireComponent implements OnInit {
 
         return mouvement;
     });
-    console.log('mvt : ', mouvements);
     
     return {
       mouvementsPromo: mouvementsApresPromotion,
@@ -799,6 +798,21 @@ export class NewExemplaireComponent implements OnInit {
     };
 }
 
+  // Stocker un tableau de mouvements
+  saveMouvements(mouvements: IMouvement[]): void {
+    sessionStorage.setItem(this.storageKey, JSON.stringify(mouvements));
+  }
+
+  // Récupérer un tableau de mouvements
+  getMouvements(): IMouvement[] | null {
+    const mouvementsData = sessionStorage.getItem(this.storageKey);
+    return mouvementsData ? JSON.parse(mouvementsData) as IMouvement[] : null;
+  }
+
+  // Supprimer un tableau de mouvements
+  removeMouvements(): void {
+    sessionStorage.removeItem(this.storageKey);
+  }
   /**
    * Methode qui permet d'effacer la valeur du control ressource lorsqu'on a
    * déjà choisi la ressource en cliquant dessus
@@ -874,7 +888,6 @@ export class NewExemplaireComponent implements OnInit {
   }
 
   setCode(date : Date){
-    console.log('codde', date)
     return this.serviceExemplaire.formatCode(date)
   }
 }

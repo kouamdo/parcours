@@ -164,13 +164,12 @@
                             <!-- prixEntrée Column -->
                             <ng-container *ngIf="document.affichagePrix == true && document.typeMouvement == typeAjout" matColumnDef="prixEntrée">
                                 <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{'ressource.table.title5' | translate}} </th>
-                                <td class="text-dark containCell" mat-cell *matCellDef="let element">
+                                <td class="text-dark containCell promo" mat-cell *matCellDef="let element">
                                     <label class="custom-control">
                                         <input class="form-control" type="number" [(ngModel)]="element.prix" [ngModelOptions]="{standalone: true}">
                                     </label> 
                                     <div>
-                                        <i class="fa fa-cloud" aria-hidden="true"></i>
-                                        <span>{{valeurPromo}}</span>
+                                        <span>{{remisePromo}}</span>
                                     </div>
                                 </td>
                             </ng-container>
@@ -221,11 +220,11 @@
                             </div>
                             <div class="total">
                                 <span class="mr-2">{{'ressource.table2.title12' | translate}}</span>
-                                <input type="text" [value]="sommeMontants(this.ELEMENTS_TABLE_MOUVEMENTS_AVEC_PROMO)" disabled>
+                                <input type="text" [value]="sommeMontants(this.ELEMENTS_TABLE_MOUVEMENTS)-sommeMontants(this.ELEMENTS_TABLE_MOUVEMENTS_AVEC_PROMO)" disabled>
                             </div>
                             <div class="total">
                                 <span class="mr-2">{{'ressource.table2.title13' | translate}}</span>
-                                <input type="text" [value]="sommeMontants(this.ELEMENTS_TABLE_MOUVEMENTS)-sommeMontants(this.ELEMENTS_TABLE_MOUVEMENTS_AVEC_PROMO)" disabled>
+                                <input type="text" [value]="sommeMontants(this.ELEMENTS_TABLE_MOUVEMENTS_AVEC_PROMO)" disabled>
                             </div>
                          </div>
 

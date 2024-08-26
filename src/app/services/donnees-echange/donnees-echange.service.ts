@@ -24,6 +24,7 @@ export class DonneesEchangeService {
   dataExemplairePersonneRatachee: any;
   dataUrlExemplaireDePersonne: any;
   private _dataEnteteMenu: string = '';
+  dataMouvementsExemplaire: any
   constructor(private http: HttpClient) {
     const storedDataEnteteMenu = sessionStorage.getItem('dataEnteteMenu');
     if (storedDataEnteteMenu) {
@@ -60,6 +61,14 @@ export class DonneesEchangeService {
 
   getsaveEtatModal(){
     return this.dataEtatSelectionner;
+  }
+
+  saveMouvementsExemplaire(value: any) {
+    this.dataMouvementsExemplaire = value;
+  }
+
+  getMouvementsExemplaire(){
+    return this.dataMouvementsExemplaire;
   }
 
   /**
