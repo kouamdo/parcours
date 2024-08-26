@@ -16,8 +16,9 @@ export interface IDocument {
     contientDistributeurs:boolean,
     missions : IMission[],
     attributs : IAttributs[],
-    categories : ICategoriesAttributs[]
-    preconisations : IPrecoMvt[]
-    sousDocuments? : IDocument[]
-    docEtats : IDocEtats[]
+    categories : ICategoriesAttributs[],
+    preconisations : IPrecoMvt[],
+    sousDocuments? : IDocument[],
+    docEtats : IDocEtats[],
+    estEncaissable: boolean
 }

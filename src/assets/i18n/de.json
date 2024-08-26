@@ -50,7 +50,9 @@
         "button7": "Edit",
         "button8": "Delete",
         "button9": "Add",
-        "button10": "Close"
+        "button10": "Close",
+        "button14": "rule"
+
     },
     "caisse": {
         "title1": "Add ",
@@ -94,6 +96,34 @@
             "text2": "libelle is required"
         }
     },
+    "mvtCaisse": {
+  "title1": "Add",
+  "search-bar": "Search",
+  "table": {
+    "title0": "Amount",
+    "title1": "Label",
+    "title2": "Payment Method",
+    "title3": "Movement Type",
+    "title4": "Payment Reference",
+    "title5": "Cash Register",
+    "title6": "Copy",
+    "actions": {
+      "link1": "Add",
+      "link2": "Edit",
+      "link3": "Details",
+      "link4": "Delete"
+    }
+  },
+  "form": {
+    "text1": "The amount is required.",
+    "text2": "The label is required.",
+    "text3": "The payment method is required.",
+    "text4": "The payment reference is required.",
+    "text5": "The cash register is required.",
+    "text6": "The copy is required.",
+      "text7": "the type is required."
+  }
+},
     "patient": {
         "title1": "Add patient",
         "search-bar": "search",
@@ -170,6 +200,7 @@
             "label2": "Status",
             "label3": "location",
             "label4": "description",
+            "label5": "est encaissable",
             "text1": "Libel is requied",
             "text2": "Status is requied",
             "text3": "the Last modification's date is requied"

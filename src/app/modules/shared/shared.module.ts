@@ -38,6 +38,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { ModalChoixPersonneComponent } from './modal-choix-personne/modal-choix-personne.component';
 import { MatSelectModule } from '@angular/material/select';
 import { ModalAffecterComptePersonnelComponent } from './modal-affecter-compte-personnel/modal-affecter-compte-personnel.component';
+import { ModalMouvementCaisseCompteComponent } from './modal-mouvement-caisse-compte/modal-mouvement-caisse-compte.component';
 
 @NgModule({
   declarations: [
@@ -57,6 +58,7 @@ import { ModalAffecterComptePersonnelComponent } from './modal-affecter-compte-p
     ModalChoixDocEtatComponent,
     ModalChoixPersonneComponent,
     ModalAffecterComptePersonnelComponent,
+    ModalMouvementCaisseCompteComponent,
   ],
   exports: [
     ModalCategoriesComponent,

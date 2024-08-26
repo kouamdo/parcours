@@ -1,0 +1,110 @@
+#mainSection {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.493);
+}
+
+.block {
+    width: 50%;
+    border-radius: 8px;
+    --tw-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+    --tw-shadow-colored: 0 25px 50px -12px var(--tw-shadow-color);
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+    --tw-shadow-color: rgba(46, 216, 24, 0.884);
+}
+
+#etat {
+    border: none;
+    box-shadow: none;
+    height: 20px;
+    padding: 0;
+}
+
+.entete {
+    background-color: #28a745;
+    border-top-left-radius: 8px /* 4px */;
+    border-top-right-radius: 8px;
+    color: white;
+    text-align: center;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.form-control {
+    border: none;
+    box-shadow: 0 0 2px rgb(220, 220, 220);
+    height: 35px;
+}
+
+.champs {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin: 10px 0;
+
+    label {
+        width: 300px;
+        font-weight: normal;
+    }
+}
+
+.champs,
+select,
+input {
+    font-size: 15px;
+}
+
+select {
+    border: none;
+    box-shadow: 0 0 2px rgb(220, 220, 220);
+    height: 24px;
+    background-color: #28a74563;
+    color: rgb(108, 108, 108);
+    padding: 0 10px;
+    border-radius: 5px;
+}
+
+mat-form-field:focus {
+    border: none;
+    padding: 0;
+    margin: 0;
+    border-top: none;
+
+    input {
+        padding: 0;
+        color: #7ea97e;
+        border: none;
+        margin: 0;
+        top: -10px;
+
+    }
+}
+
+.example-full-width {
+    height: 35px !important;
+    border: 1px solid #28a745;
+    border-radius: 5px;
+    background-color: transparent;
+    padding: 0;
+    margin: 0;
+    margin-bottom: 10px;
+
+    width: 100%;
+    position: relative;
+    color: #7ea97e;
+    line-height: normal;
+    box-sizing: initial;
+
+    input {
+        position: absolute;
+        padding: 0;
+        border: 2px;
+        margin: 0;
+        top: -12px;
+
+    }
+}

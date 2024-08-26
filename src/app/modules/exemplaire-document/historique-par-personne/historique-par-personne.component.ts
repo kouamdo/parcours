@@ -34,6 +34,7 @@ export class HistoriqueParPersonneComponent implements OnInit {
     preconisations: [],
     mouvements: [],
     etat: false,
+    estEncaissable: false,
     affichagePrix: false,
     contientRessources: false,
     contientDistributeurs: false,

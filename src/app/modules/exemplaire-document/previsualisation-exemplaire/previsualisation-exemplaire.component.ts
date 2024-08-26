@@ -15,6 +15,9 @@ import { ModalChoixDocEtatComponent } from '../../shared/modal-choix-doc-etat/mo
 import { IDocument } from 'src/app/modele/document';
 import { DocumentService } from 'src/app/services/documents/document.service';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { IPatient } from 'src/app/modele/Patient';
+import { ModalMouvementCaisseCompteComponent } from '../../shared/modal-mouvement-caisse-compte/modal-mouvement-caisse-compte.component';
+import { float } from '@zxing/library/esm/customTypings';
 
 @Component({
   selector: 'app-previsualisation-exemplaire',
@@ -37,6 +40,7 @@ export class PrevisualisationExemplaireComponent implements OnInit {
     mouvements: [],
     etat: false,
     affichagePrix: false,
+    estEncaissable: false,
     contientRessources: false,
     contientDistributeurs: false,
     typeMouvement: TypeMouvement.Neutre,
@@ -261,6 +265,24 @@ export class PrevisualisationExemplaireComponent implements OnInit {
     this.nomPatientCourant = sessionStorage.getItem('nomPatientCourant');
   }
 
+  openModalDialog(personnel: IPatient, montant: float, document: IExemplaireDocument){
+    const dialogRef = this.dialog.open(ModalMouvementCaisseCompteComponent,
+    {
+      maxWidth: '100%',
+      maxHeight: '100%',
+      width:'100%',
+      height:'100%',
+      enterAnimationDuration:'1000ms',
+      exitAnimationDuration:'1000ms',
+      data:{personnel, montant, document}
+    }
+    )
+
+    dialogRef.afterClosed().subscribe(result => { 
+      console.log("result:", result);
+    });   
+  }
+
   openModal(documentChoisi: IDocument) {
     let selectedEtat = {};
 
@@ -307,6 +329,7 @@ export class PrevisualisationExemplaireComponent implements OnInit {
             categories: this.exemplaire.categories,
             preconisations: this.exemplaire.preconisations,
             mouvements: this.exemplaire.mouvements,
+            estEncaissable: this.exemplaire.estEncaissable,
             etat: this.exemplaire.etat,
             affichagePrix: this.exemplaire.affichagePrix,
             contientRessources: this.exemplaire.contientRessources,
@@ -346,6 +369,7 @@ export class PrevisualisationExemplaireComponent implements OnInit {
       objetEnregistre: this.exemplaire.objetEnregistre,
       categories: this.exemplaire.categories,
       preconisations: this.exemplaire.preconisations,
+      estEncaissable: this.exemplaire.estEncaissable,
       mouvements: this.exemplaire.mouvements,
       etat: this.exemplaire.etat,
       affichagePrix: this.exemplaire.affichagePrix,

@@ -24,6 +24,15 @@ export class ComptesService {
     );
   }
 
+  getCompteByUser(idUser:string):Observable<IComptes>{
+    return this.getAllComptes().pipe(
+      map(x=>
+        {
+          return x.find(p=>p.personnel?.id==idUser) as IComptes
+        })
+    );
+  }
+
   getComptesByLibelle(libelle:string): Observable<IComptes[]> {
     return this.http.get<IComptes[]>('api/comptes').pipe(
       map(x=>

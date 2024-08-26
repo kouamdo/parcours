@@ -40,6 +40,7 @@ export class ViewExemplaireComponent implements OnInit {
     typeMouvement: TypeMouvement.Neutre,
     docEtats: [],
     dateCreation: new Date,
+    estEncaissable: false,
     personneRattachee: {
       id: '',
       nom: '',

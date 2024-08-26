@@ -1,3 +1,4 @@
+import { IPatient } from "./Patient";
 import { IPersonnel } from "./personnel";
 
 export interface IComptes {
@@ -6,5 +7,5 @@ export interface IComptes {
     libelle: string,
     montantDecouvertMax?: number,
     dateCreation: Date,
-    personnel?: IPersonnel
+    personnel?: IPatient
 }
