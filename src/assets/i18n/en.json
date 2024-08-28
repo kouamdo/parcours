@@ -337,7 +337,9 @@
       "title6": "Category",
       "title7": "Caracteristic",
       "title8": "Ressources",
-      "title9": "sell prise"
+      "title9": "sell prise",
+      "title11": "Percentage Covered",
+      "title12": "Amount Covered"
     },
     "form": {
       "text1": "Field Required",

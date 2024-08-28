@@ -23407,31 +23407,7 @@ export class InMemDBService implements InMemoryDbService {
         montantRemise: 0,
         pourcentageRemise:10,
         dateCreation: new Date(),
-        famille: [
-          {
-            id: '1', libelle: 'Electronique', description: 'sang', etat: true
-          },
-          {
-            id: '3', libelle: 'pediatrie', description: 'enfant', etat: true,
-          },
-        ],
         ressource: [
-          {
-            id: '1',
-            libelle: 'transfusion',
-            etat: true,
-            quantite: 10,
-            scanBarCode: '6911989109209',
-            prixEntree: 1000,
-            prixDeSortie: 1050,
-            unite: 'Litre',
-            famille: {
-              id: '1',
-              libelle: 'Electronique',
-              description: 'sang',
-              etat: true,
-            },
-          },
           {
             id: '2',
             libelle: 'Medical',

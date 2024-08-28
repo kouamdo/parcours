@@ -59,17 +59,10 @@
                 </div>
             </div>
             <div *ngIf="document.contientRessources == true" class="block2 card mt-2 pt-1" id="sectionAjoutPreco">
-                <div class="togglePromo">
-                    <mat-toolbar class="bg-light">
-                        <div>{{"promo-distributeur.title2" | translate}}</div>
-                        <mat-slide-toggle (click)="change()" class="ml-2">
-                        </mat-slide-toggle>
-                    </mat-toolbar>
-                </div>
                 <div>
                     <h3>{{'document.exemplaire.title3' | translate}} :</h3>
                     <div class="searchBlock" [ngClass]="{'searchBlock': document.contientDistributeurs, 'searchBlockUnique': !document.contientDistributeurs}">
-                        <div *ngIf="document.contientDistributeurs == true" class="blockAutoDistributeurs">
+                        <div *ngIf="document.contientDistributeurs == true && !document.beneficiaireObligatoire" class="blockAutoDistributeurs">
                             <form class="example-form-entete">
                                 <h4>{{'preconisation.table.title6' | translate}}</h4>
                                 <input type="text" matInput [formControl]="distributeurControl" [matAutocomplete]="autoDistributeur">
@@ -164,13 +157,10 @@
                             <!-- prixEntrée Column -->
                             <ng-container *ngIf="document.affichagePrix == true && document.typeMouvement == typeAjout" matColumnDef="prixEntrée">
                                 <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{'ressource.table.title5' | translate}} </th>
-                                <td class="text-dark containCell promo" mat-cell *matCellDef="let element">
+                                <td class="text-dark containCell" mat-cell *matCellDef="let element">
                                     <label class="custom-control">
                                         <input class="form-control" type="number" [(ngModel)]="element.prix" [ngModelOptions]="{standalone: true}">
-                                    </label> 
-                                    <div>
-                                        <span>{{remisePromo}}</span>
-                                    </div>
+                                    </label>
                                 </td>
                             </ng-container>
 
@@ -184,6 +174,26 @@
                                 </td>
                             </ng-container>
 
+                            <!-- pourcentageCharge Column -->
+                            <ng-container *ngIf="document.affichagePrix == true && document.typeMouvement != typeNeutre" matColumnDef="pourcentageCharge">
+                                <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{'ressource.table.title11' | translate}} </th>
+                                <td class="text-dark containCell" mat-cell *matCellDef="let element">
+                                    <label class="custom-control">
+                                        <input class="form-control" type="number" value="{{remisePromo | number:'1.2-2' }}" disabled>
+                                    </label> 
+                                </td>
+                            </ng-container>
+
+                            <!-- montantCharge Column -->
+                            <ng-container *ngIf="document.affichagePrix == true && document.typeMouvement != typeNeutre" matColumnDef="montantCharge">
+                                <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{'ressource.table.title12' | translate}} </th>
+                                <td class="text-dark containCell" mat-cell *matCellDef="let element">
+                                    <label class="custom-control">
+                                        <input class="form-control" type="number" [(ngModel)]="element.prix" [ngModelOptions]="{standalone: true}" disabled>
+                                    </label> 
+                                </td>
+                            </ng-container>
+
                             <!-- montant total Column -->
                             <ng-container *ngIf="document.affichagePrix == true" matColumnDef="montant total">
                                   <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{'ressource.table2.title10' | translate}}</th>
@@ -191,7 +201,7 @@
                             </ng-container>
 
                           <!-- distributeur Column -->
-                          <ng-container *ngIf="document.contientDistributeurs == true" matColumnDef="distributeur">
+                          <ng-container *ngIf="document.contientDistributeurs == true && !document.beneficiaireObligatoire" matColumnDef="distributeur">
                                 <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{'preconisation.table.title5' | translate}} </th>
                                 <td class="text-dark containCell" mat-cell *matCellDef="let element; let i = index"><div class="modifierDistributeurBlock" title="{{element.distributeur?.raisonSocial}}">{{element.distributeur?.raisonSocial}}<span role="button" title="{{'document.exemplaire.text3' | translate}}" (click)="InitialiseDistributeurControlPourModufication(i)"><i class="fa fa-pen-alt text-warning" aria-hidden="true"></i></span></div></td>
                         </ng-container>
@@ -220,11 +230,11 @@
                             </div>
                             <div class="total">
                                 <span class="mr-2">{{'ressource.table2.title12' | translate}}</span>
-                                <input type="text" [value]="sommeMontants(this.ELEMENTS_TABLE_MOUVEMENTS)-sommeMontants(this.ELEMENTS_TABLE_MOUVEMENTS_AVEC_PROMO)" disabled>
+                                <input type="text" [value]="sommeMontants(this.ELEMENTS_TABLE_MOUVEMENTS)-sommeMontants(this.ELEMENTS_TABLE_MOUVEMENTS_AVEC_PROMO) | number:'1.2-2' " disabled>
                             </div>
                             <div class="total">
                                 <span class="mr-2">{{'ressource.table2.title13' | translate}}</span>
-                                <input type="text" [value]="sommeMontants(this.ELEMENTS_TABLE_MOUVEMENTS_AVEC_PROMO)" disabled>
+                                <input type="text" [value]="sommeMontants(this.ELEMENTS_TABLE_MOUVEMENTS_AVEC_PROMO) | number:'1.2-2' " disabled>
                             </div>
                          </div>
 

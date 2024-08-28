@@ -360,7 +360,9 @@
       "title7": "Caractéristiques",
       "title8": "Ressources",
       "title9": "Prix de sortie",
-      "title10": "Scanner"
+      "title10": "Scanner",
+      "title11": "pourcentage pris en charge",
+      "title12": "montant pris en charge"
     },
     "form": {
       "text1": "Champ Obligatoire",

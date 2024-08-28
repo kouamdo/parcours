@@ -165,14 +165,13 @@ export class NewExemplaireComponent implements OnInit {
   laPersonneRattachee : IPatient | undefined 
   codeControl = new FormControl()
   promotion : IPromo | undefined
-  toggle:boolean = false;
   distributeurR: string = '';
   ressource: string = '';
   mouvements: IMouvement[] = [];
   promotions: IPromo[] = []; // Ceci devrait contenir les promotions existantes
   promoApplicable?: IPromo; // La promotion qui est applicable si le distributeur correspond
   private storageKey = 'mouvements'; // La variable qui sera stockée dans le session storage
-  remisePromo : string = "" // laveur de la promotion
+  remisePromo : number = 0 // laveur de la promotion
 
 
   constructor(
@@ -425,12 +424,14 @@ export class NewExemplaireComponent implements OnInit {
    * Methode qui permet de rajouter les colones de prix et montants si affichePrix a la valeur true
    */
   formerEnteteTableauMissions(){
-    if (this.document.contientDistributeurs == true) {
+    if (this.document.contientDistributeurs == true && !this.document.beneficiaireObligatoire) {
       let distributeur : string = "distributeur"
       this.displayedRessourcesColumns.push(distributeur)
     }
     if ((this.document.affichagePrix == true)) {
       let prix : string = "prix"
+      let pourcentageCharge : string = "pourcentageCharge"
+      let montantCharge : string = "montantCharge"
       let montant : string = "montant total"
       if (this.document.typeMouvement == TypeMouvement.Reduire) {
         prix = "prixDeSortie"
@@ -440,6 +441,8 @@ export class NewExemplaireComponent implements OnInit {
         prix = "prix"
       }
       this.displayedRessourcesColumns.push(prix)
+      this.displayedRessourcesColumns.push(pourcentageCharge)
+      this.displayedRessourcesColumns.push(montantCharge)
       this.displayedRessourcesColumns.push(montant)
     }
   }
@@ -725,11 +728,6 @@ export class NewExemplaireComponent implements OnInit {
     })
   }
 
-// méthode permettant d'activer/désactiver l'application de promotion
-  change(){
-    this.toggle = !this.toggle;    
-  }
-
   verifieSiPromoAppliquable(){
     
   }
@@ -770,10 +768,11 @@ export class NewExemplaireComponent implements OnInit {
 
             if (promo.pourcentageRemise > 0) {
                 remise = prix * (promo.pourcentageRemise / 100);
-                this.remisePromo = "- " + promo.pourcentageRemise + " %"
+                this.remisePromo = promo.pourcentageRemise
             } else if (promo.montantRemise > 0) {
                 remise = promo.montantRemise;
-                this.remisePromo = "- " + promo.montantRemise + " uc"
+                // remise = (promo.montantRemise/mouvement.prix)*100;
+                this.remisePromo = promo.montantRemise
             }
 
             remise = Math.min(remise, prix); // S'assurer que la remise n'excède pas le prix
