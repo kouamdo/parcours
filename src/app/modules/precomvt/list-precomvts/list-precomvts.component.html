@@ -56,7 +56,7 @@
                                     <span>{{action.nom}}</span>
                                   </button>
                                   <button *ngIf="action.bouton == 'true'" class="dropdown-item nav-link" (click)="getPrecoMvtId(element.id); openViewPrecoDialog()">
-                                    <span>{{action.nom}}</span>
+                                    <span>{{action.nom | translate}}</span>
                                   </button>
                                 </div>
                               </div>

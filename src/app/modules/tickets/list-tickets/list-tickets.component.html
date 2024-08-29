@@ -67,8 +67,16 @@
                                     <span>...</span>
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="triggerId">
-                                  <div class="d-flex justify-content-center">
-                                    <button *ngIf="element.statut == statutTicketTraite" class="btn"
+                                  <div *ngFor="let action of actions">
+                                    <button *ngIf="action.bouton == 'false'" class="dropdown-item nav-link" [routerLink]="[action.lien,element.id]">
+                                      <span>{{action.nom}}</span>
+                                    </button>
+                                  </div>
+                                  <div *ngFor="let action of actions" class="d-flex justify-content-center">
+                                    <button *ngIf="action.bouton == 'false'" class="dropdown-item nav-link" [routerLink]="[action.lien,element.id]">
+                                      <span>{{action.nom}}</span>
+                                    </button>
+                                    <button *ngIf="element.statut == statutTicketTraite && action.bouton == 'false'" class="btn"
                                       [useExistingCss]="true"
                                       styleSheetFile="assets/css/ticketPrint.scss"
                                       printSectionId="ticketView"

@@ -24784,7 +24784,9 @@ export class InMemDBService implements InMemoryDbService {
                   icone: 'fas fa-chart-pie',
                   actif: '',
                   elements: [
-                    { nom: 'Rechercher', lien: 'tickets/list-tickets', bouton: 'false' },
+                    { nom: 'Rechercher', lien: 'tickets/list-tickets', bouton: 'false', action: [
+                      { nom: 'Imprimer', lien: '', bouton: 'true' }
+                    ] },
                     {
                       nom: 'Afficher le panneau',
                       lien: '/panneau-tickets',
@@ -24834,7 +24836,8 @@ export class InMemDBService implements InMemoryDbService {
                     ]
                     },
                     { nom: 'Rechercher', lien: './documents/list-documents', bouton: 'false', action: [
-                      { nom: 'Modifier', lien: '../document-nouveau', bouton: 'false'}
+                      { nom: 'Modifier', lien: '../document-nouveau', bouton: 'false'},
+                      { nom: 'Vue', lien: '../view-document', bouton: 'false'}
                     ] },
                   ],
                 },
@@ -24860,7 +24863,8 @@ export class InMemDBService implements InMemoryDbService {
                       {nom: 'Creer', lien: '', bouton: 'true', type: 'global'}
                     ] },
                     { nom: 'Rechercher', lien: './roles/list-roles', bouton: 'false', action: [
-                      { nom: 'Modifier', lien: '../role-nouveau', bouton: 'false'}
+                      { nom: 'Modifier', lien: '../role-nouveau', bouton: 'false'},
+                      { nom: 'Affecter Mission', lien: '../affecte-mission-role', bouton: 'false'}
                     ] },
                   ],
                 },
@@ -24886,7 +24890,8 @@ export class InMemDBService implements InMemoryDbService {
                       {nom: 'Creer', lien: '', bouton: 'true', type: 'global'}
                     ] },
                     { nom: 'Rechercher', lien: './preconisations/list-precomvts', bouton: 'false', action: [
-                      { nom: 'Modifier', lien: '../precomvt-nouvelle', bouton: 'false'}
+                      { nom: 'Modifier', lien: '../precomvt-nouvelle', bouton: 'false'},
+                      { nom: 'patient.table.actions.link3', lien: '', bouton: 'true'}
                     ] },
                   ],
                 },
@@ -25010,7 +25015,9 @@ export class InMemDBService implements InMemoryDbService {
                   icone: 'fas fa-chart-pie',
                   actif: '',
                   elements: [
-                    { nom: 'Search', lien: 'tickets/list-tickets', bouton: 'false' },
+                    { nom: 'Search', lien: 'tickets/list-tickets', bouton: 'false', action: [
+                      { nom: 'Print', lien: '', bouton: 'true' }
+                    ] },
                     { nom: 'View panel', lien: 'tickets/panneau-tickets', bouton: 'false' },
                   ],
                 },
@@ -25073,7 +25080,8 @@ export class InMemDBService implements InMemoryDbService {
                     ]
                     },
                     { nom: 'Search', lien: './documents/list-documents', bouton: 'false', action: [
-                      { nom: 'Update', lien: '../document-nouveau', bouton: 'false' }
+                      { nom: 'Update', lien: '../document-nouveau', bouton: 'false' },
+                      { nom: 'View', lien: '../view-document', bouton: 'false'}
                     ] },
                   ],
                 },
@@ -25099,7 +25107,8 @@ export class InMemDBService implements InMemoryDbService {
                       {nom: 'New', lien: '', bouton: 'true', type: 'global'}
                     ] },
                     { nom: 'search', lien: './roles/list-roles', bouton: 'false', action: [
-                      { nom: 'Update', lien: '../role-nouveau', bouton: 'false' }
+                      { nom: 'Update', lien: '../role-nouveau', bouton: 'false' },
+                      { nom: 'Mission', lien: '../affecte-mission-role', bouton: 'false'}
                     ] },
                   ],
                 },
@@ -25125,7 +25134,8 @@ export class InMemDBService implements InMemoryDbService {
                       {nom: 'New', lien: '', bouton: 'true', type: 'global'}
                     ] },
                     { nom: 'Search', lien: './preconisations/list-precomvts', bouton: 'false', action: [
-                      { nom: 'Update', lien: '../precomvt-nouvelle', bouton: 'false' }
+                      { nom: 'Update', lien: '../precomvt-nouvelle', bouton: 'false' },
+                      { nom: 'patient.table.actions.link3', lien: '', bouton: 'true'}
                     ] },
                   ],
                 },
