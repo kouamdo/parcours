@@ -695,7 +695,10 @@ export class NewExemplaireComponent implements OnInit {
       if(this.distributeur != undefined){
         mvt.distributeur = this.distributeur
       }
-
+      if (this.distributeurControl.value != undefined && this.verifieSiPromoAppliquable(mvt, this.promotion!)) {
+        
+      this.ELEMENTS_TABLE_MOUVEMENTS_AVEC_PROMO.unshift(this.appliquerPromotion(mvt, this.promotion!))
+      }
       this.ELEMENTS_TABLE_MOUVEMENTS.unshift(mvt)
       this.dataSourceMouvements.data = this.ELEMENTS_TABLE_MOUVEMENTS
     }
@@ -707,106 +710,101 @@ export class NewExemplaireComponent implements OnInit {
     const year = parseInt(dateString.substring(4, 8));
 
     return new Date(year, month, day);
-}
+  }
+  getPromo(option: IDistributeur){
+    this.servicePromo.getPromoByIdAssurance(option.id).subscribe((promo) =>{
+      this.promotion = promo
+    })
+  }
+  public rechercherListingAssurance(option: IDistributeur){
+    // this.saveMouvements(this.ELEMENTS_TABLE_MOUVEMENTS)
+    this.getPromo(option)
+    this.ELEMENTS_TABLE_MOUVEMENTS.forEach(
+      mvt => {
+      let mouvementTemp = mvt
+        this.appliquerPromotion(mouvementTemp, this.promotion!)
+        this.ELEMENTS_TABLE_MOUVEMENTS_AVEC_PROMO.push(mouvementTemp)
+    });
+  }
 
   /**
    * Méthode permettant de déterminer si une assurance pocède une promotion en cours
    * @param option assurance
    */
-  public rechercherListingAssurance(option: IDistributeur){
-    this.saveMouvements(this.ELEMENTS_TABLE_MOUVEMENTS)
-    this.servicePromo.getPromoByIdAssurance(option.id).subscribe((promo) =>{
-      const today = new Date();
-      const dateDebut = this.datePipe.transform(promo.dateDebut, "mmddyyyy") 
-      const dateFin = this.datePipe.transform(promo.dateFin, "mmddyyyy") 
-  
-      // Vérification des Dates : La promotion n'est appliquée que si la date actuelle se situe entre la date de début et la date de fin de la promotion.
-      if (!(today < this.parseDateMMddyyyy(dateDebut!) || today > this.parseDateMMddyyyy(dateFin!))) {
-        this.promotion = promo
-        this.appliquerPromotion(this.promotion)
+  verifieSiPromoAppliquable(mouvement: IMouvement, promo: IPromo):boolean{
+    
+    const today = new Date(); 
+    let dateOk = false
+    let ressourceOk = false
+    let familleOk = false
+
+    // Vérification des Dates : La promotion n'est appliquée que si la date actuelle se situe entre la date de début et la date de fin de la promotion.
+    if (!(today < new Date(promo.dateDebut!) || today > new Date(promo.dateFin!))) {
+      this.promotion = promo
+      dateOk = true
+
+      let ressourceCouverte : boolean = false;
+      let familleCouverte : boolean = false;
+
+      // Vérification des Ressources et Familles : La promotion est appliquée si la ressource ou la famille de la ressource est couverte par la promotion.
+      if (promo.ressource) {
+        ressourceCouverte = promo.ressource?.some(r => r.id === mouvement.ressource.id);
+        ressourceOk = true
       }
-    })
+      if (promo.famille) {
+        familleCouverte = promo.famille?.some(f => f.id === mouvement.ressource.famille.id);
+        familleOk = true
+      }
+    }
+    if (dateOk == true && (ressourceOk == true || familleOk == true)) {
+      return true
+    } else {
+      return false
+    }
   }
 
-  verifieSiPromoAppliquable(){
-    
+  // Calcul de la Remise : La remise est calculée soit en pourcentage soit en montant fixe. Si les deux sont présents, seul le pourcentage est utilisé.
+  calculRemise(mouvement: IMouvement, promo: IPromo):number{
+    let remise = 0;
+
+    if (promo.pourcentageRemise > 0) {
+        remise = mouvement.prix * (promo.pourcentageRemise / 100);
+        this.remisePromo = promo.pourcentageRemise
+    } else if (promo.montantRemise > 0) {
+        remise = promo.montantRemise;
+        // remise = (promo.montantRemise/mouvement.prix)*100;
+        this.remisePromo = promo.montantRemise
+    }
+
+    remise = Math.min(remise, mouvement.prix); // S'assurer que la remise n'excède pas le prix
+    const prixReduit = mouvement.prix - remise;
+    mouvement.prix = prixReduit
+    return prixReduit
   }
 
   /**
    * Ce code permet d'appliquer les promotions en tenant compte des ressources et des familles de ressources concernées dans les mouvements.
-   * @param mouvements tableau de mouvements sur lequel on applique la promo
+   * @param mouvements ligne de mouvement sur laquelle on applique la promo
    * @param promo promotion à apliquer
-   * @returns le tableau de mouvements soldés et le montant total de la remise
+   * @returns mouvement soldés
    */
-  appliquerPromotion(promo: IPromo): { mouvementsPromo: IMouvement[], totalRemise: number } {
-    let totalRemise = 0;
-    if (promo == undefined) {
-      return {
-        mouvementsPromo: [],
-        totalRemise
-      }
+  appliquerPromotion(mouvement: IMouvement, promo: IPromo):IMouvement{
+    if (this.verifieSiPromoAppliquable(mouvement, promo)) {
+      this.calculRemise(mouvement, promo)
     }
-
-    // Appliquer la promotion aux mouvements éligibles
-    this.ELEMENTS_TABLE_MOUVEMENTS_AVEC_PROMO = this.getMouvements()!
-    const mouvementsApresPromotion = this.ELEMENTS_TABLE_MOUVEMENTS_AVEC_PROMO.map(mouvement => {
-        const { ressource, quantite, prix } = mouvement;
-        let ressourceCouverte : boolean = false;
-        let familleCouverte : boolean = false;
-
-        // Vérification des Ressources et Familles : La promotion est appliquée si la ressource ou la famille de la ressource est couverte par la promotion.
-        if (promo.ressource) {
-          ressourceCouverte = promo.ressource?.some(r => r.id === ressource.id);
-        }
-        if (promo.famille) {
-          familleCouverte = promo.famille?.some(f => f.id === ressource.famille.id);
-        }
-
-        // Calcul de la Remise : La remise est calculée soit en pourcentage soit en montant fixe. Si les deux sont présents, seul le pourcentage est utilisé.
-        if (ressourceCouverte == true || familleCouverte == true) {
-            let remise = 0;
-
-            if (promo.pourcentageRemise > 0) {
-                remise = prix * (promo.pourcentageRemise / 100);
-                this.remisePromo = promo.pourcentageRemise
-            } else if (promo.montantRemise > 0) {
-                remise = promo.montantRemise;
-                // remise = (promo.montantRemise/mouvement.prix)*100;
-                this.remisePromo = promo.montantRemise
-            }
-
-            remise = Math.min(remise, prix); // S'assurer que la remise n'excède pas le prix
-
-            const prixReduit = prix - remise;
-            totalRemise += remise * quantite;
-            mouvement.prix = prixReduit
-
-            // Retour des Mouvements : La fonction retourne les mouvements avec le prix réduit et le total des remises appliquées.
-            return {
-                ...mouvement,
-                prix: prixReduit
-            };
-        }
-
-        return mouvement;
-    });
-    
-    return {
-      mouvementsPromo: mouvementsApresPromotion,
-        totalRemise
-    };
-}
-
-  // Stocker un tableau de mouvements
-  saveMouvements(mouvements: IMouvement[]): void {
-    sessionStorage.setItem(this.storageKey, JSON.stringify(mouvements));
+    return mouvement
   }
 
-  // Récupérer un tableau de mouvements
-  getMouvements(): IMouvement[] | null {
-    const mouvementsData = sessionStorage.getItem(this.storageKey);
-    return mouvementsData ? JSON.parse(mouvementsData) as IMouvement[] : null;
-  }
+  // // Stocker un tableau de mouvements
+  // saveMouvements(mouvements: IMouvement[]): void {
+  //   sessionStorage.setItem(this.storageKey, JSON.stringify(mouvements));
+  // }
+
+  // // Récupérer un tableau de mouvements
+  // getMouvements(): IMouvement[] | null {
+  //   const mouvementsData = sessionStorage.getItem(this.storageKey);
+  //   return mouvementsData ? JSON.parse(mouvementsData) as IMouvement[] : null;
+  // }
 
   // Supprimer un tableau de mouvements
   removeMouvements(): void {
