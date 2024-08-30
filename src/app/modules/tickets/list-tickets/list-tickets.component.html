@@ -76,7 +76,7 @@
                                     <button *ngIf="action.bouton == 'false'" class="dropdown-item nav-link" [routerLink]="[action.lien,element.id]">
                                       <span>{{action.nom}}</span>
                                     </button>
-                                    <button *ngIf="element.statut == statutTicketTraite && action.bouton == 'false'" class="btn"
+                                    <button *ngIf="element.statut == statutTicketTraite && action.bouton == 'true'" class="btn"
                                       [useExistingCss]="true"
                                       styleSheetFile="assets/css/ticketPrint.scss"
                                       printSectionId="ticketView"

@@ -6,7 +6,6 @@ export interface IPatient {
   dateNaissance?: Date;
   adresse: string;
   mail: string;
-  mdp: string;
   telephone: string;
   qrCodeValue: string;
   personnesRatachees?: IPatient[];

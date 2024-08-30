@@ -44,8 +44,7 @@ export class ViewExemplaireComponent implements OnInit {
       adresse: '',
       mail: '',
       telephone: '',
-      qrCodeValue: '',
-      mdp: ''
+      qrCodeValue: ''
     }
   };
   titre: string = '';
@@ -159,8 +158,7 @@ export class ViewExemplaireComponent implements OnInit {
               adresse: '',
               mail: '',
               telephone: '',
-              qrCodeValue: '',
-              mdp: ''
+              qrCodeValue: ''
             }
           };
       
@@ -207,8 +205,7 @@ export class ViewExemplaireComponent implements OnInit {
         adresse: '',
         mail: '',
         telephone: '',
-        qrCodeValue: '',
-        mdp: ''
+        qrCodeValue: ''
       }
     };
 
