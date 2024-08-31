@@ -121,7 +121,7 @@
                                 <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{'ressource.table2.title7' | translate}} </th>
                                 <td class="text-dark containCell" mat-cell *matCellDef="let element">
                                     <label class="custom-control">
-                                        <input class="form-control" type="number" [(ngModel)]="element.prix" [ngModelOptions]="{standalone: true}">
+                                        <input class="form-control" type="number" [disabled]="element.typeMouvement != 'Neutre'" [(ngModel)]="element.prix" [ngModelOptions]="{standalone: true}">
                                     </label> 
                                 </td>
                             </ng-container>
@@ -141,7 +141,7 @@
                                 <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{'ressource.table.title9' | translate}} </th>
                                 <td class="text-dark containCell" mat-cell *matCellDef="let element">
                                     <label class="custom-control">
-                                        <input class="form-control" type="number" [(ngModel)]="element.prix" [ngModelOptions]="{standalone: true}">
+                                        <input class="form-control" type="number" [disabled]="element.typeMouvement != 'Neutre'" [(ngModel)]="element.prix" [ngModelOptions]="{standalone: true}">
                                     </label> 
                                 </td>
                             </ng-container>
@@ -163,7 +163,7 @@
                                 <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{"patient.table.title8" | translate}} </th>
                                 <td class="text-dark containCell" mat-cell *matCellDef="let element; let i = index">
                                     <div class="actions">
-                                        <button class="btn p-0" [value]="element.id" title="clicker pour annuler la selection" (click)="retirerSelectionRessource(i)">
+                                        <button class="btn p-0" [disabled]="element.typeMouvement != 'Neutre'" [value]="element.id" title="clicker pour annuler la selection" (click)="retirerSelectionRessource(i)">
                                             <i class="fa fa-trash text-danger" aria-hidden="true"></i>
                                         </button>
                                         <span><i class="fa fa-info-circle text-info ml-1" (click)="getRessourceId(element.id)" aria-hidden="true" title="{{'preconisation.table.title4' | translate}}"></i></span>
@@ -185,6 +185,129 @@
                                        aria-label="Select page of periodic elements">
                         </mat-paginator>
                     </div>
+                </div>
+
+                <!-- tableau de mouvement d'une caisse -->
+                <div class="card-body">
+                    <form [formGroup]="formeMvt" *ngIf="formeMvt" >
+                        <div class="">
+                            <div class="d-flex flex-wrap">
+                                <div class="form-group">
+                                    <div>
+                                        <div class="champs">
+                                            <label for="nom" class="label">
+                                                {{'personnel.table.title1' | translate}}
+                                            </label>
+                                            <input type="text" [value]="exemplaire.personneRattachee.nom" disabled class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="champs">
+                                        <label  for="exemplaire" class="label">
+                                            {{'mvtCaisse.table.title6' | translate}}
+                                        </label>
+                                        <input  type="text" [value]="document.titre" disabled class="form-control" style="color: black;">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div>
+                                        <div class="champs">
+                                            <label for="montant" class="label">
+                                                {{'mvtCaisse.table.title0' | translate}}
+                                            </label>
+                                            <input type="number" formControlName="montant" name="montant" class="form-control">
+                                        </div>
+                                        <div *ngIf="submitted && fCaisse['montant'].errors"  class="alert alert-danger" >
+                                            <div *ngIf="fCaisse['montant'].errors['required']">{{'mvtCaisse.form.text1' | translate}}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div>
+                                        <div class="champs">
+                                            <label for="libelle" class="label">
+                                                {{'mvtCaisse.table.title1' | translate}}
+                                            </label>
+                                            <input type="text" formControlName="libelle" name="libelle" class="form-control">
+                                        </div>
+                                        <div *ngIf="submitted && fCaisse['libelle'].errors"  class="alert alert-danger" >
+                                            <div *ngIf="fCaisse['libelle'].errors['required']">{{'mvtCaisse.form.text2' | translate}}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div>
+                                        <div class="champs">
+                                            <label for="typeMvt" class="label">
+                                                {{'mvtCaisse.table.title3' | translate}}
+                                            </label>
+                                            <input type="text" formControlName="typeMvt" name="typeMvt" class="form-control">
+                                        </div>
+                                        <div *ngIf="submitted && fCaisse['typeMvt'].errors"  class="alert alert-danger" >
+                                            <div *ngIf="fCaisse['typeMvt'].errors['required']">{{'mvtCaisse.form.text7' | translate}}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div>
+                                        <div class="champs">
+                                            <label for="moyenPaiement" class="label">
+                                                {{'mvtCaisse.table.title2' | translate}}
+                                            </label>
+                                            <input type="text" formControlName="moyenPaiement" name="moyenPaiement" class="form-control">
+                                        </div>
+                                        <div *ngIf="submitted && fCaisse['moyenPaiement'].errors"  class="alert alert-danger" >
+                                            <div *ngIf="fCaisse['moyenPaiement'].errors['required']">{{'mvtCaisse.form.text3' | translate}}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group" id="etat">
+                                    <div>
+                                        <div class="champs">
+                                            <label for="etat" class="label" >
+                                                {{'attributs.table.title3' | translate}}
+                                            </label>
+                                            <p class="d-flex align-items-center choix" >
+                                            <input type="checkbox" [checked]="formeMvt.get('etat')?.value" value="true" formControlName="etat"  name="etat" id="etat" placeholder="{{'attributs.table.title3' | translate}}"  class="form-control">
+                                          </p>
+                                        </div>
+                                        <div *ngIf="submitted && fCaisse['etat'].errors"  class="alert alert-danger" >
+                                            <div *ngIf="fCaisse['etat'].errors['required']">{{'attributs.form.text3' | translate}}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div>
+                                        <div class="champs">
+                                            <label for="referencePaiement" class="label">
+                                                {{'mvtCaisse.table.title4' | translate}}
+                                            </label>
+                                            <input type="text" formControlName="referencePaiement" name="referencePaiement" class="form-control">
+                                        </div>
+                                        <div *ngIf="submitted && fCaisse['referencePaiement'].errors"  class="alert alert-danger" >
+                                            <div *ngIf="fCaisse['referencePaiement'].errors['required']">{{'mvtCaisse.form.text4' | translate}}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="champs">
+                                        <label  for="caisse" class="label">
+                                            {{'mvtCaisse.table.title5' | translate}}
+                                        </label>
+                                        <mat-form-field class="example-full-width" appearance="fill">
+                                            <input  type="text" matInput [matAutocomplete]="auto"  aria-label="caisse" formControlName="caisse" name="caisse" id="caisse" placeholder="" class="w-100" style="color: black;">
+                                            <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFnCaisse" >
+                                            <mat-option *ngFor="let option of caisses" [value]="option">
+                                                {{option.libelle}}
+                                            </mat-option>
+                                            </mat-autocomplete>
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

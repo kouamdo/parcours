@@ -31,6 +31,12 @@ import { TypeMouvement } from 'src/app/modele/typeMouvement';
 import { ModalCodebarreService } from '../../shared/modal-codebarre/modal-codebarre.service';
 import { PatientsService } from 'src/app/services/patients/patients.service';
 import { IPatient } from 'src/app/modele/Patient';
+import { IMouvementCaisses } from 'src/app/modele/mouvement-caisses';
+import { ICaisses } from 'src/app/modele/caisses';
+import { IComptes } from 'src/app/modele/comptes';
+import { MouvementCaisseService } from 'src/app/services/mouvement-caisse/mouvement-caisse.service';
+import { ComptesService } from 'src/app/services/comptes/comptes.service';
+import { CaissesService } from 'src/app/services/caisses/caisses.service';
 
 @Component({
   selector: 'app-new-exemplaire',
@@ -97,6 +103,7 @@ export class NewExemplaireComponent implements OnInit {
   };
 
   formeExemplaire: FormGroup;
+  formeMvt: FormGroup;
   btnLibelle: string = 'Ajouter';
   submitted: boolean = false;
   controlExemplaire = new FormControl();
@@ -144,6 +151,16 @@ export class NewExemplaireComponent implements OnInit {
     'unite',
     'description'
   ]; // structure du tableau presentant les Ressources
+  ELEMENTS_TABLE_MOUVEMENTCAISSES: IMouvementCaisses[] = [];
+  dataSourceMouvementcaisses = new MatTableDataSource<IMouvementCaisses>(
+    this.ELEMENTS_TABLE_MOUVEMENTCAISSES
+  );
+  displayedMvtCaissesColumns: string[] = [
+    'N° Compte',
+    'Montant Réglé',
+    'Moyen Paiement',
+    'Reste'
+  ];
   TABLE_PRECONISATION_RESSOURCES: IPrecoMvt[] = [];
   montantTotal : number = 0;
   soustotal : number = 0;
@@ -154,6 +171,8 @@ export class NewExemplaireComponent implements OnInit {
   typeAjout : string = TypeMouvement.Ajout
   typeReduire : string = TypeMouvement.Reduire
   laPersonneRattachee : IPatient | undefined 
+  compte: IComptes | undefined
+  caisses: ICaisses[] = []
 
   constructor(
     private router: Router,
@@ -167,16 +186,29 @@ export class NewExemplaireComponent implements OnInit {
     private serviceExemplaire: ExemplaireDocumentService,
     private datePipe: DatePipe,
     private barService: ModalCodebarreService,
-    private servicePatient: PatientsService
+    private servicePatient: PatientsService,
+    private mvtCaisseService: MouvementCaisseService,
+    private compteService: ComptesService,
+    private caisseService: CaissesService,
   ) {
     this.formeExemplaire = this.formBuilder.group({
       _exemplaireDocument: new FormArray([]),
       _controlsSupprime: new FormArray([]),
     });
+    this.formeMvt = this.formBuilder.group({
+      etat: [true],
+      libelle: ['', [Validators.required]],
+      typeMvt: ['', [Validators.required]],
+      montant: [Number, [Validators.required]],
+      moyenPaiement: ['', [Validators.required]],
+      referencePaiement: ['', [Validators.required]],
+      caisse: new FormControl<string | ICaisses | ICaisses[]>('')
+    })
   }
   scan_val: any | undefined;
 
   ngOnInit(): void {
+    console.log("info doc :", this.exemplaire, this.document);
     
     let idPersonne : string = this.donneeEchangeService.getExemplairePersonneRatachee()
     this.servicePatient.getPatientById(idPersonne).subscribe(
@@ -187,6 +219,18 @@ export class NewExemplaireComponent implements OnInit {
         }
       }
     )
+
+    this.caisseService.getAllCaisses().subscribe(
+      (reponse) =>{
+        this.caisses=reponse
+      }
+    );
+
+    this.compteService.getCompteByUser(this.exemplaire.personneRattachee.id).subscribe((res) => {
+      if (res) {
+        this.compte = res;
+      }
+    })
 
     this.barService.getCode().subscribe((dt) => {
       this.scan_val = dt;
@@ -329,7 +373,7 @@ export class NewExemplaireComponent implements OnInit {
          //Bug du mocker apiMemory qui ne met pas à jour les données du document dans exemplaire
          //pour avoir la donnée fraiche on refait un appel à document
          //à supprimer lorsqu'on aura un vrai back connecté
-          this.modifierMouvementExemplaire(x.idDocument)
+          this.modifierMouvementExemplaire(x.idDocument)          
         });
     }
     if (this.idDocument != null && this.idDocument !== '') {
@@ -350,15 +394,17 @@ export class NewExemplaireComponent implements OnInit {
    */
   concatMouvementsSousExemplaireDocument(){
     let sousExelplaires : IExemplaireDocument[] = this.donneeEchangeService.dataDocumentSousDocuments
-    sousExelplaires.forEach(
-      element => {
-        if (element.mouvements) {
-          element.mouvements.forEach(
-            mvt => {
-              this.ELEMENTS_TABLE_MOUVEMENTS.push(mvt)
-          });
-        }     
-    });
+    if (sousExelplaires) {
+      sousExelplaires.forEach(
+        element => {
+          if (element.mouvements) {
+            element.mouvements!.forEach(
+              mvt => {
+                this.ELEMENTS_TABLE_MOUVEMENTS.push(mvt)
+            });
+          }     
+      });
+    }
     this.dataSourceMouvements.data = this.ELEMENTS_TABLE_MOUVEMENTS;
   }
 
@@ -541,6 +587,10 @@ export class NewExemplaireComponent implements OnInit {
     return this.formeExemplaire.get('_exemplaireDocument') as FormArray;
   }
 
+  get fCaisse() {
+    return this.formeMvt.controls;
+  }
+
   /**
    * Methodr qui permet de faire la somme des montants du tableau de mouvements
    * pour afficher le resultat dans la case montant total
@@ -603,6 +653,35 @@ export class NewExemplaireComponent implements OnInit {
         
         this.router.navigate(['/list-exemplaire']);
       });
+  }
+
+  displayFnCaisse(element: ICaisses): string {
+    return element && element.libelle ? element.libelle : '';
+  }
+
+  saveMvt(selectItem: any) {
+    this.submitted = true;
+
+    if(this.formeMvt.invalid) return;
+
+    let mvtCaisse: IMouvementCaisses = {
+      id: uuidv4(),
+      etat: selectItem.etat,
+      montant: selectItem.montant,
+      libelle: selectItem.libelle,
+      typeMvt: selectItem.typeMvt,
+      dateCreation: new Date(),
+      moyenPaiement: selectItem.moyenPaiement,
+      referencePaiement: selectItem.referencePaiement,
+      caisse: selectItem.caisse,
+      compte: selectItem.compte,
+      personnel: selectItem.personne,
+      exemplaire: selectItem.exemplaire
+
+    }
+
+    this.mvtCaisseService.ajouterMouvement(mvtCaisse).subscribe((obj) => {
+    })
   }
 
   /**
