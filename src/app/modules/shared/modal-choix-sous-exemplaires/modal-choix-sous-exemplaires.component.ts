@@ -92,7 +92,7 @@ export class ModalChoixSousExemplairesComponent implements OnInit {
 
   choisirDocument(){
     let valeurIdDocument  = sessionStorage.getItem("idDocumentPourExemplaire")
-    this.router.navigate(['exemplaire-nouveau/'.concat(valeurIdDocument!)]);
+    this.router.navigate(['parcours/missions/exemplaire-nouveau/'.concat(valeurIdDocument!)]);
   }
 
   ajoutSelectionDocument(idDocument: string) {

@@ -18,7 +18,7 @@ export class RoleAuthGuard implements CanActivate {
     menu.fonctionnalites.find((m) => lienUse = m.elements.find((l) => l.lien == './'+route.routeConfig?.path+'/'+route.children[0]!.routeConfig?.path || l.lien == route.routeConfig?.path+'/'+route.children[0].routeConfig?.path)!)
     console.log("ele du user :", lienUse, route.routeConfig?.path+'/'+route.children[0].routeConfig?.path, route);
     
-    if (lienUse || 'personnels/detail-user' == route.routeConfig?.path+'/'+route.children[0].routeConfig?.path || 'documents/historique-par-personne' == route.routeConfig?.path+'/'+route.children[0].routeConfig?.path || 'missions/executer-missions' == route.routeConfig?.path+'/'+route.children[0].routeConfig?.path) {
+    if (lienUse || 'personnels/detail-user' == route.routeConfig?.path+'/'+route.children[0].routeConfig?.path || 'documents/historique-par-personne' == route.routeConfig?.path+'/'+route.children[0].routeConfig?.path || 'missions/executer-missions' == route.routeConfig?.path+'/'+route.children[0].routeConfig?.path || 'missions/exemplaire-nouveau' == route.routeConfig?.path+'/'+route.children[0].routeConfig?.path) {
       return true;
     } else {
       this.router.navigate(['/parcours']);
