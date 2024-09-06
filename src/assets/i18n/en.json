@@ -258,7 +258,8 @@
       "text7": "If this box is checked, the distributor column will be visible when creating the movement of a copy of this document",
       "text8": "Mouvement's nature applied to thid document",
       "text9": "Mouvement's nature to apply to this document is required",
-      "text12": "If this box is checked, people would be asked when we create document"
+      "text12": "If this box is checked, people would be asked when we create document",
+      "text13": "If documents are here, they will be not considerated if 'link ressources' is disabled"
     },
     "view": {
       "title": "Document's Model",

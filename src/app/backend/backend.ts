@@ -2057,7 +2057,7 @@ export class InMemDBService implements InMemoryDbService {
             titre: 'Fiche de suivi',
             description:
               "Document delivre par le medecin ou un infirmier de l'etablissement",
-                beneficiaireObligatoire: true,
+                beneficiaireObligatoire: false,
             docEtats: [
               {
                 id: '1',
@@ -2554,7 +2554,7 @@ export class InMemDBService implements InMemoryDbService {
             titre: 'Fiche de soin',
             description:
               "Document delivre par le medecin ou un infirmier de l'etablissement",
-                beneficiaireObligatoire: true,
+                beneficiaireObligatoire: false,
             typeMouvement: 'Neutre',
             etat: true,
             affichagePrix: true,
@@ -5651,7 +5651,7 @@ export class InMemDBService implements InMemoryDbService {
         titre: 'Fiche de suivi',
         description:
           "Document delivre par le medecin ou un infirmier de l'etablissement",
-                beneficiaireObligatoire: true,
+                beneficiaireObligatoire: false,
         docEtats: [
           {
             id: '1',
@@ -6149,7 +6149,7 @@ export class InMemDBService implements InMemoryDbService {
         titre: 'Fiche de soin',
         description:
           "Document delivre par le medecin ou un infirmier de l'etablissement",
-                beneficiaireObligatoire: true,
+                beneficiaireObligatoire: false,
         typeMouvement: 'Neutre',
         etat: true,
         affichagePrix: false,
@@ -7103,7 +7103,7 @@ export class InMemDBService implements InMemoryDbService {
             titre: 'Fiche de suivi',
             description:
               "Document delivre par le medecin ou un infirmier de l'etablissement",
-                beneficiaireObligatoire: true,
+                beneficiaireObligatoire: false,
             docEtats: [
               {
                 id: '1',
@@ -7601,7 +7601,7 @@ export class InMemDBService implements InMemoryDbService {
             titre: 'Fiche de soin',
             description:
               "Document delivre par le medecin ou un infirmier de l'etablissement",
-                beneficiaireObligatoire: true,
+                beneficiaireObligatoire: false,
             typeMouvement: 'Neutre',
             etat: true,
             affichagePrix: true,
@@ -10340,7 +10340,7 @@ export class InMemDBService implements InMemoryDbService {
             titre: 'Fiche de soin',
             description:
               "Document delivre par le medecin ou un infirmier de l'etablissement",
-                beneficiaireObligatoire: true,
+                beneficiaireObligatoire: false,
             typeMouvement: 'Neutre',
             etat: true,
             affichagePrix: true,
@@ -14703,7 +14703,7 @@ export class InMemDBService implements InMemoryDbService {
             id: '3',
             titre: 'Fiche de soin',
             description: "Document delivre par le medecin ou un infirmier de l'etablissement",
-            beneficiaireObligatoire: true,
+            beneficiaireObligatoire: false,
             typeMouvement: 'Neutre',
             etat: true,
             affichagePrix: true,
@@ -19090,7 +19090,7 @@ export class InMemDBService implements InMemoryDbService {
             id: '3',
             titre: 'Fiche de soin',
             description: "Document delivre par le medecin ou un infirmier de l'etablissement",
-            beneficiaireObligatoire: true,
+            beneficiaireObligatoire: false,
             typeMouvement: 'Neutre',
             etat: true,
             affichagePrix: true,
@@ -24973,7 +24973,7 @@ export class InMemDBService implements InMemoryDbService {
                 titre: 'Fiche de suivi',
                 description:
                   "Document delivre par le medecin ou un infirmier de l'etablissement",
-                beneficiaireObligatoire: true,
+                beneficiaireObligatoire: false,
                 docEtats: [
                   {
                     id: '1',
@@ -25471,7 +25471,7 @@ export class InMemDBService implements InMemoryDbService {
                 titre: 'Fiche de soin',
                 description:
                   "Document delivre par le medecin ou un infirmier de l'etablissement",
-                beneficiaireObligatoire: true,
+                beneficiaireObligatoire: false,
                 typeMouvement: 'Neutre',
                 etat: true,
                 affichagePrix: true,
@@ -28578,7 +28578,7 @@ export class InMemDBService implements InMemoryDbService {
             titre: 'Fiche de suivi',
             description:
               "Document delivre par le medecin ou un infirmier de l'etablissement",
-                beneficiaireObligatoire: true,
+                beneficiaireObligatoire: false,
             docEtats: [
               {
                 id: '1',
@@ -30111,7 +30111,7 @@ export class InMemDBService implements InMemoryDbService {
                     titre: 'Fiche de suivi',
                     description:
                       "Document delivre par le medecin ou un infirmier de l'etablissement",
-                beneficiaireObligatoire: true,
+                beneficiaireObligatoire: false,
                     docEtats: [
                       {
                         id: '1',
@@ -30609,7 +30609,7 @@ export class InMemDBService implements InMemoryDbService {
                     titre: 'Fiche de soin',
                     description:
                       "Document delivre par le medecin ou un infirmier de l'etablissement",
-                beneficiaireObligatoire: true,
+                beneficiaireObligatoire: false,
                     typeMouvement: 'Neutre',
                     etat: true,
                     affichagePrix: true,
@@ -33731,7 +33731,7 @@ export class InMemDBService implements InMemoryDbService {
                 titre: 'Fiche de soin',
                 description:
                   "Document delivre par le medecin ou un infirmier de l'etablissement",
-                beneficiaireObligatoire: true,
+                beneficiaireObligatoire: false,
                 typeMouvement: 'Neutre',
                 etat: true,
                 affichagePrix: false,
@@ -34687,7 +34687,7 @@ export class InMemDBService implements InMemoryDbService {
                     titre: 'Fiche de suivi',
                     description:
                       "Document delivre par le medecin ou un infirmier de l'etablissement",
-                beneficiaireObligatoire: true,
+                beneficiaireObligatoire: false,
                     docEtats: [
                       {
                         id: '1',
@@ -35186,7 +35186,7 @@ export class InMemDBService implements InMemoryDbService {
                     titre: 'Fiche de soin',
                     description:
                       "Document delivre par le medecin ou un infirmier de l'etablissement",
-                beneficiaireObligatoire: true,
+                beneficiaireObligatoire: false,
                     typeMouvement: 'Neutre',
                     etat: true,
                     affichagePrix: true,

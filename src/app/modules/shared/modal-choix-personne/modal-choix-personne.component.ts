@@ -1,12 +1,14 @@
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { IPatient } from 'src/app/modele/Patient';
 import { DonneesEchangeService } from 'src/app/services/donnees-echange/donnees-echange.service';
 import { PatientsService } from 'src/app/services/patients/patients.service';
 import { ModalCodebarreService } from '../../shared/modal-codebarre/modal-codebarre.service';
+import { DocumentService } from 'src/app/services/documents/document.service';
+import { ModalChoixSousExemplairesComponent } from '../modal-choix-sous-exemplaires/modal-choix-sous-exemplaires.component';
 
 @Component({
   selector: 'app-modal-choix-personne',
@@ -27,6 +29,8 @@ export class ModalChoixPersonneComponent  implements OnInit{
     @Inject(MAT_DIALOG_DATA) public data: any,
     private servicePersonne:PatientsService,
     private donneeExemplairePersonneRatacheeService:DonneesEchangeService,
+    private documentService:DocumentService,
+    private dialogDef : MatDialog, 
     private barService: ModalCodebarreService
   ) {}
   
@@ -101,16 +105,47 @@ export class ModalChoixPersonneComponent  implements OnInit{
    * pouvoir déterminer l'url de la page suivante
    * @returns l'url de redirection
    */
-  navigate() : string{
+  navigate(){
     
-    let valeurIdDocument  = sessionStorage.getItem("idDocumentPourExemplaire")
-
-    if (this.donneeExemplairePersonneRatacheeService.getUrlSource() == "Exécuter") {
-      this.url= "exemplaire-nouveau/".concat(valeurIdDocument!)
-    }else if (this.donneeExemplairePersonneRatacheeService.getUrlSource() == "Historique des documents") {
-      this.url= "../historique-par-personne"
-    }
-    return this.url
+    let valeurIdDocument = sessionStorage.getItem("idDocumentPourExemplaire")
+    this.documentService.getDocumentById(valeurIdDocument!).subscribe(
+      objet =>{
+        if (objet.contientRessources == true) {
+          this.url= "exemplaire-nouveau/".concat(valeurIdDocument!)
+          const dialogRef = this.dialogDef.open(ModalChoixSousExemplairesComponent, 
+            {
+              maxWidth: '100vw',
+              maxHeight: '100vh',
+              width:'100%',
+              height:'100%',
+              enterAnimationDuration:'1000ms',
+              exitAnimationDuration:'1000ms',
+              data: valeurIdDocument
+            })
+        }else if (this.donneeExemplairePersonneRatacheeService.getUrlSource() == "Historique des documents") {
+          this.router.navigate(['../historique-par-personne'])
+        }
+      }
+    )
+  }
+  
+  /**
+   * Methode permettant d'ouvrir la modal permettant d'associer des sous exemplaire à celui qu'on veut creer
+   */
+  openSousExemplaireDocumentDialog(){
+    
+    // else if (this.document?.beneficiaireObligatoire == false && this.document?.contientRessources == true) {
+      const dialogRef = this.dialogDef.open(ModalChoixSousExemplairesComponent, 
+      {
+        maxWidth: '100vw',
+        maxHeight: '100vh',
+        width:'100%',
+        height:'100%',
+        enterAnimationDuration:'1000ms',
+        exitAnimationDuration:'1000ms',
+        // data: this.idDocumentPourExemplaire
+      })
+    // }
   }
   public rechercherListingPersonnes(option: IPatient) {
     this.donneeExemplairePersonneRatacheeService.setExemplairePersonneRatachee(option)

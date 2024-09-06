@@ -280,7 +280,8 @@
       "text9": "Le type des mouvements effectués sur ce document est obligatoire",
       "text10": "Le Format de code",
       "text11": "Le Format de code est obligatoire",
-      "text12": "Si cette case est cochée, une personne bénéficiaire sera demandée à la création du document"
+      "text12": "Si cette case est cochée, une personne bénéficiaire sera demandée à la création du document",
+      "text13": "Les documents présents ici ne seront pas prix en compte si la case 'lier des ressources' est désactivée"
     },
     "view": {
       "title": "Modele ",

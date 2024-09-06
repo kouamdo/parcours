@@ -32,6 +32,7 @@ import { IAssociationCategorieAttributs } from 'src/app/modele/association-categ
 import { TypeMouvement } from 'src/app/modele/typeMouvement';
 import { ModalDocEtatsComponent } from '../../shared/modal-document-doc-etats/modal-document-doc-etats.component';
 import { IDocEtats } from 'src/app/modele/doc-etats';
+import { log } from 'console';
 
 @Component({
   selector: 'app-new-form-document',
@@ -98,6 +99,7 @@ export class NewFormDocumentComponent implements OnInit {
 
   typeMvt: string[] = [];
   formatsCode: string[] = [];
+  documentParentDesactive = false
 
   constructor(
     private router: Router,
@@ -116,15 +118,18 @@ export class NewFormDocumentComponent implements OnInit {
       description: [''],
       typeMouvement: ['', [Validators.required]],
       etat: new FormControl(true),
-      affichagePrix: new FormControl(true),
-      contientRessources: new FormControl(true),
-      contientDistributeurs: new FormControl(true),
+      affichagePrix: new FormControl(false),
+      contientRessources: new FormControl(false),
+      contientDistributeurs: new FormControl(false),
       beneficiaireObligatoire: new FormControl(true),
       formatCode: [ '', [ Validators.required]]
     });
   }
   ngOnInit(): void {
     this.mission$ = this.getAllMissions();
+    this.forme.controls['affichagePrix'].disable()
+    this.forme.controls['contientDistributeurs'].disable()    
+    this.documentParentDesactive = true
     this.donneeDocCatService.getTypeMvt().subscribe((x) => (this.typeMvt = x.type));
     this.donneeDocCatService.getFormatCode().subscribe((f) => (this.formatsCode = f.type));
 
@@ -135,6 +140,11 @@ export class NewFormDocumentComponent implements OnInit {
       this.titre = 'Document à Modifier';
       this.serviceDocument.getDocumentById(idDocument).subscribe((x) => {
         this.document = x;
+        if (this.document.contientRessources == true) {
+          this.forme.controls['affichagePrix'].enable()
+          this.forme.controls['contientDistributeurs'].enable()    
+          this.documentParentDesactive = false
+        }
         this.forme.setValue({
           titre: this.document.titre,
           description: this.document.description,
@@ -408,9 +418,15 @@ export class NewFormDocumentComponent implements OnInit {
       documentTemp.preconisations.push(preco)
     );
 
-    this.ELEMENTS_TABLE_SOUS_DOCUMENTS.forEach((preco) =>
-      documentTemp.sousDocuments?.push(preco)
+    this.ELEMENTS_TABLE_SOUS_DOCUMENTS.forEach((doc) =>
+      documentTemp.sousDocuments?.push(doc)
     );
+
+    if (this.documentParentDesactive == true) {
+      documentTemp.sousDocuments = undefined
+      documentTemp.affichagePrix = false
+      documentTemp.contientDistributeurs = false
+    }
 
     this.ELEMENTS_TABLE_DOC_ETATS.forEach(
       docEtat => documentTemp.docEtats.push(docEtat)
@@ -460,5 +476,16 @@ export class NewFormDocumentComponent implements OnInit {
     return mission2 && mission1
       ? mission2.id === mission1.id
       : mission2 === mission1;
+  }
+  desactiveElementsLieRessource(event: any){
+    if (!event.target.checked) {
+      this.forme.controls['affichagePrix'].disable()
+      this.forme.controls['contientDistributeurs'].disable()    
+      this.documentParentDesactive = true
+    }else{
+      this.forme.controls['affichagePrix'].enable()
+      this.forme.controls['contientDistributeurs'].enable()
+      this.documentParentDesactive = false
+    }
   }
 }

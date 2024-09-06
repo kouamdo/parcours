@@ -73,7 +73,7 @@
                                             {{"document.table.title18" | translate}}
                                         </label>
                                         <span id="affichagePrix" class="w-100">
-                                            <input type="checkbox" checked value="true" formControlName="affichagePrix" name="affichagePrix">
+                                            <input type="checkbox" value="true" formControlName="affichagePrix" name="affichagePrix">
                                         </span>
                                     </div>
                                 </div>
@@ -86,7 +86,7 @@
                                             {{"document.table.title19" | translate}}
                                         </label>
                                         <span id="contientRessources" class="w-100">
-                                            <input type="checkbox" checked value="true" formControlName="contientRessources" name="contientRessources">
+                                            <input type="checkbox" value="false" formControlName="contientRessources" name="contientRessources" (change)="desactiveElementsLieRessource($event)">
                                         </span>
                                     </div>
                                 </div>
@@ -98,7 +98,7 @@
                                             {{"document.table.title20" | translate}}
                                         </label>
                                         <span id="contientDistributeurs" class="w-100">
-                                            <input type="checkbox" checked value="true" formControlName="contientDistributeurs" name="contientDistributeurs">
+                                            <input type="checkbox" value="true" formControlName="contientDistributeurs" name="contientDistributeurs">
                                         </span>
                                     </div>
                                 </div>
@@ -212,7 +212,7 @@
 
                         <!-- sous documents ------------------------------------------------- -->
 
-                        <div class="form-group">
+                        <div class="form-group" title="{{'document.form.text13' | translate}}">
                             <div class="champs">
                                 <label  for="" class="label">
                                     {{"document.title4" | translate}}
@@ -221,7 +221,8 @@
 
                                     <!-- Ouvrir le formulair de selection des sous documents -->
                                     <div class="listAttr">
-                                        <button type="button" class="btn p-0" title="{{'lists.button9' | translate}} / {{'lists.button8' | translate}}" (click)="openSousDocumentDialog()">
+                                        <button type="button" class="btn p-0" title="{{'lists.button9' | translate}} / {{'lists.button8' | translate}}"
+                                            (click)="openSousDocumentDialog()" [disabled]="documentParentDesactive">
                                             <i class="fas fa-plus-square"></i>
                                         </button>
                                         <p>

@@ -9,6 +9,9 @@ import { MissionsService } from 'src/app/services/missions/missions.service';
 import { ModalChoixSousExemplairesComponent } from '../../shared/modal-choix-sous-exemplaires/modal-choix-sous-exemplaires.component';
 import { MatDialog } from '@angular/material/dialog';
 import { IPatient } from 'src/app/modele/Patient';
+import { ModalChoixPersonneComponent } from '../../shared/modal-choix-personne/modal-choix-personne.component';
+import { DonneesEchangeService } from 'src/app/services/donnees-echange/donnees-echange.service';
+import { log } from 'console';
 
 @Component({
   selector: 'app-executer-mission',
@@ -25,9 +28,11 @@ export class ExecuterMissionComponent implements OnInit {
   estClique : boolean = false;
   idDocumentPourExemplaire : string = ""
   laPersonneRattachee : IPatient | undefined
+  document: IDocument | undefined;
 
   constructor(private formBuilder:FormBuilder, private missionService:MissionsService,private router:Router, private infosPath:ActivatedRoute,
-     private documentService:DocumentService, private dialogDef : MatDialog ) {
+     private documentService:DocumentService,
+     private donneeEchangeService:DonneesEchangeService, private dialogDef : MatDialog ) {
     this.formeMissionExec = this.formBuilder.group({
      
     });
@@ -55,26 +60,31 @@ export class ExecuterMissionComponent implements OnInit {
    ); 
   }
 
-  getDocumentId(valeur:string){
-    this.idDocumentPourExemplaire = valeur
+  getDocument(valeur: IDocument){
+    this.idDocumentPourExemplaire = valeur.id
+    this.document = valeur
     sessionStorage.setItem("idDocumentPourExemplaire", this.idDocumentPourExemplaire);
   }
 
   /**
-   * Methode permettant d'ouvrir la modal permettant d'associer des sous exemplaire à celui qu'on veut creer
+   * Methode permettant d'ouvrir la modal permettant d'associer un bénéficiaire au document qu'on veut creer
    */
   openSousExemplaireDocumentDialog(){
-
-    const dialogRef = this.dialogDef.open(ModalChoixSousExemplairesComponent, 
-    {
-      maxWidth: '100vw',
-      maxHeight: '100vh',
-      width:'100%',
-      height:'100%',
-      enterAnimationDuration:'1000ms',
-      exitAnimationDuration:'1000ms',
-      data: this.idDocumentPourExemplaire
+    
+    if (this.document?.beneficiaireObligatoire == true) {
+      console.log('this.document?.beneficiaireObligatoire', this.document?.beneficiaireObligatoire);
+      const dialogRef = this.dialogDef.open(ModalChoixPersonneComponent, 
+      {
+        maxWidth: '100vw',
+        maxHeight: '100vh',
+        width:'100%',
+        height:'100%',
+        enterAnimationDuration:'1000ms',
+        exitAnimationDuration:'1000ms',
+        data: this.idDocumentPourExemplaire
+      })
+    }else{
+      this.router.navigate(['exemplaire-nouveau/'.concat(this.idDocumentPourExemplaire)])
     }
-    )
   }
 }
