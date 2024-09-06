@@ -33,7 +33,8 @@ import { PatientsService } from 'src/app/services/patients/patients.service';
 import { IPatient } from 'src/app/modele/Patient';
 import { IPromo } from 'src/app/modele/promo-distributeur';
 import { PromoService } from 'src/app/services/promo/promo.service';
-import { transform } from 'html2canvas/dist/types/css/property-descriptors/transform';
+import { setTimeout } from 'timers/promises';
+import { resolve } from 'path';
 
 @Component({
   selector: 'app-new-exemplaire',
@@ -70,7 +71,9 @@ export class NewExemplaireComponent implements OnInit {
     },
     formatCode: '',
     code: '',
-    beneficiaireObligatoire: true
+    beneficiaireObligatoire: true,
+    assurance: undefined,
+    promotion: undefined
   };
 
   document: IDocument = {
@@ -82,9 +85,9 @@ export class NewExemplaireComponent implements OnInit {
     attributs: [],
     categories: [],
     preconisations: [],
-    affichagePrix: false,
-    contientRessources: false,
-    contientDistributeurs: false,
+    affichagePrix: true,
+    contientRessources: true,
+    contientDistributeurs: true,
     typeMouvement: 'Neutre',
     docEtats: [],
     formatCode: '',
@@ -139,7 +142,6 @@ export class NewExemplaireComponent implements OnInit {
   assuranceControl = new FormControl<string | IDistributeur>('');
   idRessource: string = '';
   ELEMENTS_TABLE_MOUVEMENTS: IMouvement[] = [];
-  ELEMENTS_TABLE_MOUVEMENTS_AVEC_PROMO: IMouvement[] = [];
   dataSourceMouvements = new MatTableDataSource<IMouvement>(
     this.ELEMENTS_TABLE_MOUVEMENTS
   );
@@ -168,10 +170,9 @@ export class NewExemplaireComponent implements OnInit {
   distributeurR: string = '';
   ressource: string = '';
   mouvements: IMouvement[] = [];
-  promotions: IPromo[] = []; // Ceci devrait contenir les promotions existantes
-  promoApplicable?: IPromo; // La promotion qui est applicable si le distributeur correspond
-  private storageKey = 'mouvements'; // La variable qui sera stockée dans le session storage
+  assurancePersone : IDistributeur | undefined
   remisePromo : number = 0 // laveur de la promotion
+  showText = false
 
 
   constructor(
@@ -352,7 +353,13 @@ export class NewExemplaireComponent implements OnInit {
         .getExemplaireDocumentById(this.idExemplaire)
         .subscribe((x) => {
           this.exemplaire = x;
-          this.document = x;
+          this.document = x
+          this.document.id = x.idDocument
+          this.promotion = x.promotion
+          this.assurancePersone = x.assurance
+          if (this.assurancePersone) {
+            this.assuranceControl.setValue(this.assurancePersone)
+          }
           if (this.exemplaire.mouvements != undefined) {
             this.ELEMENTS_TABLE_MOUVEMENTS = this.exemplaire.mouvements;
           }
@@ -426,6 +433,7 @@ export class NewExemplaireComponent implements OnInit {
   formerEnteteTableauMissions(){
     if (this.document.contientDistributeurs == true && !this.document.beneficiaireObligatoire) {
       let distributeur : string = "distributeur"
+      this.displayedRessourcesColumns.includes('distributeur')
       this.displayedRessourcesColumns.push(distributeur)
     }
     if ((this.document.affichagePrix == true)) {
@@ -444,7 +452,7 @@ export class NewExemplaireComponent implements OnInit {
       this.displayedRessourcesColumns.push(pourcentageCharge)
       this.displayedRessourcesColumns.push(montantCharge)
       this.displayedRessourcesColumns.push(montant)
-    }
+    }    
   }
   /**
    * methode permettant de renvoyer la valeur de l'attribut
@@ -588,7 +596,7 @@ export class NewExemplaireComponent implements OnInit {
   }
 
   /**
-   * Methodr qui permet de faire la somme des montants du tableau de mouvements
+   * Methode qui permet de faire la somme des montants du tableau de mouvements
    * pour afficher le resultat dans la case montant total
    */
   sommeMontants(mouvements: IMouvement[]): number {
@@ -603,6 +611,28 @@ export class NewExemplaireComponent implements OnInit {
       }
     });
     return this.montantTotal;
+  }
+
+  /**
+   * Methode qui permet de faire la somme des montants du tableau de mouvements après remise
+   * pour afficher le resultat dans la case montant total à payer
+   */
+  sommeMontantsApresRemise(mouvements: IMouvement[]): number {
+    this.montantTotal = 0;
+    mouvements.forEach((mouvement) => {
+      if (
+        mouvement.ressource != undefined &&
+        mouvement.quantite != null &&
+        mouvement.prix != null
+      ) {
+        this.montantTotal += this.calculRemise(mouvement, this.promotion!) * mouvement.quantite;
+      }
+    });
+    return this.montantTotal;
+  }
+
+  getAssurancePersonne(assurance:IDistributeur){
+    this.assurancePersone = assurance
   }
 
   /**
@@ -636,12 +666,16 @@ export class NewExemplaireComponent implements OnInit {
       personneRattachee: this.laPersonneRattachee!,
       formatCode: this.document.formatCode,
       code: this.codeControl.value,
-      beneficiaireObligatoire: true
+      beneficiaireObligatoire: true,
+      promotion: this.promotion,
+      assurance: this.assurancePersone
     };
 
     if (this.exemplaire.id != '') {
       exemplaireTemp.id = this.exemplaire.id;
     }
+    exemplaireTemp.promotion = this.promotion
+    exemplaireTemp.assurance = this.assurancePersone
     this.serviceExemplaire
       .ajouterExemplaireDocument(exemplaireTemp)
       .subscribe((object) => {
@@ -695,36 +729,27 @@ export class NewExemplaireComponent implements OnInit {
       if(this.distributeur != undefined){
         mvt.distributeur = this.distributeur
       }
-      if (this.distributeurControl.value != undefined && this.verifieSiPromoAppliquable(mvt, this.promotion!)) {
-        
-      this.ELEMENTS_TABLE_MOUVEMENTS_AVEC_PROMO.unshift(this.appliquerPromotion(mvt, this.promotion!))
-      }
+
       this.ELEMENTS_TABLE_MOUVEMENTS.unshift(mvt)
       this.dataSourceMouvements.data = this.ELEMENTS_TABLE_MOUVEMENTS
     }
   }
-
-  parseDateMMddyyyy(dateString : string) {
-    const month = parseInt(dateString.substring(0, 2)) - 1; // Les mois commencent à 0 en JavaScript
-    const day = parseInt(dateString.substring(2, 4));
-    const year = parseInt(dateString.substring(4, 8));
-
-    return new Date(year, month, day);
-  }
-  getPromo(option: IDistributeur){
+  
+  rechercherListingAssurance(option: IDistributeur){
     this.servicePromo.getPromoByIdAssurance(option.id).subscribe((promo) =>{
-      this.promotion = promo
+      this.promotion = promo!
+      this.showText = false
+      this.ELEMENTS_TABLE_MOUVEMENTS.forEach(
+        mvt => {
+        let mouvementTemp = mvt
+        if (this.promotion) {
+          this.appliquerPromotion(mouvementTemp, this.promotion)
+        }
+        if (!this.promotion) {
+          this.showText = true
+        }
+      });
     })
-  }
-  public rechercherListingAssurance(option: IDistributeur){
-    // this.saveMouvements(this.ELEMENTS_TABLE_MOUVEMENTS)
-    this.getPromo(option)
-    this.ELEMENTS_TABLE_MOUVEMENTS.forEach(
-      mvt => {
-      let mouvementTemp = mvt
-        this.appliquerPromotion(mouvementTemp, this.promotion!)
-        this.ELEMENTS_TABLE_MOUVEMENTS_AVEC_PROMO.push(mouvementTemp)
-    });
   }
 
   /**
@@ -740,7 +765,7 @@ export class NewExemplaireComponent implements OnInit {
 
     // Vérification des Dates : La promotion n'est appliquée que si la date actuelle se situe entre la date de début et la date de fin de la promotion.
     if (!(today < new Date(promo.dateDebut!) || today > new Date(promo.dateFin!))) {
-      this.promotion = promo
+      this.promotion = promo!
       dateOk = true
 
       let ressourceCouverte : boolean = false;
@@ -765,6 +790,9 @@ export class NewExemplaireComponent implements OnInit {
 
   // Calcul de la Remise : La remise est calculée soit en pourcentage soit en montant fixe. Si les deux sont présents, seul le pourcentage est utilisé.
   calculRemise(mouvement: IMouvement, promo: IPromo):number{
+    if (!promo) {
+      return mouvement.prix
+    }
     let remise = 0;
 
     if (promo.pourcentageRemise > 0) {
@@ -778,7 +806,7 @@ export class NewExemplaireComponent implements OnInit {
 
     remise = Math.min(remise, mouvement.prix); // S'assurer que la remise n'excède pas le prix
     const prixReduit = mouvement.prix - remise;
-    mouvement.prix = prixReduit
+    // mouvement.prix = prixReduit
     return prixReduit
   }
 
@@ -794,22 +822,7 @@ export class NewExemplaireComponent implements OnInit {
     }
     return mouvement
   }
-
-  // // Stocker un tableau de mouvements
-  // saveMouvements(mouvements: IMouvement[]): void {
-  //   sessionStorage.setItem(this.storageKey, JSON.stringify(mouvements));
-  // }
-
-  // // Récupérer un tableau de mouvements
-  // getMouvements(): IMouvement[] | null {
-  //   const mouvementsData = sessionStorage.getItem(this.storageKey);
-  //   return mouvementsData ? JSON.parse(mouvementsData) as IMouvement[] : null;
-  // }
-
-  // Supprimer un tableau de mouvements
-  removeMouvements(): void {
-    sessionStorage.removeItem(this.storageKey);
-  }
+  
   /**
    * Methode qui permet d'effacer la valeur du control ressource lorsqu'on a
    * déjà choisi la ressource en cliquant dessus

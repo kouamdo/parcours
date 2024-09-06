@@ -1097,7 +1097,7 @@ export class InMemDBService implements InMemoryDbService {
         affichagePrix: true,
         contientRessources: true,
         contientDistributeurs: true,
-            formatCode: 'FACT',
+        formatCode: 'FACT',
         missions: [
           {
             id: '1',
