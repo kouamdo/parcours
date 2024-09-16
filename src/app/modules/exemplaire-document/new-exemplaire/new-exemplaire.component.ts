@@ -103,7 +103,6 @@ export class NewExemplaireComponent implements OnInit {
   };
 
   formeExemplaire: FormGroup;
-  formeMvt: FormGroup;
   btnLibelle: string = 'Ajouter';
   submitted: boolean = false;
   controlExemplaire = new FormControl();
@@ -194,12 +193,9 @@ export class NewExemplaireComponent implements OnInit {
     this.formeExemplaire = this.formBuilder.group({
       _exemplaireDocument: new FormArray([]),
       _controlsSupprime: new FormArray([]),
-    });
-    this.formeMvt = this.formBuilder.group({
       etat: [true],
       libelle: ['', [Validators.required]],
-      typeMvt: ['', [Validators.required]],
-      montant: [Number, [Validators.required]],
+      montant: ['', [Validators.required]],
       moyenPaiement: ['', [Validators.required]],
       referencePaiement: ['', [Validators.required]],
       caisse: new FormControl<string | ICaisses | ICaisses[]>('')
@@ -216,21 +212,24 @@ export class NewExemplaireComponent implements OnInit {
         this.laPersonneRattachee =  patientTrouve;
         if (patientTrouve != undefined) {
           this.nomPatientCourant = this.laPersonneRattachee.nom + " " + this.laPersonneRattachee.prenom
+          this.compteService.getCompteByUser(this.laPersonneRattachee.id).subscribe(
+            account => {
+              this.compte = account;
+              console.log('compte personne rattaché :', this.compte); 
+            }
+          )
         }
+        console.log("personne ratachée :", this.nomPatientCourant);  
       }
     )
 
     this.caisseService.getAllCaisses().subscribe(
       (reponse) =>{
         this.caisses=reponse
+        console.log('all caisses :', this.caisses);
+        
       }
     );
-
-    this.compteService.getCompteByUser(this.exemplaire.personneRattachee.id).subscribe((res) => {
-      if (res) {
-        this.compte = res;
-      }
-    })
 
     this.barService.getCode().subscribe((dt) => {
       this.scan_val = dt;
@@ -588,7 +587,7 @@ export class NewExemplaireComponent implements OnInit {
   }
 
   get fCaisse() {
-    return this.formeMvt.controls;
+    return this.formeExemplaire.controls;
   }
 
   /**
@@ -612,7 +611,7 @@ export class NewExemplaireComponent implements OnInit {
   /**
    * methode de validation du formulaire (enregistrement des donnees du formulaire)
    */
-  onSubmit() {
+  onSubmit(data: any) {
     const exemplaireDocument = this._exemplaireDocument;
     this.submitted = true;
     this.enregistrerObjet();
@@ -649,9 +648,8 @@ export class NewExemplaireComponent implements OnInit {
     this.serviceExemplaire
       .ajouterExemplaireDocument(exemplaireTemp)
       .subscribe((object) => {
-        console.log(" new exemplaire :", exemplaireTemp);
-        
-        this.router.navigate(['/list-exemplaire']);
+        console.log(" new exemplaire :", exemplaireTemp, data.value);
+        this.saveMvt(data.value);
       });
   }
 
@@ -660,9 +658,6 @@ export class NewExemplaireComponent implements OnInit {
   }
 
   saveMvt(selectItem: any) {
-    this.submitted = true;
-
-    if(this.formeMvt.invalid) return;
 
     let mvtCaisse: IMouvementCaisses = {
       id: uuidv4(),
@@ -674,13 +669,15 @@ export class NewExemplaireComponent implements OnInit {
       moyenPaiement: selectItem.moyenPaiement,
       referencePaiement: selectItem.referencePaiement,
       caisse: selectItem.caisse,
-      compte: selectItem.compte,
-      personnel: selectItem.personne,
+      compte: this.compte,
+      personnel: this.laPersonneRattachee!,
       exemplaire: selectItem.exemplaire
-
     }
 
     this.mvtCaisseService.ajouterMouvement(mvtCaisse).subscribe((obj) => {
+      console.log('Le mouvement a été bien enregistré !', mvtCaisse);
+      this.router.navigate(['/list-exemplaire']);
+
     })
   }
 

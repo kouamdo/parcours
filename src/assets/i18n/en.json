@@ -110,6 +110,7 @@
     "title4": "Payment Reference",
     "title5": "Cash Register",
     "title6": "Copy",
+    "title7": "Acount Balance",
     "actions": {
       "link1": "Add",
       "link2": "Edit",

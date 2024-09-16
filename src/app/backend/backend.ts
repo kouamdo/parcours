@@ -28,6 +28,7 @@ import { IParours } from '../modele/parours';
 import { Promo } from '../modele/promo-distributeur';
 import { ICaisses } from '../modele/caisses';
 import { IComptes } from '../modele/comptes';
+import { IMouvementCaisses } from '../modele/mouvement-caisses';
 
 export class InMemDBService implements InMemoryDbService {
   createDb() {
@@ -23883,7 +23884,30 @@ export class InMemDBService implements InMemoryDbService {
       {id: "7", libelle: "caisse 7", type: "credit", solde: 700000.00}
     ];
     let comptes: IComptes[] = [
-      {id: "1", libelle: "courant", solde: 1000.0, montantDecouvertMax: 100000.0, dateCreation:new Date('10/06/2020')},
+      {id: "1", libelle: "courant", solde: 1000.0, montantDecouvertMax: 100000.0, dateCreation:new Date('10/06/2020'), personnel: {
+        id: '6911989109209',
+        nom: 'NGONGANG',
+        prenom: 'Philippe',
+        sexe: 'M',
+        adresse: 'Yaoundé',
+        telephone: '090999090',
+        mail: 'ngong@yad.fr',
+        dateNaissance: new Date('07/07/1989'),
+        qrCodeValue: '',
+        personnesRatachees: [
+          {
+            id: '78',
+            nom: 'Tchakounte',
+            prenom: 'Simpice',
+            sexe: 'm',
+            dateNaissance: new Date('07/07/1989'),
+            adresse: 'Yaoundé',
+            telephone: '090999090',
+            mail: 'ngong@yad.fr',
+            qrCodeValue: '78',
+          },
+        ],
+      }},
       {id: "2", libelle: "enfants", solde: 70000.0, montantDecouvertMax: 100000.0, dateCreation:new Date('10/06/2010')},
       {id: "3", libelle: "personnel", solde: 0.0, montantDecouvertMax: 100000.0, dateCreation:new Date('10/06/2022')},
       {id: "4", libelle: "courant", solde: 10000.0, montantDecouvertMax: 100000.0, dateCreation:new Date('10/06/2024')},
@@ -36699,12 +36723,16 @@ export class InMemDBService implements InMemoryDbService {
         ],
       },
     ];
+    let mvtCaisses: IMouvementCaisses[] = [
+
+    ];
     return {
       patients,
       services,
       menus,
       tickets,
       validations,
+      mvtCaisses,
       missions,
       attributs,
       documents,

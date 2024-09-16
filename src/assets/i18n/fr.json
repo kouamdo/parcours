@@ -127,7 +127,8 @@
       "title3": "type de mouvement",
       "title4": "reference de paiement",
       "title5": "caisse",
-      "title6": "Exemplaire ",
+      "title6": "Exemplaire",
+      "title7": "Solde Compte",
       "actions": {
         "link1": "Ajouter",
         "link2": "Modifier",

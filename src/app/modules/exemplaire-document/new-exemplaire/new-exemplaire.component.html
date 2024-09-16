@@ -1,5 +1,5 @@
 <div class="mainBlock" id="top2">
-     <form [formGroup]="formeExemplaire" (ngSubmit)="onSubmit()" *ngIf="formeExemplaire" >
+     <form [formGroup]="formeExemplaire" (ngSubmit)="onSubmit(formeExemplaire)" *ngIf="formeExemplaire" >
         <h1>
             {{this.document.titre}} {{titre}}
         </h1>
@@ -94,7 +94,7 @@
                                 <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{'ressource.table2.title5' | translate}} </th>
                                 <td class="text-dark containCell" mat-cell *matCellDef="let element">
                                   <label class="custom-control">
-                                      <input class="form-control" type="number" [(ngModel)]="element.quantite" [ngModelOptions]="{standalone: true}" value="true">
+                                      <input class="form-control" type="number" [(ngModel)]="element.quantite" [ngModelOptions]="{standalone: true}" [disabled]="element.typeMouvement != 'Neutre'" value="true">
                                   </label>
                                 </td>
                           </ng-container>
@@ -189,27 +189,24 @@
 
                 <!-- tableau de mouvement d'une caisse -->
                 <div class="card-body">
-                    <form [formGroup]="formeMvt" *ngIf="formeMvt" >
                         <div class="">
                             <h2>{{'lists.text5' | translate}}</h2>
 
                             <div class="d-flex flex-wrap justify-content-between block1 p-2">
                                 <div class="form-group">
-                                    <div>
-                                        <div class="champs">
-                                            <label for="nom" class="label">
-                                                {{'personnel.table.title1' | translate}}
-                                            </label>
-                                            <input type="text" [value]="exemplaire.personneRattachee.nom" disabled class="form-control">
-                                        </div>
+                                    <div class="champs">
+                                        <label for="exemplaire" class="label">
+                                            {{'mvtCaisse.table.title6' | translate}}
+                                        </label>
+                                        <input type="text" [value]="document.titre" disabled class="form-control" style="color: black;">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <div class="champs">
-                                        <label  for="exemplaire" class="label">
-                                            {{'mvtCaisse.table.title6' | translate}}
+                                        <label for="exemplaire" class="label">
+                                            {{'mvtCaisse.table.title7' | translate}}
                                         </label>
-                                        <input  type="text" [value]="document.titre" disabled class="form-control" style="color: black;">
+                                        <input type="text" [value]="compte?.solde" disabled class="form-control" style="color: black;">
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -218,7 +215,7 @@
                                             <label for="montant" class="label">
                                                 {{'mvtCaisse.table.title0' | translate}}
                                             </label>
-                                            <input type="number" formControlName="montant" name="montant" class="form-control">
+                                            <input type="number" formControlName="montant" name="montant" [value]="sommeMontants()" class="form-control">
                                         </div>
                                         <div *ngIf="submitted && fCaisse['montant'].errors"  class="alert alert-danger" >
                                             <div *ngIf="fCaisse['montant'].errors['required']">{{'mvtCaisse.form.text1' | translate}}</div>
@@ -235,19 +232,6 @@
                                         </div>
                                         <div *ngIf="submitted && fCaisse['libelle'].errors"  class="alert alert-danger" >
                                             <div *ngIf="fCaisse['libelle'].errors['required']">{{'mvtCaisse.form.text2' | translate}}</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div>
-                                        <div class="champs">
-                                            <label for="typeMvt" class="label">
-                                                {{'mvtCaisse.table.title3' | translate}}
-                                            </label>
-                                            <input type="text" formControlName="typeMvt" name="typeMvt" class="form-control">
-                                        </div>
-                                        <div *ngIf="submitted && fCaisse['typeMvt'].errors"  class="alert alert-danger" >
-                                            <div *ngIf="fCaisse['typeMvt'].errors['required']">{{'mvtCaisse.form.text7' | translate}}</div>
                                         </div>
                                     </div>
                                 </div>
@@ -271,7 +255,7 @@
                                                 {{'attributs.table.title3' | translate}}
                                             </label>
                                             <p class="d-flex align-items-center choix" >
-                                            <input type="checkbox" [checked]="formeMvt.get('etat')?.value" value="true" formControlName="etat"  name="etat" id="etat" placeholder="{{'attributs.table.title3' | translate}}"  class="form-control">
+                                            <input type="checkbox" [checked]="formeExemplaire.get('etat')?.value" value="true" formControlName="etat"  name="etat" id="etat" placeholder="{{'attributs.table.title3' | translate}}"  class="form-control">
                                           </p>
                                         </div>
                                         <div *ngIf="submitted && fCaisse['etat'].errors"  class="alert alert-danger" >
@@ -298,8 +282,8 @@
                                             {{'mvtCaisse.table.title5' | translate}}
                                         </label>
                                         <mat-form-field class="example-full-width" appearance="fill">
-                                            <input  type="text" matInput [matAutocomplete]="auto"  aria-label="caisse" formControlName="caisse" name="caisse" id="caisse" placeholder="" class="w-100" style="color: black;">
-                                            <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFnCaisse" >
+                                            <input  type="text" matInput [matAutocomplete]="aut"  aria-label="caisse" formControlName="caisse" name="caisse" id="caisse" placeholder="" class="w-100" style="color: black;">
+                                            <mat-autocomplete #aut="matAutocomplete" [displayWith]="displayFnCaisse" >
                                             <mat-option *ngFor="let option of caisses" [value]="option">
                                                 {{option.libelle}}
                                             </mat-option>
@@ -309,7 +293,7 @@
                                 </div>
                             </div>
                         </div>
-                    </form>
+                    
                 </div>
             </div>
         </div>
