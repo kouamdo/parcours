@@ -208,11 +208,11 @@
                 title="{{ 'lists.button6' | translate }}" class="btn btnValidation">
                 <i class="fas fa-cog"></i>
             </button>
-            <button *ngIf="docEtatCourant?.validation?.typeValidation == 'Transmission'"  class="btn modifier" (click)="generatePDFsByDistributeur()">
-                pdf
+            <button *ngIf="docEtatCourant?.validation?.typeValidation == 'Transmission'" title="{{'document.exemplaire.text16' | translate }}"  class="btn modifier" (click)="generatePDFsByDistributeur()">
+                {{'document.exemplaire.text16' | translate }}
             </button>
             <button *ngIf="docEtatCourant?.validation?.typeValidation == 'Transmission'" data-toggle="collapse" href="#formContentId" aria-expanded="false" aria-controls="formContentId"
-                title="{{ 'document.exemplaire.text13' | translate }}" class="btn btnValidation">
+                title="{{'document.exemplaire.text13' | translate }}" class="btn btnValidation">
                 <i class="fas fa-paper-plane"></i>
             </button>
         </div>

@@ -323,15 +323,12 @@ export class PrevisualisationExemplaireComponent implements OnInit {
   }
 
   rechercheDocEtatCourant(idEtatCourant : string){
-    this.exemplaire.docEtats.forEach(
-      element => {
-      
-    });
     for (let index = 0; index < this.exemplaire.docEtats.length; index++) {
       const element = this.exemplaire.docEtats[index];
 
       if (element.etat.id == idEtatCourant) {
         this.docEtatCourant = element
+        break
       }
     }    
   }

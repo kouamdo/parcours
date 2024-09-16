@@ -108,25 +108,28 @@ export class ModalChoixPersonneComponent  implements OnInit{
   navigate(){
     
     let valeurIdDocument = sessionStorage.getItem("idDocumentPourExemplaire")
-    this.documentService.getDocumentById(valeurIdDocument!).subscribe(
-      objet =>{
-        if (objet.contientRessources == true) {
-          this.url= "exemplaire-nouveau/".concat(valeurIdDocument!)
-          const dialogRef = this.dialogDef.open(ModalChoixSousExemplairesComponent, 
-            {
-              maxWidth: '100vw',
-              maxHeight: '100vh',
-              width:'100%',
-              height:'100%',
-              enterAnimationDuration:'1000ms',
-              exitAnimationDuration:'1000ms',
-              data: valeurIdDocument
-            })
-        }else if (this.donneeExemplairePersonneRatacheeService.getUrlSource() == "Historique des documents") {
-          this.router.navigate(['../historique-par-personne'])
+    if (this.donneeExemplairePersonneRatacheeService.getUrlSource() == "Historique des documents") {
+      this.router.navigate(['../historique-par-personne'])
+    }else{
+        
+      this.documentService.getDocumentById(valeurIdDocument!).subscribe(
+        objet =>{
+          if (objet.contientRessources == true) {
+            this.url= "exemplaire-nouveau/".concat(valeurIdDocument!)
+            const dialogRef = this.dialogDef.open(ModalChoixSousExemplairesComponent, 
+              {
+                maxWidth: '100vw',
+                maxHeight: '100vh',
+                width:'100%',
+                height:'100%',
+                enterAnimationDuration:'1000ms',
+                exitAnimationDuration:'1000ms',
+                data: valeurIdDocument
+              })
+          }
         }
-      }
-    )
+      )
+    }
   }
   
   /**

@@ -172,6 +172,7 @@ export class NewExemplaireComponent implements OnInit {
   mouvements: IMouvement[] = [];
   assurancePersone : IDistributeur | undefined
   remisePromo : number = 0 // laveur de la promotion
+  unitePromo : string = "" // laveur de la promotion
   showText = false
 
 
@@ -199,6 +200,7 @@ export class NewExemplaireComponent implements OnInit {
 
   ngOnInit(): void {
     
+    this.unitePromo =""
     this.codeControl.disable()
     let idPersonne : string = this.donneeEchangeService.getExemplairePersonneRatachee()
     this.servicePatient.getPatientById(idPersonne).subscribe(
@@ -791,6 +793,8 @@ export class NewExemplaireComponent implements OnInit {
   // Calcul de la Remise : La remise est calculée soit en pourcentage soit en montant fixe. Si les deux sont présents, seul le pourcentage est utilisé.
   calculRemise(mouvement: IMouvement, promo: IPromo):number{
     if (!promo) {
+      this.remisePromo = 0
+      this.unitePromo =""
       return mouvement.prix
     }
     let remise = 0;
@@ -798,10 +802,12 @@ export class NewExemplaireComponent implements OnInit {
     if (promo.pourcentageRemise > 0) {
         remise = mouvement.prix * (promo.pourcentageRemise / 100);
         this.remisePromo = promo.pourcentageRemise
+        this.unitePromo = "%"
     } else if (promo.montantRemise > 0) {
         remise = promo.montantRemise;
         // remise = (promo.montantRemise/mouvement.prix)*100;
         this.remisePromo = promo.montantRemise
+        this.unitePromo = "UD"
     }
 
     remise = Math.min(remise, mouvement.prix); // S'assurer que la remise n'excède pas le prix

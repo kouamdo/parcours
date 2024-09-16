@@ -289,7 +289,8 @@
       "text12": "Transmission mode",
       "text13": "Transmission",
       "text14": "Document's history is not available for dose who don't be associate to people",
-      "text15": "Search an assurence"
+      "text15": "Search an assurence",
+      "text16": "Generate PDF"
     }
   },
   "theme": {
@@ -339,7 +340,7 @@
       "title7": "Caracteristic",
       "title8": "Ressources",
       "title9": "sell prise",
-      "title11": "Percentage Covered",
+      "title11": "Percentage value",
       "title12": "Amount Covered"
     },
     "form": {

@@ -311,7 +311,8 @@
       "text12": "Type d'envoi",
       "text13": "Transmission",
       "text14": "L'historique n'est pas disponible pour les documents qui n'admettent pas de bénéficiaires.",
-      "text15": "Rechercher une assurence"
+      "text15": "Rechercher une assurence",
+      "text16": "Génération de PDF"
     }
   },
   "theme": {
@@ -362,7 +363,7 @@
       "title8": "Ressources",
       "title9": "Prix de sortie",
       "title10": "Scanner",
-      "title11": "pourcentage pris en charge",
+      "title11": "Valeur de la promotion",
       "title12": "montant pris en charge"
     },
     "form": {
