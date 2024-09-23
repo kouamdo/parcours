@@ -37,6 +37,8 @@ import { IComptes } from 'src/app/modele/comptes';
 import { MouvementCaisseService } from 'src/app/services/mouvement-caisse/mouvement-caisse.service';
 import { ComptesService } from 'src/app/services/comptes/comptes.service';
 import { CaissesService } from 'src/app/services/caisses/caisses.service';
+import { MatDialog } from '@angular/material/dialog';
+import { ModalMouvementCaisseComponent } from '../../shared/modal-mouvement-caisse/modal-mouvement-caisse.component';
 
 @Component({
   selector: 'app-new-exemplaire',
@@ -138,6 +140,7 @@ export class NewExemplaireComponent implements OnInit {
   distributeurControl = new FormControl<string | IDistributeur>('');
   idRessource: string = '';
   ELEMENTS_TABLE_MOUVEMENTS: IMouvement[] = [];
+  LAST_ELEMENTS_TABLE_MOUVEMENTS: IMouvement[] = [];
   dataSourceMouvements = new MatTableDataSource<IMouvement>(
     this.ELEMENTS_TABLE_MOUVEMENTS
   );
@@ -163,6 +166,7 @@ export class NewExemplaireComponent implements OnInit {
   TABLE_PRECONISATION_RESSOURCES: IPrecoMvt[] = [];
   montantTotal : number = 0;
   soustotal : number = 0;
+  restes: number = 0;
   distributeur : IDistributeur | undefined;
   modificationDistributeurActive : boolean = false
   indexmodificationDistributeur : number = -1
@@ -189,16 +193,15 @@ export class NewExemplaireComponent implements OnInit {
     private mvtCaisseService: MouvementCaisseService,
     private compteService: ComptesService,
     private caisseService: CaissesService,
+    private dialogDef : MatDialog 
   ) {
     this.formeExemplaire = this.formBuilder.group({
       _exemplaireDocument: new FormArray([]),
       _controlsSupprime: new FormArray([]),
-      etat: [true],
-      libelle: ['', [Validators.required]],
+      use: [false],
       montant: ['', [Validators.required]],
       moyenPaiement: ['', [Validators.required]],
-      referencePaiement: ['', [Validators.required]],
-      caisse: new FormControl<string | ICaisses | ICaisses[]>('')
+      referencePaiement: ['', [Validators.required]]
     })
   }
   scan_val: any | undefined;
@@ -353,6 +356,28 @@ export class NewExemplaireComponent implements OnInit {
       }
     }
   }
+
+  openModalPaiementDialog(){
+
+    const dialogRef = this.dialogDef.open(ModalMouvementCaisseComponent,
+    {
+      maxWidth: '100vw',
+      maxHeight: '100vh',
+      height: '100%',
+      width: '100%',
+      enterAnimationDuration:'1000ms',
+      exitAnimationDuration:'1000ms',
+      data:{}
+    }
+    )
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        console.log('result :', result.data);
+      }
+    });
+  }
+
   initialiseFormExemplaire() {
     if (this.idExemplaire != null && this.idExemplaire !== '') {
       this.btnLibelle = 'Modifier';
@@ -364,9 +389,12 @@ export class NewExemplaireComponent implements OnInit {
           this.exemplaire = x;
           this.document = x;
           if (this.exemplaire.mouvements != undefined) {
-            this.ELEMENTS_TABLE_MOUVEMENTS = this.exemplaire.mouvements;
+            this.ELEMENTS_TABLE_MOUVEMENTS = this.exemplaire.mouvements;            
           }
           this.dataSourceMouvements.data = this.ELEMENTS_TABLE_MOUVEMENTS;
+          console.log('mvts :', this.dataSourceMouvements.data);
+
+          this.LAST_ELEMENTS_TABLE_MOUVEMENTS = this.ELEMENTS_TABLE_MOUVEMENTS;
           this.totalAttribut = x.attributs.length - 1;
           this.rechercherAttributsAbsants();
          //Bug du mocker apiMemory qui ne met pas à jour les données du document dans exemplaire
@@ -387,6 +415,17 @@ export class NewExemplaireComponent implements OnInit {
     }
   }
 
+  lastValueMvt(value: IMouvement):boolean {
+    let response = false;
+    if (this.LAST_ELEMENTS_TABLE_MOUVEMENTS != undefined) {
+      let ele = this.LAST_ELEMENTS_TABLE_MOUVEMENTS.find((d) => d.id == value.id) as IMouvement;
+      ele != undefined ? response = true : response = false;
+      console.log("ele last table :", ele, response, this.LAST_ELEMENTS_TABLE_MOUVEMENTS);
+    }
+    
+    return response;
+  }
+
   /**
    * methode permettant de regrouper les mouvement des sous exemplaires pour
    * pré-former le tableau de mouvement
@@ -404,6 +443,7 @@ export class NewExemplaireComponent implements OnInit {
           }     
       });
     }
+    this.LAST_ELEMENTS_TABLE_MOUVEMENTS = this.ELEMENTS_TABLE_MOUVEMENTS;
     this.dataSourceMouvements.data = this.ELEMENTS_TABLE_MOUVEMENTS;
   }
 
@@ -549,6 +589,7 @@ export class NewExemplaireComponent implements OnInit {
     this.compteur = this.compteur + 1;
     return this.compteur;
   }
+
   incrementeNumerateur(num: number, attribut: IAttributs): number {
     if (this.numerateur >= -1 && this.numerateur >= this.totalAttributSupprime)
       return num;

@@ -1,0 +1,49 @@
+<div id="mainSection">
+    <div class="card block">
+      <!--<div class="card-header" class="entete pt-4 pb-4">{{ titre }}</div>-->
+        <div class="card-header" class="entete pt-4 pb-4">
+          {{"attributs.title1" | translate}}
+        </div>
+        <div class="card-body">
+            <form [formGroup]="formePaiement" *ngIf="formePaiement" >
+                <div class="table-responsive w-100">
+                    <table class="table table-sm table-centered table-striped table-bordered w-100">
+                        <thead>
+                          <tr>
+                            <th scope="col">Moyen de Paiement</th>
+                            <th scope="col">Montant a Régler</th>
+                            <th scope="col">Reférence de Paiement</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr [formGroup]="formePaiement">
+                            <th scope="row"><input formControlName="moyen" type="text" [disabled]="true"></th>
+                            <td><input formControlName="montant" type="number" class="form-control"></td>
+                            <td><input formControlName="reference" type="text" class="form-control"></td>
+                          </tr>
+                          <tr [formGroup]="formePaiement1">
+                            <th scope="row"><input formControlName="moyen" type="text" [disabled]="true"></th>
+                            <td><input formControlName="montant" type="number" class="form-control"></td>
+                            <td><input formControlName="reference" type="text" class="form-control"></td>
+                          </tr>
+                          <tr [formGroup]="formePaiement2">
+                            <th scope="row"><input formControlName="moyen" type="text" [disabled]="true"></th>
+                            <td><input formControlName="montant" type="number" class="form-control"></td>
+                            <td><input formControlName="reference" type="text" class="form-control"></td>
+                          </tr>
+                          <tr [formGroup]="formePaiement3">
+                            <th scope="row"><input type="text" formControlName="moyen" [disabled]="true"></th>
+                            <td><input formControlName="montant" type="number" class="form-control"></td>
+                            <td><input formControlName="reference" type="text" class="form-control"></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                </div>
+                <div class="actionButton">
+                    <button class="btn" [mat-dialog-close]=""><i class="fa fa-reply mr-1" aria-hidden="true"></i>{{'lists.button2' | translate}}</button>
+                    <button type="submit" cdkFocusInitial (click)="onSubmit()" class="btn btnValidation">{{btnLibelle}}</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
