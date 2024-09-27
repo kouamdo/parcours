@@ -417,12 +417,12 @@ export class NewExemplaireComponent implements OnInit {
 
   lastValueMvt(value: IMouvement):boolean {
     let response = false;
+    this.LAST_ELEMENTS_TABLE_MOUVEMENTS = JSON.parse(localStorage.getItem("mvtExempl")!);
     if (this.LAST_ELEMENTS_TABLE_MOUVEMENTS != undefined) {
       let ele = this.LAST_ELEMENTS_TABLE_MOUVEMENTS.find((d) => d.id == value.id) as IMouvement;
       ele != undefined ? response = true : response = false;
       console.log("ele last table :", ele, response, this.LAST_ELEMENTS_TABLE_MOUVEMENTS);
     }
-    
     return response;
   }
 
@@ -431,7 +431,15 @@ export class NewExemplaireComponent implements OnInit {
    * pré-former le tableau de mouvement
    */
   concatMouvementsSousExemplaireDocument(){
-    let sousExelplaires : IExemplaireDocument[] = this.donneeEchangeService.dataDocumentSousDocuments
+    let sousExelplaires : IExemplaireDocument[] = [];
+    console.log("données echanges :", this.donneeEchangeService.dataDocumentSousDocuments, JSON.parse(localStorage.getItem("mvtExempl")!));
+    
+    if (this.donneeEchangeService.dataDocumentSousDocuments != undefined) {
+      sousExelplaires = this.donneeEchangeService.dataDocumentSousDocuments;
+      localStorage.setItem("mvtExempl", JSON.stringify(this.donneeEchangeService.dataDocumentSousDocuments));
+    } else {
+      sousExelplaires = JSON.parse(localStorage.getItem("mvtExempl")!);
+    }
     if (sousExelplaires) {
       sousExelplaires.forEach(
         element => {
@@ -443,7 +451,6 @@ export class NewExemplaireComponent implements OnInit {
           }     
       });
     }
-    this.LAST_ELEMENTS_TABLE_MOUVEMENTS = this.ELEMENTS_TABLE_MOUVEMENTS;
     this.dataSourceMouvements.data = this.ELEMENTS_TABLE_MOUVEMENTS;
   }
 
