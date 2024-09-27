@@ -236,6 +236,30 @@ th{
         font-size: 100%;
     }
 }
+.btnPromoShow{
+padding: 0;
+background-color: inherit;
+color: #b3b3b3;
+border: none;
+}
+.menuPromoShow{
+    width: fit-content !important;
+    ul{
+        background-color: red;
+        padding: 0;
+        li{
+            background-color: #ffffff;
+            font-size: 11px;
+            input{
+                width: 11px;
+            }
+            span{
+                background-color: yellow;
+            }
+        }
+    }
+
+}
 @media screen and (max-width: 1040px) {
     .block1 .inputBlock{
         width: 31% !important;

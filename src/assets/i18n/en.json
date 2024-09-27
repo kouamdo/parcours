@@ -341,7 +341,9 @@
       "title8": "Ressources",
       "title9": "sell prise",
       "title11": "Percentage value",
-      "title12": "Amount Covered"
+      "title12": "Remaining balance",
+      "title13": "No promotion for this assurence",
+      "title14": "Promotion"
     },
     "form": {
       "text1": "Field Required",

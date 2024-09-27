@@ -35,6 +35,7 @@ import { IPromo } from 'src/app/modele/promo-distributeur';
 import { PromoService } from 'src/app/services/promo/promo.service';
 import { setTimeout } from 'timers/promises';
 import { resolve } from 'path';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-new-exemplaire',
@@ -174,6 +175,7 @@ export class NewExemplaireComponent implements OnInit {
   remisePromo : number = 0 // laveur de la promotion
   unitePromo : string = "" // laveur de la promotion
   showText = false
+  promotionsByRessource: { [key: string]: IPromo[] } = {};
 
 
   constructor(
@@ -202,16 +204,6 @@ export class NewExemplaireComponent implements OnInit {
     
     this.unitePromo =""
     this.codeControl.disable()
-    let idPersonne : string = this.donneeEchangeService.getExemplairePersonneRatachee()
-    this.servicePatient.getPatientById(idPersonne).subscribe(
-      patientTrouve =>{
-        this.laPersonneRattachee =  patientTrouve;
-        if (patientTrouve != undefined) {
-          this.nomPatientCourant = this.laPersonneRattachee.nom + " " + this.laPersonneRattachee.prenom
-          
-        }
-      }
-    )
 
     this.barService.getCode().subscribe((dt) => {
       this.scan_val = dt;
@@ -373,7 +365,8 @@ export class NewExemplaireComponent implements OnInit {
          //à supprimer lorsqu'on aura un vrai back connecté
           this.modifierMouvementExemplaire(x.idDocument)
           this.laPersonneRattachee = this.exemplaire.personneRattachee
-          if (this.laPersonneRattachee != undefined) {
+          if (this.exemplaire.personneRattachee != undefined) {
+            this.laPersonneRattachee = this.exemplaire.personneRattachee
             this.nomPatientCourant = this.laPersonneRattachee.nom + " " + this.laPersonneRattachee.prenom
           }
           this.codeControl.setValue(this.exemplaire.code)
@@ -390,6 +383,18 @@ export class NewExemplaireComponent implements OnInit {
           this.codeControl.setValue(this.setCode(dateExemplaire))
           if ( this.donneeEchangeService.dataDocumentSousDocuments != undefined) {
             this.concatMouvementsSousExemplaireDocument()
+          }
+          if (this.document.beneficiaireObligatoire) {
+            let idPersonne : string = this.donneeEchangeService.getExemplairePersonneRatachee()
+            this.servicePatient.getPatientById(idPersonne).subscribe(
+              patientTrouve =>{
+                this.laPersonneRattachee =  patientTrouve;
+                if (patientTrouve != undefined) {
+                  this.nomPatientCourant = this.laPersonneRattachee.nom + " " + this.laPersonneRattachee.prenom
+                  
+                }
+              }
+            )
           }
         });
     }
@@ -441,7 +446,9 @@ export class NewExemplaireComponent implements OnInit {
     if ((this.document.affichagePrix == true)) {
       let prix : string = "prix"
       let pourcentageCharge : string = "pourcentageCharge"
+      let pourcentageChargeRssource : string = "pourcentageChargeRssource"
       let montantCharge : string = "montantCharge"
+      let promoIndividuelle : string = "promoIndividuelle"
       let montant : string = "montant total"
       if (this.document.typeMouvement == TypeMouvement.Reduire) {
         prix = "prixDeSortie"
@@ -451,7 +458,12 @@ export class NewExemplaireComponent implements OnInit {
         prix = "prix"
       }
       this.displayedRessourcesColumns.push(prix)
-      this.displayedRessourcesColumns.push(pourcentageCharge)
+      if (this.document.beneficiaireObligatoire) {
+        this.displayedRessourcesColumns.push(pourcentageCharge)
+      }else{
+        this.displayedRessourcesColumns.push(promoIndividuelle)
+        this.displayedRessourcesColumns.push(pourcentageChargeRssource)
+      }
       this.displayedRessourcesColumns.push(montantCharge)
       this.displayedRessourcesColumns.push(montant)
     }    
@@ -903,6 +915,30 @@ export class NewExemplaireComponent implements OnInit {
     this.dataSourceMouvements.data = this.ELEMENTS_TABLE_MOUVEMENTS;
   }
 
+  /**
+   * Méthode pour charger les promotions d'une ressource
+   * @param ressource 
+   */
+  getPromotionByRessource(ressource: IRessource) {
+    this.servicePromo.getPromosByRessource(ressource).subscribe(
+      (promos) => {
+        // Associer les promotions à la ressource dans le dictionnaire
+        this.promotionsByRessource[ressource.id] = promos;
+        
+      }
+    );
+  }
+
+  /**
+   * Methode pour affecter une promotion à une ligne de mouvement pour une ressource covcernée
+   * @param promoressource 
+   * @param mvt 
+   */
+  applyPromoRessource(promoressource:IPromo, mvt:IMouvement){
+    if (mvt.promotion) {
+      mvt.promotion = promoressource
+    }
+  }
   setCode(date : Date){
     return this.serviceExemplaire.formatCode(date)
   }

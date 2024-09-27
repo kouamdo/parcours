@@ -77,7 +77,7 @@
                                 
                             </form>
                         </div>
-                        <div class="blockAutoPromos">
+                        <div class="blockAutoPromos" *ngIf="document.affichagePrix == true && document.beneficiaireObligatoire">
                             <form class="example-form-entete">
                                 <h4>{{'document.exemplaire.text15' | translate}}</h4>
                                 <input type="text" matInput [formControl]="assuranceControl" [matAutocomplete]="autoAssurance">
@@ -88,7 +88,7 @@
                                 </mat-autocomplete>
                             </form>
                             <div *ngIf="showText == true" class="notfoundPromo">
-                                <p>aucune promotion en cours pour cette assurence</p>
+                                <p>{{'ressource.table.title12' | translate}}</p>
                             </div>
                         </div>
                         <div class="blockAutoRessources">
@@ -175,7 +175,7 @@
                             </ng-container>
 
                             <!-- pourcentageCharge Column -->
-                            <ng-container *ngIf="document.affichagePrix == true && document.typeMouvement != typeNeutre" matColumnDef="pourcentageCharge">
+                            <ng-container *ngIf="document.affichagePrix == true && document.typeMouvement != typeNeutre && document.beneficiaireObligatoire" matColumnDef="pourcentageCharge">
                                 <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{'ressource.table.title11' | translate}} </th>
                                 <td class="text-dark containCell" mat-cell *matCellDef="let element">
                                     <label class="custom-control">
@@ -185,12 +185,34 @@
                                 </td>
                             </ng-container>
 
+                            <!-- promoIndividuelle Column -->
+                            <ng-container *ngIf="document.affichagePrix == true && document.typeMouvement != typeNeutre && !document.beneficiaireObligatoire" matColumnDef="promoIndividuelle">
+                                <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{'ressource.table.title14' | translate}} </th>
+                                <td class="text-dark containCell" mat-cell *matCellDef="let element">
+                                    {{element.promotion?.emetteur.raisonSocial}} 
+                                </td>
+                            </ng-container>
+
+                            <!-- pourcentageChargeRssource Column -->
+                            <ng-container *ngIf="document.affichagePrix == true && document.typeMouvement != typeNeutre && !document.beneficiaireObligatoire" matColumnDef="pourcentageChargeRssource">
+                                <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{'ressource.table.title11' | translate}} </th>
+                                <td class="text-dark containCell" mat-cell *matCellDef="let element">
+                                    <label class="custom-control">
+                                        <input *ngIf="element.promotion?.pourcentageRemise > 0" class="form-control" type="number" value="{{element.promotion?.pourcentageRemise | number:'1.2-2' }}" disabled>
+                                        <input *ngIf="element.promotion?.montantRemise > 0" class="form-control" type="number" value="{{element.promotion?.montantRemise | number:'1.2-2' }}" disabled>
+                                        <span *ngIf="element.promotion?.pourcentageRemise > 0">UD</span>
+                                        <span *ngIf="element.promotion?.montantRemise > 0">%</span>
+                                    </label> 
+                                </td>
+                            </ng-container>
+
                             <!-- montantCharge Column -->
                             <ng-container *ngIf="document.affichagePrix == true && document.typeMouvement != typeNeutre" matColumnDef="montantCharge">
                                 <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{'ressource.table.title12' | translate}} </th>
                                 <td class="text-dark containCell" mat-cell *matCellDef="let element">
                                     <label class="custom-control">
-                                        <input class="form-control" type="number" value="{{calculRemise(element, promotion!)}}" disabled>
+                                        <input *ngIf="document.beneficiaireObligatoire" class="form-control" type="number" value="{{calculRemise(element, promotion!) | number:'1.2-2' }}" disabled>
+                                        <input *ngIf="!document.beneficiaireObligatoire" class="form-control" type="number" value="{{calculRemise(element, element.promotion!) | number:'1.2-2' }}" disabled>
                                     </label> 
                                 </td>
                             </ng-container>
@@ -198,7 +220,9 @@
                             <!-- montant total Column -->
                             <ng-container *ngIf="document.affichagePrix == true" matColumnDef="montant total">
                                   <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{'ressource.table2.title10' | translate}}</th>
-                                  <td class="text-dark containCell" mat-cell *matCellDef="let element"><input type="number" value="{{element.quantite*element.prix}}" disabled> </td>
+                                  <td class="text-dark containCell" mat-cell *matCellDef="let element">
+                                    <input type="number" value="{{element.quantite*element.prix}}" disabled>
+                                </td>
                             </ng-container>
 
                           <!-- distributeur Column -->
@@ -216,6 +240,24 @@
                                             <i class="fa fa-trash text-danger" aria-hidden="true"></i>
                                         </button>
                                         <span><i class="fa fa-info-circle text-info ml-1" (click)="getRessourceId(element.id)" aria-hidden="true" title="{{'preconisation.table.title4' | translate}}"></i></span>
+                                        <div class="dropdown">
+                                            <button class="btn btnPromoShow btn-secondary dropdown-toggle" type="button" id="triggerId" data-toggle="dropdown" aria-haspopup="true"
+                                                    aria-expanded="false"  (click)="getPromotionByRessource(element.ressource)">
+                                                        <i class="fa fa-tags" aria-hidden="true"></i>
+                                                    </button>
+                                            <div class="dropdown-menu menuPromoShow" aria-labelledby="triggerId">
+                                                <h6 class="dropdown-header">Section header</h6>
+                                                <ul *ngIf="promotionsByRessource[element.ressource.id] && promotionsByRessource[element.ressource.id].length > 0">
+                                                    <li class="dropdown-item" for="" *ngFor="let promo of promotionsByRessource[element.ressource.id]">
+                                                        <input type="radio" name="promoRessource" [(ngModel)]="element.promotion" [ngModelOptions]="{standalone: true}"> {{promo.emetteur.raisonSocial}} - 
+                                                        <span *ngIf="element.promotion?.pourcentageRemise > 0">{{element.promotion?.pourcentageRemise | number:'1.2-2' }}</span>
+                                                        <span *ngIf="element.promotion?.pourcentageRemise > 0">%</span>
+                                                        <span *ngIf="element.promotion?.montantRemise > 0">{{element.promotion?.montantRemise | number:'1.2-2' }}</span>
+                                                        <span *ngIf="element.promotion?.montantRemise > 0">UD</span>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
                                     </div>
                                 </td>
                             </ng-container>

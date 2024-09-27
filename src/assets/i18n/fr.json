@@ -364,7 +364,9 @@
       "title9": "Prix de sortie",
       "title10": "Scanner",
       "title11": "Valeur de la promotion",
-      "title12": "montant pris en charge"
+      "title12": "Reste à payer",
+      "title13": "aucune promotion en cours pour cette assurence",
+      "title14": "Promotion"
     },
     "form": {
       "text1": "Champ Obligatoire",
