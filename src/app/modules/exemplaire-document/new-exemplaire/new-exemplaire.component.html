@@ -92,9 +92,9 @@
                             <!-- quantite Column -->
                             <ng-container matColumnDef="quantite">
                                 <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{'ressource.table2.title5' | translate}} </th>
-                                <td class="text-dark containCell" mat-cell *matCellDef="let element">
+                                <td class="text-dark containCell" mat-cell *matCellDef="let element; let i = index">
                                   <label class="custom-control">
-                                      <input class="form-control" type="number" [(ngModel)]="element.quantite" [ngModelOptions]="{standalone: true}" [disabled]="element.typeMouvement != 'Neutre' && lastValueMvt(element)" value="true">
+                                      <input class="form-control" type="number" [(ngModel)]="element.quantite" [ngModelOptions]="{standalone: true}" [disabled]="element.typeMouvement != 'Neutre' && i <= (tailleFirstMvts - 1)" value="true">
                                   </label>
                                 </td>
                           </ng-container>
@@ -119,9 +119,9 @@
                             <!-- prix Column -->
                             <ng-container *ngIf="document.affichagePrix == true && document.typeMouvement == typeNeutre" matColumnDef="prix">
                                 <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{'ressource.table2.title7' | translate}} </th>
-                                <td class="text-dark containCell" mat-cell *matCellDef="let element">
+                                <td class="text-dark containCell" mat-cell *matCellDef="let element; let i = index">
                                     <label class="custom-control">
-                                        <input class="form-control" type="number" [disabled]="element.typeMouvement != 'Neutre' && lastValueMvt(element)" [(ngModel)]="element.prix" [ngModelOptions]="{standalone: true}">
+                                        <input class="form-control" type="number" [disabled]="element.typeMouvement != 'Neutre' && i <= (tailleFirstMvts - 1)" [(ngModel)]="element.prix" [ngModelOptions]="{standalone: true}">
                                     </label> 
                                 </td>
                             </ng-container>
@@ -139,9 +139,9 @@
                             <!-- prixDeSortie Column -->
                             <ng-container *ngIf="document.affichagePrix == true && document.typeMouvement == typeReduire" matColumnDef="prixDeSortie">
                                 <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{'ressource.table.title9' | translate}} </th>
-                                <td class="text-dark containCell" mat-cell *matCellDef="let element">
+                                <td class="text-dark containCell" mat-cell *matCellDef="let element; let i = index">
                                     <label class="custom-control">
-                                        <input class="form-control" type="number" [disabled]="element.typeMouvement != 'Neutre' && lastValueMvt(element)" [(ngModel)]="element.prix" [ngModelOptions]="{standalone: true}">
+                                        <input class="form-control" type="number" [disabled]="element.typeMouvement != 'Neutre' && i <= (tailleFirstMvts - 1)" [(ngModel)]="element.prix" [ngModelOptions]="{standalone: true}">
                                     </label> 
                                 </td>
                             </ng-container>
@@ -163,7 +163,7 @@
                                 <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{"patient.table.title8" | translate}} </th>
                                 <td class="text-dark containCell" mat-cell *matCellDef="let element; let i = index">
                                     <div class="actions">
-                                        <button class="btn p-0" [disabled]="element.typeMouvement != 'Neutre'" [value]="element.id" title="clicker pour annuler la selection" (click)="retirerSelectionRessource(i)">
+                                        <button class="btn p-0" [disabled]="element.typeMouvement != 'Neutre' && i <= (tailleFirstMvts - 1)" [value]="element.id" title="clicker pour annuler la selection" (click)="retirerSelectionRessource(i)">
                                             <i class="fa fa-trash text-danger" aria-hidden="true"></i>
                                         </button>
                                         <span><i class="fa fa-info-circle text-info ml-1" (click)="getRessourceId(element.id)" aria-hidden="true" title="{{'preconisation.table.title4' | translate}}"></i></span>
@@ -210,7 +210,7 @@
                                             <label for="montant" class="label">
                                                 {{'mvtCaisse.table.title0' | translate}}
                                             </label>
-                                            <input type="number" formControlName="montant" name="montant" [value]="sommeMontants()" class="form-control">
+                                            <input type="number" formControlName="montant" name="montant" class="form-control">
                                         </div>
                                         <div *ngIf="submitted && fCaisse['montant'].errors"  class="alert alert-danger" >
                                             <div *ngIf="fCaisse['montant'].errors['required']">{{'mvtCaisse.form.text1' | translate}}</div>

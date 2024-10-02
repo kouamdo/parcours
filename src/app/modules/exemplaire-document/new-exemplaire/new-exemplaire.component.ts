@@ -167,6 +167,7 @@ export class NewExemplaireComponent implements OnInit {
   montantTotal : number = 0;
   soustotal : number = 0;
   restes: number = 0;
+  tailleFirstMvts : number = 0;
   distributeur : IDistributeur | undefined;
   modificationDistributeurActive : boolean = false
   indexmodificationDistributeur : number = -1
@@ -395,12 +396,15 @@ export class NewExemplaireComponent implements OnInit {
           console.log('mvts :', this.dataSourceMouvements.data);
 
           this.LAST_ELEMENTS_TABLE_MOUVEMENTS = this.ELEMENTS_TABLE_MOUVEMENTS;
+          this.tailleFirstMvts = this.ELEMENTS_TABLE_MOUVEMENTS.length;
+          
           this.totalAttribut = x.attributs.length - 1;
           this.rechercherAttributsAbsants();
          //Bug du mocker apiMemory qui ne met pas à jour les données du document dans exemplaire
          //pour avoir la donnée fraiche on refait un appel à document
          //à supprimer lorsqu'on aura un vrai back connecté
-          this.modifierMouvementExemplaire(x.idDocument)          
+          this.modifierMouvementExemplaire(x.idDocument)
+          this.fCaisse['montant'].setValue(this.sommeMontants())          
         });
     }
     if (this.idDocument != null && this.idDocument !== '') {
@@ -411,6 +415,7 @@ export class NewExemplaireComponent implements OnInit {
           this.totalAttribut = document.attributs.length - 1;
           this.formerEnteteTableauMissions()
           this.concatMouvementsSousExemplaireDocument()
+          this.fCaisse['montant'].setValue(this.sommeMontants())
         });
     }
   }
@@ -452,6 +457,8 @@ export class NewExemplaireComponent implements OnInit {
       });
     }
     this.dataSourceMouvements.data = this.ELEMENTS_TABLE_MOUVEMENTS;
+    this.tailleFirstMvts = this.ELEMENTS_TABLE_MOUVEMENTS.length;
+    console.log(" taille table :", this.tailleFirstMvts, this.ELEMENTS_TABLE_MOUVEMENTS);
   }
 
 /**
@@ -776,7 +783,7 @@ export class NewExemplaireComponent implements OnInit {
         mvt.distributeur = this.distributeur
       }
 
-      this.ELEMENTS_TABLE_MOUVEMENTS.unshift(mvt)
+      this.ELEMENTS_TABLE_MOUVEMENTS.push(mvt)
       this.dataSourceMouvements.data = this.ELEMENTS_TABLE_MOUVEMENTS
     }
   }
