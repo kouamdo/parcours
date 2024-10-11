@@ -61,8 +61,20 @@
             <div *ngIf="document.contientRessources == true" class="block2 card mt-2 pt-1" id="sectionAjoutPreco">
                 <div>
                     <h3>{{'document.exemplaire.title3' | translate}} :</h3>
-                    <div class="searchBlock" [ngClass]="{'searchBlock': document.contientDistributeurs, 'searchBlockUnique': !document.contientDistributeurs}">
-                        <div *ngIf="document.contientDistributeurs == true && !document.beneficiaireObligatoire" class="blockAutoDistributeurs">
+                     <!-- [ngClass]="{'searchBlock': document.contientDistributeurs, 'searchBlockUnique': !document.contientDistributeurs}" -->
+                    <div class="searchBlockUnique">
+                        <div class="blockAutoRessources">
+                            <form class="example-form-entete">
+                                <h4>{{'ressource.form.text16' | translate}}</h4>
+                                <input type="text" matInput [formControl]="ressourceControl" [(ngModel)]="scan_val" [value]="scan_val" [matAutocomplete]="auto">
+                                <mat-autocomplete class="blockAutocomplate" #auto="matAutocomplete" [displayWith]="displayFn">
+                                    <mat-option class="options" *ngFor="let option of filteredOptionsRessource" [value]="option" (click)="rechercherListingRessources(option); reinitialliseRessourceControl()">
+                                        {{option.libelle}}
+                                    </mat-option>
+                                </mat-autocomplete>
+                            </form>
+                        </div>
+                        <div *ngIf="document.contientDistributeurs == true && !document.beneficiaireObligatoire && modificationDistributeurActive == true" class="blockAutoDistributeurs">
                             <form class="example-form-entete">
                                 <h4>{{'preconisation.table.title6' | translate}}</h4>
                                 <input type="text" matInput [formControl]="distributeurControl" [matAutocomplete]="autoDistributeur">
@@ -90,17 +102,6 @@
                             <div *ngIf="showText == true" class="notfoundPromo">
                                 <p>{{'ressource.table.title12' | translate}}</p>
                             </div>
-                        </div>
-                        <div class="blockAutoRessources">
-                            <form class="example-form-entete">
-                                <h4>{{'ressource.form.text16' | translate}}</h4>
-                                <input type="text" matInput [formControl]="ressourceControl" [(ngModel)]="scan_val" [value]="scan_val" [matAutocomplete]="auto">
-                                <mat-autocomplete class="blockAutocomplate" #auto="matAutocomplete" [displayWith]="displayFn">
-                                    <mat-option class="options" *ngFor="let option of filteredOptionsRessource" [value]="option" (click)="rechercherListingRessources(option); reinitialliseRessourceControl()">
-                                        {{option.libelle}}
-                                    </mat-option>
-                                </mat-autocomplete>
-                            </form>
                         </div>
                     </div>
                 </div>
@@ -200,8 +201,8 @@
                                     <label class="custom-control">
                                         <input *ngIf="element.promotion?.pourcentageRemise > 0" class="form-control" type="number" value="{{element.promotion?.pourcentageRemise | number:'1.2-2' }}" disabled>
                                         <input *ngIf="element.promotion?.montantRemise > 0" class="form-control" type="number" value="{{element.promotion?.montantRemise | number:'1.2-2' }}" disabled>
-                                        <span *ngIf="element.promotion?.pourcentageRemise > 0">UD</span>
-                                        <span *ngIf="element.promotion?.montantRemise > 0">%</span>
+                                        <span *ngIf="element.promotion?.pourcentageRemise > 0">%</span>
+                                        <span *ngIf="element.promotion?.montantRemise > 0">UD</span>
                                     </label> 
                                 </td>
                             </ng-container>
@@ -211,8 +212,8 @@
                                 <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{'ressource.table.title12' | translate}} </th>
                                 <td class="text-dark containCell" mat-cell *matCellDef="let element">
                                     <label class="custom-control">
-                                        <input *ngIf="document.beneficiaireObligatoire" class="form-control" type="number" value="{{calculRemise(element, promotion!) | number:'1.2-2' }}" disabled>
-                                        <input *ngIf="!document.beneficiaireObligatoire" class="form-control" type="number" value="{{calculRemise(element, element.promotion!) | number:'1.2-2' }}" disabled>
+                                        <input *ngIf="document.beneficiaireObligatoire" class="form-control" type="number" value="{{calculRemise(element) | number:'1.2-2' }}" disabled>
+                                        <!-- <input *ngIf="!document.beneficiaireObligatoire" class="form-control" type="number" value="{{calculRemise(element) | number:'1.2-2' }}" disabled> -->
                                     </label> 
                                 </td>
                             </ng-container>
@@ -239,25 +240,10 @@
                                         <button class="btn p-0" [value]="element.id" title="clicker pour annuler la selection" (click)="retirerSelectionRessource(i)">
                                             <i class="fa fa-trash text-danger" aria-hidden="true"></i>
                                         </button>
-                                        <span><i class="fa fa-info-circle text-info ml-1" (click)="getRessourceId(element.id)" aria-hidden="true" title="{{'preconisation.table.title4' | translate}}"></i></span>
-                                        <div class="dropdown">
-                                            <button class="btn btnPromoShow btn-secondary dropdown-toggle" type="button" id="triggerId" data-toggle="dropdown" aria-haspopup="true"
-                                                    aria-expanded="false"  (click)="getPromotionByRessource(element.ressource)">
-                                                        <i class="fa fa-tags" aria-hidden="true"></i>
-                                                    </button>
-                                            <div class="dropdown-menu menuPromoShow" aria-labelledby="triggerId">
-                                                <h6 class="dropdown-header">Section header</h6>
-                                                <ul *ngIf="promotionsByRessource[element.ressource.id] && promotionsByRessource[element.ressource.id].length > 0">
-                                                    <li class="dropdown-item" for="" *ngFor="let promo of promotionsByRessource[element.ressource.id]">
-                                                        <input type="radio" name="promoRessource" [(ngModel)]="element.promotion" [ngModelOptions]="{standalone: true}"> {{promo.emetteur.raisonSocial}} - 
-                                                        <span *ngIf="element.promotion?.pourcentageRemise > 0">{{element.promotion?.pourcentageRemise | number:'1.2-2' }}</span>
-                                                        <span *ngIf="element.promotion?.pourcentageRemise > 0">%</span>
-                                                        <span *ngIf="element.promotion?.montantRemise > 0">{{element.promotion?.montantRemise | number:'1.2-2' }}</span>
-                                                        <span *ngIf="element.promotion?.montantRemise > 0">UD</span>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
+                                        <span><i class="fa fa-info-circle text-info ml-1" aria-hidden="true" title="{{'preconisation.table.title4' | translate}}"></i></span>
+                                        <span role="button" class="ml-1 mr-1" title="{{'doc-etats.button2' | translate}}" (click)="getRessource(element.ressource); openPromotionRessourceDialog(); getIndexTableauMvtCourant(i); initialisePromotionControl(element.promotion!)">
+                                            <i class="fa fa-tags" aria-hidden="true"></i>
+                                        </span>
                                     </div>
                                 </td>
                             </ng-container>

@@ -25,6 +25,8 @@ export class DonneesEchangeService {
   dataUrlExemplaireDePersonne: any;
   private _dataEnteteMenu: string = '';
   dataMouvementsExemplaire: any
+  dataPromoMouvementCourant: any
+  dataRessourceMouvementCourant: any
   constructor(private http: HttpClient) {
     const storedDataEnteteMenu = sessionStorage.getItem('dataEnteteMenu');
     if (storedDataEnteteMenu) {

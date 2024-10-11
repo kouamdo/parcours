@@ -1,0 +1,38 @@
+#mainBlock{
+    background-color: #ffffff;
+    padding: 5px;
+    width: 80%;
+    height: max-content !important;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.example-form-entete{
+    width: 100% !important;
+}
+.affichePromo{
+    margin: 20px auto;
+    width: 90%;
+}
+.libelle{
+    opacity: 0.8;
+}
+.resultat{
+    font-weight: 600;
+}
+@media screen and (max-width: 1200px) {
+    .affichePromo{
+        width: 95%;
+    }
+}
+@media screen and (max-width: 1100px) {
+    .affichePromo{
+        width: 98%;
+    }
+}
+@media screen and (max-width: 1060px) {
+    .affichePromo{
+        width: 100%;
+    }
+}

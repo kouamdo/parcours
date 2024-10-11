@@ -1,0 +1,272 @@
+<div id="mainBlock" class="bg-light card modalCategorie modalContentScroll">
+    <h2>{{'doc-etats.form.text7' | translate}}</h2>
+    
+    <div class="card-body p-0" id="tableBlock">
+      <div class="table-responsive w-100">
+        <table
+          class="table table-sm table-centered table-striped table-bordered w-100"
+          mat-table
+          [dataSource]="dataSource"
+          matSort
+        >
+          <!-- Emetteur Column -->
+          <ng-container matColumnDef="emetteur">
+            <th
+              class="containHead"
+              mat-header-cell
+              *matHeaderCellDef
+              mat-sort-header
+            >
+              {{ "promo-distributeur.emetteur" | translate }}
+            </th>
+            <td
+              class="containCell"
+              mat-cell
+              *matCellDef="let element"
+            >
+              {{ element.emetteur.raisonSocial }}
+            </td>
+          </ng-container>
+
+          <!-- Date Debut Column -->
+          <ng-container matColumnDef="dateDebut">
+            <th
+              class="containHead"
+              mat-header-cell
+              *matHeaderCellDef
+              mat-sort-header
+            >
+              {{ "promo-distributeur.date_debut" | translate }}
+            </th>
+            <td
+              class="containCell"
+              mat-cell
+              *matCellDef="let element"
+            >
+              {{ element.dateDebut | date }}
+            </td>
+          </ng-container>
+
+          <!-- Date Fin Column -->
+          <ng-container matColumnDef="dateFin">
+            <th
+              class="containHead"
+              mat-header-cell
+              *matHeaderCellDef
+              mat-sort-header
+            >
+              {{ "promo-distributeur.date_fin" | translate }}
+            </th>
+            <td
+              class="containCell"
+              mat-cell
+              *matCellDef="let element"
+            >
+              {{ element.dateFin | date }}
+            </td>
+          </ng-container>
+
+          <!-- Code Unique Column -->
+          <ng-container matColumnDef="codeUnique">
+            <th
+              class="containHead"
+              mat-header-cell
+              *matHeaderCellDef
+              mat-sort-header
+            >
+              {{ "promo-distributeur.code" | translate }}
+            </th>
+            <td
+              class="containCell"
+              mat-cell
+              *matCellDef="let element"
+            >
+              {{ element.codeUnique }}
+            </td>
+          </ng-container>
+
+          <!-- Montant Remise Column -->
+          <ng-container matColumnDef="montantRemise">
+            <th
+              class="containHead"
+              mat-header-cell
+              *matHeaderCellDef
+              mat-sort-header
+            >
+              {{ "promo-distributeur.montant" | translate }}
+            </th>
+            <td
+              class="containCell"
+              mat-cell
+              *matCellDef="let element"
+            >
+              {{ element.montantRemise }}
+            </td>
+          </ng-container>
+
+          <!-- Pourcentage Remise Column -->
+          <ng-container matColumnDef="pourcentageRemise">
+            <th
+              class="containHead"
+              mat-header-cell
+              *matHeaderCellDef
+              mat-sort-header
+            >
+              {{ "promo-distributeur.Pourcentage" | translate }}
+            </th>
+            <td
+              class="containCell"
+              mat-cell
+              *matCellDef="let element"
+            >
+              {{ element.pourcentageRemise }}
+            </td>
+          </ng-container>
+
+          <!-- Famille Column -->
+          <ng-container matColumnDef="famille">
+            <th
+              class="containHead"
+              mat-header-cell
+              *matHeaderCellDef
+            >
+              {{ "promo-distributeur.famille" | translate }}
+            </th>
+            <td
+              class="containCell"
+              mat-cell
+              *matCellDef="let element"
+            >
+              <span *ngFor="let fam of element.famille">
+                {{ fam.libelle
+                }}<span *ngIf="!isLastElement(element.famille, fam)">, </span>
+              </span>
+            </td>
+          </ng-container>
+
+          <!-- Ressource Column -->
+          <ng-container matColumnDef="ressource">
+            <th
+              class="containHead"
+              mat-header-cell
+              *matHeaderCellDef
+            >
+              {{ "promo-distributeur.ressource" | translate }}
+            </th>
+            <td
+              class="containCell"
+              mat-cell
+              *matCellDef="let element"
+            >
+              <span *ngFor="let res of element.ressource">
+                {{ res.libelle
+                }}<span *ngIf="!isLastElement(element.ressource, res)">, </span>
+              </span>
+            </td>
+          </ng-container>
+
+          <!-- Actions Column -->
+          <ng-container matColumnDef="actions">
+            <th class="text-dark containHead" mat-header-cell *matHeaderCellDef>
+              {{ "promo-distributeur.action" | translate }}
+            </th>
+            <td
+              class="text-dark containCell"
+              mat-cell
+              *matCellDef="let element"
+            >
+              <div class="actions" [formGroup]="formePromoRessource">
+                <input type="radio"formControlName="promoControl" name="promo" [value]="element" id="" (change)="getPromotion(element,$event)">
+              </div>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>
+        <mat-paginator
+          style="background-color: rgba(40, 167, 69, 0.79)"
+          [pageSizeOptions]="[5, 10, 20]"
+          showFirstLastButtons
+          aria-label="Select page of periodic elements"
+        >
+        </mat-paginator>
+      </div>
+    </div>
+    <div *ngIf="this.promotionCourente != undefined" class="affichePromo">
+      <p>
+        <span class="libelle">
+          {{'promo-distributeur.emetteur' | translate}} : 
+        </span>
+        <span class="resultat">
+          {{this.promotionCourente.emetteur.raisonSocial}}
+        </span>
+      </p>
+      <p>
+        <span class="libelle">
+          {{'promo-distributeur.date_debut' | translate}} : 
+        </span>
+        <span class="resultat">
+          {{this.promotionCourente.dateDebut | date : 'dd/mm/yyyy'}}
+        </span>
+      </p>
+      <p>
+        <span class="libelle">
+          {{'promo-distributeur.date_fin' | translate}} : 
+        </span>
+        <span class="resultat">
+          {{this.promotionCourente.dateFin | date : 'dd/mm/yyyy'}}
+        </span>
+      </p>
+      <p>
+        <span class="libelle">
+          {{'promo-distributeur.code' | translate}} : 
+        </span>
+        <span class="resultat">
+          {{this.promotionCourente.codeUnique}}
+        </span>
+      </p>
+      <p>
+        <span class="libelle">
+          {{'promo-distributeur.montant' | translate}} : 
+        </span>
+        <span class="resultat">
+          {{this.promotionCourente.montantRemise}}
+        </span>
+      </p>
+      <p>
+        <span class="libelle">
+          {{'promo-distributeur.Pourcentage' | translate}} : 
+        </span>
+        <span class="resultat">
+          {{this.promotionCourente.pourcentageRemise}}
+        </span>
+      </p>
+      <p>
+        <span class="libelle">
+          {{'promo-distributeur.ressource' | translate}} : 
+        </span>
+        <span class="resultat" *ngFor="let fam of this.promotionCourente.famille">
+            {{ fam.libelle
+            }}<span *ngIf="!isLastElement(this.promotionCourente.famille!, fam)">, </span>
+        </span>
+      </p>
+      <p>
+        <span class="libelle">
+          {{'promo-distributeur.famille' | translate}} : 
+        </span>
+        <span class="resultat" *ngFor="let res of this.promotionCourente.ressource">
+            {{ res.libelle
+            }}<span *ngIf="!isLastElement(this.promotionCourente.ressource!, res)">, </span>
+        </span>
+      </p>
+    </div>
+    <div class="actionButton valBtn mt-2">
+      <button *ngIf="this.promotionCourente != undefined" mat-button class="btn btnValidation annuler" title="{{'lists.button3' | translate}}">
+        <i class="fa fa-undo" aria-hidden="true" (click)="reinitialier()"></i>
+      </button>
+        <button mat-button [mat-dialog-close] cdkFocusInitial class="btn btnValidation">
+          <i class="fa fa-check" aria-hidden="true"></i>  
+        </button>
+    </div>
+</div>

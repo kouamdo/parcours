@@ -36,6 +36,8 @@ import { PromoService } from 'src/app/services/promo/promo.service';
 import { setTimeout } from 'timers/promises';
 import { resolve } from 'path';
 import { Observable } from 'rxjs';
+import { MatDialog } from '@angular/material/dialog';
+import { ModalChoixPromotionRessourceComponent } from '../../shared/modal-choix-promotion-ressource/modal-choix-promotion-ressource.component';
 
 @Component({
   selector: 'app-new-exemplaire',
@@ -176,6 +178,7 @@ export class NewExemplaireComponent implements OnInit {
   unitePromo : string = "" // laveur de la promotion
   showText = false
   promotionsByRessource: { [key: string]: IPromo[] } = {};
+  indexTableauMvtCourant: number = -1
 
 
   constructor(
@@ -191,7 +194,8 @@ export class NewExemplaireComponent implements OnInit {
     private datePipe: DatePipe,
     private barService: ModalCodebarreService,
     private servicePatient: PatientsService,
-    private servicePromo: PromoService
+    private servicePromo: PromoService,
+    private dialogDef: MatDialog
   ) {
     this.formeExemplaire = this.formBuilder.group({
       _exemplaireDocument: new FormArray([]),
@@ -204,6 +208,7 @@ export class NewExemplaireComponent implements OnInit {
     
     this.unitePromo =""
     this.codeControl.disable()
+    this.donneeEchangeService.dataPromoMouvementCourant = undefined
 
     this.barService.getCode().subscribe((dt) => {
       this.scan_val = dt;
@@ -349,7 +354,9 @@ export class NewExemplaireComponent implements OnInit {
           this.exemplaire = x;
           this.document = x
           this.document.id = x.idDocument
-          this.promotion = x.promotion
+          if (x.mouvements) {
+            this.promotion = x.mouvements[0].promotion
+          }
           this.assurancePersone = x.assurance
           if (this.assurancePersone) {
             this.assuranceControl.setValue(this.assurancePersone)
@@ -639,7 +646,7 @@ export class NewExemplaireComponent implements OnInit {
         mouvement.quantite != null &&
         mouvement.prix != null
       ) {
-        this.montantTotal += this.calculRemise(mouvement, this.promotion!) * mouvement.quantite;
+        this.montantTotal += this.calculRemise(mouvement) * mouvement.quantite;
       }
     });
     return this.montantTotal;
@@ -757,7 +764,8 @@ export class NewExemplaireComponent implements OnInit {
         mvt => {
         let mouvementTemp = mvt
         if (this.promotion) {
-          this.appliquerPromotion(mouvementTemp, this.promotion)
+          mouvementTemp.promotion = this.promotion
+          this.appliquerPromotion(mouvementTemp)
         }
         if (!this.promotion) {
           this.showText = true
@@ -770,7 +778,7 @@ export class NewExemplaireComponent implements OnInit {
    * Méthode permettant de déterminer si une assurance pocède une promotion en cours
    * @param option assurance
    */
-  verifieSiPromoAppliquable(mouvement: IMouvement, promo: IPromo):boolean{
+  verifieSiPromoAppliquable(mouvement: IMouvement):boolean{
     
     const today = new Date(); 
     let dateOk = false
@@ -778,20 +786,20 @@ export class NewExemplaireComponent implements OnInit {
     let familleOk = false
 
     // Vérification des Dates : La promotion n'est appliquée que si la date actuelle se situe entre la date de début et la date de fin de la promotion.
-    if (!(today < new Date(promo.dateDebut!) || today > new Date(promo.dateFin!))) {
-      this.promotion = promo!
+    if (mouvement.promotion && !(today < new Date(mouvement.promotion.dateDebut!) || today > new Date(mouvement.promotion.dateFin!))) {
+      this.promotion = mouvement.promotion
       dateOk = true
 
       let ressourceCouverte : boolean = false;
       let familleCouverte : boolean = false;
 
       // Vérification des Ressources et Familles : La promotion est appliquée si la ressource ou la famille de la ressource est couverte par la promotion.
-      if (promo.ressource) {
-        ressourceCouverte = promo.ressource?.some(r => r.id === mouvement.ressource.id);
+      if (mouvement.promotion.ressource) {
+        ressourceCouverte = mouvement.promotion.ressource?.some(r => r.id === mouvement.ressource.id);
         ressourceOk = true
       }
-      if (promo.famille) {
-        familleCouverte = promo.famille?.some(f => f.id === mouvement.ressource.famille.id);
+      if (mouvement.promotion.famille) {
+        familleCouverte = mouvement.promotion.famille?.some(f => f.id === mouvement.ressource.famille.id);
         familleOk = true
       }
     }
@@ -803,22 +811,22 @@ export class NewExemplaireComponent implements OnInit {
   }
 
   // Calcul de la Remise : La remise est calculée soit en pourcentage soit en montant fixe. Si les deux sont présents, seul le pourcentage est utilisé.
-  calculRemise(mouvement: IMouvement, promo: IPromo):number{
-    if (!promo) {
+  calculRemise(mouvement: IMouvement):number{
+    if (!mouvement.promotion) {
       this.remisePromo = 0
       this.unitePromo =""
       return mouvement.prix
     }
     let remise = 0;
 
-    if (promo.pourcentageRemise > 0) {
-        remise = mouvement.prix * (promo.pourcentageRemise / 100);
-        this.remisePromo = promo.pourcentageRemise
+    if (mouvement.promotion.pourcentageRemise > 0) {
+        remise = mouvement.prix * (mouvement.promotion.pourcentageRemise / 100);
+        this.remisePromo = mouvement.promotion.pourcentageRemise
         this.unitePromo = "%"
-    } else if (promo.montantRemise > 0) {
-        remise = promo.montantRemise;
+    } else if (mouvement.promotion.montantRemise > 0) {
+        remise = mouvement.promotion.montantRemise;
         // remise = (promo.montantRemise/mouvement.prix)*100;
-        this.remisePromo = promo.montantRemise
+        this.remisePromo = mouvement.promotion.montantRemise
         this.unitePromo = "UD"
     }
 
@@ -834,9 +842,9 @@ export class NewExemplaireComponent implements OnInit {
    * @param promo promotion à apliquer
    * @returns mouvement soldés
    */
-  appliquerPromotion(mouvement: IMouvement, promo: IPromo):IMouvement{
-    if (this.verifieSiPromoAppliquable(mouvement, promo)) {
-      this.calculRemise(mouvement, promo)
+  appliquerPromotion(mouvement: IMouvement):IMouvement{
+    if (this.verifieSiPromoAppliquable(mouvement)) {
+      this.calculRemise(mouvement)
     }
     return mouvement
   }
@@ -905,10 +913,6 @@ export class NewExemplaireComponent implements OnInit {
     }
   }
 
-  getRessourceId(idRessource: string) {
-    this.idRessource = idRessource;
-  }
-
   retirerSelectionRessource(index: number) {
     this.ELEMENTS_TABLE_MOUVEMENTS = this.dataSourceMouvements.data;
     this.ELEMENTS_TABLE_MOUVEMENTS.splice(index, 1); // je supprime un seul element du tableau a la position 'index'
@@ -941,5 +945,40 @@ export class NewExemplaireComponent implements OnInit {
   }
   setCode(date : Date){
     return this.serviceExemplaire.formatCode(date)
+  }
+
+  getIndexTableauMvtCourant(index: number) {
+    this.indexTableauMvtCourant = index;
+  }
+
+  getRessource(ressource: IRessource) {
+    this.idRessource = ressource.id;
+    this.donneeEchangeService.dataRessourceMouvementCourant = ressource
+    console.log("ressource : ", ressource);
+  }
+  
+  openPromotionRessourceDialog() {
+    const dialogRef = this.dialogDef.open(ModalChoixPromotionRessourceComponent,
+      {
+        maxWidth: '100vw',
+        maxHeight: '100vh',
+        height: '100%',
+        width: '100%',
+        enterAnimationDuration: '1000ms',
+        exitAnimationDuration: '1000ms',
+        data: {}
+      }
+    );
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.ELEMENTS_TABLE_MOUVEMENTS[this.indexTableauMvtCourant].promotion = this.donneeEchangeService.dataPromoMouvementCourant
+      if (this.donneeEchangeService.dataPromoMouvementCourant) {
+        this.ELEMENTS_TABLE_MOUVEMENTS[this.indexTableauMvtCourant].distributeur = undefined
+      }
+    });
+  }
+
+  initialisePromotionControl(promotion: IPromo) {
+    this.donneeEchangeService.dataPromoMouvementCourant = promotion;
   }
 }

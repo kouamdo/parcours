@@ -92,15 +92,15 @@ h3{
 .searchBlockUnique{
     display: flex;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: space-between;
     width: 100%;
     padding: 0 2px;
     padding-bottom: 5px;
     .blockAutoRessources{
-        width: 100%;
+        // width: 100%;
     }
     .blockAutoRessources form{
-        justify-content: flex-start;
+        // justify-content: flex-start;
     }
 }
 .searchBlockUnique h4{
@@ -120,6 +120,12 @@ h3{
 }
 .blockAutoRessources form{
     justify-content: end;
+}
+.blockAutoDistributeurs, .blockAutoPromos{
+    width: 48%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
 }
 .example-form-entete{
     display: flex;
@@ -227,13 +233,21 @@ th{
 }
 .btnModifierDistributeurBlock{
     border: 1px solid #28a745;
-    width: 30px;
-    height: 30px;
+    background-color: #28a745;
+    color: #ffffff;
+    width: 50px;
+    height: 32px;
     display: flex;
     padding: 0;
+    border-radius: 0%;
+    border-radius: 1px;
     i{
         margin: auto;
         font-size: 100%;
+    }
+    &:hover{
+        box-shadow: 0 0 6px #28a745;
+        color: #ffffffdf;
     }
 }
 .btnPromoShow{
