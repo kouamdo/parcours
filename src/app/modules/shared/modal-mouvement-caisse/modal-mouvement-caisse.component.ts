@@ -1,6 +1,6 @@
 import { DialogRef } from '@angular/cdk/dialog';
 import { DatePipe } from '@angular/common';
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -14,7 +14,7 @@ import { MouvementCaisseService } from 'src/app/services/mouvement-caisse/mouvem
   templateUrl: './modal-mouvement-caisse.component.html',
   styleUrls: ['./modal-mouvement-caisse.component.scss']
 })
-export class ModalMouvementCaisseComponent {
+export class ModalMouvementCaisseComponent implements OnInit {
 
   submitted: boolean = false;
   formePaiement: FormGroup;
@@ -61,6 +61,31 @@ export class ModalMouvementCaisseComponent {
     })
   }
 
+  ngOnInit(): void {
+    console.log("donnee de la modal:", this.data.donnee);
+    
+      this.formePaiement.setValue({
+        moyen: this.data.donnee[0].moyen,
+        montant: this.data.donnee[0].montant,
+        reference: this.data.donnee[0].reference
+      });
+      this.formePaiement1.setValue({
+        moyen: this.data.donnee[1].moyen,
+        montant: this.data.donnee[1].montant,
+        reference: this.data.donnee[1].reference
+      });
+      this.formePaiement2.setValue({
+        moyen: this.data.donnee[2].moyen,
+        montant: this.data.donnee[2].montant,
+        reference: this.data.donnee[2].reference
+      });
+      this.formePaiement3.setValue({
+        moyen: this.data.donnee[3].moyen,
+        montant: this.data.donnee[3].montant,
+        reference: this.data.donnee[3].reference
+      });
+  }
+
   get f() {
     return this.formePaiement.controls;
   }
@@ -70,12 +95,12 @@ export class ModalMouvementCaisseComponent {
 
     if(this.formePaiement.invalid) return;
 
-    const data = {
-      element: this.formePaiement.value,
-      element1: this.formePaiement1.value,
-      element2: this.formePaiement2.value,
-      element3: this.formePaiement3.value
-    };
+    const data = [
+      this.formePaiement.value,
+      this.formePaiement1.value,
+      this.formePaiement2.value,
+      this.formePaiement3.value]
+    ;
 
     console.log("value paiement :", this.formePaiement.value, this.formePaiement1.value, this.formePaiement2.value, this.formePaiement3.value);
     

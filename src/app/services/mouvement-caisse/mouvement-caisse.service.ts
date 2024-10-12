@@ -33,8 +33,20 @@ export class MouvementCaisseService {
     );
   }
 
-  ajouterMouvement(mvt:IMouvementCaisses)
+  ajouterMouvement(mvt:IMouvementCaisses | IMouvementCaisses[])
   {
-    return this.http.post("api/mvtCaisses",mvt);
+    let value : IMouvementCaisses;
+
+    if (Array.isArray(mvt)) {
+      value = mvt[mvt.length - 1];
+      mvt.forEach((item) => {
+        this.http.post("api/mvtCaisses",item);
+      });
+    } else {
+      value = mvt;
+      console.error('mvt is not an array:', mvt);
+    }
+    
+    return this.http.post("api/mvtCaisses",value);
   }
 }

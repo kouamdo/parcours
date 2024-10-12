@@ -98,7 +98,6 @@ export class ModalMouvementCaisseCompteComponent implements OnInit {
       dateCreation: new Date(),
       moyenPaiement: selectItem.moyenPaiement,
       referencePaiement: selectItem.referencePaiement,
-      caisse: selectItem.caisse,
       compte: this.compte,
       personnel: this.person!,
       exemplaire: this.data.exemplaire

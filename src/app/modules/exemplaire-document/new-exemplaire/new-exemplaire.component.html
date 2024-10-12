@@ -200,7 +200,7 @@
                                         </label>
                                         <div class="d-flex" >
                                             <input type="text" [value]="compte?.solde" disabled class="form-control" style="color: black;">
-                                            <input style="margin-left: 0.375rem;" type="checkbox" name="use" formControlName="use" title="{{'lists.text6' | translate }}" d="">
+                                            <input style="margin-left: 0.375rem;" type="checkbox" name="use" formControlName="use" (change)="useSolde(fCaisse['use'].value)" title="{{'lists.text6' | translate }}">
                                         </div>
                                     </div>
                                 </div>
@@ -210,10 +210,25 @@
                                             <label for="montant" class="label">
                                                 {{'mvtCaisse.table.title0' | translate}}
                                             </label>
-                                            <input type="number" formControlName="montant" name="montant" class="form-control">
+                                            <div>
+                                                <input type="number" formControlName="montant" name="montant" class="form-control">
+                                                <p class="text-danger" style="font-size: 10px;" *ngIf="fCaisse['use'].value == true && compte?.solde! < montantTotal">{{ 'Solde insufisant pour régler. Utiliser un autre moyen pour régler!' }}</p>
+                                            </div>
                                         </div>
                                         <div *ngIf="submitted && fCaisse['montant'].errors"  class="alert alert-danger" >
                                             <div *ngIf="fCaisse['montant'].errors['required']">{{'mvtCaisse.form.text1' | translate}}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div>
+                                        <div class="champs">
+                                            <label for="reste" class="label">
+                                                {{'mvtCaisse.table.title8' | translate}}
+                                            </label>
+                                            <div>
+                                                <input type="number" [value]="resteAPayer" (change)="resteAPayer" disabled class="form-control">
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -224,10 +239,7 @@
                                                 {{'mvtCaisse.table.title2' | translate}}
                                             </label>
                                             <select class="form-control" formControlName="moyenPaiement" name="moyenPaiement">
-                                                <option value="cash">Cash</option>
-                                                <option value="cheque">Cheque</option>
-                                                <option value="carte bleue">Carte Bleue</option>
-                                                <option value="mobile money">Mobile Money</option>
+                                                <option *ngFor="let caisse in caisses" [value]="caisse">{{caisse.type}}</option>
                                                 <option value="multipaiement" (click)="openModalPaiementDialog()">Multipaiement</option>
                                             </select>
                                         </div>

@@ -31,7 +31,7 @@ import { TypeMouvement } from 'src/app/modele/typeMouvement';
 import { ModalCodebarreService } from '../../shared/modal-codebarre/modal-codebarre.service';
 import { PatientsService } from 'src/app/services/patients/patients.service';
 import { IPatient } from 'src/app/modele/Patient';
-import { IMouvementCaisses } from 'src/app/modele/mouvement-caisses';
+import { IMouvementCaisses, MoyenPaiement } from 'src/app/modele/mouvement-caisses';
 import { ICaisses } from 'src/app/modele/caisses';
 import { IComptes } from 'src/app/modele/comptes';
 import { MouvementCaisseService } from 'src/app/services/mouvement-caisse/mouvement-caisse.service';
@@ -166,7 +166,7 @@ export class NewExemplaireComponent implements OnInit {
   TABLE_PRECONISATION_RESSOURCES: IPrecoMvt[] = [];
   montantTotal : number = 0;
   soustotal : number = 0;
-  restes: number = 0;
+  resteAPayer: number = 0;
   tailleFirstMvts : number = 0;
   distributeur : IDistributeur | undefined;
   modificationDistributeurActive : boolean = false
@@ -177,6 +177,9 @@ export class NewExemplaireComponent implements OnInit {
   laPersonneRattachee : IPatient | undefined 
   compte: IComptes | undefined
   caisses: ICaisses[] = []
+  modalResult: MoyenPaiement[] = [];
+  modalLastResult: MoyenPaiement[] = [];
+  tableMvts: IMouvementCaisses[] = []
 
   constructor(
     private router: Router,
@@ -201,7 +204,7 @@ export class NewExemplaireComponent implements OnInit {
       _controlsSupprime: new FormArray([]),
       use: [false],
       montant: ['', [Validators.required]],
-      moyenPaiement: ['', [Validators.required]],
+      moyenPaiement: new FormControl<string | ICaisses>(''),
       referencePaiement: ['', [Validators.required]]
     })
   }
@@ -368,13 +371,27 @@ export class NewExemplaireComponent implements OnInit {
       width: '100%',
       enterAnimationDuration:'1000ms',
       exitAnimationDuration:'1000ms',
-      data:{}
+      data:{donnee: this.modalResult}
     }
     )
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        console.log('result :', result.data);
+        this.modalResult = result.data;
+        if (this.modalLastResult) {
+          this.modalLastResult.forEach((element) => {
+            if (element.montant) {
+              this.resteAPayer += element.montant;
+            }
+          });
+        }
+        this.modalResult.forEach((element) => {
+          if (element.montant) {
+            this.resteApayer(element.montant);
+          }
+        });
+        this.modalLastResult = result.data;
+        console.log('result :', this.modalResult);
       }
     });
   }
@@ -389,6 +406,7 @@ export class NewExemplaireComponent implements OnInit {
         .subscribe((x) => {
           this.exemplaire = x;
           this.document = x;
+                  
           if (this.exemplaire.mouvements != undefined) {
             this.ELEMENTS_TABLE_MOUVEMENTS = this.exemplaire.mouvements;            
           }
@@ -404,7 +422,8 @@ export class NewExemplaireComponent implements OnInit {
          //pour avoir la donnée fraiche on refait un appel à document
          //à supprimer lorsqu'on aura un vrai back connecté
           this.modifierMouvementExemplaire(x.idDocument)
-          this.fCaisse['montant'].setValue(this.sommeMontants())          
+          this.resteAPayer = this.sommeMontants()
+          this.fCaisse['montant'].setValue(0)  
         });
     }
     if (this.idDocument != null && this.idDocument !== '') {
@@ -415,7 +434,8 @@ export class NewExemplaireComponent implements OnInit {
           this.totalAttribut = document.attributs.length - 1;
           this.formerEnteteTableauMissions()
           this.concatMouvementsSousExemplaireDocument()
-          this.fCaisse['montant'].setValue(this.sommeMontants())
+          this.resteAPayer = this.sommeMontants()
+          this.fCaisse['montant'].setValue(0)  
         });
     }
   }
@@ -429,6 +449,23 @@ export class NewExemplaireComponent implements OnInit {
       console.log("ele last table :", ele, response, this.LAST_ELEMENTS_TABLE_MOUVEMENTS);
     }
     return response;
+  }
+
+  useSolde(res: boolean):number {
+    let reste: number = 0;
+    if (res) {
+      this.fCaisse['montant'].setValue(this.compte?.solde!);          
+      reste = this.resteApayer(this.fCaisse['montant'].value);
+    } else {
+      reste = this.resteAPayer + this.fCaisse['montant'].value;
+      this.fCaisse['montant'].setValue(0);          
+    }
+    return reste;
+  }
+
+  resteApayer(montant: number):number {
+    this.resteAPayer -= montant;
+    return this.resteAPayer;
   }
 
   /**
@@ -713,27 +750,61 @@ export class NewExemplaireComponent implements OnInit {
   }
 
   saveMvt(selectItem: any) {
+    let mvtCaisse: IMouvementCaisses[] = [];
+    let donne : IMouvementCaisses;
 
-    let mvtCaisse: IMouvementCaisses = {
-      id: uuidv4(),
-      etat: selectItem.etat,
-      montant: selectItem.montant,
-      libelle: selectItem.libelle,
-      typeMvt: selectItem.typeMvt,
-      dateCreation: new Date(),
-      moyenPaiement: selectItem.moyenPaiement,
-      referencePaiement: selectItem.referencePaiement,
-      caisse: selectItem.caisse,
-      compte: this.compte,
-      personnel: this.laPersonneRattachee!,
-      exemplaire: selectItem.exemplaire
+    if (selectItem.moyenPaiement == 'multipaiement') {
+      if (Array.isArray(this.modalResult)) {
+        this.modalResult.forEach((element) => {
+          if (element.montant) {
+            donne = {
+              id: uuidv4(),
+              etat: selectItem.etat,
+              montant: element.montant,
+              libelle: selectItem.libelle,
+              typeMvt: selectItem.typeMvt,
+              dateCreation: new Date(),
+              moyenPaiement: element.moyen,
+              referencePaiement: element.reference,
+              compte: this.compte,
+              personnel: this.laPersonneRattachee!,
+              exemplaire: this.exemplaire
+            }
+  
+            mvtCaisse.push(donne);
+          }
+        });
+        this.mvtCaisseService.ajouterMouvement(mvtCaisse).subscribe((obj) => {
+          console.log('Le mouvement a été bien enregistré !', mvtCaisse);
+          this.router.navigate(['/list-exemplaire']);
+        })
+      } else {
+        console.error('modalResult is not an array:', this.modalResult);
+      }    
+    } else {
+      let montant : number = 0;
+      if (selectItem.use) {
+        this.compte?.solde! < this.montantTotal ? montant = this.compte?.solde! : montant = this.montantTotal;
+      }
+      donne = {
+        id: uuidv4(),
+        etat: selectItem.etat,
+        montant: selectItem.montant,
+        libelle: selectItem.libelle,
+        typeMvt: selectItem.typeMvt,
+        dateCreation: new Date(),
+        moyenPaiement: selectItem.moyenPaiement,
+        referencePaiement: selectItem.referencePaiement,
+        compte: this.compte,
+        personnel: this.laPersonneRattachee!,
+        exemplaire: this.exemplaire
+      }
+
+      this.mvtCaisseService.ajouterMouvement(donne).subscribe((obj) => {
+        console.log('Le mouvement a été bien enregistré !', donne);
+        this.router.navigate(['/list-exemplaire']);
+      })
     }
-
-    this.mvtCaisseService.ajouterMouvement(mvtCaisse).subscribe((obj) => {
-      console.log('Le mouvement a été bien enregistré !', mvtCaisse);
-      this.router.navigate(['/list-exemplaire']);
-
-    })
   }
 
   /**

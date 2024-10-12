@@ -110,6 +110,7 @@
     "title5": "Cash Register",
     "title6": "Copy",
     "title7": "Account Balance",
+    "title8": "remainder to pay",
     "actions": {
       "link1": "Add",
       "link2": "Edit",

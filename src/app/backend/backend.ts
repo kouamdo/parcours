@@ -23875,12 +23875,12 @@ export class InMemDBService implements InMemoryDbService {
       },
     ];
     let caisses: ICaisses[] = [
-      {id: "1", libelle: "caisse 1", type: "credit", solde: 100000.00},
-      {id: "2", libelle: "caisse 2", type: "débit", solde: 200000.00},
-      {id: "3", libelle: "caisse 3", type: "credit", solde: 300000.00},
-      {id: "4", libelle: "caisse 4", type: "débit", solde: 400000.00},
-      {id: "5", libelle: "caisse 5", type: "credit", solde: 500000.00},
-      {id: "6", libelle: "caisse 6", type: "débit", solde: 600000.00},
+      {id: "1", libelle: "caisse 1", type: "cash", solde: 100000.00},
+      {id: "2", libelle: "caisse 2", type: "chèque", solde: 200000.00},
+      {id: "3", libelle: "caisse 3", type: "carte bleue", solde: 300000.00},
+      {id: "4", libelle: "caisse 4", type: "mobile money", solde: 400000.00},
+      {id: "5", libelle: "caisse 5", type: "mtn money", solde: 500000.00},
+      {id: "6", libelle: "caisse 6", type: "orange money", solde: 600000.00},
       {id: "7", libelle: "caisse 7", type: "credit", solde: 700000.00}
     ];
     let comptes: IComptes[] = [
