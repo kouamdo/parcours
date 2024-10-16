@@ -56,7 +56,7 @@ export class ModalChoixDocEtatComponent {
   ngOnInit(): void {
     // Charge l'état précédemment sélectionné depuis DocumentService
     this.selectedEtat = this.documentService.getSelectedEtat(
-      this.data.documentChoisi.id
+      this.data.documentChoisi.idDocument
     );
   }
 }

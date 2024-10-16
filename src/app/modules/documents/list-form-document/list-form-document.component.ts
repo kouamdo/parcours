@@ -36,7 +36,7 @@ export class ListFormDocumentComponent implements OnInit, AfterViewInit {
 
 
   afficheDocument : IAfficheDocument = {
-    id: '',
+    idDocument: '',
     titre: '',
     description: '',
     missions: [],
@@ -138,7 +138,7 @@ export class ListFormDocumentComponent implements OnInit, AfterViewInit {
      listPreconisations: '',
      listSousDocuments: '',
      listDocEtats: '',
-     id: x.id,
+     idDocument: x.idDocument,
      titre: x.titre,
      description: x.description,
      etat: x.etat,

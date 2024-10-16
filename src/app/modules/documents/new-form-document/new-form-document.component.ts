@@ -41,7 +41,7 @@ import { log } from 'console';
 })
 export class NewFormDocumentComponent implements OnInit {
   document: IDocument = {
-    id: '',
+    idDocument: '',
     titre: '',
     description: '',
     etat: false,
@@ -292,7 +292,7 @@ export class NewFormDocumentComponent implements OnInit {
   openSousDocumentDialog() {
     const dialogConfig = new MatDialogConfig();
     if (this.ELEMENTS_TABLE_SOUS_DOCUMENTS.length > 0) {
-      dialogConfig.data = { documentIds: this.ELEMENTS_TABLE_SOUS_DOCUMENTS.map(doc => doc.id) };
+      dialogConfig.data = { documentIds: this.ELEMENTS_TABLE_SOUS_DOCUMENTS.map(doc => doc.idDocument) };
     }
   
     dialogConfig.maxWidth = '100vw';
@@ -388,7 +388,7 @@ export class NewFormDocumentComponent implements OnInit {
     )
       return;
     let documentTemp: IDocument = {
-      id: uuidv4(),
+      idDocument: uuidv4(),
       titre: documentInput.titre,
       description: documentInput.description,
       etat: documentInput.etat,
@@ -406,8 +406,8 @@ export class NewFormDocumentComponent implements OnInit {
       formatCode: documentInput.formatCode
     }
 
-    if (this.document.id != '') {
-      documentTemp.id = this.document.id;
+    if (this.document.idDocument != '') {
+      documentTemp.idDocument = this.document.idDocument;
     }
 
     this.ELEMENTS_TABLE_ATTRIBUTS.forEach((a) =>

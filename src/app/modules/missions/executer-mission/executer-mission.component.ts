@@ -61,7 +61,7 @@ export class ExecuterMissionComponent implements OnInit {
   }
 
   getDocument(valeur: IDocument){
-    this.idDocumentPourExemplaire = valeur.id
+    this.idDocumentPourExemplaire = valeur.idDocument
     this.document = valeur
     sessionStorage.setItem("idDocumentPourExemplaire", this.idDocumentPourExemplaire);
   }

@@ -56,14 +56,14 @@ export class ModalChoixSousDocumentComponent implements OnInit {
       width: '600px',
       data: {
         documentChoisi: documentChoisi,
-        documentId: documentChoisi.id,
+        documentId: documentChoisi.idDocument,
       },
     });
 
     dialogRef.afterClosed().subscribe((selectedEtat: string) => {
       this.populateSelectedEtatsMap();
       if (selectedEtat) {
-        this.selectedEtatsMap[documentChoisi.id] = selectedEtat;
+        this.selectedEtatsMap[documentChoisi.idDocument] = selectedEtat;
       }
     });
   }
@@ -99,9 +99,9 @@ export class ModalChoixSousDocumentComponent implements OnInit {
   // Remplir la carte des états sélectionnés
   private populateSelectedEtatsMap() {
     this.dataSourceDocumentResultat.data.forEach((element: IDocument) => {
-      const etat = this.serviceDocument.getSelectedEtat(element.id);
+      const etat = this.serviceDocument.getSelectedEtat(element.idDocument);
       if (etat) {
-        this.selectedEtatsMap[element.id] = etat;
+        this.selectedEtatsMap[element.idDocument] = etat;
       }
     });
   }
@@ -112,8 +112,8 @@ export class ModalChoixSousDocumentComponent implements OnInit {
     let positionsDocument = new Map();
     let indexDocumentCourant: number = 0;
     this.ELEMENTS_TABLE_DOCUMENTS_TEMP.forEach((element: IDocument) => {
-      listidDocumentTemp.push(element.id);
-      positionsDocument.set(element.id, indexDocumentCourant++);
+      listidDocumentTemp.push(element.idDocument);
+      positionsDocument.set(element.idDocument, indexDocumentCourant++);
     });
     if (event.target.checked) {
       if (!listidDocumentTemp.includes(this.idDocument)) {
@@ -181,7 +181,7 @@ export class ModalChoixSousDocumentComponent implements OnInit {
 
   // Vérifier si un document est sélectionné
   isDocumentSelected(documentId: string): boolean {
-    return this.ELEMENTS_TABLE_DOCUMENTS_TEMP.some((doc) => doc.id === documentId);
+    return this.ELEMENTS_TABLE_DOCUMENTS_TEMP.some((doc) => doc.idDocument === documentId);
   }
 
   // Sauvegarder les changements et fermer la boîte de dialogue

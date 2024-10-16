@@ -5,7 +5,7 @@ import { IMission } from "./mission";
 import { IPrecoMvt } from "./precomvt";
 
 export interface IDocument {
-    id:string,
+    idDocument:string,
     titre:string,
     description:string,
     etat:boolean,

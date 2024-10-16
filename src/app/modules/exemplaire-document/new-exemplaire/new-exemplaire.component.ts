@@ -80,7 +80,7 @@ export class NewExemplaireComponent implements OnInit {
   };
 
   document: IDocument = {
-    id: '',
+    idDocument: '',
     titre: '',
     description: '',
     etat: false,
@@ -353,7 +353,7 @@ export class NewExemplaireComponent implements OnInit {
         .subscribe((x) => {
           this.exemplaire = x;
           this.document = x
-          this.document.id = x.idDocument
+          this.document.idDocument = x.idDocument
           if (x.mouvements) {
             this.promotion = x.mouvements[0].promotion
           }
@@ -667,7 +667,7 @@ export class NewExemplaireComponent implements OnInit {
 
     let exemplaireTemp: IExemplaireDocument = {
       id: uuidv4(),
-      idDocument: this.document.id,
+      idDocument: this.document.idDocument,
       titre: this.document.titre,
       description: this.document.description,
       missions: this.document.missions,

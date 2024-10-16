@@ -13,7 +13,7 @@ import { DonneesEchangeService } from 'src/app/services/donnees-echange/donnees-
 export class ViewFormDocumentComponent implements OnInit {
 
   document : IDocument = {
-    id: '',
+    idDocument: '',
     titre: '',
     description: '',
     missions: [],

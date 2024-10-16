@@ -24,7 +24,7 @@
             </h3>
             <div class="block">
                 <div class="inputBlock"  *ngFor="let document of documents; let i=index;">
-                    <input type="button" class="button-options" style="font-weight: 400;"  [name]="document.id" [id]="document.id"
+                    <input type="button" class="button-options" style="font-weight: 400;"  [name]="document.idDocument" [id]="document.idDocument"
                              [title]="document.description" [value]="document.titre"  (click)="getDocument(document);openSousExemplaireDocumentDialog()">
                 </div>
             </div>

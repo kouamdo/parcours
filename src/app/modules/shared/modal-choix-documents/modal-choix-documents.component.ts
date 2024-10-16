@@ -85,8 +85,8 @@ export class ModalChoixDocumentsComponent implements OnInit {
     let indexDocumentCourant: number = 0;
     this.donneeEtapCatService.dataDocumentSousDocuments?.forEach(
       (element: IDocument) => {
-        listidDocumentTemp.push(element.id);
-        positionsDocument.set(element.id, indexDocumentCourant++);
+        listidDocumentTemp.push(element.idDocument);
+        positionsDocument.set(element.idDocument, indexDocumentCourant++);
       }
     );
     if (event.target.checked) {
