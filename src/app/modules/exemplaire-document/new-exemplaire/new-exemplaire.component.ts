@@ -33,9 +33,6 @@ import { PatientsService } from 'src/app/services/patients/patients.service';
 import { IPatient } from 'src/app/modele/Patient';
 import { IPromo } from 'src/app/modele/promo-distributeur';
 import { PromoService } from 'src/app/services/promo/promo.service';
-import { setTimeout } from 'timers/promises';
-import { resolve } from 'path';
-import { Observable } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalChoixPromotionRessourceComponent } from '../../shared/modal-choix-promotion-ressource/modal-choix-promotion-ressource.component';
 
@@ -178,7 +175,7 @@ export class NewExemplaireComponent implements OnInit {
   unitePromo : string = "" // laveur de la promotion
   showText = false
   promotionsByRessource: { [key: string]: IPromo[] } = {};
-  indexTableauMvtCourant: number = -1
+  idMouvement: string = '';
 
 
   constructor(
@@ -687,7 +684,7 @@ export class NewExemplaireComponent implements OnInit {
       personneRattachee: this.laPersonneRattachee!,
       formatCode: this.document.formatCode,
       code: this.codeControl.value,
-      beneficiaireObligatoire: true,
+      beneficiaireObligatoire: this.document.beneficiaireObligatoire,
       promotion: this.promotion,
       assurance: this.assurancePersone
     };
@@ -726,7 +723,7 @@ export class NewExemplaireComponent implements OnInit {
     });
     if (!tabIdRessource.includes(option.id)) {
       let mvt: IMouvement = {
-        id: '',
+        id: uuidv4(),
         description: '',
         quantite: option.quantite,
         prix: 0,
@@ -750,7 +747,10 @@ export class NewExemplaireComponent implements OnInit {
       if(this.distributeur != undefined){
         mvt.distributeur = this.distributeur
       }
-
+      if (this.promotion) {
+        mvt.promotion = this.promotion
+        this.appliquerPromotion(mvt)
+      }
       this.ELEMENTS_TABLE_MOUVEMENTS.unshift(mvt)
       this.dataSourceMouvements.data = this.ELEMENTS_TABLE_MOUVEMENTS
     }
@@ -947,15 +947,15 @@ export class NewExemplaireComponent implements OnInit {
     return this.serviceExemplaire.formatCode(date)
   }
 
-  getIndexTableauMvtCourant(index: number) {
-    this.indexTableauMvtCourant = index;
+  getIndexTableauMvtCourant(idMvt: string) {
+    this.idMouvement = idMvt
   }
 
   getRessource(ressource: IRessource) {
     this.idRessource = ressource.id;
     this.donneeEchangeService.dataRessourceMouvementCourant = ressource
     console.log("ressource : ", ressource);
-  }
+  } 
   
   openPromotionRessourceDialog() {
     const dialogRef = this.dialogDef.open(ModalChoixPromotionRessourceComponent,
@@ -971,9 +971,16 @@ export class NewExemplaireComponent implements OnInit {
     );
 
     dialogRef.afterClosed().subscribe(result => {
-      this.ELEMENTS_TABLE_MOUVEMENTS[this.indexTableauMvtCourant].promotion = this.donneeEchangeService.dataPromoMouvementCourant
-      if (this.donneeEchangeService.dataPromoMouvementCourant) {
-        this.ELEMENTS_TABLE_MOUVEMENTS[this.indexTableauMvtCourant].distributeur = undefined
+      for (let index = 0; index < this.ELEMENTS_TABLE_MOUVEMENTS.length; index++) {
+        const element = this.ELEMENTS_TABLE_MOUVEMENTS[index];
+        if (this.idMouvement == element.id) {
+          element.promotion = this.donneeEchangeService.dataPromoMouvementCourant
+          if (this.donneeEchangeService.dataPromoMouvementCourant) {
+            element.distributeur = undefined
+          }
+          this.idMouvement = ''
+          break
+        }  
       }
     });
   }
