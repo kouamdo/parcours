@@ -55,7 +55,8 @@
     "button11": "Enregistrer",
     "button12": "Suivant",
     "button13": "Continuer",
-    "button14": "Envoyé"
+    "button14": "Envoyé",
+    "button15": "Supprimer la sélection"
   },
   "validation":{
     "header":"Ajouter Validation",

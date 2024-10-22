@@ -1,7 +1,7 @@
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
@@ -34,7 +34,8 @@ export class ModalChoixPromotionRessourceComponent  implements OnInit{
     private formBuilder: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private servicePromotion:PromoService,
-    private donneeEchangeService:DonneesEchangeService
+    private donneeEchangeService:DonneesEchangeService,
+    private dialogRef: MatDialogRef<ModalChoixPromotionRessourceComponent>
   ) {
     
     this.formePromoRessource = this.formBuilder.group({
@@ -45,19 +46,17 @@ export class ModalChoixPromotionRessourceComponent  implements OnInit{
   ngOnInit(): void {
 
     this.ressourceCourante = this.donneeEchangeService.dataRessourceMouvementCourant
-    console.log("ressourceCourante : ", this.ressourceCourante);
 
     this.getPromosByRessource(this.ressourceCourante!).subscribe(valeurs => {
       this.dataSource.data = valeurs
-      this.formePromoRessource.setValue({promoControl: this.donneeEchangeService.dataPromoMouvementCourant})
-    });
-
-    this.promotionCourente = this.donneeEchangeService.dataPromoMouvementCourant
-
     // Initialiser le formulaire avec la promotion courante (si nécessaire)
     this.formePromoRessource.setValue({
       promoControl: this.donneeEchangeService.dataPromoMouvementCourant
     });
+    });
+
+    this.promotionCourente = this.donneeEchangeService.dataPromoMouvementCourant
+
   }
 
   displayFn(promo: IPromo): string {
@@ -83,12 +82,18 @@ export class ModalChoixPromotionRessourceComponent  implements OnInit{
   public getPromotion(option: IPromo, event: any){
     if (event.target.checked) {
       this.promotionCourente = option
-      this.donneeEchangeService.dataPromoMouvementCourant = option
     }
   }
   reinitialier() {
     this.formePromoRessource.reset()
     this.promotionCourente = undefined
-    this.donneeEchangeService.dataPromoMouvementCourant = undefined
+  }
+  // Annuler et fermer la boîte de dialogue
+  onCancel() {
+    this.dialogRef.close();
+  }
+  // Sauvegarder les changements et fermer la boîte de dialogue
+  onSave() {
+    this.donneeEchangeService.dataPromoMouvementCourant = this.promotionCourente
   }
 }

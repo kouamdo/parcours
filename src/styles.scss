@@ -305,10 +305,16 @@ mat-option{
     vertical-align: middle !important;
 }
 .containHead{
-  padding: 1% 10px !important;
+  padding: 0 2px !important;
 }
 .containCell{
   vertical-align: middle !important;
+}
+th.mat-header-cell:first-of-type, td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type {
+  padding-left: 1px !important;
+}
+.mat-cell[_ngcontent-non-c44] {
+  height: fit-content !important;
 }
 td{
 font-size: 13px!important;
@@ -358,11 +364,11 @@ display: flex;
     }
 }
 .actions button{
-    font-size: 10px !important;
+    font-size: 9px !important;
     padding: 2px !important;
 }
 .actions span{
-    font-size: 10px !important;
+    font-size: 9px !important;
 }
 #tableBlock th, .pageView th {
     background-color: rgba(40, 167, 69, 0.2);
@@ -706,6 +712,7 @@ mat-paginator{
           padding: 0;
           input{
               margin: auto;
+              padding: 0;
               border: none;
               box-shadow: 0 0 3px #80808031;
               height: 20px;
@@ -714,11 +721,8 @@ mat-paginator{
           }
       }
   }
-  .containHead{
-      padding: 1% 0;
-  }
   .containCell{
-      padding-top: 20px;
+      padding-top: 0 !important;
   }
   td{
       font-size: 13px;

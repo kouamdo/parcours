@@ -55,7 +55,8 @@
     "button11": "Registrer",
     "button12": "Next",
     "button13": "Next",
-    "button14": "Send"
+    "button14": "Send",
+    "button15": "Delete selected value"
   },
   "patient": {
     "title1": "Add patient",

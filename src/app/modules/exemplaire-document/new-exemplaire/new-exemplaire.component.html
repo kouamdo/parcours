@@ -83,7 +83,10 @@
                                         {{optionDistributeur.raisonSocial}}
                                     </mat-option>
                                 </mat-autocomplete>
-                                <button *ngIf="modificationDistributeurActive == true" class="btn btnModifierDistributeurBlock" type="button" (click)="modifierDistributeur()" title="{{'lists.button6' | translate}}">
+                                <button *ngIf="modificationDistributeurActive == true" id="btnDeleteDistributeur" class="btn btnModifierDistributeurBlock" type="button" (click)="reinitialliseDistributeurControl()" title="{{'lists.button15' | translate}}">
+                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                </button>
+                                <button *ngIf="modificationDistributeurActive == true"  id="btnUpdateDistributeur" class="btn btnModifierDistributeurBlock" type="button" (click)="modifierDistributeur(); reinitialliseDistributeurControl()" title="{{'lists.button6' | translate}}">
                                     <i class="fa fa-check-circle" aria-hidden="true"></i>
                                 </button>
                                 
@@ -135,16 +138,6 @@
                                   {{element.ressource.unite}}
                           </ng-container>
 
-                            <!-- description Column -->
-                            <ng-container matColumnDef="description">
-                                <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{'attributs.table.title2' | translate}} </th>
-                                <td class="text-dark containCell" mat-cell *matCellDef="let element">
-                                    <label class="custom-control">
-                                        <input class="form-control" type="text" [(ngModel)]="element.description" [ngModelOptions]="{standalone: true}" value="true">
-                                    </label>
-                                </td>
-                            </ng-container>
-
                             <!-- prix Column -->
                             <ng-container *ngIf="document.affichagePrix == true && document.typeMouvement == typeNeutre" matColumnDef="prix">
                                 <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{'ressource.table2.title7' | translate}} </th>
@@ -186,14 +179,6 @@
                                 </td>
                             </ng-container>
 
-                            <!-- promoIndividuelle Column -->
-                            <ng-container *ngIf="document.affichagePrix == true && document.typeMouvement != typeNeutre && !document.beneficiaireObligatoire" matColumnDef="promoIndividuelle">
-                                <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{'ressource.table.title14' | translate}} </th>
-                                <td class="text-dark containCell" mat-cell *matCellDef="let element">
-                                    {{element.promotion?.emetteur.raisonSocial}} 
-                                </td>
-                            </ng-container>
-
                             <!-- pourcentageChargeRssource Column -->
                             <ng-container *ngIf="document.affichagePrix == true && document.typeMouvement != typeNeutre && !document.beneficiaireObligatoire" matColumnDef="pourcentageChargeRssource">
                                 <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{'ressource.table.title11' | translate}} </th>
@@ -228,7 +213,14 @@
                           <!-- distributeur Column -->
                           <ng-container *ngIf="document.contientDistributeurs == true && !document.beneficiaireObligatoire" matColumnDef="distributeur">
                                 <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{'preconisation.table.title5' | translate}} </th>
-                                <td class="text-dark containCell" mat-cell *matCellDef="let element; let i = index"><div class="modifierDistributeurBlock" title="{{element.distributeur?.raisonSocial}}">{{element.distributeur?.raisonSocial}}<span role="button" title="{{'document.exemplaire.text3' | translate}}" (click)="InitialiseDistributeurControlPourModufication(i)"><i class="fa fa-pen-alt text-warning" aria-hidden="true"></i></span></div></td>
+                                <td class="text-dark containCell" mat-cell *matCellDef="let element; let i = index">
+                                    <div class="modifierDistributeurBlock" title="{{element.distributeur?.raisonSocial}}">
+                                        {{element.distributeur?.raisonSocial}}
+                                        <span role="button" title="{{'document.exemplaire.text3' | translate}}" (click)="InitialiseDistributeurControlPourModufication(i)">
+                                            <i class="fa fa-pen-alt text-warning" aria-hidden="true"></i>
+                                        </span>
+                                    </div>
+                                </td>
                         </ng-container>
 
                             <!-- Actions column -->
@@ -240,7 +232,7 @@
                                             <i class="fa fa-trash text-danger" aria-hidden="true"></i>
                                         </button>
                                         <span><i class="fa fa-info-circle text-info ml-1" aria-hidden="true" title="{{'preconisation.table.title4' | translate}}"></i></span>
-                                        <span role="button" class="ml-1 mr-1" title="{{'doc-etats.button2' | translate}}" (click)="getRessource(element.ressource); openPromotionRessourceDialog(); getIndexTableauMvtCourant(element.id); initialisePromotionControl(element.promotion!)">
+                                        <span *ngIf="document.affichagePrix == true && !document.beneficiaireObligatoire" role="button" class="ml-1 mr-1" title="{{'promo-distributeur.title2' | translate}}" (click)="getRessource(element.ressource); openPromotionRessourceDialog(); getIndexTableauMvtCourant(element.id); initialisePromotionControl(element.promotion!)">
                                             <i class="fa fa-tags" aria-hidden="true"></i>
                                         </span>
                                     </div>

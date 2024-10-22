@@ -152,8 +152,7 @@ export class NewExemplaireComponent implements OnInit {
     'actions',
     'libelle',
     'quantite',
-    'unite',
-    'description'
+    'unite'
   ]; // structure du tableau presentant les Ressources
   TABLE_PRECONISATION_RESSOURCES: IPrecoMvt[] = [];
   montantTotal : number = 0;
@@ -452,7 +451,6 @@ export class NewExemplaireComponent implements OnInit {
       let pourcentageCharge : string = "pourcentageCharge"
       let pourcentageChargeRssource : string = "pourcentageChargeRssource"
       let montantCharge : string = "montantCharge"
-      let promoIndividuelle : string = "promoIndividuelle"
       let montant : string = "montant total"
       if (this.document.typeMouvement == TypeMouvement.Reduire) {
         prix = "prixDeSortie"
@@ -465,7 +463,6 @@ export class NewExemplaireComponent implements OnInit {
       if (this.document.beneficiaireObligatoire) {
         this.displayedRessourcesColumns.push(pourcentageCharge)
       }else{
-        this.displayedRessourcesColumns.push(promoIndividuelle)
         this.displayedRessourcesColumns.push(pourcentageChargeRssource)
       }
       this.displayedRessourcesColumns.push(montantCharge)
@@ -859,6 +856,17 @@ export class NewExemplaireComponent implements OnInit {
     });
     this.ressourceControl.reset();
   }
+  /**
+   * Methode qui permet d'effacer la valeur du control distributeur lorsqu'on a
+   * déjà choisi le distributeur en cliquant dessus
+   */
+  reinitialliseDistributeurControl() {
+    this.serviceDistributeur.getAllDistributeurs().subscribe((resultat) => {
+      this.filteredDistributeurOptions = resultat;
+    });
+    this.distributeurControl.reset();
+    this.distributeur = undefined
+  }
 
   InitialiseDistributeurControlPourModufication(index : number){
     this.modificationDistributeurActive = true
@@ -954,7 +962,6 @@ export class NewExemplaireComponent implements OnInit {
   getRessource(ressource: IRessource) {
     this.idRessource = ressource.id;
     this.donneeEchangeService.dataRessourceMouvementCourant = ressource
-    console.log("ressource : ", ressource);
   } 
   
   openPromotionRessourceDialog() {
@@ -966,7 +973,8 @@ export class NewExemplaireComponent implements OnInit {
         width: '100%',
         enterAnimationDuration: '1000ms',
         exitAnimationDuration: '1000ms',
-        data: {}
+        data : this.donneeEchangeService.dataPromoMouvementCourant
+        
       }
     );
 
@@ -976,7 +984,7 @@ export class NewExemplaireComponent implements OnInit {
         if (this.idMouvement == element.id) {
           element.promotion = this.donneeEchangeService.dataPromoMouvementCourant
           if (this.donneeEchangeService.dataPromoMouvementCourant) {
-            element.distributeur = undefined
+            element.distributeur = element.promotion?.emetteur
           }
           this.idMouvement = ''
           break
