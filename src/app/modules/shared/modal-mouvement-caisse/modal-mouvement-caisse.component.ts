@@ -5,7 +5,9 @@ import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@ang
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ICaisses } from 'src/app/modele/caisses';
+import { IMouvement } from 'src/app/modele/mouvement';
 import { MoyenPaiement } from 'src/app/modele/mouvement-caisses';
+import { CaissesService } from 'src/app/services/caisses/caisses.service';
 import { DonneesEchangeService } from 'src/app/services/donnees-echange/donnees-echange.service';
 import { MouvementCaisseService } from 'src/app/services/mouvement-caisse/mouvement-caisse.service';
 
@@ -17,6 +19,7 @@ import { MouvementCaisseService } from 'src/app/services/mouvement-caisse/mouvem
 export class ModalMouvementCaisseComponent implements OnInit {
 
   submitted: boolean = false;
+  dynamicForm: FormGroup;
   formePaiement: FormGroup;
   formePaiement1: FormGroup;
   formePaiement2: FormGroup;
@@ -28,6 +31,7 @@ export class ModalMouvementCaisseComponent implements OnInit {
     'Reférence de Paiement',
     'Reste'
   ];
+  elementsArray: MoyenPaiement[] = [];
 
   constructor(
     private router: Router,
@@ -39,6 +43,9 @@ export class ModalMouvementCaisseComponent implements OnInit {
     private mvtCaisseService: MouvementCaisseService,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
+    this.dynamicForm = this.formBuilder.group({
+      elements: this.formBuilder.array([]) // Utilisation de FormArray pour gérer une liste dynamique
+    });
     this.formePaiement = this.formBuilder.group({
       moyen: ['cash'],
       montant: [''],
@@ -62,9 +69,44 @@ export class ModalMouvementCaisseComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log("donnee de la modal:", this.data.donnee);
+    console.log("donnee de la modal:", this.data.donnee, this.data.caisses);
+    let dataCaisses: ICaisses[] = this.data.caisses;
+
+    // Ajouter dynamiquement des objets dans le formulaire en fonction du tableau `elementsArray`
+    dataCaisses.forEach((caisse) => {
+      if (caisse.type != 'solde') {
+        console.log('premier if');
+        
+        if (this.data.donnee.length > 0) {
+          console.log('deuxieme if');
+          
+          this.data.donnee.forEach((ele:MoyenPaiement) => {
+            if (ele.moyen.type == caisse.type) {
+              const elementGroup = this.formBuilder.group({
+                moyen: new FormControl<string | ICaisses>(caisse),
+                montant: [ele.montant],
+                reference: [ele.reference]
+              });
+              this.elements.push(elementGroup);
+              console.log("elements modal 0:", this.elements.controls);
+            }
+          })
+        } else {
+          console.log('troisième if');
+          
+          const elementGroup = this.formBuilder.group({
+            moyen: new FormControl<string | ICaisses>(caisse),
+            montant: [''],
+            reference: ['']
+          });
+          this.elements.push(elementGroup);
+          console.log("elements modal :", this.elements.controls);
+        }
+      }
+    });
+
     
-      this.formePaiement.setValue({
+      /* this.formePaiement.setValue({
         moyen: this.data.donnee[0].moyen,
         montant: this.data.donnee[0].montant,
         reference: this.data.donnee[0].reference
@@ -83,26 +125,29 @@ export class ModalMouvementCaisseComponent implements OnInit {
         moyen: this.data.donnee[3].moyen,
         montant: this.data.donnee[3].montant,
         reference: this.data.donnee[3].reference
-      });
+      }); */
+  }
+
+  get elements(): FormArray {
+    return this.dynamicForm.get('elements') as FormArray;
   }
 
   get f() {
     return this.formePaiement.controls;
   }
 
+  displayFn(caisse: ICaisses): string {
+    return caisse && caisse.type ? caisse.type : '';
+  }
+
   onSubmit() {
     this.submitted = true;
 
-    if(this.formePaiement.invalid) return;
+    if(this.dynamicForm.invalid) return;
 
-    const data = [
-      this.formePaiement.value,
-      this.formePaiement1.value,
-      this.formePaiement2.value,
-      this.formePaiement3.value]
-    ;
+    const data = this.elements.value;
 
-    console.log("value paiement :", this.formePaiement.value, this.formePaiement1.value, this.formePaiement2.value, this.formePaiement3.value);
+    console.log("value paiement :", this.elements.value);
     
     this.dialogRef.close({ result: 'Success', data: data });
   }

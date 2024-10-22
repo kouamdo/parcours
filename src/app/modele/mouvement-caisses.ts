@@ -13,6 +13,7 @@ export interface IMouvementCaisses {
     dateCreation: Date,
     detailJson?: string,
     moyenPaiement: ICaisses,
+    isMultipaiement?: string,
     referencePaiement: string,
     compte?: IComptes,
     personnel: IPatient,

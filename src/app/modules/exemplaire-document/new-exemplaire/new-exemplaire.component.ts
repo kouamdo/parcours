@@ -371,7 +371,7 @@ export class NewExemplaireComponent implements OnInit {
       width: '100%',
       enterAnimationDuration:'1000ms',
       exitAnimationDuration:'1000ms',
-      data:{donnee: this.modalResult}
+      data:{donnee: this.modalResult, caisses: this.caisses}
     }
     )
 
@@ -449,23 +449,6 @@ export class NewExemplaireComponent implements OnInit {
       console.log("ele last table :", ele, response, this.LAST_ELEMENTS_TABLE_MOUVEMENTS);
     }
     return response;
-  }
-
-  useSolde(res: boolean):number {
-    let reste: number = 0;
-    if (res) {
-      this.fCaisse['montant'].setValue(this.compte?.solde!);          
-      reste = this.resteApayer(this.fCaisse['montant'].value);
-    } else {
-      reste = this.resteAPayer + this.fCaisse['montant'].value;
-      this.fCaisse['montant'].setValue(0);          
-    }
-    return reste;
-  }
-
-  resteApayer(montant: number):number {
-    this.resteAPayer -= montant;
-    return this.resteAPayer;
   }
 
   /**
@@ -682,6 +665,37 @@ export class NewExemplaireComponent implements OnInit {
     return this.formeExemplaire.controls;
   }
 
+  useSolde(res: boolean):number {
+    if (res) {
+      this.fCaisse['montant'].setValue(this.compte?.solde!); 
+      this.fCaisse['moyenPaiement'].setValue(this.caisses.find(c => c.type === 'solde')?.type);   
+      this.resteAPayer = this.resteApayer(this.fCaisse['montant'].value);
+    } else {
+      this.resteAPayer += this.fCaisse['montant'].value;
+      this.fCaisse['montant'].setValue(0);          
+    }
+    return this.resteAPayer;
+  }
+
+  resteApayer(montant: number):number {
+    this.resteAPayer -= montant;
+    return this.resteAPayer;
+  }
+
+  verifyUseSolde() {
+    let i : boolean = false;
+    if (this.fCaisse['moyenPaiement'].value == 'solde') {
+      this.fCaisse['use'].setValue(true);     
+      this.fCaisse['montant'].setValue(this.compte?.solde!);          
+      this.resteApayer(this.fCaisse['montant'].value);
+    }
+    if(this.fCaisse['use'].value && this.fCaisse['moyenPaiement'].value != 'solde') {
+      this.fCaisse['use'].setValue(false), 
+      this.useSolde(false);
+    }
+    console.log("caisse retourné :", this.fCaisse['moyenPaiement'].value, this.fCaisse['use'].value);   
+  }
+
   /**
    * Methodr qui permet de faire la somme des montants du tableau de mouvements
    * pour afficher le resultat dans la case montant total
@@ -753,8 +767,30 @@ export class NewExemplaireComponent implements OnInit {
     let mvtCaisse: IMouvementCaisses[] = [];
     let donne : IMouvementCaisses;
 
+    if (selectItem.use) {
+      donne = {
+        id: uuidv4(),
+        etat: selectItem.etat,
+        montant: selectItem.montant,
+        libelle: selectItem.libelle,
+        typeMvt: selectItem.typeMvt,
+        dateCreation: new Date(),
+        moyenPaiement: selectItem.moyenpaiement,
+        referencePaiement: selectItem.referencePaiement,
+        compte: this.compte,
+        personnel: this.laPersonneRattachee!,
+        exemplaire: this.exemplaire
+      }
+  
+      this.mvtCaisseService.ajouterMouvement(donne).subscribe((obj) => {
+        console.log('Le mouvement a été bien enregistré !', donne);
+        this.router.navigate(['/list-exemplaire']);
+      })
+    }
+    
     if (selectItem.moyenPaiement == 'multipaiement') {
       if (Array.isArray(this.modalResult)) {
+        let uuidEle : string = uuidv4();
         this.modalResult.forEach((element) => {
           if (element.montant) {
             donne = {
@@ -765,6 +801,7 @@ export class NewExemplaireComponent implements OnInit {
               typeMvt: selectItem.typeMvt,
               dateCreation: new Date(),
               moyenPaiement: element.moyen,
+              isMultipaiement: uuidEle,
               referencePaiement: element.reference,
               compte: this.compte,
               personnel: this.laPersonneRattachee!,

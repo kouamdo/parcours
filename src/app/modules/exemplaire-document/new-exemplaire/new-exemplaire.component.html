@@ -211,8 +211,7 @@
                                                 {{'mvtCaisse.table.title0' | translate}}
                                             </label>
                                             <div>
-                                                <input type="number" formControlName="montant" name="montant" class="form-control">
-                                                <p class="text-danger" style="font-size: 10px;" *ngIf="fCaisse['use'].value == true && compte?.solde! < montantTotal">{{ 'Solde insufisant pour régler. Utiliser un autre moyen pour régler!' }}</p>
+                                                <input type="number" formControlName="montant" name="montant" [disabled]="fCaisse['use'].value" class="form-control">
                                             </div>
                                         </div>
                                         <div *ngIf="submitted && fCaisse['montant'].errors"  class="alert alert-danger" >
@@ -238,8 +237,8 @@
                                             <label for="moyenPaiement" class="label">
                                                 {{'mvtCaisse.table.title2' | translate}}
                                             </label>
-                                            <select class="form-control" formControlName="moyenPaiement" name="moyenPaiement">
-                                                <option *ngFor="let caisse in caisses" [value]="caisse">{{caisse.type}}</option>
+                                            <select class="form-control" formControlName="moyenPaiement" name="moyenPaiement" (change)="verifyUseSolde()">
+                                                <option *ngFor="let caisse of caisses" [value]="caisse.type">{{caisse.type}}</option>
                                                 <option value="multipaiement" (click)="openModalPaiementDialog()">Multipaiement</option>
                                             </select>
                                         </div>
