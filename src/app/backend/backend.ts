@@ -23884,7 +23884,7 @@ export class InMemDBService implements InMemoryDbService {
       {id: "6", libelle: "caisse 6", type: "orange money", solde: 600000.00},
     ];
     let comptes: IComptes[] = [
-      {id: "1", libelle: "courant", solde: 1000.0, montantDecouvertMax: 100000.0, dateCreation:new Date('10/06/2020'), personnel: {
+      {id: "1", libelle: "courant", solde: 1000.0, montantDecouvertMax: 100000.0, dateCreation:new Date('10/06/2020'), beneficiaire: {
         id: '6911989109209',
         nom: 'NGONGANG',
         prenom: 'Philippe',

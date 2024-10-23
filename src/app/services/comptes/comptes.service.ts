@@ -28,7 +28,7 @@ export class ComptesService {
     return this.getAllComptes().pipe(
       map(x=>
         {
-          return x.find(p=>p.personnel?.id==idUser) as IComptes
+          return x.find(p=>p.beneficiaire?.id==idUser) as IComptes
         })
     );
   }

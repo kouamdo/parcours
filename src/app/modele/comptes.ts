@@ -7,5 +7,5 @@ export interface IComptes {
     libelle: string,
     montantDecouvertMax?: number,
     dateCreation: Date,
-    personnel?: IPatient
+    beneficiaire?: IPatient
 }

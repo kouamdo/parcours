@@ -11,8 +11,6 @@ import { v4 as uuidv4 } from 'uuid';
 import { IComptes } from 'src/app/modele/comptes';
 import { ComptesService } from 'src/app/services/comptes/comptes.service';
 import { DonneesEchangeService } from 'src/app/services/donnees-echange/donnees-echange.service';
-import { IPersonnel } from 'src/app/modele/personnel';
-import { PersonnelsService } from 'src/app/services/personnels/personnels.service';
 import { IPatient } from 'src/app/modele/Patient';
 import { PatientsService } from 'src/app/services/patients/patients.service';
 
@@ -25,8 +23,8 @@ export class NewCompteComponent {
   compte: IComptes | undefined;
   forme: FormGroup;
   titre: string = '';
+  idCompteIs: boolean = false;
   btnLibelle: string = 'Ajouter';
-  //titre: string="Ajouter Caisse";
   submitted: boolean = false;
   personnels: IPatient[] = [];
 
@@ -43,7 +41,7 @@ export class NewCompteComponent {
       libelle: ['', [Validators.required]],
       solde: [''],
       montantDecouvert: [''],
-      personnel: new FormControl<string | IPatient>(''),
+      beneficiaire: new FormControl<string | IPatient>(''),
     });
   }
 
@@ -53,6 +51,7 @@ export class NewCompteComponent {
       this.personnels = reponse;
     });
     if (idCompte != null && idCompte !== '') {
+      this.idCompteIs = true;
       this.btnLibelle = 'Modifier';
       this.titre = 'Compte à Modifier';
       this.compteService.getCompteById(idCompte).subscribe((x) => {
@@ -61,7 +60,7 @@ export class NewCompteComponent {
           libelle: this.compte?.libelle,
           solde: this.compte?.solde,
           montantDecouvert: this.compte?.montantDecouvertMax,
-          personnel: this.compte.personnel,
+          beneficiaire: this.compte?.beneficiaire
         });
       });
     }
@@ -72,8 +71,8 @@ export class NewCompteComponent {
     return this.forme.controls;
   }
 
-  displayFn(peronne: IPatient): string {
-    return peronne && peronne.nom ? peronne.nom : '';
+  displayFn(personne: IPatient): string {
+    return personne && personne.nom ? personne.nom : '';
   }
 
   return() {
@@ -90,7 +89,7 @@ export class NewCompteComponent {
       solde: compteInput.solde,
       dateCreation: new Date(),
       montantDecouvertMax: compteInput.montantDecouvert,
-      personnel: compteInput.personnel,
+      beneficiaire: compteInput.beneficiaire,
     };
 
     if (this.compte != undefined) {
