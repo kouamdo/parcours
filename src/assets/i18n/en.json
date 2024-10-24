@@ -83,7 +83,7 @@
     "search-bar": "Search",
     "table": {
       "title0": "Solde",
-      "title1": "libellé",
+      "title1": "Libellé",
       "title2": "Date création",
       "title3": "Montant Decouvert Max",
       "title4": "Customer",
@@ -104,7 +104,7 @@
   "title1": "Add",
   "search-bar": "Search",
   "table": {
-    "title0": "Amount",
+    "title0": "Amount Paid",
     "title1": "Label",
     "title2": "Payment Method",
     "title3": "Movement Type",

@@ -167,6 +167,7 @@ export class NewExemplaireComponent implements OnInit {
   montantTotal : number = 0;
   soustotal : number = 0;
   resteAPayer: number = 0;
+  lastSomme: number = 0;
   tailleFirstMvts : number = 0;
   distributeur : IDistributeur | undefined;
   modificationDistributeurActive : boolean = false
@@ -222,6 +223,9 @@ export class NewExemplaireComponent implements OnInit {
           this.compteService.getCompteByUser(this.laPersonneRattachee.id).subscribe(
             account => {
               this.compte = account;
+              if (this.compte?.solde == 0 || this.compte?.solde == null) {
+                this.formeExemplaire.controls['use'].disable()
+              }
               console.log('compte personne rattaché :', this.compte); 
             }
           )
@@ -423,6 +427,7 @@ export class NewExemplaireComponent implements OnInit {
          //à supprimer lorsqu'on aura un vrai back connecté
           this.modifierMouvementExemplaire(x.idDocument)
           this.resteAPayer = this.sommeMontants()
+          this.lastSomme = this.sommeMontants();
           this.fCaisse['montant'].setValue(0)  
         });
     }
@@ -435,6 +440,7 @@ export class NewExemplaireComponent implements OnInit {
           this.formerEnteteTableauMissions()
           this.concatMouvementsSousExemplaireDocument()
           this.resteAPayer = this.sommeMontants()
+          this.lastSomme = this.sommeMontants();
           this.fCaisse['montant'].setValue(0)  
         });
     }
@@ -712,6 +718,19 @@ export class NewExemplaireComponent implements OnInit {
       }
     });
     return this.montantTotal;
+  }
+
+  verifySomme() {
+    let reste = 0;
+    if (this.sommeMontants() > this.lastSomme) {
+      reste = this.sommeMontants() - this.lastSomme;
+    } else {
+      reste = this.lastSomme - this.sommeMontants();
+    }
+    this.resteAPayer += reste;
+    this.lastSomme = this.sommeMontants();
+    console.log('donnéé :', this.resteAPayer, this.sommeMontants());
+    
   }
 
   /**

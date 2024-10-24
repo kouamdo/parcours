@@ -23,7 +23,6 @@ export class NewCompteComponent {
   compte: IComptes | undefined;
   forme: FormGroup;
   titre: string = '';
-  idCompteIs: boolean = false;
   btnLibelle: string = 'Ajouter';
   submitted: boolean = false;
   personnels: IPatient[] = [];
@@ -51,16 +50,18 @@ export class NewCompteComponent {
       this.personnels = reponse;
     });
     if (idCompte != null && idCompte !== '') {
-      this.idCompteIs = true;
       this.btnLibelle = 'Modifier';
       this.titre = 'Compte à Modifier';
+      this.forme.controls['solde'].disable();
       this.compteService.getCompteById(idCompte).subscribe((x) => {
         this.compte = x;
+        console.log('compte:', this.compte);
+        
         this.forme.setValue({
           libelle: this.compte?.libelle,
           solde: this.compte?.solde,
           montantDecouvert: this.compte?.montantDecouvertMax,
-          beneficiaire: this.compte?.beneficiaire
+          beneficiaire: this.compte?.beneficiaire,
         });
       });
     }

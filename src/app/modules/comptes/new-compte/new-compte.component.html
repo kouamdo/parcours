@@ -24,9 +24,9 @@
                             <div>
                                 <div class="champs">
                                     <label for="solde" class="label" >
-                                        {{"compte.table.title0" | translate}}<span style="color: red;" aria-label="required">* {{ idCompteIs}}</span>
+                                        {{"compte.table.title0" | translate}}<span style="color: red;" aria-label="required">*</span>
                                     </label>
-                                    <input [disabled]="idCompteIs" type="text" formControlName="solde" name="solde" id="solde" placeholder="{{'compte.table.title0' | translate}}" class="form-control" required>
+                                    <input type="text" formControlName="solde" name="solde" id="solde" placeholder="{{'compte.table.title0' | translate}}" class="form-control" required>
                                 </div>
                                 <div *ngIf="submitted && f['solde'].errors" class="alert alert-danger">
                                     <div *ngIf="f['solde'].errors['required']">{{'compte.form.text1' | translate}}</div>
@@ -60,9 +60,9 @@
                                     </mat-autocomplete>
                                 </mat-form-field>
                             </div>
-                            <div *ngIf="submitted && f['beneficiaire'].errors"  class="alert alert-danger" >
-                                <div *ngIf="f['beneficiaire'].errors['required']">{{'personnel.form.text3' | translate}}</div>
-                            </div>
+                                <!-- <div *ngIf="submitted && f['beneficiaire'].errors"  class="alert alert-danger" >
+                                    <div *ngIf="f['beneficiaire'].errors['required']">{{'personnel.form.text3' | translate}}</div>
+                                </div> -->
                         </div>
                     </div>
                 </div>
