@@ -73,6 +73,14 @@
                                     </mat-option>
                                 </mat-autocomplete>
                             </form>
+                            <div class="blockScan">
+                                <span role="button" *ngIf="document.contientRessources == true" class="btnScan" (click)="openBarcodeScanner(); toogleScanCodeView()">
+                                    <i class="fas fa-camera icon"></i>
+                                </span>
+                                <div class="scanCodeComponent">
+                                    <app-modal-codebarre-scan-continue #barcodeScanner></app-modal-codebarre-scan-continue>
+                                </div>
+                            </div>
                         </div>
                         <div *ngIf="document.contientDistributeurs == true && !document.beneficiaireObligatoire && modificationDistributeurActive == true" class="blockAutoDistributeurs">
                             <form class="example-form-entete">

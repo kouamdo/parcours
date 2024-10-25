@@ -105,7 +105,6 @@ h3{
     display: flex;
     align-items: center;
     margin: 2px;
-    flex-wrap: wrap;
     h4{
         width: fit-content;
         margin: auto 0;
@@ -113,13 +112,11 @@ h3{
     }
 }
 .blockAutoRessources form{
-    justify-content: end;
+    justify-content: flex-end;
 }
 .blockAutoDistributeurs, .blockAutoPromos{
-    width: 48%;
-    display: flex;
-    align-items: center;
     justify-content: flex-end;
+    flex-wrap: wrap;
 }
 .example-form-entete{
     display: flex;
@@ -254,29 +251,26 @@ th{
         color: #ffffffdf;
     }
 }
-.btnPromoShow{
-padding: 0;
-background-color: inherit;
-color: #b3b3b3;
-border: none;
-}
-.menuPromoShow{
-    width: fit-content !important;
-    ul{
-        background-color: red;
-        padding: 0;
-        li{
-            background-color: #ffffff;
-            font-size: 11px;
-            input{
-                width: 11px;
-            }
-            span{
-                background-color: yellow;
-            }
-        }
+.blockScan{
+    width: fit-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .scanCodeComponent{
+        width: 93px;
+        margin-left: 2px;
     }
-
+}
+.btnScan{
+    font-size: 25px;
+    background-color: #28a7463c;
+    color: #28a745;
+    padding: 3px;
+    display: flex;
+    border-radius: 2px;
+    i{
+        margin: auto;
+    }
 }
 @media screen and (max-width: 1040px) {
     .block1 .inputBlock{

@@ -50,9 +50,11 @@ export class ModalChoixPromotionRessourceComponent  implements OnInit{
     this.getPromosByRessource(this.ressourceCourante!).subscribe(valeurs => {
       this.dataSource.data = valeurs
     // Initialiser le formulaire avec la promotion courante (si nécessaire)
-    this.formePromoRessource.setValue({
-      promoControl: this.donneeEchangeService.dataPromoMouvementCourant
-    });
+    if (this.donneeEchangeService.dataPromoMouvementCourant) {
+      this.formePromoRessource.setValue({
+        promoControl: this.donneeEchangeService.dataPromoMouvementCourant.id
+      });
+    }
     });
 
     this.promotionCourente = this.donneeEchangeService.dataPromoMouvementCourant

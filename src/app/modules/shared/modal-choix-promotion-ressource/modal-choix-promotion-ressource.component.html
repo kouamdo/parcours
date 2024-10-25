@@ -176,7 +176,7 @@
               *matCellDef="let element, let i = index"
             >
               <div class="actions" [formGroup]="formePromoRessource">
-                <input type="radio"formControlName="promoControl" name="promoControl" [value]="element" id="" (change)="getPromotion(element,$event)">
+                <input type="radio"formControlName="promoControl" name="promoControl" [value]="element.id" id="" (change)="getPromotion(element,$event)">
               </div>
             </td>
           </ng-container>

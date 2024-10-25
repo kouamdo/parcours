@@ -1,6 +1,6 @@
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { DatePipe } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import {
   FormArray,
   FormBuilder,
@@ -35,13 +35,17 @@ import { IPromo } from 'src/app/modele/promo-distributeur';
 import { PromoService } from 'src/app/services/promo/promo.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalChoixPromotionRessourceComponent } from '../../shared/modal-choix-promotion-ressource/modal-choix-promotion-ressource.component';
+import { ModalCodebarreScanContinueComponent } from '../../shared/modal-codebarre-scan-continue/modal-codebarre-scan-continue.component';
 
 @Component({
   selector: 'app-new-exemplaire',
   templateUrl: './new-exemplaire.component.html',
   styleUrls: ['./new-exemplaire.component.scss'],
 })
-export class NewExemplaireComponent implements OnInit {
+export class NewExemplaireComponent implements OnInit , AfterViewInit {
+  @ViewChild('barcodeScanner', { static: false })
+  barcodeScanner!: ModalCodebarreScanContinueComponent;
+
   exemplaire: IExemplaireDocument = {
     id: '',
     idDocument: '',
@@ -175,6 +179,8 @@ export class NewExemplaireComponent implements OnInit {
   showText = false
   promotionsByRessource: { [key: string]: IPromo[] } = {};
   idMouvement: string = '';
+  scan_val: any | undefined;
+  showScanCodeComponent = false
 
 
   constructor(
@@ -198,7 +204,6 @@ export class NewExemplaireComponent implements OnInit {
       _controlsSupprime: new FormArray([]),
     });
   }
-  scan_val: any | undefined;
 
   ngOnInit(): void {
     
@@ -216,6 +221,13 @@ export class NewExemplaireComponent implements OnInit {
           .getRessourcesByScanBarCodeorLibelle(this.scan_val)
           .subscribe((response) => {
             this.filteredOptionsRessource = response;
+            const selectedOption = this.filteredOptionsRessource.find(
+              (option) => option.id === this.scan_val
+            );
+            if (selectedOption) {
+              this.filteredOptionsRessource = [selectedOption];
+              // this.dataSource.data = [selectedOption];
+            }
           });
       }
     });
@@ -995,5 +1007,21 @@ export class NewExemplaireComponent implements OnInit {
 
   initialisePromotionControl(promotion: IPromo) {
     this.donneeEchangeService.dataPromoMouvementCourant = promotion;
+  }
+
+  ngAfterViewInit() {}
+
+  openBarcodeScanner(): void {
+    console.log('Attempting to open barcode scanner');
+    if (this.barcodeScanner) {
+      console.log('barcodeScanner initialized');
+      this.barcodeScanner.createMediaStream(); // Make sure to use parentheses to call the function
+    } else {
+      console.log('barcodeScanner is undefined in AfterViewInit');
+    }
+  }
+
+  toogleScanCodeView(){
+    this.showScanCodeComponent = !this.showScanCodeComponent
   }
 }
