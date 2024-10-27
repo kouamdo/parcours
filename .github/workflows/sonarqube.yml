@@ -1,0 +1,103 @@
+# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
+
+name: Angular GitHub CI
+on:
+  push:
+    branches: [ "master", "develop-*" ]
+  pull_request:
+    branches: [ "master", "develop-*" ]
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [14.x, 16.x, 18.x]
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Cache node modules
+        id: cache-nodemodules
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-node-modules
+        with:
+          # caching node_modules
+          path: node_modules
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+      - name: Install Dependencies
+        if: steps.cache-nodemodules.outputs.cache-hit != 'true'
+        run: |
+          npm ci
+      - name: Install admin-lte
+        run: |
+          npm install admin-lte --save
+#      - name: Install karma
+#        run: |
+#          npm i -D puppeteer karma-chrome-launcher
+      - name: Build
+        run: |
+          npm run build --configuration=production
+#      - name: Test
+#        run: |
+#          npm run test:ci
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+  
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v4
+        with:
+          context: .  # Use the current directory as the build context
+          file: Dockerfile  # Specify the Dockerfile to use
+          tags: localpytest:latest  # Tag for the built image
+          load: true  # Load the image into the Docker daemon (for local use)
+          cache-from: type=gha  # Use GitHub Actions cache as a cache source
+          cache-to: type=gha,mode=max  # Store cache in GitHub Actions for future builds
+          push: false  # Do not push to a remote registry (set to true if you want to push)
+      - name: Test Docker image
+        run: |
+          docker run -d frontApp:latest -p 8080:80 testFrontApp
+        fail-fast: true  # Stop on build failure
+      - name : Test app communication
+        run: |
+            curl -I http://localhost:8080
+        fail-fast: true
+      - name: Conventional Changelog Action
+        id: changelog
+        uses: TriPSs/conventional-changelog-action@v3
+        with:
+          github-token: ${{ secrets.SONAR_TOKEN }}
+          output-file: "false"
+      - name: Create Release 
+        uses: actions/create-release@v1
+        if: ${{ steps.changelog.outputs.skipped == 'false' }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        with:
+          tag_name: ${{ steps.changelog.outputs.tag }}
+          release_name: ${{ steps.changelog.outputs.tag }}
+          body: ${{ steps.changelog.outputs.clean_changelog }}
+          
+      - name: Add GH Pages
+        run: |
+          npm run add:ghpages
+      
+      - name: Deploy
+        uses: crazy-max/ghaction-github-pages@v3
+        with:
+            target_branch: gh-pages
+            build_dir: dist/clinique
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
