@@ -11,7 +11,7 @@ export interface IMouvementCaisses {
     libelle: string,
     typeMvt: string,
     dateCreation: Date,
-    detailJson?: string,
+    detailJson?: Monaies,
     moyenPaiement: ICaisses,
     isMultipaiement?: string,
     referencePaiement: string,
@@ -24,4 +24,24 @@ export interface MoyenPaiement {
     moyen: ICaisses,
     montant: float,
     reference: string
+}
+
+export interface Monaies {
+    pieces?: {
+        x1?: number,
+        x2?: number,
+        x5?: number,
+        x10?: number,
+        x25?: number,
+        x50?: number,
+        x100?: number,
+        x500?: number,
+    },
+    billets?: {
+        x500?: number,
+        x1000?: number,
+        x2000?: number,
+        x5000?: number,
+        x10000?: number,
+    }
 }

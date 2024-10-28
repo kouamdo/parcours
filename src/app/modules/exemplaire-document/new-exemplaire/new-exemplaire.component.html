@@ -245,6 +245,48 @@
                                             <div *ngIf="fCaisse['moyenPaiement'].errors['required']">{{'mvtCaisse.form.text3' | translate}}</div>
                                         </div>
                                 </div>
+                                <div *ngIf="fCaisse['moyenPaiement'].value == 'cash'" class="form-group overflow-auto">
+                                    <div class="champs">
+                                        <div class="table-responsive">
+                                            <table class="table table-centered table-bordered w-100">
+                                                <thead>
+                                                  <tr>
+                                                    <th scope="col">x1</th>
+                                                    <th scope="col">x2</th>
+                                                    <th scope="col">x5</th>
+                                                    <th scope="col">x10</th>
+                                                    <th scope="col">x25</th>
+                                                    <th scope="col">x50</th>
+                                                    <th scope="col">x100</th>
+                                                    <th scope="col">x500</th>
+                                                    <th scope="col">x500 {{ 'mvtCaisse.table.title9' | translate }}</th>
+                                                    <th scope="col">x1000</th>
+                                                    <th scope="col">x2000</th>
+                                                    <th scope="col">x5000</th>
+                                                    <th scope="col">x10000</th>
+                                                  </tr>
+                                                </thead>
+                                                <tbody>
+                                                  <tr class="w-100">
+                                                    <td><input placeholder="{{'mvtCaisse.table.title10' | translate}}" formControlName="x1" type="number" class="form-control w-auto"></td>
+                                                    <td><input placeholder="{{'mvtCaisse.table.title10' | translate}}" formControlName="x2" type="number" class="form-control w-auto"></td>
+                                                    <td><input placeholder="{{'mvtCaisse.table.title10' | translate}}" formControlName="x5" type="number" class="form-control w-auto"></td>
+                                                    <td><input placeholder="{{'mvtCaisse.table.title10' | translate}}" formControlName="x10" type="number" class="form-control w-auto"></td>
+                                                    <td><input placeholder="{{'mvtCaisse.table.title10' | translate}}" formControlName="x25" type="number" class="form-control w-auto"></td>
+                                                    <td><input placeholder="{{'mvtCaisse.table.title10' | translate}}" formControlName="x50" type="number" class="form-control w-auto"></td>
+                                                    <td><input placeholder="{{'mvtCaisse.table.title10' | translate}}" formControlName="x100" type="number" class="form-control w-auto"></td>
+                                                    <td><input placeholder="{{'mvtCaisse.table.title10' | translate}}" formControlName="x500" type="number" class="form-control w-auto"></td>
+                                                    <td><input placeholder="{{'mvtCaisse.table.title10' | translate}}" formControlName="x500B" type="number" class="form-control w-auto"></td>
+                                                    <td><input placeholder="{{'mvtCaisse.table.title10' | translate}}" formControlName="x1000" type="number" class="form-control w-auto"></td>
+                                                    <td><input placeholder="{{'mvtCaisse.table.title10' | translate}}" formControlName="x2000" type="number" class="form-control w-auto"></td>
+                                                    <td><input placeholder="{{'mvtCaisse.table.title10' | translate}}" formControlName="x5000" type="number" class="form-control w-auto"></td>
+                                                    <td><input placeholder="{{'mvtCaisse.table.title10' | translate}}" formControlName="x10000" type="number" class="form-control w-auto"></td>
+                                                  </tr>
+                                                </tbody>
+                                              </table>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="form-group">
                                     <div>
                                         <div class="champs">

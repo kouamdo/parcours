@@ -55,14 +55,13 @@ export class NewCompteComponent {
       this.forme.controls['solde'].disable();
       this.compteService.getCompteById(idCompte).subscribe((x) => {
         this.compte = x;
-        console.log('compte:', this.compte);
-        
         this.forme.setValue({
           libelle: this.compte?.libelle,
           solde: this.compte?.solde,
           montantDecouvert: this.compte?.montantDecouvertMax,
-          beneficiaire: this.compte?.beneficiaire,
+          beneficiaire: null,
         });
+        if(this.compte.beneficiaire) this.forme.controls['beneficiaire'].setValue(this.compte.beneficiaire);
       });
     }
     this.titre = this.dataEnteteMenuService.dataEnteteMenu;
@@ -95,6 +94,7 @@ export class NewCompteComponent {
 
     if (this.compte != undefined) {
       compteTemp.id = this.compte.id;
+      compteTemp.solde = this.compte.solde;
       compteTemp.dateCreation = this.compte.dateCreation;
     }
 

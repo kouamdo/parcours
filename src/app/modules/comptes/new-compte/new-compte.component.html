@@ -26,7 +26,7 @@
                                     <label for="solde" class="label" >
                                         {{"compte.table.title0" | translate}}<span style="color: red;" aria-label="required">*</span>
                                     </label>
-                                    <input type="text" formControlName="solde" name="solde" id="solde" placeholder="{{'compte.table.title0' | translate}}" class="form-control" required>
+                                    <input type="number" formControlName="solde" name="solde" id="solde" placeholder="{{'compte.table.title0' | translate}}" class="form-control" required>
                                 </div>
                                 <div *ngIf="submitted && f['solde'].errors" class="alert alert-danger">
                                     <div *ngIf="f['solde'].errors['required']">{{'compte.form.text1' | translate}}</div>

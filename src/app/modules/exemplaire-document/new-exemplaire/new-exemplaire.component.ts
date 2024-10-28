@@ -206,7 +206,21 @@ export class NewExemplaireComponent implements OnInit {
       use: [false],
       montant: ['', [Validators.required]],
       moyenPaiement: new FormControl<string | ICaisses>(''),
-      referencePaiement: ['', [Validators.required]]
+      referencePaiement: ['', [Validators.required]],
+      // enregistrer la billeterie en cas de cash comme moyen de paiement
+      x1: [''],
+      x2: [''],
+      x5: [''],
+      x10: [''],
+      x25: [''],
+      x50: [''],
+      x100: [''],
+      x500: [''],
+      x500B: [''],
+      x1000: [''],
+      x2000: [''],
+      x5000: [''],
+      x10000: ['']
     })
   }
   scan_val: any | undefined;
@@ -689,8 +703,7 @@ export class NewExemplaireComponent implements OnInit {
   }
 
   verifyUseSolde() {
-    let i : boolean = false;
-    if (this.fCaisse['moyenPaiement'].value == 'solde') {
+    if (this.fCaisse['moyenPaiement'].value == 'solde' && this.compte?.solde! > 0) {
       this.fCaisse['use'].setValue(true);     
       this.fCaisse['montant'].setValue(this.compte?.solde!);          
       this.resteApayer(this.fCaisse['montant'].value);

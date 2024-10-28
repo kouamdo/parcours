@@ -45,10 +45,10 @@
                         <td class="containCell" mat-cell *matCellDef="let element"> {{element.montantDecouvertMax}} </td>
                     </ng-container>
 
-                    <!-- personnel Column -->
-                    <ng-container matColumnDef="personnel">
+                    <!-- bénéficiaire Column -->
+                    <ng-container matColumnDef="bénéficiaire">
                         <th class="containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'compte.table.title4' | translate}} </th>
-                        <td class="containCell" mat-cell *matCellDef="let element"> {{element.personnel?.nom}} </td>
+                        <td class="containCell" mat-cell *matCellDef="let element"> {{element.beneficiaire?.nom}} </td>
                     </ng-container>
 
                     <!-- date de création Column -->
