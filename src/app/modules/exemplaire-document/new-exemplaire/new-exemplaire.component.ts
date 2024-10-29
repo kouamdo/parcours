@@ -31,7 +31,7 @@ import { TypeMouvement } from 'src/app/modele/typeMouvement';
 import { ModalCodebarreService } from '../../shared/modal-codebarre/modal-codebarre.service';
 import { PatientsService } from 'src/app/services/patients/patients.service';
 import { IPatient } from 'src/app/modele/Patient';
-import { IMouvementCaisses, MoyenPaiement } from 'src/app/modele/mouvement-caisses';
+import { IMouvementCaisses, Monaies, MoyenPaiement } from 'src/app/modele/mouvement-caisses';
 import { ICaisses } from 'src/app/modele/caisses';
 import { IComptes } from 'src/app/modele/comptes';
 import { MouvementCaisseService } from 'src/app/services/mouvement-caisse/mouvement-caisse.service';
@@ -704,14 +704,17 @@ export class NewExemplaireComponent implements OnInit {
 
   verifyUseSolde() {
     if (this.fCaisse['moyenPaiement'].value == 'solde' && this.compte?.solde! > 0) {
-      this.fCaisse['use'].setValue(true);     
+      this.fCaisse['montant'].disable();     
+      this.fCaisse['use'].setValue(true);
       this.fCaisse['montant'].setValue(this.compte?.solde!);          
       this.resteApayer(this.fCaisse['montant'].value);
     }
     if(this.fCaisse['use'].value && this.fCaisse['moyenPaiement'].value != 'solde') {
       this.fCaisse['use'].setValue(false), 
+      this.fCaisse['montant'].enable();     
       this.useSolde(false);
     }
+    if(this.fCaisse['moyenPaiement'].value == 'multipaiement') this.openModalPaiementDialog();
     console.log("caisse retourné :", this.fCaisse['moyenPaiement'].value, this.fCaisse['use'].value);   
   }
 
@@ -742,7 +745,10 @@ export class NewExemplaireComponent implements OnInit {
     }
     this.resteAPayer += reste;
     this.lastSomme = this.sommeMontants();
-    console.log('donnéé :', this.resteAPayer, this.sommeMontants());
+    console.log('donnéé :', this.resteAPayer, this.sommeMontants()); 
+  }
+
+  totalCash(multiple: number, nb: number) {
     
   }
 
@@ -800,10 +806,13 @@ export class NewExemplaireComponent implements OnInit {
     let donne : IMouvementCaisses;
 
     if (selectItem.use) {
+      let montant : number = 0;
+      this.compte?.solde! < this.montantTotal ? montant = this.compte?.solde! : montant = this.montantTotal;
+      
       donne = {
         id: uuidv4(),
         etat: selectItem.etat,
-        montant: selectItem.montant,
+        montant: montant,
         libelle: selectItem.libelle,
         typeMvt: selectItem.typeMvt,
         dateCreation: new Date(),
@@ -851,10 +860,29 @@ export class NewExemplaireComponent implements OnInit {
         console.error('modalResult is not an array:', this.modalResult);
       }    
     } else {
-      let montant : number = 0;
-      if (selectItem.use) {
-        this.compte?.solde! < this.montantTotal ? montant = this.compte?.solde! : montant = this.montantTotal;
+      let billets : Monaies;
+      if (selectItem.moyenPaiement == 'cash') {
+        billets = {
+          pieces: {
+            x1: selectItem.x1,
+            x2: selectItem.x2,
+            x5: selectItem.x5,
+            x10: selectItem.x10,
+            x25: selectItem.x25,
+            x50: selectItem.x50,
+            x100: selectItem.x100,
+            x500: selectItem.x500,
+          },
+          billets: {
+            x500: selectItem.x500,
+            x1000: selectItem.x1000,
+            x2000: selectItem.x2000,
+            x5000: selectItem.x5000,
+            x10000: selectItem.x10000
+          }
+        }
       }
+      
       donne = {
         id: uuidv4(),
         etat: selectItem.etat,
@@ -862,6 +890,7 @@ export class NewExemplaireComponent implements OnInit {
         libelle: selectItem.libelle,
         typeMvt: selectItem.typeMvt,
         dateCreation: new Date(),
+        detailJson: billets!,
         moyenPaiement: selectItem.moyenPaiement,
         referencePaiement: selectItem.referencePaiement,
         compte: this.compte,

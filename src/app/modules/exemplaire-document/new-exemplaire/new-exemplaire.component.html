@@ -238,7 +238,7 @@
                                             </label>
                                             <select formControlName="moyenPaiement" name="moyenPaiement" (change)="verifyUseSolde()" class="form-control">
                                                 <option *ngFor="let caisse of caisses" [value]="caisse.type">{{caisse.type}}</option>
-                                                <option value="multipaiement" (click)="openModalPaiementDialog()">Multipaiement</option>
+                                                <option value="multipaiement">Multipaiement</option>
                                             </select>
                                         </div>
                                         <div *ngIf="submitted && fCaisse['moyenPaiement'].errors"  class="alert alert-danger" >
