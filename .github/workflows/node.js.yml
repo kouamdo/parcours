@@ -36,8 +36,8 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-node-
     - run: npm ci
-    - run: npm run build
-      name: Run build
+    - run: npm run serve && npm run build && npm run build --watch --configuration development
+      name: Run serve and build
 
       
     - name: Set up Docker Buildx
