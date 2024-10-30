@@ -35,7 +35,7 @@ jobs:
         key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
         restore-keys: |
           ${{ runner.os }}-node-
-    - run: npm run build && npm run watch
+    - run: npm ci && npm run build --prod
       name: Run serve and build
 
       
