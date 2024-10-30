@@ -37,8 +37,8 @@ jobs:
           ${{ runner.os }}-node-
     - run: npm install && npm ci
       name: dependencies installations
-    # - run: npm run build --prod
-    #   name: Compile for production
+    - run: ng serve
+      name: Compile for production
 
       
     - name: Set up Docker Buildx
