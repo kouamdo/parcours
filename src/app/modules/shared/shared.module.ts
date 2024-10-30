@@ -37,6 +37,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatRadioModule } from '@angular/material/radio';
 import { ModalChoixPersonneComponent } from './modal-choix-personne/modal-choix-personne.component';
 import { MatSelectModule } from '@angular/material/select';
+import { BarcodeScannerComponent } from './barcode-scanner/barcode-scanner.component';
+import { ZXingScannerModule } from '@zxing/ngx-scanner';
 
 @NgModule({
   declarations: [
@@ -55,6 +57,7 @@ import { MatSelectModule } from '@angular/material/select';
     ModalChoixDocumentsComponent,
     ModalChoixDocEtatComponent,
     ModalChoixPersonneComponent,
+    BarcodeScannerComponent,
   ],
   exports: [
     ModalCategoriesComponent,
@@ -95,7 +98,8 @@ import { MatSelectModule } from '@angular/material/select';
         deps: [HttpClient],
       },
       extend: true,
-    })
+    }),
+    ZXingScannerModule
   ],
   providers: [
     { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { hasBackdrop: false } },
