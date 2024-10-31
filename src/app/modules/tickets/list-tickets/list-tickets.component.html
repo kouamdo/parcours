@@ -72,7 +72,6 @@
                                 <div class="dropdown-menu" aria-labelledby="triggerId">
                                   <div class="d-flex justify-content-center">
                                     <button *ngIf="element.statut == statutTicketTraite" class="btn"
-                                      [useExistingCss]="true"
                                       styleSheetFile="assets/css/ticketPrint.scss"
                                       printSectionId="ticketView"
                                       ngxPrint (click)="recupIdTicket(element.id); ticketAImprimer()">
