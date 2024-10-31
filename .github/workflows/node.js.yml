@@ -39,7 +39,7 @@ jobs:
     #   name: install CI
     - run: npm install -g @angular/cli
       name: Install Angular CLi
-    - run: npm install --legacy-peer-deps
+    - run: npm install
       name: dependencies installations
     - run: ng build
       name: Compile for production
