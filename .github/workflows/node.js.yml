@@ -35,8 +35,8 @@ jobs:
         key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
         restore-keys: |
           ${{ runner.os }}-node-
-    - run: npm ci
-      name: install CI
+    # - run: npm ci
+    #   name: install CI
     - run: npm install -g @angular/cli && npm install
       name: dependencies installations
     - run: ng build && ng build --configuration production
