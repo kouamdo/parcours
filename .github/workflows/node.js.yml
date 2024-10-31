@@ -16,7 +16,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [15.x]
+        node-version: [20]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
@@ -37,7 +37,7 @@ jobs:
           ${{ runner.os }}-node-
     - run: npm install -g @angular/cli && npm install && npm ci
       name: dependencies installations
-    - run: ng build --configuration production
+    - run: ng build && ng build --configuration production
       name: Compile for production
 
       
