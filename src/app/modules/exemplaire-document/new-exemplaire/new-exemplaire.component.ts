@@ -898,6 +898,7 @@ export class NewExemplaireComponent implements OnInit , AfterViewInit {
       if (this.distributeur == undefined) {
         mouvement.distributeur = this.distributeur;
       }
+      mouvement.promotion = undefined
       this.dataSourceMouvements.data = this.ELEMENTS_TABLE_MOUVEMENTS;
     }
     this.modificationDistributeurActive = false;
