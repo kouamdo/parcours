@@ -39,7 +39,7 @@ jobs:
     #   name: install CI
     - run: npm install -g @angular/cli
       name: Install Angular CLi
-    - run: npm install --force
+    - run: npm install
       name: dependencies installations
     - run: ng build && ng build --configuration production
       name: Compile for production
