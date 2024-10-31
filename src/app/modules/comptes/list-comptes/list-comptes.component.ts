@@ -25,7 +25,7 @@ export class ListComptesComponent implements OnInit {
   ELEMENTS_TABLE: IComptes[] = [];
   filteredOptions: IComptes[] | undefined;
 
-  displayedColumns: string[] = ['libelle', 'solde','montantMax', 'Bénéficiaire','dateCreation','actions'];
+  displayedColumns: string[] = ['libelle', 'solde','montantMax', 'bénéficiaire','dateCreation','actions'];
 
   dataSource = new MatTableDataSource<IComptes>(this.ELEMENTS_TABLE);
 

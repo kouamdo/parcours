@@ -49,7 +49,8 @@ export class ModalMouvementCaisseComponent implements OnInit {
     this.formePaiement = this.formBuilder.group({
       moyen: ['cash'],
       montant: [''],
-      reference: ['']
+      reference: [''],
+      
     })
     this.formePaiement1 = this.formBuilder.group({
       moyen: ['cheque'],
@@ -85,7 +86,7 @@ export class ModalMouvementCaisseComponent implements OnInit {
               const elementGroup = this.formBuilder.group({
                 moyen: new FormControl<string | ICaisses>(caisse),
                 montant: [ele.montant],
-                reference: [ele.reference]
+                reference: [ele.reference],
               });
               this.elements.push(elementGroup);
               console.log("elements modal 0:", this.elements.controls);
@@ -97,7 +98,21 @@ export class ModalMouvementCaisseComponent implements OnInit {
           const elementGroup = this.formBuilder.group({
             moyen: new FormControl<string | ICaisses>(caisse),
             montant: [''],
-            reference: ['']
+            reference: [''],
+            // enregistrer la billeterie en cas de cash comme moyen de paiement
+      x1: [''],
+      x2: [''],
+      x5: [''],
+      x10: [''],
+      x25: [''],
+      x50: [''],
+      x100: [''],
+      x500: [''],
+      x500B: [''],
+      x1000: [''],
+      x2000: [''],
+      x5000: [''],
+      x10000: ['']
           });
           this.elements.push(elementGroup);
           console.log("elements modal :", this.elements.controls);
