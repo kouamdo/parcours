@@ -39,19 +39,10 @@ export class DocumentService {
    }
 
    getDocumentByMission(idMission:string): Observable<IDocument[]> {
-    return this.http.get<IDocument[]>('api/documents').pipe(
-      map(x=>
-        {
-          return x.filter(d=> {
-            let b:boolean=false;
-            d.missions.forEach(m =>{
-              if(m.id==idMission)
-                b=true;
-            } );
-            if(b) return d;
-            else return 
-          })
-        })
-    );        
+    return this.http
+      .get<IDocument[]>('api/documents')
+      .pipe(
+        map((x) => x.filter((d) => d.missions.some((m) => m.id === idMission)))
+      );    
   }
 }
