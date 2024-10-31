@@ -37,7 +37,7 @@ jobs:
           ${{ runner.os }}-node-
     - run: npm ci
       name: install CI
-    - run: npm install -g @angular/cli@14 && npm install
+    - run: npm install -g @angular/cli@16 && npm install
       name: dependencies installations
     - run: ng build && ng build --configuration production
       name: Compile for production
