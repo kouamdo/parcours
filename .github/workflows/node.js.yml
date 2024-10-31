@@ -41,7 +41,7 @@ jobs:
       name: Install Angular CLi
     - run: npm install --legacy-peer-deps
       name: dependencies installations
-    - run: ng build --prod
+    - run: ng build
       name: Compile for production
 
       
