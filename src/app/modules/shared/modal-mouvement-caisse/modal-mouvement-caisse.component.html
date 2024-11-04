@@ -61,7 +61,7 @@
                             <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
                             </mat-autocomplete>
                           </th>
-                          <td><input id="montant-{{i}}" placeholder="Entrer le montant" formControlName="montant" type="number" class="form-control"></td>
+                          <td><input id="montant-{{i}}" (click)="openModalBilleterieDialog(element)" placeholder="Entrer le montant" formControlName="montant" type="number" class="form-control"></td>
                           <td><input id="reference-{{i}}" placeholder="Entrer la reference" formControlName="reference" type="text" class="form-control"></td>
                         </tr>
                       </tbody>

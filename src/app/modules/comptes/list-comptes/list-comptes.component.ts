@@ -81,31 +81,6 @@ export class ListComptesComponent implements OnInit {
     )
   }
 
-  openChoixPersonnelDialog(compte: IComptes){
-    const dialogRef = this.dialogDef.open(ModalAffecterComptePersonnelComponent,
-    {
-      maxWidth: '100%',
-      maxHeight: '100%',
-      width:'100%',
-      height:'100%',
-      enterAnimationDuration:'1000ms',
-      exitAnimationDuration:'1000ms',
-      data:{compte}
-    }
-    )
-
-    dialogRef.afterClosed().subscribe(result => { 
-      this.getAllComptes().subscribe((valeurs) => {
-        this.dataSource.data = valeurs;
-        this.filteredOptions = valeurs;
-      console.log("result:", result, valeurs);
-      });    
-      this.router.navigate([this.router.url]);
-      
-    });
-    
-  }
-
   announceSortChange(sortState: Sort) {
     if (sortState.direction) {
       this._liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);

@@ -53,6 +53,7 @@ export class NewCompteComponent {
       this.btnLibelle = 'Modifier';
       this.titre = 'Compte à Modifier';
       this.forme.controls['solde'].disable();
+      this.forme.controls['beneficiaire'].disable();
       this.compteService.getCompteById(idCompte).subscribe((x) => {
         this.compte = x;
         this.forme.setValue({

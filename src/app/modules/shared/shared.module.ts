@@ -40,6 +40,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { ModalAffecterComptePersonnelComponent } from './modal-affecter-compte-personnel/modal-affecter-compte-personnel.component';
 import { ModalMouvementCaisseCompteComponent } from './modal-mouvement-caisse-compte/modal-mouvement-caisse-compte.component';
 import { ModalMouvementCaisseComponent } from './modal-mouvement-caisse/modal-mouvement-caisse.component';
+import { ModalBilleterieComponent } from './modal-billeterie/modal-billeterie.component';
 
 @NgModule({
   declarations: [
@@ -61,6 +62,7 @@ import { ModalMouvementCaisseComponent } from './modal-mouvement-caisse/modal-mo
     ModalAffecterComptePersonnelComponent,
     ModalMouvementCaisseCompteComponent,
     ModalMouvementCaisseComponent,
+    ModalBilleterieComponent,
   ],
   exports: [
     ModalCategoriesComponent,

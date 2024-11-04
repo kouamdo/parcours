@@ -97,7 +97,7 @@
                                       <input class="form-control" type="number" [(ngModel)]="element.quantite" [ngModelOptions]="{standalone: true}" [disabled]="element.typeMouvement != 'Neutre' && i <= (tailleFirstMvts - 1)" value="true">
                                   </label>
                                 </td>
-                          </ng-container>
+                            </ng-container>
 
                           <!-- unite Column -->
                           <ng-container matColumnDef="unite">
@@ -236,7 +236,7 @@
                                             <label for="moyenPaiement" class="label">
                                                 {{'mvtCaisse.table.title2' | translate}}
                                             </label>
-                                            <select formControlName="moyenPaiement" name="moyenPaiement" (change)="verifyUseSolde()" class="form-control">
+                                            <select formControlName="moyenPaiement" name="moyenPaiement" (click)="verifyUseSolde()" class="form-control">
                                                 <option *ngFor="let caisse of caisses" [value]="caisse.type">{{caisse.type}}</option>
                                                 <option value="multipaiement">Multipaiement</option>
                                             </select>
@@ -244,68 +244,6 @@
                                         <div *ngIf="submitted && fCaisse['moyenPaiement'].errors"  class="alert alert-danger" >
                                             <div *ngIf="fCaisse['moyenPaiement'].errors['required']">{{'mvtCaisse.form.text3' | translate}}</div>
                                         </div>
-                                </div>
-                                <div *ngIf="fCaisse['moyenPaiement'].value == 'cash'" class="form-group">
-                                    <div class="champs">
-                                        <div class="d-flex w-75">
-                                            <table class="table table-centered table-bordered">
-                                                <tr>
-                                                    <th scope="col">x1</th>
-                                                    <td><input formControlName="x1" type="number" class="form-control"></td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="col">x2</th>
-                                                    <td><input formControlName="x2" type="number" class="form-control"></td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="col">x5</th>
-                                                    <td><input formControlName="x5" type="number" class="form-control"></td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="col">x10</th>
-                                                    <td><input formControlName="x10" type="number" class="form-control"></td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="col">x25</th>
-                                                    <td><input formControlName="x25" type="number" class="form-control"></td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="col">x50</th>
-                                                    <td><input formControlName="x50" type="number" class="form-control"></td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="col">x100</th>
-                                                    <td><input formControlName="x100" type="number" class="form-control"></td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="col">x500</th>
-                                                    <td><input formControlName="x500" type="number" class="form-control"></td>
-                                                </tr>
-                                            </table>
-                                            <table class="table table-centered table-bordered">
-                                                <tr>
-                                                    <th scope="row">x500 {{ 'mvtCaisse.table.title9' | translate }}</th>
-                                                    <td><input formControlName="x500B" type="number" class="form-control"></td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="col">x1000</th>
-                                                    <td><input formControlName="x1000" type="number" class="form-control"></td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="col">x2000</th>
-                                                    <td><input formControlName="x2000" type="number" class="form-control"></td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="col">x5000</th>
-                                                    <td><input formControlName="x5000" type="number" class="form-control"></td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="col">x10000</th>
-                                                    <td><input formControlName="x10000" type="number" class="form-control"></td>
-                                                </tr>
-                                            </table>
-                                        </div>
-                                    </div>
                                 </div>
                                 <div class="form-group">
                                     <div>
