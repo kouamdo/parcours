@@ -16,17 +16,32 @@ h3{
     opacity: 0.8;
     font-weight: bold;
 }
-.groupe{
-    margin-top: 10px;
+#titre{
+    margin: 20px 0;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 5px;
+}
+.infos{
+    padding-bottom: 10px;
+}
+.infos .title{
+    font-weight: normal;
+    text-transform: uppercase;
+    .capitaliseTitle{
+        text-transform: capitalize;
+    }
+}
+.infos .label{
+    font-weight: bold;
+    text-transform: capitalize;
 }
 .codeInput{
     display: flex;
+    align-items: center;
+    justify-content: center;
     label{
-        margin-right: 5px;
+        margin: auto;
     }
 }
 .contentBlock{

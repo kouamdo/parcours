@@ -181,6 +181,9 @@ export class NewExemplaireComponent implements OnInit , AfterViewInit {
   idMouvement: string = '';
   scan_val: any | undefined;
   showScanCodeComponent = false
+  reponse: any;
+  courant: string = '';
+  req: boolean = false;
 
 
   constructor(
@@ -248,7 +251,7 @@ export class NewExemplaireComponent implements OnInit , AfterViewInit {
     this.titre=this.donneeEchangeService.dataEnteteMenu
     
     this.ressourceControl.valueChanges.subscribe((value) => {
-      const query = value?.toString().toLowerCase(); // Convert to lower case for case-insensitive search
+      const query = value?.toString(); // Convert to lower case for case-insensitive search
       if (query && query.length > 0) {
         // Search by name or ID
         this.serviceRessource
@@ -385,6 +388,17 @@ export class NewExemplaireComponent implements OnInit , AfterViewInit {
             this.nomPatientCourant = this.laPersonneRattachee.nom + " " + this.laPersonneRattachee.prenom
           }
           this.codeControl.setValue(this.exemplaire.code)
+          this.serviceDocument.getDocumentById(x.idDocument).subscribe(
+            (y) => {
+              this.reponse = this.serviceExemplaire.getExemplaireDocumentByOrder(x, y);
+              if (this.reponse) {
+                this.req = this.reponse.sol;
+                if (this.reponse.ele != undefined && this.reponse.ele.etat != undefined) {
+                  this.courant = this.reponse.ele.etat.libelle;
+                }
+              }
+            }
+          )
         });
     }
     if (this.idDocument != null && this.idDocument !== '') {
@@ -700,6 +714,7 @@ export class NewExemplaireComponent implements OnInit , AfterViewInit {
 
     if (this.exemplaire.id != '') {
       exemplaireTemp.id = this.exemplaire.id;
+      exemplaireTemp.dateCreation = this.exemplaire.dateCreation
     }
     exemplaireTemp.promotion = this.promotion
     exemplaireTemp.assurance = this.assurancePersone

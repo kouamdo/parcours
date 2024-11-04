@@ -5,25 +5,36 @@
             <!-- {{titre}} -->
         </h1>
         <div class="infos">
-            <div class="groupe">
-                <p class="titre">
-                    {{'document.exemplaire.text9' | translate}} :
-                    <span class="title">{{this.nomPatientCourant}}</span>
-                </p>
-                <div class="codeInput">
-                    <label for="">{{'document.exemplaire.text11' | translate}}</label>
-                    <p>
-                        <input [formControl]="codeControl" type="text" name="code" id="code">
-                    </p>
+            <div id="titre">
+                <div *ngIf="this.exemplaire.personneRattachee != undefined">
+                    <span class="label">
+                        {{ "document.exemplaire.text9" | translate }} :
+                    </span>
+                    <span class="title">{{ this.exemplaire.personneRattachee.nom + " " }}
+                        <span class="capitaliseTitle"> {{ this.exemplaire.personneRattachee.prenom! }} </span>
+                    </span>
                 </div>
-            </div>
-            <div class="groupe pb-2">
-                <p class="titre">
-                    {{'document.exemplaire.text6' | translate}} :
-                    <span class="title">{{this.exemplaire.dateCreation | date: 'dd/MM/yyyy'}}</span>
-                    {{'document.exemplaire.text7' | translate}} 
-                    <span class="title">{{this.exemplaire.dateCreation | date: 'hh:mm:ss'}}</span>
-                </p>
+                <div>
+                    <span class="label">
+                        {{ "document.exemplaire.text6" | translate }} :
+                    </span>
+                    <span class="title">{{
+                        this.exemplaire.dateCreation | date : "dd/MM/yyyy"}}
+                    </span>
+                    <span class="label">
+                        {{ "document.exemplaire.text7" | translate }} : 
+                    </span>
+                    <span class="title">{{ this.exemplaire.dateCreation | date : "hh:mm:ss" }}
+                    </span>
+                </div>
+                <div *ngIf="this.idExemplaire">
+                    <span class="label"> {{ "document.title7" | translate }} : </span>
+                    {{ courant }}
+                </div>
+                <div class="codeInput">
+                    <label for="">{{'document.exemplaire.text11' | translate}} </label>
+                    <input [formControl]="codeControl" type="text" name="code" id="code">
+                </div>
             </div>
            
             <div  *ngIf="submitted && estValide == false" class="alert alert-danger">
