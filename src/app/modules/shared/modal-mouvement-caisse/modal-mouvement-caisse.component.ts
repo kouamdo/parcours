@@ -22,10 +22,6 @@ export class ModalMouvementCaisseComponent implements OnInit {
   submitted: boolean = false;
   dynamicForm: FormGroup;
   resteAPayer: number = 0;
-  formePaiement: FormGroup;
-  formePaiement1: FormGroup;
-  formePaiement2: FormGroup;
-  formePaiement3: FormGroup;
   btnLibelle: string = 'Ajouter';
   displayedMvtCaissesColumns: string[] = [
     'Moyen de Paiement',
@@ -50,27 +46,6 @@ export class ModalMouvementCaisseComponent implements OnInit {
     this.dynamicForm = this.formBuilder.group({
       elements: this.formBuilder.array([]) // Utilisation de FormArray pour gérer une liste dynamique
     });
-    this.formePaiement = this.formBuilder.group({
-      moyen: ['cash'],
-      montant: [''],
-      reference: [''],
-
-    })
-    this.formePaiement1 = this.formBuilder.group({
-      moyen: ['cheque'],
-      montant: [''],
-      reference: ['']
-    })
-    this.formePaiement2 = this.formBuilder.group({
-      moyen: ['carte bleue'],
-      montant: [''],
-      reference: ['']
-    })
-    this.formePaiement3 = this.formBuilder.group({
-      moyen: ['mobile money'],
-      montant: [''],
-      reference: ['']
-    })
   }
 
   ngOnInit(): void {
@@ -133,8 +108,8 @@ export class ModalMouvementCaisseComponent implements OnInit {
     }); */
   }
 
-  openModalBilleterieDialog(req: any) {
-    console.log('valeur passée :', req.controls['moyen'].value.type);
+  openModalBilleterieDialog(req: any, index: number) {
+    console.log('valeur passée :', req.controls['moyen'].value.type, index);
     
     if (req.controls['moyen'].value.type == 'cash') {
       const dialogRef = this.dialogDef.open(ModalBilleterieComponent,
@@ -181,11 +156,10 @@ export class ModalMouvementCaisseComponent implements OnInit {
           if (this.modalResultBilleterie.x5000) this.resteApayer(this.modalResultBilleterie.x5000 * 5000);
           if (this.modalResultBilleterie.x10000) this.resteApayer(this.modalResultBilleterie.x10000 * 10000);
           this.modalLastResultBilleterie = result.data;
+          req.controls['montant'].setValue(this.resteAPayer);
           console.log('result Billeterie:', this.modalResultBilleterie);
         }
       });
-    } else {
-      
     }
   }
 
@@ -197,10 +171,6 @@ export class ModalMouvementCaisseComponent implements OnInit {
 
   get elements(): FormArray {
     return this.dynamicForm.get('elements') as FormArray;
-  }
-
-  get f() {
-    return this.formePaiement.controls;
   }
 
   displayFn(caisse: ICaisses): string {

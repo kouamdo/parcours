@@ -237,7 +237,7 @@ export class NewExemplaireComponent implements OnInit {
         console.log("personne ratachée :", this.nomPatientCourant);
       }
     )
-
+    this.formeExemplaire.controls['montant'].disable()
     this.caisseService.getAllCaisses().subscribe(
       (reponse) => {
         this.caisses = reponse

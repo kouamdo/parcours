@@ -236,9 +236,9 @@
                                             <label for="moyenPaiement" class="label">
                                                 {{'mvtCaisse.table.title2' | translate}}
                                             </label>
-                                            <select formControlName="moyenPaiement" name="moyenPaiement" (click)="verifyUseSolde()" class="form-control">
-                                                <option *ngFor="let caisse of caisses" [value]="caisse.type">{{caisse.type}}</option>
-                                                <option value="multipaiement">Multipaiement</option>
+                                            <select formControlName="moyenPaiement" name="moyenPaiement" class="form-control">
+                                                <option *ngFor="let caisse of caisses" (click)="verifyUseSolde()" [value]="caisse.type">{{caisse.type}}</option>
+                                                <option (click)="verifyUseSolde()" value="multipaiement">Multipaiement</option>
                                             </select>
                                         </div>
                                         <div *ngIf="submitted && fCaisse['moyenPaiement'].errors"  class="alert alert-danger" >
