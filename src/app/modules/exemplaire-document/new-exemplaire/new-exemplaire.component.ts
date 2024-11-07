@@ -154,16 +154,17 @@ export class NewExemplaireComponent implements OnInit {
     'unite',
     'description'
   ]; // structure du tableau presentant les Ressources
+  filteredOptionsMouvement: IMouvementCaisses[] | undefined;
+  displayedMouvementsColumns: string[] = [
+    'reférence',
+    'moyen de paiement',
+    'date',
+    'montant'
+  ];
   ELEMENTS_TABLE_MOUVEMENTCAISSES: IMouvementCaisses[] = [];
   dataSourceMouvementcaisses = new MatTableDataSource<IMouvementCaisses>(
     this.ELEMENTS_TABLE_MOUVEMENTCAISSES
   );
-  displayedMvtCaissesColumns: string[] = [
-    'N° Compte',
-    'Montant Réglé',
-    'Moyen Paiement',
-    'Reste'
-  ];
   TABLE_PRECONISATION_RESSOURCES: IPrecoMvt[] = [];
   montantTotal: number = 0;
   soustotal: number = 0;
@@ -237,7 +238,6 @@ export class NewExemplaireComponent implements OnInit {
         console.log("personne ratachée :", this.nomPatientCourant);
       }
     )
-    this.formeExemplaire.controls['montant'].disable()
     this.caisseService.getAllCaisses().subscribe(
       (reponse) => {
         this.caisses = reponse
@@ -486,6 +486,7 @@ export class NewExemplaireComponent implements OnInit {
           this.lastSomme = this.sommeMontants();
           this.fCaisse['montant'].setValue(0)
         });
+      this.initialiseMvtCaisses(this.idExemplaire);
     }
     if (this.idDocument != null && this.idDocument !== '') {
       this.serviceDocument
@@ -499,7 +500,17 @@ export class NewExemplaireComponent implements OnInit {
           this.lastSomme = this.sommeMontants();
           this.fCaisse['montant'].setValue(0)
         });
+      this.initialiseMvtCaisses(this.idDocument);
     }
+  }
+
+  initialiseMvtCaisses(id: string) {
+    this.mvtCaisseService.getExemplaireDocumentByIdMvtCaisse(id).subscribe((d) => {
+      if (d) {
+        this.ELEMENTS_TABLE_MOUVEMENTCAISSES = d;
+        this.dataSourceMouvementcaisses.data = this.ELEMENTS_TABLE_MOUVEMENTCAISSES;
+      }
+    })
   }
 
   lastValueMvt(value: IMouvement): boolean {
@@ -752,7 +763,7 @@ export class NewExemplaireComponent implements OnInit {
       this.fCaisse['montant'].setValue(this.compte?.solde!);
       this.resteApayer(this.fCaisse['montant'].value);
     }
-    if (this.fCaisse['use'].value && this.fCaisse['moyenPaiement'].value != 'solde') {
+    if (this.fCaisse['moyenPaiement'].value != 'multipaiement' && this.fCaisse['moyenPaiement'].value != 'cash' && this.fCaisse['moyenPaiement'].value != 'solde') {
       this.fCaisse['use'].setValue(false),
         this.fCaisse['montant'].enable();
       this.useSolde(false);

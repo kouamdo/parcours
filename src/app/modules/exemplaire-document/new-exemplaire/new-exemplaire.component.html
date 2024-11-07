@@ -188,10 +188,9 @@
                 </div>
 
                 <!-- tableau de mouvement d'une caisse -->
-                <div class="card-body">
-                        <div class="w-50">
-                            <h2>{{'lists.text5' | translate}}</h2>
-
+                <h2 class="m-2">{{'lists.text5' | translate}}</h2>
+                <div class="card-body d-flex gap-2 justify-content-between">
+                        <div class="m-2">
                             <div class=" block1 p-2">
                                 <div class="form-group">
                                     <div class="champs">
@@ -220,7 +219,6 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <div>
                                         <div class="champs">
                                             <label for="reste" class="label">
                                                 {{'mvtCaisse.table.title8' | translate}}
@@ -229,7 +227,6 @@
                                                 <input type="number" [value]="resteAPayer" (change)="resteAPayer" disabled class="form-control">
                                             </div>
                                         </div>
-                                    </div>
                                 </div>
                                 <div class="form-group">
                                         <div class="champs">
@@ -246,7 +243,6 @@
                                         </div>
                                 </div>
                                 <div class="form-group">
-                                    <div>
                                         <div class="champs">
                                             <label for="referencePaiement" class="label">
                                                 {{'mvtCaisse.table.title4' | translate}}
@@ -256,8 +252,50 @@
                                         <div *ngIf="submitted && fCaisse['referencePaiement'].errors"  class="alert alert-danger" >
                                             <div *ngIf="fCaisse['referencePaiement'].errors['required']">{{'mvtCaisse.form.text4' | translate}}</div>
                                         </div>
-                                    </div>
                                 </div>
+                            </div>
+                        </div>
+                        <div class="h-auto w-100 m-2">
+                            <div class='table-responsive' *ngIf="ELEMENTS_TABLE_MOUVEMENTCAISSES.length > 0">
+                                <table class='table table-sm table-centered table-striped table-bordered' mat-table [dataSource]="dataSourceMouvementcaisses">
+        
+                                    <!-- reférence Column -->
+                                    <ng-container matColumnDef="reférence">
+                                        <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{'mvtCaisse.table.title4' | translate}} </th>
+                                        <td class="text-dark containCell" mat-cell *matCellDef="let element"> {{element.referencePaiement}} </td>
+                                    </ng-container>
+        
+                                    <!-- moyen de paiement Column -->
+                                    <ng-container matColumnDef="moyen de paiement">
+                                        <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{'mvtCaisse.table.title2' | translate}} </th>
+                                        <td class="text-dark containCell" mat-cell *matCellDef="let element">{{element.moyenPaiement.type}}</td>
+                                    </ng-container>
+        
+                                    <!-- date Column -->
+                                    <ng-container matColumnDef="date">
+                                        <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> Date </th>
+                                        <td class="text-dark containCell" mat-cell *matCellDef="let element">{{element.dateCreation | date:'dd/MM/yyyy HH:mm:ss'}}</td>
+                                    </ng-container>
+        
+                                    <!-- montant total Column -->
+                                    <ng-container *ngIf="document.affichagePrix == true" matColumnDef="montant">
+                                          <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{'mvtCaisse.table.title0' | translate}}</th>
+                                          <td class="text-dark containCell" mat-cell *matCellDef="let element">{{element.montant}}</td>
+                                    </ng-container>
+                                    <tr mat-header-row *matHeaderRowDef="displayedMouvementsColumns"></tr>
+                                    <tr mat-row *matRowDef="let row; columns: displayedMouvementsColumns;"></tr>
+                                </table>
+        
+                                <!-- montant total -->
+                                <div class="total">
+                                    <span class="mr-2">{{'ressource.table2.title11' | translate}}</span>
+                                    <input type="text" [value]="sommeMontants()" disabled>
+                                </div>
+        
+                                <mat-paginator [pageSizeOptions]="[2, 5, 10, 20]"
+                                               showFirstLastButtons
+                                               aria-label="Select page of periodic elements">
+                                </mat-paginator>
                             </div>
                         </div>
                 </div>

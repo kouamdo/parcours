@@ -9,7 +9,6 @@ import { TranslateService } from '@ngx-translate/core';
 import { Observable, EMPTY } from 'rxjs';
 import { IComptes } from 'src/app/modele/comptes';
 import { ComptesService } from 'src/app/services/comptes/comptes.service';
-import { ModalAffecterComptePersonnelComponent } from '../../shared/modal-affecter-compte-personnel/modal-affecter-compte-personnel.component';
 import { MatDialog } from '@angular/material/dialog';
 
 @Component({

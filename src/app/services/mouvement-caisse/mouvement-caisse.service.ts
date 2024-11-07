@@ -33,6 +33,15 @@ export class MouvementCaisseService {
     );
   }
 
+  getExemplaireDocumentByIdMvtCaisse(idDoc:string): Observable<IMouvementCaisses[]> {
+    return this.http.get<IMouvementCaisses[]>('api/exemplaires').pipe(
+      map(x=>
+        {
+          return x.filter(e=> e.exemplaire.id.toLowerCase() == idDoc)
+        })
+    );        
+  }
+
   ajouterMouvement(mvt:IMouvementCaisses | IMouvementCaisses[])
   {
     let value : IMouvementCaisses;
