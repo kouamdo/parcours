@@ -57,7 +57,7 @@ import { ZXingScannerModule } from '@zxing/ngx-scanner';
     ModalChoixDocumentsComponent,
     ModalChoixDocEtatComponent,
     ModalChoixPersonneComponent,
-    BarcodeScannerComponent,
+    BarcodeScannerComponent
   ],
   exports: [
     ModalCategoriesComponent,
@@ -72,6 +72,7 @@ import { ZXingScannerModule } from '@zxing/ngx-scanner';
     ModalRoleValidationComponent,
     ModalRessourceAttributsComponent,
     ModalChoixDocumentsComponent,
+    BarcodeScannerComponent
   ],
   imports: [
     CommonModule,

@@ -1,7 +1,9 @@
 <div class="scanner-container">
     <button (click)="closeScanner()">Close</button>
     <zxing-scanner
-      
+    [enable]="!isScannerClosed"
+    [tryHarder]="true"
+    [delayBetweenScanSuccess]="500"
       (scanSuccess)="handleScanSuccess($event)">
     </zxing-scanner>
-  </div>[start]="!isScannerClosed"
+  </div>

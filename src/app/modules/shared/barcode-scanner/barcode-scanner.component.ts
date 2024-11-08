@@ -13,6 +13,7 @@ export class BarcodeScannerComponent implements OnDestroy {
 
   @Output() scannerClosed = new EventEmitter<void>();
   handleScanSuccess(result: string) {
+    this.playBeep();
     this.barcodeScannerService.setScanResult(result);
     // Permettre le scan continu sans réinitialiser
   }
@@ -25,4 +26,18 @@ export class BarcodeScannerComponent implements OnDestroy {
   ngOnDestroy() {
     this.isScannerClosed = true; // Arrête la caméra si le composant est détruit
   }
+
+playBeep() {
+  const audioContext = new AudioContext();
+  const oscillator = audioContext.createOscillator();
+  oscillator.type = 'sine'; // Type de son, ici "sine" pour un son simple
+  oscillator.frequency.setValueAtTime(440, audioContext.currentTime); // 440 Hz, fréquence pour un bip classique
+  oscillator.connect(audioContext.destination);
+  oscillator.start();
+  setTimeout(() => {
+    oscillator.stop();
+    audioContext.close();
+  }, 100); // Durée du bip en millisecondes
+}
+
 }

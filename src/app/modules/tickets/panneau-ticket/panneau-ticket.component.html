@@ -62,3 +62,12 @@
         </div>
     </div>
 </div>
+
+<button (click)="toggleScanner()">Scanner un code</button>
+    <input type="text" [value]="scanResult" placeholder="Dernier scan" readonly>
+
+    <app-barcode-scanner *ngIf="showScanner" (scannerClosed)="closeScanner()"></app-barcode-scanner>
+
+    <div *ngFor="let result of scanHistory">
+      <input type="text" [value]="result" readonly>
+    </div>

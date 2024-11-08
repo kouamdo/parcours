@@ -21,6 +21,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { MatDialogModule } from '@angular/material/dialog';
 import { SharedModule } from '../shared/shared.module';
+import { ZXingScannerModule } from '@zxing/ngx-scanner';
 
 
 @NgModule({
@@ -55,6 +56,8 @@ import { SharedModule } from '../shared/shared.module';
     BrowserModule,
     // ngx-print
     NgxPrintModule,
+    ZXingScannerModule,
+    SharedModule
   ],
   providers: [DatePipe],
   exports: [
