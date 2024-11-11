@@ -37,6 +37,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatRadioModule } from '@angular/material/radio';
 import { ModalChoixPersonneComponent } from './modal-choix-personne/modal-choix-personne.component';
 import { MatSelectModule } from '@angular/material/select';
+import { ModalChoixPromotionRessourceComponent } from './modal-choix-promotion-ressource/modal-choix-promotion-ressource.component';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import { MatSelectModule } from '@angular/material/select';
     ModalChoixDocumentsComponent,
     ModalChoixDocEtatComponent,
     ModalChoixPersonneComponent,
+    ModalChoixPromotionRessourceComponent,
   ],
   exports: [
     ModalCategoriesComponent,

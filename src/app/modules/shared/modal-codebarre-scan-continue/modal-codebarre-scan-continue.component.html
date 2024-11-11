@@ -13,10 +13,10 @@
 </div>
 -->
 
-
+ <!-- [width]="isCameraOpen ? 300 : 0" [height]="isCameraOpen ? 70 : 0" -->
 <div class="video-container">
   <div class="video-content">
-    <video #video [width]="isCameraOpen ? 300 : 0" [height]="isCameraOpen ? 70 : 0"></video>
+    <video #video></video>
   </div>
   <div *ngIf="isCameraOpen" class="close-button" (click)="stopScanner()">✕</div>
 </div>

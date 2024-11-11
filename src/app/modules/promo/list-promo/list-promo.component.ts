@@ -2,7 +2,7 @@ import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { EMPTY, Observable } from 'rxjs';
-import { Promo } from 'src/app/modele/promo-distributeur';
+import { IPromo } from 'src/app/modele/promo-distributeur';
 import { PromoService } from 'src/app/services/promo/promo.service';
 import { FormControl } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
@@ -17,13 +17,13 @@ import { LiveAnnouncer } from '@angular/cdk/a11y';
 })
 export class ListPromoComponent implements OnInit, AfterViewInit {
 
-  promos$: Observable<Promo[]> = EMPTY;
-  myControl = new FormControl<string | Promo>('');
-  ELEMENTS_TABLE: Promo[] = [];
-  filteredOptions: Promo[] | undefined;
+  promos$: Observable<IPromo[]> = EMPTY;
+  myControl = new FormControl<string | IPromo>('');
+  ELEMENTS_TABLE: IPromo[] = [];
+  filteredOptions: IPromo[] | undefined;
 
   displayedColumns: string[] = ['emetteur', 'dateDebut', 'dateFin', 'codeUnique', 'montantRemise', 'pourcentageRemise', 'famille', 'ressource', 'actions'];
-  dataSource = new MatTableDataSource<Promo>(this.ELEMENTS_TABLE);
+  dataSource = new MatTableDataSource<IPromo>(this.ELEMENTS_TABLE);
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -55,11 +55,11 @@ export class ListPromoComponent implements OnInit, AfterViewInit {
     });
   }
 
-  private getAllPromos(): Observable<Promo[]> {
+  private getAllPromos(): Observable<IPromo[]> {
     return this.promoService.getAllPromos();
   }
 
-  displayFn(promo: Promo): string {
+  displayFn(promo: IPromo): string {
     return promo && promo.codeUnique ? promo.codeUnique : '';
   }
 
@@ -68,7 +68,7 @@ export class ListPromoComponent implements OnInit, AfterViewInit {
     this.dataSource.sort = this.sort;
   }
 
-  public rechercherListingPromo(option: Promo): void {
+  public rechercherListingPromo(option: IPromo): void {
     this.promoService.getPromosByCodeUnique(option.codeUnique.toLowerCase()).subscribe(valeurs => {
       this.dataSource.data = valeurs;
     });

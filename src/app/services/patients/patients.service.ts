@@ -93,7 +93,6 @@ export class PatientsService {
         const relatedPatients = patients.filter((patient) =>
           patient.personnesRatachees?.some((p) => p.id === personId)
         );
-        console.log(`Patients with personnesRatachees ID ${personId}:`, relatedPatients);
         return relatedPatients;
       })
     );

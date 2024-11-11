@@ -47,7 +47,10 @@ export class ViewExemplaireComponent implements OnInit {
       mail: '',
       telephone: '',
       qrCodeValue: ''
-    }
+    },
+    formatCode: '',
+    code: '',
+    beneficiaireObligatoire: true
   };
   titre: string = '';
   courant: string = '';
@@ -76,6 +79,9 @@ export class ViewExemplaireComponent implements OnInit {
         .getExemplaireDocumentById(idExemplaire)
         .subscribe((x) => {
           this.exemplaire = x;
+          if (this.exemplaire.mouvements != undefined) {
+            this.mouvements = this.exemplaire.mouvements;
+          }
           this.serviceDocument.getDocumentById(x.idDocument).subscribe(
             (y) => {
               this.reponse = this.serviceExemplaire.getExemplaireDocumentByOrder(x, y);
@@ -92,9 +98,6 @@ export class ViewExemplaireComponent implements OnInit {
           }
           this.courant = x.ordreEtats![x.ordreEtats!.length - 1].etat.libelle;
 
-          if (this.exemplaire.mouvements != undefined) {
-            this.mouvements = this.exemplaire.mouvements;
-          }
         });
     }
     this.titre = this.dataEnteteMenuService.dataEnteteMenu;

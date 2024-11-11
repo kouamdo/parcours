@@ -5,11 +5,13 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router, ActivatedRoute } from '@angular/router';
+import { IDocEtats } from 'src/app/modele/doc-etats';
 import { IExemplaireDocument } from 'src/app/modele/exemplaire-document';
 import { IExemplairesDePersonne } from 'src/app/modele/exemplaires-de-personne';
 import { IMouvement } from 'src/app/modele/mouvement';
 import { IType } from 'src/app/modele/type';
 import { TypeMouvement } from 'src/app/modele/typeMouvement';
+import { DocumentService } from 'src/app/services/documents/document.service';
 import { DonneesEchangeService } from 'src/app/services/donnees-echange/donnees-echange.service';
 import { ExemplaireDocumentService } from 'src/app/services/exemplaire-document/exemplaire-document.service';
 import { PatientsService } from 'src/app/services/patients/patients.service';
@@ -47,7 +49,10 @@ export class HistoriqueParPersonneComponent implements OnInit {
       mail: '',
       telephone: '',
       qrCodeValue: ''
-    }
+    },
+    formatCode: '',
+    code: '',
+    beneficiaireObligatoire: false
   };
   titre:string='';
   mouvements : IMouvement[] = []
@@ -69,6 +74,10 @@ export class HistoriqueParPersonneComponent implements OnInit {
   exemplairesDePersonne : IExemplairesDePersonne[] = [];
   DEFAULT_VALUE_TRI : string = "default";
   TRI_VALUE_DATE : string = "date";
+  courant: string = '';
+  req: boolean = false;
+  reponse: any;
+  docEtatCourant : IDocEtats | undefined
 
   constructor(
     private router:Router, 
@@ -78,6 +87,7 @@ export class HistoriqueParPersonneComponent implements OnInit {
     private _liveAnnouncer: LiveAnnouncer,
     private donneeExemplairePersonneRatacheeService:DonneesEchangeService,
     private decimalPipe : DecimalPipe,
+    private serviceDocument: DocumentService,
     private servicePatient: PatientsService
     ) {}
 
@@ -102,6 +112,22 @@ export class HistoriqueParPersonneComponent implements OnInit {
       this.regrouperExemplairesParType("default")
     });
   }
+
+  /**
+   * Methode permettant de retrouver l'état courant du document affiché
+   * @param idEtatCourant 
+   */
+  rechercheDocEtatCourant(idEtatCourant : string){
+    for (let index = 0; index < this.exemplaire.docEtats.length; index++) {
+      const element = this.exemplaire.docEtats[index];
+
+      if (element.etat.id == idEtatCourant) {
+        this.docEtatCourant = element
+        break
+      }
+    }    
+  }
+
   /**
    * Methode permettant de formater les nombres afin d'y inserer un separateur de millers
    * @param nbr le nombre à transformer
@@ -140,7 +166,7 @@ export class HistoriqueParPersonneComponent implements OnInit {
 
   /**
    * Methode permettant de verifier si un attribut existe déjà dans les valeur enregistrées de l'exemplaire
-   * afin de determiner s'il doit etre affiché dans la previsualisation 
+   * afin de determiner s'il doit etre affiché
    * @param idAttribut id de l'attribut à rechercher
    * @returns 
    */
@@ -266,6 +292,18 @@ export class HistoriqueParPersonneComponent implements OnInit {
     this.exemplaire = exemplaire
     
     this.formerEnteteTableauMissions();
+    this.serviceDocument.getDocumentById(exemplaire.idDocument).subscribe(
+      (y) => {
+        this.reponse = this.serviceExemplaire.getExemplaireDocumentByOrder(exemplaire, y);
+        if (this.reponse) {
+          this.req = this.reponse.sol;
+          if (this.reponse.ele != undefined && this.reponse.ele.etat != undefined) {
+            this.courant = this.reponse.ele.etat.libelle;
+            this.rechercheDocEtatCourant(this.reponse.ele.etat.id)
+          }
+        }
+      }
+    )
 
     if (this.exemplaire.mouvements != undefined) {
       this.mouvements = this.exemplaire.mouvements

@@ -104,7 +104,7 @@ export class NewEtapeComponent implements OnInit {
           libelle: this.etape.libelle,
           etat: this.etape.etat,
         });
-        this.documentId = this.etape.document.map((doc) => doc.id);
+        this.documentId = this.etape.document.map((doc) => doc.idDocument);
       });
     }
   }
@@ -140,7 +140,7 @@ export class NewEtapeComponent implements OnInit {
       this.documents = this.donneeDocCatService.dataDocumentSousDocuments;
 
       if (this.documents.length > 0) {
-        this.documentId = this.documents.map((doc) => doc.id);
+        this.documentId = this.documents.map((doc) => doc.idDocument);
       }
     });
   }

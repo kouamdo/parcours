@@ -13,7 +13,7 @@ import { DonneesEchangeService } from 'src/app/services/donnees-echange/donnees-
 export class ViewFormDocumentComponent implements OnInit {
 
   document : IDocument = {
-    id: '',
+    idDocument: '',
     titre: '',
     description: '',
     missions: [],
@@ -25,7 +25,9 @@ export class ViewFormDocumentComponent implements OnInit {
     contientRessources: false,
     contientDistributeurs: false,
     typeMouvement: TypeMouvement.Neutre,
-    docEtats: []
+    docEtats: [],
+    formatCode: '',
+    beneficiaireObligatoire: false
   };
   titre:string='';
   constructor(private router:Router,private dataEnteteMenuService:DonneesEchangeService, private infosPath:ActivatedRoute, private serviceDocument:DocumentService) {}

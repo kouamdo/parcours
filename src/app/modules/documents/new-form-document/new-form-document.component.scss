@@ -10,7 +10,7 @@
 .block{
     width: 60%;
 }
-#etat, #affichagePrix, #contientRessources, #contientDistributeurs{
+#etat, #affichagePrix, #contientRessources, #contientDistributeurs, #beneficiaireObligatoire{
     height: 20px;
     padding: 0;
     input{
@@ -19,38 +19,29 @@
         padding: 0;
     }
 }
-.champs{
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    margin: 10px 0;
-    label{
-        width: 300px;
-        font-weight: normal;
-    }
-}
-.champs, .select, input, textarea{
-    font-size: 15px;
-}
-.note, sup{
-    color: orangered;
-}
-sup{
-    font-style: normal;
-}
-.note{
-    font-size: 10px;
-    padding-top: 8px;
-    opacity: 0.7;
-}
 .groupChamps{
     display: flex;
+    flex-wrap: wrap;
     width: 100%;
     .form-group{
-        width: 60%;
+        width: 32%;
     }
     .champs{
         margin: 2px 0;
         width: 100%;
     }
+}
+@media screen and (max-width: 910px) {
+    .groupChamps{
+        .form-group{
+            width: 50%;
+        }
+    } 
+}
+@media screen and (max-width: 550px) {
+    .groupChamps{
+        .form-group{
+            width: 100%;
+        }
+    } 
 }

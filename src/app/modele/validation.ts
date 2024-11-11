@@ -8,5 +8,6 @@ export interface IValidation {
     libelle: string,
     typeVote: string,
     dureeVote: number,
-    dateCreation: Date
+    dateCreation: Date,
+    typeValidation: string
 }

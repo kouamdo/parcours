@@ -1,19 +1,42 @@
 <div class="mainBlock" id="top2">
      <form [formGroup]="formeExemplaire" (ngSubmit)="onSubmit()" *ngIf="formeExemplaire" >
         <h1>
-            {{this.document.titre}} {{titre}}
+            {{this.document.titre}} 
+            <!-- {{titre}} -->
         </h1>
         <div class="infos">
-            <p id="titre">
-                {{'document.exemplaire.text9' | translate}} :
-                <span class="title">{{this.nomPatientCourant}}</span>
-            </p>
-            <p id="titre">
-                {{'document.exemplaire.text6' | translate}} :
-                <span class="title">{{this.exemplaire.dateCreation | date: 'dd/MM/yyyy'}}</span>
-                {{'document.exemplaire.text7' | translate}} 
-                <span class="title">{{this.exemplaire.dateCreation | date: 'hh:mm:ss'}}</span>
-            </p>
+            <div id="titre">
+                <div *ngIf="this.exemplaire.personneRattachee != undefined">
+                    <span class="label">
+                        {{ "document.exemplaire.text9" | translate }} :
+                    </span>
+                    <span class="title">{{ this.exemplaire.personneRattachee.nom + " " }}
+                        <span class="capitaliseTitle"> {{ this.exemplaire.personneRattachee.prenom! }} </span>
+                    </span>
+                </div>
+                <div>
+                    <span class="label">
+                        {{ "document.exemplaire.text6" | translate }} :
+                    </span>
+                    <span class="title">{{
+                        this.exemplaire.dateCreation | date : "dd/MM/yyyy"}}
+                    </span>
+                    <span class="label">
+                        {{ "document.exemplaire.text7" | translate }} : 
+                    </span>
+                    <span class="title">{{ this.exemplaire.dateCreation | date : "hh:mm:ss" }}
+                    </span>
+                </div>
+                <div *ngIf="this.idExemplaire">
+                    <span class="label"> {{ "document.title7" | translate }} : </span>
+                    {{ courant }}
+                </div>
+                <div class="codeInput">
+                    <label for="">{{'document.exemplaire.text11' | translate}} </label>
+                    <input [formControl]="codeControl" type="text" name="code" id="code">
+                </div>
+            </div>
+           
             <div  *ngIf="submitted && estValide == false" class="alert alert-danger">
                 <div >{{eValvalide}} {{'lists.text3' | translate}}</div>
             </div>
@@ -49,20 +72,8 @@
             <div *ngIf="document.contientRessources == true" class="block2 card mt-2 pt-1" id="sectionAjoutPreco">
                 <div>
                     <h3>{{'document.exemplaire.title3' | translate}} :</h3>
-                    <div class="searchBlock" [ngClass]="{'searchBlock': document.contientDistributeurs, 'searchBlockUnique': !document.contientDistributeurs}">
-                        <div *ngIf="document.contientDistributeurs == true" class="blockAutoDistributeurs">
-                            <form class="example-form-entete">
-                                <h4>{{'preconisation.table.title6' | translate}}</h4>
-                                <input type="text" matInput [formControl]="distributeurControl" [matAutocomplete]="autoDistributeur">
-                                <mat-autocomplete class="blockAutocomplate" #autoDistributeur="matAutocomplete" [displayWith]="displayDistributeurFn">
-                                    <mat-option class="options" *ngFor="let optionDistributeur of filteredDistributeurOptions" [value]="optionDistributeur" (click)="associerDistributeur(optionDistributeur)">
-                                        {{optionDistributeur.raisonSocial}}
-                                    </mat-option>
-                                </mat-autocomplete>
-                                <button *ngIf="modificationDistributeurActive == true" class="btn btnModifierDistributeurBlock" type="button" (click)="modifierDistributeur()">{{'lists.button6' | translate}}</button>
-                                
-                            </form>
-                        </div>
+                     <!-- [ngClass]="{'searchBlock': document.contientDistributeurs, 'searchBlockUnique': !document.contientDistributeurs}" -->
+                    <div class="searchBlockUnique">
                         <div class="blockAutoRessources">
                             <form class="example-form-entete">
                                 <h4>{{'ressource.form.text16' | translate}}</h4>
@@ -73,6 +84,46 @@
                                     </mat-option>
                                 </mat-autocomplete>
                             </form>
+                            <div class="blockScan">
+                                <span role="button" *ngIf="document.contientRessources == true" class="btnScan" (click)="openBarcodeScanner(); toogleScanCodeView()">
+                                    <i class="fas fa-camera icon"></i>
+                                </span>
+                                <div class="scanCodeComponent">
+                                    <app-modal-codebarre-scan-continue #barcodeScanner></app-modal-codebarre-scan-continue>
+                                </div>
+                            </div>
+                        </div>
+                        <div *ngIf="document.contientDistributeurs == true && !document.beneficiaireObligatoire && modificationDistributeurActive == true" class="blockAutoDistributeurs">
+                            <form class="example-form-entete">
+                                <h4>{{'preconisation.table.title6' | translate}}</h4>
+                                <input type="text" matInput [formControl]="distributeurControl" [matAutocomplete]="autoDistributeur">
+                                <mat-autocomplete class="blockAutocomplate" #autoDistributeur="matAutocomplete" [displayWith]="displayDistributeurFn">
+                                    <mat-option class="options" *ngFor="let optionDistributeur of filteredDistributeurOptions" [value]="optionDistributeur" (click)="associerDistributeur(optionDistributeur)">
+                                        {{optionDistributeur.raisonSocial}}
+                                    </mat-option>
+                                </mat-autocomplete>
+                                <button *ngIf="modificationDistributeurActive == true" id="btnDeleteDistributeur" class="btn btnModifierDistributeurBlock" type="button" (click)="reinitialliseDistributeurControl()" title="{{'lists.button15' | translate}}">
+                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                </button>
+                                <button *ngIf="modificationDistributeurActive == true"  id="btnUpdateDistributeur" class="btn btnModifierDistributeurBlock" type="button" (click)="modifierDistributeur(); reinitialliseDistributeurControl()" title="{{'lists.button6' | translate}}">
+                                    <i class="fa fa-check-circle" aria-hidden="true"></i>
+                                </button>
+                                
+                            </form>
+                        </div>
+                        <div class="blockAutoPromos" *ngIf="document.affichagePrix == true && document.beneficiaireObligatoire">
+                            <form class="example-form-entete">
+                                <h4>{{'document.exemplaire.text15' | translate}}</h4>
+                                <input type="text" matInput [formControl]="assuranceControl" [matAutocomplete]="autoAssurance">
+                                <mat-autocomplete class="blockAutocomplate" #autoAssurance="matAutocomplete" [displayWith]="displayAssuranceFn">
+                                    <mat-option class="options" *ngFor="let option of filteredAssuranceOptions" [value]="option" (click)="rechercherListingAssurance(option); getAssurancePersonne(option)">
+                                        {{option.raisonSocial}}
+                                    </mat-option>
+                                </mat-autocomplete>
+                            </form>
+                            <div *ngIf="showText == true" class="notfoundPromo">
+                                <p>{{'ressource.table.title12' | translate}}</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -94,7 +145,7 @@
                                 <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{'ressource.table2.title5' | translate}} </th>
                                 <td class="text-dark containCell" mat-cell *matCellDef="let element">
                                   <label class="custom-control">
-                                      <input class="form-control" type="number" [(ngModel)]="element.quantite" [ngModelOptions]="{standalone: true}" value="true">
+                                      <input class="form-control" type="number" [(ngModel)]="element.quantite" [ngModelOptions]="{standalone: true}">
                                   </label>
                                 </td>
                           </ng-container>
@@ -105,16 +156,6 @@
                                 <td class="text-dark containCell" mat-cell *matCellDef="let element">
                                   {{element.ressource.unite}}
                           </ng-container>
-
-                            <!-- description Column -->
-                            <ng-container matColumnDef="description">
-                                <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{'attributs.table.title2' | translate}} </th>
-                                <td class="text-dark containCell" mat-cell *matCellDef="let element">
-                                    <label class="custom-control">
-                                        <input class="form-control" type="text" [(ngModel)]="element.description" [ngModelOptions]="{standalone: true}" value="true">
-                                    </label>
-                                </td>
-                            </ng-container>
 
                             <!-- prix Column -->
                             <ng-container *ngIf="document.affichagePrix == true && document.typeMouvement == typeNeutre" matColumnDef="prix">
@@ -132,7 +173,7 @@
                                 <td class="text-dark containCell" mat-cell *matCellDef="let element">
                                     <label class="custom-control">
                                         <input class="form-control" type="number" [(ngModel)]="element.prix" [ngModelOptions]="{standalone: true}">
-                                    </label> 
+                                    </label>
                                 </td>
                             </ng-container>
 
@@ -146,16 +187,59 @@
                                 </td>
                             </ng-container>
 
+                            <!-- pourcentageCharge Column -->
+                            <ng-container *ngIf="document.affichagePrix == true && document.typeMouvement != typeNeutre && document.beneficiaireObligatoire" matColumnDef="pourcentageCharge">
+                                <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{'ressource.table.title11' | translate}} </th>
+                                <td class="text-dark containCell" mat-cell *matCellDef="let element">
+                                    <label class="custom-control">
+                                        <input class="form-control" type="number" value="{{remisePromo }}" disabled>
+                                        <span>{{unitePromo}}</span>
+                                    </label> 
+                                </td>
+                            </ng-container>
+
+                            <!-- pourcentageChargeRssource Column -->
+                            <ng-container *ngIf="document.affichagePrix == true && document.typeMouvement != typeNeutre && !document.beneficiaireObligatoire" matColumnDef="pourcentageChargeRssource">
+                                <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{'ressource.table.title11' | translate}} </th>
+                                <td class="text-dark containCell" mat-cell *matCellDef="let element">
+                                    <label class="custom-control">
+                                        <input *ngIf="element.promotion?.pourcentageRemise > 0" class="form-control" type="number" value="{{element.promotion?.pourcentageRemise }}" disabled>
+                                        <input *ngIf="element.promotion?.montantRemise > 0" class="form-control" type="number" value="{{element.promotion?.montantRemise }}" disabled>
+                                        <span *ngIf="element.promotion?.pourcentageRemise > 0">%</span>
+                                        <span *ngIf="element.promotion?.montantRemise > 0">UD</span>
+                                    </label> 
+                                </td>
+                            </ng-container>
+
+                            <!-- montantCharge Column -->
+                            <ng-container *ngIf="document.affichagePrix == true && document.typeMouvement != typeNeutre" matColumnDef="montantCharge">
+                                <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{'ressource.table.title12' | translate}} </th>
+                                <td class="text-dark containCell" mat-cell *matCellDef="let element">
+                                    <label class="custom-control">
+                                        <input class="form-control" type="number" [value]="calculRemise(element)*element.quantite" disabled>
+                                    </label> 
+                                </td>
+                            </ng-container>
+
                             <!-- montant total Column -->
                             <ng-container *ngIf="document.affichagePrix == true" matColumnDef="montant total">
                                   <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{'ressource.table2.title10' | translate}}</th>
-                                  <td class="text-dark containCell" mat-cell *matCellDef="let element"><input type="number" value="{{element.quantite*element.prix}}" disabled> </td>
+                                  <td class="text-dark containCell" mat-cell *matCellDef="let element">
+                                    <input type="number" value="{{element.quantite*element.prix}}" disabled>
+                                </td>
                             </ng-container>
 
                           <!-- distributeur Column -->
-                          <ng-container *ngIf="document.contientDistributeurs == true" matColumnDef="distributeur">
+                          <ng-container *ngIf="document.contientDistributeurs == true && !document.beneficiaireObligatoire" matColumnDef="distributeur">
                                 <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{'preconisation.table.title5' | translate}} </th>
-                                <td class="text-dark containCell" mat-cell *matCellDef="let element; let i = index"><div class="modifierDistributeurBlock">{{element.distributeur?.raisonSocial}}<span role="button" title="{{'document.exemplaire.text3' | translate}}" (click)="InitialiseDistributeurControlPourModufication(i)"><i class="fa fa-pen-alt text-warning" aria-hidden="true"></i></span></div></td>
+                                <td class="text-dark containCell" mat-cell *matCellDef="let element; let i = index">
+                                    <div class="modifierDistributeurBlock" title="{{element.distributeur?.raisonSocial}}">
+                                        {{element.distributeur?.raisonSocial}}
+                                        <span role="button" title="{{'document.exemplaire.text3' | translate}}" (click)="InitialiseDistributeurControlPourModufication(i)">
+                                            <i class="fa fa-pen-alt text-warning" aria-hidden="true"></i>
+                                        </span>
+                                    </div>
+                                </td>
                         </ng-container>
 
                             <!-- Actions column -->
@@ -166,7 +250,10 @@
                                         <button class="btn p-0" [value]="element.id" title="clicker pour annuler la selection" (click)="retirerSelectionRessource(i)">
                                             <i class="fa fa-trash text-danger" aria-hidden="true"></i>
                                         </button>
-                                        <span><i class="fa fa-info-circle text-info ml-1" (click)="getRessourceId(element.id)" aria-hidden="true" title="{{'preconisation.table.title4' | translate}}"></i></span>
+                                        <span><i class="fa fa-info-circle text-info ml-1" aria-hidden="true" title="{{'preconisation.table.title4' | translate}}"></i></span>
+                                        <span *ngIf="document.affichagePrix == true && !document.beneficiaireObligatoire" role="button" class="ml-1 mr-1" title="{{'promo-distributeur.title2' | translate}}" (click)="getRessource(element.ressource); openPromotionRessourceDialog(); getIndexTableauMvtCourant(element.id); initialisePromotionControl(element.promotion!)">
+                                            <i class="fa fa-tags" aria-hidden="true"></i>
+                                        </span>
                                     </div>
                                 </td>
                             </ng-container>
@@ -175,10 +262,20 @@
                         </table>
 
                         <!-- montant total -->
-                        <div class="total" *ngIf="document.affichagePrix == true && ELEMENTS_TABLE_MOUVEMENTS.length > 0">
-                            <span class="mr-2">{{'ressource.table2.title11' | translate}}</span>
-                            <input type="text" [value]="sommeMontants()" disabled>
-                        </div>
+                         <div class="blockMontantsTotaux" *ngIf="document.affichagePrix == true && ELEMENTS_TABLE_MOUVEMENTS.length > 0">
+                            <div class="total">
+                                <span class="mr-2">{{'ressource.table2.title11' | translate}}</span>
+                                <input type="text" [value]="sommeMontants(this.ELEMENTS_TABLE_MOUVEMENTS) " disabled>
+                            </div>
+                            <div class="total">
+                                <span class="mr-2">{{'ressource.table2.title12' | translate}}</span>
+                                <input type="text" [value]="sommeMontants(this.ELEMENTS_TABLE_MOUVEMENTS)-sommeMontantsApresRemise(this.ELEMENTS_TABLE_MOUVEMENTS) " disabled>
+                            </div>
+                            <div class="total">
+                                <span class="mr-2">{{'ressource.table2.title13' | translate}}</span>
+                                <input type="text" [value]="sommeMontantsApresRemise(this.ELEMENTS_TABLE_MOUVEMENTS) " disabled>
+                            </div>
+                         </div>
 
                         <mat-paginator [pageSizeOptions]="[2, 5, 10, 20]"
                                        showFirstLastButtons

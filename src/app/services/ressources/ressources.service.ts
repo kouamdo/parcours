@@ -38,7 +38,7 @@ export class RessourcesService {
         // Filter by ID or name
         return resources.filter(
           (p) =>
-            p.libelle.toString().startsWith(query) ||
+            p.libelle.toLowerCase().startsWith(query.toLowerCase()) ||
             p.scanBarCode.toLowerCase().startsWith(lowerCaseQuery)
         );
       })

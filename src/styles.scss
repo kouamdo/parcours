@@ -83,20 +83,18 @@ font-size: 22px;
 font-weight: bold;
 }
 .enteteViewPage{
-    text-align: center;
-    font-size: 22px;
-    font-weight: bold;
-    background-color: #28a745;
-    border-radius: 5px;
-    box-shadow: 0 0 2px #28a745;
-    margin: 0 5px;
-    padding: 10px 0;
+  background-color: #28a745;
+  box-shadow: 0 0 2px #28a745;
+  margin: 0 5px;
+  padding: 10px 5px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
     h1{
-        margin: auto;
-        text-transform: uppercase;
-        color: rgba(255, 255, 255, 0.7);
-        position: relative;
-        width: 100%;
+      margin: auto;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.7);
+      width: fit-content;
     }
 }
 // le contenu des formulaires
@@ -120,6 +118,11 @@ sup{
 }
 .note, sup{
   color: orangered;
+}
+.note{
+    font-size: 10px;
+    padding-top: 8px;
+    opacity: 0.7;
 }
 .champs, select, input{
 font-size: 15px;
@@ -302,10 +305,16 @@ mat-option{
     vertical-align: middle !important;
 }
 .containHead{
-  padding: 1% 10px !important;
+  padding: 0 2px !important;
 }
 .containCell{
   vertical-align: middle !important;
+}
+th.mat-header-cell:first-of-type, td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type {
+  padding-left: 1px !important;
+}
+.mat-cell[_ngcontent-non-c44] {
+  height: fit-content !important;
 }
 td{
 font-size: 13px!important;
@@ -355,11 +364,11 @@ display: flex;
     }
 }
 .actions button{
-    font-size: 10px !important;
+    font-size: 9px !important;
     padding: 2px !important;
 }
 .actions span{
-    font-size: 10px !important;
+    font-size: 9px !important;
 }
 #tableBlock th, .pageView th {
     background-color: rgba(40, 167, 69, 0.2);
@@ -410,7 +419,6 @@ mat-paginator{
     color: rgba(255, 255, 255, 0.7);
     transition: ease 0.2s;
     font-size: 18px;
-    margin-top: 10px;
   }
   .lien:hover{
     color: rgba(255, 255, 255, 0.8);
@@ -465,8 +473,6 @@ mat-paginator{
     height: fit-content;
     border-radius: 50%;
     background-color: #ffffff;
-    position: absolute;
-    bottom: 0px;
   }
   .hoverBlock .infoBuble i{
     font-size: 20px;
@@ -520,6 +526,238 @@ mat-paginator{
     .type{
         width: 10%;
     }
+  }
+}
+
+// page de prévisualisation
+
+#globalSection{
+  width: 100%;
+  margin: 0 10px;
+  border: 1px solid #28a7452b;
+  .lien{
+      color: rgba(255, 255, 255, 0.7);
+      transition: ease 0.2s;
+      font-size: 18px;
+      margin-top: 10px;
+  }
+  .lien:hover{
+      color: rgba(255, 255, 255, 0.8);
+      transition: ease-in-out 0.2s;
+      transform: scale(1.1);
+  }
+  #titre{
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      div{
+          margin: 20px 0;
+          margin-right: 20px;
+      }
+  }
+  .hoverBlock{
+      display: flex;
+      position: relative;
+      transition: ease-in-out 0.2s;
+  }
+  .hoverBlock:hover{
+      color: #787878;
+      #description{
+          display: flex;
+          align-items: flex-start;
+          justify-content: flex-start;
+          width: 400px;
+          position: absolute;
+          right: 0px;
+          top: 60px;
+          font-size: 12px;
+          background-color: #ffffff;
+          border: 1px solid #28a7450e;
+          box-shadow: 0 1px 2px;
+          padding: 10px;
+          padding-top: 0;
+          p{
+              margin: 0;
+              margin-left: 5px;
+              border-radius: 5px;
+          }
+          .titl{
+              font-weight: normal;
+              text-transform: uppercase;
+              white-space: nowrap;
+          }
+      }
+  }
+  .entete{
+      background-color: #28a745;
+      box-shadow: 0 0 2px #28a745;
+      margin: 0 5px;
+      padding: 10px 5px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      h3{
+          margin: auto;
+          text-transform: uppercase;
+          color: rgba(255, 255, 255, 0.7);
+          width: fit-content;
+      }
+  }
+  .hoverBlock .infoBuble{
+      width: fit-content;
+      height: fit-content;
+      border-radius: 50%;
+      background-color: #ffffff;
+      margin-top: 8px;
+  }
+  .hoverBlock .infoBuble i{
+      font-size: 20px;
+  }
+  .hoverBlock:hover{
+      transition: ease-in-out 0.2s;
+      transform: scale(1.1);
+  }
+  #description{
+      display: none;
+  }
+  .options button {
+      margin-left: 10px;
+  }
+  th{
+      background-color: #28a7452f;
+      color: #28a745;
+  }
+  h3{
+      text-align: center;
+      text-transform: uppercase;
+      background-color: #28a745;
+      color: rgba(255, 255, 255, 0.7);
+      border-radius: 5px;
+      box-shadow: 0 0 2px #28a745;
+      padding: 10px 0;
+      margin: 0;
+  }
+  h4{
+      text-transform: capitalize;
+      margin: 0;
+      padding: 0;
+      padding-left: 5px;
+      opacity: 0.8;
+      font-weight: bold;
+  }
+  #titre{
+      margin: 20px 0;
+  }
+  .infos{
+      padding: 0 10px;
+      padding-bottom: 10px;
+  }
+  .infos p{
+      margin: 40px 0;
+      font-weight: 300;
+  }
+  .infos .title{
+      font-weight: normal;
+      text-transform: uppercase;
+      .capitaliseTitle{
+          text-transform: capitalize;
+      }
+  }
+  .infos .label{
+      font-weight: bold;
+      text-transform: capitalize;
+  }
+  .contentBlock{
+      display: flex;
+      align-items: flex-start;
+      width: 100%;
+      flex-wrap: wrap;
+  }
+  .block1{
+      background-color: #ffffff !important;
+  }
+  .block1 .inputBlock{
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      width: 30% !important;
+      margin: 2px 5px;
+      padding: 5px;
+  }
+  .block1 .inputBlock label{
+      text-transform: capitalize;
+      font-weight: 400;
+      font-size: 12px;
+      position: relative;
+      top: 5px;
+      opacity: 0.8;
+      // width: 100%;
+  }
+  .block1 .inputBlock label, .block1 .inputBlock span{
+      font-size: 13px;
+  }
+  .titre{
+      font-weight: 400 !important;
+      padding: 20px 0 2px 0 !important;
+  }
+  .block1 .inputBlock .valAttribut {
+      background-color: rgba(251, 251, 251, 0.64);
+      padding: 2px;
+      overflow: hidden;
+  }
+  .containCell{
+      label{
+          display: flex;
+          margin: auto;
+          padding: 0;
+          input{
+              margin: auto;
+              padding: 0;
+              border: none;
+              box-shadow: 0 0 3px #80808031;
+              height: 20px;
+              font-size: 12px;
+              width: 80%;
+          }
+      }
+  }
+  .containCell{
+      padding-top: 0 !important;
+  }
+  td{
+      font-size: 13px;
+  }
+  .tableBlock{
+      width: 100%;
+      div{
+          width: 100%;
+      }
+      table{
+          .actions{
+              margin: 0;
+              font-size: 12px;
+              display: flex;
+              align-items: center;
+              justify-content: flex-start;
+          }
+      }
+  }
+  .collapseForm{
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      justify-content: flex-end;
+      padding: 8px;
+      form{
+          background-color: #78787831;
+          box-shadow: 0 0 6px #78787849;
+          width: 40%;
+          padding: 8px;
+          font-size: 14px;
+          i{
+              margin: 0 5px;
+          }
+      }
   }
 }
 

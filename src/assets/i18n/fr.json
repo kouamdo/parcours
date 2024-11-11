@@ -54,7 +54,9 @@
     "button10": "Fermer",
     "button11": "Enregistrer",
     "button12": "Suivant",
-    "button13": "Continuer"
+    "button13": "Continuer",
+    "button14": "Envoyé",
+    "button15": "Supprimer la sélection"
   },
   "validation":{
     "header":"Ajouter Validation",
@@ -70,6 +72,7 @@
       "label4": "Type vote",
       "label5": "Duree vote",
       "label6": "role",
+      "label7": "Type de validation",
       "text1":"Champ Obligatoire"
     }
   },
@@ -261,7 +264,9 @@
       "title21": "Sous documents",
       "title22": "type des mouvements",
       "title23": "Etats du document",
-      "title24": "Etat"
+      "title24": "Etat",
+      "title25": "format de code",
+      "title26": "Associer un béneficiaire ?"
 
     },
     "form": {
@@ -273,7 +278,11 @@
       "text6": "Si cette case est décochée, il n'y aura pas la possibilité de creer des mouvement lors de la creation d'un exemplaire du document",
       "text7": "Si cette case est cochée, la colone du distributeur sera visible lors de la creation des mouvement d'un exemplaire de ce document",
       "text8": "Le type des mouvements effectués sur ce document",
-      "text9": "Le type des mouvements effectués sur ce document est obligatoire"
+      "text9": "Le type des mouvements effectués sur ce document est obligatoire",
+      "text10": "Le Format de code",
+      "text11": "Le Format de code est obligatoire",
+      "text12": "Si cette case est cochée, une personne bénéficiaire sera demandée à la création du document",
+      "text13": "Les documents présents ici ne seront pas prix en compte si la case 'lier des ressources' est désactivée"
     },
     "view": {
       "title": "Modele ",
@@ -298,7 +307,13 @@
       "text7": "à ",
       "text8": "Selectionner la personne",
       "text9": "Nom du bénéficiaire",
-      "text10": "Trier par "
+      "text10": "Trier par ",
+      "text11": "Code",
+      "text12": "Type d'envoi",
+      "text13": "Transmission",
+      "text14": "L'historique n'est pas disponible pour les documents qui n'admettent pas de bénéficiaires.",
+      "text15": "Rechercher une assurence",
+      "text16": "Génération de PDF"
     }
   },
   "theme": {
@@ -348,7 +363,11 @@
       "title7": "Caractéristiques",
       "title8": "Ressources",
       "title9": "Prix de sortie",
-      "title10": "Scanner"
+      "title10": "Scanner",
+      "title11": "Valeur de la promotion",
+      "title12": "Reste à payer",
+      "title13": "aucune promotion en cours pour cette assurence",
+      "title14": "Promotion"
     },
     "form": {
       "text1": "Champ Obligatoire",
@@ -382,7 +401,9 @@
       "title8": "Catégorie",
       "title9": "Actions",
       "title10": "Total",
-      "title11": "Montant total"
+      "title11": "Montant total",
+      "title12": "Montant pris en charge",
+      "title13": "Montant total à payer"
     }
   },
   "preconisation": {
@@ -431,6 +452,7 @@
   },
   "promo-distributeur":{
     "title": "Ajouter Promotion",
+    "title2": "Appliquer une Promotion",
     "emetteur": "Émetteur",
     "text1":"Émetteur",
     "text2":"Nom de la ressource ou de la catégorie",
@@ -509,12 +531,7 @@
       "title7": "Montant Max",
       "title8": "Montant Min",
       "title9": "Distributeur",
-      "title10": "familles",
-      "title11": "Quantité Max",
-      "title12": "Quantité Min",
-      "title13": "Montant Max",
-      "title14": "Montant Min",
-      "title15": "Distributeur"
+      "title10": "familles"
     }
   },
   "role": {

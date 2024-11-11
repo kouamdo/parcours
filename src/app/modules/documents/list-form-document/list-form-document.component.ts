@@ -7,13 +7,9 @@ import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { Observable, EMPTY } from 'rxjs';
 import { IAfficheDocument } from 'src/app/modele/affiche-document';
-import { IAttributs } from 'src/app/modele/attributs';
 import { IDocument } from 'src/app/modele/document';
-import { TypeMvt } from 'src/app/modele/type-mvt';
 import { DocumentService } from 'src/app/services/documents/document.service';
-import { ModalDocEtatsComponent } from '../../shared/modal-document-doc-etats/modal-document-doc-etats.component';
 
 @Component({
   selector: 'app-list-form-document',
@@ -40,7 +36,7 @@ export class ListFormDocumentComponent implements OnInit, AfterViewInit {
 
 
   afficheDocument : IAfficheDocument = {
-    id: '',
+    idDocument: '',
     titre: '',
     description: '',
     missions: [],
@@ -59,7 +55,9 @@ export class ListFormDocumentComponent implements OnInit, AfterViewInit {
     contientRessources: false,
     contientDistributeurs: false,
     listDocEtats: '',
-    docEtats: []
+    docEtats: [],
+    formatCode: '',
+    beneficiaireObligatoire: false
   }
 
   constructor(private translate: TranslateService, private router:Router,
@@ -140,43 +138,39 @@ export class ListFormDocumentComponent implements OnInit, AfterViewInit {
      listPreconisations: '',
      listSousDocuments: '',
      listDocEtats: '',
-     id: '',
-     titre: '',
-     description: '',
-     etat: false,
-     typeMouvement: "Neutre",
-     affichagePrix: false,
-     contientRessources: false,
-     contientDistributeurs: false,
-     missions: [],
-     attributs: [],
-     categories: [],
-     preconisations: [],
-     docEtats: []
+     idDocument: x.idDocument,
+     titre: x.titre,
+     description: x.description,
+     etat: x.etat,
+     typeMouvement: x.typeMouvement,
+     affichagePrix:  x.affichagePrix,
+     contientRessources:  x.contientRessources,
+     contientDistributeurs:  x.contientDistributeurs,
+     missions:  x.missions,
+     attributs:  x.attributs,
+     categories:  x.categories,
+     preconisations:  x.preconisations,
+     docEtats:  x.docEtats,
+     formatCode:  x.formatCode,
+     beneficiaireObligatoire:  x.beneficiaireObligatoire
    }
-    afficheDocument.id = x.id;
-    afficheDocument.titre = x.titre;
-    afficheDocument.description = x.description;
-    afficheDocument.etat = x.etat;
-    afficheDocument.missions = x.missions;
-    afficheDocument.attributs = x.attributs;
-      x.missions.forEach(
-        m => {
-          afficheDocument.listeMissions += m.libelle + ", ";
-        }
-      )
-      x.attributs.forEach(
-        a => afficheDocument.listAttributs += a.titre + ", "
-      )
-      x.categories.forEach(
-        c => afficheDocument.listCategories += c.nom + ", "
-      )
-      x.preconisations.forEach(
-        p => afficheDocument.listPreconisations += p.libelle + ", "
-      )
-      x.docEtats.forEach(
-        de => afficheDocument.listDocEtats += de.etat.libelle + ", "
-      )
-      return afficheDocument;
+    x.missions.forEach(
+      m => {
+        afficheDocument.listeMissions += m.libelle + ", ";
+      }
+    )
+    x.attributs.forEach(
+      a => afficheDocument.listAttributs += a.titre + ", "
+    )
+    x.categories.forEach(
+      c => afficheDocument.listCategories += c.nom + ", "
+    )
+    x.preconisations.forEach(
+      p => afficheDocument.listPreconisations += p.libelle + ", "
+    )
+    x.docEtats.forEach(
+      de => afficheDocument.listDocEtats += de.etat.libelle + ", "
+    )
+    return afficheDocument;
   }
 }

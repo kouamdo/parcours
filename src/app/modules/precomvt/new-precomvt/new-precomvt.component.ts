@@ -5,14 +5,10 @@ import {
   FormControl,
   FormGroup,
   FormGroupDirective,
-  FormsModule,
-  NgForm,
-  ReactiveFormsModule,
-  Validators,
 } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { v4 as uuidv4 } from 'uuid';
-import { elementAt, EMPTY, map, Observable, single } from 'rxjs';
+import { EMPTY, Observable } from 'rxjs';
 
 import { PrecoMvtsService } from 'src/app/services/precomvts/precomvts.service';
 import { IPrecoMvt } from 'src/app/modele/precomvt';
@@ -21,7 +17,6 @@ import { IFamille } from 'src/app/modele/famille';
 import { RessourcesService } from 'src/app/services/ressources/ressources.service';
 import { FamillesService } from 'src/app/services/familles/familles.service';
 import { IPrecoMvtQte } from 'src/app/modele/precomvtqte';
-import { TypeMvt } from 'src/app/modele/type-mvt';
 import { IDistributeur } from 'src/app/modele/distributeur';
 import { DistributeursService } from 'src/app/services/distributeurs/distributeurs.service';
 import { DonneesEchangeService } from 'src/app/services/donnees-echange/donnees-echange.service';

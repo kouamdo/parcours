@@ -38,7 +38,7 @@
                           <div>
                               <div class="champs">
                                 <label for="typeMouvement" class="label" >
-                                    {{"document.table.title22" | translate}}
+                                    {{"document.table.title22" | translate}} <sup>*</sup>
                                 </label>
                                 <select class="form-control" formControlName="typeMouvement" title="{{'document.form.text8' | translate}}">
                                   <option class="label" *ngFor="let typeMouvement of typeMvt" value="{{ typeMouvement }}" >
@@ -73,13 +73,12 @@
                                             {{"document.table.title18" | translate}}
                                         </label>
                                         <span id="affichagePrix" class="w-100">
-                                            <input type="checkbox" checked value="true" formControlName="affichagePrix" name="affichagePrix">
+                                            <input type="checkbox" value="true" formControlName="affichagePrix" name="affichagePrix">
                                         </span>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="groupChamps">
+
                             <div class="form-group" title="{{'document.form.text6' | translate}}">
                                 <div>
                                     <div class="champs">
@@ -87,12 +86,11 @@
                                             {{"document.table.title19" | translate}}
                                         </label>
                                         <span id="contientRessources" class="w-100">
-                                            <input type="checkbox" checked value="true" formControlName="contientRessources" name="contientRessources">
+                                            <input type="checkbox" value="false" formControlName="contientRessources" name="contientRessources" (change)="desactiveElementsLieRessource($event)">
                                         </span>
                                     </div>
                                 </div>
                             </div>
-
                             <div class="form-group" title="{{'document.form.text7' | translate}}">
                                 <div>
                                     <div class="champs">
@@ -100,11 +98,26 @@
                                             {{"document.table.title20" | translate}}
                                         </label>
                                         <span id="contientDistributeurs" class="w-100">
-                                            <input type="checkbox" checked value="true" formControlName="contientDistributeurs" name="contientDistributeurs">
+                                            <input type="checkbox" value="true" formControlName="contientDistributeurs" name="contientDistributeurs">
                                         </span>
                                     </div>
                                 </div>
                             </div>
+
+                            <div class="form-group" title="{{'document.form.text12' | translate}}">
+                                <div>
+                                    <div class="champs">
+                                        <label for="beneficiaireObligatoire" class="beneficiaireObligatoire" >
+                                            {{"document.table.title26" | translate}}
+                                        </label>
+                                        <span id="beneficiaireObligatoire" class="w-100">
+                                            <input type="checkbox" checked value="true" formControlName="beneficiaireObligatoire" name="beneficiaireObligatoire">
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="groupChamps">
                         </div>
 
                         <div class="form-group">
@@ -199,7 +212,7 @@
 
                         <!-- sous documents ------------------------------------------------- -->
 
-                        <div class="form-group">
+                        <div class="form-group" title="{{'document.form.text13' | translate}}">
                             <div class="champs">
                                 <label  for="" class="label">
                                     {{"document.title4" | translate}}
@@ -208,7 +221,8 @@
 
                                     <!-- Ouvrir le formulair de selection des sous documents -->
                                     <div class="listAttr">
-                                        <button type="button" class="btn p-0" title="{{'lists.button9' | translate}} / {{'lists.button8' | translate}}" (click)="openSousDocumentDialog()">
+                                        <button type="button" class="btn p-0" title="{{'lists.button9' | translate}} / {{'lists.button8' | translate}}"
+                                            (click)="openSousDocumentDialog()" [disabled]="documentParentDesactive">
                                             <i class="fas fa-plus-square"></i>
                                         </button>
                                         <p>
@@ -246,6 +260,26 @@
                                 </div>
                             </div>
                         </div>
+
+                        <!-- format de code -->
+                        <div class="form-group">
+                          <div>
+                              <div class="champs">
+                                <label for="formatCode" class="label" >
+                                    {{"document.table.title25" | translate}} <sup>*</sup>
+                                </label>
+                                <select class="form-control" formControlName="formatCode" title="{{'document.form.text10' | translate}}">
+                                  <option class="label" *ngFor="let formatCode of formatsCode" value="{{ formatCode }}" >
+                                    {{ formatCode }}
+                                  </option>
+                                </select>
+                              </div>
+                          </div>
+                          <div  *ngIf="submitted && f['formatCode'].errors"  class="alert alert-danger blockErreur" >
+                              <div *ngIf="f['formatCode'].errors['required']">{{'document.form.text11' | translate}}</div>
+                          </div>
+                        </div>
+
                     </div>
                 </div>
                 <div class="actionButton valBtn">

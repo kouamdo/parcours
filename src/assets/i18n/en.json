@@ -54,7 +54,9 @@
     "button10": "Close",
     "button11": "Registrer",
     "button12": "Next",
-    "button13": "Next"
+    "button13": "Next",
+    "button14": "Send",
+    "button15": "Delete selected value"
   },
   "patient": {
     "title1": "Add patient",
@@ -242,7 +244,10 @@
       "title20": "Distributor visibility ?",
       "title21": "Paired documents",
       "title22": "Mouvement's nature",
-      "title23": "Document's Status"
+      "title23": "Document's Status",
+      "title24": "Status",
+      "title25": "Code format",
+      "title26": "Associate people ?"
     },
     "form": {
       "text1": "Title is required.",
@@ -253,7 +258,9 @@
       "text6": "If this box is unchecked, there will be no possibility of creating movements when creating a copy of the document",
       "text7": "If this box is checked, the distributor column will be visible when creating the movement of a copy of this document",
       "text8": "Mouvement's nature applied to thid document",
-      "text9": "Mouvement's nature to apply to this document is required"
+      "text9": "Mouvement's nature to apply to this document is required",
+      "text12": "If this box is checked, people would be asked when we create document",
+      "text13": "If documents are here, they will be not considerated if 'link ressources' is disabled"
     },
     "view": {
       "title": "Document's Model",
@@ -278,7 +285,13 @@
       "text7": "at ",
       "text8": "Select people",
       "text9": "Customer's name",
-      "text10": "Order by "
+      "text10": "Order by ",
+      "text11": "Code",
+      "text12": "Transmission mode",
+      "text13": "Transmission",
+      "text14": "Document's history is not available for dose who don't be associate to people",
+      "text15": "Search an assurence",
+      "text16": "Generate PDF"
     }
   },
   "theme": {
@@ -327,7 +340,11 @@
       "title6": "Category",
       "title7": "Caracteristic",
       "title8": "Ressources",
-      "title9": "sell prise"
+      "title9": "sell prise",
+      "title11": "Percentage value",
+      "title12": "Remaining balance",
+      "title13": "No promotion for this assurence",
+      "title14": "Promotion"
     },
     "form": {
       "text1": "Field Required",
@@ -361,7 +378,9 @@
       "title8": "Category",
       "title9": "Actions ",
       "title10": "Total",
-      "title11": "Total amont"
+      "title11": "Total amont",
+      "title12": "Montant pris en charge",
+      "title13": "Montant total à payer"
     }
   },
 
@@ -514,12 +533,7 @@
       "title7": "Amount Max",
       "title8": "Min Amount",
       "title9": "Distributor",
-      "title10": "families",
-      "title11": "Max Quantity",
-      "title12": "Min Quantity",
-      "title13": "Amount Max",
-      "title14": "Min Amount",
-      "title15": "Distributor"
+      "title10": "families"
     }
   },
   "validation":{
@@ -535,7 +549,8 @@
       "label3":"Creation day",
       "label4": "Voting Type",
       "label5": "Duration vote",
-      "label6": "role"
+      "label6": "role",
+      "label7": "Type de validation"
     }
   },
   "etats": {

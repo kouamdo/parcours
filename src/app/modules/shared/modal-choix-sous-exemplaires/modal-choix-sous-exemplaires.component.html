@@ -98,10 +98,10 @@
                                 </mat-paginator>
                             </div>
                             <div class="actionButton valBtn mt-2">
-                                <button class="btn retour" [mat-dialog-close] title="{{'lists.button2' | translate}}">
-                                    <i class="fa fa-undo" aria-hidden="true"></i>
+                                <button class="btn fermer" [mat-dialog-close] title="{{'lists.button3' | translate}}" (click)="cancel()">
+                                    <i class="fa fa-times" aria-hidden="true"></i>
                                 </button>
-                                <button mat-button [mat-dialog-close] cdkFocusInitial class="btn btnValidation" (click)="choisirDocument()" title="{{'lists.button6' | translate}}">
+                                <button mat-button [mat-dialog-close] cdkFocusInitial class="btn btnValidation" (click)="choisirDocument()" title="{{'lists.button6' | translate}} & {{'lists.button13' | translate}}">
                                     <i class="fa fa-check" aria-hidden="true"></i>
                                 </button>
                             </div>

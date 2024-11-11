@@ -47,9 +47,9 @@
                                 <td class="text-dark containCell" mat-cell *matCellDef="let element">
                                     <div class="actions">
                                         <input type="checkbox" [value]="element.titre"
-                                            (click)="getDocumentId(element.id)"
+                                            (click)="getDocumentId(element.idDocument)"
                                             (change)="onCheckDocumentChange($event)">
-                                        <span role="button" (click)="getDocumentId(element.id)"></span>
+                                        <span role="button" (click)="getDocumentId(element.idDocument)"></span>
                                     </div>
                                 </td>
                             </ng-container>
@@ -103,7 +103,7 @@
                                         <td class="text-dark containCell" mat-cell
                                             *matCellDef="let element;  let i=index">
                                             <div class="actions">
-                                                <button class="btn p-0" name="documents" [value]="element.id"
+                                                <button class="btn p-0" name="documents" [value]="element.idDocument"
                                                     id="documents" title="clicker pour annuler la selection"
                                                     (click)="retirerSelectionDocument(i)">
                                                     <i class="fa fa-trash text-danger" aria-hidden="true"></i>

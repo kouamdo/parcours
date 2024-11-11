@@ -1,4 +1,3 @@
-import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import {
   FormGroup,
@@ -8,7 +7,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatSort, Sort } from '@angular/material/sort';
+import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Observable, EMPTY } from 'rxjs';
@@ -17,7 +16,6 @@ import { ICategoriesAttributs } from 'src/app/modele/categories-attributs';
 import { IDocument } from 'src/app/modele/document';
 import { IMission } from 'src/app/modele/mission';
 import { IService } from 'src/app/modele/service';
-import { AttributService } from 'src/app/services/attributs/attribut.service';
 import { DocumentService } from 'src/app/services/documents/document.service';
 import { MissionsService } from 'src/app/services/missions/missions.service';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
@@ -34,6 +32,7 @@ import { IAssociationCategorieAttributs } from 'src/app/modele/association-categ
 import { TypeMouvement } from 'src/app/modele/typeMouvement';
 import { ModalDocEtatsComponent } from '../../shared/modal-document-doc-etats/modal-document-doc-etats.component';
 import { IDocEtats } from 'src/app/modele/doc-etats';
+import { log } from 'console';
 
 @Component({
   selector: 'app-new-form-document',
@@ -42,7 +41,7 @@ import { IDocEtats } from 'src/app/modele/doc-etats';
 })
 export class NewFormDocumentComponent implements OnInit {
   document: IDocument = {
-    id: '',
+    idDocument: '',
     titre: '',
     description: '',
     etat: false,
@@ -54,7 +53,9 @@ export class NewFormDocumentComponent implements OnInit {
     contientRessources: false,
     contientDistributeurs: false,
     typeMouvement: TypeMouvement.Neutre,
-    docEtats: []
+    docEtats: [],
+    formatCode: '',
+    beneficiaireObligatoire: false
   };
   mission$: Observable<IMission[]> = EMPTY;
   forme: FormGroup;
@@ -97,6 +98,8 @@ export class NewFormDocumentComponent implements OnInit {
   @ViewChild(MatSort) sort!: MatSort;
 
   typeMvt: string[] = [];
+  formatsCode: string[] = [];
+  documentParentDesactive = false
 
   constructor(
     private router: Router,
@@ -105,35 +108,31 @@ export class NewFormDocumentComponent implements OnInit {
     private dataEnteteMenuService: DonneesEchangeService,
     private serviceDocument: DocumentService,
     private serviceMission: MissionsService,
-    private serviceAttribut: AttributService,
-    private _liveAnnouncer: LiveAnnouncer,
     private donneeDocCatService: DonneesEchangeService,
     private dialogDef: MatDialog
   ) {
     this.forme = this.formBuilder.group({
       _missions: new FormControl<string | IMission[]>(''),
       _attributs: new FormArray([]),
-      titre: [
-        '',
-        [
-          Validators.required,
-          Validators.minLength(2),
-          Validators.maxLength(50),
-        ],
-      ],
+      titre: [ '', [ Validators.required]],
       description: [''],
       typeMouvement: ['', [Validators.required]],
       etat: new FormControl(true),
-      affichagePrix: new FormControl(true),
-      contientRessources: new FormControl(true),
-      contientDistributeurs: new FormControl(true),
+      affichagePrix: new FormControl(false),
+      contientRessources: new FormControl(false),
+      contientDistributeurs: new FormControl(false),
+      beneficiaireObligatoire: new FormControl(true),
+      formatCode: [ '', [ Validators.required]]
     });
   }
   ngOnInit(): void {
     this.mission$ = this.getAllMissions();
-    this.donneeDocCatService
-      .getTypeMvt()
-      .subscribe((x) => (this.typeMvt = x.type));
+    this.forme.controls['affichagePrix'].disable()
+    this.forme.controls['contientDistributeurs'].disable()    
+    this.documentParentDesactive = true
+    this.donneeDocCatService.getTypeMvt().subscribe((x) => (this.typeMvt = x.type));
+    this.donneeDocCatService.getFormatCode().subscribe((f) => (this.formatsCode = f.type));
+
     // chargement de la page a partir d'un Id pour la modification d'un document
     let idDocument = this.infosPath.snapshot.paramMap.get('idDocument');
     if (idDocument != null && idDocument !== '') {
@@ -141,6 +140,11 @@ export class NewFormDocumentComponent implements OnInit {
       this.titre = 'Document à Modifier';
       this.serviceDocument.getDocumentById(idDocument).subscribe((x) => {
         this.document = x;
+        if (this.document.contientRessources == true) {
+          this.forme.controls['affichagePrix'].enable()
+          this.forme.controls['contientDistributeurs'].enable()    
+          this.documentParentDesactive = false
+        }
         this.forme.setValue({
           titre: this.document.titre,
           description: this.document.description,
@@ -149,8 +153,10 @@ export class NewFormDocumentComponent implements OnInit {
           affichagePrix: this.document.affichagePrix,
           contientRessources: this.document.contientRessources,
           contientDistributeurs: this.document.contientDistributeurs,
+          beneficiaireObligatoire: this.document.beneficiaireObligatoire,
           _missions: this.document.missions,
           _attributs: [],
+          formatCode : this.document.formatCode
         });
         this.forme.controls['_missions'].setValue(this.document.missions);
 
@@ -286,7 +292,7 @@ export class NewFormDocumentComponent implements OnInit {
   openSousDocumentDialog() {
     const dialogConfig = new MatDialogConfig();
     if (this.ELEMENTS_TABLE_SOUS_DOCUMENTS.length > 0) {
-      dialogConfig.data = { documentIds: this.ELEMENTS_TABLE_SOUS_DOCUMENTS.map(doc => doc.id) };
+      dialogConfig.data = { documentIds: this.ELEMENTS_TABLE_SOUS_DOCUMENTS.map(doc => doc.idDocument) };
     }
   
     dialogConfig.maxWidth = '100vw';
@@ -382,7 +388,7 @@ export class NewFormDocumentComponent implements OnInit {
     )
       return;
     let documentTemp: IDocument = {
-      id: uuidv4(),
+      idDocument: uuidv4(),
       titre: documentInput.titre,
       description: documentInput.description,
       etat: documentInput.etat,
@@ -395,11 +401,13 @@ export class NewFormDocumentComponent implements OnInit {
       affichagePrix: documentInput.affichagePrix,
       contientRessources: documentInput.contientRessources,
       contientDistributeurs: documentInput.contientDistributeurs,
-      docEtats: []
+      beneficiaireObligatoire: documentInput.beneficiaireObligatoire,
+      docEtats: [],
+      formatCode: documentInput.formatCode
     }
 
-    if (this.document.id != '') {
-      documentTemp.id = this.document.id;
+    if (this.document.idDocument != '') {
+      documentTemp.idDocument = this.document.idDocument;
     }
 
     this.ELEMENTS_TABLE_ATTRIBUTS.forEach((a) =>
@@ -410,9 +418,15 @@ export class NewFormDocumentComponent implements OnInit {
       documentTemp.preconisations.push(preco)
     );
 
-    this.ELEMENTS_TABLE_SOUS_DOCUMENTS.forEach((preco) =>
-      documentTemp.sousDocuments?.push(preco)
+    this.ELEMENTS_TABLE_SOUS_DOCUMENTS.forEach((doc) =>
+      documentTemp.sousDocuments?.push(doc)
     );
+
+    if (this.documentParentDesactive == true) {
+      documentTemp.sousDocuments = undefined
+      documentTemp.affichagePrix = false
+      documentTemp.contientDistributeurs = false
+    }
 
     this.ELEMENTS_TABLE_DOC_ETATS.forEach(
       docEtat => documentTemp.docEtats.push(docEtat)
@@ -462,5 +476,16 @@ export class NewFormDocumentComponent implements OnInit {
     return mission2 && mission1
       ? mission2.id === mission1.id
       : mission2 === mission1;
+  }
+  desactiveElementsLieRessource(event: any){
+    if (!event.target.checked) {
+      this.forme.controls['affichagePrix'].disable()
+      this.forme.controls['contientDistributeurs'].disable()    
+      this.documentParentDesactive = true
+    }else{
+      this.forme.controls['affichagePrix'].enable()
+      this.forme.controls['contientDistributeurs'].enable()
+      this.documentParentDesactive = false
+    }
   }
 }

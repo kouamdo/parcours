@@ -30,21 +30,6 @@ h4{
     opacity: 0.8;
     font-weight: bold;
 }
-#titre{
-    margin: 20px 0;
-}
-.infos{
-    padding: 0 10px;
-    padding-bottom: 10px;
-}
-.infos p{
-    margin: 40px 0;
-    font-weight: 300;
-}
-.infos .title{
-    font-weight: normal;
-    text-transform: uppercase;
-}
 .infos .title:last-child{
     text-transform: capitalize;
 }
@@ -99,12 +84,6 @@ h4{
             width: 80%;
         }
     }
-}
-.containHead{
-    padding: 1% 0;
-}
-.containCell{
-    padding-top: 20px;
 }
 td{
     font-size: 13px;
@@ -266,6 +245,13 @@ th{
 }
 #my-dropdownFiltre::after{
     display: none;
+}
+.emptySection{
+    background-color: #7878780c;
+    box-shadow: 0 0 6px #7878782d;
+    color: #787878;
+    width: 100% !important;
+    padding: 5px;
 }
 @media screen and (max-width: 1040px) {
     #my-dropdownFiltre{

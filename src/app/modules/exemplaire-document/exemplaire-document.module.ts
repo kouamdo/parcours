@@ -22,6 +22,9 @@ import { PrevisualisationExemplaireComponent } from './previsualisation-exemplai
 import { HistoriqueParPersonneComponent } from './historique-par-personne/historique-par-personne.component';
 import { PageIntermediaireComponent } from './page-intermediaire/page-intermediaire.component';
 import { NgxPrintModule } from 'ngx-print';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatIconModule } from '@angular/material/icon';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 
 @NgModule({
@@ -46,6 +49,9 @@ import { NgxPrintModule } from 'ngx-print';
     MatPaginatorModule,
     MatTableModule,
     MatSortModule,
+    MatSlideToggleModule,
+    MatIconModule,
+    MatToolbarModule,
     TranslateModule.forChild({
       loader: {
         provide: TranslateLoader,

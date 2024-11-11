@@ -19,7 +19,7 @@ export class DocumentService {
 
   getDocumentById(id: string): Observable<IDocument> {
     return this.getAllDocuments().pipe(
-      map((x) => x.find((d) => d.id === id) as IDocument)
+      map((x) => x.find((d) => d.idDocument === id) as IDocument)
     );
   }
 

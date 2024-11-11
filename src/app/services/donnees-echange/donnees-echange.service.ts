@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { TypeMvt } from 'src/app/modele/type-mvt';
+import { TypeValidation } from 'src/app/modele/type-validation';
+import { FormatCode } from 'src/app/modele/format-code';
 
 @Injectable({
   providedIn: 'root',
@@ -22,6 +24,9 @@ export class DonneesEchangeService {
   dataExemplairePersonneRatachee: any;
   dataUrlExemplaireDePersonne: any;
   private _dataEnteteMenu: string = '';
+  dataMouvementsExemplaire: any
+  dataPromoMouvementCourant: any
+  dataRessourceMouvementCourant: any
   constructor(private http: HttpClient) {
     const storedDataEnteteMenu = sessionStorage.getItem('dataEnteteMenu');
     if (storedDataEnteteMenu) {
@@ -44,12 +49,28 @@ export class DonneesEchangeService {
     return this.http.get<TypeMvt>('api/typeMvt');
   }
 
+  getTypeValidation(): Observable<TypeValidation> {
+    return this.http.get<TypeValidation>('api/typeValidation');
+  }
+
+  getFormatCode(): Observable<FormatCode> {
+    return this.http.get<FormatCode>('api/formatCode');
+  }
+
   saveEtatModal(value: any) {
     this.dataEtatSelectionner = value;
   }
 
   getsaveEtatModal(){
     return this.dataEtatSelectionner;
+  }
+
+  saveMouvementsExemplaire(value: any) {
+    this.dataMouvementsExemplaire = value;
+  }
+
+  getMouvementsExemplaire(){
+    return this.dataMouvementsExemplaire;
   }
 
   /**

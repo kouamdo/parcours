@@ -1,6 +1,6 @@
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { DatePipe } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import {
   FormArray,
   FormBuilder,
@@ -31,13 +31,21 @@ import { TypeMouvement } from 'src/app/modele/typeMouvement';
 import { ModalCodebarreService } from '../../shared/modal-codebarre/modal-codebarre.service';
 import { PatientsService } from 'src/app/services/patients/patients.service';
 import { IPatient } from 'src/app/modele/Patient';
+import { IPromo } from 'src/app/modele/promo-distributeur';
+import { PromoService } from 'src/app/services/promo/promo.service';
+import { MatDialog } from '@angular/material/dialog';
+import { ModalChoixPromotionRessourceComponent } from '../../shared/modal-choix-promotion-ressource/modal-choix-promotion-ressource.component';
+import { ModalCodebarreScanContinueComponent } from '../../shared/modal-codebarre-scan-continue/modal-codebarre-scan-continue.component';
 
 @Component({
   selector: 'app-new-exemplaire',
   templateUrl: './new-exemplaire.component.html',
   styleUrls: ['./new-exemplaire.component.scss'],
 })
-export class NewExemplaireComponent implements OnInit {
+export class NewExemplaireComponent implements OnInit , AfterViewInit {
+  @ViewChild('barcodeScanner', { static: false })
+  barcodeScanner!: ModalCodebarreScanContinueComponent;
+
   exemplaire: IExemplaireDocument = {
     id: '',
     idDocument: '',
@@ -64,11 +72,16 @@ export class NewExemplaireComponent implements OnInit {
       mail: '',
       telephone: '',
       qrCodeValue: ''
-    }
+    },
+    formatCode: '',
+    code: '',
+    beneficiaireObligatoire: true,
+    assurance: undefined,
+    promotion: undefined
   };
 
   document: IDocument = {
-    id: '',
+    idDocument: '',
     titre: '',
     description: '',
     etat: false,
@@ -76,11 +89,13 @@ export class NewExemplaireComponent implements OnInit {
     attributs: [],
     categories: [],
     preconisations: [],
-    affichagePrix: false,
-    contientRessources: false,
-    contientDistributeurs: false,
+    affichagePrix: true,
+    contientRessources: true,
+    contientDistributeurs: true,
     typeMouvement: 'Neutre',
-    docEtats: []
+    docEtats: [],
+    formatCode: '',
+    beneficiaireObligatoire: false
   };
 
   attribut: IAttributs = {
@@ -128,6 +143,7 @@ export class NewExemplaireComponent implements OnInit {
   titre:string='';  
   ressourceControl = new FormControl<string | IRessource>('');
   distributeurControl = new FormControl<string | IDistributeur>('');
+  assuranceControl = new FormControl<string | IDistributeur>('');
   idRessource: string = '';
   ELEMENTS_TABLE_MOUVEMENTS: IMouvement[] = [];
   dataSourceMouvements = new MatTableDataSource<IMouvement>(
@@ -135,12 +151,12 @@ export class NewExemplaireComponent implements OnInit {
   );
   filteredOptionsRessource: IRessource[] | undefined;
   filteredDistributeurOptions: IDistributeur[] | undefined;
+  filteredAssuranceOptions: IDistributeur[] | undefined;
   displayedRessourcesColumns: string[] = [
     'actions',
     'libelle',
     'quantite',
-    'unite',
-    'description'
+    'unite'
   ]; // structure du tableau presentant les Ressources
   TABLE_PRECONISATION_RESSOURCES: IPrecoMvt[] = [];
   montantTotal : number = 0;
@@ -152,6 +168,23 @@ export class NewExemplaireComponent implements OnInit {
   typeAjout : string = TypeMouvement.Ajout
   typeReduire : string = TypeMouvement.Reduire
   laPersonneRattachee : IPatient | undefined 
+  codeControl = new FormControl()
+  promotion : IPromo | undefined
+  distributeurR: string = '';
+  ressource: string = '';
+  mouvements: IMouvement[] = [];
+  assurancePersone : IDistributeur | undefined
+  remisePromo : number = 0 // laveur de la promotion
+  unitePromo : string = "" // laveur de la promotion
+  showText = false
+  promotionsByRessource: { [key: string]: IPromo[] } = {};
+  idMouvement: string = '';
+  scan_val: any | undefined;
+  showScanCodeComponent = false
+  reponse: any;
+  courant: string = '';
+  req: boolean = false;
+
 
   constructor(
     private router: Router,
@@ -165,26 +198,21 @@ export class NewExemplaireComponent implements OnInit {
     private serviceExemplaire: ExemplaireDocumentService,
     private datePipe: DatePipe,
     private barService: ModalCodebarreService,
-    private servicePatient: PatientsService
+    private servicePatient: PatientsService,
+    private servicePromo: PromoService,
+    private dialogDef: MatDialog
   ) {
     this.formeExemplaire = this.formBuilder.group({
       _exemplaireDocument: new FormArray([]),
       _controlsSupprime: new FormArray([]),
     });
   }
-  scan_val: any | undefined;
 
   ngOnInit(): void {
     
-    let idPersonne : string = this.donneeEchangeService.getExemplairePersonneRatachee()
-    this.servicePatient.getPatientById(idPersonne).subscribe(
-      patientTrouve =>{
-        this.laPersonneRattachee =  patientTrouve;
-        if (patientTrouve != undefined) {
-          this.nomPatientCourant = this.laPersonneRattachee.nom + " " + this.laPersonneRattachee.prenom
-        }
-      }
-    )
+    this.unitePromo =""
+    this.codeControl.disable()
+    this.donneeEchangeService.dataPromoMouvementCourant = undefined
 
     this.barService.getCode().subscribe((dt) => {
       this.scan_val = dt;
@@ -196,6 +224,13 @@ export class NewExemplaireComponent implements OnInit {
           .getRessourcesByScanBarCodeorLibelle(this.scan_val)
           .subscribe((response) => {
             this.filteredOptionsRessource = response;
+            const selectedOption = this.filteredOptionsRessource.find(
+              (option) => option.id === this.scan_val
+            );
+            if (selectedOption) {
+              this.filteredOptionsRessource = [selectedOption];
+              // this.dataSource.data = [selectedOption];
+            }
           });
       }
     });
@@ -216,7 +251,7 @@ export class NewExemplaireComponent implements OnInit {
     this.titre=this.donneeEchangeService.dataEnteteMenu
     
     this.ressourceControl.valueChanges.subscribe((value) => {
-      const query = value?.toString().toLowerCase(); // Convert to lower case for case-insensitive search
+      const query = value?.toString(); // Convert to lower case for case-insensitive search
       if (query && query.length > 0) {
         // Search by name or ID
         this.serviceRessource
@@ -242,6 +277,17 @@ export class NewExemplaireComponent implements OnInit {
         this.serviceDistributeur.getAllDistributeurs().subscribe((reponse) => {
           this.filteredDistributeurOptions = reponse;
         });
+      }
+    });
+
+    this.assuranceControl.valueChanges.subscribe((value) => {
+      const raisonSocial =
+        typeof value === 'string' ? value : value?.raisonSocial;
+      if (raisonSocial != undefined && raisonSocial?.length > 0) {
+        this.serviceDistributeur.getDistributeursByraisonSocial(raisonSocial.toLowerCase() as string)
+          .subscribe((reponse) => {
+            this.filteredAssuranceOptions = reponse;
+          });
       }
     });
   }
@@ -317,7 +363,15 @@ export class NewExemplaireComponent implements OnInit {
         .getExemplaireDocumentById(this.idExemplaire)
         .subscribe((x) => {
           this.exemplaire = x;
-          this.document = x;
+          this.document = x
+          this.document.idDocument = x.idDocument
+          if (x.mouvements) {
+            this.promotion = x.mouvements[0].promotion
+          }
+          this.assurancePersone = x.assurance
+          if (this.assurancePersone) {
+            this.assuranceControl.setValue(this.assurancePersone)
+          }
           if (this.exemplaire.mouvements != undefined) {
             this.ELEMENTS_TABLE_MOUVEMENTS = this.exemplaire.mouvements;
           }
@@ -328,6 +382,23 @@ export class NewExemplaireComponent implements OnInit {
          //pour avoir la donnée fraiche on refait un appel à document
          //à supprimer lorsqu'on aura un vrai back connecté
           this.modifierMouvementExemplaire(x.idDocument)
+          this.laPersonneRattachee = this.exemplaire.personneRattachee
+          if (this.exemplaire.personneRattachee != undefined) {
+            this.laPersonneRattachee = this.exemplaire.personneRattachee
+            this.nomPatientCourant = this.laPersonneRattachee.nom + " " + this.laPersonneRattachee.prenom
+          }
+          this.codeControl.setValue(this.exemplaire.code)
+          this.serviceDocument.getDocumentById(x.idDocument).subscribe(
+            (y) => {
+              this.reponse = this.serviceExemplaire.getExemplaireDocumentByOrder(x, y);
+              if (this.reponse) {
+                this.req = this.reponse.sol;
+                if (this.reponse.ele != undefined && this.reponse.ele.etat != undefined) {
+                  this.courant = this.reponse.ele.etat.libelle;
+                }
+              }
+            }
+          )
         });
     }
     if (this.idDocument != null && this.idDocument !== '') {
@@ -337,7 +408,23 @@ export class NewExemplaireComponent implements OnInit {
           this.document = document;
           this.totalAttribut = document.attributs.length - 1;
           this.formerEnteteTableauMissions()
-          this.concatMouvementsSousExemplaireDocument()
+          let dateExemplaire = new Date()
+          this.codeControl.setValue(this.setCode(dateExemplaire))
+          if ( this.donneeEchangeService.dataDocumentSousDocuments != undefined) {
+            this.concatMouvementsSousExemplaireDocument()
+          }
+          if (this.document.beneficiaireObligatoire) {
+            let idPersonne : string = this.donneeEchangeService.getExemplairePersonneRatachee()
+            this.servicePatient.getPatientById(idPersonne).subscribe(
+              patientTrouve =>{
+                this.laPersonneRattachee =  patientTrouve;
+                if (patientTrouve != undefined) {
+                  this.nomPatientCourant = this.laPersonneRattachee.nom + " " + this.laPersonneRattachee.prenom
+                  
+                }
+              }
+            )
+          }
         });
     }
   }
@@ -380,12 +467,16 @@ export class NewExemplaireComponent implements OnInit {
    * Methode qui permet de rajouter les colones de prix et montants si affichePrix a la valeur true
    */
   formerEnteteTableauMissions(){
-    if (this.document.contientDistributeurs == true) {
+    if (this.document.contientDistributeurs == true && !this.document.beneficiaireObligatoire) {
       let distributeur : string = "distributeur"
+      this.displayedRessourcesColumns.includes('distributeur')
       this.displayedRessourcesColumns.push(distributeur)
     }
     if ((this.document.affichagePrix == true)) {
       let prix : string = "prix"
+      let pourcentageCharge : string = "pourcentageCharge"
+      let pourcentageChargeRssource : string = "pourcentageChargeRssource"
+      let montantCharge : string = "montantCharge"
       let montant : string = "montant total"
       if (this.document.typeMouvement == TypeMouvement.Reduire) {
         prix = "prixDeSortie"
@@ -395,8 +486,14 @@ export class NewExemplaireComponent implements OnInit {
         prix = "prix"
       }
       this.displayedRessourcesColumns.push(prix)
+      if (this.document.beneficiaireObligatoire) {
+        this.displayedRessourcesColumns.push(pourcentageCharge)
+      }else{
+        this.displayedRessourcesColumns.push(pourcentageChargeRssource)
+      }
+      this.displayedRessourcesColumns.push(montantCharge)
       this.displayedRessourcesColumns.push(montant)
-    }
+    }    
   }
   /**
    * methode permettant de renvoyer la valeur de l'attribut
@@ -540,12 +637,12 @@ export class NewExemplaireComponent implements OnInit {
   }
 
   /**
-   * Methodr qui permet de faire la somme des montants du tableau de mouvements
+   * Methode qui permet de faire la somme des montants du tableau de mouvements
    * pour afficher le resultat dans la case montant total
    */
-  sommeMontants(): number {
+  sommeMontants(mouvements: IMouvement[]): number {
     this.montantTotal = 0;
-    this.ELEMENTS_TABLE_MOUVEMENTS.forEach((mouvement) => {
+    mouvements.forEach((mouvement) => {
       if (
         mouvement.ressource != undefined &&
         mouvement.quantite != null &&
@@ -558,10 +655,31 @@ export class NewExemplaireComponent implements OnInit {
   }
 
   /**
+   * Methode qui permet de faire la somme des montants du tableau de mouvements après remise
+   * pour afficher le resultat dans la case montant total à payer
+   */
+  sommeMontantsApresRemise(mouvements: IMouvement[]): number {
+    this.montantTotal = 0;
+    mouvements.forEach((mouvement) => {
+      if (
+        mouvement.ressource != undefined &&
+        mouvement.quantite != null &&
+        mouvement.prix != null
+      ) {
+        this.montantTotal += this.calculRemise(mouvement) * mouvement.quantite;
+      }
+    });
+    return this.montantTotal;
+  }
+
+  getAssurancePersonne(assurance:IDistributeur){
+    this.assurancePersone = assurance
+  }
+
+  /**
    * methode de validation du formulaire (enregistrement des donnees du formulaire)
    */
   onSubmit() {
-    const exemplaireDocument = this._exemplaireDocument;
     this.submitted = true;
     this.enregistrerObjet();
     this.evaluation();
@@ -569,7 +687,7 @@ export class NewExemplaireComponent implements OnInit {
 
     let exemplaireTemp: IExemplaireDocument = {
       id: uuidv4(),
-      idDocument: this.document.id,
+      idDocument: this.document.idDocument,
       titre: this.document.titre,
       description: this.document.description,
       missions: this.document.missions,
@@ -586,18 +704,23 @@ export class NewExemplaireComponent implements OnInit {
       docEtats: this.document.docEtats,
       ordreEtats: this.exemplaire.ordreEtats,
       dateCreation: new Date,
-      personneRattachee: this.laPersonneRattachee!
+      personneRattachee: this.laPersonneRattachee!,
+      formatCode: this.document.formatCode,
+      code: this.codeControl.value,
+      beneficiaireObligatoire: this.document.beneficiaireObligatoire,
+      promotion: this.promotion,
+      assurance: this.assurancePersone
     };
 
     if (this.exemplaire.id != '') {
       exemplaireTemp.id = this.exemplaire.id;
+      exemplaireTemp.dateCreation = this.exemplaire.dateCreation
     }
-
+    exemplaireTemp.promotion = this.promotion
+    exemplaireTemp.assurance = this.assurancePersone
     this.serviceExemplaire
       .ajouterExemplaireDocument(exemplaireTemp)
       .subscribe((object) => {
-        console.log(" new exemplaire :", exemplaireTemp);
-        
         this.router.navigate(['/list-exemplaire']);
       });
   }
@@ -624,7 +747,7 @@ export class NewExemplaireComponent implements OnInit {
     });
     if (!tabIdRessource.includes(option.id)) {
       let mvt: IMouvement = {
-        id: '',
+        id: uuidv4(),
         description: '',
         quantite: option.quantite,
         prix: 0,
@@ -648,12 +771,108 @@ export class NewExemplaireComponent implements OnInit {
       if(this.distributeur != undefined){
         mvt.distributeur = this.distributeur
       }
-
+      if (this.promotion) {
+        mvt.promotion = this.promotion
+        this.appliquerPromotion(mvt)
+      }
       this.ELEMENTS_TABLE_MOUVEMENTS.unshift(mvt)
       this.dataSourceMouvements.data = this.ELEMENTS_TABLE_MOUVEMENTS
     }
   }
+  
+  rechercherListingAssurance(option: IDistributeur){
+    this.servicePromo.getPromoByIdAssurance(option.id).subscribe((promo) =>{
+      this.promotion = promo!
+      this.showText = false
+      this.ELEMENTS_TABLE_MOUVEMENTS.forEach(
+        mvt => {
+        let mouvementTemp = mvt
+        if (this.promotion) {
+          mouvementTemp.promotion = this.promotion
+          this.appliquerPromotion(mouvementTemp)
+        }
+        if (!this.promotion) {
+          this.showText = true
+        }
+      });
+    })
+  }
 
+  /**
+   * Méthode permettant de déterminer si une assurance pocède une promotion en cours
+   * @param option assurance
+   */
+  verifieSiPromoAppliquable(mouvement: IMouvement):boolean{
+    
+    const today = new Date(); 
+    let dateOk = false
+    let ressourceOk = false
+    let familleOk = false
+
+    // Vérification des Dates : La promotion n'est appliquée que si la date actuelle se situe entre la date de début et la date de fin de la promotion.
+    if (mouvement.promotion && !(today < new Date(mouvement.promotion.dateDebut!) || today > new Date(mouvement.promotion.dateFin!))) {
+      this.promotion = mouvement.promotion
+      dateOk = true
+
+      let ressourceCouverte : boolean = false;
+      let familleCouverte : boolean = false;
+
+      // Vérification des Ressources et Familles : La promotion est appliquée si la ressource ou la famille de la ressource est couverte par la promotion.
+      if (mouvement.promotion.ressource) {
+        ressourceCouverte = mouvement.promotion.ressource?.some(r => r.id === mouvement.ressource.id);
+        ressourceOk = true
+      }
+      if (mouvement.promotion.famille) {
+        familleCouverte = mouvement.promotion.famille?.some(f => f.id === mouvement.ressource.famille.id);
+        familleOk = true
+      }
+    }
+    if (dateOk == true && (ressourceOk == true || familleOk == true)) {
+      return true
+    } else {
+      return false
+    }
+  }
+
+  // Calcul de la Remise : La remise est calculée soit en pourcentage soit en montant fixe. Si les deux sont présents, seul le pourcentage est utilisé.
+  calculRemise(mouvement: IMouvement):number{
+    if (!mouvement.promotion) {
+      this.remisePromo = 0
+      this.unitePromo =""
+      return mouvement.prix
+    }
+    let remise = 0;
+
+    if (mouvement.promotion.pourcentageRemise > 0) {
+        remise = mouvement.prix * (mouvement.promotion.pourcentageRemise / 100);
+        this.remisePromo = mouvement.promotion.pourcentageRemise
+        this.unitePromo = "%"
+    } else if (mouvement.promotion.montantRemise > 0) {
+        remise = mouvement.promotion.montantRemise;
+        // remise = (promo.montantRemise/mouvement.prix)*100;
+        this.remisePromo = mouvement.promotion.montantRemise
+        this.unitePromo = "UD"
+    }
+
+    remise = Math.min(remise, mouvement.prix); // S'assurer que la remise n'excède pas le prix
+    const prixReduit = mouvement.prix - remise;
+    // mouvement.prix = prixReduit
+    return prixReduit
+  }
+
+  /**
+   * Ce code permet d'appliquer les promotions en tenant compte des ressources et des familles de ressources concernées dans les mouvements.
+   * @param mouvements ligne de mouvement sur laquelle on applique la promo
+   * @param promo promotion à apliquer
+   * @returns mouvement soldés
+   */
+  appliquerPromotion(mouvement: IMouvement):IMouvement{
+    if (this.verifieSiPromoAppliquable(mouvement)) {
+      this.calculRemise(mouvement)
+    }
+    return mouvement
+  }
+  
   /**
    * Methode qui permet d'effacer la valeur du control ressource lorsqu'on a
    * déjà choisi la ressource en cliquant dessus
@@ -663,6 +882,17 @@ export class NewExemplaireComponent implements OnInit {
       this.filteredOptionsRessource = resultat;
     });
     this.ressourceControl.reset();
+  }
+  /**
+   * Methode qui permet d'effacer la valeur du control distributeur lorsqu'on a
+   * déjà choisi le distributeur en cliquant dessus
+   */
+  reinitialliseDistributeurControl() {
+    this.serviceDistributeur.getAllDistributeurs().subscribe((resultat) => {
+      this.filteredDistributeurOptions = resultat;
+    });
+    this.distributeurControl.reset();
+    this.distributeur = undefined
   }
 
   InitialiseDistributeurControlPourModufication(index : number){
@@ -680,6 +910,10 @@ export class NewExemplaireComponent implements OnInit {
       let mouvement =
         this.ELEMENTS_TABLE_MOUVEMENTS[this.indexmodificationDistributeur];
       mouvement.distributeur = this.distributeur;
+      if (this.distributeur == undefined) {
+        mouvement.distributeur = this.distributeur;
+      }
+      mouvement.promotion = undefined
       this.dataSourceMouvements.data = this.ELEMENTS_TABLE_MOUVEMENTS;
     }
     this.modificationDistributeurActive = false;
@@ -701,6 +935,12 @@ export class NewExemplaireComponent implements OnInit {
       : '';
   }
 
+  displayAssuranceFn(assurance: IDistributeur): string {
+    return assurance && assurance.raisonSocial
+      ? assurance.raisonSocial
+      : '';
+  }
+
   announceSortChange(sortState: Sort) {
     if (sortState.direction) {
       this._liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);
@@ -709,13 +949,95 @@ export class NewExemplaireComponent implements OnInit {
     }
   }
 
-  getRessourceId(idRessource: string) {
-    this.idRessource = idRessource;
-  }
-
   retirerSelectionRessource(index: number) {
     this.ELEMENTS_TABLE_MOUVEMENTS = this.dataSourceMouvements.data;
     this.ELEMENTS_TABLE_MOUVEMENTS.splice(index, 1); // je supprime un seul element du tableau a la position 'index'
     this.dataSourceMouvements.data = this.ELEMENTS_TABLE_MOUVEMENTS;
+  }
+
+  /**
+   * Méthode pour charger les promotions d'une ressource
+   * @param ressource 
+   */
+  getPromotionByRessource(ressource: IRessource) {
+    this.servicePromo.getPromosByRessource(ressource).subscribe(
+      (promos) => {
+        // Associer les promotions à la ressource dans le dictionnaire
+        this.promotionsByRessource[ressource.id] = promos;
+        
+      }
+    );
+  }
+
+  /**
+   * Methode pour affecter une promotion à une ligne de mouvement pour une ressource covcernée
+   * @param promoressource 
+   * @param mvt 
+   */
+  applyPromoRessource(promoressource:IPromo, mvt:IMouvement){
+    if (mvt.promotion) {
+      mvt.promotion = promoressource
+    }
+  }
+  setCode(date : Date){
+    return this.serviceExemplaire.formatCode(date)
+  }
+
+  getIndexTableauMvtCourant(idMvt: string) {
+    this.idMouvement = idMvt
+  }
+
+  getRessource(ressource: IRessource) {
+    this.idRessource = ressource.id;
+    this.donneeEchangeService.dataRessourceMouvementCourant = ressource
+  } 
+  
+  openPromotionRessourceDialog() {
+    const dialogRef = this.dialogDef.open(ModalChoixPromotionRessourceComponent,
+      {
+        maxWidth: '100vw',
+        maxHeight: '100vh',
+        height: '100%',
+        width: '100%',
+        enterAnimationDuration: '1000ms',
+        exitAnimationDuration: '1000ms',
+        data : this.donneeEchangeService.dataPromoMouvementCourant
+        
+      }
+    );
+
+    dialogRef.afterClosed().subscribe(result => {
+      for (let index = 0; index < this.ELEMENTS_TABLE_MOUVEMENTS.length; index++) {
+        const element = this.ELEMENTS_TABLE_MOUVEMENTS[index];
+        if (this.idMouvement == element.id) {
+          element.promotion = this.donneeEchangeService.dataPromoMouvementCourant
+          if (this.donneeEchangeService.dataPromoMouvementCourant) {
+            element.distributeur = element.promotion?.emetteur
+          }
+          this.idMouvement = ''
+          break
+        }  
+      }
+    });
+  }
+
+  initialisePromotionControl(promotion: IPromo) {
+    this.donneeEchangeService.dataPromoMouvementCourant = promotion;
+  }
+
+  ngAfterViewInit() {}
+
+  openBarcodeScanner(): void {
+    console.log('Attempting to open barcode scanner');
+    if (this.barcodeScanner) {
+      console.log('barcodeScanner initialized');
+      this.barcodeScanner.createMediaStream(); // Make sure to use parentheses to call the function
+    } else {
+      console.log('barcodeScanner is undefined in AfterViewInit');
+    }
+  }
+
+  toogleScanCodeView(){
+    this.showScanCodeComponent = !this.showScanCodeComponent
   }
 }

@@ -1,7 +1,9 @@
 <div class="mainBlock pageView card" id="top2">
     <div class="enteteViewPage">
-        <h1>
+        <p>
             <span routerLink="../../list-documents" title="{{'lists.button2' | translate}}"><i class="fa fa-arrow-left lien" aria-hidden="true"></i></span>
+        </p>
+        <h1>
             {{document.titre}}
         </h1>
         <div class="hoverBlock">
@@ -28,6 +30,10 @@
                 <div>
                     <span> {{"document.table.title20" | translate}} : </span>
                     <p class="title1">{{document.contientDistributeurs}}</p>
+                </div>
+                <div>
+                    <span> {{"document.table.title26" | translate}} : </span>
+                    <p class="title1">{{document.beneficiaireObligatoire}}</p>
                 </div>
             </div>
         </div>
@@ -142,7 +148,7 @@
         </div>
     </div>
     <div class="actionButton valBtn">
-        <button type="button" [routerLink]="['/document-nouveau',document.id]" class="btn modifier" title="{{'lists.button7' | translate}}">
+        <button type="button" [routerLink]="['/document-nouveau',document.idDocument]" class="btn modifier" title="{{'lists.button7' | translate}}">
             <i class="fas fa-pen"></i>
         </button>
         <button type="button" class="btn fermer" title="{{'lists.button8' | translate}}">
