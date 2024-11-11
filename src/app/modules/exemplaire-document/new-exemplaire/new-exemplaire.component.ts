@@ -219,6 +219,7 @@ export class NewExemplaireComponent implements OnInit {
   ngOnInit(): void {
     console.log("info doc :", this.exemplaire, this.document);
 
+    this.fCaisse['montant'].disable();
     let idPersonne: string = this.donneeEchangeService.getExemplairePersonneRatachee()
     this.servicePatient.getPatientById(idPersonne).subscribe(
       patientTrouve => {
@@ -506,11 +507,23 @@ export class NewExemplaireComponent implements OnInit {
 
   initialiseMvtCaisses(id: string) {
     this.mvtCaisseService.getExemplaireDocumentByIdMvtCaisse(id).subscribe((d) => {
+      console.log("mvt caisses last :", d);
+      
       if (d) {
         this.ELEMENTS_TABLE_MOUVEMENTCAISSES = d;
         this.dataSourceMouvementcaisses.data = this.ELEMENTS_TABLE_MOUVEMENTCAISSES;
       }
     })
+  }
+
+  sommeTtVerse(): number {
+    let montantTl = 0;
+    this.ELEMENTS_TABLE_MOUVEMENTCAISSES.forEach((mouvement) => {
+      if (mouvement.montant != undefined || mouvement.montant != null) {
+        montantTl += mouvement.montant;
+      }
+    });
+    return montantTl;
   }
 
   lastValueMvt(value: IMouvement): boolean {
@@ -771,7 +784,7 @@ export class NewExemplaireComponent implements OnInit {
     if (this.fCaisse['moyenPaiement'].value == 'multipaiement') this.fCaisse['montant'].disable(), this.openModalPaiementDialog();
     if (this.fCaisse['moyenPaiement'].value == 'cash') this.fCaisse['montant'].disable(), this.openModalBilleterieDialog();
 
-    console.log("caisse retourné :", this.fCaisse['moyenPaiement'].value, this.fCaisse['use'].value);
+    console.log("caisse retourné :", this.fCaisse['moyenPaiement'], this.fCaisse['use'].value);
   }
 
   /**
@@ -806,15 +819,10 @@ export class NewExemplaireComponent implements OnInit {
     console.log('donnéé :', this.resteAPayer, this.montantTotal, reste);
   }
 
-  totalCash(multiple: number, nb: number) {
-
-  }
-
   /**
    * methode de validation du formulaire (enregistrement des donnees du formulaire)
    */
   onSubmit(data: any) {
-    const exemplaireDocument = this._exemplaireDocument;
     this.submitted = true;
     this.enregistrerObjet();
     this.evaluation();
@@ -851,7 +859,7 @@ export class NewExemplaireComponent implements OnInit {
       .ajouterExemplaireDocument(exemplaireTemp)
       .subscribe((object) => {
         console.log(" new exemplaire :", exemplaireTemp, data.value);
-        this.saveMvt(data.value);
+        this.saveMvt(data.value, exemplaireTemp);
       });
   }
 
@@ -859,7 +867,7 @@ export class NewExemplaireComponent implements OnInit {
     return element && element.libelle ? element.libelle : '';
   }
 
-  saveMvt(selectItem: any) {
+  saveMvt(selectItem: any, doc: IExemplaireDocument) {
     let mvtCaisse: IMouvementCaisses[] = [];
     let donne: IMouvementCaisses;
 
@@ -878,7 +886,7 @@ export class NewExemplaireComponent implements OnInit {
         referencePaiement: selectItem.referencePaiement,
         compte: this.compte,
         personnel: this.laPersonneRattachee!,
-        exemplaire: this.exemplaire
+        exemplaire: doc
       }
 
       this.mvtCaisseService.ajouterMouvement(donne).subscribe((obj) => {
@@ -904,7 +912,7 @@ export class NewExemplaireComponent implements OnInit {
               referencePaiement: element.reference,
               compte: this.compte,
               personnel: this.laPersonneRattachee!,
-              exemplaire: this.exemplaire
+              exemplaire: doc
             }
 
             mvtCaisse.push(donne);
@@ -953,7 +961,7 @@ export class NewExemplaireComponent implements OnInit {
         referencePaiement: selectItem.referencePaiement,
         compte: this.compte,
         personnel: this.laPersonneRattachee!,
-        exemplaire: this.exemplaire
+        exemplaire: doc
       }
 
       this.mvtCaisseService.ajouterMouvement(donne).subscribe((obj) => {
