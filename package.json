@@ -45,6 +45,7 @@
     "@angular/cli": "^15.2.9",
     "@angular/compiler-cli": "^15.2.9",
     "@types/jasmine": "~4.0.0",
+    "@types/jspdf": "^2.0.0",
     "@types/node": "^20.6.2",
     "@types/uuid": "^9.0.4",
     "jasmine-core": "~4.2.0",
