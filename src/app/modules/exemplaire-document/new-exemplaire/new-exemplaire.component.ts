@@ -47,6 +47,7 @@ import { ModalBilleterieComponent } from '../../shared/modal-billeterie/modal-bi
   styleUrls: ['./new-exemplaire.component.scss'],
 })
 export class NewExemplaireComponent implements OnInit {
+[x: string]: any;
   exemplaire: IExemplaireDocument = {
     id: '',
     idDocument: '',
@@ -128,6 +129,7 @@ export class NewExemplaireComponent implements OnInit {
   compteur: number = -1;
   totalAttribut: number = 0;
   numerateur: number = -1;
+  selectedOptions!: ICaisses;
   totalAttributSupprime: number = 0;
   objetCleValeurSupprime: ObjetCleValeur[] = [];
   tableauAttributsSupprime: IAttributs[] = [];
@@ -769,22 +771,23 @@ export class NewExemplaireComponent implements OnInit {
     return this.resteAPayer;
   }
 
-  verifyUseSolde() {
-    if (this.fCaisse['moyenPaiement'].value == 'solde' && this.compte?.solde! > 0) {
+  verifyUseSolde(caisse: string) {
+    console.log("caisse retourné :", this.selectedOptions, caisse);
+
+    if (caisse == 'solde' && this.compte?.solde! > 0) {
       this.fCaisse['montant'].disable();
       this.fCaisse['use'].setValue(true);
       this.fCaisse['montant'].setValue(this.compte?.solde!);
       this.resteApayer(this.fCaisse['montant'].value);
     }
-    if (this.fCaisse['moyenPaiement'].value != 'multipaiement' && this.fCaisse['moyenPaiement'].value != 'cash' && this.fCaisse['moyenPaiement'].value != 'solde') {
+    if (caisse != 'multipaiement' && caisse != 'cash' && caisse != 'solde') {
       this.fCaisse['use'].setValue(false),
         this.fCaisse['montant'].enable();
       this.useSolde(false);
     }
-    if (this.fCaisse['moyenPaiement'].value == 'multipaiement') this.fCaisse['montant'].disable(), this.openModalPaiementDialog();
-    if (this.fCaisse['moyenPaiement'].value == 'cash') this.fCaisse['montant'].disable(), this.openModalBilleterieDialog();
+    if (caisse == 'multipaiement') this.fCaisse['montant'].disable(), this.openModalPaiementDialog();
+    if (caisse == 'cash') this.fCaisse['montant'].disable(), this.openModalBilleterieDialog();
 
-    console.log("caisse retourné :", this.fCaisse['moyenPaiement'], this.fCaisse['use'].value);
   }
 
   /**

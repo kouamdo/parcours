@@ -22,6 +22,7 @@ import { PrevisualisationExemplaireComponent } from './previsualisation-exemplai
 import { HistoriqueParPersonneComponent } from './historique-par-personne/historique-par-personne.component';
 import { PageIntermediaireComponent } from './page-intermediaire/page-intermediaire.component';
 import { NgxPrintModule } from 'ngx-print';
+import { MatSelectModule } from '@angular/material/select';
 
 
 @NgModule({
@@ -42,6 +43,7 @@ import { NgxPrintModule } from 'ngx-print';
     MatAutocompleteModule,
     SharedModule,
     MatInputModule,
+    MatSelectModule,
     MatFormFieldModule,
     MatPaginatorModule,
     MatTableModule,

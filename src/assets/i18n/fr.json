@@ -131,8 +131,10 @@
       "title6": "Exemplaire",
       "title7": "Solde Compte",
       "title8": "Reste à payer",
-      "title9": "(Billets)",
+      "title9": "Billets",
       "title10": "Entrer le nombre",
+      "title11": "Pièces",
+      "title12": "Multipaiement",
       "actions": {
         "link1": "Ajouter",
         "link2": "Modifier",

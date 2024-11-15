@@ -112,6 +112,8 @@
     "title8": "remainder to pay",
     "title9": "(Bills)",
     "title10": "Enter number",
+    "title11": "Pieces",
+    "title12": "Multi'payment",
     "actions": {
       "link1": "Add",
       "link2": "Edit",

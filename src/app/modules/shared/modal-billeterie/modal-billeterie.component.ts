@@ -49,22 +49,23 @@ export class ModalBilleterieComponent implements OnInit {
   ngOnInit(): void {
     console.log("donnee de la modal:", this.data.monaies);
 
-
-    this.formePaiement.setValue({
-      x1: this.data.monaies.x1,
-      x2: this.data.monaies.x2,
-      x5: this.data.monaies.x5,
-      x10: this.data.monaies.x10,
-      x25: this.data.monaies.x25,
-      x50: this.data.monaies.x50,
-      x100: this.data.monaies.x100,
-      x500: this.data.monaies.x500,
-      x500B: this.data.monaies.x500B,
-      x1000: this.data.monaies.x1000,
-      x2000: this.data.monaies.x2000,
-      x5000: this.data.monaies.x5000,
-      x10000: this.data.monaies.x10000
-    });
+    if (this.data.monaies) {
+      this.formePaiement.setValue({
+        x1: this.data.monaies.x1,
+        x2: this.data.monaies.x2,
+        x5: this.data.monaies.x5,
+        x10: this.data.monaies.x10,
+        x25: this.data.monaies.x25,
+        x50: this.data.monaies.x50,
+        x100: this.data.monaies.x100,
+        x500: this.data.monaies.x500,
+        x500B: this.data.monaies.x500B,
+        x1000: this.data.monaies.x1000,
+        x2000: this.data.monaies.x2000,
+        x5000: this.data.monaies.x5000,
+        x10000: this.data.monaies.x10000
+      });
+    }
   }
 
   get f() {

@@ -233,10 +233,22 @@
                                             <label for="moyenPaiement" class="label">
                                                 {{'mvtCaisse.table.title2' | translate}}
                                             </label>
-                                            <select (change)="verifyUseSolde()" formControlName="moyenPaiement" name="moyenPaiement" class="form-control">
+                                            <mat-form-field appearance="fill">
+                                                <mat-label>Choisissez des options</mat-label>
+                                                <mat-select 
+                                                  [multiple]="false"
+                                                  [(value)]="selectedOptions"
+                                                  >
+                                                  <mat-option *ngFor="let option of caisses" [value]="option" (click)="verifyUseSolde(option.type)">
+                                                    {{ option.type }}
+                                                  </mat-option>
+                                                  <mat-option (click)="verifyUseSolde('multipaiement')" value="multipaiement">{{'mvtCaisse.table.title12' | translate}}</mat-option>
+                                                </mat-select>
+                                              </mat-form-field>
+                                            <!-- <select (change)="verifyUseSolde()" formControlName="moyenPaiement" name="moyenPaiement" class="form-control">
                                                 <option *ngFor="let caisse of caisses" [value]="caisse.type">{{caisse.type}}</option>
-                                                <option value="multipaiement">Multipaiement</option>
-                                            </select>
+                                                <option value="multipaiement">{{'mvtCaisse.table.title12' | translate}}</option>
+                                            </select> -->
                                         </div>
                                         <div *ngIf="submitted && fCaisse['moyenPaiement'].errors"  class="alert alert-danger" >
                                             <div *ngIf="fCaisse['moyenPaiement'].errors['required']">{{'mvtCaisse.form.text3' | translate}}</div>
