@@ -169,6 +169,7 @@ export class NewExemplaireComponent implements OnInit {
   );
   TABLE_PRECONISATION_RESSOURCES: IPrecoMvt[] = [];
   montantTotal: number = 0;
+  montantTTverse: number = 0;
   soustotal: number = 0;
   resteAPayer: number = 0;
   lastSomme: number = 0;
@@ -519,13 +520,12 @@ export class NewExemplaireComponent implements OnInit {
   }
 
   sommeTtVerse(): number {
-    let montantTl = 0;
     this.ELEMENTS_TABLE_MOUVEMENTCAISSES.forEach((mouvement) => {
       if (mouvement.montant != undefined || mouvement.montant != null) {
-        montantTl += mouvement.montant;
+        this.montantTTverse += mouvement.montant;
       }
     });
-    return montantTl;
+    return this.montantTTverse;
   }
 
   lastValueMvt(value: IMouvement): boolean {
@@ -885,7 +885,7 @@ export class NewExemplaireComponent implements OnInit {
         libelle: selectItem.libelle,
         typeMvt: selectItem.typeMvt,
         dateCreation: new Date(),
-        moyenPaiement: selectItem.moyenpaiement,
+        moyenPaiement: this.selectedOptions,
         referencePaiement: selectItem.referencePaiement,
         compte: this.compte,
         personnel: this.laPersonneRattachee!,
@@ -960,7 +960,7 @@ export class NewExemplaireComponent implements OnInit {
         typeMvt: selectItem.typeMvt,
         dateCreation: new Date(),
         detailJson: billets!,
-        moyenPaiement: selectItem.moyenPaiement,
+        moyenPaiement: this.selectedOptions,
         referencePaiement: selectItem.referencePaiement,
         compte: this.compte,
         personnel: this.laPersonneRattachee!,
