@@ -210,7 +210,7 @@
                                                 {{'mvtCaisse.table.title0' | translate}}
                                             </label>
                                             <div>
-                                                <input type="number" formControlName="montant" name="montant" [disabled]="fCaisse['use'].value" class="form-control">
+                                                <input type="number" formControlName="montant" name="montant" class="form-control">
                                             </div>
                                         </div>
                                         <div *ngIf="submitted && fCaisse['montant'].errors"  class="alert alert-danger" >
@@ -280,7 +280,7 @@
                                     <!-- moyen de paiement Column -->
                                     <ng-container matColumnDef="moyen de paiement">
                                         <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{'mvtCaisse.table.title2' | translate}} </th>
-                                        <td class="text-dark containCell" mat-cell *matCellDef="let element">{{element.moyenPaiement}}</td>
+                                        <td class="text-dark containCell" mat-cell *matCellDef="let element">{{element.moyenPaiement.type}}</td>
                                     </ng-container>
         
                                     <!-- date Column -->

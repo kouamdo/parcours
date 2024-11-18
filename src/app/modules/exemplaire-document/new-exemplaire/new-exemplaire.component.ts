@@ -47,7 +47,7 @@ import { ModalBilleterieComponent } from '../../shared/modal-billeterie/modal-bi
   styleUrls: ['./new-exemplaire.component.scss'],
 })
 export class NewExemplaireComponent implements OnInit {
-[x: string]: any;
+  [x: string]: any;
   exemplaire: IExemplaireDocument = {
     id: '',
     idDocument: '',
@@ -413,13 +413,13 @@ export class NewExemplaireComponent implements OnInit {
 
     const dialogRef = this.dialogDef.open(ModalBilleterieComponent,
       {
-        maxWidth: '70vw',
-        maxHeight: '80vh',
+        maxWidth: '100vw',
+        maxHeight: '100vh',
         height: '100%',
         width: '100%',
         enterAnimationDuration: '1000ms',
         exitAnimationDuration: '1000ms',
-        data:{monaies: this.modalResultBilleterie}
+        data: { monaies: this.modalResultBilleterie }
       }
     )
 
@@ -511,7 +511,7 @@ export class NewExemplaireComponent implements OnInit {
   initialiseMvtCaisses(id: string) {
     this.mvtCaisseService.getExemplaireDocumentByIdMvtCaisse(id).subscribe((d) => {
       console.log("mvt caisses last :", d);
-      
+
       if (d) {
         this.ELEMENTS_TABLE_MOUVEMENTCAISSES = d;
         this.dataSourceMouvementcaisses.data = this.ELEMENTS_TABLE_MOUVEMENTCAISSES;
@@ -520,6 +520,7 @@ export class NewExemplaireComponent implements OnInit {
   }
 
   sommeTtVerse(): number {
+    this.montantTTverse = 0;
     this.ELEMENTS_TABLE_MOUVEMENTCAISSES.forEach((mouvement) => {
       if (mouvement.montant != undefined || mouvement.montant != null) {
         this.montantTTverse += mouvement.montant;
@@ -787,7 +788,6 @@ export class NewExemplaireComponent implements OnInit {
     }
     if (caisse == 'multipaiement') this.fCaisse['montant'].disable(), this.openModalPaiementDialog();
     if (caisse == 'cash') this.fCaisse['montant'].disable(), this.openModalBilleterieDialog();
-
   }
 
   /**
@@ -871,17 +871,14 @@ export class NewExemplaireComponent implements OnInit {
   }
 
   saveMvt(selectItem: any, doc: IExemplaireDocument) {
-    let mvtCaisse: IMouvementCaisses[] = [];
     let donne: IMouvementCaisses;
+    let ele: any = this.selectedOptions;
 
     if (selectItem.use) {
-      let montant: number = 0;
-      this.compte?.solde! < this.montantTotal ? montant = this.compte?.solde! : montant = this.montantTotal;
-
       donne = {
         id: uuidv4(),
         etat: selectItem.etat,
-        montant: montant,
+        montant: this.fCaisse['montant'].value,
         libelle: selectItem.libelle,
         typeMvt: selectItem.typeMvt,
         dateCreation: new Date(),
@@ -898,56 +895,51 @@ export class NewExemplaireComponent implements OnInit {
       })
     }
 
-    if (selectItem.moyenPaiement == 'multipaiement') {
-      if (Array.isArray(this.modalResult)) {
-        let uuidEle: string = uuidv4();
-        this.modalResult.forEach((element) => {
-          if (element.montant) {
-            donne = {
-              id: uuidv4(),
-              etat: selectItem.etat,
-              montant: element.montant,
-              libelle: selectItem.libelle,
-              typeMvt: selectItem.typeMvt,
-              dateCreation: new Date(),
-              moyenPaiement: element.moyen,
-              isMultipaiement: uuidEle,
-              referencePaiement: element.reference,
-              compte: this.compte,
-              personnel: this.laPersonneRattachee!,
-              exemplaire: doc
-            }
-
-            mvtCaisse.push(donne);
+    if (ele == 'multipaiement') {
+      let uuidEle: string = uuidv4();
+      this.modalResult.forEach((element) => {
+        if (element.montant) {
+          donne = {
+            id: uuidv4(),
+            etat: selectItem.etat,
+            montant: element.montant,
+            libelle: selectItem.libelle,
+            typeMvt: selectItem.typeMvt,
+            dateCreation: new Date(),
+            moyenPaiement: element.moyen,
+            isMultipaiement: uuidEle,
+            referencePaiement: element.reference,
+            compte: this.compte,
+            personnel: this.laPersonneRattachee!,
+            exemplaire: doc
           }
-        });
-        this.mvtCaisseService.ajouterMouvement(mvtCaisse).subscribe((obj) => {
-          console.log('Le mouvement a été bien enregistré !', mvtCaisse);
-          this.router.navigate(['/list-exemplaire']);
-        })
-      } else {
-        console.error('modalResult is not an array:', this.modalResult);
-      }
+
+          this.mvtCaisseService.ajouterMouvement(donne).subscribe((obj) => {
+            console.log('Le mouvement a été bien enregistré !', donne);
+          })
+        }
+      });
+      this.router.navigate(['/list-exemplaire']);
     } else {
       let billets: Monaies;
-      if (selectItem.moyenPaiement == 'cash') {
+      if (this.selectedOptions.type == 'cash') {
         billets = {
           pieces: {
-            x1: selectItem.x1,
-            x2: selectItem.x2,
-            x5: selectItem.x5,
-            x10: selectItem.x10,
-            x25: selectItem.x25,
-            x50: selectItem.x50,
-            x100: selectItem.x100,
-            x500: selectItem.x500,
+            x1: this.modalResultBilleterie.x1,
+            x2: this.modalResultBilleterie.x2,
+            x5: this.modalResultBilleterie.x5,
+            x10: this.modalResultBilleterie.x10,
+            x25: this.modalResultBilleterie.x25,
+            x50: this.modalResultBilleterie.x50,
+            x100: this.modalResultBilleterie.x100,
+            x500: this.modalResultBilleterie.x500,
           },
           billets: {
-            x500: selectItem.x500,
-            x1000: selectItem.x1000,
-            x2000: selectItem.x2000,
-            x5000: selectItem.x5000,
-            x10000: selectItem.x10000
+            x500: this.modalResultBilleterie.x500B,
+            x1000: this.modalResultBilleterie.x1000,
+            x2000: this.modalResultBilleterie.x2000,
+            x5000: this.modalResultBilleterie.x5000,
+            x10000: this.modalResultBilleterie.x10000
           }
         }
       }
@@ -955,7 +947,7 @@ export class NewExemplaireComponent implements OnInit {
       donne = {
         id: uuidv4(),
         etat: selectItem.etat,
-        montant: selectItem.montant,
+        montant: this.fCaisse['montant'].value,
         libelle: selectItem.libelle,
         typeMvt: selectItem.typeMvt,
         dateCreation: new Date(),
@@ -968,7 +960,7 @@ export class NewExemplaireComponent implements OnInit {
       }
 
       this.mvtCaisseService.ajouterMouvement(donne).subscribe((obj) => {
-        console.log('Le mouvement a été bien enregistré !', donne);
+        console.log('Le mouvement a été bien enregistré !', donne, this.fCaisse['montant'].value);
         this.router.navigate(['/list-exemplaire']);
       })
     }

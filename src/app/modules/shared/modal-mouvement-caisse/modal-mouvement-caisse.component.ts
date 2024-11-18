@@ -1,15 +1,11 @@
-import { DialogRef } from '@angular/cdk/dialog';
 import { DatePipe } from '@angular/common';
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ICaisses } from 'src/app/modele/caisses';
-import { IMouvement } from 'src/app/modele/mouvement';
 import { MoyenPaiement } from 'src/app/modele/mouvement-caisses';
-import { CaissesService } from 'src/app/services/caisses/caisses.service';
 import { DonneesEchangeService } from 'src/app/services/donnees-echange/donnees-echange.service';
-import { MouvementCaisseService } from 'src/app/services/mouvement-caisse/mouvement-caisse.service';
 import { ModalBilleterieComponent } from '../modal-billeterie/modal-billeterie.component';
 
 @Component({
@@ -37,7 +33,6 @@ export class ModalMouvementCaisseComponent implements OnInit {
     private router: Router,
     private dialogRef: MatDialogRef<ModalMouvementCaisseComponent>,
     private formBuilder: FormBuilder,
-    private donneeEchangeService: DonneesEchangeService,
     private infosPath: ActivatedRoute,
     private datePipe: DatePipe,
     private dialogDef: MatDialog,
@@ -84,28 +79,6 @@ export class ModalMouvementCaisseComponent implements OnInit {
         }
       }
     });
-
-
-    /* this.formePaiement.setValue({
-      moyen: this.data.donnee[0].moyen,
-      montant: this.data.donnee[0].montant,
-      reference: this.data.donnee[0].reference
-    });
-    this.formePaiement1.setValue({
-      moyen: this.data.donnee[1].moyen,
-      montant: this.data.donnee[1].montant,
-      reference: this.data.donnee[1].reference
-    });
-    this.formePaiement2.setValue({
-      moyen: this.data.donnee[2].moyen,
-      montant: this.data.donnee[2].montant,
-      reference: this.data.donnee[2].reference
-    });
-    this.formePaiement3.setValue({
-      moyen: this.data.donnee[3].moyen,
-      montant: this.data.donnee[3].montant,
-      reference: this.data.donnee[3].reference
-    }); */
   }
 
   openModalBilleterieDialog(req: any, index: number) {
@@ -114,8 +87,8 @@ export class ModalMouvementCaisseComponent implements OnInit {
     if (req.controls['moyen'].value.type == 'cash') {
       const dialogRef = this.dialogDef.open(ModalBilleterieComponent,
         {
-          maxWidth: '70vw',
-          maxHeight: '80vh',
+          maxWidth: '100vw',
+          maxHeight: '100vh',
           height: '100%',
           width: '100%',
           enterAnimationDuration: '1000ms',
