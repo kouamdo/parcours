@@ -391,19 +391,12 @@ export class NewExemplaireComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         this.modalResult = result.data;
-        if (this.modalLastResult) {
-          this.modalLastResult.forEach((element) => {
-            if (element.montant) {
-              this.resteAPayer += element.montant;
-            }
-          });
-        }
+
         this.modalResult.forEach((element) => {
           if (element.montant) {
             this.resteApayer(element.montant);
           }
         });
-        this.modalLastResult = result.data;
         console.log('result :', this.modalResult);
       }
     });
@@ -426,21 +419,6 @@ export class NewExemplaireComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         this.modalResultBilleterie = result.data;
-        if (this.modalLastResultBilleterie) {
-          if (this.modalLastResultBilleterie.x1) this.resteAPayer += this.modalLastResultBilleterie.x1;
-          if (this.modalLastResultBilleterie.x2) this.resteAPayer += this.modalLastResultBilleterie.x2 * 2;
-          if (this.modalLastResultBilleterie.x5) this.resteAPayer += this.modalLastResultBilleterie.x5 * 5;
-          if (this.modalLastResultBilleterie.x10) this.resteAPayer += this.modalLastResultBilleterie.x10 * 10;
-          if (this.modalLastResultBilleterie.x25) this.resteAPayer += this.modalLastResultBilleterie.x25 * 25;
-          if (this.modalLastResultBilleterie.x50) this.resteAPayer += this.modalLastResultBilleterie.x50 * 50;
-          if (this.modalLastResultBilleterie.x100) this.resteAPayer += this.modalLastResultBilleterie.x100 * 100;
-          if (this.modalLastResultBilleterie.x500) this.resteAPayer += this.modalLastResultBilleterie.x500 * 500;
-          if (this.modalLastResultBilleterie.x500B) this.resteAPayer += this.modalLastResultBilleterie.x500B * 500;
-          if (this.modalLastResultBilleterie.x1000) this.resteAPayer += this.modalLastResultBilleterie.x1000 * 1000;
-          if (this.modalLastResultBilleterie.x2000) this.resteAPayer += this.modalLastResultBilleterie.x2000 * 2000;
-          if (this.modalLastResultBilleterie.x5000) this.resteAPayer += this.modalLastResultBilleterie.x5000 * 5000;
-          if (this.modalLastResultBilleterie.x10000) this.resteAPayer += this.modalLastResultBilleterie.x10000 * 10000;
-        }
         if (this.modalResultBilleterie.x1) this.resteApayer(this.modalResultBilleterie.x1);
         if (this.modalResultBilleterie.x2) this.resteApayer(this.modalResultBilleterie.x2 * 2);
         if (this.modalResultBilleterie.x5) this.resteApayer(this.modalResultBilleterie.x5 * 5);
@@ -454,7 +432,6 @@ export class NewExemplaireComponent implements OnInit {
         if (this.modalResultBilleterie.x2000) this.resteApayer(this.modalResultBilleterie.x2000 * 2000);
         if (this.modalResultBilleterie.x5000) this.resteApayer(this.modalResultBilleterie.x5000 * 5000);
         if (this.modalResultBilleterie.x10000) this.resteApayer(this.modalResultBilleterie.x10000 * 10000);
-        this.modalLastResultBilleterie = result.data;
         console.log('result Billeterie:', this.modalResultBilleterie);
       }
     });
@@ -774,6 +751,7 @@ export class NewExemplaireComponent implements OnInit {
 
   verifyUseSolde(caisse: string) {
     console.log("caisse retourné :", this.selectedOptions, caisse);
+    this.resteAPayer = this.sommeMontants();
 
     if (caisse == 'solde' && this.compte?.solde! > 0) {
       this.fCaisse['montant'].disable();
