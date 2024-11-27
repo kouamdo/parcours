@@ -1,0 +1,80 @@
+<div id="mainSection">
+    <div class="card block" id="top2">
+        <div class="card-header" class="entete pt-4 pb-4">
+          {{"personnel.title1" | translate}} {{titre}}
+        </div>
+        <div class="card-body" >
+            <form [formGroup]="forme" (ngSubmit)="onSubmit(forme.value)" *ngIf="forme" >
+                <div class="">
+                    <div class="">
+                        <div class="form-group">
+                            <div>
+                                <div class="champs">
+                                    <label for="libelle" class="label">
+                                        {{'compte.table.title1' | translate}}<span style="color: red;" aria-label="required">*</span>
+                                    </label>
+                                    <input type="text" formControlName="libelle" name="nom" id="libelle"  placeholder="{{'compte.table.title1' | translate}}"  class="form-control" required>
+                                </div>
+                                <div  *ngIf="submitted && f['libelle'].errors"  class="alert alert-danger" >
+                                    <div *ngIf="f['libelle'].errors['required']">{{'compte.form.text2' | translate}}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div>
+                                <div class="champs">
+                                    <label for="solde" class="label" >
+                                        {{"compte.table.title0" | translate}}<span style="color: red;" aria-label="required">*</span>
+                                    </label>
+                                    <input type="number" formControlName="solde" name="solde" id="solde" placeholder="{{'compte.table.title0' | translate}}" class="form-control" required>
+                                </div>
+                                <div *ngIf="submitted && f['solde'].errors" class="alert alert-danger">
+                                    <div *ngIf="f['solde'].errors['required']">{{'compte.form.text1' | translate}}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div>
+                                <div class="champs">
+                                    <label for="montantDecouvert" class="label" >
+                                        {{"compte.table.title3" | translate}}
+                                    </label>
+                                    <input  type="text" formControlName="montantDecouvert"  name="montantDecouvert" id="montantDecouvert" placeholder="{{'compte.table.title3' | translate}}" value="" class="form-control">
+                                </div>
+                                <!-- <div *ngIf="submitted && f['montantDecouvert'].errors" class="alert alert-danger">
+                                    <div *ngIf="f['montantDecouvert'].errors['required']">{{'personnel.form.text3' | translate}}</div>
+                                </div> -->
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="champs">
+                                <label for="beneficiaire" class="label">
+                                    {{'compte.table.title4' | translate}}
+                                </label>
+                                <mat-form-field class="example-full-width w-100" appearance="fill">
+                                    <input type="text" matInput [matAutocomplete]="auto"  aria-label="beneficiaire" formControlName="beneficiaire" name="beneficiaire" id="beneficiaire" placeholder="" class="w-100" style="color: black;">
+                                    <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn" >
+                                    <mat-option *ngFor="let option of personnels" [value]="option">
+                                        {{option.nom}}
+                                    </mat-option>
+                                    </mat-autocomplete>
+                                </mat-form-field>
+                            </div>
+                                <!-- <div *ngIf="submitted && f['beneficiaire'].errors"  class="alert alert-danger" >
+                                    <div *ngIf="f['beneficiaire'].errors['required']">{{'personnel.form.text3' | translate}}</div>
+                                </div> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="actionButton valBtn" >
+                    <button class="btn retour" (click)="return()" title="{{'lists.button2' | translate}}">
+                        <i class="fa fa-reply mr-1" aria-hidden="true"></i>
+                    </button>
+                    <button type="submit" class="btn btnValidation" title="{{btnLibelle}}">
+                        <i class="fa fa-check" aria-hidden="true"></i>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

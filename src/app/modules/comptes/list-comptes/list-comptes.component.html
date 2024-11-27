@@ -1,0 +1,87 @@
+
+<div id="">
+    <div class="title" id="top1">
+        <app-entete class="title"></app-entete>
+    </div>
+    <div class="card container-fluid" id="cardBlock" id="top">
+        <div class='card-hearder pt-3' >
+            <div class="d-flex align-items-center justify-content-end tableTools">
+                <div class="form-inline mr-2">
+                    <form class="example-form-entete">
+                        <input placeholder="{{'patient.search-bar' | translate}}" type="text" matInput aria-label="Rechercher" [formControl]="myControl" [matAutocomplete]="auto">
+                        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+                        <mat-option *ngFor="let option of filteredOptions" [value]="option" (onSelectionChange)="rechercherListingCompte(option)">
+                            {{option.libelle}}
+                        </mat-option>
+                        </mat-autocomplete>
+                    </form>
+                </div>
+                <div role="button" id="addCompteBotton" routerLink="../compte-nouveau">
+                    <span title="Ajouter une compte">
+                        <i class="fa fa-user-plus" aria-hidden="true"></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="card-body p-0" id="tableBlock">
+            <div class='table-responsive w-100'>
+                <table class='table table-sm table-centered table-striped table-bordered w-100' mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)">
+
+                    <!-- libelle Column -->
+                    <ng-container matColumnDef="libelle">
+                        <th class="containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'compte.table.title1' | translate}} </th>
+                        <td class="containCell" mat-cell *matCellDef="let element"> {{element.libelle}} </td>
+                    </ng-container>
+
+                    <!-- solde Column -->
+                    <ng-container matColumnDef="solde">
+                        <th class="containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'compte.table.title0' | translate}} </th>
+                        <td class="containCell" mat-cell *matCellDef="let element"> {{element.solde}} </td>
+                    </ng-container>
+
+                    <!-- montantMax Column -->
+                    <ng-container matColumnDef="montantMax">
+                        <th class="containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'compte.table.title3' | translate}} </th>
+                        <td class="containCell" mat-cell *matCellDef="let element"> {{element.montantDecouvertMax}} </td>
+                    </ng-container>
+
+                    <!-- bénéficiaire Column -->
+                    <ng-container matColumnDef="bénéficiaire">
+                        <th class="containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'compte.table.title4' | translate}} </th>
+                        <td class="containCell" mat-cell *matCellDef="let element"> {{element.beneficiaire?.nom}} </td>
+                    </ng-container>
+
+                    <!-- date de création Column -->
+                    <ng-container matColumnDef="dateCreation">
+                        <th class="containHead" mat-header-cell *matHeaderCellDef mat-sort-header> {{'compte.table.title2' | translate}} </th>
+                        <td class="containCell" mat-cell *matCellDef="let element"> {{element.dateCreation | date:'dd/MM/yyyy HH:mm:ss'}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="actions">
+                        <th class="text-dark containHead" mat-header-cell *matHeaderCellDef> {{"patient.table.title8" | translate}} </th>
+                        <td class="containCell" mat-cell *matCellDef="let element">
+                            <div id="actions" class="dropdown open">
+                                <button class="btn dropdown-toggle" type="button" id="triggerId" data-toggle="dropdown" aria-haspopup="true"
+                                        aria-expanded="false">
+                                    <span>...</span>
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="triggerId">
+                                    <button class="dropdown-item nav-link" [routerLink]="['/compte-nouveau',element.id]" title="{{'compte.table.actions.link2' | translate}}">
+                                        <i class="fa fa-pen text-info" aria-hidden="true"></i>
+                                        <span>{{'compte.table.actions.link2' | translate}}</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </td>
+                    </ng-container>
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                </table>
+                <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+                               showFirstLastButtons
+                               aria-label="Select page of periodic elements">
+                </mat-paginator>
+            </div>
+        </div>
+    </div>
+</div>

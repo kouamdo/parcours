@@ -52,48 +52,50 @@
                           </div>
                         </div>
 
-                        <div class="groupChamps">
+                        <div class=" d-flex flex-wrap">
                             <div class="form-group">
-                                <div>
-                                    <div class="champs">
-                                        <label for="etat" class="label" >
+                                    <div class="">
+                                        <label for="etat" class="etat" >
                                             {{"services.form.label2" | translate}}
                                         </label>
-                                        <span id="etat" class="w-100">
+                                        <span id="etat" class="ml-2">
                                             <input type="checkbox" checked value="true" formControlName="etat" name="etat">
                                         </span>
                                     </div>
+                            </div>
+                            <div class="form-group ml-2">
+                                <div>
+                                        <label for="estEncaissable" class="estEncaissable" >
+                                            {{"services.form.label5" | translate}}
+                                        </label>
+                                        <span id="estEncaissable" class="ml-2">
+                                            <input type="checkbox" checked value="false" formControlName="estEncaissable" name="estEncaissable">
+                                        </span>
                                 </div>
                             </div>
-
-                            <div class="form-group" title="{{'document.form.text5' | translate}}">
+                            <div class="form-group ml-2" title="{{'document.form.text5' | translate}}">
                                 <div>
-                                    <div class="champs">
-                                        <label for="affichagePrix" class="label" >
+                                        <label for="affichagePrix" class="affichagePrix" >
                                             {{"document.table.title18" | translate}}
                                         </label>
                                         <span id="affichagePrix" class="w-100">
                                             <input type="checkbox" value="true" formControlName="affichagePrix" name="affichagePrix">
                                         </span>
-                                    </div>
                                 </div>
                             </div>
 
                             <div class="form-group" title="{{'document.form.text6' | translate}}">
                                 <div>
-                                    <div class="champs">
                                         <label for="contientRessources" class="contientRessources" >
                                             {{"document.table.title19" | translate}}
                                         </label>
                                         <span id="contientRessources" class="w-100">
                                             <input type="checkbox" value="false" formControlName="contientRessources" name="contientRessources" (change)="desactiveElementsLieRessource($event)">
                                         </span>
-                                    </div>
                                 </div>
                             </div>
                             <div class="form-group" title="{{'document.form.text7' | translate}}">
                                 <div>
-                                    <div class="champs">
                                         <label for="contientDistributeurs" class="contientDistributeurs" >
                                             {{"document.table.title20" | translate}}
                                         </label>
@@ -113,8 +115,7 @@
                                         <span id="beneficiaireObligatoire" class="w-100">
                                             <input type="checkbox" checked value="true" formControlName="beneficiaireObligatoire" name="beneficiaireObligatoire">
                                         </span>
-                                    </div>
-                                </div>
+                                </div> 
                             </div>
                         </div>
                         <div class="groupChamps">

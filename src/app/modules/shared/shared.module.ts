@@ -38,6 +38,10 @@ import { MatRadioModule } from '@angular/material/radio';
 import { ModalChoixPersonneComponent } from './modal-choix-personne/modal-choix-personne.component';
 import { MatSelectModule } from '@angular/material/select';
 import { ModalChoixPromotionRessourceComponent } from './modal-choix-promotion-ressource/modal-choix-promotion-ressource.component';
+import { ModalAffecterComptePersonnelComponent } from './modal-affecter-compte-personnel/modal-affecter-compte-personnel.component';
+import { ModalMouvementCaisseCompteComponent } from './modal-mouvement-caisse-compte/modal-mouvement-caisse-compte.component';
+import { ModalMouvementCaisseComponent } from './modal-mouvement-caisse/modal-mouvement-caisse.component';
+import { ModalBilleterieComponent } from './modal-billeterie/modal-billeterie.component';
 
 @NgModule({
   declarations: [
@@ -57,6 +61,10 @@ import { ModalChoixPromotionRessourceComponent } from './modal-choix-promotion-r
     ModalChoixDocEtatComponent,
     ModalChoixPersonneComponent,
     ModalChoixPromotionRessourceComponent,
+    ModalAffecterComptePersonnelComponent,
+    ModalMouvementCaisseCompteComponent,
+    ModalMouvementCaisseComponent,
+    ModalBilleterieComponent,
   ],
   exports: [
     ModalCategoriesComponent,

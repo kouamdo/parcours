@@ -16,9 +16,10 @@ export interface IDocument {
     beneficiaireObligatoire:boolean,
     missions : IMission[],
     attributs : IAttributs[],
-    categories : ICategoriesAttributs[]
-    preconisations : IPrecoMvt[]
-    sousDocuments? : IDocument[]
+    categories : ICategoriesAttributs[],
+    preconisations : IPrecoMvt[],
+    sousDocuments? : IDocument[],
     docEtats : IDocEtats[],
-    formatCode : string
+    formatCode : string,
+    estEncaissable: boolean
 }

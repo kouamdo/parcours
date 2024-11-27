@@ -1,6 +1,6 @@
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { DatePipe } from '@angular/common';
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import {
   FormArray,
   FormBuilder,
@@ -36,6 +36,14 @@ import { PromoService } from 'src/app/services/promo/promo.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalChoixPromotionRessourceComponent } from '../../shared/modal-choix-promotion-ressource/modal-choix-promotion-ressource.component';
 import { ModalCodebarreScanContinueComponent } from '../../shared/modal-codebarre-scan-continue/modal-codebarre-scan-continue.component';
+import { IMouvementCaisses, Monaies, MoyenPaiement } from 'src/app/modele/mouvement-caisses';
+import { ICaisses } from 'src/app/modele/caisses';
+import { IComptes } from 'src/app/modele/comptes';
+import { MouvementCaisseService } from 'src/app/services/mouvement-caisse/mouvement-caisse.service';
+import { ComptesService } from 'src/app/services/comptes/comptes.service';
+import { CaissesService } from 'src/app/services/caisses/caisses.service';
+import { ModalMouvementCaisseComponent } from '../../shared/modal-mouvement-caisse/modal-mouvement-caisse.component';
+import { ModalBilleterieComponent } from '../../shared/modal-billeterie/modal-billeterie.component';
 
 @Component({
   selector: 'app-new-exemplaire',
@@ -46,6 +54,7 @@ export class NewExemplaireComponent implements OnInit , AfterViewInit {
   @ViewChild('barcodeScanner', { static: false })
   barcodeScanner!: ModalCodebarreScanContinueComponent;
 
+  [x: string]: any;
   exemplaire: IExemplaireDocument = {
     id: '',
     idDocument: '',
@@ -59,6 +68,7 @@ export class NewExemplaireComponent implements OnInit , AfterViewInit {
     preconisations: [],
     mouvements: [],
     affichagePrix: false,
+    estEncaissable: false,
     contientRessources: false,
     contientDistributeurs: false,
     typeMouvement: 'Neutre',
@@ -90,6 +100,7 @@ export class NewExemplaireComponent implements OnInit , AfterViewInit {
     categories: [],
     preconisations: [],
     affichagePrix: true,
+    estEncaissable: false,
     contientRessources: true,
     contientDistributeurs: true,
     typeMouvement: 'Neutre',
@@ -127,25 +138,27 @@ export class NewExemplaireComponent implements OnInit , AfterViewInit {
   typeDate = IType.Date;
   TypeBoolean = IType.Boolean;
   TypeRadio = IType.Radio;
-  typeTextArea= IType.Textarea;
+  typeTextArea = IType.Textarea;
 
   compteur: number = -1;
   totalAttribut: number = 0;
   numerateur: number = -1;
+  selectedOptions!: ICaisses;
   totalAttributSupprime: number = 0;
   objetCleValeurSupprime: ObjetCleValeur[] = [];
   tableauAttributsSupprime: IAttributs[] = [];
 
   tempAttributsCpt = new Map()
   tempAttributsObbligatoires = new Map()
-  estValide : boolean = true
-  eValvalide : string = "";
-  titre:string='';  
+  estValide: boolean = true
+  eValvalide: string = "";
+  titre: string = '';
   ressourceControl = new FormControl<string | IRessource>('');
   distributeurControl = new FormControl<string | IDistributeur>('');
   assuranceControl = new FormControl<string | IDistributeur>('');
   idRessource: string = '';
   ELEMENTS_TABLE_MOUVEMENTS: IMouvement[] = [];
+  LAST_ELEMENTS_TABLE_MOUVEMENTS: IMouvement[] = [];
   dataSourceMouvements = new MatTableDataSource<IMouvement>(
     this.ELEMENTS_TABLE_MOUVEMENTS
   );
@@ -158,16 +171,38 @@ export class NewExemplaireComponent implements OnInit , AfterViewInit {
     'quantite',
     'unite'
   ]; // structure du tableau presentant les Ressources
+  filteredOptionsMouvement: IMouvementCaisses[] | undefined;
+  displayedMouvementsColumns: string[] = [
+    'reférence',
+    'moyen de paiement',
+    'date',
+    'montant'
+  ];
+  ELEMENTS_TABLE_MOUVEMENTCAISSES: IMouvementCaisses[] = [];
+  dataSourceMouvementcaisses = new MatTableDataSource<IMouvementCaisses>(
+    this.ELEMENTS_TABLE_MOUVEMENTCAISSES
+  );
   TABLE_PRECONISATION_RESSOURCES: IPrecoMvt[] = [];
-  montantTotal : number = 0;
-  soustotal : number = 0;
-  distributeur : IDistributeur | undefined;
-  modificationDistributeurActive : boolean = false
-  indexmodificationDistributeur : number = -1
-  typeNeutre : string = TypeMouvement.Neutre
-  typeAjout : string = TypeMouvement.Ajout
-  typeReduire : string = TypeMouvement.Reduire
-  laPersonneRattachee : IPatient | undefined 
+  montantTotal: number = 0;
+  montantTTverse: number = 0;
+  soustotal: number = 0;
+  resteAPayer: number = 0;
+  lastSomme: number = 0;
+  tailleFirstMvts: number = 0;
+  distributeur: IDistributeur | undefined;
+  modificationDistributeurActive: boolean = false
+  indexmodificationDistributeur: number = -1
+  typeNeutre: string = TypeMouvement.Neutre
+  typeAjout: string = TypeMouvement.Ajout
+  typeReduire: string = TypeMouvement.Reduire
+  laPersonneRattachee: IPatient | undefined
+  compte: IComptes | undefined
+  caisses: ICaisses[] = []
+  modalResult: MoyenPaiement[] = [];
+  modalLastResult: MoyenPaiement[] = [];
+  modalResultBilleterie: any;
+  modalLastResultBilleterie: any;
+  tableMvts: IMouvementCaisses[] = []
   codeControl = new FormControl()
   promotion : IPromo | undefined
   distributeurR: string = '';
@@ -188,8 +223,9 @@ export class NewExemplaireComponent implements OnInit , AfterViewInit {
 
   constructor(
     private router: Router,
+    private cdr: ChangeDetectorRef,
     private formBuilder: FormBuilder,
-    private donneeEchangeService:DonneesEchangeService,
+    private donneeEchangeService: DonneesEchangeService,
     private infosPath: ActivatedRoute,
     private serviceRessource: RessourcesService,
     private serviceDistributeur: DistributeursService,
@@ -200,11 +236,18 @@ export class NewExemplaireComponent implements OnInit , AfterViewInit {
     private barService: ModalCodebarreService,
     private servicePatient: PatientsService,
     private servicePromo: PromoService,
-    private dialogDef: MatDialog
+    private dialogDef: MatDialog,
+    private mvtCaisseService: MouvementCaisseService,
+    private compteService: ComptesService,
+    private caisseService: CaissesService
   ) {
     this.formeExemplaire = this.formBuilder.group({
       _exemplaireDocument: new FormArray([]),
       _controlsSupprime: new FormArray([]),
+      use : [false],
+      montant : ['', [Validators.required]],
+      moyenPaiement : new FormControl<string | ICaisses>(''),
+      referencePaiement : ['', [Validators.required]]
     });
   }
 
@@ -213,6 +256,35 @@ export class NewExemplaireComponent implements OnInit , AfterViewInit {
     this.unitePromo =""
     this.codeControl.disable()
     this.donneeEchangeService.dataPromoMouvementCourant = undefined
+    console.log("info doc :", this.exemplaire, this.document);
+
+    this.fCaisse['montant'].disable();
+    let idPersonne: string = this.donneeEchangeService.getExemplairePersonneRatachee()
+    this.servicePatient.getPatientById(idPersonne).subscribe(
+      patientTrouve => {
+        this.laPersonneRattachee = patientTrouve;
+        if (patientTrouve != undefined) {
+          this.nomPatientCourant = this.laPersonneRattachee.nom + " " + this.laPersonneRattachee.prenom
+          this.compteService.getCompteByUser(this.laPersonneRattachee.id).subscribe(
+            account => {
+              this.compte = account;
+              if (this.compte?.solde == 0 || this.compte?.solde == null) {
+                this.formeExemplaire.controls['use'].disable()
+              }
+              console.log('compte personne rattaché :', this.compte);
+            }
+          )
+        }
+        console.log("personne ratachée :", this.nomPatientCourant);
+      }
+    )
+    this.caisseService.getAllCaisses().subscribe(
+      (reponse) => {
+        this.caisses = reponse
+        console.log('all caisses :', this.caisses);
+
+      }
+    );
 
     this.barService.getCode().subscribe((dt) => {
       this.scan_val = dt;
@@ -235,8 +307,8 @@ export class NewExemplaireComponent implements OnInit , AfterViewInit {
       }
     });
     this.serviceDistributeur.getAllDistributeurs().subscribe(
-      (reponse) =>{
-        this.filteredDistributeurOptions=reponse
+      (reponse) => {
+        this.filteredDistributeurOptions = reponse
       }
     )
     this.compteur = -1;
@@ -248,8 +320,9 @@ export class NewExemplaireComponent implements OnInit , AfterViewInit {
     this.idDocument = this.infosPath.snapshot.paramMap.get('idDocument');
 
     this.initialiseFormExemplaire();
-    this.titre=this.donneeEchangeService.dataEnteteMenu
-    
+    this.cdr.detectChanges();
+    this.titre = this.donneeEchangeService.dataEnteteMenu
+
     this.ressourceControl.valueChanges.subscribe((value) => {
       const query = value?.toString(); // Convert to lower case for case-insensitive search
       if (query && query.length > 0) {
@@ -316,6 +389,11 @@ export class NewExemplaireComponent implements OnInit , AfterViewInit {
     }
   }
 
+  onInput(event: Event): void {
+    const inputElement = event.target as HTMLInputElement;
+    inputElement.value = inputElement.value.replace(/[^0-9]/g, ''); // Supprime les caractères non numériques
+  }
+
   /**
    * Methode pour l'initialisation d'un control avec une valeur
    * @param valParDefaut valeur recuperer dans objetEnregistre et qui servira de valeur du control cree
@@ -354,6 +432,71 @@ export class NewExemplaireComponent implements OnInit , AfterViewInit {
       }
     }
   }
+
+  openModalPaiementDialog() {
+
+    const dialogRef = this.dialogDef.open(ModalMouvementCaisseComponent,
+      {
+        maxWidth: '100vw',
+        maxHeight: '100vh',
+        height: '100%',
+        width: '100%',
+        enterAnimationDuration: '1000ms',
+        exitAnimationDuration: '1000ms',
+        data: { donnee: this.modalResult, caisses: this.caisses }
+      }
+    )
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.resteAPayer = this.sommeMontants(this.ELEMENTS_TABLE_MOUVEMENTS);
+        this.modalResult = result.data;
+        this.modalResult.forEach((element) => {
+          if (element.montant) {
+            this.resteApayer(element.montant);
+          }
+        });
+        console.log('result :', this.modalResult);
+      }
+    });
+  }
+
+  openModalBilleterieDialog() {
+
+    const dialogRef = this.dialogDef.open(ModalBilleterieComponent,
+      {
+        maxWidth: '100vw',
+        maxHeight: '100vh',
+        height: '100%',
+        width: '100%',
+        enterAnimationDuration: '1000ms',
+        exitAnimationDuration: '1000ms',
+        data: { monaies: this.modalResultBilleterie }
+      }
+    )
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.resteAPayer = this.sommeMontants(this.ELEMENTS_TABLE_MOUVEMENTS);
+        this.modalResultBilleterie = result.data;
+        if (this.modalResultBilleterie.x1) this.resteApayer(this.modalResultBilleterie.x1);
+        if (this.modalResultBilleterie.x2) this.resteApayer(this.modalResultBilleterie.x2 * 2);
+        if (this.modalResultBilleterie.x5) this.resteApayer(this.modalResultBilleterie.x5 * 5);
+        if (this.modalResultBilleterie.x10) this.resteApayer(this.modalResultBilleterie.x10 * 10);
+        if (this.modalResultBilleterie.x25) this.resteApayer(this.modalResultBilleterie.x25 * 25);
+        if (this.modalResultBilleterie.x50) this.resteApayer(this.modalResultBilleterie.x50 * 50);
+        if (this.modalResultBilleterie.x100) this.resteApayer(this.modalResultBilleterie.x100 * 100);
+        if (this.modalResultBilleterie.x500) this.resteApayer(this.modalResultBilleterie.x500 * 500);
+        if (this.modalResultBilleterie.x500B) this.resteApayer(this.modalResultBilleterie.x500B * 500);
+        if (this.modalResultBilleterie.x1000) this.resteApayer(this.modalResultBilleterie.x1000 * 1000);
+        if (this.modalResultBilleterie.x2000) this.resteApayer(this.modalResultBilleterie.x2000 * 2000);
+        if (this.modalResultBilleterie.x5000) this.resteApayer(this.modalResultBilleterie.x5000 * 5000);
+        if (this.modalResultBilleterie.x10000) this.resteApayer(this.modalResultBilleterie.x10000 * 10000);
+        console.log('result Billeterie:', this.modalResultBilleterie);
+      }
+    });
+  }
+
   initialiseFormExemplaire() {
     if (this.idExemplaire != null && this.idExemplaire !== '') {
       this.btnLibelle = 'Modifier';
@@ -376,11 +519,16 @@ export class NewExemplaireComponent implements OnInit , AfterViewInit {
             this.ELEMENTS_TABLE_MOUVEMENTS = this.exemplaire.mouvements;
           }
           this.dataSourceMouvements.data = this.ELEMENTS_TABLE_MOUVEMENTS;
+          console.log('mvts :', this.dataSourceMouvements.data);
+
+          this.LAST_ELEMENTS_TABLE_MOUVEMENTS = this.ELEMENTS_TABLE_MOUVEMENTS;
+          this.tailleFirstMvts = this.ELEMENTS_TABLE_MOUVEMENTS.length;
+
           this.totalAttribut = x.attributs.length - 1;
           this.rechercherAttributsAbsants();
-         //Bug du mocker apiMemory qui ne met pas à jour les données du document dans exemplaire
-         //pour avoir la donnée fraiche on refait un appel à document
-         //à supprimer lorsqu'on aura un vrai back connecté
+          //Bug du mocker apiMemory qui ne met pas à jour les données du document dans exemplaire
+          //pour avoir la donnée fraiche on refait un appel à document
+          //à supprimer lorsqu'on aura un vrai back connecté
           this.modifierMouvementExemplaire(x.idDocument)
           this.laPersonneRattachee = this.exemplaire.personneRattachee
           if (this.exemplaire.personneRattachee != undefined) {
@@ -399,7 +547,11 @@ export class NewExemplaireComponent implements OnInit , AfterViewInit {
               }
             }
           )
+          this.resteAPayer = this.sommeMontants(this.ELEMENTS_TABLE_MOUVEMENTS);
+          this.lastSomme = this.sommeMontants(this.ELEMENTS_TABLE_MOUVEMENTS);
+          this.fCaisse['montant'].setValue(0)
         });
+      this.initialiseMvtCaisses(this.idExemplaire);
     }
     if (this.idDocument != null && this.idDocument !== '') {
       this.serviceDocument
@@ -425,36 +577,84 @@ export class NewExemplaireComponent implements OnInit , AfterViewInit {
               }
             )
           }
+          this.resteAPayer = this.sommeMontants(this.ELEMENTS_TABLE_MOUVEMENTS);
+          this.lastSomme = this.sommeMontants(this.ELEMENTS_TABLE_MOUVEMENTS);
+          this.fCaisse['montant'].setValue(0)
         });
+      this.initialiseMvtCaisses(this.idDocument);
     }
+  }
+
+  initialiseMvtCaisses(id: string) {
+    this.mvtCaisseService.getExemplaireDocumentByIdMvtCaisse(id).subscribe((d) => {
+      console.log("mvt caisses last :", d);
+
+      if (d) {
+        this.ELEMENTS_TABLE_MOUVEMENTCAISSES = d;
+        this.dataSourceMouvementcaisses.data = this.ELEMENTS_TABLE_MOUVEMENTCAISSES;
+      }
+    })
+  }
+
+  sommeTtVerse(): number {
+    this.montantTTverse = 0;
+    this.ELEMENTS_TABLE_MOUVEMENTCAISSES.forEach((mouvement) => {
+      if (mouvement.montant != undefined || mouvement.montant != null) {
+        this.montantTTverse += mouvement.montant;
+      }
+    });
+    return this.montantTTverse;
+  }
+
+  lastValueMvt(value: IMouvement): boolean {
+    let response = false;
+    this.LAST_ELEMENTS_TABLE_MOUVEMENTS = JSON.parse(localStorage.getItem("mvtExempl")!);
+    if (this.LAST_ELEMENTS_TABLE_MOUVEMENTS != undefined) {
+      let ele = this.LAST_ELEMENTS_TABLE_MOUVEMENTS.find((d) => d.id == value.id) as IMouvement;
+      ele != undefined ? response = true : response = false;
+      console.log("ele last table :", ele, response, this.LAST_ELEMENTS_TABLE_MOUVEMENTS);
+    }
+    return response;
   }
 
   /**
    * methode permettant de regrouper les mouvement des sous exemplaires pour
    * pré-former le tableau de mouvement
    */
-  concatMouvementsSousExemplaireDocument(){
-    let sousExelplaires : IExemplaireDocument[] = this.donneeEchangeService.dataDocumentSousDocuments
-    sousExelplaires.forEach(
-      element => {
-        if (element.mouvements) {
-          element.mouvements.forEach(
-            mvt => {
-              this.ELEMENTS_TABLE_MOUVEMENTS.push(mvt)
-          });
-        }     
-    });
+  concatMouvementsSousExemplaireDocument() {
+    let sousExelplaires: IExemplaireDocument[] = [];
+    console.log("données echanges :", this.donneeEchangeService.dataDocumentSousDocuments, JSON.parse(localStorage.getItem("mvtExempl")!));
+
+    if (this.donneeEchangeService.dataDocumentSousDocuments != undefined) {
+      sousExelplaires = this.donneeEchangeService.dataDocumentSousDocuments;
+      localStorage.setItem("mvtExempl", JSON.stringify(this.donneeEchangeService.dataDocumentSousDocuments));
+    } else {
+      sousExelplaires = JSON.parse(localStorage.getItem("mvtExempl")!);
+    }
+    if (sousExelplaires) {
+      sousExelplaires.forEach(
+        element => {
+          if (element.mouvements) {
+            element.mouvements!.forEach(
+              mvt => {
+                this.ELEMENTS_TABLE_MOUVEMENTS.push(mvt)
+              });
+          }
+        });
+    }
     this.dataSourceMouvements.data = this.ELEMENTS_TABLE_MOUVEMENTS;
+    this.tailleFirstMvts = this.ELEMENTS_TABLE_MOUVEMENTS.length;
+    console.log(" taille table :", this.tailleFirstMvts, this.ELEMENTS_TABLE_MOUVEMENTS);
   }
 
-/**
- * Methode permettant de former la nouvelle structure du tableau de mouvement de l'exemplaire
- * si les données affiche prix et affiche ressourse sont modifiées dans le document initial 
- * @param document est le model de document inital duquel l'exemplaire a été tiré
- */
-  modifierMouvementExemplaire(idDocument:string){
+  /**
+   * Methode permettant de former la nouvelle structure du tableau de mouvement de l'exemplaire
+   * si les données affiche prix et affiche ressourse sont modifiées dans le document initial 
+   * @param document est le model de document inital duquel l'exemplaire a été tiré
+   */
+  modifierMouvementExemplaire(idDocument: string) {
     this.serviceDocument.getDocumentById(idDocument).subscribe(
-      value=>{
+      value => {
         this.document.affichagePrix = value.affichagePrix
         this.document.contientRessources = value.contientRessources
         this.document.contientDistributeurs = value.contientDistributeurs
@@ -480,9 +680,9 @@ export class NewExemplaireComponent implements OnInit , AfterViewInit {
       let montant : string = "montant total"
       if (this.document.typeMouvement == TypeMouvement.Reduire) {
         prix = "prixDeSortie"
-      } else if (this.document.typeMouvement == TypeMouvement.Ajout){
+      } else if (this.document.typeMouvement == TypeMouvement.Ajout) {
         prix = "prixEntrée"
-      }else{
+      } else {
         prix = "prix"
       }
       this.displayedRessourcesColumns.push(prix)
@@ -583,13 +783,13 @@ export class NewExemplaireComponent implements OnInit , AfterViewInit {
     }
 
     let valAttribut = this.rechercherValeurParIdAttribut(attributCategories.attribut.id);
-    this.tempAttributsCpt.set(attributCategories.attribut.id, cpt+1)
-    this.tempAttributsObbligatoires.set(cpt+1, attributCategories.attribut.titre)
+    this.tempAttributsCpt.set(attributCategories.attribut.id, cpt + 1)
+    this.tempAttributsObbligatoires.set(cpt + 1, attributCategories.attribut.titre)
     if (attributCategories.attribut.type == IType.Date && valAttribut != null) {
       // si le type de l'attribut est Date et que la valeur de valAttribut n'est pas vide
       let dateAtt = new Date();
-      if(valAttribut != "PARCOURS_NOT_FOUND_404")
-         dateAtt = new Date(valAttribut); // creatoion d'une nouvelle date avec la valeur de valAttribut
+      if (valAttribut != "PARCOURS_NOT_FOUND_404")
+        dateAtt = new Date(valAttribut); // creatoion d'une nouvelle date avec la valeur de valAttribut
 
       let dateReduite = this.datePipe.transform(dateAtt, 'yyyy-MM-dd'); // changer le format de la date de naissance pour pouvoir l'afficher dans mon input type date
       this.addAttributs(dateReduite, attributCategories.obligatoire);
@@ -599,6 +799,7 @@ export class NewExemplaireComponent implements OnInit , AfterViewInit {
     this.compteur = this.compteur + 1;
     return this.compteur;
   }
+
   incrementeNumerateur(num: number, attribut: IAttributs): number {
     if (this.numerateur >= -1 && this.numerateur >= this.totalAttributSupprime)
       return num;
@@ -619,7 +820,7 @@ export class NewExemplaireComponent implements OnInit , AfterViewInit {
    * Methode qui permet de parcourir le formulaire lors de la validation et de repérer les chapms obligatoires non remplis
    * @returns le titre du premier attribut obligatoire non remplis
    */
-  evaluation():string{
+  evaluation(): string {
 
     this.estValide = true
     for (let index = 0; index < this.tempAttributsObbligatoires.size; index++) {
@@ -636,6 +837,50 @@ export class NewExemplaireComponent implements OnInit , AfterViewInit {
     return this.formeExemplaire.get('_exemplaireDocument') as FormArray;
   }
 
+  get fCaisse() {
+    return this.formeExemplaire.controls;
+  }
+
+  useSolde(res: boolean): number {
+    if (res) {
+      this.fCaisse['montant'].setValue(this.compte?.solde!);
+      this.fCaisse['moyenPaiement'].setValue(this.caisses.find(c => c.type === 'solde')?.type);
+      this.resteAPayer = this.resteApayer(this.fCaisse['montant'].value);
+    } else {
+      this.resteAPayer += this.fCaisse['montant'].value;
+      this.fCaisse['montant'].setValue(0);
+    }
+    return this.resteAPayer;
+  }
+
+  resteApayer(montant: number): number {
+    this.resteAPayer -= montant;
+    this.fCaisse['montant'].setValue(this.sommeMontants(this.ELEMENTS_TABLE_MOUVEMENTS) - this.resteAPayer)
+    return this.resteAPayer;
+  }
+
+  verifyUseSolde(caisse: string) {
+    console.log("caisse retourné :", this.selectedOptions, caisse);
+
+    if (caisse == 'solde' && this.compte?.solde! > 0) {
+      this.resteAPayer = this.sommeMontants(this.ELEMENTS_TABLE_MOUVEMENTS);
+      this.fCaisse['montant'].disable();
+      this.fCaisse['use'].setValue(true);
+      this.fCaisse['montant'].setValue(this.compte?.solde!);
+      this.resteApayer(this.fCaisse['montant'].value);
+    }
+    if (caisse != 'multipaiement' && caisse != 'cash' && caisse != 'solde') {
+      this.resteAPayer = this.sommeMontants(this.ELEMENTS_TABLE_MOUVEMENTS);
+      this.fCaisse['use'].setValue(false),
+      this.fCaisse['montant'].enable();
+      this.fCaisse['montant'].setValue(0);
+
+    }
+    if (caisse == 'multipaiement') this.fCaisse['montant'].disable(), this.openModalPaiementDialog();
+    if (caisse == 'cash') this.fCaisse['montant'].disable(), this.openModalBilleterieDialog();
+  }
+
+
   /**
    * Methode qui permet de faire la somme des montants du tableau de mouvements
    * pour afficher le resultat dans la case montant total
@@ -651,6 +896,7 @@ export class NewExemplaireComponent implements OnInit , AfterViewInit {
         this.montantTotal += mouvement.prix * mouvement.quantite;
       }
     });
+    this.verifySomme();
     return this.montantTotal;
   }
 
@@ -676,10 +922,23 @@ export class NewExemplaireComponent implements OnInit , AfterViewInit {
     this.assurancePersone = assurance
   }
 
+  verifySomme() {
+    let reste = 0;
+    if (this.montantTotal >= this.lastSomme) {
+      reste = this.montantTotal - this.lastSomme;
+    } else {
+      reste = this.lastSomme - this.montantTotal;
+      reste = reste * -1;
+    }
+    this.resteAPayer += reste;
+    this.lastSomme = this.montantTotal;
+    console.log('donnéé :', this.resteAPayer, this.montantTotal, reste);
+  }
+
   /**
    * methode de validation du formulaire (enregistrement des donnees du formulaire)
    */
-  onSubmit() {
+  onSubmit(data: any) {
     this.submitted = true;
     this.enregistrerObjet();
     this.evaluation();
@@ -692,6 +951,7 @@ export class NewExemplaireComponent implements OnInit , AfterViewInit {
       description: this.document.description,
       missions: this.document.missions,
       attributs: this.document.attributs,
+      estEncaissable: this.document.estEncaissable,
       objetEnregistre: this.exemplaire.objetEnregistre,
       categories: this.document.categories,
       preconisations: this.document.preconisations,
@@ -721,8 +981,109 @@ export class NewExemplaireComponent implements OnInit , AfterViewInit {
     this.serviceExemplaire
       .ajouterExemplaireDocument(exemplaireTemp)
       .subscribe((object) => {
-        this.router.navigate(['/list-exemplaire']);
+        console.log(" new exemplaire :", exemplaireTemp, data.value);
+        this.saveMvt(data.value, exemplaireTemp);
       });
+  }
+
+  displayFnCaisse(element: ICaisses): string {
+    return element && element.libelle ? element.libelle : '';
+  }
+
+  saveMvt(selectItem: any, doc: IExemplaireDocument) {
+    let donne: IMouvementCaisses;
+    let ele: any = this.selectedOptions;
+
+    if (selectItem.use) {
+      donne = {
+        id: uuidv4(),
+        etat: selectItem.etat,
+        montant: this.fCaisse['montant'].value,
+        libelle: selectItem.libelle,
+        typeMvt: selectItem.typeMvt,
+        dateCreation: new Date(),
+        moyenPaiement: this.selectedOptions,
+        referencePaiement: selectItem.referencePaiement,
+        compte: this.compte,
+        personnel: this.laPersonneRattachee!,
+        exemplaire: doc
+      }
+
+      this.mvtCaisseService.ajouterMouvement(donne).subscribe((obj) => {
+        console.log('Le mouvement a été bien enregistré !', donne);
+        this.router.navigate(['/list-exemplaire']);
+      })
+    }
+
+    if (ele == 'multipaiement') {
+      let uuidEle: string = uuidv4();
+      this.modalResult.forEach((element) => {
+        if (element.montant) {
+          donne = {
+            id: uuidv4(),
+            etat: selectItem.etat,
+            montant: element.montant,
+            libelle: selectItem.libelle,
+            typeMvt: selectItem.typeMvt,
+            dateCreation: new Date(),
+            moyenPaiement: element.moyen,
+            isMultipaiement: uuidEle,
+            referencePaiement: element.reference,
+            compte: this.compte,
+            personnel: this.laPersonneRattachee!,
+            exemplaire: doc
+          }
+
+          this.mvtCaisseService.ajouterMouvement(donne).subscribe((obj) => {
+            console.log('Le mouvement a été bien enregistré !', donne);
+          })
+        }
+      });
+      this.router.navigate(['/list-exemplaire']);
+    } else {
+      let billets: Monaies;
+      if (this.selectedOptions.type == 'cash') {
+        billets = {
+          pieces: {
+            x1: this.modalResultBilleterie.x1,
+            x2: this.modalResultBilleterie.x2,
+            x5: this.modalResultBilleterie.x5,
+            x10: this.modalResultBilleterie.x10,
+            x25: this.modalResultBilleterie.x25,
+            x50: this.modalResultBilleterie.x50,
+            x100: this.modalResultBilleterie.x100,
+            x500: this.modalResultBilleterie.x500,
+          },
+          billets: {
+            x500: this.modalResultBilleterie.x500B,
+            x1000: this.modalResultBilleterie.x1000,
+            x2000: this.modalResultBilleterie.x2000,
+            x5000: this.modalResultBilleterie.x5000,
+            x10000: this.modalResultBilleterie.x10000
+          }
+        }
+      }
+
+      donne = {
+        id: uuidv4(),
+        etat: selectItem.etat,
+        montant: this.fCaisse['montant'].value,
+        libelle: selectItem.libelle,
+        typeMvt: selectItem.typeMvt,
+        dateCreation: new Date(),
+        detailJson: billets!,
+        moyenPaiement: this.selectedOptions,
+        referencePaiement: selectItem.referencePaiement,
+        compte: this.compte,
+        personnel: this.laPersonneRattachee!,
+        exemplaire: doc
+      }
+
+      this.mvtCaisseService.ajouterMouvement(donne).subscribe((obj) => {
+        console.log('Le mouvement a été bien enregistré !', donne, this.fCaisse['montant'].value);
+        this.router.navigate(['/list-exemplaire']);
+      })
+    }
   }
 
   /**
@@ -752,13 +1113,13 @@ export class NewExemplaireComponent implements OnInit , AfterViewInit {
         quantite: option.quantite,
         prix: 0,
         dateCreation: new Date(),
-        datePeremption:  new Date(),
+        datePeremption: new Date(),
         ressource: option
       }
 
       if (this.document.typeMouvement == TypeMouvement.Ajout) {
         mvt.prix = option.prixEntree
-      }else if (this.document.typeMouvement == TypeMouvement.Reduire) {
+      } else if (this.document.typeMouvement == TypeMouvement.Reduire) {
         mvt.prix = option.prixDeSortie
       } else {
         mvt.prix = option.prixEntree
@@ -768,14 +1129,14 @@ export class NewExemplaireComponent implements OnInit , AfterViewInit {
         this.distributeur = undefined
       }
 
-      if(this.distributeur != undefined){
+      if (this.distributeur != undefined) {
         mvt.distributeur = this.distributeur
       }
       if (this.promotion) {
         mvt.promotion = this.promotion
         this.appliquerPromotion(mvt)
       }
-      this.ELEMENTS_TABLE_MOUVEMENTS.unshift(mvt)
+      this.ELEMENTS_TABLE_MOUVEMENTS.push(mvt)
       this.dataSourceMouvements.data = this.ELEMENTS_TABLE_MOUVEMENTS
     }
   }
@@ -895,7 +1256,7 @@ export class NewExemplaireComponent implements OnInit , AfterViewInit {
     this.distributeur = undefined
   }
 
-  InitialiseDistributeurControlPourModufication(index : number){
+  InitialiseDistributeurControlPourModufication(index: number) {
     this.modificationDistributeurActive = true
     this.indexmodificationDistributeur = index
     let mouvement = this.ELEMENTS_TABLE_MOUVEMENTS[index]
