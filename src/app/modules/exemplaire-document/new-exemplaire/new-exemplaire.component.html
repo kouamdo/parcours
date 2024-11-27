@@ -210,7 +210,7 @@
                                                 {{'mvtCaisse.table.title0' | translate}}
                                             </label>
                                             <div>
-                                                <input type="number" formControlName="montant" name="montant" class="form-control">
+                                                <input type="number" formControlName="montant" name="montant" (input)="onInput($event)" pattern="^[0-9]*$" class="form-control">
                                             </div>
                                         </div>
                                         <div *ngIf="submitted && fCaisse['montant'].errors"  class="alert alert-danger" >

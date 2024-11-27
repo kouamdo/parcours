@@ -335,6 +335,11 @@ export class NewExemplaireComponent implements OnInit {
     }
   }
 
+  onInput(event: Event): void {
+    const inputElement = event.target as HTMLInputElement;
+    inputElement.value = inputElement.value.replace(/[^0-9]/g, ''); // Supprime les caractères non numériques
+  }  
+
   /**
    * Methode pour l'initialisation d'un control avec une valeur
    * @param valParDefaut valeur recuperer dans objetEnregistre et qui servira de valeur du control cree

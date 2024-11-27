@@ -81,6 +81,11 @@ export class ModalMouvementCaisseComponent implements OnInit {
     });
   }
 
+  onInput(event: Event): void {
+    const inputElement = event.target as HTMLInputElement;
+    inputElement.value = inputElement.value.replace(/[^0-9]/g, ''); // Supprime les caractères non numériques
+  }  
+
   openModalBilleterieDialog(req: any, index: number) {
     console.log('valeur passée :', req.controls['moyen'].value.type, index);
     

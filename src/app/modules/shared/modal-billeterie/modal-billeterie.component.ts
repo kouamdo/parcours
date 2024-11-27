@@ -72,6 +72,11 @@ export class ModalBilleterieComponent implements OnInit {
     return this.formePaiement.controls;
   }
 
+  onInput(event: Event): void {
+    const inputElement = event.target as HTMLInputElement;
+    inputElement.value = inputElement.value.replace(/[^0-9]/g, ''); // Supprime les caractères non numériques
+  }  
+
   onSubmit() {
     this.submitted = true;
 
