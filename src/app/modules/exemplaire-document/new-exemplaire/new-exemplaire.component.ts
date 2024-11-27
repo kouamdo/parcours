@@ -338,7 +338,7 @@ export class NewExemplaireComponent implements OnInit {
   onInput(event: Event): void {
     const inputElement = event.target as HTMLInputElement;
     inputElement.value = inputElement.value.replace(/[^0-9]/g, ''); // Supprime les caractères non numériques
-  }  
+  }
 
   /**
    * Methode pour l'initialisation d'un control avec une valeur
@@ -395,8 +395,8 @@ export class NewExemplaireComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
+        this.resteAPayer = this.sommeMontants();
         this.modalResult = result.data;
-
         this.modalResult.forEach((element) => {
           if (element.montant) {
             this.resteApayer(element.montant);
@@ -423,6 +423,7 @@ export class NewExemplaireComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
+        this.resteAPayer = this.sommeMontants();
         this.modalResultBilleterie = result.data;
         if (this.modalResultBilleterie.x1) this.resteApayer(this.modalResultBilleterie.x1);
         if (this.modalResultBilleterie.x2) this.resteApayer(this.modalResultBilleterie.x2 * 2);
@@ -756,15 +757,16 @@ export class NewExemplaireComponent implements OnInit {
 
   verifyUseSolde(caisse: string) {
     console.log("caisse retourné :", this.selectedOptions, caisse);
-    this.resteAPayer = this.sommeMontants();
 
     if (caisse == 'solde' && this.compte?.solde! > 0) {
+      this.resteAPayer = this.sommeMontants();
       this.fCaisse['montant'].disable();
       this.fCaisse['use'].setValue(true);
       this.fCaisse['montant'].setValue(this.compte?.solde!);
       this.resteApayer(this.fCaisse['montant'].value);
     }
     if (caisse != 'multipaiement' && caisse != 'cash' && caisse != 'solde') {
+      this.resteAPayer = this.sommeMontants();
       this.fCaisse['use'].setValue(false),
         this.fCaisse['montant'].enable();
       this.useSolde(false);
