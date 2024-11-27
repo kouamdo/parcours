@@ -768,8 +768,9 @@ export class NewExemplaireComponent implements OnInit {
     if (caisse != 'multipaiement' && caisse != 'cash' && caisse != 'solde') {
       this.resteAPayer = this.sommeMontants();
       this.fCaisse['use'].setValue(false),
-        this.fCaisse['montant'].enable();
-      this.useSolde(false);
+      this.fCaisse['montant'].enable();
+      this.fCaisse['montant'].setValue(0);
+
     }
     if (caisse == 'multipaiement') this.fCaisse['montant'].disable(), this.openModalPaiementDialog();
     if (caisse == 'cash') this.fCaisse['montant'].disable(), this.openModalBilleterieDialog();
