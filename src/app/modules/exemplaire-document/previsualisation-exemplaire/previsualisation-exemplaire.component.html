@@ -204,7 +204,7 @@
                 ngxPrint>
                 <i class="fas fa-print"></i>
             </button>
-            <button *ngIf="exemplaire.estEncaissable" title="{{'lists.button14' | translate}}" type="button" (click)="openModalDialog(exemplaire.personneRattachee, sommeMontants(), exemplaire)" class="btn bg-success">
+            <button *ngIf="exemplaire.estEncaissable" title="{{'lists.button14' | translate}}" type="button" (click)="openModalDialog(exemplaire.personneRattachee!, sommeMontants(exemplaire.mouvements!), exemplaire)" class="btn bg-success">
                 <i class="fas fa-wallet"></i>
             </button>
             <button *ngIf="req" (click)="openModal(exemplaire)" type="button"

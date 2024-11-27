@@ -11988,6 +11988,7 @@ export class InMemDBService implements InMemoryDbService {
         description:
           "Document delivre par le medecin ou un infirmier de l'etablissement",
         beneficiaireObligatoire: false,
+        estEncaissable: true,
         docEtats: [
           {
             id: '2',
@@ -23873,6 +23874,7 @@ export class InMemDBService implements InMemoryDbService {
         contientDistributeurs: true,
         formatCode: 'FACT',
         beneficiaireObligatoire: false,
+        estEncaissable: true,
         objetEnregistre: [
           {
             key: {
