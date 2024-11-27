@@ -244,9 +244,10 @@ export class NewExemplaireComponent implements OnInit , AfterViewInit {
     this.formeExemplaire = this.formBuilder.group({
       _exemplaireDocument: new FormArray([]),
       _controlsSupprime: new FormArray([]),
-      use : new FormControl(),
-      referencePaiement : new FormControl(),
-      montant : new FormControl(),
+      use : [false],
+      montant : ['', [Validators.required]],
+      moyenPaiement : new FormControl<string | ICaisses>(''),
+      referencePaiement : ['', [Validators.required]]
     });
   }
 
