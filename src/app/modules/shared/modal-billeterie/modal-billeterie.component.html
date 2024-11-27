@@ -1,0 +1,81 @@
+<div id="mainSection">
+    <div class="card">
+        <div class="card-header" class="entete pt-4 pb-4">
+            {{"attributs.title1" | translate}}
+        </div>
+        <form [formGroup]="formePaiement" *ngIf="formePaiement" (ngSubmit)="onSubmit()" class="p-4">
+            <div class="d-flex w-100 items-center">
+                <div>
+                    <h2 class="text-center">{{ 'mvtCaisse.table.title11' | translate }}</h2>
+                    <table class="table-centered table-bordered w-75">
+                        <tr>
+                            <th scope="col">x1</th>
+                            <td><input formControlName="x1" type="number" pattern="^[0-9]*$" (input)="onInput($event)" class="form-control"></td>
+                        </tr>
+                        <tr>
+                            <th scope="col">x2</th>
+                            <td><input formControlName="x2" type="number" pattern="^[0-9]*$" (input)="onInput($event)" class="form-control"></td>
+                        </tr>
+                        <tr>
+                            <th scope="col">x5</th>
+                            <td><input formControlName="x5" type="number" pattern="^[0-9]*$" (input)="onInput($event)" class="form-control"></td>
+                        </tr>
+                        <tr>
+                            <th scope="col">x10</th>
+                            <td><input formControlName="x10" type="number" pattern="^[0-9]*$" (input)="onInput($event)" class="form-control"></td>
+                        </tr>
+                        <tr>
+                            <th scope="col">x25</th>
+                            <td><input formControlName="x25" type="number" pattern="^[0-9]*$" (input)="onInput($event)" class="form-control"></td>
+                        </tr>
+                        <tr>
+                            <th scope="col">x50</th>
+                            <td><input formControlName="x50" type="number" pattern="^[0-9]*$" (input)="onInput($event)" class="form-control"></td>
+                        </tr>
+                        <tr>
+                            <th scope="col">x100</th>
+                            <td><input formControlName="x100" type="number" pattern="^[0-9]*$" (input)="onInput($event)" class="form-control"></td>
+                        </tr>
+                        <tr>
+                            <th scope="col">x500</th>
+                            <td><input formControlName="x500" type="number" pattern="^[0-9]*$" (input)="onInput($event)" class="form-control"></td>
+                        </tr>
+                    </table>
+                </div>
+                <div>
+                    <h2 class="text-center w-100">{{ 'mvtCaisse.table.title9' | translate }}</h2>
+                    <table class="table table-sm table-centered table-bordered w-75">
+                        <tr>
+                            <th scope="col">x500</th>
+                            <td><input formControlName="x500B" type="number" class="form-control"></td>
+                        </tr>
+                        <tr>
+                            <th scope="col">x1000</th>
+                            <td><input formControlName="x1000" type="number" pattern="^[0-9]*$" (input)="onInput($event)" class="form-control"></td>
+                        </tr>
+                        <tr>
+                            <th scope="col">x2000</th>
+                            <td><input formControlName="x2000" type="number" pattern="^[0-9]*$" (input)="onInput($event)" class="form-control"></td>
+                        </tr>
+                        <tr>
+                            <th scope="col">x5000</th>
+                            <td><input formControlName="x5000" type="number" pattern="^[0-9]*$" (input)="onInput($event)" class="form-control"></td>
+                        </tr>
+                        <tr>
+                            <th scope="col">x10000</th>
+                            <td><input formControlName="x10000" type="number" pattern="^[0-9]*$" (input)="onInput($event)" class="form-control"></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="actionButton valBtn">
+                <button class="btn retour" [mat-dialog-close]="" title="{{'lists.button2' | translate}}">
+                    <i class="fa fa-undo" aria-hidden="true"></i>
+                </button>
+                <button type="submit" cdkFocusInitial class="btn btnValidation" title="{{btnLibelle}}">
+                    <i class="fa fa-check" aria-hidden="true"></i>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -21,6 +21,7 @@ export class ViewFormDocumentComponent implements OnInit {
     categories: [],
     preconisations: [],
     etat: false,
+    estEncaissable: false,
     affichagePrix: false,
     contientRessources: false,
     contientDistributeurs: false,

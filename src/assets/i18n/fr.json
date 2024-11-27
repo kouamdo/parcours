@@ -11,7 +11,6 @@
         "nav-link1-item1": "Recherche",
         "nav-link1-item2": "Créer",
         "nav-link1-item3": "Modifier",
-
         "nav-link2": "Tickets",
         "nav-link2-item1": "Donner un ticket",
         "nav-link2-item2": "Creer une file",
@@ -42,6 +41,8 @@
     "text2": "Champs non obligatoires",
     "text3": "est un champs non obligatoires",
     "text4": "entrer la valeur ici",
+    "text5": "Ajouter des mouvements caisse",
+    "text6": "Utiliser ce solde pour ce règlement",
     "button1": "Imprimer",
     "button2": "Retour",
     "button3": "Annuler",
@@ -56,24 +57,102 @@
     "button12": "Suivant",
     "button13": "Continuer",
     "button14": "Envoyé",
-    "button15": "Supprimer la sélection"
+    "button15": "Supprimer la sélection",
+    "button16": "régler"
   },
-  "validation":{
-    "header":"Ajouter Validation",
+  "validation": {
+    "header": "Ajouter Validation",
     "title0": "liste validation",
-    "title1":"Personnel autorisé",
-    "table":{
-      "title0":"validation"
+    "title1": "Personnel autorisé",
+    "table": {
+      "title0": "validation"
     },
-    "form":{
-      "label1":"code",
-      "label2":"etat",
-      "label3":"Date de création",
+    "form": {
+      "label1": "code",
+      "label2": "etat",
+      "label3": "Date de création",
       "label4": "Type vote",
       "label5": "Duree vote",
       "label6": "role",
       "label7": "Type de validation",
-      "text1":"Champ Obligatoire"
+      "text1": "Champ Obligatoire"
+    }
+  },
+  "caisse": {
+    "title1": "Ajouter ",
+    "search-bar": "Rechercher",
+    "table": {
+      "title0": "Solde",
+      "title1": "libellé",
+      "title2": "type",
+      "title3": "detailJson",
+      "actions": {
+        "link1": "Ajouter",
+        "link2": "Modifier",
+        "link3": "Détails",
+        "link4": "Supprimer"
+      }
+    },
+    "form": {
+      "text1": "Le solde est obligatoire.",
+      "text2": "le libelle est obligatoire.",
+      "text3": "le type est obligatoire."
+    }
+  },
+  "compte": {
+    "title1": "Ajouter ",
+    "search-bar": "Rechercher",
+    "table": {
+      "title0": "Solde",
+      "title1": "Libellé",
+      "title2": "Date création",
+      "title3": "Montant Decouvert Max",
+      "title4": "Bénéficiaire",
+      "actions": {
+        "link1": "Ajouter",
+        "link2": "Modifier",
+        "link3": "Détails",
+        "link4": "Supprimer",
+        "link5": "Affecter"
+      }
+    },
+    "form": {
+      "text1": "Le solde est obligatoire.",
+      "text2": "le libelle est obligatoire."
+    }
+  },
+  "mvtCaisse": {
+    "title1": "Ajouter ",
+    "search-bar": "Rechercher",
+    "table": {
+      "title0": "Montant Versé",
+      "title1": "Libelle",
+      "title2": "Moyen de Paiement",
+      "title3": "Type de mouvement",
+      "title4": "Reference de paiement",
+      "title5": "Caisse",
+      "title6": "Exemplaire",
+      "title7": "Solde Compte",
+      "title8": "Reste à payer",
+      "title9": "Billets",
+      "title10": "Entrer le nombre",
+      "title11": "Pièces",
+      "title12": "Multipaiement",
+      "actions": {
+        "link1": "Ajouter",
+        "link2": "Modifier",
+        "link3": "Détails",
+        "link4": "Supprimer"
+      }
+    },
+    "form": {
+      "text1": "Le montant est obligatoire.",
+      "text2": "le libelle est obligatoire.",
+      "text3": "le moyen de paiement est obligatoire.",
+      "text4": "la reference de paiement est obligatoire.",
+      "text5": "la caisse est obligatoire.",
+      "text6": "l'exemplaire est obligatoire.",
+      "text7": "type de mouvement est obligatoire."
     }
   },
   "patient": {
@@ -153,6 +232,7 @@
       "label2": "etat",
       "label3": "localisation",
       "label4": "description",
+      "label5": "est encaissable",
       "text1": "Le libelle est obligatoire.",
       "text2": "L'etat est obligatoire.",
       "text3": "La date de derniere modification est obligatoire."
@@ -194,7 +274,7 @@
       "title9": "Valeurs par defaut",
       "title10": "Separer les valeurs par un point virgule (;)",
       "title11": "Obligatoire ?",
-      "title12":"valeur"
+      "title12": "valeur"
     },
     "form": {
       "text1": "Le titre est obligatoire.",
@@ -450,12 +530,12 @@
       "title9": "Actions "
     }
   },
-  "promo-distributeur":{
+  "promo-distributeur": {
     "title": "Ajouter Promotion",
     "title2": "Appliquer une Promotion",
     "emetteur": "Émetteur",
-    "text1":"Émetteur",
-    "text2":"Nom de la ressource ou de la catégorie",
+    "text1": "Émetteur",
+    "text2": "Nom de la ressource ou de la catégorie",
     "date_debut": "Date debut",
     "date_fin": "Date fin",
     "code": "Code unique",
@@ -474,8 +554,8 @@
     "pourcentage1": "Pourcentage",
     "date_error": "La date de fin doit être postérieure à la date de début. ",
     "montant_message": "Entrez le montant",
-    "pourcentage_messgae":"Entrez le pourcentage",
-    "rechercher":"Rechercher",
+    "pourcentage_messgae": "Entrez le pourcentage",
+    "rechercher": "Rechercher",
     "modifier": "Modifier",
     "famille": "Catégorie",
     "ressource": "Ressources",
@@ -577,57 +657,57 @@
       "text1": "Status courant",
       "text2": "Status suivant",
       "text3": "Ordre de l'état",
-       "text4": "Cet ordre existe déjà",
-       "text5": "Cet etat existe déjà",
-       "text6": "Validation associée",
-       "text7": "Recherchez une validation"
+      "text4": "Cet ordre existe déjà",
+      "text5": "Cet etat existe déjà",
+      "text6": "Validation associée",
+      "text7": "Recherchez une validation"
     }
   },
-"etape":{
-  "title1":"Document",
-  "table": {
-    "title": "Ajouter ",
-    "title1": "libelle",
-    "title2": "Etat"
-  },
-  "form":{
-    "text1":"Champ Obligatoire"
-  },
-  "lists":{
-    "button1":"Annuler"
-  },
-  "title":"listing ",
-  "search-bar":"Rechercher",
-  "table1":{
-    "title1":"libellé",
-    "title2":"Etat",
-    "title4":"Actions",
-    "actions":{
-        "link2":"Modifier"
+  "etape": {
+    "title1": "Document",
+    "table": {
+      "title": "Ajouter ",
+      "title1": "libelle",
+      "title2": "Etat"
+    },
+    "form": {
+      "text1": "Champ Obligatoire"
+    },
+    "lists": {
+      "button1": "Annuler"
+    },
+    "title": "listing ",
+    "search-bar": "Rechercher",
+    "table1": {
+      "title1": "libellé",
+      "title2": "Etat",
+      "title4": "Actions",
+      "actions": {
+        "link2": "Modifier"
+      }
     }
-}
-},
-"parours":{
-  "table": {
-    "title": "Ajouter ",
-    "title1": "libelle",
-    "title2": "Etape"
   },
-  "form":{
-    "text1":"Champ Obligatoire"
-  },
-  "lists":{
-    "button1":"Annuler"
-  },
-  "title":"listing ",
-  "search-bar":"Rechercher",
-  "table1":{
-    "title1":"libellé",
-    "title2":"etape",
-    "title4":"Actions",
-    "actions":{
-        "link2":"Modifier"
+  "parours": {
+    "table": {
+      "title": "Ajouter ",
+      "title1": "libelle",
+      "title2": "Etape"
+    },
+    "form": {
+      "text1": "Champ Obligatoire"
+    },
+    "lists": {
+      "button1": "Annuler"
+    },
+    "title": "listing ",
+    "search-bar": "Rechercher",
+    "table1": {
+      "title1": "libellé",
+      "title2": "etape",
+      "title4": "Actions",
+      "actions": {
+        "link2": "Modifier"
+      }
+    }
   }
-}
-}
 }

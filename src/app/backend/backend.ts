@@ -28,6 +28,9 @@ import { IParours } from '../modele/parours';
 import { IPromo } from '../modele/promo-distributeur';
 import { TypeValidation } from '../modele/type-validation';
 import { FormatCode } from '../modele/format-code';
+import { ICaisses } from '../modele/caisses';
+import { IComptes } from '../modele/comptes';
+import { IMouvementCaisses } from '../modele/mouvement-caisses';
 
 export class InMemDBService implements InMemoryDbService {
   createDb() {
@@ -376,6 +379,24 @@ export class InMemDBService implements InMemoryDbService {
             ],
           },
           {
+            fonction: 'Caisse',
+            icone: 'fas fa-user-cog',
+            actif: '',
+            elements: [
+              { nom: 'Créer', lien: './caisse-nouveau', bouton: 'false' },
+              { nom: 'Rechercher', lien: './list-caisses', bouton: 'false' },
+            ],
+          },
+          {
+            fonction: 'Compte',
+            icone: 'fas fa-user-cog',
+            actif: '',
+            elements: [
+              { nom: 'Créer', lien: './compte-nouveau', bouton: 'false' },
+              { nom: 'Rechercher', lien: './list-comptes', bouton: 'false' },
+            ],
+          },
+          {
             fonction: 'Mission',
             icone: 'fas fa-user-cog',
             actif: '',
@@ -532,6 +553,24 @@ export class InMemDBService implements InMemoryDbService {
             elements: [
               { nom: 'New', lien: './attribut-nouveau', bouton: 'false' },
               { nom: 'Search', lien: './list-attributs', bouton: 'false' },
+            ],
+          },
+          {
+            fonction: 'Caisse',
+            icone: 'fas fa-user-cog',
+            actif: '',
+            elements: [
+              { nom: 'New', lien: './caisse-nouveau', bouton: 'false' },
+              { nom: 'Search', lien: './list-caisses', bouton: 'false' },
+            ],
+          },
+          {
+            fonction: 'Account',
+            icone: 'fas fa-user-cog',
+            actif: '',
+            elements: [
+              { nom: 'New', lien: './compte-nouveau', bouton: 'false' },
+              { nom: 'Search', lien: './list-comptes', bouton: 'false' },
             ],
           },
           {
@@ -1043,6 +1082,7 @@ export class InMemDBService implements InMemoryDbService {
       {
         idDocument: '1',
         titre: 'Note intervention',
+        estEncaissable: false,
         description:
           "Document delivre par le medecin ou un infirmier de l'etablissement",
                 beneficiaireObligatoire: true,
@@ -1551,6 +1591,7 @@ export class InMemDBService implements InMemoryDbService {
           {
             idDocument: '1',
             titre: 'Note intervention',
+            estEncaissable: false,
             description: "Document delivre par le medecin ou un infirmier de l'etablissement",
             beneficiaireObligatoire: true,
             docEtats: [
@@ -2055,6 +2096,7 @@ export class InMemDBService implements InMemoryDbService {
           {
             idDocument: '2',
             titre: 'Fiche de suivi',
+            estEncaissable: true,
             description:
               "Document delivre par le medecin ou un infirmier de l'etablissement",
                 beneficiaireObligatoire: false,
@@ -2552,6 +2594,7 @@ export class InMemDBService implements InMemoryDbService {
           {
             idDocument: '3',
             titre: 'Fiche de soin',
+            estEncaissable: false,
             description:
               "Document delivre par le medecin ou un infirmier de l'etablissement",
                 beneficiaireObligatoire: false,
@@ -2996,6 +3039,7 @@ export class InMemDBService implements InMemoryDbService {
           {
             idDocument: '4',
             titre: 'Formulaire de sortie',
+            estEncaissable: false,
             typeMouvement: 'Ajout',
             description:
               "Document delivre par le medecin ou un infirmier de l'etablissement",
@@ -3441,6 +3485,7 @@ export class InMemDBService implements InMemoryDbService {
           {
             idDocument: '4',
             titre: 'Formulaire de sortie',
+            estEncaissable: true,
             description:
               "Document delivre par le medecin ou un infirmier de l'etablissement",
                 beneficiaireObligatoire: true,
@@ -4053,6 +4098,7 @@ export class InMemDBService implements InMemoryDbService {
           {
             idDocument: '4',
             titre: 'Formulaire de sortie',
+            estEncaissable: true,
             description:
               "Document delivre par le medecin ou un infirmier de l'etablissement",
                 beneficiaireObligatoire: true,
@@ -4497,6 +4543,7 @@ export class InMemDBService implements InMemoryDbService {
           {
             idDocument: '4',
             titre: 'Formulaire de sortie',
+            estEncaissable: true,
             description:
               "Document delivre par le medecin ou un infirmier de l'etablissement",
                 beneficiaireObligatoire: true,
@@ -5138,6 +5185,7 @@ export class InMemDBService implements InMemoryDbService {
           {
             idDocument: '5',
             titre: 'ordonnance',
+            estEncaissable: true,
             description:
               "Document delivre par le medecin ou un infirmier de l'etablissement",
                 beneficiaireObligatoire: true,
@@ -5649,6 +5697,7 @@ export class InMemDBService implements InMemoryDbService {
       {
         idDocument: '2',
         titre: 'Fiche de suivi',
+        estEncaissable: false,
         description:
           "Document delivre par le medecin ou un infirmier de l'etablissement",
                 beneficiaireObligatoire: false,
@@ -6147,6 +6196,7 @@ export class InMemDBService implements InMemoryDbService {
       {
         idDocument: '3',
         titre: 'Fiche de soin',
+        estEncaissable: true,
         description:
           "Document delivre par le medecin ou un infirmier de l'etablissement",
                 beneficiaireObligatoire: false,
@@ -6594,6 +6644,7 @@ export class InMemDBService implements InMemoryDbService {
           {
             idDocument: '1',
             titre: 'Note intervention',
+            estEncaissable: false,
             description:
               "Document delivre par le medecin ou un infirmier de l'etablissement",
                 beneficiaireObligatoire: true,
@@ -7101,6 +7152,7 @@ export class InMemDBService implements InMemoryDbService {
           {
             idDocument: '2',
             titre: 'Fiche de suivi',
+            estEncaissable: false,
             description:
               "Document delivre par le medecin ou un infirmier de l'etablissement",
                 beneficiaireObligatoire: false,
@@ -7599,6 +7651,7 @@ export class InMemDBService implements InMemoryDbService {
           {
             idDocument: '3',
             titre: 'Fiche de soin',
+            estEncaissable: true,
             description:
               "Document delivre par le medecin ou un infirmier de l'etablissement",
                 beneficiaireObligatoire: false,
@@ -8045,6 +8098,7 @@ export class InMemDBService implements InMemoryDbService {
           {
             idDocument: '4',
             titre: 'Formulaire de sortie',
+            estEncaissable: true,
             description:
               "Document delivre par le medecin ou un infirmier de l'etablissement",
                 beneficiaireObligatoire: true,
@@ -8675,6 +8729,7 @@ export class InMemDBService implements InMemoryDbService {
           {
             idDocument: '5',
             titre: 'ordonnance',
+            estEncaissable: true,
             description: "Document delivre par le medecin ou un infirmier de l'etablissement",
             beneficiaireObligatoire: true,
             typeMouvement: 'Neutre',
@@ -9183,6 +9238,7 @@ export class InMemDBService implements InMemoryDbService {
       {
         idDocument: '4',
         titre: 'Formulaire de sortie',
+        estEncaissable: true,
         description:
           "Document delivre par le medecin ou un infirmier de l'etablissement",
                 beneficiaireObligatoire: true,
@@ -9812,6 +9868,7 @@ export class InMemDBService implements InMemoryDbService {
       {
         idDocument: '5',
         titre: 'ordonnance',
+        estEncaissable: true,
         description:
           "Document delivre par le medecin ou un infirmier de l'etablissement",
                 beneficiaireObligatoire: true,
@@ -10338,6 +10395,7 @@ export class InMemDBService implements InMemoryDbService {
           {
             idDocument: '3',
             titre: 'Fiche de soin',
+            estEncaissable: false,
             description:
               "Document delivre par le medecin ou un infirmier de l'etablissement",
                 beneficiaireObligatoire: false,
@@ -10784,6 +10842,7 @@ export class InMemDBService implements InMemoryDbService {
           {
             idDocument: '4',
             titre: 'Formulaire de sortie',
+            estEncaissable: false,
             description:
               "Document delivre par le medecin ou un infirmier de l'etablissement",
                 beneficiaireObligatoire: true,
@@ -11414,6 +11473,7 @@ export class InMemDBService implements InMemoryDbService {
           {
             idDocument: '5',
             titre: 'ordonnance',
+            estEncaissable: true,
             description:
               "Document delivre par le medecin ou un infirmier de l'etablissement",
                 beneficiaireObligatoire: true,
@@ -12395,6 +12455,7 @@ export class InMemDBService implements InMemoryDbService {
         id: '1',
         code: '03072024-120000-123',
         idDocument: '4',
+        estEncaissable: false,
         personneRattachee: {
           id: '6911989109209',
           nom: 'NGONGANG',
@@ -13246,6 +13307,7 @@ export class InMemDBService implements InMemoryDbService {
           {
             idDocument: '1',
             titre: 'Note intervention',
+            estEncaissable: false,
             description: "Document delivre par le medecin ou un infirmier de l'etablissement",
             beneficiaireObligatoire: true,
             docEtats: [
@@ -13750,6 +13812,7 @@ export class InMemDBService implements InMemoryDbService {
           {
             idDocument: '4',
             titre: 'Formulaire de sortie',
+            estEncaissable: false,
             description: "Document delivre par le medecin ou un infirmier de l'etablissement",
             beneficiaireObligatoire: true,
             typeMouvement: 'Reduire',
@@ -14502,6 +14565,7 @@ export class InMemDBService implements InMemoryDbService {
         id: '2',
         code: '21052021-120000-123',
         idDocument: '5',
+        estEncaissable: true,
         personneRattachee: {
           id: '6911989109209',
           nom: 'NGONGANG',
@@ -15169,6 +15233,7 @@ export class InMemDBService implements InMemoryDbService {
           {
             idDocument: '3',
             titre: 'Fiche de soin',
+            estEncaissable: false,
             description: "Document delivre par le medecin ou un infirmier de l'etablissement",
             beneficiaireObligatoire: false,
             typeMouvement: 'Neutre',
@@ -15614,6 +15679,7 @@ export class InMemDBService implements InMemoryDbService {
           {
             idDocument: '4',
             titre: 'Formulaire de sortie',
+            estEncaissable: true,
             description: "Document delivre par le medecin ou un infirmier de l'etablissement",
             beneficiaireObligatoire: true,
             typeMouvement: 'Reduire',
@@ -16241,6 +16307,7 @@ export class InMemDBService implements InMemoryDbService {
           {
             idDocument: '5',
             titre: 'ordonnance',
+            estEncaissable: false,
             description: "Document delivre par le medecin ou un infirmier de l'etablissement",
             beneficiaireObligatoire: true,
             typeMouvement: 'Neutre',
@@ -16841,6 +16908,7 @@ export class InMemDBService implements InMemoryDbService {
         id: '3',
         code: '05072021-120000-123',
         idDocument: '4',
+        estEncaissable: false,
         personneRattachee: {
           id: '6911989109209',
           nom: 'NGONGANG',
@@ -17682,6 +17750,7 @@ export class InMemDBService implements InMemoryDbService {
           {
             idDocument: '1',
             titre: 'Note intervention',
+            estEncaissable: false,
             description: "Document delivre par le medecin ou un infirmier de l'etablissement",
             beneficiaireObligatoire: true,
             docEtats: [
@@ -18187,6 +18256,7 @@ export class InMemDBService implements InMemoryDbService {
           {
             idDocument: '4',
             titre: 'Formulaire de sortie',
+            estEncaissable: true,
             description: "Document delivre par le medecin ou un infirmier de l'etablissement",
             beneficiaireObligatoire: true,
             typeMouvement: 'Reduire',
@@ -18940,6 +19010,7 @@ export class InMemDBService implements InMemoryDbService {
         id: '4',
         code: '03072013-120000-123',
         idDocument: '5',
+        estEncaissable: false,
         personneRattachee: {
           id: '6911989109209',
           nom: 'NGONGANG',
@@ -19556,6 +19627,7 @@ export class InMemDBService implements InMemoryDbService {
           {
             idDocument: '3',
             titre: 'Fiche de soin',
+            estEncaissable: false,
             description: "Document delivre par le medecin ou un infirmier de l'etablissement",
             beneficiaireObligatoire: false,
             typeMouvement: 'Neutre',
@@ -20002,6 +20074,7 @@ export class InMemDBService implements InMemoryDbService {
           {
             idDocument: '5',
             titre: 'ordonnance',
+            estEncaissable: true,
             description: "Document delivre par le medecin ou un infirmier de l'etablissement",
             beneficiaireObligatoire: true,
             typeMouvement: 'Neutre',
@@ -20603,6 +20676,7 @@ export class InMemDBService implements InMemoryDbService {
         id: '5',
         code: '03072023-120000-123',
         idDocument: '1',
+        estEncaissable: true,
         personneRattachee: {
           id: '290',
           nom: 'Oubian',
@@ -21106,6 +21180,7 @@ export class InMemDBService implements InMemoryDbService {
           {
             idDocument: '5',
             titre: 'ordonnance',
+            estEncaissable: true,
             description: "Document delivre par le medecin ou un infirmier de l'etablissement",
             beneficiaireObligatoire: true,
             typeMouvement: 'Neutre',
@@ -21675,6 +21750,7 @@ export class InMemDBService implements InMemoryDbService {
         id: '6',
         code: '03072010-120000-123',
         idDocument: '4',
+        estEncaissable: false,
         personneRattachee: {
           id: '290',
           nom: 'Oubian',
@@ -22527,6 +22603,7 @@ export class InMemDBService implements InMemoryDbService {
           {
             idDocument: '1',
             titre: 'Note intervention',
+            estEncaissable: false,
             description: "Document delivre par le medecin ou un infirmier de l'etablissement",
             beneficiaireObligatoire: true,
             docEtats: [
@@ -23032,6 +23109,7 @@ export class InMemDBService implements InMemoryDbService {
           {
             idDocument: '4',
             titre: 'Formulaire de sortie',
+            estEncaissable: false,
             description: "Document delivre par le medecin ou un infirmier de l'etablissement",
             beneficiaireObligatoire: true,
             typeMouvement: 'Reduire',
@@ -25122,6 +25200,46 @@ export class InMemDBService implements InMemoryDbService {
         dateCreation: new Date('07/21/2024'),
       },
     ];
+    let caisses: ICaisses[] = [
+      {id: "1", libelle: "caisse 1", type: "cash", solde: 100000.00},
+      {id: "7", libelle: "caisse 7", type: "solde", solde: 700000.00},
+      {id: "2", libelle: "caisse 2", type: "chèque", solde: 200000.00},
+      {id: "3", libelle: "caisse 3", type: "carte bleue", solde: 300000.00},
+      {id: "5", libelle: "caisse 5", type: "mtn money", solde: 500000.00},
+      {id: "4", libelle: "caisse 4", type: "mobile money", solde: 400000.00},
+      {id: "6", libelle: "caisse 6", type: "orange money", solde: 600000.00},
+    ];
+    let comptes: IComptes[] = [
+      {id: "1", libelle: "courant", solde: 1000.0, montantDecouvertMax: 100000.0, dateCreation:new Date('10/06/2020'), beneficiaire: {
+        id: '6911989109209',
+        nom: 'NGONGANG',
+        prenom: 'Philippe',
+        sexe: 'M',
+        adresse: 'Yaoundé',
+        telephone: '090999090',
+        mail: 'ngong@yad.fr',
+        dateNaissance: new Date('07/07/1989'),
+        qrCodeValue: '',
+        personnesRatachees: [
+          {
+            id: '78',
+            nom: 'Tchakounte',
+            prenom: 'Simpice',
+            sexe: 'm',
+            dateNaissance: new Date('07/07/1989'),
+            adresse: 'Yaoundé',
+            telephone: '090999090',
+            mail: 'ngong@yad.fr',
+            qrCodeValue: '78',
+          },
+        ],
+      }},
+      {id: "2", libelle: "enfants", solde: 70000.0, montantDecouvertMax: 100000.0, dateCreation:new Date('10/06/2010')},
+      {id: "3", libelle: "personnel", solde: 0.0, montantDecouvertMax: 100000.0, dateCreation:new Date('10/06/2022')},
+      {id: "4", libelle: "courant", solde: 10000.0, montantDecouvertMax: 100000.0, dateCreation:new Date('10/06/2024')},
+      {id: "5", libelle: "urgence", solde: 500.0, montantDecouvertMax: 100000.0, dateCreation:new Date('10/06/2017')},
+      {id: "6", libelle: "courant", solde: 1000.0, montantDecouvertMax: 100000.0, dateCreation:new Date('10/06/2020')}
+    ];
     let etape: IEtape[] = [
       {
         id: '1',
@@ -25131,6 +25249,7 @@ export class InMemDBService implements InMemoryDbService {
           {
             idDocument: '1',
             titre: 'Note intervention',
+            estEncaissable: false,
             description:
               "Document delivre par le medecin ou un infirmier de l'etablissement",
                 beneficiaireObligatoire: true,
@@ -25642,6 +25761,7 @@ export class InMemDBService implements InMemoryDbService {
               {
                 idDocument: '1',
                 titre: 'Note intervention',
+                estEncaissable: false,
                 description:
                   "Document delivre par le medecin ou un infirmier de l'etablissement",
                 beneficiaireObligatoire: true,
@@ -26150,6 +26270,7 @@ export class InMemDBService implements InMemoryDbService {
               {
                 idDocument: '2',
                 titre: 'Fiche de suivi',
+                estEncaissable: true,
                 description:
                   "Document delivre par le medecin ou un infirmier de l'etablissement",
                 beneficiaireObligatoire: false,
@@ -26648,6 +26769,7 @@ export class InMemDBService implements InMemoryDbService {
               {
                 idDocument: '3',
                 titre: 'Fiche de soin',
+                estEncaissable: true,
                 description:
                   "Document delivre par le medecin ou un infirmier de l'etablissement",
                 beneficiaireObligatoire: false,
@@ -27092,6 +27214,7 @@ export class InMemDBService implements InMemoryDbService {
               {
                 idDocument: '4',
                 titre: 'Formulaire de sortie',
+                estEncaissable: false,
                 typeMouvement: 'Ajout',
                 description:
                   "Document delivre par le medecin ou un infirmier de l'etablissement",
@@ -27538,6 +27661,7 @@ export class InMemDBService implements InMemoryDbService {
               {
                 idDocument: '4',
                 titre: 'Formulaire de sortie',
+                estEncaissable: false,
                 description:
                   "Document delivre par le medecin ou un infirmier de l'etablissement",
                 beneficiaireObligatoire: true,
@@ -28153,6 +28277,7 @@ export class InMemDBService implements InMemoryDbService {
               {
                 idDocument: '4',
                 titre: 'Formulaire de sortie',
+                estEncaissable: false,
                 description:
                   "Document delivre par le medecin ou un infirmier de l'etablissement",
                 beneficiaireObligatoire: true,
@@ -28598,6 +28723,7 @@ export class InMemDBService implements InMemoryDbService {
               {
                 idDocument: '4',
                 titre: 'Formulaire de sortie',
+                estEncaissable: false,
                 description:
                   "Document delivre par le medecin ou un infirmier de l'etablissement",
                 beneficiaireObligatoire: true,
@@ -29241,6 +29367,7 @@ export class InMemDBService implements InMemoryDbService {
               {
                 idDocument: '5',
                 titre: 'ordonnance',
+                estEncaissable: true,
                 description:
                   "Document delivre par le medecin ou un infirmier de l'etablissement",
                 beneficiaireObligatoire: true,
@@ -29755,6 +29882,7 @@ export class InMemDBService implements InMemoryDbService {
           {
             idDocument: '2',
             titre: 'Fiche de suivi',
+            estEncaissable: true,
             description:
               "Document delivre par le medecin ou un infirmier de l'etablissement",
                 beneficiaireObligatoire: false,
@@ -30269,6 +30397,7 @@ export class InMemDBService implements InMemoryDbService {
               {
                 idDocument: '1',
                 titre: 'Note intervention',
+                estEncaissable: false,
                 description:
                   "Document delivre par le medecin ou un infirmier de l'etablissement",
                 beneficiaireObligatoire: true,
@@ -30780,6 +30909,7 @@ export class InMemDBService implements InMemoryDbService {
                   {
                     idDocument: '1',
                     titre: 'Note intervention',
+                    estEncaissable: false,
                     description:
                       "Document delivre par le medecin ou un infirmier de l'etablissement",
                 beneficiaireObligatoire: true,
@@ -31288,6 +31418,7 @@ export class InMemDBService implements InMemoryDbService {
                   {
                     idDocument: '2',
                     titre: 'Fiche de suivi',
+                    estEncaissable: false,
                     description:
                       "Document delivre par le medecin ou un infirmier de l'etablissement",
                 beneficiaireObligatoire: false,
@@ -31786,6 +31917,7 @@ export class InMemDBService implements InMemoryDbService {
                   {
                     idDocument: '3',
                     titre: 'Fiche de soin',
+                    estEncaissable: false,
                     description:
                       "Document delivre par le medecin ou un infirmier de l'etablissement",
                 beneficiaireObligatoire: false,
@@ -32230,6 +32362,7 @@ export class InMemDBService implements InMemoryDbService {
                   {
                     idDocument: '4',
                     titre: 'Formulaire de sortie',
+                    estEncaissable: true,
                     typeMouvement: 'Ajout',
                     description:
                       "Document delivre par le medecin ou un infirmier de l'etablissement",
@@ -32676,6 +32809,7 @@ export class InMemDBService implements InMemoryDbService {
                   {
                     idDocument: '4',
                     titre: 'Formulaire de sortie',
+                    estEncaissable: true,
                     description:
                       "Document delivre par le medecin ou un infirmier de l'etablissement",
                 beneficiaireObligatoire: true,
@@ -33291,6 +33425,7 @@ export class InMemDBService implements InMemoryDbService {
                   {
                     idDocument: '4',
                     titre: 'Formulaire de sortie',
+                    estEncaissable: true,
                     description:
                       "Document delivre par le medecin ou un infirmier de l'etablissement",
                 beneficiaireObligatoire: true,
@@ -33736,6 +33871,7 @@ export class InMemDBService implements InMemoryDbService {
                   {
                     idDocument: '4',
                     titre: 'Formulaire de sortie',
+                    estEncaissable: true,
                     description:
                       "Document delivre par le medecin ou un infirmier de l'etablissement",
                 beneficiaireObligatoire: true,
@@ -34379,6 +34515,7 @@ export class InMemDBService implements InMemoryDbService {
                   {
                     idDocument: '5',
                     titre: 'ordonnance',
+                    estEncaissable: true,
                     description:
                       "Document delivre par le medecin ou un infirmier de l'etablissement",
                 beneficiaireObligatoire: true,
@@ -34894,7 +35031,6 @@ export class InMemDBService implements InMemoryDbService {
           },
         ],
       },
-
       {
         id: '2',
         libelle: 'Milieu',
@@ -34908,6 +35044,7 @@ export class InMemDBService implements InMemoryDbService {
               {
                 idDocument: '3',
                 titre: 'Fiche de soin',
+                estEncaissable: false,
                 description:
                   "Document delivre par le medecin ou un infirmier de l'etablissement",
                 beneficiaireObligatoire: false,
@@ -35356,6 +35493,7 @@ export class InMemDBService implements InMemoryDbService {
                   {
                     idDocument: '1',
                     titre: 'Note intervention',
+                    estEncaissable: false,
                     description:
                       "Document delivre par le medecin ou un infirmier de l'etablissement",
                 beneficiaireObligatoire: true,
@@ -35864,6 +36002,7 @@ export class InMemDBService implements InMemoryDbService {
                   {
                     idDocument: '2',
                     titre: 'Fiche de suivi',
+                    estEncaissable: false,
                     description:
                       "Document delivre par le medecin ou un infirmier de l'etablissement",
                 beneficiaireObligatoire: false,
@@ -36363,6 +36502,7 @@ export class InMemDBService implements InMemoryDbService {
                   {
                     idDocument: '3',
                     titre: 'Fiche de soin',
+                    estEncaissable: false,
                     description:
                       "Document delivre par le medecin ou un infirmier de l'etablissement",
                     beneficiaireObligatoire: false,
@@ -36810,6 +36950,7 @@ export class InMemDBService implements InMemoryDbService {
                   {
                     idDocument: '4',
                     titre: 'Formulaire de sortie',
+                    estEncaissable: true,
                     description:
                       "Document delivre par le medecin ou un infirmier de l'etablissement",
                 beneficiaireObligatoire: true,
@@ -37442,6 +37583,7 @@ export class InMemDBService implements InMemoryDbService {
                   {
                     idDocument: '5',
                     titre: 'ordonnance',
+                    estEncaissable: true,
                     description:
                       "Document delivre par le medecin ou un infirmier de l'etablissement",
                 beneficiaireObligatoire: true,
@@ -37957,12 +38099,16 @@ export class InMemDBService implements InMemoryDbService {
         ],
       },
     ];
+    let mvtCaisses: IMouvementCaisses[] = [
+
+    ];
     return {
       patients,
       services,
       menus,
       tickets,
       validations,
+      mvtCaisses,
       missions,
       attributs,
       documents,
@@ -37978,6 +38124,8 @@ export class InMemDBService implements InMemoryDbService {
       typeUnite,
       typeMvt,
       etats,
+      caisses,
+      comptes,
       etape,
       parours,
       typeValidation,

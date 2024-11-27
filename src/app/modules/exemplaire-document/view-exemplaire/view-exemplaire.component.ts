@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { v4 as uuidv4 } from 'uuid';
 import { Router, ActivatedRoute } from '@angular/router';
-import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { IDocEtats } from 'src/app/modele/doc-etats';
-import { IEtats } from 'src/app/modele/etats';
 import { IExemplaireDocument } from 'src/app/modele/exemplaire-document';
 import { IMouvement } from 'src/app/modele/mouvement';
 import { TypeMouvement } from 'src/app/modele/typeMouvement';
@@ -11,9 +9,6 @@ import { DocumentService } from 'src/app/services/documents/document.service';
 import { DonneesEchangeService } from 'src/app/services/donnees-echange/donnees-echange.service';
 import { ExemplaireDocumentService } from 'src/app/services/exemplaire-document/exemplaire-document.service';
 import { IOrdreEtat } from 'src/app/modele/ordreEtat';
-import { IDocument } from 'src/app/modele/document';
-import { ModalChoixDocEtatComponent } from '../../shared/modal-choix-doc-etat/modal-choix-doc-etat.component';
-import { log } from 'console';
 
 @Component({
   selector: 'app-view-exemplaire',
@@ -40,6 +35,7 @@ export class ViewExemplaireComponent implements OnInit {
     typeMouvement: TypeMouvement.Neutre,
     docEtats: [],
     dateCreation: new Date,
+    estEncaissable: false,
     personneRattachee: {
       id: '',
       nom: '',

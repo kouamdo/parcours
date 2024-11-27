@@ -25,6 +25,7 @@ import { NgxPrintModule } from 'ngx-print';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatSelectModule } from '@angular/material/select';
 
 
 @NgModule({
@@ -45,6 +46,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     MatAutocompleteModule,
     SharedModule,
     MatInputModule,
+    MatSelectModule,
     MatFormFieldModule,
     MatPaginatorModule,
     MatTableModule,
