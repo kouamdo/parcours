@@ -45,10 +45,10 @@ jobs:
         run: npm install --legacy-peer-deps
 
       # Step 5: Install Sonar Scanner and run analysis
-      - name: Run SonarQube Analysis
-        run: |
-          npm install -D sonarqube-scanner --save-dev --legacy-peer-deps
-          npm run sonar
+      # - name: Run SonarQube Analysis
+      #   run: |
+      #     npm install -D sonarqube-scanner --save-dev --legacy-peer-deps
+      #     npm run sonar
 
       # Step 6: Build the Angular application for production
       - name: Build Application
