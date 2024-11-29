@@ -6,7 +6,7 @@ export interface IUtilisateurs {
     id: string,
     login: string,
     passWord: string,
-    menu?: IMenu,
+    menu?: IMenu[],
     groupe?: IGroupes,
     user: IPersonnel
 }
