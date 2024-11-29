@@ -2,9 +2,9 @@ name: Node.js CI/CD Pipeline
 
 on:
   push:
-    branches: [ "develop-extend-test-update" ]
+    branches: [ "master" , "develop-extend-test-update" ]
   pull_request:
-    branches: [ "develop-extend-test-update" ]
+    branches: [ "master" , "develop-extend-test-update" ]
 
 jobs:
   build:
