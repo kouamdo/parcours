@@ -395,7 +395,7 @@ export class NewExemplaireComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        this.resteAPayer = this.sommeMontants();
+        this.resteAPayer = this.sommeMontants() - this.sommeTtVerse();
         this.modalResult = result.data;
         this.modalResult.forEach((element) => {
           if (element.montant) {
@@ -423,7 +423,7 @@ export class NewExemplaireComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        this.resteAPayer = this.sommeMontants();
+        this.resteAPayer = this.sommeMontants() - this.sommeTtVerse();
         this.modalResultBilleterie = result.data;
         if (this.modalResultBilleterie.x1) this.resteApayer(this.modalResultBilleterie.x1);
         if (this.modalResultBilleterie.x2) this.resteApayer(this.modalResultBilleterie.x2 * 2);
@@ -469,7 +469,7 @@ export class NewExemplaireComponent implements OnInit {
           //pour avoir la donnée fraiche on refait un appel à document
           //à supprimer lorsqu'on aura un vrai back connecté
           this.modifierMouvementExemplaire(x.idDocument)
-          this.resteAPayer = this.sommeMontants();
+          this.resteAPayer = this.sommeMontants() - this.sommeTtVerse();
           this.lastSomme = this.sommeMontants();
           this.fCaisse['montant'].setValue(0)
         });
@@ -483,7 +483,7 @@ export class NewExemplaireComponent implements OnInit {
           this.totalAttribut = document.attributs.length - 1;
           this.formerEnteteTableauMissions()
           this.concatMouvementsSousExemplaireDocument()
-          this.resteAPayer = this.sommeMontants();
+          this.resteAPayer = this.sommeMontants() - this.sommeTtVerse();
           this.lastSomme = this.sommeMontants();
           this.fCaisse['montant'].setValue(0)
         });
@@ -756,17 +756,16 @@ export class NewExemplaireComponent implements OnInit {
   }
 
   verifyUseSolde(caisse: string) {
-    console.log("caisse retourné :", this.selectedOptions, caisse);
 
     if (caisse == 'solde' && this.compte?.solde! > 0) {
-      this.resteAPayer = this.sommeMontants();
+      this.resteAPayer = this.sommeMontants() - this.sommeTtVerse();
       this.fCaisse['montant'].disable();
       this.fCaisse['use'].setValue(true);
       this.fCaisse['montant'].setValue(this.compte?.solde!);
       this.resteApayer(this.fCaisse['montant'].value);
     }
     if (caisse != 'multipaiement' && caisse != 'cash' && caisse != 'solde') {
-      this.resteAPayer = this.sommeMontants();
+      this.resteAPayer = this.sommeMontants() - this.sommeTtVerse();
       this.fCaisse['use'].setValue(false),
       this.fCaisse['montant'].enable();
       this.fCaisse['montant'].setValue(0);
@@ -805,7 +804,6 @@ export class NewExemplaireComponent implements OnInit {
     }
     this.resteAPayer += reste;
     this.lastSomme = this.montantTotal;
-    console.log('donnéé :', this.resteAPayer, this.montantTotal, reste);
   }
 
   /**

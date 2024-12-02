@@ -47,7 +47,7 @@
                     <table class="table table-sm table-centered table-bordered w-75">
                         <tr>
                             <th scope="col">x500</th>
-                            <td><input formControlName="x500B" type="number" class="form-control"></td>
+                            <td><input formControlName="x500B" type="number" pattern="^[0-9]*$" (input)="onInput($event)" class="form-control"></td>
                         </tr>
                         <tr>
                             <th scope="col">x1000</th>

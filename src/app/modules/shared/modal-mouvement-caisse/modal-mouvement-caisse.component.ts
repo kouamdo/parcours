@@ -5,7 +5,6 @@ import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dial
 import { Router, ActivatedRoute } from '@angular/router';
 import { ICaisses } from 'src/app/modele/caisses';
 import { MoyenPaiement } from 'src/app/modele/mouvement-caisses';
-import { DonneesEchangeService } from 'src/app/services/donnees-echange/donnees-echange.service';
 import { ModalBilleterieComponent } from '../modal-billeterie/modal-billeterie.component';
 
 @Component({
@@ -44,16 +43,13 @@ export class ModalMouvementCaisseComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log("donnee de la modal:", this.data.donnee, this.data.caisses);
     let dataCaisses: ICaisses[] = this.data.caisses;
 
     // Ajouter dynamiquement des objets dans le formulaire en fonction du tableau `elementsArray`
     dataCaisses.forEach((caisse) => {
       if (caisse.type != 'solde') {
-        console.log('premier if');
 
         if (this.data.donnee.length > 0) {
-          console.log('deuxieme if');
 
           this.data.donnee.forEach((ele: MoyenPaiement) => {
             if (ele.moyen.type == caisse.type) {
@@ -63,11 +59,9 @@ export class ModalMouvementCaisseComponent implements OnInit {
                 reference: [ele.reference],
               });
               this.elements.push(elementGroup);
-              console.log("elements modal 0:", this.elements.controls);
             }
           })
         } else {
-          console.log('troisième if');
 
           const elementGroup = this.formBuilder.group({
             moyen: new FormControl<string | ICaisses>(caisse),
@@ -75,10 +69,10 @@ export class ModalMouvementCaisseComponent implements OnInit {
             reference: ['']
           });
           this.elements.push(elementGroup);
-          console.log("elements modal :", this.elements.controls[0]);
         }
       }
     });
+    if(localStorage.getItem('valueBills') != null) {this.modalResultBilleterie = JSON.parse(localStorage.getItem('valueBills')!)};
   }
 
   onInput(event: Event): void {
@@ -87,7 +81,6 @@ export class ModalMouvementCaisseComponent implements OnInit {
   }  
 
   openModalBilleterieDialog(req: any, index: number) {
-    console.log('valeur passée :', req.controls['moyen'].value.type, index);
     
     if (req.controls['moyen'].value.type == 'cash') {
       const dialogRef = this.dialogDef.open(ModalBilleterieComponent,
@@ -134,8 +127,9 @@ export class ModalMouvementCaisseComponent implements OnInit {
           if (this.modalResultBilleterie.x5000) this.resteApayer(this.modalResultBilleterie.x5000 * 5000);
           if (this.modalResultBilleterie.x10000) this.resteApayer(this.modalResultBilleterie.x10000 * 10000);
           this.modalLastResultBilleterie = result.data;
+          localStorage.setItem('valueBills', JSON.stringify(result.data));
+          console.log("bills:", result.data);
           req.controls['montant'].setValue(this.resteAPayer);
-          console.log('result Billeterie:', this.modalResultBilleterie);
         }
       });
     }
@@ -161,9 +155,7 @@ export class ModalMouvementCaisseComponent implements OnInit {
     if (this.dynamicForm.invalid) return;
 
     const data = this.elements.value;
-
-    console.log("value paiement :", this.elements.value);
-
+    
     this.dialogRef.close({ result: 'Success', data: data });
   }
 }

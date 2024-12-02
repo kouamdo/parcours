@@ -189,7 +189,7 @@
 
                 <!-- tableau de mouvement d'une caisse -->
                 <h2 class="m-2">{{'lists.text5' | translate}}</h2>
-                <div class="card-body d-flex gap-2 justify-content-between">
+                <div class="card-body d-flex flex-wrap gap-2 justify-content-between flex-lg-row flex-column">
                         <div class="m-2">
                             <div class=" block1 p-2">
                                 <div class="form-group">
@@ -198,8 +198,8 @@
                                             {{'mvtCaisse.table.title7' | translate}}
                                         </label>
                                         <div class="d-flex" >
-                                            <input type="text" [value]="compte?.solde" disabled class="form-control" style="color: black;">
-                                            <input style="margin-left: 0.375rem;" type="checkbox" name="use" formControlName="use" (change)="useSolde(fCaisse['use'].value)" title="{{'lists.text6' | translate }}">
+                                            <input type="text" [value]="compte?.solde" disabled class="form-control text-dark">
+                                            <input class="ml-6" type="checkbox" name="use" formControlName="use" (change)="useSolde(fCaisse['use'].value)" title="{{'lists.text6' | translate }}">
                                         </div>
                                     </div>
                                 </div>
@@ -267,8 +267,8 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="h-auto w-100 m-2">
-                            <div class='table-responsive' *ngIf="ELEMENTS_TABLE_MOUVEMENTCAISSES.length > 0">
+                        <div class="h-auto w-auto m-2">
+                            <div class='table-responsive'>
                                 <table class='table table-sm table-centered table-striped table-bordered' mat-table [dataSource]="dataSourceMouvementcaisses">
         
                                     <!-- reférence Column -->
