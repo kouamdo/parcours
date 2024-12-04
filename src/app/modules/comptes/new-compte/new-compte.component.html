@@ -47,18 +47,16 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <div class="champs">
+                            <div class="champs champsSelect">
                                 <label for="beneficiaire" class="label">
                                     {{'compte.table.title4' | translate}}
                                 </label>
-                                <mat-form-field class="example-full-width w-100" appearance="fill">
-                                    <input type="text" matInput [matAutocomplete]="auto"  aria-label="beneficiaire" formControlName="beneficiaire" name="beneficiaire" id="beneficiaire" placeholder="" class="w-100" style="color: black;">
+                                    <input type="text" matInput [matAutocomplete]="auto" aria-label="beneficiaire" formControlName="beneficiaire" name="beneficiaire" id="beneficiaire" class="w-100 champsAutocomplate text-dark">
                                     <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn" >
                                     <mat-option *ngFor="let option of personnels" [value]="option">
                                         {{option.nom}}
                                     </mat-option>
                                     </mat-autocomplete>
-                                </mat-form-field>
                             </div>
                                 <!-- <div *ngIf="submitted && f['beneficiaire'].errors"  class="alert alert-danger" >
                                     <div *ngIf="f['beneficiaire'].errors['required']">{{'personnel.form.text3' | translate}}</div>

@@ -25,7 +25,7 @@ export class NewCompteComponent {
   titre: string = '';
   btnLibelle: string = 'Ajouter';
   submitted: boolean = false;
-  personnels: IPatient[] = [];
+  personnels: IPatient[] | undefined;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -48,6 +48,20 @@ export class NewCompteComponent {
     let idCompte = this.infosPath.snapshot.paramMap.get('idCompte');
     this.userService.getAllPatients().subscribe((reponse) => {
       this.personnels = reponse;
+    });
+    this.forme.controls['beneficiaire'].valueChanges.subscribe((value) => {
+      const nom = typeof value === 'string' ? value : value?.nom;
+      if (nom != undefined && nom?.length > 0) {
+        this.userService
+          .getPatientsByName(nom.toLowerCase() as string)
+          .subscribe((reponse) => {
+            this.personnels = reponse;
+          });
+      } else {
+        this.userService.getAllPatients().subscribe((reponse) => {
+          this.personnels = reponse;
+        });
+      }
     });
     if (idCompte != null && idCompte !== '') {
       this.btnLibelle = 'Modifier';
