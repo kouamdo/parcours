@@ -7,7 +7,7 @@
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"
-  }
+  },
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
