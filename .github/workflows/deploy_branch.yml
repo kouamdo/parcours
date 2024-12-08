@@ -54,6 +54,9 @@ jobs:
       - name: Build Application
         run: ng build --configuration production && npm publish dist/my-library --access public
 
+      - name: Publich package
+        run: npm publish dist/my-library --access public
+
   dockerBuildAndPush:
     name: Build and Push Docker Image
     runs-on: ubuntu-latest
