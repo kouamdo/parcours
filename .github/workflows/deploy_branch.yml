@@ -50,6 +50,9 @@ jobs:
       #     npm install sonar-scanner --save-dev --legacy-peer-deps
       #     npm run sonar
 
+      - name: NPM login
+        run: npm login --registry=https://npm.pkg.github.com --scope=kouamdo
+      
       # Step 6: Build the Angular application for production
       - name: Build Application
         run: ng build --configuration production
