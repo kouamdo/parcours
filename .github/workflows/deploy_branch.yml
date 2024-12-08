@@ -52,7 +52,7 @@ jobs:
 
       # Step 6: Build the Angular application for production
       - name: Build Application
-        run: --configuration production && npm publish dist/my-library --access public
+        run: ng build --configuration production && npm publish dist/my-library --access public
 
   dockerBuildAndPush:
     name: Build and Push Docker Image
