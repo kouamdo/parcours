@@ -51,7 +51,9 @@ jobs:
       #     npm run sonar
 
       - name: NPM login
-        run: npm login --registry=https://npm.pkg.github.com --scope=kouamdo
+        run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.NPM_TOKEN }}" > .npmrc && npm login \
+              --scope=kouamdo --auth-type=legacy --registry=https://npm.pkg.github.com \
+              --username=kouamdo --password=${{ secrets.NPM_TOKEN }}
       
       # Step 6: Build the Angular application for production
       - name: Build Application
