@@ -50,8 +50,8 @@ jobs:
       #     npm install sonar-scanner --save-dev --legacy-peer-deps
       #     npm run sonar
 
-      - name: NPM login
-        run: npm set "//npm.pkg.github.com/:_authToken=${{ secrets.NPM_TOKEN }}"
+      - name: NPM set and login
+        run: npm set "//npm.pkg.github.com/:_authToken=${{ secrets.NPM_TOKEN }}" && npm login --scope=kouamdo --auth-type=legacy --registry=https://npm.pkg.github.com --username=kouamdo --password=${{ secrets.NPM_TOKEN }}
       
       # Step 6: Build the Angular application for production
       - name: Build Application
