@@ -52,7 +52,7 @@ jobs:
 
       - name: Authenticate to GitHub Packages
         run: |
-          npm set "//npm.pkg.github.com/:_authToken=${{ secrets.NPM_TOKEN }}
+          npm set "//npm.pkg.github.com/:_authToken=${{ secrets.NPM_TOKEN }}"
           npm login --scope=@kouamdo --registry=https://npm.pkg.github.com --username=kouamdo --password=${{ secrets.NPM_TOKEN }}
       
       # Step 6: Build the Angular application for production
