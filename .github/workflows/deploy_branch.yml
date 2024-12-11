@@ -35,7 +35,12 @@ jobs:
       #   uses: actions/setup-java@v1
       #   with:
       #     java-version: '17'
-          
+
+      - name: Authenticate to GitHub Packages
+        run: |
+          npm set "//npm.pkg.github.com/:_authToken=${{ secrets.NPM_TOKEN }}"
+          # npm login --scope=@kouamdo --auth-type=legacy --registry=https://npm.pkg.github.com -username=kouamdo --password=${{ secrets.NPM_TOKEN }}
+      
       # Step 3: Install Angular CLI globally
       - name: Install Angular CLI
         run: npm install -g @angular/cli
@@ -50,10 +55,7 @@ jobs:
       #     npm install sonar-scanner --save-dev --legacy-peer-deps
       #     npm run sonar
 
-      - name: Authenticate to GitHub Packages
-        run: |
-          npm set "//npm.pkg.github.com/:_authToken=${{ secrets.NPM_TOKEN }}"
-          npm login --scope=@kouamdo --auth-type=legacy --registry=https://npm.pkg.github.com -username=kouamdo --password=${{ secrets.NPM_TOKEN }}
+      
       
       # Step 6: Build the Angular application for production
       - name: Build Application
